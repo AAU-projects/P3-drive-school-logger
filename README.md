@@ -1,21 +1,5 @@
 # DetFantastiskeP3Progam
 
-hmmmmmmmmmmmm :alien:
+hmmmmmmmmmmmm 
 
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
-:alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien::alien:
+No Time
