@@ -1,5 +1,1 @@
-# DetFantastiskeP3Progam
-
-hmmmmmmmmmmmm 
-
-No Time
+# AAU Software 3.Semester Project
