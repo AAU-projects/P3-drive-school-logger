@@ -26,8 +26,8 @@ namespace DriveLogGUI
 
         private void registerCancelHyperLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
             _loginForm.Show();
+            this.Dispose();
         }
     }
 }

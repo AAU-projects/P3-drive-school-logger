@@ -16,7 +16,11 @@ namespace DriveLogGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            DriveLogStarter driveLog = new DriveLogStarter();
+            driveLog.Start();
+            
+
+
         }
     }
 }

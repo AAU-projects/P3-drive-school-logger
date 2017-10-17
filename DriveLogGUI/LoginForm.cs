@@ -28,5 +28,13 @@ namespace DriveLogGUI
             RegisterForm registerForm = new RegisterForm(this);
             registerForm.ShowDialog();
         }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            MainWindow mainwindow = new DriveLogGUI.MainWindow();
+            mainwindow.IsMdiContainer = true;
+            mainwindow.Show();
+            this.Hide();
+        }
     }
 }

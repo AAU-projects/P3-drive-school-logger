@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.PictureBox registerPicturebox;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
             this.registerUsernameLabel = new System.Windows.Forms.Label();
             this.registerPasswordLabel = new System.Windows.Forms.Label();
             this.registerFirstnameLabel = new System.Windows.Forms.Label();
@@ -51,12 +53,12 @@
             this.registerTitleLabel = new System.Windows.Forms.Label();
             this.registerSubtitleLabel = new System.Windows.Forms.Label();
             this.registerUploadPhotoButton = new System.Windows.Forms.Button();
-            this.registerPicturebox = new System.Windows.Forms.PictureBox();
             this.registerCreateNewUserButton = new System.Windows.Forms.Button();
             this.registerCancelHyperLink = new System.Windows.Forms.LinkLabel();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.registerConfirmPasswordLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.registerPicturebox)).BeginInit();
+            registerPicturebox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).BeginInit();
             this.SuspendLayout();
             // 
             // registerUsernameLabel
@@ -252,12 +254,12 @@
             // 
             // registerPicturebox
             // 
-            this.registerPicturebox.Image = global::DriveLogGUI.Properties.Resources.rubber_duck;
-            this.registerPicturebox.Location = new System.Drawing.Point(328, 81);
-            this.registerPicturebox.Name = "registerPicturebox";
-            this.registerPicturebox.Size = new System.Drawing.Size(128, 128);
-            this.registerPicturebox.TabIndex = 22;
-            this.registerPicturebox.TabStop = false;
+            registerPicturebox.Image = ((System.Drawing.Image)(resources.GetObject("registerPicturebox.Image")));
+            registerPicturebox.Location = new System.Drawing.Point(328, 81);
+            registerPicturebox.Name = "registerPicturebox";
+            registerPicturebox.Size = new System.Drawing.Size(128, 128);
+            registerPicturebox.TabIndex = 22;
+            registerPicturebox.TabStop = false;
             // 
             // registerCreateNewUserButton
             // 
@@ -297,7 +299,7 @@
             this.registerConfirmPasswordLabel.TabIndex = 26;
             this.registerConfirmPasswordLabel.Text = "Verify password:";
             // 
-            // Register
+            // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -307,7 +309,7 @@
             this.Controls.Add(this.registerCancelHyperLink);
             this.Controls.Add(this.registerCreateNewUserButton);
             this.Controls.Add(this.registerUploadPhotoButton);
-            this.Controls.Add(this.registerPicturebox);
+            this.Controls.Add(registerPicturebox);
             this.Controls.Add(this.registerSubtitleLabel);
             this.Controls.Add(this.registerTitleLabel);
             this.Controls.Add(this.textBox10);
@@ -330,9 +332,9 @@
             this.Controls.Add(this.registerFirstnameLabel);
             this.Controls.Add(this.registerPasswordLabel);
             this.Controls.Add(this.registerUsernameLabel);
-            this.Name = "Register";
+            this.Name = "RegisterForm";
             this.Text = "Register";
-            ((System.ComponentModel.ISupportInitialize)(this.registerPicturebox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,7 +364,6 @@
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Label registerTitleLabel;
         private System.Windows.Forms.Label registerSubtitleLabel;
-        private System.Windows.Forms.PictureBox registerPicturebox;
         private System.Windows.Forms.Button registerUploadPhotoButton;
         private System.Windows.Forms.Button registerCreateNewUserButton;
         private System.Windows.Forms.LinkLabel registerCancelHyperLink;
