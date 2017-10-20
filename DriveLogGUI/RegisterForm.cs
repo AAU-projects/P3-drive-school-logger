@@ -66,7 +66,7 @@ namespace DriveLogGUI
 
             if (RegisterVerification.UsernameVerifacation(registerUsernameBox.Text))
             {
-                registerUsernameBox.BorderColor = Color.GreenYellow;
+                registerUsernameBox.BorderColor = Color.Chartreuse;
                 isUsernameOk = true;
             }
             else
@@ -85,12 +85,12 @@ namespace DriveLogGUI
         {
             if (RegisterVerification.InputOnlyLettersVerification(registerFirstnameBox.Text))
             {
-                registerFirstnameBox.BackColor = Color.Chartreuse;
+                registerFirstnameBox.BorderColor = Color.Chartreuse;
                 isFirstnameOk = true;
             }
             else
             {
-                registerFirstnameBox.BackColor = Color.Crimson;
+                registerFirstnameBox.BorderColor = Color.Crimson;
                 isFirstnameOk = false;
             }
         }
@@ -99,12 +99,12 @@ namespace DriveLogGUI
         {
             if (RegisterVerification.InputOnlyLettersVerification(registerLastnameBox.Text))
             {
-                registerLastnameBox.BackColor = Color.Chartreuse;
+                registerLastnameBox.BorderColor = Color.Chartreuse;
                 isLastnameOk = true;
             }
             else
             {
-                registerLastnameBox.BackColor = Color.Crimson;
+                registerLastnameBox.BorderColor = Color.Crimson;
                 isLastnameOk = false;
             }
         }
@@ -113,12 +113,12 @@ namespace DriveLogGUI
         {
             if (RegisterVerification.InputOnlyLettersVerification(registerCityBox.Text))
             {
-                registerCityBox.BackColor = Color.Chartreuse;
+                registerCityBox.BorderColor = Color.Chartreuse;
                 isCityOk = true;
             }
             else
             {
-                registerCityBox.BackColor = Color.Crimson;
+                registerCityBox.BorderColor = Color.Crimson;
                 isCityOk = false;
             }
         }
@@ -127,12 +127,12 @@ namespace DriveLogGUI
         {
             if (RegisterVerification.AdressVerification(registerAdressBox.Text))
             {
-                registerAdressBox.BackColor = Color.Chartreuse;
+                registerAdressBox.BorderColor = Color.Chartreuse;
                 isAdressOk = true;
             }
             else
             {
-                registerAdressBox.BackColor = Color.Crimson;
+                registerAdressBox.BorderColor = Color.Crimson;
                 isAdressOk = false;
             }
         }
@@ -164,13 +164,41 @@ namespace DriveLogGUI
 
             if (RegisterVerification.CPRVerification(registerCprBox.Text))
             {
-                registerCprBox.BackColor = Color.Chartreuse;
+                registerCprBox.BorderColor = Color.Chartreuse;
                 isCPROk = true;
             }
             else
             {
-                registerCprBox.BackColor = Color.Crimson;
+                registerCprBox.BorderColor = Color.Crimson;
                 isCPROk = false;
+            }
+        }
+
+        private void registerPasswordBox_TextChanged(object sender, EventArgs e)
+        {
+            if (RegisterVerification.PasswordVertification(registerPasswordBox.Text))
+            {
+                registerCprBox.BorderColor = Color.Chartreuse;
+                isPasswordOk = true;
+            }
+            else
+            {
+                registerCprBox.BorderColor = Color.Crimson;
+                isPasswordOk = false;
+            }
+        }
+
+        private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
+        {
+            if (registerPasswordBox.Text == verifyPasswordBox.Text)
+            {
+                verifyPasswordBox.BorderColor = Color.Chartreuse;
+                isVerifyPasswordOk = true;
+            }
+            else
+            {
+                verifyPasswordBox.BorderColor = Color.Crimson;
+                isVerifyPasswordOk = false;
             }
         }
     }

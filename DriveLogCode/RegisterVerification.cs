@@ -99,6 +99,22 @@ namespace DriveLogCode
             else
                 return false;
         }
+
+        public static bool PasswordVertification(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password)) return false;
+
+            if (password.Length < 3) return false;
+
+            foreach (char c in password)
+            {
+                if (!char.IsLetterOrDigit(c) && !c.Equals('_') && !c.Equals('-'))
+                    return false;
+            }
+
+            return true;
+
+        }
     }
 }
 

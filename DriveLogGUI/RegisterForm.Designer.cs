@@ -64,7 +64,7 @@
             // registerPicturebox
             // 
             registerPicturebox.Image = ((System.Drawing.Image)(resources.GetObject("registerPicturebox.Image")));
-            registerPicturebox.Location = new System.Drawing.Point(328, 81);
+            registerPicturebox.Location = new System.Drawing.Point(315, 81);
             registerPicturebox.Name = "registerPicturebox";
             registerPicturebox.Size = new System.Drawing.Size(128, 128);
             registerPicturebox.TabIndex = 22;
@@ -73,7 +73,7 @@
             // registerUsernameLabel
             // 
             this.registerUsernameLabel.AutoSize = true;
-            this.registerUsernameLabel.Location = new System.Drawing.Point(19, 84);
+            this.registerUsernameLabel.Location = new System.Drawing.Point(19, 349);
             this.registerUsernameLabel.Name = "registerUsernameLabel";
             this.registerUsernameLabel.Size = new System.Drawing.Size(58, 13);
             this.registerUsernameLabel.TabIndex = 0;
@@ -82,7 +82,7 @@
             // registerPasswordLabel
             // 
             this.registerPasswordLabel.AutoSize = true;
-            this.registerPasswordLabel.Location = new System.Drawing.Point(19, 117);
+            this.registerPasswordLabel.Location = new System.Drawing.Point(20, 385);
             this.registerPasswordLabel.Name = "registerPasswordLabel";
             this.registerPasswordLabel.Size = new System.Drawing.Size(56, 13);
             this.registerPasswordLabel.TabIndex = 1;
@@ -91,7 +91,7 @@
             // registerFirstnameLabel
             // 
             this.registerFirstnameLabel.AutoSize = true;
-            this.registerFirstnameLabel.Location = new System.Drawing.Point(19, 184);
+            this.registerFirstnameLabel.Location = new System.Drawing.Point(19, 84);
             this.registerFirstnameLabel.Name = "registerFirstnameLabel";
             this.registerFirstnameLabel.Size = new System.Drawing.Size(55, 13);
             this.registerFirstnameLabel.TabIndex = 2;
@@ -99,7 +99,8 @@
             // 
             // registerUsernameBox
             // 
-            this.registerUsernameBox.Location = new System.Drawing.Point(111, 81);
+            this.registerUsernameBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerUsernameBox.Location = new System.Drawing.Point(111, 346);
             this.registerUsernameBox.Name = "registerUsernameBox";
             this.registerUsernameBox.Size = new System.Drawing.Size(145, 20);
             this.registerUsernameBox.TabIndex = 3;
@@ -109,7 +110,7 @@
             // registerLastnameLabel
             // 
             this.registerLastnameLabel.AutoSize = true;
-            this.registerLastnameLabel.Location = new System.Drawing.Point(19, 217);
+            this.registerLastnameLabel.Location = new System.Drawing.Point(19, 117);
             this.registerLastnameLabel.Name = "registerLastnameLabel";
             this.registerLastnameLabel.Size = new System.Drawing.Size(56, 13);
             this.registerLastnameLabel.TabIndex = 4;
@@ -118,7 +119,7 @@
             // registerPhoneLabel
             // 
             this.registerPhoneLabel.AutoSize = true;
-            this.registerPhoneLabel.Location = new System.Drawing.Point(20, 250);
+            this.registerPhoneLabel.Location = new System.Drawing.Point(20, 150);
             this.registerPhoneLabel.Name = "registerPhoneLabel";
             this.registerPhoneLabel.Size = new System.Drawing.Size(41, 13);
             this.registerPhoneLabel.TabIndex = 5;
@@ -127,7 +128,7 @@
             // registerEmailLabel
             // 
             this.registerEmailLabel.AutoSize = true;
-            this.registerEmailLabel.Location = new System.Drawing.Point(20, 283);
+            this.registerEmailLabel.Location = new System.Drawing.Point(20, 183);
             this.registerEmailLabel.Name = "registerEmailLabel";
             this.registerEmailLabel.Size = new System.Drawing.Size(35, 13);
             this.registerEmailLabel.TabIndex = 6;
@@ -136,7 +137,7 @@
             // registerCPRLabel
             // 
             this.registerCPRLabel.AutoSize = true;
-            this.registerCPRLabel.Location = new System.Drawing.Point(20, 316);
+            this.registerCPRLabel.Location = new System.Drawing.Point(20, 216);
             this.registerCPRLabel.Name = "registerCPRLabel";
             this.registerCPRLabel.Size = new System.Drawing.Size(47, 13);
             this.registerCPRLabel.TabIndex = 7;
@@ -145,7 +146,7 @@
             // registerAdressLabel
             // 
             this.registerAdressLabel.AutoSize = true;
-            this.registerAdressLabel.Location = new System.Drawing.Point(20, 349);
+            this.registerAdressLabel.Location = new System.Drawing.Point(20, 249);
             this.registerAdressLabel.Name = "registerAdressLabel";
             this.registerAdressLabel.Size = new System.Drawing.Size(42, 13);
             this.registerAdressLabel.TabIndex = 8;
@@ -154,7 +155,7 @@
             // registerCityLabel
             // 
             this.registerCityLabel.AutoSize = true;
-            this.registerCityLabel.Location = new System.Drawing.Point(20, 382);
+            this.registerCityLabel.Location = new System.Drawing.Point(20, 282);
             this.registerCityLabel.Name = "registerCityLabel";
             this.registerCityLabel.Size = new System.Drawing.Size(27, 13);
             this.registerCityLabel.TabIndex = 9;
@@ -163,7 +164,7 @@
             // registerZipcodeLabel
             // 
             this.registerZipcodeLabel.AutoSize = true;
-            this.registerZipcodeLabel.Location = new System.Drawing.Point(19, 415);
+            this.registerZipcodeLabel.Location = new System.Drawing.Point(19, 315);
             this.registerZipcodeLabel.Name = "registerZipcodeLabel";
             this.registerZipcodeLabel.Size = new System.Drawing.Size(52, 13);
             this.registerZipcodeLabel.TabIndex = 10;
@@ -171,15 +172,18 @@
             // 
             // registerPasswordBox
             // 
-            this.registerPasswordBox.Location = new System.Drawing.Point(111, 114);
+            this.registerPasswordBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerPasswordBox.Location = new System.Drawing.Point(112, 382);
             this.registerPasswordBox.Name = "registerPasswordBox";
             this.registerPasswordBox.PasswordChar = '*';
             this.registerPasswordBox.Size = new System.Drawing.Size(145, 20);
             this.registerPasswordBox.TabIndex = 11;
+            this.registerPasswordBox.TextChanged += new System.EventHandler(this.registerPasswordBox_TextChanged);
             // 
             // registerFirstnameBox
             // 
-            this.registerFirstnameBox.Location = new System.Drawing.Point(111, 181);
+            this.registerFirstnameBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
             this.registerFirstnameBox.Name = "registerFirstnameBox";
             this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
             this.registerFirstnameBox.TabIndex = 12;
@@ -188,7 +192,8 @@
             // 
             // registerLastnameBox
             // 
-            this.registerLastnameBox.Location = new System.Drawing.Point(111, 214);
+            this.registerLastnameBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerLastnameBox.Location = new System.Drawing.Point(111, 114);
             this.registerLastnameBox.Name = "registerLastnameBox";
             this.registerLastnameBox.Size = new System.Drawing.Size(145, 20);
             this.registerLastnameBox.TabIndex = 13;
@@ -196,14 +201,16 @@
             // 
             // registerPhoneBox
             // 
-            this.registerPhoneBox.Location = new System.Drawing.Point(111, 247);
+            this.registerPhoneBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerPhoneBox.Location = new System.Drawing.Point(111, 147);
             this.registerPhoneBox.Name = "registerPhoneBox";
             this.registerPhoneBox.Size = new System.Drawing.Size(145, 20);
             this.registerPhoneBox.TabIndex = 14;
             // 
             // registerEmailBox
             // 
-            this.registerEmailBox.Location = new System.Drawing.Point(111, 280);
+            this.registerEmailBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerEmailBox.Location = new System.Drawing.Point(111, 180);
             this.registerEmailBox.Name = "registerEmailBox";
             this.registerEmailBox.Size = new System.Drawing.Size(145, 20);
             this.registerEmailBox.TabIndex = 15;
@@ -211,7 +218,8 @@
             // 
             // registerCprBox
             // 
-            this.registerCprBox.Location = new System.Drawing.Point(111, 313);
+            this.registerCprBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerCprBox.Location = new System.Drawing.Point(111, 213);
             this.registerCprBox.Name = "registerCprBox";
             this.registerCprBox.Size = new System.Drawing.Size(145, 20);
             this.registerCprBox.TabIndex = 16;
@@ -219,7 +227,8 @@
             // 
             // registerAdressBox
             // 
-            this.registerAdressBox.Location = new System.Drawing.Point(111, 346);
+            this.registerAdressBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerAdressBox.Location = new System.Drawing.Point(111, 246);
             this.registerAdressBox.Name = "registerAdressBox";
             this.registerAdressBox.Size = new System.Drawing.Size(145, 20);
             this.registerAdressBox.TabIndex = 17;
@@ -227,7 +236,8 @@
             // 
             // registerCityBox
             // 
-            this.registerCityBox.Location = new System.Drawing.Point(111, 379);
+            this.registerCityBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerCityBox.Location = new System.Drawing.Point(111, 279);
             this.registerCityBox.Name = "registerCityBox";
             this.registerCityBox.Size = new System.Drawing.Size(145, 20);
             this.registerCityBox.TabIndex = 18;
@@ -235,7 +245,8 @@
             // 
             // registerZipBox
             // 
-            this.registerZipBox.Location = new System.Drawing.Point(111, 412);
+            this.registerZipBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerZipBox.Location = new System.Drawing.Point(111, 312);
             this.registerZipBox.Name = "registerZipBox";
             this.registerZipBox.Size = new System.Drawing.Size(145, 20);
             this.registerZipBox.TabIndex = 19;
@@ -263,7 +274,7 @@
             // 
             // registerUploadPhotoButton
             // 
-            this.registerUploadPhotoButton.Location = new System.Drawing.Point(346, 215);
+            this.registerUploadPhotoButton.Location = new System.Drawing.Point(333, 215);
             this.registerUploadPhotoButton.Name = "registerUploadPhotoButton";
             this.registerUploadPhotoButton.Size = new System.Drawing.Size(91, 23);
             this.registerUploadPhotoButton.TabIndex = 23;
@@ -293,16 +304,18 @@
             // 
             // verifyPasswordBox
             // 
-            this.verifyPasswordBox.Location = new System.Drawing.Point(111, 147);
+            this.verifyPasswordBox.BorderColor = System.Drawing.Color.Blue;
+            this.verifyPasswordBox.Location = new System.Drawing.Point(112, 415);
             this.verifyPasswordBox.Name = "verifyPasswordBox";
             this.verifyPasswordBox.PasswordChar = '*';
             this.verifyPasswordBox.Size = new System.Drawing.Size(145, 20);
             this.verifyPasswordBox.TabIndex = 27;
+            this.verifyPasswordBox.TextChanged += new System.EventHandler(this.verifyPasswordBox_TextChanged);
             // 
             // registerConfirmPasswordLabel
             // 
             this.registerConfirmPasswordLabel.AutoSize = true;
-            this.registerConfirmPasswordLabel.Location = new System.Drawing.Point(19, 150);
+            this.registerConfirmPasswordLabel.Location = new System.Drawing.Point(20, 418);
             this.registerConfirmPasswordLabel.Name = "registerConfirmPasswordLabel";
             this.registerConfirmPasswordLabel.Size = new System.Drawing.Size(84, 13);
             this.registerConfirmPasswordLabel.TabIndex = 26;
