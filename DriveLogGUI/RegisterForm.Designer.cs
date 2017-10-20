@@ -99,6 +99,7 @@
             // 
             // registerUsernameBox
             // 
+            this.registerUsernameBox.BorderColor = System.Drawing.Color.Blue;
             this.registerUsernameBox.Location = new System.Drawing.Point(111, 81);
             this.registerUsernameBox.Name = "registerUsernameBox";
             this.registerUsernameBox.Size = new System.Drawing.Size(145, 20);
@@ -171,6 +172,7 @@
             // 
             // registerPasswordBox
             // 
+            this.registerPasswordBox.BorderColor = System.Drawing.Color.Blue;
             this.registerPasswordBox.Location = new System.Drawing.Point(111, 114);
             this.registerPasswordBox.Name = "registerPasswordBox";
             this.registerPasswordBox.PasswordChar = '*';
@@ -179,6 +181,7 @@
             // 
             // registerFirstnameBox
             // 
+            this.registerFirstnameBox.BorderColor = System.Drawing.Color.Blue;
             this.registerFirstnameBox.Location = new System.Drawing.Point(111, 181);
             this.registerFirstnameBox.Name = "registerFirstnameBox";
             this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
@@ -188,6 +191,7 @@
             // 
             // registerLastnameBox
             // 
+            this.registerLastnameBox.BorderColor = System.Drawing.Color.Blue;
             this.registerLastnameBox.Location = new System.Drawing.Point(111, 214);
             this.registerLastnameBox.Name = "registerLastnameBox";
             this.registerLastnameBox.Size = new System.Drawing.Size(145, 20);
@@ -196,13 +200,16 @@
             // 
             // registerPhoneBox
             // 
+            this.registerPhoneBox.BorderColor = System.Drawing.Color.Blue;
             this.registerPhoneBox.Location = new System.Drawing.Point(111, 247);
             this.registerPhoneBox.Name = "registerPhoneBox";
             this.registerPhoneBox.Size = new System.Drawing.Size(145, 20);
             this.registerPhoneBox.TabIndex = 14;
+            this.registerPhoneBox.Leave += new System.EventHandler(this.registerPhoneBox_Leave);
             // 
             // registerEmailBox
             // 
+            this.registerEmailBox.BorderColor = System.Drawing.Color.Blue;
             this.registerEmailBox.Location = new System.Drawing.Point(111, 280);
             this.registerEmailBox.Name = "registerEmailBox";
             this.registerEmailBox.Size = new System.Drawing.Size(145, 20);
@@ -211,6 +218,7 @@
             // 
             // registerCprBox
             // 
+            this.registerCprBox.BorderColor = System.Drawing.Color.Blue;
             this.registerCprBox.Location = new System.Drawing.Point(111, 313);
             this.registerCprBox.Name = "registerCprBox";
             this.registerCprBox.Size = new System.Drawing.Size(145, 20);
@@ -219,6 +227,7 @@
             // 
             // registerAdressBox
             // 
+            this.registerAdressBox.BorderColor = System.Drawing.Color.Blue;
             this.registerAdressBox.Location = new System.Drawing.Point(111, 346);
             this.registerAdressBox.Name = "registerAdressBox";
             this.registerAdressBox.Size = new System.Drawing.Size(145, 20);
@@ -227,6 +236,7 @@
             // 
             // registerCityBox
             // 
+            this.registerCityBox.BorderColor = System.Drawing.Color.Blue;
             this.registerCityBox.Location = new System.Drawing.Point(111, 379);
             this.registerCityBox.Name = "registerCityBox";
             this.registerCityBox.Size = new System.Drawing.Size(145, 20);
@@ -235,10 +245,12 @@
             // 
             // registerZipBox
             // 
+            this.registerZipBox.BorderColor = System.Drawing.Color.Blue;
             this.registerZipBox.Location = new System.Drawing.Point(111, 412);
             this.registerZipBox.Name = "registerZipBox";
             this.registerZipBox.Size = new System.Drawing.Size(145, 20);
             this.registerZipBox.TabIndex = 19;
+            this.registerZipBox.Leave += new System.EventHandler(this.registerZipBox_Leave);
             // 
             // registerTitleLabel
             // 
@@ -293,6 +305,7 @@
             // 
             // verifyPasswordBox
             // 
+            this.verifyPasswordBox.BorderColor = System.Drawing.Color.Blue;
             this.verifyPasswordBox.Location = new System.Drawing.Point(111, 147);
             this.verifyPasswordBox.Name = "verifyPasswordBox";
             this.verifyPasswordBox.PasswordChar = '*';

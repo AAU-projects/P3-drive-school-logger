@@ -173,5 +173,34 @@ namespace DriveLogGUI
                 isCPROk = false;
             }
         }
+
+        private void registerZipBox_Leave(object sender, EventArgs e)
+        {
+            if (RegisterVerification.ZipVerifacation(registerZipBox.Text))
+            {
+                registerZipBox.BorderColor = Color.Chartreuse;
+                isZipOk = true;
+            }
+            else
+            {
+                registerZipBox.BorderColor = Color.Crimson;
+                isZipOk = false;
+            }
+        }
+
+        private void registerPhoneBox_Leave(object sender, EventArgs e)
+        {
+            if (RegisterVerification.PhoneVerifacation(registerPhoneBox.Text))
+            {
+                registerPhoneBox.BorderColor = Color.Chartreuse;
+                isPhoneOk = true;
+            }
+            else
+            {
+                registerPhoneBox.BorderColor = Color.Crimson;
+                isPhoneOk = false;
+            }
+        }
     }
+
 }
