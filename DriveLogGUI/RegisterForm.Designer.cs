@@ -183,6 +183,8 @@
             this.registerFirstnameBox.Name = "registerFirstnameBox";
             this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
             this.registerFirstnameBox.TabIndex = 12;
+            this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
+            this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
             // registerLastnameBox
             // 
@@ -190,6 +192,7 @@
             this.registerLastnameBox.Name = "registerLastnameBox";
             this.registerLastnameBox.Size = new System.Drawing.Size(145, 20);
             this.registerLastnameBox.TabIndex = 13;
+            this.registerLastnameBox.Leave += new System.EventHandler(this.registerLastnameBox_Leave);
             // 
             // registerPhoneBox
             // 
@@ -218,6 +221,7 @@
             this.registerAdressBox.Name = "registerAdressBox";
             this.registerAdressBox.Size = new System.Drawing.Size(145, 20);
             this.registerAdressBox.TabIndex = 17;
+            this.registerAdressBox.Leave += new System.EventHandler(this.registerAdressBox_Leave);
             // 
             // registerCityBox
             // 
@@ -225,6 +229,7 @@
             this.registerCityBox.Name = "registerCityBox";
             this.registerCityBox.Size = new System.Drawing.Size(145, 20);
             this.registerCityBox.TabIndex = 18;
+            this.registerCityBox.Leave += new System.EventHandler(this.registerCityBox_Leave);
             // 
             // registerZipBox
             // 

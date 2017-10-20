@@ -21,6 +21,7 @@ namespace DriveLogGUI
         private bool isZipOk;
 
         private LoginForm _loginForm;
+
         public RegisterForm(LoginForm login)
         {
             _loginForm = login;
@@ -66,6 +67,67 @@ namespace DriveLogGUI
             {
                 registerUsernameBox.BackColor = Color.Crimson;
                 isUsernameOk = false;
+            }
+        }
+
+        private void registerFirstnameBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void registerFirstnameBox_Leave(object sender, EventArgs e)
+        {
+            if (RegisterVerification.InputOnlyLettersVerification(registerFirstnameBox.Text))
+            {
+                registerFirstnameBox.BackColor = Color.Chartreuse;
+                isFirstnameOk = true;
+            }
+            else
+            {
+                registerFirstnameBox.BackColor = Color.Crimson;
+                isFirstnameOk = false;
+            }
+        }
+
+        private void registerLastnameBox_Leave(object sender, EventArgs e)
+        {
+            if (RegisterVerification.InputOnlyLettersVerification(registerLastnameBox.Text))
+            {
+                registerLastnameBox.BackColor = Color.Chartreuse;
+                isLastnameOk = true;
+            }
+            else
+            {
+                registerLastnameBox.BackColor = Color.Crimson;
+                isLastnameOk = false;
+            }
+        }
+
+        private void registerCityBox_Leave(object sender, EventArgs e)
+        {
+            if (RegisterVerification.InputOnlyLettersVerification(registerCityBox.Text))
+            {
+                registerCityBox.BackColor = Color.Chartreuse;
+                isCityOk = true;
+            }
+            else
+            {
+                registerCityBox.BackColor = Color.Crimson;
+                isCityOk = false;
+            }
+        }
+
+        private void registerAdressBox_Leave(object sender, EventArgs e)
+        {
+            if (RegisterVerification.AdressVerification(registerAdressBox.Text))
+            {
+                registerAdressBox.BackColor = Color.Chartreuse;
+                isAdressOk = true;
+            }
+            else
+            {
+                registerAdressBox.BackColor = Color.Crimson;
+                isAdressOk = false;
             }
         }
     }
