@@ -21,5 +21,18 @@ namespace DriveLogCode
 
             return true;
         }
+
+        public static bool EmailVerification(string input)
+        {
+            try
+            {
+                var emailAdress = new System.Net.Mail.MailAddress(input);
+                return emailAdress.Address == input;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

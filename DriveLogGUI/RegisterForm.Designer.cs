@@ -204,6 +204,7 @@
             this.registerEmailBox.Name = "registerEmailBox";
             this.registerEmailBox.Size = new System.Drawing.Size(145, 20);
             this.registerEmailBox.TabIndex = 15;
+            this.registerEmailBox.Leave += new System.EventHandler(this.registerEmailBox_Leave);
             // 
             // registerCprBox
             // 
