@@ -102,7 +102,7 @@ namespace DriveLogCode
 
         public static bool CPRVerification(string input)
         {
-            input.Replace("-", String.Empty);
+            input = input.Replace("-", "");
 
             if (input.Length != 10)
                 return false;
