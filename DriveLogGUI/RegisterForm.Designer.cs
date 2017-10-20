@@ -61,6 +61,15 @@
             ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).BeginInit();
             this.SuspendLayout();
             // 
+            // registerPicturebox
+            // 
+            registerPicturebox.Image = ((System.Drawing.Image)(resources.GetObject("registerPicturebox.Image")));
+            registerPicturebox.Location = new System.Drawing.Point(328, 81);
+            registerPicturebox.Name = "registerPicturebox";
+            registerPicturebox.Size = new System.Drawing.Size(128, 128);
+            registerPicturebox.TabIndex = 22;
+            registerPicturebox.TabStop = false;
+            // 
             // registerUsernameLabel
             // 
             this.registerUsernameLabel.AutoSize = true;
@@ -94,6 +103,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(145, 20);
             this.textBox1.TabIndex = 3;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // registerLastnameLabel
             // 
@@ -252,15 +262,6 @@
             this.registerUploadPhotoButton.Text = "Upload picture";
             this.registerUploadPhotoButton.UseVisualStyleBackColor = true;
             // 
-            // registerPicturebox
-            // 
-            registerPicturebox.Image = ((System.Drawing.Image)(resources.GetObject("registerPicturebox.Image")));
-            registerPicturebox.Location = new System.Drawing.Point(328, 81);
-            registerPicturebox.Name = "registerPicturebox";
-            registerPicturebox.Size = new System.Drawing.Size(128, 128);
-            registerPicturebox.TabIndex = 22;
-            registerPicturebox.TabStop = false;
-            // 
             // registerCreateNewUserButton
             // 
             this.registerCreateNewUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -334,6 +335,7 @@
             this.Controls.Add(this.registerUsernameLabel);
             this.Name = "RegisterForm";
             this.Text = "Register";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
