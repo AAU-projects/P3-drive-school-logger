@@ -99,20 +99,12 @@
             // 
             // registerUsernameBox
             // 
-<<<<<<< HEAD
-            this.textBox1.Location = new System.Drawing.Point(111, 81);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(145, 20);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-=======
             this.registerUsernameBox.Location = new System.Drawing.Point(111, 81);
             this.registerUsernameBox.Name = "registerUsernameBox";
             this.registerUsernameBox.Size = new System.Drawing.Size(145, 20);
             this.registerUsernameBox.TabIndex = 3;
             this.registerUsernameBox.TextChanged += new System.EventHandler(this.registerUsernameBox_TextChanged);
             this.registerUsernameBox.Leave += new System.EventHandler(this.registerUsernameBox_Leave);
->>>>>>> b570fc830e1dfb0f9e7d49cfd3faac6c5ad728ce
             // 
             // registerLastnameLabel
             // 
