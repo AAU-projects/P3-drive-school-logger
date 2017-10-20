@@ -91,7 +91,7 @@ namespace DriveLogCode
 
             int[] intArray = input.Select(c => (c - '0')).ToArray();
 
-            int sum = (intArray[0] * 4) + (intArray[1] * 3) + (intArray[2] * 2) + (intArray[3] * 7) + (intArray[4] * 6) + (intArray[5] * 5) + 
+            int sum = (intArray[0] * 4) + (intArray[1] * 3) + (intArray[2] * 2) + (intArray[3] * 7) + (intArray[4] * 6) + (intArray[5] * 5) +
                 (intArray[6] * 4) + (intArray[7] * 3) + (intArray[8] * 2) + intArray[9];
 
             if (sum % 11 == 0)
@@ -113,7 +113,34 @@ namespace DriveLogCode
             }
 
             return true;
+        }
 
+        public static bool PhoneVerifacation(string input)
+        {
+
+            if (string.IsNullOrEmpty(input) || input.Length != 8)
+                return false;
+
+            foreach (char c in input)
+            {
+                if (!input.All(char.IsDigit))
+                    return false;
+            }
+            return true;
+        }
+
+        public static bool ZipVerifacation(string input)
+        {
+
+            if (string.IsNullOrEmpty(input) || input.Length != 4)
+                return false;
+
+            foreach (char c in input)
+            {
+                if (!input.All(char.IsDigit))
+                    return false;
+            }
+            return true;
         }
     }
 }

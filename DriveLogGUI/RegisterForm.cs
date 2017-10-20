@@ -63,7 +63,6 @@ namespace DriveLogGUI
         private void registerUsernameBox_Leave(object sender, EventArgs e)
         {
             //Check if username is unique in SQL - Error message: Username taken!
-
             if (RegisterVerification.UsernameVerifacation(registerUsernameBox.Text))
             {
                 registerUsernameBox.BorderColor = Color.Chartreuse;
@@ -71,9 +70,10 @@ namespace DriveLogGUI
             }
             else
             {
-                registerUsernameBox.BorderColor = Color.Crimson;
                 isUsernameOk = false;
+                ChangeBorderColorTextbox(registerUsernameBox);
             }
+            
         }
 
         private void registerFirstnameBox_TextChanged(object sender, EventArgs e)
@@ -90,8 +90,8 @@ namespace DriveLogGUI
             }
             else
             {
-                registerFirstnameBox.BorderColor = Color.Crimson;
                 isFirstnameOk = false;
+                ChangeBorderColorTextbox(registerFirstnameBox);
             }
         }
 
@@ -104,7 +104,7 @@ namespace DriveLogGUI
             }
             else
             {
-                registerLastnameBox.BorderColor = Color.Crimson;
+                ChangeBorderColorTextbox(registerLastnameBox);
                 isLastnameOk = false;
             }
         }
@@ -118,7 +118,7 @@ namespace DriveLogGUI
             }
             else
             {
-                registerCityBox.BorderColor = Color.Crimson;
+                ChangeBorderColorTextbox(registerCityBox);
                 isCityOk = false;
             }
         }
@@ -132,7 +132,7 @@ namespace DriveLogGUI
             }
             else
             {
-                registerAdressBox.BorderColor = Color.Crimson;
+                ChangeBorderColorTextbox(registerAdressBox);
                 isAdressOk = false;
             }
         }
@@ -148,7 +148,7 @@ namespace DriveLogGUI
             }
             else
             {
-                registerEmailBox.BorderColor = Color.Crimson;
+                ChangeBorderColorTextbox(registerEmailBox);
                 isEmailOk = false;
             }
         }
@@ -169,7 +169,7 @@ namespace DriveLogGUI
             }
             else
             {
-                registerCprBox.BorderColor = Color.Crimson;
+                ChangeBorderColorTextbox(registerCprBox);
                 isCPROk = false;
             }
         }
@@ -178,17 +178,23 @@ namespace DriveLogGUI
         {
             if (RegisterVerification.PasswordVertification(registerPasswordBox.Text))
             {
-                registerCprBox.BorderColor = Color.Chartreuse;
+                registerPasswordBox.BorderColor = Color.Chartreuse;
                 isPasswordOk = true;
             }
             else
             {
-                registerCprBox.BorderColor = Color.Crimson;
+                ChangeBorderColorTextbox(registerPasswordBox);
                 isPasswordOk = false;
             }
+            VertifyPassword();
         }
 
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
+        {
+            VertifyPassword();
+        }
+
+        private void VertifyPassword()
         {
             if (registerPasswordBox.Text == verifyPasswordBox.Text)
             {
@@ -197,9 +203,53 @@ namespace DriveLogGUI
             }
             else
             {
-                verifyPasswordBox.BorderColor = Color.Crimson;
+                ChangeBorderColorTextbox(verifyPasswordBox);
                 isVerifyPasswordOk = false;
             }
         }
+
+        private void registerZipBox_Leave(object sender, EventArgs e)
+        {
+            if (RegisterVerification.ZipVerifacation(registerZipBox.Text))
+            {
+                registerZipBox.BorderColor = Color.Chartreuse;
+                isZipOk = true;
+            }
+            else
+            {
+                ChangeBorderColorTextbox(registerZipBox);
+                isZipOk = false;
+            }
+        }
+
+        private void registerPhoneBox_Leave(object sender, EventArgs e)
+        {
+            if (RegisterVerification.PhoneVerifacation(registerPhoneBox.Text))
+            {
+                registerPhoneBox.BorderColor = Color.Chartreuse;
+                isPhoneOk = true;
+            }
+            else
+            {
+                ChangeBorderColorTextbox(registerPhoneBox);
+                isPhoneOk = false;
+            }
+        }
+
+
+        private void ChangeBorderColorTextbox(TextboxBorderColor textbox)
+        {
+            if (textbox.Text.Length == 0)
+            {
+                textbox.BorderColor = Color.Blue;
+            }
+            else
+            {
+                textbox.BorderColor = Color.Crimson;
+            }
+        }
+
+
     }
+
 }
