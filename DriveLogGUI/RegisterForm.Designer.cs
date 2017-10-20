@@ -103,6 +103,8 @@
             this.registerUsernameBox.Name = "registerUsernameBox";
             this.registerUsernameBox.Size = new System.Drawing.Size(145, 20);
             this.registerUsernameBox.TabIndex = 3;
+            this.registerUsernameBox.TextChanged += new System.EventHandler(this.registerUsernameBox_TextChanged);
+            this.registerUsernameBox.Leave += new System.EventHandler(this.registerUsernameBox_Leave);
             // 
             // registerLastnameLabel
             // 

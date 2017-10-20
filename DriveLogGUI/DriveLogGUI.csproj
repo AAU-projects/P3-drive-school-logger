@@ -121,5 +121,11 @@
     <None Include="Resources\green.png" />
     <None Include="Resources\Discord_2017-10-17_13-33-05.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DriveLogCode\DriveLogCode.csproj">
+      <Project>{7dceb141-7172-4ebd-b057-dfcfabd47186}</Project>
+      <Name>DriveLogCode</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
