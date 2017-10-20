@@ -38,6 +38,12 @@ namespace DriveLogGUI
             this.Dispose();
         }
 
+        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _loginForm.Show();
+            this.Dispose();
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 

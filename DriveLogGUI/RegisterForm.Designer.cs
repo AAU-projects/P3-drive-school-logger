@@ -337,6 +337,7 @@
             this.Controls.Add(this.registerUsernameLabel);
             this.Name = "RegisterForm";
             this.Text = "Register";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
