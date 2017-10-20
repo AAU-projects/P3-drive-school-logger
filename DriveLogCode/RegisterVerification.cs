@@ -49,7 +49,7 @@ namespace DriveLogCode
                 return false;
 
             if (!InputOnlyLettersVerification(street))
-                    return false;
+                return false;
 
             foreach (char number in streetNo)
             {
@@ -68,5 +68,37 @@ namespace DriveLogCode
             }
             return true;
         }
+
+        public static bool EmailVerification(string input)
+        {
+            try
+            {
+                var emailAdress = new System.Net.Mail.MailAddress(input);
+                return emailAdress.Address == input;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool CPRVerification(string input)
+        {
+            input.Replace("-", String.Empty);
+
+            if (input.Length != 10)
+                return false;
+
+            int[] intArray = input.Select(c => (c - '0')).ToArray();
+
+            int sum = (intArray[0] * 4) + (intArray[1] * 3) + (intArray[2] * 2) + (intArray[3] * 7) + (intArray[4] * 6) + (intArray[5] * 5) + 
+                (intArray[6] * 4) + (intArray[7] * 3) + (intArray[8] * 2) + intArray[9];
+
+            if (sum % 11 == 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
+

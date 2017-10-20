@@ -33,7 +33,7 @@
             this.registerUsernameLabel = new System.Windows.Forms.Label();
             this.registerPasswordLabel = new System.Windows.Forms.Label();
             this.registerFirstnameLabel = new System.Windows.Forms.Label();
-            this.registerUsernameBox = new System.Windows.Forms.TextBox();
+            this.registerUsernameBox = new TextboxBorderColor();
             this.registerLastnameLabel = new System.Windows.Forms.Label();
             this.registerPhoneLabel = new System.Windows.Forms.Label();
             this.registerEmailLabel = new System.Windows.Forms.Label();
@@ -41,21 +41,21 @@
             this.registerAdressLabel = new System.Windows.Forms.Label();
             this.registerCityLabel = new System.Windows.Forms.Label();
             this.registerZipcodeLabel = new System.Windows.Forms.Label();
-            this.registerPasswordBox = new System.Windows.Forms.TextBox();
-            this.registerFirstnameBox = new System.Windows.Forms.TextBox();
-            this.registerLastnameBox = new System.Windows.Forms.TextBox();
-            this.registerPhoneBox = new System.Windows.Forms.TextBox();
-            this.registerEmailBox = new System.Windows.Forms.TextBox();
-            this.registerCprBox = new System.Windows.Forms.TextBox();
-            this.registerAdressBox = new System.Windows.Forms.TextBox();
-            this.registerCityBox = new System.Windows.Forms.TextBox();
-            this.registerZipBox = new System.Windows.Forms.TextBox();
+            this.registerPasswordBox = new TextboxBorderColor();
+            this.registerFirstnameBox = new TextboxBorderColor();
+            this.registerLastnameBox = new TextboxBorderColor();
+            this.registerPhoneBox = new TextboxBorderColor();
+            this.registerEmailBox = new TextboxBorderColor();
+            this.registerCprBox = new TextboxBorderColor();
+            this.registerAdressBox = new TextboxBorderColor();
+            this.registerCityBox = new TextboxBorderColor();
+            this.registerZipBox = new TextboxBorderColor();
             this.registerTitleLabel = new System.Windows.Forms.Label();
             this.registerSubtitleLabel = new System.Windows.Forms.Label();
             this.registerUploadPhotoButton = new System.Windows.Forms.Button();
             this.registerCreateNewUserButton = new System.Windows.Forms.Button();
             this.registerCancelHyperLink = new System.Windows.Forms.LinkLabel();
-            this.verifyPasswordBox = new System.Windows.Forms.TextBox();
+            this.verifyPasswordBox = new TextboxBorderColor();
             this.registerConfirmPasswordLabel = new System.Windows.Forms.Label();
             registerPicturebox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).BeginInit();
@@ -207,6 +207,7 @@
             this.registerEmailBox.Name = "registerEmailBox";
             this.registerEmailBox.Size = new System.Drawing.Size(145, 20);
             this.registerEmailBox.TabIndex = 15;
+            this.registerEmailBox.Leave += new System.EventHandler(this.registerEmailBox_Leave);
             // 
             // registerCprBox
             // 
@@ -214,6 +215,7 @@
             this.registerCprBox.Name = "registerCprBox";
             this.registerCprBox.Size = new System.Drawing.Size(145, 20);
             this.registerCprBox.TabIndex = 16;
+            this.registerCprBox.Leave += new System.EventHandler(this.registerCprBox_Leave);
             // 
             // registerAdressBox
             // 
@@ -341,6 +343,7 @@
             this.Controls.Add(this.registerUsernameLabel);
             this.Name = "RegisterForm";
             this.Text = "Register";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -352,7 +355,7 @@
         private System.Windows.Forms.Label registerUsernameLabel;
         private System.Windows.Forms.Label registerPasswordLabel;
         private System.Windows.Forms.Label registerFirstnameLabel;
-        private System.Windows.Forms.TextBox registerUsernameBox;
+        private TextboxBorderColor registerUsernameBox;
         private System.Windows.Forms.Label registerLastnameLabel;
         private System.Windows.Forms.Label registerPhoneLabel;
         private System.Windows.Forms.Label registerEmailLabel;
@@ -360,21 +363,21 @@
         private System.Windows.Forms.Label registerAdressLabel;
         private System.Windows.Forms.Label registerCityLabel;
         private System.Windows.Forms.Label registerZipcodeLabel;
-        private System.Windows.Forms.TextBox registerPasswordBox;
-        private System.Windows.Forms.TextBox registerFirstnameBox;
-        private System.Windows.Forms.TextBox registerLastnameBox;
-        private System.Windows.Forms.TextBox registerPhoneBox;
-        private System.Windows.Forms.TextBox registerEmailBox;
-        private System.Windows.Forms.TextBox registerCprBox;
-        private System.Windows.Forms.TextBox registerAdressBox;
-        private System.Windows.Forms.TextBox registerCityBox;
-        private System.Windows.Forms.TextBox registerZipBox;
+        private TextboxBorderColor registerPasswordBox;
+        private TextboxBorderColor registerFirstnameBox;
+        private TextboxBorderColor registerLastnameBox;
+        private TextboxBorderColor registerPhoneBox;
+        private TextboxBorderColor registerEmailBox;
+        private TextboxBorderColor registerCprBox;
+        private TextboxBorderColor registerAdressBox;
+        private TextboxBorderColor registerCityBox;
+        private TextboxBorderColor registerZipBox;
         private System.Windows.Forms.Label registerTitleLabel;
         private System.Windows.Forms.Label registerSubtitleLabel;
         private System.Windows.Forms.Button registerUploadPhotoButton;
         private System.Windows.Forms.Button registerCreateNewUserButton;
         private System.Windows.Forms.LinkLabel registerCancelHyperLink;
-        private System.Windows.Forms.TextBox verifyPasswordBox;
+        private TextboxBorderColor verifyPasswordBox;
         private System.Windows.Forms.Label registerConfirmPasswordLabel;
     }
 }

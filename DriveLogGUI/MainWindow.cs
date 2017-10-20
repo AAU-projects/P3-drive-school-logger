@@ -25,6 +25,7 @@ namespace DriveLogGUI
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            mainOverviewTab.DrawItem += new DrawItemEventHandler(tabControlDrawHorizontalText_DrawItem);
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -34,14 +35,49 @@ namespace DriveLogGUI
 
         private void toolStripLabel3_Click(object sender, EventArgs e)
         {
-            OverviewForm overviewTab = new OverviewForm();
-            overviewTab.MdiParent = this;
+        }
 
-            overviewTab.FormBorderStyle = FormBorderStyle.None;
-            overviewTab.StartPosition = FormStartPosition.Manual;
-            overviewTab.Left = mainSidebar.Size.Width;
 
-            overviewTab.Show();
+        private void tabControlDrawHorizontalText_DrawItem(Object sender, System.Windows.Forms.DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Brush _textBrush;
+
+            // Get the item from the collection.
+            TabPage _tabPage = mainOverviewTab.TabPages[e.Index];
+
+            // Get the real bounds for the tab rectangle.
+            Rectangle _tabBounds = mainOverviewTab.GetTabRect(e.Index);
+
+            if (e.State == DrawItemState.Selected)
+            {
+
+                // Text color and background color
+                SolidBrush textcolor = new SolidBrush(Color.Black);
+                Brush backgroundcolor = Brushes.CornflowerBlue;
+
+                _textBrush = textcolor;
+                g.FillRectangle(backgroundcolor, e.Bounds);
+            }
+            else
+            {
+                _textBrush = new System.Drawing.SolidBrush(e.ForeColor);
+                e.DrawBackground();
+            }
+
+            // Use our own font.
+            Font _tabFont = new Font("Arial", (float)10.0, FontStyle.Bold, GraphicsUnit.Pixel);
+
+            // Draw string. Center the text.
+            StringFormat _stringFlags = new StringFormat();
+            _stringFlags.Alignment = StringAlignment.Center;
+            _stringFlags.LineAlignment = StringAlignment.Center;
+            g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

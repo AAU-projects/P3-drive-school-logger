@@ -39,6 +39,12 @@ namespace DriveLogGUI
             this.Dispose();
         }
 
+        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _loginForm.Show();
+            this.Dispose();
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -60,12 +66,12 @@ namespace DriveLogGUI
 
             if (RegisterVerification.UsernameVerifacation(registerUsernameBox.Text))
             {
-                registerUsernameBox.BackColor = Color.Chartreuse;
+                registerUsernameBox.BorderColor = Color.GreenYellow;
                 isUsernameOk = true;
             }
             else
             {
-                registerUsernameBox.BackColor = Color.Crimson;
+                registerUsernameBox.BorderColor = Color.Crimson;
                 isUsernameOk = false;
             }
         }
@@ -128,6 +134,43 @@ namespace DriveLogGUI
             {
                 registerAdressBox.BackColor = Color.Crimson;
                 isAdressOk = false;
+            }
+        }
+
+        private void registerEmailBox_Leave(object sender, EventArgs e)
+        {
+            //Check if email is unique in SQL - Error message: Email taken!
+
+            if (RegisterVerification.EmailVerification(registerEmailBox.Text))
+            {
+                registerEmailBox.BorderColor = Color.Chartreuse;
+                isEmailOk = true;
+            }
+            else
+            {
+                registerEmailBox.BorderColor = Color.Crimson;
+                isEmailOk = false;
+            }
+        }
+
+        /// <summary>
+        /// Verification function for the Register CPR input
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The Event args</param>
+        private void registerCprBox_Leave(object sender, EventArgs e)
+        {
+            //Check if CPR is already in SQL - Error message: CPR already exists!
+
+            if (RegisterVerification.CPRVerification(registerCprBox.Text))
+            {
+                registerCprBox.BackColor = Color.Chartreuse;
+                isCPROk = true;
+            }
+            else
+            {
+                registerCprBox.BackColor = Color.Crimson;
+                isCPROk = false;
             }
         }
     }
