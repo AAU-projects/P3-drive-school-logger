@@ -66,7 +66,7 @@ namespace DriveLogGUI
             }
 
             // Use our own font.
-            Font _tabFont = new Font("Arial", (float)10.0, FontStyle.Bold, GraphicsUnit.Pixel);
+            Font _tabFont = new Font("Arial", (float)12.0, FontStyle.Bold, GraphicsUnit.Pixel);
 
             // Draw string. Center the text.
             StringFormat _stringFlags = new StringFormat();

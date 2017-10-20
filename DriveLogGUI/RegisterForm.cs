@@ -232,6 +232,7 @@ namespace DriveLogGUI
             else
             {
                 ChangeBorderColorTextbox(registerPhoneBox);
+
                 isPhoneOk = false;
             }
         }

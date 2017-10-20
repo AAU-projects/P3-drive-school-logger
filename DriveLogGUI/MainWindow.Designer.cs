@@ -34,9 +34,6 @@
             this.heyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainOverviewTab = new System.Windows.Forms.TabControl();
             this.Overview = new System.Windows.Forms.TabPage();
-            this.Profile = new System.Windows.Forms.TabPage();
-            this.Booking = new System.Windows.Forms.TabPage();
-            this.Settings = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -62,18 +59,21 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.Profile = new System.Windows.Forms.TabPage();
+            this.Booking = new System.Windows.Forms.TabPage();
+            this.Settings = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1.SuspendLayout();
             this.mainOverviewTab.SuspendLayout();
             this.Overview.SuspendLayout();
-            this.Settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.Settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,36 +144,6 @@
             this.Overview.TabIndex = 0;
             this.Overview.Text = "Overview";
             this.Overview.UseVisualStyleBackColor = true;
-            // 
-            // Profile
-            // 
-            this.Profile.Location = new System.Drawing.Point(149, 4);
-            this.Profile.Name = "Profile";
-            this.Profile.Padding = new System.Windows.Forms.Padding(3);
-            this.Profile.Size = new System.Drawing.Size(832, 554);
-            this.Profile.TabIndex = 1;
-            this.Profile.Text = "Profile";
-            this.Profile.UseVisualStyleBackColor = true;
-            // 
-            // Booking
-            // 
-            this.Booking.Location = new System.Drawing.Point(149, 4);
-            this.Booking.Name = "Booking";
-            this.Booking.Size = new System.Drawing.Size(832, 554);
-            this.Booking.TabIndex = 2;
-            this.Booking.Text = "Booking";
-            this.Booking.UseVisualStyleBackColor = true;
-            // 
-            // Settings
-            // 
-            this.Settings.Controls.Add(this.dataGridView1);
-            this.Settings.Controls.Add(this.checkBox1);
-            this.Settings.Location = new System.Drawing.Point(149, 4);
-            this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(832, 554);
-            this.Settings.TabIndex = 3;
-            this.Settings.Text = "Settings";
-            this.Settings.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -410,6 +380,44 @@
             this.monthCalendar1.ShowWeekNumbers = true;
             this.monthCalendar1.TabIndex = 55;
             // 
+            // Profile
+            // 
+            this.Profile.Location = new System.Drawing.Point(149, 4);
+            this.Profile.Name = "Profile";
+            this.Profile.Padding = new System.Windows.Forms.Padding(3);
+            this.Profile.Size = new System.Drawing.Size(832, 554);
+            this.Profile.TabIndex = 1;
+            this.Profile.Text = "Profile";
+            this.Profile.UseVisualStyleBackColor = true;
+            // 
+            // Booking
+            // 
+            this.Booking.Location = new System.Drawing.Point(149, 4);
+            this.Booking.Name = "Booking";
+            this.Booking.Size = new System.Drawing.Size(832, 554);
+            this.Booking.TabIndex = 2;
+            this.Booking.Text = "Booking";
+            this.Booking.UseVisualStyleBackColor = true;
+            // 
+            // Settings
+            // 
+            this.Settings.Controls.Add(this.dataGridView1);
+            this.Settings.Controls.Add(this.checkBox1);
+            this.Settings.Location = new System.Drawing.Point(149, 4);
+            this.Settings.Name = "Settings";
+            this.Settings.Size = new System.Drawing.Size(832, 554);
+            this.Settings.TabIndex = 3;
+            this.Settings.Text = "Settings";
+            this.Settings.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(179, 259);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.TabIndex = 1;
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
@@ -419,14 +427,6 @@
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(179, 259);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 1;
             // 
             // MainWindow
             // 
@@ -446,14 +446,14 @@
             this.mainOverviewTab.ResumeLayout(false);
             this.Overview.ResumeLayout(false);
             this.Overview.PerformLayout();
-            this.Settings.ResumeLayout(false);
-            this.Settings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Settings.ResumeLayout(false);
+            this.Settings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
