@@ -71,15 +71,33 @@ namespace DriveLogCode
 
         public static bool EmailVerification(string input)
         {
-            try
+            string[] splittedEmail = input.Split('@');
+            string localPart;
+            string domainPart;
+
+            if (splittedEmail.Length != 2)
+                return false;
+
+            else
             {
-                var emailAdress = new System.Net.Mail.MailAddress(input);
-                return emailAdress.Address == input;
+                localPart = splittedEmail[0];
+                domainPart = splittedEmail[1];
             }
-            catch
+            if (!localPart.All(c => char.IsLetterOrDigit(c) || c == '_' || c == '.' || c == '-'))
             {
                 return false;
             }
+            else if (!domainPart.All(c => char.IsLetterOrDigit(c) || c == '.' || c == '-')
+                || domainPart.StartsWith(".")
+                || domainPart.StartsWith("-")
+                || domainPart.EndsWith("-")
+                || domainPart.EndsWith(".")
+                || !domainPart.Any(c => c == '.'))
+            {
+                return false;
+            }
+            else
+                return true;
         }
 
         public static bool CPRVerification(string input)
