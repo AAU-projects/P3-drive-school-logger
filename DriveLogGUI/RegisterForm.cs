@@ -110,5 +110,6 @@ namespace DriveLogGUI
                 registerCprBox.BackColor = Color.Crimson;
                 isCPROk = false;
             }
-        }    }
+        }
+    }
 }
