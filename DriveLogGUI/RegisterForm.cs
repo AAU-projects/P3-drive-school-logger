@@ -81,12 +81,12 @@ namespace DriveLogGUI
 
             if (RegisterVerification.EmailVerification(registerEmailBox.Text))
             {
-                registerEmailBox.BackColor = Color.Chartreuse;
+                registerEmailBox.BorderColor = Color.Chartreuse;
                 isEmailOk = true;
             }
             else
             {
-                registerEmailBox.BackColor = Color.Crimson;
+                registerEmailBox.BorderColor = Color.Crimson;
                 isEmailOk = false;
             }
         }
