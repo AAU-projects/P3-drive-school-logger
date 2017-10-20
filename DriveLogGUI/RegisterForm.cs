@@ -68,5 +68,21 @@ namespace DriveLogGUI
                 isUsernameOk = false;
             }
         }
+
+        private void registerEmailBox_Leave(object sender, EventArgs e)
+        {
+            //Check if email is unique in SQL - Error message: Email taken!
+
+            if (RegisterVerification.EmailVerification(registerEmailBox.Text))
+            {
+                registerEmailBox.BackColor = Color.Chartreuse;
+                isEmailOk = true;
+            }
+            else
+            {
+                registerEmailBox.BackColor = Color.Crimson;
+                isEmailOk = false;
+            }
+        }
     }
 }
