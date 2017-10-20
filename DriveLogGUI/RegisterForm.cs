@@ -65,12 +65,12 @@ namespace DriveLogGUI
 
             if (RegisterVerification.UsernameVerifacation(registerUsernameBox.Text))
             {
-                registerUsernameBox.BackColor = Color.Chartreuse;
+                registerUsernameBox.BorderColor = Color.GreenYellow;
                 isUsernameOk = true;
             }
             else
             {
-                registerUsernameBox.BackColor = Color.Crimson;
+                registerUsernameBox.BorderColor = Color.Crimson;
                 isUsernameOk = false;
             }
         }
