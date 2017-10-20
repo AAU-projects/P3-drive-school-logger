@@ -22,6 +22,19 @@ namespace DriveLogCode
             return true;
         }
 
+        public static bool EmailVerification(string input)
+        {
+            try
+            {
+                var emailAdress = new System.Net.Mail.MailAddress(input);
+                return emailAdress.Address == input;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static bool CPRVerification(string input)
         {
             input.Replace("-", String.Empty);
@@ -40,4 +53,5 @@ namespace DriveLogCode
                 return false;
         }
     }
+}    }
 }
