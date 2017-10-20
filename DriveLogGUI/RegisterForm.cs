@@ -68,5 +68,26 @@ namespace DriveLogGUI
                 isUsernameOk = false;
             }
         }
+
+        /// <summary>
+        /// Verification function for the Register CPR input
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The Event args</param>
+        private void registerCprBox_Leave(object sender, EventArgs e)
+        {
+            //Check if CPR is already in SQL - Error message: CPR already exists!
+
+            if (RegisterVerification.CPRVerification(registerCprBox.Text))
+            {
+                registerCprBox.BackColor = Color.Chartreuse;
+                isCPROk = true;
+            }
+            else
+            {
+                registerCprBox.BackColor = Color.Crimson;
+                isCPROk = false;
+            }
+        }
     }
 }

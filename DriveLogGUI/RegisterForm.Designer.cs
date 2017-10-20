@@ -211,6 +211,7 @@
             this.registerCprBox.Name = "registerCprBox";
             this.registerCprBox.Size = new System.Drawing.Size(145, 20);
             this.registerCprBox.TabIndex = 16;
+            this.registerCprBox.Leave += new System.EventHandler(this.registerCprBox_Leave);
             // 
             // registerAdressBox
             // 
