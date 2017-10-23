@@ -297,6 +297,7 @@ namespace DriveLogGUI
             }
             catch (Exception exception)
             {
+                Console.WriteLine(exception);
                 MessageBox.Show("An Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
