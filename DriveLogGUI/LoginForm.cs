@@ -26,15 +26,14 @@ namespace DriveLogGUI
         {
             this.Hide();
             RegisterForm registerForm = new RegisterForm(this);
-            registerForm.ShowDialog();
+            registerForm.ShowDialog(this);
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            MainWindow mainwindow = new DriveLogGUI.MainWindow();
-            mainwindow.Owner = this;
-            mainwindow.Show();
             this.Hide();
+            MainWindow main = new MainWindow();
+            main.ShowDialog(this);
         }
     }
 }

@@ -165,7 +165,7 @@
             // 
             this.registerTitleLabel.AutoSize = true;
             this.registerTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registerTitleLabel.Location = new System.Drawing.Point(159, 9);
+            this.registerTitleLabel.Location = new System.Drawing.Point(183, 10);
             this.registerTitleLabel.Name = "registerTitleLabel";
             this.registerTitleLabel.Size = new System.Drawing.Size(165, 26);
             this.registerTitleLabel.TabIndex = 20;
@@ -176,7 +176,7 @@
             // 
             this.registerSubtitleLabel.AutoSize = true;
             this.registerSubtitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registerSubtitleLabel.Location = new System.Drawing.Point(171, 35);
+            this.registerSubtitleLabel.Location = new System.Drawing.Point(195, 36);
             this.registerSubtitleLabel.Name = "registerSubtitleLabel";
             this.registerSubtitleLabel.Size = new System.Drawing.Size(138, 20);
             this.registerSubtitleLabel.TabIndex = 21;
@@ -184,7 +184,7 @@
             // 
             // registerUploadPhotoButton
             // 
-            this.registerUploadPhotoButton.Location = new System.Drawing.Point(349, 249);
+            this.registerUploadPhotoButton.Location = new System.Drawing.Point(353, 249);
             this.registerUploadPhotoButton.Name = "registerUploadPhotoButton";
             this.registerUploadPhotoButton.Size = new System.Drawing.Size(91, 23);
             this.registerUploadPhotoButton.TabIndex = 11;
@@ -195,7 +195,7 @@
             // registerCreateNewUserButton
             // 
             this.registerCreateNewUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registerCreateNewUserButton.Location = new System.Drawing.Point(164, 453);
+            this.registerCreateNewUserButton.Location = new System.Drawing.Point(189, 453);
             this.registerCreateNewUserButton.Name = "registerCreateNewUserButton";
             this.registerCreateNewUserButton.Size = new System.Drawing.Size(144, 44);
             this.registerCreateNewUserButton.TabIndex = 12;
@@ -206,7 +206,7 @@
             // registerCancelHyperLink
             // 
             this.registerCancelHyperLink.AutoSize = true;
-            this.registerCancelHyperLink.Location = new System.Drawing.Point(216, 500);
+            this.registerCancelHyperLink.Location = new System.Drawing.Point(241, 500);
             this.registerCancelHyperLink.Name = "registerCancelHyperLink";
             this.registerCancelHyperLink.Size = new System.Drawing.Size(40, 13);
             this.registerCancelHyperLink.TabIndex = 13;
@@ -234,7 +234,7 @@
             // 
             // registerPicture
             // 
-            this.registerPicture.Location = new System.Drawing.Point(316, 81);
+            this.registerPicture.Location = new System.Drawing.Point(320, 81);
             this.registerPicture.Name = "registerPicture";
             this.registerPicture.Size = new System.Drawing.Size(155, 155);
             this.registerPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -440,7 +440,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 528);
+            this.ClientSize = new System.Drawing.Size(524, 530);
             this.Controls.Add(this.usernameStatusLabel);
             this.Controls.Add(this.cityStatusLabel);
             this.Controls.Add(this.zipcodeStatusLabel);
