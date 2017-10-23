@@ -139,7 +139,7 @@ namespace DriveLogGUI
             else if (strength < 12)
                 ChangeLabelTextAndColor(passwordStatusLabel, "Weak", Color.Red);
             else if (strength < 22)
-                ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.Blue);
+                ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.FromArgb(229, 200, 3));
             else
                 ChangeLabelTextAndColor(passwordStatusLabel, "Strong", Color.Green);
         }
@@ -188,9 +188,8 @@ namespace DriveLogGUI
             }
             else if (verify)
             {
-                status.Text = "Valid";
-                status.ForeColor = Color.Chartreuse;
-                textbox.BorderColor = Color.Chartreuse;
+                status.Text = "";
+                textbox.BorderColor = Color.LawnGreen;
             }
             else
             {

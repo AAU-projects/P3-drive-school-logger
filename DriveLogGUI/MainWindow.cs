@@ -77,14 +77,20 @@ namespace DriveLogGUI
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if (Owner.Visible)
+            {
+                this.Dispose();
+            }
+            else if (!Owner.Visible)
+            {
+                Application.Exit();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form login = this.Owner;
-            login.Show();
-            this.Dispose();
+            Owner.Show();
+            this.Close();
         }
     }
 }
