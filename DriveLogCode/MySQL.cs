@@ -15,6 +15,18 @@ namespace DriveLogCode
 
         private static readonly string UserTable = "users";
 
+        public static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr, string address, 
+            string zip, string city, string username, string password, string picture = null, string sysmin = "false")
+        {
+            var cmd = new MySqlCommand($"INSERT INTO {UserTable} (" +
+                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, sysmin)" +
+                                       $"VALUES (" +
+                                       $"'{firstname}', '{lastname}', '{phone}', '{mail}', '{cpr}', '{address}', '{zip}', '{city}', '{username}', " +
+                                       $"'{password}', '{picture}', '{sysmin}')");
+            
+            return SendNonQuery(cmd);
+        }
+
         private static bool CreateTable(string tablename)
         {
             var query = $"CREATE TABLE `{tablename}` (" +
@@ -43,8 +55,8 @@ namespace DriveLogCode
         {
             try
             {
-                Connection.Open();
                 cmd.Connection = Connection;
+                Connection.Open();
                 cmd.ExecuteNonQuery();
 
                 return true;
@@ -67,6 +79,7 @@ namespace DriveLogCode
 
             try
             {
+                cmd.Connection = Connection;
                 Connection.Open();
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
