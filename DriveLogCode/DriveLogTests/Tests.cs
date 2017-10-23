@@ -23,5 +23,19 @@ namespace DriveLogTests
         {
             return RegisterVerification.UsernameVerifacation(username);
         }
+
+        [TestCase("testmail@domain.com", ExpectedResult = true)]
+        [TestCase("testmail@domain.co.uk", ExpectedResult = true)]
+        [TestCase("test.mail@domain.co.uk", ExpectedResult = true)]
+        [TestCase("testmail@domain", ExpectedResult = false)]
+        [TestCase("testmail@domain..com", ExpectedResult = false)]
+        [TestCase("testmail@domain.", ExpectedResult = false)]
+        [TestCase("test@mail@domain.com", ExpectedResult = false)]
+        [TestCase(".testmail@domain.com", ExpectedResult = false)]
+        [TestCase("testmail@domain.com.", ExpectedResult = false)]
+        public bool EmailVerification_CheckInput(string email)
+        {
+            return RegisterVerification.EmailVerification(email);
+        }
     }
 }

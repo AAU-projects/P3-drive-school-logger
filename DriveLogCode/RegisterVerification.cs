@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -81,6 +82,7 @@ namespace DriveLogCode
             string[] splittedEmail = input.Split('@');
             string localPart;
             string domainPart;
+            char[] allowedDomainChars = { '.', '-' };
 
             if (splittedEmail.Length != 2)
                 return false;
@@ -90,7 +92,10 @@ namespace DriveLogCode
                 localPart = splittedEmail[0];
                 domainPart = splittedEmail[1];
             }
-            if (!localPart.All(c => char.IsLetterOrDigit(c) || c == '_' || c == '.' || c == '-'))
+            if (!localPart.All(c => char.IsLetterOrDigit(c) || c == '_' || c == '.' || c == '-')
+                || localPart.StartsWith("_")
+                || localPart.StartsWith(".")
+                || localPart.StartsWith("-"))
             {
                 return false;
             }
@@ -103,8 +108,15 @@ namespace DriveLogCode
             {
                 return false;
             }
-            else
-                return true;
+            for (int i = 0; i < domainPart.Length; i++)
+            {
+                if (i != 0 && allowedDomainChars.Contains(domainPart[i]) && allowedDomainChars.Contains(domainPart[i - 1]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public static bool CPRVerification(string input)
@@ -178,7 +190,6 @@ namespace DriveLogCode
 
         public static bool ZipVerifacation(string input)
         {
-
             if (string.IsNullOrEmpty(input) || input.Length != 4)
                 return false;
 
@@ -192,6 +203,9 @@ namespace DriveLogCode
 
         public static bool CityVerification(string city)
         {
+            if (string.IsNullOrEmpty(city)) return false;
+            if (string.IsNullOrWhiteSpace(city)) return false;
+
             int whiteSpaceCounter = 0;
 
             foreach (char c in city)
