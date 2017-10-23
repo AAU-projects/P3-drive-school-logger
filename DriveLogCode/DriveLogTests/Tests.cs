@@ -6,28 +6,12 @@ namespace DriveLogTests
 {
     public class Tests
     {
-        [Test]
-        public void CPRValidation_InvalidInput_False()
+        [TestCase("2010170035", ExpectedResult = false)]
+        [TestCase("2010170039", ExpectedResult = true)]
+        [TestCase("201017-0039", ExpectedResult = true)]
+        public bool CPRValidation_CheckInput(string cpr)
         {
-            bool result = RegisterVerification.CPRVerification("2010170035");
-
-            Assert.IsFalse(result);
-        }
-
-        [Test]
-        public void CPRValidation_ValidInput_True()
-        {
-            bool result = RegisterVerification.CPRVerification("2010170039");
-
-            Assert.IsTrue(result);
-        }
-
-        [Test]
-        public void CPRValidation_ValidInputWithDash_True()
-        {
-            bool result = RegisterVerification.CPRVerification("201017-0039");
-
-            Assert.IsTrue(result);
+            return RegisterVerification.CPRVerification(cpr);
         }
     }
 }
