@@ -79,5 +79,12 @@ namespace DriveLogGUI
         {
             Application.Exit();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form login = this.Owner;
+            login.Show();
+            this.Dispose();
+        }
     }
 }
