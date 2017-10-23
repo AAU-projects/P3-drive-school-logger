@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.PictureBox registerPicturebox;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
             this.registerUsernameLabel = new System.Windows.Forms.Label();
             this.registerPasswordLabel = new System.Windows.Forms.Label();
             this.registerFirstnameLabel = new System.Windows.Forms.Label();
@@ -58,18 +56,9 @@
             this.verifyPasswordBox = new TextboxBorderColor();
             this.registerConfirmPasswordLabel = new System.Windows.Forms.Label();
             this.passwordStrengthLabel = new System.Windows.Forms.Label();
-            registerPicturebox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).BeginInit();
+            this.registerPicture = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.registerPicture)).BeginInit();
             this.SuspendLayout();
-            // 
-            // registerPicturebox
-            // 
-            registerPicturebox.Image = ((System.Drawing.Image)(resources.GetObject("registerPicturebox.Image")));
-            registerPicturebox.Location = new System.Drawing.Point(315, 81);
-            registerPicturebox.Name = "registerPicturebox";
-            registerPicturebox.Size = new System.Drawing.Size(128, 128);
-            registerPicturebox.TabIndex = 22;
-            registerPicturebox.TabStop = false;
             // 
             // registerUsernameLabel
             // 
@@ -104,11 +93,7 @@
             this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
             this.registerFirstnameBox.Name = "registerFirstnameBox";
             this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
-<<<<<<< HEAD
             this.registerFirstnameBox.TabIndex = 0;
-=======
-            this.registerFirstnameBox.TabIndex = 3;
->>>>>>> 5920622e40e95117f7021d4b1f4991fe52d9d681
             this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
             this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
@@ -281,12 +266,13 @@
             // 
             // registerUploadPhotoButton
             // 
-            this.registerUploadPhotoButton.Location = new System.Drawing.Point(333, 215);
+            this.registerUploadPhotoButton.Location = new System.Drawing.Point(333, 275);
             this.registerUploadPhotoButton.Name = "registerUploadPhotoButton";
             this.registerUploadPhotoButton.Size = new System.Drawing.Size(91, 23);
             this.registerUploadPhotoButton.TabIndex = 11;
             this.registerUploadPhotoButton.Text = "Upload picture";
             this.registerUploadPhotoButton.UseVisualStyleBackColor = true;
+            this.registerUploadPhotoButton.Click += new System.EventHandler(this.registerUploadPhotoButton_Click);
             // 
             // registerCreateNewUserButton
             // 
@@ -336,18 +322,28 @@
             this.passwordStrengthLabel.Size = new System.Drawing.Size(0, 13);
             this.passwordStrengthLabel.TabIndex = 28;
             // 
+            // registerPicture
+            // 
+            this.registerPicture.Location = new System.Drawing.Point(296, 81);
+            this.registerPicture.Name = "registerPicture";
+            this.registerPicture.Size = new System.Drawing.Size(175, 185);
+            this.registerPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.registerPicture.TabIndex = 29;
+            this.registerPicture.TabStop = false;
+            this.registerPicture.Click += new System.EventHandler(this.registerPicture_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 528);
+            this.Controls.Add(this.registerPicture);
             this.Controls.Add(this.passwordStrengthLabel);
             this.Controls.Add(this.verifyPasswordBox);
             this.Controls.Add(this.registerConfirmPasswordLabel);
             this.Controls.Add(this.registerCancelHyperLink);
             this.Controls.Add(this.registerCreateNewUserButton);
             this.Controls.Add(this.registerUploadPhotoButton);
-            this.Controls.Add(registerPicturebox);
             this.Controls.Add(this.registerSubtitleLabel);
             this.Controls.Add(this.registerTitleLabel);
             this.Controls.Add(this.registerZipBox);
@@ -371,9 +367,10 @@
             this.Controls.Add(this.registerPasswordLabel);
             this.Controls.Add(this.registerUsernameLabel);
             this.Name = "RegisterForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Register";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.registerPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -409,5 +406,6 @@
         private TextboxBorderColor verifyPasswordBox;
         private System.Windows.Forms.Label registerConfirmPasswordLabel;
         private System.Windows.Forms.Label passwordStrengthLabel;
+        private System.Windows.Forms.PictureBox registerPicture;
     }
 }

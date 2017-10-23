@@ -267,6 +267,33 @@ namespace DriveLogGUI
             label.Text = text;
             label.ForeColor = color;
         }
+
+        private void registerUploadPhotoButton_Click(object sender, EventArgs e)
+        {
+            string imageLocation = string.Empty;
+
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    imageLocation = dialog.FileName;
+
+                    registerPicture.ImageLocation = imageLocation;
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("An Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void registerPicture_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
