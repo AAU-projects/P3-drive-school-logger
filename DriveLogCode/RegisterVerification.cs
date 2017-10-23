@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -178,7 +179,6 @@ namespace DriveLogCode
 
         public static bool ZipVerifacation(string input)
         {
-
             if (string.IsNullOrEmpty(input) || input.Length != 4)
                 return false;
 
@@ -192,6 +192,9 @@ namespace DriveLogCode
 
         public static bool CityVerification(string city)
         {
+            if (string.IsNullOrEmpty(city)) return false;
+            if (string.IsNullOrWhiteSpace(city)) return false;
+
             int whiteSpaceCounter = 0;
 
             foreach (char c in city)
