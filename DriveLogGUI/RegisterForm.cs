@@ -279,9 +279,6 @@ namespace DriveLogGUI
             label.Text = text;
             label.ForeColor = color;
         }
-<<<<<<< HEAD
-=======
-
         private void registerUploadPhotoButton_Click(object sender, EventArgs e)
         {
             string imageLocation = string.Empty;
@@ -308,8 +305,6 @@ namespace DriveLogGUI
         {
 
         }
-    }
->>>>>>> origin/master
 
         private void registerCityBox_TextChanged(object sender, EventArgs e)
         {

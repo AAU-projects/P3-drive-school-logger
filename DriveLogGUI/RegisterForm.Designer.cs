@@ -94,11 +94,7 @@
             this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
             this.registerFirstnameBox.Name = "registerFirstnameBox";
             this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
-<<<<<<< HEAD
-            this.registerFirstnameBox.TabIndex = 3;
-=======
             this.registerFirstnameBox.TabIndex = 0;
->>>>>>> origin/master
             this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
             this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
