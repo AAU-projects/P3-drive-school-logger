@@ -57,6 +57,7 @@
             this.registerCancelHyperLink = new System.Windows.Forms.LinkLabel();
             this.verifyPasswordBox = new TextboxBorderColor();
             this.registerConfirmPasswordLabel = new System.Windows.Forms.Label();
+            this.passwordStrengthLabel = new System.Windows.Forms.Label();
             registerPicturebox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).BeginInit();
             this.SuspendLayout();
@@ -103,7 +104,11 @@
             this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
             this.registerFirstnameBox.Name = "registerFirstnameBox";
             this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
+<<<<<<< HEAD
             this.registerFirstnameBox.TabIndex = 0;
+=======
+            this.registerFirstnameBox.TabIndex = 3;
+>>>>>>> 5920622e40e95117f7021d4b1f4991fe52d9d681
             this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
             this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
@@ -323,11 +328,20 @@
             this.registerConfirmPasswordLabel.TabIndex = 26;
             this.registerConfirmPasswordLabel.Text = "Verify password:";
             // 
+            // passwordStrengthLabel
+            // 
+            this.passwordStrengthLabel.AutoSize = true;
+            this.passwordStrengthLabel.Location = new System.Drawing.Point(264, 385);
+            this.passwordStrengthLabel.Name = "passwordStrengthLabel";
+            this.passwordStrengthLabel.Size = new System.Drawing.Size(0, 13);
+            this.passwordStrengthLabel.TabIndex = 28;
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 528);
+            this.Controls.Add(this.passwordStrengthLabel);
             this.Controls.Add(this.verifyPasswordBox);
             this.Controls.Add(this.registerConfirmPasswordLabel);
             this.Controls.Add(this.registerCancelHyperLink);
@@ -394,5 +408,6 @@
         private System.Windows.Forms.LinkLabel registerCancelHyperLink;
         private TextboxBorderColor verifyPasswordBox;
         private System.Windows.Forms.Label registerConfirmPasswordLabel;
+        private System.Windows.Forms.Label passwordStrengthLabel;
     }
 }
