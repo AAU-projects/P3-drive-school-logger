@@ -92,7 +92,10 @@ namespace DriveLogCode
                 localPart = splittedEmail[0];
                 domainPart = splittedEmail[1];
             }
-            if (!localPart.All(c => char.IsLetterOrDigit(c) || c == '_' || c == '.' || c == '-'))
+            if (!localPart.All(c => char.IsLetterOrDigit(c) || c == '_' || c == '.' || c == '-')
+                || localPart.StartsWith("_")
+                || localPart.StartsWith(".")
+                || localPart.StartsWith("-"))
             {
                 return false;
             }
@@ -100,7 +103,8 @@ namespace DriveLogCode
                 || domainPart.StartsWith(".")
                 || domainPart.StartsWith("-")
                 || domainPart.EndsWith("-")
-                || domainPart.EndsWith("."))
+                || domainPart.EndsWith(".")
+                || !domainPart.Any(c => c == '.'))
             {
                 return false;
             }
