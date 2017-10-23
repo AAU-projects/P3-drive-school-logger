@@ -163,6 +163,11 @@ namespace DriveLogGUI
 
             ChangeBorderColorTextbox(registerZipBox, zipcodeStatusLabel, verify);
             isZipOk = verify;
+
+            if (verify)
+            {
+                registerCityBox.Text = JSONReader.GetCity(int.Parse(registerZipBox.Text));
+            }
         }
 
         private void registerPhoneBox_Leave(object sender, EventArgs e)
@@ -203,7 +208,7 @@ namespace DriveLogGUI
                 isCityOk && isZipOk && isUsernameOk && isPasswordOk && isVerifyPasswordOk)
             {
                 //Opret en ny bruger i databasen
-                MessageBox.Show("You have succesfully crated a user", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MessageBox.Show("You have succesfully created a user", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.None);
                 this.Dispose();
                 _loginForm.Show();
             }
