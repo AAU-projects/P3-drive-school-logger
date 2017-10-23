@@ -13,7 +13,7 @@ namespace DriveLogCode
         public string navn { get; set; }
     }
 
-    public class RootObject
+    public class ZipCode
     {
         public string href { get; set; }
         public string nr { get; set; }
