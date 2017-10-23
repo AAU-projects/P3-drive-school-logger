@@ -13,9 +13,16 @@ namespace DriveLogCode
             if (string.IsNullOrEmpty(input))
                 return false;
 
-            foreach (char c in input)
+            char[] specialChars = { '_', '-', '.' };
+
+            if (specialChars.Contains(input[0]) || specialChars.Contains(input[input.Length - 1]))
+                return false;
+
+            for(int i = 0; i < input.Length; i++)
             {
-                if (!char.IsLetterOrDigit(c) && !c.Equals('_') && !c.Equals('-') && !c.Equals('.'))
+                if (!char.IsLetterOrDigit(input[i]) && !specialChars.Contains(input[i]))
+                    return false;
+                if (i != 0 && specialChars.Contains(input[i]) && specialChars.Contains(input[i-1]))
                     return false;
             }
 
