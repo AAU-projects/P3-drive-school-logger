@@ -125,7 +125,8 @@ namespace DriveLogGUI
 
         private void registerPasswordBox_TextChanged(object sender, EventArgs e)
         {
-            bool verify = RegisterVerification.PasswordVertification(registerPasswordBox.Text);
+            bool usernameNotSameAsPassword = registerPasswordBox.Text != registerUsernameBox.Text;
+            bool verify = RegisterVerification.PasswordVertification(registerPasswordBox.Text) && usernameNotSameAsPassword;
 
             ChangeBorderColorTextbox(registerPasswordBox, passwordStatusLabel, verify);
             isPasswordOk = verify;
@@ -142,6 +143,12 @@ namespace DriveLogGUI
                 ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.FromArgb(229, 200, 3));
             else
                 ChangeLabelTextAndColor(passwordStatusLabel, "Strong", Color.Green);
+
+            if (!usernameNotSameAsPassword)
+            {
+                passwordStatusLabel.Text = "Password can not be the same as your username";
+                passwordStatusLabel.ForeColor = Color.Red;
+            }
         }
 
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
