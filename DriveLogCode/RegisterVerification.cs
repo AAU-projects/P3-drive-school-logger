@@ -133,6 +133,28 @@ namespace DriveLogCode
             return true;
         }
 
+        public static int PasswordStrength(string password)
+        {
+            int hasUppercase = 0;
+            int hasLowercase = 0;
+            int hasDigit = 0;
+            int hasSpecialChar = 0;
+
+            foreach(char c in password)
+            {
+                if (char.IsDigit(c))
+                    hasDigit = 2;
+                else if (char.IsLower(c))
+                    hasLowercase = 2;
+                else if (char.IsUpper(c))
+                    hasUppercase = 2;
+                else if (c.Equals('_') || c.Equals('-'))
+                    hasSpecialChar = 2;
+            }
+
+            return hasUppercase + hasLowercase + hasDigit + hasSpecialChar + password.Length;
+        }
+
         public static bool PhoneVerifacation(string input)
         {
 

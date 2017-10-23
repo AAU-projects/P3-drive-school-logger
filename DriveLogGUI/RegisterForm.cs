@@ -187,6 +187,17 @@ namespace DriveLogGUI
                 isPasswordOk = false;
             }
             VertifyPassword();
+
+            int strength = RegisterVerification.PasswordStrength(registerPasswordBox.Text);
+
+            if(strength == 0)
+                passwordStrengthLabel.Text = "";
+            else if (strength < 12)
+                ChangeLabelTextAndColor(passwordStrengthLabel, "Weak", Color.Red);
+            else if (strength < 22)
+                ChangeLabelTextAndColor(passwordStrengthLabel, "Medium", Color.Blue);
+            else
+                ChangeLabelTextAndColor(passwordStrengthLabel, "Strong", Color.Green);
         }
 
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
@@ -250,7 +261,11 @@ namespace DriveLogGUI
             }
         }
 
-
+        private void ChangeLabelTextAndColor(Label label, string text, Color color)
+        {
+            label.Text = text;
+            label.ForeColor = color;
+        }
     }
 
 }
