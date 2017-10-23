@@ -210,10 +210,9 @@ namespace DriveLogGUI
 
         private void registerZipBox_Leave(object sender, EventArgs e)
         {
-            JSONReader.GetCity(8600);
-
             if (RegisterVerification.ZipVerifacation(registerZipBox.Text))
             {
+                registerCityBox.Text = JSONReader.GetCity(int.Parse(registerZipBox.Text));
                 registerZipBox.BorderColor = Color.Chartreuse;
                 isZipOk = true;
             }

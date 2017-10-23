@@ -13,11 +13,19 @@ namespace DriveLogCode
     {
         public static string GetCity(int zip)
         {
-            WebClient client = new WebClient();
-            String downloadedString = client.DownloadString("https://dawa.aws.dk/postnumre?nr=8600");
-            RootObject r = JsonConvert.DeserializeObject<RootObject>(downloadedString);
+            try
+            {
+                WebClient client = new WebClient();
+                client.Encoding = Encoding.UTF8;
+                var downloadedString = client.DownloadString($"https://dawa.aws.dk/postnumre/{zip}");
+                ZipCode r = JsonConvert.DeserializeObject<ZipCode>(downloadedString);
 
-            return r.navn;
+                return r.navn;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }
