@@ -13,7 +13,7 @@ namespace DriveLogCode
         private static string _connectionString = "server=ds315e17.duckdns.org;port=50000;uid=DriveLog;pwd=#SWe2017;database=DriveLog";
         private static readonly  MySqlConnection Connection = new MySqlConnection(_connectionString);
 
-        private static string _userTable = "Users";
+        private static readonly string UserTable = "users";
 
         private static bool CreateTable(string tablename)
         {
