@@ -13,9 +13,16 @@ namespace DriveLogCode
             if (string.IsNullOrEmpty(input))
                 return false;
 
-            foreach (char c in input)
+            char[] specialChars = { '_', '-', '.' };
+
+            if (specialChars.Contains(input[0]) || specialChars.Contains(input[input.Length - 1]))
+                return false;
+
+            for(int i = 0; i < input.Length; i++)
             {
-                if (!char.IsLetterOrDigit(c) && !c.Equals('_') && !c.Equals('-') && !c.Equals('.'))
+                if (!char.IsLetterOrDigit(input[i]) && !specialChars.Contains(input[i]))
+                    return false;
+                if (i != 0 && specialChars.Contains(input[i]) && specialChars.Contains(input[i-1]))
                     return false;
             }
 
@@ -131,6 +138,28 @@ namespace DriveLogCode
             }
 
             return true;
+        }
+
+        public static int PasswordStrength(string password)
+        {
+            int hasUppercase = 0;
+            int hasLowercase = 0;
+            int hasDigit = 0;
+            int hasSpecialChar = 0;
+
+            foreach(char c in password)
+            {
+                if (char.IsDigit(c))
+                    hasDigit = 2;
+                else if (char.IsLower(c))
+                    hasLowercase = 2;
+                else if (char.IsUpper(c))
+                    hasUppercase = 2;
+                else if (c.Equals('_') || c.Equals('-'))
+                    hasSpecialChar = 2;
+            }
+
+            return hasUppercase + hasLowercase + hasDigit + hasSpecialChar + password.Length;
         }
 
         public static bool PhoneVerifacation(string input)

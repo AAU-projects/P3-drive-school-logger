@@ -13,5 +13,15 @@ namespace DriveLogTests
         {
             return RegisterVerification.CPRVerification(cpr);
         }
+
+        [TestCase("HansHansen", ExpectedResult = true)]
+        [TestCase("Hans-Hansen", ExpectedResult = true)]
+        [TestCase("HansHansen-", ExpectedResult = false)]
+        [TestCase("-HansHansen", ExpectedResult = false)]
+        [TestCase("Hans-_Hansen", ExpectedResult = false)]
+        public bool UsernameValidation_CheckInput(string username)
+        {
+            return RegisterVerification.UsernameVerifacation(username);
+        }
     }
 }
