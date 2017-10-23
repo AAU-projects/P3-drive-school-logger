@@ -133,21 +133,23 @@ namespace DriveLogGUI
 
             VertifyPassword();
 
-            int strength = RegisterVerification.PasswordStrength(registerPasswordBox.Text);
-
-            if(strength == 0)
-                passwordStatusLabel.Text = "";
-            else if (strength < 12)
-                ChangeLabelTextAndColor(passwordStatusLabel, "Weak", Color.Red);
-            else if (strength < 22)
-                ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.FromArgb(229, 200, 3));
-            else
-                ChangeLabelTextAndColor(passwordStatusLabel, "Strong", Color.Green);
-
             if (!usernameNotSameAsPassword)
             {
                 passwordStatusLabel.Text = "Password can not be the same as your username";
                 passwordStatusLabel.ForeColor = Color.Red;
+            }
+            else
+            {
+                int strength = RegisterVerification.PasswordStrength(registerPasswordBox.Text);
+
+                if (strength == 0)
+                    passwordStatusLabel.Text = "";
+                else if (strength < 12)
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Weak", Color.Red);
+                else if (strength < 22)
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.FromArgb(229, 200, 3));
+                else
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Strong", Color.Green);
             }
         }
 

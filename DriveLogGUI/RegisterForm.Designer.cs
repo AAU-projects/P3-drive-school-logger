@@ -184,7 +184,7 @@
             // 
             // registerUploadPhotoButton
             // 
-            this.registerUploadPhotoButton.Location = new System.Drawing.Point(368, 249);
+            this.registerUploadPhotoButton.Location = new System.Drawing.Point(353, 249);
             this.registerUploadPhotoButton.Name = "registerUploadPhotoButton";
             this.registerUploadPhotoButton.Size = new System.Drawing.Size(91, 23);
             this.registerUploadPhotoButton.TabIndex = 11;
@@ -234,7 +234,7 @@
             // 
             // registerPicture
             // 
-            this.registerPicture.Location = new System.Drawing.Point(335, 81);
+            this.registerPicture.Location = new System.Drawing.Point(320, 81);
             this.registerPicture.Name = "registerPicture";
             this.registerPicture.Size = new System.Drawing.Size(155, 155);
             this.registerPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
