@@ -4,7 +4,7 @@ using DriveLogCode;
 
 namespace DriveLogTests
 {
-    public class Tests
+    public class RegisterVerificationTests
     {
         [TestCase("2010170035", ExpectedResult = false)]
         [TestCase("2010170039", ExpectedResult = true)]
