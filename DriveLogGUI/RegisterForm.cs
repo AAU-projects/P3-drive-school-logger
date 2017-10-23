@@ -103,7 +103,7 @@ namespace DriveLogGUI
 
         private void registerCityBox_Leave(object sender, EventArgs e)
         {
-            if (RegisterVerification.InputOnlyLettersVerification(registerCityBox.Text))
+            if (RegisterVerification.CityVerification(registerCityBox.Text))
             {
                 registerCityBox.BorderColor = Color.Chartreuse;
                 isCityOk = true;
@@ -254,7 +254,6 @@ namespace DriveLogGUI
             }
         }
 
-<<<<<<< HEAD
         private void registerCreateNewUserButton_Click(object sender, EventArgs e)
         {
             if (isFirstnameOk && isLastnameOk && isPhoneOk && isEmailOk && isCPROk && isAdressOk &&
@@ -273,13 +272,17 @@ namespace DriveLogGUI
                         tb.BorderColor = Color.Crimson;
                 }
             }
-=======
+        }
+
         private void ChangeLabelTextAndColor(Label label, string text, Color color)
         {
             label.Text = text;
             label.ForeColor = color;
->>>>>>> origin/master
+        }
+
+        private void registerCityBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
-
 }

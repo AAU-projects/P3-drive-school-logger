@@ -57,11 +57,8 @@
             this.registerCancelHyperLink = new System.Windows.Forms.LinkLabel();
             this.verifyPasswordBox = new TextboxBorderColor();
             this.registerConfirmPasswordLabel = new System.Windows.Forms.Label();
-<<<<<<< HEAD
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-=======
             this.passwordStrengthLabel = new System.Windows.Forms.Label();
->>>>>>> origin/master
             registerPicturebox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).BeginInit();
             this.SuspendLayout();
@@ -108,15 +105,7 @@
             this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
             this.registerFirstnameBox.Name = "registerFirstnameBox";
             this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
-<<<<<<< HEAD
             this.registerFirstnameBox.TabIndex = 3;
-=======
-<<<<<<< HEAD
-            this.registerFirstnameBox.TabIndex = 0;
-=======
-            this.registerFirstnameBox.TabIndex = 3;
->>>>>>> 5920622e40e95117f7021d4b1f4991fe52d9d681
->>>>>>> origin/master
             this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
             this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
@@ -255,6 +244,7 @@
             this.registerCityBox.Name = "registerCityBox";
             this.registerCityBox.Size = new System.Drawing.Size(145, 20);
             this.registerCityBox.TabIndex = 7;
+            this.registerCityBox.TextChanged += new System.EventHandler(this.registerCityBox_TextChanged);
             this.registerCityBox.Leave += new System.EventHandler(this.registerCityBox_Leave);
             // 
             // registerZipBox
@@ -417,10 +407,7 @@
         private System.Windows.Forms.LinkLabel registerCancelHyperLink;
         private TextboxBorderColor verifyPasswordBox;
         private System.Windows.Forms.Label registerConfirmPasswordLabel;
-<<<<<<< HEAD
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-=======
         private System.Windows.Forms.Label passwordStrengthLabel;
->>>>>>> origin/master
     }
 }

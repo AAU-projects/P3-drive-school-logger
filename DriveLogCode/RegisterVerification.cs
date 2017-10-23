@@ -189,6 +189,24 @@ namespace DriveLogCode
             }
             return true;
         }
+
+        public static bool CityVerification(string city)
+        {
+            int whiteSpaceCounter = 0;
+
+            foreach (char c in city)
+            {
+                if (c == ' ')
+                    whiteSpaceCounter++;
+
+                if (whiteSpaceCounter > 1)
+                    return false;
+
+                if (!char.IsLetter(c) && !char.IsWhiteSpace(c))
+                    return false;
+            }
+            return true;
+        }
     }
 }
 
