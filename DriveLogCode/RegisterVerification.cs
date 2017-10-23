@@ -74,6 +74,7 @@ namespace DriveLogCode
             string[] splittedEmail = input.Split('@');
             string localPart;
             string domainPart;
+            char[] allowedDomainChars = { '.', '-' };
 
             if (splittedEmail.Length != 2)
                 return false;
@@ -91,13 +92,19 @@ namespace DriveLogCode
                 || domainPart.StartsWith(".")
                 || domainPart.StartsWith("-")
                 || domainPart.EndsWith("-")
-                || domainPart.EndsWith(".")
-                || !domainPart.Any(c => c == '.'))
+                || domainPart.EndsWith("."))
             {
                 return false;
             }
-            else
-                return true;
+            for (int i = 0; i < domainPart.Length; i++)
+            {
+                if (i != 0 && allowedDomainChars.Contains(domainPart[i]) && allowedDomainChars.Contains(domainPart[i - 1]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public static bool CPRVerification(string input)
