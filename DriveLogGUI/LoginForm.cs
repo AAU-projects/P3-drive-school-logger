@@ -32,6 +32,7 @@ namespace DriveLogGUI
         private void loginButton_Click(object sender, EventArgs e)
         {
             MainWindow mainwindow = new DriveLogGUI.MainWindow();
+            mainwindow.Owner = this;
             mainwindow.Show();
             this.Hide();
         }
