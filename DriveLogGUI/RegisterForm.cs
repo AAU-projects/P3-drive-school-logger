@@ -125,23 +125,32 @@ namespace DriveLogGUI
 
         private void registerPasswordBox_TextChanged(object sender, EventArgs e)
         {
-            bool verify = RegisterVerification.PasswordVertification(registerPasswordBox.Text);
+            bool usernameNotSameAsPassword = registerPasswordBox.Text != registerUsernameBox.Text;
+            bool verify = RegisterVerification.PasswordVertification(registerPasswordBox.Text) && usernameNotSameAsPassword;
 
             ChangeBorderColorTextbox(registerPasswordBox, passwordStatusLabel, verify);
             isPasswordOk = verify;
 
             VertifyPassword();
 
-            int strength = RegisterVerification.PasswordStrength(registerPasswordBox.Text);
-
-            if(strength == 0)
-                passwordStatusLabel.Text = "";
-            else if (strength < 12)
-                ChangeLabelTextAndColor(passwordStatusLabel, "Weak", Color.Red);
-            else if (strength < 22)
-                ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.FromArgb(229, 200, 3));
+            if (!usernameNotSameAsPassword)
+            {
+                passwordStatusLabel.Text = "Password can not be the same as your username";
+                passwordStatusLabel.ForeColor = Color.Red;
+            }
             else
-                ChangeLabelTextAndColor(passwordStatusLabel, "Strong", Color.Green);
+            {
+                int strength = RegisterVerification.PasswordStrength(registerPasswordBox.Text);
+
+                if (strength == 0)
+                    passwordStatusLabel.Text = "";
+                else if (strength < 12)
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Weak", Color.Red);
+                else if (strength < 22)
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.FromArgb(229, 200, 3));
+                else
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Strong", Color.Green);
+            }
         }
 
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
