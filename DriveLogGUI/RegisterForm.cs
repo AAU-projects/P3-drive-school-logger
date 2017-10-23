@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DriveLogCode;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DriveLogGUI
 {
@@ -43,16 +45,6 @@ namespace DriveLogGUI
         {
             _loginForm.Show();
             this.Dispose();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void registerUsernameLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void registerUsernameBox_TextChanged(object sender, EventArgs e)
@@ -250,7 +242,25 @@ namespace DriveLogGUI
             }
         }
 
-
+        private void registerCreateNewUserButton_Click(object sender, EventArgs e)
+        {
+            if (isFirstnameOk && isLastnameOk && isPhoneOk && isEmailOk && isCPROk && isAdressOk &&
+                isCityOk && isZipOk && isUsernameOk && isPasswordOk && isVerifyPasswordOk)
+            {
+                //Opret en ny bruger i databasen
+                MessageBox.Show("You have succesfully crated a user");
+                this.Dispose();
+                _loginForm.Show();
+            }
+            else
+            {
+                foreach (TextboxBorderColor tb in this.Controls.OfType<TextboxBorderColor>())
+                {
+                    if (string.IsNullOrEmpty(tb.Text))
+                        tb.BorderColor = Color.Crimson;
+                }
+            }
+        }
     }
 
 }

@@ -57,6 +57,7 @@
             this.registerCancelHyperLink = new System.Windows.Forms.LinkLabel();
             this.verifyPasswordBox = new TextboxBorderColor();
             this.registerConfirmPasswordLabel = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             registerPicturebox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).BeginInit();
             this.SuspendLayout();
@@ -96,6 +97,16 @@
             this.registerFirstnameLabel.Size = new System.Drawing.Size(55, 13);
             this.registerFirstnameLabel.TabIndex = 0;
             this.registerFirstnameLabel.Text = "Firstname:";
+            // 
+            // registerFirstnameBox
+            // 
+            this.registerFirstnameBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
+            this.registerFirstnameBox.Name = "registerFirstnameBox";
+            this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
+            this.registerFirstnameBox.TabIndex = 3;
+            this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
+            this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
             // registerUsernameBox
             // 
@@ -179,16 +190,6 @@
             this.registerPasswordBox.Size = new System.Drawing.Size(145, 20);
             this.registerPasswordBox.TabIndex = 11;
             this.registerPasswordBox.TextChanged += new System.EventHandler(this.registerPasswordBox_TextChanged);
-            // 
-            // registerFirstnameBox
-            // 
-            this.registerFirstnameBox.BorderColor = System.Drawing.Color.Blue;
-            this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
-            this.registerFirstnameBox.Name = "registerFirstnameBox";
-            this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
-            this.registerFirstnameBox.TabIndex = 3;
-            this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
-            this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
             // registerLastnameBox
             // 
@@ -292,6 +293,7 @@
             this.registerCreateNewUserButton.TabIndex = 24;
             this.registerCreateNewUserButton.Text = "Create";
             this.registerCreateNewUserButton.UseVisualStyleBackColor = true;
+            this.registerCreateNewUserButton.Click += new System.EventHandler(this.registerCreateNewUserButton_Click);
             // 
             // registerCancelHyperLink
             // 
@@ -394,5 +396,6 @@
         private System.Windows.Forms.LinkLabel registerCancelHyperLink;
         private TextboxBorderColor verifyPasswordBox;
         private System.Windows.Forms.Label registerConfirmPasswordLabel;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
