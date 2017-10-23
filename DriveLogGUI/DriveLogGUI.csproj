@@ -47,12 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BookingForm.Designer.cs">
-      <DependentUpon>BookingForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DriveLogStarter.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -65,12 +59,6 @@
     </Compile>
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OverviewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OverviewForm.Designer.cs">
-      <DependentUpon>OverviewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBarColor.cs">
@@ -96,9 +84,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OverviewForm.resx">
-      <DependentUpon>OverviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

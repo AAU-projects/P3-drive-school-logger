@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SqlTests.cs" />
-    <Compile Include="Tests.cs" />
+    <Compile Include="RegisterVerificationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
