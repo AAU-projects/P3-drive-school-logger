@@ -104,11 +104,8 @@
             this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
             this.registerFirstnameBox.Name = "registerFirstnameBox";
             this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
-<<<<<<< HEAD
             this.registerFirstnameBox.TabIndex = 0;
-=======
             this.registerFirstnameBox.TabIndex = 3;
->>>>>>> 5920622e40e95117f7021d4b1f4991fe52d9d681
             this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
             this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
