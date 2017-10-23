@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.PictureBox registerPicturebox;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
             this.registerUsernameLabel = new System.Windows.Forms.Label();
             this.registerPasswordLabel = new System.Windows.Forms.Label();
             this.registerFirstnameLabel = new System.Windows.Forms.Label();
@@ -57,18 +55,11 @@
             this.registerCancelHyperLink = new System.Windows.Forms.LinkLabel();
             this.verifyPasswordBox = new TextboxBorderColor();
             this.registerConfirmPasswordLabel = new System.Windows.Forms.Label();
-            registerPicturebox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).BeginInit();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.passwordStrengthLabel = new System.Windows.Forms.Label();
+            this.registerPicture = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.registerPicture)).BeginInit();
             this.SuspendLayout();
-            // 
-            // registerPicturebox
-            // 
-            registerPicturebox.Image = ((System.Drawing.Image)(resources.GetObject("registerPicturebox.Image")));
-            registerPicturebox.Location = new System.Drawing.Point(315, 81);
-            registerPicturebox.Name = "registerPicturebox";
-            registerPicturebox.Size = new System.Drawing.Size(128, 128);
-            registerPicturebox.TabIndex = 22;
-            registerPicturebox.TabStop = false;
             // 
             // registerUsernameLabel
             // 
@@ -97,13 +88,23 @@
             this.registerFirstnameLabel.TabIndex = 0;
             this.registerFirstnameLabel.Text = "Firstname:";
             // 
+            // registerFirstnameBox
+            // 
+            this.registerFirstnameBox.BorderColor = System.Drawing.Color.Blue;
+            this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
+            this.registerFirstnameBox.Name = "registerFirstnameBox";
+            this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
+            this.registerFirstnameBox.TabIndex = 0;
+            this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
+            this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
+            // 
             // registerUsernameBox
             // 
             this.registerUsernameBox.BorderColor = System.Drawing.Color.Blue;
             this.registerUsernameBox.Location = new System.Drawing.Point(112, 346);
             this.registerUsernameBox.Name = "registerUsernameBox";
             this.registerUsernameBox.Size = new System.Drawing.Size(145, 20);
-            this.registerUsernameBox.TabIndex = 12;
+            this.registerUsernameBox.TabIndex = 8;
             this.registerUsernameBox.TextChanged += new System.EventHandler(this.registerUsernameBox_TextChanged);
             this.registerUsernameBox.Leave += new System.EventHandler(this.registerUsernameBox_Leave);
             // 
@@ -155,7 +156,7 @@
             // registerCityLabel
             // 
             this.registerCityLabel.AutoSize = true;
-            this.registerCityLabel.Location = new System.Drawing.Point(20, 282);
+            this.registerCityLabel.Location = new System.Drawing.Point(19, 318);
             this.registerCityLabel.Name = "registerCityLabel";
             this.registerCityLabel.Size = new System.Drawing.Size(27, 13);
             this.registerCityLabel.TabIndex = 9;
@@ -164,7 +165,7 @@
             // registerZipcodeLabel
             // 
             this.registerZipcodeLabel.AutoSize = true;
-            this.registerZipcodeLabel.Location = new System.Drawing.Point(19, 315);
+            this.registerZipcodeLabel.Location = new System.Drawing.Point(20, 285);
             this.registerZipcodeLabel.Name = "registerZipcodeLabel";
             this.registerZipcodeLabel.Size = new System.Drawing.Size(52, 13);
             this.registerZipcodeLabel.TabIndex = 10;
@@ -177,18 +178,8 @@
             this.registerPasswordBox.Name = "registerPasswordBox";
             this.registerPasswordBox.PasswordChar = '*';
             this.registerPasswordBox.Size = new System.Drawing.Size(145, 20);
-            this.registerPasswordBox.TabIndex = 11;
+            this.registerPasswordBox.TabIndex = 9;
             this.registerPasswordBox.TextChanged += new System.EventHandler(this.registerPasswordBox_TextChanged);
-            // 
-            // registerFirstnameBox
-            // 
-            this.registerFirstnameBox.BorderColor = System.Drawing.Color.Blue;
-            this.registerFirstnameBox.Location = new System.Drawing.Point(111, 81);
-            this.registerFirstnameBox.Name = "registerFirstnameBox";
-            this.registerFirstnameBox.Size = new System.Drawing.Size(145, 20);
-            this.registerFirstnameBox.TabIndex = 3;
-            this.registerFirstnameBox.TextChanged += new System.EventHandler(this.registerFirstnameBox_TextChanged);
-            this.registerFirstnameBox.Leave += new System.EventHandler(this.registerFirstnameBox_Leave);
             // 
             // registerLastnameBox
             // 
@@ -196,7 +187,7 @@
             this.registerLastnameBox.Location = new System.Drawing.Point(111, 114);
             this.registerLastnameBox.Name = "registerLastnameBox";
             this.registerLastnameBox.Size = new System.Drawing.Size(145, 20);
-            this.registerLastnameBox.TabIndex = 13;
+            this.registerLastnameBox.TabIndex = 1;
             this.registerLastnameBox.Leave += new System.EventHandler(this.registerLastnameBox_Leave);
             // 
             // registerPhoneBox
@@ -205,7 +196,7 @@
             this.registerPhoneBox.Location = new System.Drawing.Point(111, 147);
             this.registerPhoneBox.Name = "registerPhoneBox";
             this.registerPhoneBox.Size = new System.Drawing.Size(145, 20);
-            this.registerPhoneBox.TabIndex = 14;
+            this.registerPhoneBox.TabIndex = 2;
             this.registerPhoneBox.Leave += new System.EventHandler(this.registerPhoneBox_Leave);
             // 
             // registerEmailBox
@@ -214,7 +205,7 @@
             this.registerEmailBox.Location = new System.Drawing.Point(111, 180);
             this.registerEmailBox.Name = "registerEmailBox";
             this.registerEmailBox.Size = new System.Drawing.Size(145, 20);
-            this.registerEmailBox.TabIndex = 15;
+            this.registerEmailBox.TabIndex = 3;
             this.registerEmailBox.Leave += new System.EventHandler(this.registerEmailBox_Leave);
             // 
             // registerCprBox
@@ -223,7 +214,7 @@
             this.registerCprBox.Location = new System.Drawing.Point(111, 213);
             this.registerCprBox.Name = "registerCprBox";
             this.registerCprBox.Size = new System.Drawing.Size(145, 20);
-            this.registerCprBox.TabIndex = 16;
+            this.registerCprBox.TabIndex = 4;
             this.registerCprBox.Leave += new System.EventHandler(this.registerCprBox_Leave);
             // 
             // registerAdressBox
@@ -232,25 +223,26 @@
             this.registerAdressBox.Location = new System.Drawing.Point(111, 246);
             this.registerAdressBox.Name = "registerAdressBox";
             this.registerAdressBox.Size = new System.Drawing.Size(145, 20);
-            this.registerAdressBox.TabIndex = 17;
+            this.registerAdressBox.TabIndex = 5;
             this.registerAdressBox.Leave += new System.EventHandler(this.registerAdressBox_Leave);
             // 
             // registerCityBox
             // 
             this.registerCityBox.BorderColor = System.Drawing.Color.Blue;
-            this.registerCityBox.Location = new System.Drawing.Point(111, 279);
+            this.registerCityBox.Location = new System.Drawing.Point(112, 315);
             this.registerCityBox.Name = "registerCityBox";
             this.registerCityBox.Size = new System.Drawing.Size(145, 20);
-            this.registerCityBox.TabIndex = 18;
+            this.registerCityBox.TabIndex = 7;
+            this.registerCityBox.TextChanged += new System.EventHandler(this.registerCityBox_TextChanged);
             this.registerCityBox.Leave += new System.EventHandler(this.registerCityBox_Leave);
             // 
             // registerZipBox
             // 
             this.registerZipBox.BorderColor = System.Drawing.Color.Blue;
-            this.registerZipBox.Location = new System.Drawing.Point(111, 312);
+            this.registerZipBox.Location = new System.Drawing.Point(112, 282);
             this.registerZipBox.Name = "registerZipBox";
             this.registerZipBox.Size = new System.Drawing.Size(145, 20);
-            this.registerZipBox.TabIndex = 19;
+            this.registerZipBox.TabIndex = 6;
             this.registerZipBox.Leave += new System.EventHandler(this.registerZipBox_Leave);
             // 
             // registerTitleLabel
@@ -276,12 +268,13 @@
             // 
             // registerUploadPhotoButton
             // 
-            this.registerUploadPhotoButton.Location = new System.Drawing.Point(333, 215);
+            this.registerUploadPhotoButton.Location = new System.Drawing.Point(333, 275);
             this.registerUploadPhotoButton.Name = "registerUploadPhotoButton";
             this.registerUploadPhotoButton.Size = new System.Drawing.Size(91, 23);
-            this.registerUploadPhotoButton.TabIndex = 23;
+            this.registerUploadPhotoButton.TabIndex = 11;
             this.registerUploadPhotoButton.Text = "Upload picture";
             this.registerUploadPhotoButton.UseVisualStyleBackColor = true;
+            this.registerUploadPhotoButton.Click += new System.EventHandler(this.registerUploadPhotoButton_Click);
             // 
             // registerCreateNewUserButton
             // 
@@ -289,9 +282,10 @@
             this.registerCreateNewUserButton.Location = new System.Drawing.Point(164, 453);
             this.registerCreateNewUserButton.Name = "registerCreateNewUserButton";
             this.registerCreateNewUserButton.Size = new System.Drawing.Size(144, 44);
-            this.registerCreateNewUserButton.TabIndex = 24;
+            this.registerCreateNewUserButton.TabIndex = 12;
             this.registerCreateNewUserButton.Text = "Create";
             this.registerCreateNewUserButton.UseVisualStyleBackColor = true;
+            this.registerCreateNewUserButton.Click += new System.EventHandler(this.registerCreateNewUserButton_Click);
             // 
             // registerCancelHyperLink
             // 
@@ -299,7 +293,7 @@
             this.registerCancelHyperLink.Location = new System.Drawing.Point(216, 500);
             this.registerCancelHyperLink.Name = "registerCancelHyperLink";
             this.registerCancelHyperLink.Size = new System.Drawing.Size(40, 13);
-            this.registerCancelHyperLink.TabIndex = 25;
+            this.registerCancelHyperLink.TabIndex = 13;
             this.registerCancelHyperLink.TabStop = true;
             this.registerCancelHyperLink.Text = "Cancel";
             this.registerCancelHyperLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.registerCancelHyperLink_LinkClicked);
@@ -311,7 +305,7 @@
             this.verifyPasswordBox.Name = "verifyPasswordBox";
             this.verifyPasswordBox.PasswordChar = '*';
             this.verifyPasswordBox.Size = new System.Drawing.Size(145, 20);
-            this.verifyPasswordBox.TabIndex = 27;
+            this.verifyPasswordBox.TabIndex = 10;
             this.verifyPasswordBox.TextChanged += new System.EventHandler(this.verifyPasswordBox_TextChanged);
             // 
             // registerConfirmPasswordLabel
@@ -323,17 +317,36 @@
             this.registerConfirmPasswordLabel.TabIndex = 26;
             this.registerConfirmPasswordLabel.Text = "Verify password:";
             // 
+            // passwordStrengthLabel
+            // 
+            this.passwordStrengthLabel.AutoSize = true;
+            this.passwordStrengthLabel.Location = new System.Drawing.Point(264, 385);
+            this.passwordStrengthLabel.Name = "passwordStrengthLabel";
+            this.passwordStrengthLabel.Size = new System.Drawing.Size(0, 13);
+            this.passwordStrengthLabel.TabIndex = 28;
+            // 
+            // registerPicture
+            // 
+            this.registerPicture.Location = new System.Drawing.Point(296, 81);
+            this.registerPicture.Name = "registerPicture";
+            this.registerPicture.Size = new System.Drawing.Size(175, 185);
+            this.registerPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.registerPicture.TabIndex = 29;
+            this.registerPicture.TabStop = false;
+            this.registerPicture.Click += new System.EventHandler(this.registerPicture_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 528);
+            this.Controls.Add(this.registerPicture);
+            this.Controls.Add(this.passwordStrengthLabel);
             this.Controls.Add(this.verifyPasswordBox);
             this.Controls.Add(this.registerConfirmPasswordLabel);
             this.Controls.Add(this.registerCancelHyperLink);
             this.Controls.Add(this.registerCreateNewUserButton);
             this.Controls.Add(this.registerUploadPhotoButton);
-            this.Controls.Add(registerPicturebox);
             this.Controls.Add(this.registerSubtitleLabel);
             this.Controls.Add(this.registerTitleLabel);
             this.Controls.Add(this.registerZipBox);
@@ -357,9 +370,10 @@
             this.Controls.Add(this.registerPasswordLabel);
             this.Controls.Add(this.registerUsernameLabel);
             this.Name = "RegisterForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Register";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(registerPicturebox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.registerPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,5 +408,8 @@
         private System.Windows.Forms.LinkLabel registerCancelHyperLink;
         private TextboxBorderColor verifyPasswordBox;
         private System.Windows.Forms.Label registerConfirmPasswordLabel;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label passwordStrengthLabel;
+        private System.Windows.Forms.PictureBox registerPicture;
     }
 }

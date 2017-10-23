@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DriveLogCode;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DriveLogGUI
 {
@@ -43,16 +45,6 @@ namespace DriveLogGUI
         {
             _loginForm.Show();
             this.Dispose();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void registerUsernameLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void registerUsernameBox_TextChanged(object sender, EventArgs e)
@@ -111,7 +103,7 @@ namespace DriveLogGUI
 
         private void registerCityBox_Leave(object sender, EventArgs e)
         {
-            if (RegisterVerification.InputOnlyLettersVerification(registerCityBox.Text))
+            if (RegisterVerification.CityVerification(registerCityBox.Text))
             {
                 registerCityBox.BorderColor = Color.Chartreuse;
                 isCityOk = true;
@@ -187,6 +179,17 @@ namespace DriveLogGUI
                 isPasswordOk = false;
             }
             VertifyPassword();
+
+            int strength = RegisterVerification.PasswordStrength(registerPasswordBox.Text);
+
+            if(strength == 0)
+                passwordStrengthLabel.Text = "";
+            else if (strength < 12)
+                ChangeLabelTextAndColor(passwordStrengthLabel, "Weak", Color.Red);
+            else if (strength < 22)
+                ChangeLabelTextAndColor(passwordStrengthLabel, "Medium", Color.Blue);
+            else
+                ChangeLabelTextAndColor(passwordStrengthLabel, "Strong", Color.Green);
         }
 
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
@@ -212,6 +215,7 @@ namespace DriveLogGUI
         {
             if (RegisterVerification.ZipVerifacation(registerZipBox.Text))
             {
+                registerCityBox.Text = JSONReader.GetCity(int.Parse(registerZipBox.Text));
                 registerZipBox.BorderColor = Color.Chartreuse;
                 isZipOk = true;
             }
@@ -250,7 +254,62 @@ namespace DriveLogGUI
             }
         }
 
+        private void registerCreateNewUserButton_Click(object sender, EventArgs e)
+        {
+            if (isFirstnameOk && isLastnameOk && isPhoneOk && isEmailOk && isCPROk && isAdressOk &&
+                isCityOk && isZipOk && isUsernameOk && isPasswordOk && isVerifyPasswordOk)
+            {
+                //Opret en ny bruger i databasen
+                MessageBox.Show("You have succesfully crated a user");
+                this.Dispose();
+                _loginForm.Show();
+            }
+            else
+            {
+                foreach (TextboxBorderColor tb in this.Controls.OfType<TextboxBorderColor>())
+                {
+                    if (string.IsNullOrEmpty(tb.Text))
+                        tb.BorderColor = Color.Crimson;
+                }
+            }
+        }
 
+        private void ChangeLabelTextAndColor(Label label, string text, Color color)
+        {
+            label.Text = text;
+            label.ForeColor = color;
+        }
+        private void registerUploadPhotoButton_Click(object sender, EventArgs e)
+        {
+            string imageLocation = string.Empty;
+
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    imageLocation = dialog.FileName;
+
+                    registerPicture.ImageLocation = imageLocation;
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                MessageBox.Show("An Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void registerPicture_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void registerCityBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
-
 }
