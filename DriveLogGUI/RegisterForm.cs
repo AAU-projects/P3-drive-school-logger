@@ -215,10 +215,22 @@ namespace DriveLogGUI
             if (isFirstnameOk && isLastnameOk && isPhoneOk && isEmailOk && isCPROk && isAdressOk &&
                 isCityOk && isZipOk && isUsernameOk && isPasswordOk && isVerifyPasswordOk)
             {
-                //Opret en ny bruger i databasen
-                MessageBox.Show("You have succesfully created a user", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.None);
-                this.Dispose();
-                _loginForm.Show();
+                bool UserCreated = MySql.AddUser(registerFirstnameBox.Text, registerLastnameBox.Text,
+                    registerPhoneBox.Text, registerEmailBox.Text,
+                    registerCprBox.Text, registerAdressBox.Text, registerZipBox.Text, registerCityBox.Text,
+                    registerUsernameBox.Text, registerPasswordBox.Text);
+
+                if (UserCreated)
+                {
+                    MessageBox.Show("You have succesfully created a user", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    this.Dispose();
+                    _loginForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create new user, please try again later!", "Failed",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
