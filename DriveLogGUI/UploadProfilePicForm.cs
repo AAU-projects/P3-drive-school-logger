@@ -30,7 +30,8 @@ namespace DriveLogGUI
 
         private void UploadProfilePicForm_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
         }
 
         private void UploadProfilePicForm_DragDrop(object sender, DragEventArgs e)
@@ -40,7 +41,6 @@ namespace DriveLogGUI
             {
                 dragAndDropLabel.Visible = false;
                 dragAndDropPictureBox.Visible = false;
-                uploadPictureButton.Visible = false;
                 
                 editPictureBox.Image = Image.FromFile(files[0]);
             }
@@ -54,6 +54,11 @@ namespace DriveLogGUI
                 return true;
             else
                 return false;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

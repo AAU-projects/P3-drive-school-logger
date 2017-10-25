@@ -48,6 +48,8 @@
             this.label1.Size = new System.Drawing.Size(224, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Choose profile picture";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // acceptButton
             // 
@@ -82,7 +84,7 @@
             this.dragAndDropPictureBox.BackColor = System.Drawing.SystemColors.Control;
             this.dragAndDropPictureBox.Image = global::DriveLogGUI.Properties.Resources.drag_and_drop_icon;
             this.dragAndDropPictureBox.InitialImage = null;
-            this.dragAndDropPictureBox.Location = new System.Drawing.Point(237, 152);
+            this.dragAndDropPictureBox.Location = new System.Drawing.Point(247, 132);
             this.dragAndDropPictureBox.Name = "dragAndDropPictureBox";
             this.dragAndDropPictureBox.Size = new System.Drawing.Size(200, 200);
             this.dragAndDropPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -99,7 +101,7 @@
             this.dragAndDropLabel.TabIndex = 4;
             this.dragAndDropLabel.Text = "Drag and drop a picture here,\r\nor click the button bellow to select a picture fro" +
     "m the PC";
-            this.dragAndDropLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dragAndDropLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uploadPictureButton
             // 
@@ -107,7 +109,7 @@
             this.uploadPictureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.uploadPictureButton.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uploadPictureButton.ForeColor = System.Drawing.Color.Black;
-            this.uploadPictureButton.Location = new System.Drawing.Point(279, 391);
+            this.uploadPictureButton.Location = new System.Drawing.Point(289, 449);
             this.uploadPictureButton.Name = "uploadPictureButton";
             this.uploadPictureButton.Size = new System.Drawing.Size(104, 34);
             this.uploadPictureButton.TabIndex = 5;
@@ -118,7 +120,7 @@
             // 
             this.editPictureBox.Location = new System.Drawing.Point(12, 105);
             this.editPictureBox.Name = "editPictureBox";
-            this.editPictureBox.Size = new System.Drawing.Size(671, 378);
+            this.editPictureBox.Size = new System.Drawing.Size(671, 338);
             this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.editPictureBox.TabIndex = 6;
             this.editPictureBox.TabStop = false;
@@ -129,7 +131,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(695, 578);
+            this.ClientSize = new System.Drawing.Size(695, 570);
             this.Controls.Add(this.uploadPictureButton);
             this.Controls.Add(this.dragAndDropLabel);
             this.Controls.Add(this.dragAndDropPictureBox);
