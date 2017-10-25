@@ -32,9 +32,11 @@
             this.acceptButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.dragAndDropPictureBox = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.dragAndDropLabel = new System.Windows.Forms.Label();
             this.uploadPictureButton = new System.Windows.Forms.Button();
+            this.editPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -87,17 +89,17 @@
             this.dragAndDropPictureBox.TabIndex = 3;
             this.dragAndDropPictureBox.TabStop = false;
             // 
-            // label2
+            // dragAndDropLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(122, 335);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(435, 46);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Drag and drop a picture here,\r\nor click the button bellow to select a picture fro" +
+            this.dragAndDropLabel.AutoSize = true;
+            this.dragAndDropLabel.Font = new System.Drawing.Font("Calibri Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dragAndDropLabel.Location = new System.Drawing.Point(122, 335);
+            this.dragAndDropLabel.Name = "dragAndDropLabel";
+            this.dragAndDropLabel.Size = new System.Drawing.Size(435, 46);
+            this.dragAndDropLabel.TabIndex = 4;
+            this.dragAndDropLabel.Text = "Drag and drop a picture here,\r\nor click the button bellow to select a picture fro" +
     "m the PC";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dragAndDropLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // uploadPictureButton
             // 
@@ -112,6 +114,15 @@
             this.uploadPictureButton.Text = "Choose image";
             this.uploadPictureButton.UseVisualStyleBackColor = false;
             // 
+            // editPictureBox
+            // 
+            this.editPictureBox.Location = new System.Drawing.Point(12, 105);
+            this.editPictureBox.Name = "editPictureBox";
+            this.editPictureBox.Size = new System.Drawing.Size(671, 378);
+            this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.editPictureBox.TabIndex = 6;
+            this.editPictureBox.TabStop = false;
+            // 
             // UploadProfilePicForm
             // 
             this.AcceptButton = this.uploadPictureButton;
@@ -120,16 +131,20 @@
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(695, 578);
             this.Controls.Add(this.uploadPictureButton);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dragAndDropLabel);
             this.Controls.Add(this.dragAndDropPictureBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.acceptButton);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.editPictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UploadProfilePicForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Choose profile picture";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UploadProfilePicForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.UploadProfilePicForm_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,7 +156,8 @@
         private System.Windows.Forms.Button acceptButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.PictureBox dragAndDropPictureBox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label dragAndDropLabel;
         private System.Windows.Forms.Button uploadPictureButton;
+        private System.Windows.Forms.PictureBox editPictureBox;
     }
 }
