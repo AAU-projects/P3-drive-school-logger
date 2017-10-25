@@ -239,7 +239,7 @@ namespace DriveLogGUI
         {
             string imageLocation = string.Empty;
 
-            UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm();
+            UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
             this.Hide();
             uploadPictureForm.ShowDialog();
             /*

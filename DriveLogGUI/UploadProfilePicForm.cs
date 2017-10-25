@@ -12,10 +12,18 @@ namespace DriveLogGUI
 {
     public partial class UploadProfilePicForm : Form
     {
-        public UploadProfilePicForm()
+        public UploadProfilePicForm(RegisterForm registerForm)
         {
+            _registerForm = registerForm;
             InitializeComponent();
             this.AllowDrop = true;
+        }
+
+        private static RegisterForm _registerForm;
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            _registerForm.Show();
         }
     }
 }
