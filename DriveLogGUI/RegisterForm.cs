@@ -239,6 +239,10 @@ namespace DriveLogGUI
         {
             string imageLocation = string.Empty;
 
+            UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm();
+            this.Hide();
+            uploadPictureForm.ShowDialog();
+            /*
             try
             {
                 OpenFileDialog dialog = new OpenFileDialog();
@@ -256,6 +260,7 @@ namespace DriveLogGUI
                 Console.WriteLine(exception);
                 MessageBox.Show("An Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            */
         }
 
         private void registerPicture_Click(object sender, EventArgs e)
