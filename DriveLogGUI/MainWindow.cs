@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
@@ -16,25 +17,21 @@ namespace DriveLogGUI
         public MainWindow()
         {
             InitializeComponent();
+            MakeWelcomeMessage();
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void MakeWelcomeMessage()
         {
-
+            mainWelcomeMesseageLabel.Text = $"Welcome {Session.LoggedInUser.Fullname}";
+            if (Session.LoggedInUser.Sysmin)
+            {
+                mainWelcomeMesseageLabel.Text += " (Admin)";
+            }
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
             mainOverviewTab.DrawItem += new DrawItemEventHandler(tabControlDrawHorizontalText_DrawItem);
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripLabel3_Click(object sender, EventArgs e)
-        {
         }
 
 

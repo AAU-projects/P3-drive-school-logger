@@ -51,6 +51,8 @@
             this.mainPracticalLabel = new System.Windows.Forms.Label();
             this.mainTheoreticalProgressLabel = new System.Windows.Forms.Label();
             this.mainTheoreticalLabel = new System.Windows.Forms.Label();
+            this.mainPracticalBarTheoratical = new DriveLogGUI.ProgressBarEx();
+            this.mainProgressBarTheoratical = new DriveLogGUI.ProgressBarEx();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.mainWelcomeMesseageLabel = new System.Windows.Forms.Label();
@@ -62,8 +64,6 @@
             this.Settings = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.mainPracticalBarTheoratical = new DriveLogGUI.ProgressBarEx();
-            this.mainProgressBarTheoratical = new DriveLogGUI.ProgressBarEx();
             this.contextMenuStrip1.SuspendLayout();
             this.mainOverviewTab.SuspendLayout();
             this.Overview.SuspendLayout();
@@ -305,6 +305,28 @@
             this.mainTheoreticalLabel.TabIndex = 63;
             this.mainTheoreticalLabel.Text = "Theoratical progress";
             // 
+            // mainPracticalBarTheoratical
+            // 
+            this.mainPracticalBarTheoratical.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.mainPracticalBarTheoratical.Location = new System.Drawing.Point(66, 350);
+            this.mainPracticalBarTheoratical.MarqueeAnimationSpeed = 25;
+            this.mainPracticalBarTheoratical.Maximum = 14;
+            this.mainPracticalBarTheoratical.Name = "mainPracticalBarTheoratical";
+            this.mainPracticalBarTheoratical.Size = new System.Drawing.Size(329, 23);
+            this.mainPracticalBarTheoratical.TabIndex = 62;
+            this.mainPracticalBarTheoratical.Value = 6;
+            // 
+            // mainProgressBarTheoratical
+            // 
+            this.mainProgressBarTheoratical.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.mainProgressBarTheoratical.Location = new System.Drawing.Point(66, 289);
+            this.mainProgressBarTheoratical.MarqueeAnimationSpeed = 12;
+            this.mainProgressBarTheoratical.Maximum = 24;
+            this.mainProgressBarTheoratical.Name = "mainProgressBarTheoratical";
+            this.mainProgressBarTheoratical.Size = new System.Drawing.Size(329, 23);
+            this.mainProgressBarTheoratical.TabIndex = 61;
+            this.mainProgressBarTheoratical.Value = 17;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -406,28 +428,6 @@
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // mainPracticalBarTheoratical
-            // 
-            this.mainPracticalBarTheoratical.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.mainPracticalBarTheoratical.Location = new System.Drawing.Point(66, 350);
-            this.mainPracticalBarTheoratical.MarqueeAnimationSpeed = 25;
-            this.mainPracticalBarTheoratical.Maximum = 14;
-            this.mainPracticalBarTheoratical.Name = "mainPracticalBarTheoratical";
-            this.mainPracticalBarTheoratical.Size = new System.Drawing.Size(329, 23);
-            this.mainPracticalBarTheoratical.TabIndex = 62;
-            this.mainPracticalBarTheoratical.Value = 6;
-            // 
-            // mainProgressBarTheoratical
-            // 
-            this.mainProgressBarTheoratical.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.mainProgressBarTheoratical.Location = new System.Drawing.Point(66, 289);
-            this.mainProgressBarTheoratical.MarqueeAnimationSpeed = 12;
-            this.mainProgressBarTheoratical.Maximum = 24;
-            this.mainProgressBarTheoratical.Name = "mainProgressBarTheoratical";
-            this.mainProgressBarTheoratical.Size = new System.Drawing.Size(329, 23);
-            this.mainProgressBarTheoratical.TabIndex = 61;
-            this.mainProgressBarTheoratical.Value = 17;
             // 
             // MainWindow
             // 
