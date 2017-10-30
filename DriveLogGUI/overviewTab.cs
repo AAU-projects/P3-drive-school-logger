@@ -16,5 +16,20 @@ namespace DriveLogGUI
         {
             InitializeComponent();
         }
+
+        private void progressBarPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void todaysNotePanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void theoreticalStatus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
