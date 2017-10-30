@@ -66,6 +66,12 @@
     <Compile Include="MainWindowTab.Designer.cs">
       <DependentUpon>MainWindowTab.cs</DependentUpon>
     </Compile>
+    <Compile Include="overviewTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="overviewTab.Designer.cs">
+      <DependentUpon>overviewTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBarColor.cs">
       <SubType>Component</SubType>
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindowTab.resx">
       <DependentUpon>MainWindowTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="overviewTab.resx">
+      <DependentUpon>overviewTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

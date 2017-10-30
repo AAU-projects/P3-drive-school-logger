@@ -12,6 +12,7 @@ namespace DriveLogGUI
 {
     public partial class MainWindowTab : Form
     {
+        private Point lastClick;
         public MainWindowTab()
         {
             InitializeComponent();
@@ -60,6 +61,30 @@ namespace DriveLogGUI
         private Point MoveLocation(Point location, int moveLocation)
         {
             return new Point(location.X, location.Y + moveLocation);
+        }
+
+        private void OverviewButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            lastClick = e.Location;
+        }
+
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - lastClick.X;
+                this.Top += e.Y - lastClick.Y;
+            }
         }
     }
 }
