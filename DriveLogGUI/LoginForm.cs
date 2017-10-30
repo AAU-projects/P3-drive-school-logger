@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
@@ -15,11 +16,6 @@ namespace DriveLogGUI
         public LoginForm()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void createNewUserLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -31,6 +27,15 @@ namespace DriveLogGUI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            DataTable user = MySql.GetUser(UsernameBox.Text);
+            if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text)
+            {
+                MessageBox.Show("Wrong username or password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            Session.LoadUserFromDataTable(user);
+
             this.Hide();
             MainWindow main = new MainWindow();
             main.ShowDialog(this);

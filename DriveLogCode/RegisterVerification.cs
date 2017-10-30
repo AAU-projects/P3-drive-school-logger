@@ -53,7 +53,7 @@ namespace DriveLogCode
             string street = adressStrings[0];
             string streetNo = adressStrings[1];
 
-            if (adressStrings.Length == 1)
+            if (adressStrings.Length == 1 || adressStrings.Length > 3)
                 return false;
 
             if (!InputOnlyLettersVerification(street))
@@ -139,15 +139,21 @@ namespace DriveLogCode
 
         public static bool PasswordVertification(string password)
         {
-            if (string.IsNullOrWhiteSpace(password)) return false;
+            int letterCounter = 0;
 
-            if (password.Length < 3) return false;
+            if (string.IsNullOrWhiteSpace(password) || password.Length < 3) return false;
 
             foreach (char c in password)
             {
+                if (char.IsLetter(c))
+                    letterCounter++;
+
                 if (!char.IsLetterOrDigit(c) && !c.Equals('_') && !c.Equals('-'))
                     return false;
             }
+
+            if (letterCounter < 1)
+                return false;
 
             return true;
         }
@@ -174,28 +180,28 @@ namespace DriveLogCode
             return hasUppercase + hasLowercase + hasDigit + hasSpecialChar + password.Length;
         }
 
-        public static bool PhoneVerifacation(string input)
+        public static bool PhoneVerifacation(string phoneNo)
         {
 
-            if (string.IsNullOrEmpty(input) || input.Length != 8)
+            if (string.IsNullOrEmpty(phoneNo) || phoneNo.Length != 8)
                 return false;
 
-            foreach (char c in input)
+            foreach (char c in phoneNo)
             {
-                if (!input.All(char.IsDigit))
+                if (!phoneNo.All(char.IsDigit))
                     return false;
             }
             return true;
         }
 
-        public static bool ZipVerifacation(string input)
+        public static bool ZipVerifacation(string zip)
         {
-            if (string.IsNullOrEmpty(input) || input.Length != 4)
+            if (string.IsNullOrEmpty(zip) || zip.Length != 4)
                 return false;
 
-            foreach (char c in input)
+            foreach (char c in zip)
             {
-                if (!input.All(char.IsDigit))
+                if (!zip.All(char.IsDigit))
                     return false;
             }
             return true;
@@ -203,8 +209,7 @@ namespace DriveLogCode
 
         public static bool CityVerification(string city)
         {
-            if (string.IsNullOrEmpty(city)) return false;
-            if (string.IsNullOrWhiteSpace(city)) return false;
+            if (string.IsNullOrEmpty(city) || (string.IsNullOrWhiteSpace(city))) return false;
 
             int whiteSpaceCounter = 0;
 
