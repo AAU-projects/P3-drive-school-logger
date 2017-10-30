@@ -27,17 +27,17 @@ namespace DriveLogGUI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            DataTable user = MySql.GetUser(UsernameBox.Text);
-            if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text)
-            {
-                MessageBox.Show("Wrong username or password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+            //DataTable user = MySql.GetUser(UsernameBox.Text);
+            //if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text)
+            //{
+            //    MessageBox.Show("Wrong username or password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    return;
+            //}
 
-            Session.LoadUserFromDataTable(user);
+            //Session.LoadUserFromDataTable(user);
 
             this.Hide();
-            MainWindow main = new MainWindow();
+            MainWindowTab main = new MainWindowTab();
             main.ShowDialog(this);
         }
     }
