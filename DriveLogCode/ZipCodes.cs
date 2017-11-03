@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DriveLogCode
 {
+    // Classes and Atributes in danish to ease the deserializing from json.
     public class Kommuner
     {
         public string href { get; set; }
