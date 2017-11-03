@@ -24,6 +24,8 @@ namespace DriveLogGUI
             ProfileButton.Controls.Add(pictureProfileTab);
             bookingButton.Controls.Add(pictureBookingTab);
             settingsButton.Controls.Add(pictureSettingsTab);
+
+            overviewTab1.LogOutButtonClick += new EventHandler(logoutButton_Click);
         }
 
         private void ProfileButton_Click(object sender, EventArgs e)
@@ -104,6 +106,13 @@ namespace DriveLogGUI
             } else if (!Owner.Visible) {
                 Application.Exit();
             }
+        }
+
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Close();
         }
     }
 }
