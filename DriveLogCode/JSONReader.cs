@@ -18,6 +18,7 @@ namespace DriveLogCode
                 WebClient client = new WebClient();
                 client.Encoding = Encoding.UTF8;
                 var downloadedString = client.DownloadString($"https://dawa.aws.dk/postnumre/{zip}");
+                //Matcing the dowloaded json string with class ZipCode
                 ZipCode r = JsonConvert.DeserializeObject<ZipCode>(downloadedString);
 
                 return r.navn;
