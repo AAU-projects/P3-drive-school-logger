@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoctorsNote.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DoctorsNote.Designer.cs">
+      <DependentUpon>DoctorsNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="DriveLogStarter.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -97,6 +103,9 @@
     <Compile Include="UploadProfilePicForm.Designer.cs">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DoctorsNote.resx">
+      <DependentUpon>DoctorsNote.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
