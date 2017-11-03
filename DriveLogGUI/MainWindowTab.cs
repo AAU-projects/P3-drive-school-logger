@@ -122,12 +122,12 @@ namespace DriveLogGUI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            CloseLastPage();
             OpenPage(doctorsNote1);
         }
 
         private void OpenPage(UserControl page)
         {
+            CloseLastPage();
             lastPage = page;
             page.Show();
         }
