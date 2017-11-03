@@ -60,6 +60,18 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainWindowTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindowTab.Designer.cs">
+      <DependentUpon>MainWindowTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="overviewTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="overviewTab.Designer.cs">
+      <DependentUpon>overviewTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBarColor.cs">
       <SubType>Component</SubType>
@@ -79,11 +91,23 @@
     <Compile Include="TextboxBorderColor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UploadProfilePicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UploadProfilePicForm.Designer.cs">
+      <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindowTab.resx">
+      <DependentUpon>MainWindowTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="overviewTab.resx">
+      <DependentUpon>overviewTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UploadProfilePicForm.resx">
+      <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -118,6 +145,10 @@
       <Project>{7dceb141-7172-4ebd-b057-dfcfabd47186}</Project>
       <Name>DriveLogCode</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avataricon.png" />
+    <Content Include="Resources\drag_and_drop_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
