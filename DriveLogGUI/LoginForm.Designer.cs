@@ -28,63 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.usernameLabel = new System.Windows.Forms.Label();
-            this.passwordLabel = new System.Windows.Forms.Label();
             this.UsernameBox = new System.Windows.Forms.TextBox();
             this.PasswordBox = new System.Windows.Forms.TextBox();
             this.loginButton = new System.Windows.Forms.Button();
             this.createNewUserLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
-            // usernameLabel
-            // 
-            this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(12, 43);
-            this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(58, 13);
-            this.usernameLabel.TabIndex = 0;
-            this.usernameLabel.Text = "Username:";
-            // 
-            // passwordLabel
-            // 
-            this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(12, 75);
-            this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(56, 13);
-            this.passwordLabel.TabIndex = 1;
-            this.passwordLabel.Text = "Password:";
-            // 
             // UsernameBox
             // 
-            this.UsernameBox.Location = new System.Drawing.Point(74, 40);
+            this.UsernameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.UsernameBox.Font = new System.Drawing.Font("Calibri Light", 16.25F);
+            this.UsernameBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.UsernameBox.Location = new System.Drawing.Point(12, 12);
             this.UsernameBox.Name = "UsernameBox";
-            this.UsernameBox.Size = new System.Drawing.Size(194, 20);
+            this.UsernameBox.Size = new System.Drawing.Size(276, 34);
             this.UsernameBox.TabIndex = 2;
+            this.UsernameBox.Text = "Username";
             // 
             // PasswordBox
             // 
-            this.PasswordBox.Location = new System.Drawing.Point(74, 72);
+            this.PasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.PasswordBox.Font = new System.Drawing.Font("Calibri Light", 16.25F);
+            this.PasswordBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.PasswordBox.Location = new System.Drawing.Point(12, 52);
             this.PasswordBox.Name = "PasswordBox";
-            this.PasswordBox.PasswordChar = '*';
-            this.PasswordBox.Size = new System.Drawing.Size(194, 20);
+            this.PasswordBox.Size = new System.Drawing.Size(276, 34);
             this.PasswordBox.TabIndex = 3;
+            this.PasswordBox.Text = "Password";
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(119, 98);
+            this.loginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.loginButton.FlatAppearance.BorderSize = 0;
+            this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginButton.Font = new System.Drawing.Font("Calibri Light", 16.25F);
+            this.loginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.loginButton.Location = new System.Drawing.Point(12, 92);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.Size = new System.Drawing.Size(276, 35);
             this.loginButton.TabIndex = 4;
             this.loginButton.Text = "Log in";
-            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.UseVisualStyleBackColor = false;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // createNewUserLabel
             // 
             this.createNewUserLabel.AutoSize = true;
-            this.createNewUserLabel.Location = new System.Drawing.Point(116, 124);
+            this.createNewUserLabel.Font = new System.Drawing.Font("Calibri Light", 12F);
+            this.createNewUserLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.createNewUserLabel.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.createNewUserLabel.Location = new System.Drawing.Point(94, 130);
             this.createNewUserLabel.Name = "createNewUserLabel";
-            this.createNewUserLabel.Size = new System.Drawing.Size(84, 13);
+            this.createNewUserLabel.Size = new System.Drawing.Size(116, 19);
             this.createNewUserLabel.TabIndex = 5;
             this.createNewUserLabel.TabStop = true;
             this.createNewUserLabel.Text = "Create new user";
@@ -95,13 +90,12 @@
             this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(303, 163);
             this.Controls.Add(this.createNewUserLabel);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.PasswordBox);
             this.Controls.Add(this.UsernameBox);
-            this.Controls.Add(this.passwordLabel);
-            this.Controls.Add(this.usernameLabel);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
@@ -111,9 +105,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label usernameLabel;
-        private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox UsernameBox;
         private System.Windows.Forms.TextBox PasswordBox;
         private System.Windows.Forms.Button loginButton;

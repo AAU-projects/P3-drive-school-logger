@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 public class TextboxBorderColor : TextBox
 {
+    public string defaultText = "";
+
     const int WM_NCPAINT = 0x85;
     const uint RDW_INVALIDATE = 0x1;
     const uint RDW_IUPDATENOW = 0x100;
@@ -16,6 +19,12 @@ public class TextboxBorderColor : TextBox
     [DllImport("user32.dll")]
     static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprc, IntPtr hrgn, uint flags);
     Color borderColor = Color.Blue;
+
+    public TextboxBorderColor()
+    {
+        this.LostFocus += AddText;
+    }
+
     public Color BorderColor {
         get { return borderColor; }
         set {
@@ -42,5 +51,19 @@ public class TextboxBorderColor : TextBox
         base.OnSizeChanged(e);
         RedrawWindow(Handle, IntPtr.Zero, IntPtr.Zero,
             RDW_FRAME | RDW_IUPDATENOW | RDW_INVALIDATE);
+    }
+
+    private void AddText(object sender, EventArgs e)
+    {
+        var TextBox = sender as TextboxBorderColor;
+
+        if (string.IsNullOrWhiteSpace(TextBox.Text))
+            TextBox.Text = defaultText;
+        }
+
+    public string DefaultText
+    {
+        get { return defaultText; }
+        set { defaultText = value; }
     }
 }

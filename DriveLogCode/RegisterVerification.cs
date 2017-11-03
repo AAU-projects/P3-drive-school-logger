@@ -165,6 +165,9 @@ namespace DriveLogCode
             int hasDigit = 0;
             int hasSpecialChar = 0;
 
+            if (password == "Password")
+                return 0;
+
             foreach(char c in password)
             {
                 if (char.IsDigit(c))
