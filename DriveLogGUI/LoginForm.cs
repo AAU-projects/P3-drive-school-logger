@@ -17,6 +17,7 @@ namespace DriveLogGUI
         public LoginForm()
         {
             InitializeComponent();
+            Select();
         }
 
         private void createNewUserLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -62,6 +63,40 @@ namespace DriveLogGUI
         private void button4_MouseClick(object sender, MouseEventArgs e)
         {
             this.Dispose();
+        }
+
+        private void UsernameBox_Leave(object sender, EventArgs e)
+        {
+            if (UsernameBox.Text == "")
+                UsernameBox.Text = "Username";
+        }
+
+        private void PasswordBox_Leave(object sender, EventArgs e)
+        {
+            if (PasswordBox.Text == "")
+            {
+                PasswordBox.Text = "Password";
+                PasswordBox.PasswordChar = '\0';
+            }
+        }
+
+        private void PasswordBox_Enter(object sender, EventArgs e)
+        {
+            if (PasswordBox.Text == "Password")
+                PasswordBox.Text = "";
+
+            PasswordBox.PasswordChar = '*';
+        }
+
+        private void UsernameBox_Enter(object sender, EventArgs e)
+        {
+            if (UsernameBox.Text == "Username")
+                UsernameBox.Text = "";
+        }
+
+        private void Unfocus_MouseClick(object sender, EventArgs e)
+        {
+            this.ActiveControl = loginFormLable;
         }
     }
 }
