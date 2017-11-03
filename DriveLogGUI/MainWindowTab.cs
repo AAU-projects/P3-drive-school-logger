@@ -13,6 +13,8 @@ namespace DriveLogGUI
     public partial class MainWindowTab : Form
     {
         private Point lastClick;
+        private List<UserControl> AllPages = new List<UserControl>();
+        private UserControl lastPage;
         public MainWindowTab()
         {
             InitializeComponent();
@@ -24,6 +26,10 @@ namespace DriveLogGUI
             ProfileButton.Controls.Add(pictureProfileTab);
             bookingButton.Controls.Add(pictureBookingTab);
             settingsButton.Controls.Add(pictureSettingsTab);
+
+
+            AllPages.Add(overviewTab1);
+            AllPages.Add(doctorsNote1);
         }
 
         private void ProfileButton_Click(object sender, EventArgs e)
@@ -65,7 +71,10 @@ namespace DriveLogGUI
 
         private void OverviewButton_Click(object sender, EventArgs e)
         {
-
+            //To add a page use the closeLastPage command to make sure that there wont be two pages visible at once. 
+            //Use the OpenPage to open your decied page :)
+            CloseLastPage();
+            OpenPage(overviewTab1);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -103,6 +112,26 @@ namespace DriveLogGUI
                 this.Dispose();
             } else if (!Owner.Visible) {
                 Application.Exit();
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            CloseLastPage();
+            OpenPage(doctorsNote1);
+        }
+
+        private void OpenPage(UserControl page)
+        {
+            lastPage = page;
+            page.Show();
+        }
+
+        private void CloseLastPage()
+        {
+            if (lastPage != null)
+            {
+                lastPage.Hide();
             }
         }
     }

@@ -48,6 +48,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.doctorsNote1 = new DriveLogGUI.DoctorsNote();
             this.overviewTab1 = new DriveLogGUI.overviewTab();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -125,6 +126,7 @@
             this.button7.Text = "First aid";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -320,18 +322,27 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.doctorsNote1);
             this.panel3.Controls.Add(this.overviewTab1);
-            this.panel3.Location = new System.Drawing.Point(132, 32);
+            this.panel3.Location = new System.Drawing.Point(132, 20);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(897, 532);
+            this.panel3.Size = new System.Drawing.Size(897, 544);
             this.panel3.TabIndex = 2;
+            // 
+            // doctorsNote1
+            // 
+            this.doctorsNote1.Location = new System.Drawing.Point(0, 0);
+            this.doctorsNote1.Name = "doctorsNote1";
+            this.doctorsNote1.Size = new System.Drawing.Size(897, 544);
+            this.doctorsNote1.TabIndex = 1;
+            this.doctorsNote1.Visible = false;
             // 
             // overviewTab1
             // 
             this.overviewTab1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.overviewTab1.Location = new System.Drawing.Point(0, 0);
             this.overviewTab1.Name = "overviewTab1";
-            this.overviewTab1.Size = new System.Drawing.Size(897, 532);
+            this.overviewTab1.Size = new System.Drawing.Size(897, 544);
             this.overviewTab1.TabIndex = 0;
             // 
             // MainWindowTab
@@ -343,6 +354,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindowTab";
             this.Text = "MainWindowTab";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindowTab_FormClosing);
@@ -383,5 +395,6 @@
         private overviewTab overviewTab1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private DoctorsNote doctorsNote1;
     }
 }
