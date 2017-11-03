@@ -113,11 +113,13 @@ namespace DriveLogGUI
                 Application.Exit();
             }
         }
-        
+
         private void logoutButton_Click(object sender, EventArgs e)
         {
             Owner.Show();
             this.Close();
+        }
+
         private void button7_Click(object sender, EventArgs e)
         {
             CloseLastPage();
