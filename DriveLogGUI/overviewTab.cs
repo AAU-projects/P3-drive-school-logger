@@ -12,6 +12,7 @@ namespace DriveLogGUI
 {
     public partial class overviewTab : UserControl
     {
+        public event EventHandler LogOutButtonClick;
         public overviewTab()
         {
             InitializeComponent();
@@ -31,5 +32,13 @@ namespace DriveLogGUI
         {
 
         }
+
+        protected void logoutButton_Click(object sender, EventArgs e)
+        {
+            //bubble the event up to the parent
+            if (this.LogOutButtonClick != null)
+                this.LogOutButtonClick(this, e);
+        }
+
     }
 }
