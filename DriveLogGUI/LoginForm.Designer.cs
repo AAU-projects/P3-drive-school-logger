@@ -34,10 +34,11 @@
             this.loginButton = new System.Windows.Forms.Button();
             this.createNewUserLabel = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.loginFormLable = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,22 +47,26 @@
             this.UsernameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.UsernameBox.Font = new System.Drawing.Font("Calibri Light", 16.25F);
             this.UsernameBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.UsernameBox.Location = new System.Drawing.Point(12, 43);
+            this.UsernameBox.Location = new System.Drawing.Point(12, 76);
             this.UsernameBox.Name = "UsernameBox";
             this.UsernameBox.Size = new System.Drawing.Size(276, 34);
             this.UsernameBox.TabIndex = 2;
             this.UsernameBox.Text = "Username";
+            this.UsernameBox.Enter += new System.EventHandler(this.UsernameBox_Enter);
+            this.UsernameBox.Leave += new System.EventHandler(this.UsernameBox_Leave);
             // 
             // PasswordBox
             // 
             this.PasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.PasswordBox.Font = new System.Drawing.Font("Calibri Light", 16.25F);
             this.PasswordBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.PasswordBox.Location = new System.Drawing.Point(12, 83);
+            this.PasswordBox.Location = new System.Drawing.Point(12, 117);
             this.PasswordBox.Name = "PasswordBox";
             this.PasswordBox.Size = new System.Drawing.Size(276, 34);
             this.PasswordBox.TabIndex = 3;
             this.PasswordBox.Text = "Password";
+            this.PasswordBox.Enter += new System.EventHandler(this.PasswordBox_Enter);
+            this.PasswordBox.Leave += new System.EventHandler(this.PasswordBox_Leave);
             // 
             // loginButton
             // 
@@ -70,7 +75,7 @@
             this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginButton.Font = new System.Drawing.Font("Calibri Light", 16.25F);
             this.loginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.loginButton.Location = new System.Drawing.Point(12, 123);
+            this.loginButton.Location = new System.Drawing.Point(12, 159);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(276, 35);
             this.loginButton.TabIndex = 4;
@@ -84,7 +89,7 @@
             this.createNewUserLabel.Font = new System.Drawing.Font("Calibri Light", 12F);
             this.createNewUserLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.createNewUserLabel.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.createNewUserLabel.Location = new System.Drawing.Point(94, 161);
+            this.createNewUserLabel.Location = new System.Drawing.Point(94, 198);
             this.createNewUserLabel.Name = "createNewUserLabel";
             this.createNewUserLabel.Size = new System.Drawing.Size(116, 19);
             this.createNewUserLabel.TabIndex = 5;
@@ -105,32 +110,6 @@
             this.panel2.TabIndex = 6;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(848, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(25, 22);
-            this.button2.TabIndex = 2;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(873, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 22);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -160,13 +139,52 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button4_MouseClick);
             // 
+            // button2
+            // 
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(848, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 22);
+            this.button2.TabIndex = 2;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(873, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 22);
+            this.button1.TabIndex = 1;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // loginFormLable
+            // 
+            this.loginFormLable.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginFormLable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.loginFormLable.Location = new System.Drawing.Point(0, 25);
+            this.loginFormLable.Name = "loginFormLable";
+            this.loginFormLable.Size = new System.Drawing.Size(303, 38);
+            this.loginFormLable.TabIndex = 22;
+            this.loginFormLable.Text = "Sign In";
+            this.loginFormLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.loginFormLable.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus_MouseClick);
+            // 
             // LoginForm
             // 
             this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.ClientSize = new System.Drawing.Size(303, 185);
+            this.ClientSize = new System.Drawing.Size(303, 230);
+            this.Controls.Add(this.loginFormLable);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.createNewUserLabel);
             this.Controls.Add(this.loginButton);
@@ -176,6 +194,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus_MouseClick);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -192,6 +211,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label loginFormLable;
     }
 }
 
