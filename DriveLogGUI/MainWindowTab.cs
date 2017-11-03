@@ -86,5 +86,24 @@ namespace DriveLogGUI
                 this.Top += e.Y - lastClick.Y;
             }
         }
+
+        private void button2_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MainWindowTab_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Owner.Visible) {
+                this.Dispose();
+            } else if (!Owner.Visible) {
+                Application.Exit();
+            }
+        }
     }
 }

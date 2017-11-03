@@ -29,6 +29,8 @@ namespace DriveLogGUI
 
         private LoginForm _loginForm;
 
+        private Point lastClick;
+
         public RegisterForm(LoginForm login)
         {
             _loginForm = login;
@@ -390,6 +392,29 @@ namespace DriveLogGUI
         {
             if (verifyPasswordBox.Text == "Verify Password")
                 verifyPasswordBox.Text = "";
+        }
+
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            lastClick = e.Location;
+        }
+
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) {
+                this.Left += e.X - lastClick.X;
+                this.Top += e.Y - lastClick.Y;
+            }
+        }
+
+        private void button3_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
