@@ -45,8 +45,8 @@
             this.OverviewButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.overviewTab1 = new DriveLogGUI.overviewTab();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -159,7 +159,7 @@
             // 
             this.pictureBookingTab.BackColor = System.Drawing.Color.Transparent;
             this.pictureBookingTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureBookingTab.Image")));
-            this.pictureBookingTab.Location = new System.Drawing.Point(3, 3);
+            this.pictureBookingTab.Location = new System.Drawing.Point(0, 0);
             this.pictureBookingTab.Name = "pictureBookingTab";
             this.pictureBookingTab.Size = new System.Drawing.Size(30, 30);
             this.pictureBookingTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -170,7 +170,7 @@
             // 
             this.pictureSettingsTab.BackColor = System.Drawing.Color.Transparent;
             this.pictureSettingsTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureSettingsTab.Image")));
-            this.pictureSettingsTab.Location = new System.Drawing.Point(3, 3);
+            this.pictureSettingsTab.Location = new System.Drawing.Point(0, 0);
             this.pictureSettingsTab.Name = "pictureSettingsTab";
             this.pictureSettingsTab.Size = new System.Drawing.Size(30, 30);
             this.pictureSettingsTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -181,7 +181,7 @@
             // 
             this.pictureProfileTab.BackColor = System.Drawing.Color.Transparent;
             this.pictureProfileTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureProfileTab.Image")));
-            this.pictureProfileTab.Location = new System.Drawing.Point(3, 3);
+            this.pictureProfileTab.Location = new System.Drawing.Point(0, 0);
             this.pictureProfileTab.Name = "pictureProfileTab";
             this.pictureProfileTab.Size = new System.Drawing.Size(30, 30);
             this.pictureProfileTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -192,7 +192,7 @@
             // 
             this.pictureHomeTab.BackColor = System.Drawing.Color.Transparent;
             this.pictureHomeTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureHomeTab.Image")));
-            this.pictureHomeTab.Location = new System.Drawing.Point(3, 3);
+            this.pictureHomeTab.Location = new System.Drawing.Point(0, 0);
             this.pictureHomeTab.Name = "pictureHomeTab";
             this.pictureHomeTab.Size = new System.Drawing.Size(30, 30);
             this.pictureHomeTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -288,14 +288,6 @@
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.overviewTab1);
-            this.panel3.Location = new System.Drawing.Point(132, 32);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(897, 532);
-            this.panel3.TabIndex = 2;
-            // 
             // button1
             // 
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
@@ -308,6 +300,14 @@
             this.button1.Size = new System.Drawing.Size(25, 25);
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.overviewTab1);
+            this.panel3.Location = new System.Drawing.Point(132, 32);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(897, 532);
+            this.panel3.TabIndex = 2;
             // 
             // overviewTab1
             // 
