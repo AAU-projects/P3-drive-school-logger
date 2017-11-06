@@ -223,9 +223,8 @@ namespace DriveLogGUI
             if (textBox.Text == textBox.defaultText)
             {
                 textBox.BackColor = neutralColor;
-                textBox.ForeColor = Color.Black;
+                textBox.ForeColor = Color.DarkGray;
             }
-                
 
             if (verify && textBox.Text != textBox.defaultText)
             {
