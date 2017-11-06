@@ -111,7 +111,7 @@
             this.welcomeUserLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.welcomeUserLabel.Location = new System.Drawing.Point(12, 6);
             this.welcomeUserLabel.Name = "welcomeUserLabel";
-            this.welcomeUserLabel.Size = new System.Drawing.Size(234, 44);
+            this.welcomeUserLabel.Size = new System.Drawing.Size(790, 44);
             this.welcomeUserLabel.TabIndex = 0;
             this.welcomeUserLabel.Text = "Welcome Bob!";
             // 
