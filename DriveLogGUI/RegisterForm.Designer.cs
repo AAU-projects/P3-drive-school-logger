@@ -130,7 +130,7 @@
             this.registerPicture.InitialImage = global::DriveLogGUI.Properties.Resources.avataricon;
             this.registerPicture.Location = new System.Drawing.Point(23, 79);
             this.registerPicture.Name = "registerPicture";
-            this.registerPicture.Size = new System.Drawing.Size(121, 118);
+            this.registerPicture.Size = new System.Drawing.Size(128, 128);
             this.registerPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.registerPicture.TabIndex = 29;
             this.registerPicture.TabStop = false;
