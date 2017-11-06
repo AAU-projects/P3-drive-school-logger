@@ -11,6 +11,8 @@ namespace DriveLogCode
     {
         public static bool UsernameVerifacation(string input)
         {
+            if (MySql.ExistUsername(input)) return false;
+
             if (string.IsNullOrEmpty(input))
                 return false;
 
@@ -79,6 +81,8 @@ namespace DriveLogCode
 
         public static bool EmailVerification(string input)
         {
+            if (MySql.ExistEmail(input)) return false;
+
             string[] splittedEmail = input.Split('@');
             string localPart;
             string domainPart;
@@ -122,6 +126,8 @@ namespace DriveLogCode
         public static bool CPRVerification(string input)
         {
             input = input.Replace("-", "");
+
+            if (MySql.ExistCPR(input)) return false;
 
             if (input.Length != 10)
                 return false;
