@@ -26,6 +26,11 @@ namespace DriveLogGUI
             emailOutputLabel.Text = user.Email;
             addressOutputLabel.Text = user.Address;
             cityOutputLabel.Text = $"{user.City}, {user.Zip}";
+
+            if (user.PicturePath != null)
+            {
+                ProfilePicture.Load(user.PicturePath);
+            }
         }
     }
 }
