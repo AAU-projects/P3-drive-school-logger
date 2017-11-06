@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
@@ -16,6 +17,7 @@ namespace DriveLogGUI
         public OverviewTab()
         {
             InitializeComponent();
+            welcomeUserLabel.Text = "Welcome " + Session.LoggedInUser.Firstname;
         }
 
         public void logoutButton_Click(object sender, EventArgs e)

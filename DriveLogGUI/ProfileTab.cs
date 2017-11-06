@@ -19,6 +19,7 @@ namespace DriveLogGUI
         {
             User user = Session.LoggedInUser;
 
+            profileHeaderLabel.Text = "Profile: " + user.Username;
             nameOutputLabel.Text = user.Fullname;
             phoneOutputLabel.Text = user.Phone;
             cprOutputLabel.Text = user.Cpr;

@@ -34,8 +34,11 @@ namespace DriveLogGUI
 
         private void ProfileButton_Click(object sender, EventArgs e)
         {
-            CloseLastPage();
-            OpenPage(profileTab1);
+            if (lastPage != profileTab1)
+            {
+                CloseLastPage();
+                OpenPage(profileTab1);
+            }
 
             if (!panelForProfile.Visible)
             {
@@ -75,8 +78,11 @@ namespace DriveLogGUI
         {
             //To add a page use the closeLastPage command to make sure that there wont be two pages visible at once. 
             //Use the OpenPage to open your decied page :)
-            CloseLastPage();
-            OpenPage(overviewTab1);
+            if (lastPage != overviewTab1)
+            {
+                CloseLastPage();
+                OpenPage(overviewTab1);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -125,8 +131,11 @@ namespace DriveLogGUI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            CloseLastPage();
-            OpenPage(doctorsNote1);
+            if (lastPage != doctorsNote1)
+            {
+                CloseLastPage();
+                OpenPage(doctorsNote1);
+            }
         }
 
         private void OpenPage(UserControl page)
