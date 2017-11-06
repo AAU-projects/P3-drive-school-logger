@@ -10,30 +10,15 @@ using System.Windows.Forms;
 
 namespace DriveLogGUI
 {
-    public partial class overviewTab : UserControl
+    public partial class OverviewTab : UserControl
     {
         public event EventHandler LogOutButtonClick;
-        public overviewTab()
+        public OverviewTab()
         {
             InitializeComponent();
         }
 
-        private void progressBarPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void todaysNotePanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void theoreticalStatus_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void logoutButton_Click(object sender, EventArgs e)
+        public void logoutButton_Click(object sender, EventArgs e)
         {
             //bubble the event up to the parent
             if (this.LogOutButtonClick != null)

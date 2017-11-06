@@ -1,6 +1,6 @@
 ﻿namespace DriveLogGUI
 {
-    partial class overviewTab
+    partial class OverviewTab
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(overviewTab));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OverviewTab));
             this.headerPanel = new System.Windows.Forms.Panel();
             this.logoutButton = new System.Windows.Forms.Button();
             this.welcomeUserLabel = new System.Windows.Forms.Label();
@@ -52,12 +52,12 @@
             this.progressLabel = new System.Windows.Forms.Label();
             this.progressUnderline = new System.Windows.Forms.Panel();
             this.miscPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -125,7 +125,6 @@
             this.todaysNotePanel.Name = "todaysNotePanel";
             this.todaysNotePanel.Size = new System.Drawing.Size(454, 180);
             this.todaysNotePanel.TabIndex = 1;
-            this.todaysNotePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.todaysNotePanel_Paint);
             // 
             // todaysNoteUnderline
             // 
@@ -209,7 +208,6 @@
             this.progressBarPanel.Name = "progressBarPanel";
             this.progressBarPanel.Size = new System.Drawing.Size(454, 152);
             this.progressBarPanel.TabIndex = 3;
-            this.progressBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.progressBarPanel_Paint);
             // 
             // practicalStatus
             // 
@@ -228,7 +226,6 @@
             this.theoreticalStatus.Size = new System.Drawing.Size(36, 13);
             this.theoreticalStatus.TabIndex = 11;
             this.theoreticalStatus.Text = "17/24";
-            this.theoreticalStatus.Click += new System.EventHandler(this.theoreticalStatus_Click);
             // 
             // practicalLabel
             // 
@@ -322,73 +319,73 @@
             this.miscPanel.Controls.Add(this.pictureBox1);
             this.miscPanel.Location = new System.Drawing.Point(12, 416);
             this.miscPanel.Name = "miscPanel";
-            this.miscPanel.Size = new System.Drawing.Size(873, 103);
+            this.miscPanel.Size = new System.Drawing.Size(873, 112);
             this.miscPanel.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(168, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Doctors note";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(273, 67);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 16);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "First aid";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(344, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 16);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Manuever track";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(446, 67);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 16);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Slippery track";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(538, 67);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 16);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Theoratical test";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(643, 67);
+            this.label6.Location = new System.Drawing.Point(653, 74);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(84, 16);
             this.label6.TabIndex = 11;
             this.label6.Text = "Practical test";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(548, 74);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 16);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Theoratical test";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(456, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 16);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Slippery track";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(354, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 16);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Manuever track";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(283, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 16);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "First aid";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(178, 74);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Doctors note";
+            // 
             // pictureBox6
             // 
             this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(660, 24);
+            this.pictureBox6.Location = new System.Drawing.Point(670, 31);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(40, 40);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -398,7 +395,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(565, 24);
+            this.pictureBox5.Location = new System.Drawing.Point(575, 31);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(40, 40);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -408,7 +405,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(470, 24);
+            this.pictureBox4.Location = new System.Drawing.Point(480, 31);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(40, 40);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -418,7 +415,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(375, 24);
+            this.pictureBox3.Location = new System.Drawing.Point(385, 31);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(40, 40);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -428,7 +425,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(280, 24);
+            this.pictureBox2.Location = new System.Drawing.Point(290, 31);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(40, 40);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -438,14 +435,14 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(185, 24);
+            this.pictureBox1.Location = new System.Drawing.Point(195, 31);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(40, 40);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // overviewTab
+            // OverviewTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -455,7 +452,7 @@
             this.Controls.Add(this.calendarPanel);
             this.Controls.Add(this.todaysNotePanel);
             this.Controls.Add(this.headerPanel);
-            this.Name = "overviewTab";
+            this.Name = "OverviewTab";
             this.Size = new System.Drawing.Size(897, 544);
             this.headerPanel.ResumeLayout(false);
             this.todaysNotePanel.ResumeLayout(false);

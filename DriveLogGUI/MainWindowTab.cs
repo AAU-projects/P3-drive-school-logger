@@ -28,11 +28,14 @@ namespace DriveLogGUI
             settingsButton.Controls.Add(pictureSettingsTab);
             overviewTab1.LogOutButtonClick += new EventHandler(logoutButton_Click);
             AllPages.Add(overviewTab1);
+            AllPages.Add(profileTab1);
             AllPages.Add(doctorsNote1);
         }
 
         private void ProfileButton_Click(object sender, EventArgs e)
         {
+            CloseLastPage();
+            OpenPage(profileTab1);
 
             if (!panelForProfile.Visible)
             {
