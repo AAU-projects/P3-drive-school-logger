@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,14 +17,21 @@ namespace DriveLogCode
             throw new NotImplementedException();
         }
 
-        public string UploadProfilePicture(string imageLocation)
+        public string SaveProfilePicture(Image image)
         {
-            if (File.Exists(imageLocation))
-            {
-                File.Copy(imageLocation, $@"C:\Users\Lukas\Desktop\test.png",true);
-                return "bob";
-            }
-            return null;
+            string tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.png");
+            
+            if (image == null) return null;
+            image.Save(tempFile,ImageFormat.Png);
+
+            System.Net.WebClient Client = new System.Net.WebClient();
+
+            Client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+            byte[] result = Client.UploadFile("http://ds315e17.duckdns.org/cityks/upload.php", "POST", tempFile);
+
+            return Encoding.UTF8.GetString(result, 0, result.Length);
         }
     }
-}
+ }
+

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
@@ -50,27 +51,22 @@ namespace DriveLogGUI
         private static readonly List<string> AcceptedImageExtensions = new List<string> { ".jpg", ".png", ".bmp", };
         private bool ValidateDroppedFile(string filepath)
         {
-            if (AcceptedImageExtensions.Contains(Path.GetExtension(filepath).ToLower()))
-                return true;
-            else
-                return false;
+            if (AcceptedImageExtensions.Contains(Path.GetExtension(filepath).ToLower())) return true;
+            return false;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void AcceptButton_Click(object sender, EventArgs e)
         {
+            if (editPictureBox.Image == null) return;
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void acceptButton_Click(object sender, EventArgs e)
-        {
-            _registerForm.ProfileImageLocation = editPictureBox.ImageLocation;
+            _registerForm.ProfileImage = editPictureBox.Image;
             this.Dispose();
             _registerForm.Show();
+        }
+
+        private void UploadButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

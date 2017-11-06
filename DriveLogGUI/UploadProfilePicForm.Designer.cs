@@ -49,7 +49,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Choose profile picture";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // acceptButton
             // 
@@ -64,7 +63,7 @@
             this.acceptButton.TabIndex = 1;
             this.acceptButton.Text = "Set profile picture";
             this.acceptButton.UseVisualStyleBackColor = false;
-            this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
+            this.acceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
             // cancelButton
             // 
@@ -128,7 +127,7 @@
             this.UploadButton.TabIndex = 7;
             this.UploadButton.Text = "Upload picture";
             this.UploadButton.UseVisualStyleBackColor = false;
-            this.UploadButton.Click += new System.EventHandler(this.button1_Click);
+            this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
             // UploadProfilePicForm
             // 
