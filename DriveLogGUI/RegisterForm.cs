@@ -31,6 +31,8 @@ namespace DriveLogGUI
 
         private Point lastClick;
 
+        public string ProfileImageLocation { get; set; } = String.Empty;
+
         public RegisterForm(LoginForm login)
         {
             _loginForm = login;
@@ -243,9 +245,14 @@ namespace DriveLogGUI
 
         private void registerCreateNewUserButton_Click(object sender, EventArgs e)
         {
+
+            IUploadHandler uploader = new UploadHandler();
+            ProfileImageLocation = uploader.UploadProfilePicture(ProfileImageLocation);
+
             if (isFirstnameOk && isLastnameOk && isPhoneOk && isEmailOk && isCPROk && isAdressOk &&
                 isCityOk && isZipOk && isUsernameOk && isPasswordOk && isVerifyPasswordOk)
             {
+                
                 bool UserCreated = MySql.AddUser(registerFirstnameBox.Text, registerLastnameBox.Text,
                     registerPhoneBox.Text, registerEmailBox.Text,
                     registerCprBox.Text, registerAdressBox.Text, registerZipBox.Text, registerCityBox.Text,
@@ -280,11 +287,10 @@ namespace DriveLogGUI
         }
         private void registerUploadPhotoButton_Click(object sender, EventArgs e)
         {
-            string imageLocation = string.Empty;
-
             UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
             this.Hide();
             uploadPictureForm.ShowDialog();
+            
             /*
             try
             {

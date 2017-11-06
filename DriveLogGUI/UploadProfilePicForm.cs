@@ -60,5 +60,17 @@ namespace DriveLogGUI
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void acceptButton_Click(object sender, EventArgs e)
+        {
+            _registerForm.ProfileImageLocation = editPictureBox.ImageLocation;
+            this.Dispose();
+            _registerForm.Show();
+        }
     }
 }
