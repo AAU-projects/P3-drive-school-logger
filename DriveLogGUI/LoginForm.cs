@@ -31,7 +31,7 @@ namespace DriveLogGUI
         {
             DataTable user = MySql.GetUser(UsernameBox.Text);
             if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text) {
-                MessageBox.Show("Wrong username or password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CustomMsgBox.Show("Wrong username or password", "Error", CustomMsgBoxIcon.Error());
                 return;
             }
 

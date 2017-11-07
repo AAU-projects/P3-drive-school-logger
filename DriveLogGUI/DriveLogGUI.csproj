@@ -47,6 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomMsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomMsgBox.Designer.cs">
+      <DependentUpon>CustomMsgBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMsgBoxIcon.cs" />
     <Compile Include="DoctorsNote.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -109,6 +116,9 @@
     <Compile Include="UploadProfilePicForm.Designer.cs">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CustomMsgBox.resx">
+      <DependentUpon>CustomMsgBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DoctorsNote.resx">
       <DependentUpon>DoctorsNote.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +175,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8-checkmark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icons8-close-window.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icons8-attention.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\avataricon.png" />
     <Content Include="Resources\drag_and_drop_icon.png" />
   </ItemGroup>
