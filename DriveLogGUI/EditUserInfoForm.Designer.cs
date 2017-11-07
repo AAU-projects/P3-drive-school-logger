@@ -40,7 +40,6 @@
             this.editPasswordBox = new TextboxBorderColor();
             this.verifyEditPasswordBox = new TextboxBorderColor();
             this.passwordStatusLabel = new System.Windows.Forms.Label();
-            this.vertifyPasswordStatusLabel = new System.Windows.Forms.Label();
             this.accountDetailsLabel = new System.Windows.Forms.Label();
             this.addressLabel = new System.Windows.Forms.Label();
             this.personalInformationLabel = new System.Windows.Forms.Label();
@@ -103,7 +102,9 @@
             this.verifyPasswordBox.Size = new System.Drawing.Size(237, 23);
             this.verifyPasswordBox.TabIndex = 0;
             this.verifyPasswordBox.Text = "Password";
+            this.verifyPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.verifyPasswordBox_MouseClick);
             this.verifyPasswordBox.TextChanged += new System.EventHandler(this.verifyPasswordBox_TextChanged);
+            this.verifyPasswordBox.Leave += new System.EventHandler(this.verifyPasswordBox_Leave);
             // 
             // topPanel
             // 
@@ -155,6 +156,8 @@
             this.usernameBox.Size = new System.Drawing.Size(237, 23);
             this.usernameBox.TabIndex = 1;
             this.usernameBox.Text = "Username";
+            this.usernameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.usernameBox_MouseClick);
+            this.usernameBox.Leave += new System.EventHandler(this.usernameBox_Leave);
             // 
             // editPasswordBox
             // 
@@ -170,6 +173,9 @@
             this.editPasswordBox.Size = new System.Drawing.Size(237, 23);
             this.editPasswordBox.TabIndex = 2;
             this.editPasswordBox.Text = "Password";
+            this.editPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.editPasswordBox_MouseClick);
+            this.editPasswordBox.TextChanged += new System.EventHandler(this.editPasswordBox_TextChanged);
+            this.editPasswordBox.Leave += new System.EventHandler(this.editPasswordBox_Leave);
             // 
             // verifyEditPasswordBox
             // 
@@ -185,6 +191,9 @@
             this.verifyEditPasswordBox.Size = new System.Drawing.Size(237, 23);
             this.verifyEditPasswordBox.TabIndex = 3;
             this.verifyEditPasswordBox.Text = "Verify Password";
+            this.verifyEditPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.verifyEditPasswordBox_MouseClick);
+            this.verifyEditPasswordBox.TextChanged += new System.EventHandler(this.verifyEditPasswordBox_TextChanged);
+            this.verifyEditPasswordBox.Leave += new System.EventHandler(this.verifyEditPasswordBox_Leave);
             // 
             // passwordStatusLabel
             // 
@@ -192,19 +201,8 @@
             this.passwordStatusLabel.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordStatusLabel.Location = new System.Drawing.Point(15, 298);
             this.passwordStatusLabel.Name = "passwordStatusLabel";
-            this.passwordStatusLabel.Size = new System.Drawing.Size(93, 15);
+            this.passwordStatusLabel.Size = new System.Drawing.Size(0, 15);
             this.passwordStatusLabel.TabIndex = 51;
-            this.passwordStatusLabel.Text = "StatusPassword";
-            // 
-            // vertifyPasswordStatusLabel
-            // 
-            this.vertifyPasswordStatusLabel.AutoSize = true;
-            this.vertifyPasswordStatusLabel.Font = new System.Drawing.Font("Calibri", 10F);
-            this.vertifyPasswordStatusLabel.Location = new System.Drawing.Point(15, 343);
-            this.vertifyPasswordStatusLabel.Name = "vertifyPasswordStatusLabel";
-            this.vertifyPasswordStatusLabel.Size = new System.Drawing.Size(75, 17);
-            this.vertifyPasswordStatusLabel.TabIndex = 52;
-            this.vertifyPasswordStatusLabel.Text = "StatusVerify";
             // 
             // accountDetailsLabel
             // 
@@ -253,6 +251,8 @@
             this.zipBox.Size = new System.Drawing.Size(237, 23);
             this.zipBox.TabIndex = 9;
             this.zipBox.Text = "Zip Code";
+            this.zipBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.zipBox_MouseClick);
+            this.zipBox.Leave += new System.EventHandler(this.zipBox_Leave);
             // 
             // cityBox
             // 
@@ -268,6 +268,8 @@
             this.cityBox.Size = new System.Drawing.Size(237, 23);
             this.cityBox.TabIndex = 10;
             this.cityBox.Text = "City";
+            this.cityBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cityBox_MouseClick);
+            this.cityBox.Leave += new System.EventHandler(this.cityBox_Leave);
             // 
             // addressBox
             // 
@@ -283,6 +285,8 @@
             this.addressBox.Size = new System.Drawing.Size(237, 23);
             this.addressBox.TabIndex = 8;
             this.addressBox.Text = "Address";
+            this.addressBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.addressBox_MouseClick);
+            this.addressBox.Leave += new System.EventHandler(this.addressBox_Leave);
             // 
             // emailBox
             // 
@@ -298,6 +302,8 @@
             this.emailBox.Size = new System.Drawing.Size(237, 23);
             this.emailBox.TabIndex = 7;
             this.emailBox.Text = "Email Address";
+            this.emailBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.emailBox_MouseClick);
+            this.emailBox.Leave += new System.EventHandler(this.emailBox_Leave);
             // 
             // phoneBox
             // 
@@ -313,6 +319,8 @@
             this.phoneBox.Size = new System.Drawing.Size(237, 23);
             this.phoneBox.TabIndex = 6;
             this.phoneBox.Text = "Phone Number";
+            this.phoneBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.phoneBox_MouseClick);
+            this.phoneBox.Leave += new System.EventHandler(this.phoneBox_Leave);
             // 
             // lastnameBox
             // 
@@ -328,6 +336,8 @@
             this.lastnameBox.Size = new System.Drawing.Size(237, 23);
             this.lastnameBox.TabIndex = 5;
             this.lastnameBox.Text = "Lastname";
+            this.lastnameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lastnameBox_MouseClick);
+            this.lastnameBox.Leave += new System.EventHandler(this.lastnameBox_Leave);
             // 
             // firstnameBox
             // 
@@ -344,6 +354,8 @@
             this.firstnameBox.Size = new System.Drawing.Size(237, 23);
             this.firstnameBox.TabIndex = 4;
             this.firstnameBox.Text = "Firstname";
+            this.firstnameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.firstnameBox_MouseClick);
+            this.firstnameBox.Leave += new System.EventHandler(this.firstnameBox_Leave);
             // 
             // pictureBox
             // 
@@ -404,7 +416,6 @@
             this.Controls.Add(this.lastnameBox);
             this.Controls.Add(this.firstnameBox);
             this.Controls.Add(this.accountDetailsLabel);
-            this.Controls.Add(this.vertifyPasswordStatusLabel);
             this.Controls.Add(this.passwordStatusLabel);
             this.Controls.Add(this.verifyEditPasswordBox);
             this.Controls.Add(this.editPasswordBox);
@@ -437,7 +448,6 @@
         private TextboxBorderColor editPasswordBox;
         private TextboxBorderColor verifyEditPasswordBox;
         private System.Windows.Forms.Label passwordStatusLabel;
-        private System.Windows.Forms.Label vertifyPasswordStatusLabel;
         private System.Windows.Forms.Label accountDetailsLabel;
         private System.Windows.Forms.Label addressLabel;
         private System.Windows.Forms.Label personalInformationLabel;

@@ -132,7 +132,7 @@ namespace DriveLogGUI
             ChangeBackColorTextBox(registerPasswordBox, verify);
             _isPasswordOk = verify;
 
-            VertifyPassword();
+            VerifyPassword();
 
             if (!usernameNotSameAsPassword)
             {
@@ -161,10 +161,10 @@ namespace DriveLogGUI
             else
                 verifyPasswordBox.PasswordChar = '\0';
 
-            VertifyPassword();
+            VerifyPassword();
         }
 
-        private void VertifyPassword()
+        private void VerifyPassword()
         {
             bool verify = registerPasswordBox.Text == verifyPasswordBox.Text && registerPasswordBox.Text.Length != 0;
 
