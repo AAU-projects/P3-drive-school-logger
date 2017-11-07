@@ -70,13 +70,13 @@
             // 
             // editProfileHeaderLabel
             // 
-            this.editProfileHeaderLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editProfileHeaderLabel.Font = new System.Drawing.Font("Calibri", 25F);
             this.editProfileHeaderLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
             this.editProfileHeaderLabel.Location = new System.Drawing.Point(0, 32);
             this.editProfileHeaderLabel.Name = "editProfileHeaderLabel";
-            this.editProfileHeaderLabel.Size = new System.Drawing.Size(529, 33);
+            this.editProfileHeaderLabel.Size = new System.Drawing.Size(529, 48);
             this.editProfileHeaderLabel.TabIndex = 44;
-            this.editProfileHeaderLabel.Text = "Edit user information";
+            this.editProfileHeaderLabel.Text = "Edit User Information";
             this.editProfileHeaderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // verifyPasswordInfo
@@ -390,9 +390,9 @@
             this.saveChangesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveChangesButton.Font = new System.Drawing.Font("Calibri Light", 16.25F);
             this.saveChangesButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.saveChangesButton.Location = new System.Drawing.Point(202, 617);
+            this.saveChangesButton.Location = new System.Drawing.Point(195, 625);
             this.saveChangesButton.Name = "saveChangesButton";
-            this.saveChangesButton.Size = new System.Drawing.Size(125, 36);
+            this.saveChangesButton.Size = new System.Drawing.Size(138, 36);
             this.saveChangesButton.TabIndex = 12;
             this.saveChangesButton.Text = "Save";
             this.saveChangesButton.UseVisualStyleBackColor = false;

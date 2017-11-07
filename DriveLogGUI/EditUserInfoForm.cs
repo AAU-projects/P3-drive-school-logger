@@ -71,6 +71,8 @@ namespace DriveLogGUI
                 ChangeEnableStatus(true);
                 ChangeBackColorTextBox(verifyPasswordBox, true);
                 ChangeLabelAndBoxColor(_standardLabelColor, _standardTextBoxColor);
+                ChangeVerifySectionColor(_slurredLableColor, _slurredTextBoxColor);
+                this.ActiveControl = null;
             }
             else
             {
@@ -78,6 +80,7 @@ namespace DriveLogGUI
                 ChangeBackColorTextBox(verifyPasswordBox, false);
                 accountDetailsLabel.ForeColor = _slurredLableColor;
                 ChangeLabelAndBoxColor(_slurredLableColor, _slurredTextBoxColor);
+                ChangeVerifySectionColor(_standardLabelColor, _standardTextBoxColor);
             }
         }
 
@@ -114,7 +117,14 @@ namespace DriveLogGUI
             addressBox.BackColor = textBoxColor;
             zipBox.BackColor = textBoxColor;
             cityBox.BackColor = textBoxColor;
+        }
 
+        private void ChangeVerifySectionColor(Color lableColor, Color textBoxColor)
+        {
+            verifyPasswordLabel.ForeColor = lableColor;
+            verifyPasswordInfo.ForeColor = lableColor;
+            verifyPasswordBox.BackColor = textBoxColor;
+            verifyPasswordBox.ForeColor = Color.DarkGray;
         }
 
         private void verifyPasswordBox_MouseClick(object sender, MouseEventArgs e)
