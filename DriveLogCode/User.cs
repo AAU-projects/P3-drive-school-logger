@@ -9,7 +9,7 @@ namespace DriveLogCode
     public class User
     {
         public User(string firstname, string lastname, string phone, string email, string cpr, 
-            string address, string zip, string city, string username, string picturePath, bool sysmin)
+            string address, string zip, string city, string username, string password, string picturePath, bool sysmin)
         {
             Firstname = firstname;
             Lastname = lastname;
@@ -20,6 +20,7 @@ namespace DriveLogCode
             Zip = zip;
             City = city;
             Username = username;
+            Password = password;
             PicturePath = picturePath;
             Sysmin = sysmin;
         }
@@ -45,6 +46,8 @@ namespace DriveLogCode
         public string City { get; }
 
         public string Username { get; }
+
+        public string Password { get; }
 
         public string PicturePath { get; }
 

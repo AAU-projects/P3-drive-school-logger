@@ -48,9 +48,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.profileTab1 = new DriveLogGUI.ProfileTab();
             this.doctorsNote1 = new DriveLogGUI.DoctorsNote();
-            this.overviewTab1 = new DriveLogGUI.OverviewTab();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelForProfile.SuspendLayout();
@@ -323,21 +321,11 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.profileTab1);
             this.panel3.Controls.Add(this.doctorsNote1);
-            this.panel3.Controls.Add(this.overviewTab1);
             this.panel3.Location = new System.Drawing.Point(132, 20);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(897, 544);
             this.panel3.TabIndex = 3;
-            // 
-            // profileTab1
-            // 
-            this.profileTab1.Location = new System.Drawing.Point(0, 0);
-            this.profileTab1.Name = "profileTab1";
-            this.profileTab1.Size = new System.Drawing.Size(897, 544);
-            this.profileTab1.TabIndex = 3;
-            this.profileTab1.Visible = false;
             // 
             // doctorsNote1
             // 
@@ -346,14 +334,6 @@
             this.doctorsNote1.Size = new System.Drawing.Size(897, 544);
             this.doctorsNote1.TabIndex = 2;
             this.doctorsNote1.Visible = false;
-            // 
-            // overviewTab1
-            // 
-            this.overviewTab1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.overviewTab1.Location = new System.Drawing.Point(0, 0);
-            this.overviewTab1.Name = "overviewTab1";
-            this.overviewTab1.Size = new System.Drawing.Size(897, 544);
-            this.overviewTab1.TabIndex = 0;
             // 
             // MainWindowTab
             // 

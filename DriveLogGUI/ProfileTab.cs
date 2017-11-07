@@ -32,5 +32,12 @@ namespace DriveLogGUI
                 ProfilePicture.Load(user.PicturePath);
             }
         }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            EditUserInfoForm editForm = new EditUserInfoForm();
+
+            editForm.ShowDialog(this);
+        }
     }
 }
