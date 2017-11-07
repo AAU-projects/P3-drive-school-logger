@@ -13,9 +13,15 @@ namespace DriveLogGUI
 {
     public partial class MainWindowTab : Form
     {
+<<<<<<< HEAD
         private Point lastClick;
         private Point pageStartPoint;
         private UserControl lastPage;
+=======
+        private Point _lastClick;
+        private UserControl _lastPage;
+        private bool _isOpen;
+>>>>>>> master
 
         private OverviewTab overviewTab;
         private ProfileTab profileTab;
@@ -38,6 +44,7 @@ namespace DriveLogGUI
             bookingButton.Controls.Add(pictureBookingTab);
             settingsButton.Controls.Add(pictureSettingsTab);
             overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
+            overviewTab.DoctorsNotePictureButtonClick += new EventHandler(doctorsNoteButton_Click);
 
             //createing the start point for all pages.
             pageStartPoint = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
@@ -56,11 +63,23 @@ namespace DriveLogGUI
             OpenPage(overviewTab);
         }
 
+        private void doctorsNoteButton_Click(object sender, EventArgs e)
+        {
+            OpenPage(doctorsNoteTab);
+
+            ProfileSubmenuControl(true);
+        }
+
         private void ProfileButton_Click(object sender, EventArgs e)
         {
             OpenPage(profileTab);
 
-            if (!panelForProfile.Visible)
+            ProfileSubmenuControl(true);
+        }
+
+        private void ProfileSubmenuControl(bool isProfileClick)
+        {
+            if (!panelForProfile.Visible && isProfileClick)
             {
                 //placing the panel at the correct location
                 panelForProfile.Location = new Point(ProfileButton.Location.X, ProfileButton.Location.Y + ProfileButton.Height);
@@ -68,15 +87,16 @@ namespace DriveLogGUI
                 //moving objects below
                 bookingButton.Location = MoveLocation(bookingButton.Location, panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, panelForProfile.Height);
+                _isOpen = true;
             }
-            else
+            else if (_isOpen)
             {
                 //move objects back
                 bookingButton.Location = MoveLocation(bookingButton.Location, -panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, -panelForProfile.Height);
                 panelForProfile.Hide();
+                _isOpen = false;
             }
-
         }
 
         private void MoveButtonSpaces(Button button, int spaces)
@@ -99,19 +119,20 @@ namespace DriveLogGUI
             //To add a page create a usercontrol and send it as paramater in use OpenPage
             OpenPage(overviewTab);
 
+            ProfileSubmenuControl(false);
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
-            lastClick = e.Location;
+            _lastClick = e.Location;
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                this.Left += e.X - lastClick.X;
-                this.Top += e.Y - lastClick.Y;
+                this.Left += e.X - _lastClick.X;
+                this.Top += e.Y - _lastClick.Y;
             }
         }
 
@@ -142,22 +163,23 @@ namespace DriveLogGUI
 
         private void OpenPage(UserControl page)
         {
-            if (lastPage != page) 
+            if (_lastPage != page) 
             {
                 CloseLastPage();
-                lastPage = page;
+                _lastPage = page;
                 page.Show();
             }
         }
 
         private void CloseLastPage()
         {
-            if (lastPage != null)
+            if (_lastPage != null)
             {
-                lastPage.Hide();
+                _lastPage.Hide();
             }
         }
 
+<<<<<<< HEAD
         private void firstAidButton_Click(object sender, EventArgs e)
         {
             if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
@@ -170,6 +192,16 @@ namespace DriveLogGUI
                 documentViewer.Clear();
                 OpenPage(documentViewer);
             }
+=======
+        private void bookingButton_Click(object sender, EventArgs e)
+        {
+            ProfileSubmenuControl(false);
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            ProfileSubmenuControl(false);
+>>>>>>> master
         }
     }
 }
