@@ -28,7 +28,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindowTab));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.leftSidePanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panelForProfile = new System.Windows.Forms.Panel();
@@ -44,35 +44,30 @@
             this.ProfileButton = new System.Windows.Forms.Button();
             this.OverviewButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.topPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.profileTab1 = new DriveLogGUI.ProfileTab();
-            this.doctorsNote1 = new DriveLogGUI.DoctorsNote();
-            this.overviewTab1 = new DriveLogGUI.OverviewTab();
-            this.panel1.SuspendLayout();
+            this.leftSidePanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelForProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBookingTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSettingsTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureProfileTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureHomeTab)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // leftSidePanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(132, 564);
-            this.panel1.TabIndex = 0;
+            this.leftSidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
+            this.leftSidePanel.Controls.Add(this.label2);
+            this.leftSidePanel.Controls.Add(this.panel4);
+            this.leftSidePanel.Controls.Add(this.label1);
+            this.leftSidePanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
+            this.leftSidePanel.Location = new System.Drawing.Point(0, 0);
+            this.leftSidePanel.Name = "leftSidePanel";
+            this.leftSidePanel.Size = new System.Drawing.Size(132, 564);
+            this.leftSidePanel.TabIndex = 0;
             // 
             // label2
             // 
@@ -281,17 +276,17 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "CITY";
             // 
-            // panel2
+            // topPanel
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Location = new System.Drawing.Point(132, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(900, 22);
-            this.panel2.TabIndex = 1;
-            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
-            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
+            this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
+            this.topPanel.Controls.Add(this.button2);
+            this.topPanel.Controls.Add(this.button1);
+            this.topPanel.Location = new System.Drawing.Point(132, 0);
+            this.topPanel.Name = "topPanel";
+            this.topPanel.Size = new System.Drawing.Size(900, 22);
+            this.topPanel.TabIndex = 1;
+            this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
+            this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             // 
             // button2
             // 
@@ -321,72 +316,35 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.profileTab1);
-            this.panel3.Controls.Add(this.doctorsNote1);
-            this.panel3.Controls.Add(this.overviewTab1);
-            this.panel3.Location = new System.Drawing.Point(132, 20);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(897, 544);
-            this.panel3.TabIndex = 3;
-            // 
-            // profileTab1
-            // 
-            this.profileTab1.Location = new System.Drawing.Point(0, 0);
-            this.profileTab1.Name = "profileTab1";
-            this.profileTab1.Size = new System.Drawing.Size(897, 544);
-            this.profileTab1.TabIndex = 3;
-            this.profileTab1.Visible = false;
-            // 
-            // doctorsNote1
-            // 
-            this.doctorsNote1.Location = new System.Drawing.Point(0, 0);
-            this.doctorsNote1.Name = "doctorsNote1";
-            this.doctorsNote1.Size = new System.Drawing.Size(897, 544);
-            this.doctorsNote1.TabIndex = 2;
-            this.doctorsNote1.Visible = false;
-            // 
-            // overviewTab1
-            // 
-            this.overviewTab1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.overviewTab1.Location = new System.Drawing.Point(0, 0);
-            this.overviewTab1.Name = "overviewTab1";
-            this.overviewTab1.Size = new System.Drawing.Size(897, 544);
-            this.overviewTab1.TabIndex = 0;
-            // 
             // MainWindowTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1030, 564);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.topPanel);
+            this.Controls.Add(this.leftSidePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindowTab";
             this.Text = "MainWindowTab";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindowTab_FormClosing);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.leftSidePanel.ResumeLayout(false);
+            this.leftSidePanel.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panelForProfile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBookingTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSettingsTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureProfileTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureHomeTab)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel leftSidePanel;
+        private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button settingsButton;
@@ -402,10 +360,7 @@
         private System.Windows.Forms.PictureBox pictureBookingTab;
         private System.Windows.Forms.PictureBox pictureHomeTab;
         private System.Windows.Forms.PictureBox pictureProfileTab;
-        private OverviewTab overviewTab1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private DoctorsNote doctorsNote1;
-        private ProfileTab profileTab1;
     }
 }
