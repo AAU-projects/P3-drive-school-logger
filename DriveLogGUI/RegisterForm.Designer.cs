@@ -134,7 +134,6 @@
             this.registerPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.registerPicture.TabIndex = 29;
             this.registerPicture.TabStop = false;
-            this.registerPicture.Click += new System.EventHandler(this.registerPicture_Click);
             // 
             // label1
             // 
@@ -215,7 +214,6 @@
             this.registerCityBox.TabIndex = 7;
             this.registerCityBox.Text = "City";
             this.registerCityBox.Click += new System.EventHandler(this.registerCityBox_Click);
-            this.registerCityBox.TextChanged += new System.EventHandler(this.registerCityBox_TextChanged);
             this.registerCityBox.Leave += new System.EventHandler(this.registerCityBox_Leave);
             // 
             // registerAdressBox
@@ -458,7 +456,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Register";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
-            this.Load += new System.EventHandler(this.RegisterForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.registerPicture)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);

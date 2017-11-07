@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileTab));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ProfilePicture = new System.Windows.Forms.PictureBox();
             this.infoHeaderLabel = new System.Windows.Forms.Label();
             this.InfoPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.cityOutputLabel = new System.Windows.Forms.Label();
             this.emailOutputLabel = new System.Windows.Forms.Label();
             this.cprOutputLabel = new System.Windows.Forms.Label();
@@ -81,8 +82,7 @@
             this.nextTheoreticalLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.theoreticalLessonLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).BeginInit();
             this.InfoPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
             this.progressBarPanel.SuspendLayout();
@@ -98,15 +98,15 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // ProfilePicture
             // 
-            this.pictureBox1.Image = global::DriveLogGUI.Properties.Resources.avataricon;
-            this.pictureBox1.Location = new System.Drawing.Point(21, 29);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.ProfilePicture.Image = global::DriveLogGUI.Properties.Resources.avataricon;
+            this.ProfilePicture.Location = new System.Drawing.Point(21, 29);
+            this.ProfilePicture.Name = "ProfilePicture";
+            this.ProfilePicture.Size = new System.Drawing.Size(128, 128);
+            this.ProfilePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ProfilePicture.TabIndex = 0;
+            this.ProfilePicture.TabStop = false;
             // 
             // infoHeaderLabel
             // 
@@ -135,12 +135,26 @@
             this.InfoPanel.Controls.Add(this.emailLabel);
             this.InfoPanel.Controls.Add(this.nameLabel);
             this.InfoPanel.Controls.Add(this.todaysNoteUnderline);
-            this.InfoPanel.Controls.Add(this.pictureBox1);
+            this.InfoPanel.Controls.Add(this.ProfilePicture);
             this.InfoPanel.Controls.Add(this.infoHeaderLabel);
             this.InfoPanel.Location = new System.Drawing.Point(12, 74);
             this.InfoPanel.Name = "InfoPanel";
             this.InfoPanel.Size = new System.Drawing.Size(454, 170);
             this.InfoPanel.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.button1.Location = new System.Drawing.Point(375, 143);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 22);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Edit Profile";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // cityOutputLabel
             // 
@@ -653,33 +667,18 @@
             this.theoreticalLessonLabel.TabIndex = 11;
             this.theoreticalLessonLabel.Text = "Theoretical Lessons";
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.button1.Location = new System.Drawing.Point(375, 143);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(69, 22);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Edit Profile";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
             // ProfileTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 544);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.miscPanel);
             this.Controls.Add(this.progressBarPanel);
             this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.InfoPanel);
             this.Name = "ProfileTab";
-            this.Text = "ProfileTab";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Size = new System.Drawing.Size(897, 544);
+            ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).EndInit();
             this.InfoPanel.ResumeLayout(false);
             this.InfoPanel.PerformLayout();
             this.headerPanel.ResumeLayout(false);
@@ -703,7 +702,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox ProfilePicture;
         private System.Windows.Forms.Label infoHeaderLabel;
         private System.Windows.Forms.Panel InfoPanel;
         private System.Windows.Forms.Panel todaysNoteUnderline;

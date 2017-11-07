@@ -10,26 +10,29 @@ namespace DriveLogGUI
 {
     public partial class RegisterForm : Form
     {
-        private bool isUsernameOk;
-        private bool isPasswordOk;
-        private bool isVerifyPasswordOk;
-        private bool isFirstnameOk;
-        private bool isLastnameOk;
-        private bool isPhoneOk;
-        private bool isEmailOk;
-        private bool isCPROk;
-        private bool isAdressOk;
-        private bool isCityOk;
-        private bool isZipOk;
+        private bool _isUsernameOk;
+        private bool _isPasswordOk;
+        private bool _isVerifyPasswordOk;
+        private bool _isFirstnameOk;
+        private bool _isLastnameOk;
+        private bool _isPhoneOk;
+        private bool _isEmailOk;
+        private bool _isCprOk;
+        private bool _isAdressOk;
+        private bool _isCityOk;
+        private bool _isZipOk;
 
-        private Color correctColor = Color.FromArgb(109, 144, 150);
-        private Color wrongColor = Color.FromArgb(229, 187, 191);
-        private Color neutralColor = Color.FromArgb(200, 212, 225);
-        private Color whitetextColor = Color.FromArgb(251, 251, 251);
+        private readonly Color _correctColor = Color.FromArgb(109, 144, 150);
+        private readonly Color _wrongColor = Color.FromArgb(229, 187, 191);
+        private readonly Color _neutralColor = Color.FromArgb(200, 212, 225);
+        private readonly Color _whitetextColor = Color.FromArgb(251, 251, 251);
 
-        private LoginForm _loginForm;
+        private readonly LoginForm _loginForm;
 
-        private Point lastClick;
+        private Point _lastClick;
+        private IUploadHandler uploader;
+
+        public Image ProfileImage { get; set; } = null;
 
         public RegisterForm(LoginForm login)
         {
@@ -37,11 +40,7 @@ namespace DriveLogGUI
             InitializeComponent();
 
             HideAllStatusLabels();
-        }
-
-        private void registerTitleLabel_Click(object sender, EventArgs e)
-        {
-
+            uploader = new UploadHandler();
         }
 
         private void registerCancelHyperLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -62,7 +61,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.UsernameVerifacation(registerUsernameBox.Text);
 
             ChangeBackColorTextBox(registerUsernameBox, verify);
-            isUsernameOk = verify;
+            _isUsernameOk = verify;
         }
 
         private void registerFirstnameBox_Leave(object sender, EventArgs e)
@@ -70,7 +69,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.InputOnlyLettersVerification(registerFirstnameBox.Text);
 
             ChangeBackColorTextBox(registerFirstnameBox, verify);
-            isFirstnameOk = verify;
+            _isFirstnameOk = verify;
         }
 
         private void registerLastnameBox_Leave(object sender, EventArgs e)
@@ -78,7 +77,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.InputOnlyLettersVerification(registerLastnameBox.Text);
 
             ChangeBackColorTextBox(registerLastnameBox, verify);
-            isLastnameOk = verify;
+            _isLastnameOk = verify;
         }
 
         private void registerCityBox_Leave(object sender, EventArgs e)
@@ -86,7 +85,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.CityVerification(registerCityBox.Text);
 
             ChangeBackColorTextBox(registerCityBox, verify);
-            isCityOk = verify;
+            _isCityOk = verify;
         }
 
         private void registerAdressBox_Leave(object sender, EventArgs e)
@@ -94,7 +93,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.AdressVerification(registerAdressBox.Text);
 
             ChangeBackColorTextBox(registerAdressBox, verify);
-            isAdressOk = verify;
+            _isAdressOk = verify;
         }
 
         private void registerEmailBox_Leave(object sender, EventArgs e)
@@ -103,7 +102,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.EmailVerification(registerEmailBox.Text);
 
             ChangeBackColorTextBox(registerEmailBox, verify);
-            isEmailOk = verify;
+            _isEmailOk = verify;
         }
 
         /// <summary>
@@ -117,7 +116,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.CPRVerification(registerCprBox.Text);
 
             ChangeBackColorTextBox(registerCprBox, verify);
-            isCPROk = verify;
+            _isCprOk = verify;
         }
 
         private void registerPasswordBox_TextChanged(object sender, EventArgs e)
@@ -131,14 +130,14 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.PasswordVertification(registerPasswordBox.Text) && usernameNotSameAsPassword;
 
             ChangeBackColorTextBox(registerPasswordBox, verify);
-            isPasswordOk = verify;
+            _isPasswordOk = verify;
 
             VertifyPassword();
 
             if (!usernameNotSameAsPassword)
             {
                 passwordStatusLabel.Text = "Password can not be the same as your username";
-                passwordStatusLabel.ForeColor = wrongColor;
+                passwordStatusLabel.ForeColor = _wrongColor;
             }
             else
             {
@@ -147,11 +146,11 @@ namespace DriveLogGUI
                 if (strength == 0)
                     passwordStatusLabel.Text = "";
                 else if (strength < 12)
-                    ChangeLabelTextAndColor(passwordStatusLabel, "Weak", wrongColor);
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Weak", _wrongColor);
                 else if (strength < 22)
                     ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.FromArgb(229, 200, 3));
                 else
-                    ChangeLabelTextAndColor(passwordStatusLabel, "Strong", correctColor);
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Strong", _correctColor);
             }
         }
 
@@ -170,7 +169,7 @@ namespace DriveLogGUI
             bool verify = registerPasswordBox.Text == verifyPasswordBox.Text && registerPasswordBox.Text.Length != 0;
 
             ChangeBackColorTextBox(verifyPasswordBox, verify);
-            isVerifyPasswordOk = verify;
+            _isVerifyPasswordOk = verify;
         }
 
         private void registerZipBox_Leave(object sender, EventArgs e)
@@ -178,7 +177,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.ZipVerifacation(registerZipBox.Text);
 
             ChangeBackColorTextBox(registerZipBox, verify);
-            isZipOk = verify;
+            _isZipOk = verify;
 
             if (verify)
             {
@@ -191,7 +190,7 @@ namespace DriveLogGUI
             bool verify = RegisterVerification.PhoneVerifacation(registerPhoneBox.Text);
 
             ChangeBackColorTextBox(registerPhoneBox, verify);
-            isPhoneOk = verify;
+            _isPhoneOk = verify;
         }
 
 
@@ -220,20 +219,20 @@ namespace DriveLogGUI
         {
             if (textBox.Text == textBox.defaultText)
             {
-                textBox.BackColor = neutralColor;
+                textBox.BackColor = _neutralColor;
                 textBox.ForeColor = Color.DarkGray;
             }
 
             if (verify && textBox.Text != textBox.defaultText)
             {
-                textBox.BackColor = correctColor;
-                textBox.ForeColor = whitetextColor;
+                textBox.BackColor = _correctColor;
+                textBox.ForeColor = _whitetextColor;
             }
                 
 
             else if (textBox.Text != textBox.defaultText && textBox.Text != textBox.defaultText)
             {
-                textBox.BackColor = wrongColor;
+                textBox.BackColor = _wrongColor;
                 textBox.ForeColor = Color.Black;
             }
                 
@@ -242,13 +241,14 @@ namespace DriveLogGUI
 
         private void registerCreateNewUserButton_Click(object sender, EventArgs e)
         {
-            if (isFirstnameOk && isLastnameOk && isPhoneOk && isEmailOk && isCPROk && isAdressOk &&
-                isCityOk && isZipOk && isUsernameOk && isPasswordOk && isVerifyPasswordOk)
+            if (_isFirstnameOk && _isLastnameOk && _isPhoneOk && _isEmailOk && _isCprOk && _isAdressOk &&
+                _isCityOk && _isZipOk && _isUsernameOk && _isPasswordOk && _isVerifyPasswordOk)
             {
+                
                 bool UserCreated = MySql.AddUser(registerFirstnameBox.Text, registerLastnameBox.Text,
                     registerPhoneBox.Text, registerEmailBox.Text,
                     registerCprBox.Text, registerAdressBox.Text, registerZipBox.Text, registerCityBox.Text,
-                    registerUsernameBox.Text, registerPasswordBox.Text);
+                    registerUsernameBox.Text, registerPasswordBox.Text, uploader.SaveProfilePicture(ProfileImage));
 
                 if (UserCreated)
                 {
@@ -279,40 +279,10 @@ namespace DriveLogGUI
         }
         private void registerUploadPhotoButton_Click(object sender, EventArgs e)
         {
-            string imageLocation = string.Empty;
-
             UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
             this.Hide();
             uploadPictureForm.ShowDialog();
-            /*
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    imageLocation = dialog.FileName;
-
-                    registerPicture.ImageLocation = imageLocation;
-                }
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                MessageBox.Show("An Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            */
-        }
-
-        private void registerPicture_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void registerCityBox_TextChanged(object sender, EventArgs e)
-        {
-
+            registerPicture.Image = ProfileImage;
         }
 
         private void HideAllStatusLabels()
@@ -364,11 +334,6 @@ namespace DriveLogGUI
                 registerZipBox.Text = "";
         }
 
-        private void RegisterForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void registerCityBox_Click(object sender, EventArgs e)
         {
             if (registerCityBox.Text == "City")
@@ -395,14 +360,14 @@ namespace DriveLogGUI
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
-            lastClick = e.Location;
+            _lastClick = e.Location;
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) {
-                this.Left += e.X - lastClick.X;
-                this.Top += e.Y - lastClick.Y;
+                this.Left += e.X - _lastClick.X;
+                this.Top += e.Y - _lastClick.Y;
             }
         }
 

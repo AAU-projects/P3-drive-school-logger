@@ -50,11 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IUploadHandler.cs" />
     <Compile Include="JSONReader.cs" />
     <Compile Include="MySQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterVerification.cs" />
     <Compile Include="Session.cs" />
+    <Compile Include="UploadHandler.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ZipCodes.cs" />
   </ItemGroup>

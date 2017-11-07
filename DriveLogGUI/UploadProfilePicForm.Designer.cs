@@ -33,8 +33,8 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.dragAndDropPictureBox = new System.Windows.Forms.PictureBox();
             this.dragAndDropLabel = new System.Windows.Forms.Label();
-            this.uploadPictureButton = new System.Windows.Forms.Button();
             this.editPictureBox = new System.Windows.Forms.PictureBox();
+            this.UploadButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -49,25 +49,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Choose profile picture";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // acceptButton
             // 
-            this.acceptButton.BackColor = System.Drawing.Color.DodgerBlue;
+            this.acceptButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.acceptButton.FlatAppearance.BorderSize = 0;
             this.acceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.acceptButton.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.acceptButton.ForeColor = System.Drawing.Color.White;
-            this.acceptButton.Location = new System.Drawing.Point(193, 521);
+            this.acceptButton.Location = new System.Drawing.Point(205, 521);
             this.acceptButton.Name = "acceptButton";
             this.acceptButton.Size = new System.Drawing.Size(153, 34);
             this.acceptButton.TabIndex = 1;
             this.acceptButton.Text = "Set profile picture";
             this.acceptButton.UseVisualStyleBackColor = false;
+            this.acceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.BackColor = System.Drawing.Color.Gainsboro;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.Color.Black;
@@ -103,19 +105,6 @@
     "m the PC";
             this.dragAndDropLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uploadPictureButton
-            // 
-            this.uploadPictureButton.BackColor = System.Drawing.Color.Gainsboro;
-            this.uploadPictureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.uploadPictureButton.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uploadPictureButton.ForeColor = System.Drawing.Color.Black;
-            this.uploadPictureButton.Location = new System.Drawing.Point(289, 449);
-            this.uploadPictureButton.Name = "uploadPictureButton";
-            this.uploadPictureButton.Size = new System.Drawing.Size(104, 34);
-            this.uploadPictureButton.TabIndex = 5;
-            this.uploadPictureButton.Text = "Choose image";
-            this.uploadPictureButton.UseVisualStyleBackColor = false;
-            // 
             // editPictureBox
             // 
             this.editPictureBox.Location = new System.Drawing.Point(12, 105);
@@ -125,14 +114,29 @@
             this.editPictureBox.TabIndex = 6;
             this.editPictureBox.TabStop = false;
             // 
+            // UploadButton
+            // 
+            this.UploadButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.UploadButton.FlatAppearance.BorderSize = 0;
+            this.UploadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UploadButton.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UploadButton.ForeColor = System.Drawing.Color.Black;
+            this.UploadButton.Location = new System.Drawing.Point(276, 449);
+            this.UploadButton.Name = "UploadButton";
+            this.UploadButton.Size = new System.Drawing.Size(133, 39);
+            this.UploadButton.TabIndex = 7;
+            this.UploadButton.Text = "Upload picture";
+            this.UploadButton.UseVisualStyleBackColor = false;
+            this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
+            // 
             // UploadProfilePicForm
             // 
-            this.AcceptButton = this.uploadPictureButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(695, 570);
-            this.Controls.Add(this.uploadPictureButton);
+            this.Controls.Add(this.UploadButton);
             this.Controls.Add(this.dragAndDropLabel);
             this.Controls.Add(this.dragAndDropPictureBox);
             this.Controls.Add(this.cancelButton);
@@ -159,7 +163,7 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.PictureBox dragAndDropPictureBox;
         private System.Windows.Forms.Label dragAndDropLabel;
-        private System.Windows.Forms.Button uploadPictureButton;
         private System.Windows.Forms.PictureBox editPictureBox;
+        private System.Windows.Forms.Button UploadButton;
     }
 }
