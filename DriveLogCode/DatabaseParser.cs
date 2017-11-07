@@ -8,6 +8,21 @@ namespace DriveLogCode
 {
     public static class DatabaseParser
     {
+        public static bool ExistDoctorsNote(User user)
+        {
+            return ExistDocument(user, "DoctorsNote");
+        }
+
+        public static bool ExistFirstAid(User user)
+        {
+            return ExistDocument(user, "FirstAid");
+        }
+
+        private static bool ExistDocument(User user, string type)
+        {
+            return MySql.ExistDocument(user.Id, type);
+        }
+
         public static Document GetDoctorsNote(User user)
         {
             return GetDocumentFromDatabase(user, "FirstAid");
@@ -19,7 +34,15 @@ namespace DriveLogCode
 
         private static Document GetDocumentFromDatabase(User user, string type)
         {
-            return new Document(MySql.GetDocument(type, user.Id));
+            try
+            {
+                return new Document(MySql.GetDocument(type, user.Id));
+
+            }
+            catch (EmptyDataTableException e)
+            {
+                return null;
+            }
         }
     }
 }

@@ -22,6 +22,10 @@ namespace DriveLogCode
 
         public Document(DataTable table)
         {
+            if (table == null)
+                throw new EmptyDataTableException("Datatabel is empty");
+
+
             Id = (int) table.Rows[0][0];
             Title = (string) table.Rows[0][1];
             Type = (string) table.Rows[0][2];

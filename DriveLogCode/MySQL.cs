@@ -70,6 +70,11 @@ namespace DriveLogCode
             return SendQuery(cmd);
         }
 
+        public static bool ExistDocument(int id, string type, string table = DocumnentTable)
+        {
+            return Exist("type", type, table);
+        }
+
         public static bool ExistUserId(int id, string table = UserTable)
         {
             return Exist("user_id", id.ToString(), table);
@@ -90,9 +95,9 @@ namespace DriveLogCode
             return Exist("cpr", cpr, table);
         }
 
-        private static bool Exist(string column, string value, string usertable = UserTable)
+        private static bool Exist(string column, string value, string table = UserTable)
         {
-            var cmd = new MySqlCommand($"SELECT 1 FROM {usertable} WHERE {column} = '{value}' LIMIT 1");
+            var cmd = new MySqlCommand($"SELECT 1 FROM {table} WHERE {column} = '{value}' LIMIT 1");
 
             var results = SendQuery(cmd);
 

@@ -7,24 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
     public partial class MainWindowTab : Form
     {
         private Point lastClick;
+        private Point pageStartPoint;
         private UserControl lastPage;
 
         private OverviewTab overviewTab;
         private ProfileTab profileTab;
-        private DoctorsNote doctorsNoteTab;
+        private DocumentViewer documentViewer;
 
         public MainWindowTab()
         {
             // Initializing
             overviewTab = new OverviewTab();
             profileTab = new ProfileTab();
-            doctorsNoteTab = new DoctorsNote();
+            documentViewer = new DocumentViewer();
 
             InitializeComponent();
             MoveButtonSpaces(OverviewButton, 8);
@@ -37,15 +39,18 @@ namespace DriveLogGUI
             settingsButton.Controls.Add(pictureSettingsTab);
             overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
 
+            //createing the start point for all pages.
+            pageStartPoint = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
+
             // setting their location
-            overviewTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
-            profileTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
-            doctorsNoteTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
+            overviewTab.Location = pageStartPoint;
+            profileTab.Location = pageStartPoint;
+            documentViewer.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
             this.Controls.Add(profileTab);
-            this.Controls.Add(doctorsNoteTab);
+            this.Controls.Add(documentViewer);
 
             // opening starting page after login
             OpenPage(overviewTab);
@@ -96,11 +101,6 @@ namespace DriveLogGUI
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
-
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
             lastClick = e.Location;
@@ -140,11 +140,6 @@ namespace DriveLogGUI
             this.Close();
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            OpenPage(doctorsNoteTab);
-        }
-
         private void OpenPage(UserControl page)
         {
             if (lastPage != page) 
@@ -160,6 +155,20 @@ namespace DriveLogGUI
             if (lastPage != null)
             {
                 lastPage.Hide();
+            }
+        }
+
+        private void firstAidButton_Click(object sender, EventArgs e)
+        {
+            if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
+            {
+                OpenPage(documentViewer);
+                documentViewer.LoadFirstAid(Session.LoggedInUser);
+            }
+            else
+            {
+                documentViewer.Clear();
+                OpenPage(documentViewer);
             }
         }
     }

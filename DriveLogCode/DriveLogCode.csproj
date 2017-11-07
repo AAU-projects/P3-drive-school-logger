@@ -56,7 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseParser.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="EmptyDataTableException.cs" />
     <Compile Include="IUploadHandler.cs" />
     <Compile Include="JSONReader.cs" />
     <Compile Include="MySQL.cs" />
