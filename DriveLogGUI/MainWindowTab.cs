@@ -13,6 +13,7 @@ namespace DriveLogGUI
     public partial class MainWindowTab : Form
     {
         private Point lastClick;
+        private List<UserControl> AllPages = new List<UserControl>();
         private UserControl lastPage;
         public MainWindowTab()
         {
@@ -26,11 +27,18 @@ namespace DriveLogGUI
             bookingButton.Controls.Add(pictureBookingTab);
             settingsButton.Controls.Add(pictureSettingsTab);
             overviewTab1.LogOutButtonClick += new EventHandler(logoutButton_Click);
+            AllPages.Add(overviewTab1);
+            AllPages.Add(profileTab1);
+            AllPages.Add(doctorsNote1);
         }
 
         private void ProfileButton_Click(object sender, EventArgs e)
         {
-            OpenPage(profileTab1);
+            if (lastPage != profileTab1)
+            {
+                CloseLastPage();
+                OpenPage(profileTab1);
+            }
 
             if (!panelForProfile.Visible)
             {
@@ -68,9 +76,13 @@ namespace DriveLogGUI
 
         private void OverviewButton_Click(object sender, EventArgs e)
         {
-            //To add a page create a usercontrol and send it as paramater in use OpenPage
-            OpenPage(overviewTab1);
-
+            //To add a page use the closeLastPage command to make sure that there wont be two pages visible at once. 
+            //Use the OpenPage to open your decied page :)
+            if (lastPage != overviewTab1)
+            {
+                CloseLastPage();
+                OpenPage(overviewTab1);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -119,17 +131,17 @@ namespace DriveLogGUI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            OpenPage(doctorsNote1);
+            if (lastPage != doctorsNote1)
+            {
+                CloseLastPage();
+                OpenPage(doctorsNote1);
+            }
         }
 
         private void OpenPage(UserControl page)
         {
-            if (lastPage != page) 
-            {
-                CloseLastPage();
-                lastPage = page;
-                page.Show();
-            }
+            lastPage = page;
+            page.Show();
         }
 
         private void CloseLastPage()
