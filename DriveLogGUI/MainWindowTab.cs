@@ -14,8 +14,19 @@ namespace DriveLogGUI
     {
         private Point lastClick;
         private UserControl lastPage;
+
+        private OverviewTab overviewTab;
+        private ProfileTab profileTab;
+        private DoctorsNote doctorsNoteTab;
+
         public MainWindowTab()
         {
+            // asdasd
+            overviewTab = new OverviewTab();
+            this.Controls.Add(overviewTab);
+            profileTab = new ProfileTab();
+            doctorsNoteTab = new DoctorsNote();
+
             InitializeComponent();
             MoveButtonSpaces(OverviewButton, 8);
             MoveButtonSpaces(ProfileButton, 8);
@@ -25,12 +36,18 @@ namespace DriveLogGUI
             ProfileButton.Controls.Add(pictureProfileTab);
             bookingButton.Controls.Add(pictureBookingTab);
             settingsButton.Controls.Add(pictureSettingsTab);
-            overviewTab1.LogOutButtonClick += new EventHandler(logoutButton_Click);
+            overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
+
+            overviewTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
+            profileTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
+            doctorsNoteTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
+
+            OpenPage(overviewTab);
         }
 
         private void ProfileButton_Click(object sender, EventArgs e)
         {
-            OpenPage(profileTab1);
+            OpenPage(profileTab);
 
             if (!panelForProfile.Visible)
             {
@@ -69,7 +86,7 @@ namespace DriveLogGUI
         private void OverviewButton_Click(object sender, EventArgs e)
         {
             //To add a page create a usercontrol and send it as paramater in use OpenPage
-            OpenPage(overviewTab1);
+            OpenPage(overviewTab);
 
         }
 
@@ -119,7 +136,7 @@ namespace DriveLogGUI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            OpenPage(doctorsNote1);
+            OpenPage(doctorsNoteTab);
         }
 
         private void OpenPage(UserControl page)
