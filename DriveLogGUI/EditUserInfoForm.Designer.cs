@@ -59,20 +59,20 @@
             // 
             // verifyPasswordLabel
             // 
-            this.verifyPasswordLabel.AutoSize = true;
             this.verifyPasswordLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.verifyPasswordLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.verifyPasswordLabel.Location = new System.Drawing.Point(12, 91);
+            this.verifyPasswordLabel.Location = new System.Drawing.Point(0, 80);
             this.verifyPasswordLabel.Name = "verifyPasswordLabel";
-            this.verifyPasswordLabel.Size = new System.Drawing.Size(187, 33);
+            this.verifyPasswordLabel.Size = new System.Drawing.Size(529, 33);
             this.verifyPasswordLabel.TabIndex = 43;
             this.verifyPasswordLabel.Text = "Verify Password";
+            this.verifyPasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // editProfileHeaderLabel
             // 
             this.editProfileHeaderLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editProfileHeaderLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.editProfileHeaderLabel.Location = new System.Drawing.Point(0, 40);
+            this.editProfileHeaderLabel.Location = new System.Drawing.Point(0, 32);
             this.editProfileHeaderLabel.Name = "editProfileHeaderLabel";
             this.editProfileHeaderLabel.Size = new System.Drawing.Size(529, 33);
             this.editProfileHeaderLabel.TabIndex = 44;
@@ -81,13 +81,14 @@
             // 
             // verifyPasswordInfo
             // 
-            this.verifyPasswordInfo.AutoSize = true;
+            this.verifyPasswordInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.verifyPasswordInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.verifyPasswordInfo.Location = new System.Drawing.Point(15, 124);
+            this.verifyPasswordInfo.Location = new System.Drawing.Point(0, 113);
             this.verifyPasswordInfo.Name = "verifyPasswordInfo";
-            this.verifyPasswordInfo.Size = new System.Drawing.Size(258, 13);
+            this.verifyPasswordInfo.Size = new System.Drawing.Size(529, 24);
             this.verifyPasswordInfo.TabIndex = 45;
             this.verifyPasswordInfo.Text = "Please enter your current password to make changes";
+            this.verifyPasswordInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // verifyPasswordBox
             // 
@@ -97,7 +98,7 @@
             this.verifyPasswordBox.DefaultText = "Password";
             this.verifyPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
             this.verifyPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.verifyPasswordBox.Location = new System.Drawing.Point(18, 149);
+            this.verifyPasswordBox.Location = new System.Drawing.Point(145, 140);
             this.verifyPasswordBox.Name = "verifyPasswordBox";
             this.verifyPasswordBox.Size = new System.Drawing.Size(237, 23);
             this.verifyPasswordBox.TabIndex = 0;
@@ -144,7 +145,6 @@
             // 
             // usernameBox
             // 
-            this.usernameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
             this.usernameBox.BorderColor = System.Drawing.Color.Blue;
             this.usernameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.usernameBox.DefaultText = "Username";
@@ -161,7 +161,7 @@
             // 
             // editPasswordBox
             // 
-            this.editPasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.editPasswordBox.BackColor = System.Drawing.SystemColors.Control;
             this.editPasswordBox.BorderColor = System.Drawing.Color.Blue;
             this.editPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.editPasswordBox.DefaultText = "Password";
@@ -179,7 +179,7 @@
             // 
             // verifyEditPasswordBox
             // 
-            this.verifyEditPasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.verifyEditPasswordBox.BackColor = System.Drawing.SystemColors.Control;
             this.verifyEditPasswordBox.BorderColor = System.Drawing.Color.Blue;
             this.verifyEditPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.verifyEditPasswordBox.DefaultText = "Verify Password";
@@ -208,7 +208,7 @@
             // 
             this.accountDetailsLabel.AutoSize = true;
             this.accountDetailsLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accountDetailsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.accountDetailsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.accountDetailsLabel.Location = new System.Drawing.Point(14, 192);
             this.accountDetailsLabel.Name = "accountDetailsLabel";
             this.accountDetailsLabel.Size = new System.Drawing.Size(185, 33);
@@ -219,7 +219,7 @@
             // 
             this.addressLabel.AutoSize = true;
             this.addressLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.addressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.addressLabel.Location = new System.Drawing.Point(16, 491);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(103, 33);
@@ -230,7 +230,7 @@
             // 
             this.personalInformationLabel.AutoSize = true;
             this.personalInformationLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.personalInformationLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.personalInformationLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.personalInformationLabel.Location = new System.Drawing.Point(14, 369);
             this.personalInformationLabel.Name = "personalInformationLabel";
             this.personalInformationLabel.Size = new System.Drawing.Size(243, 33);
@@ -239,7 +239,7 @@
             // 
             // zipBox
             // 
-            this.zipBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.zipBox.BackColor = System.Drawing.SystemColors.Control;
             this.zipBox.BorderColor = System.Drawing.Color.Blue;
             this.zipBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.zipBox.DefaultText = "Zip Code";
@@ -256,7 +256,7 @@
             // 
             // cityBox
             // 
-            this.cityBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.cityBox.BackColor = System.Drawing.SystemColors.Control;
             this.cityBox.BorderColor = System.Drawing.Color.Blue;
             this.cityBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cityBox.DefaultText = "City";
@@ -273,7 +273,7 @@
             // 
             // addressBox
             // 
-            this.addressBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.addressBox.BackColor = System.Drawing.SystemColors.Control;
             this.addressBox.BorderColor = System.Drawing.Color.Blue;
             this.addressBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.addressBox.DefaultText = "Address";
@@ -290,7 +290,7 @@
             // 
             // emailBox
             // 
-            this.emailBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.emailBox.BackColor = System.Drawing.SystemColors.Control;
             this.emailBox.BorderColor = System.Drawing.Color.Blue;
             this.emailBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.emailBox.DefaultText = "Email Address";
@@ -307,7 +307,7 @@
             // 
             // phoneBox
             // 
-            this.phoneBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.phoneBox.BackColor = System.Drawing.SystemColors.Control;
             this.phoneBox.BorderColor = System.Drawing.Color.Blue;
             this.phoneBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.phoneBox.DefaultText = "Phone Number";
@@ -324,7 +324,7 @@
             // 
             // lastnameBox
             // 
-            this.lastnameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.lastnameBox.BackColor = System.Drawing.SystemColors.Control;
             this.lastnameBox.BorderColor = System.Drawing.Color.Blue;
             this.lastnameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lastnameBox.DefaultText = "Lastname";
@@ -341,7 +341,7 @@
             // 
             // firstnameBox
             // 
-            this.firstnameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.firstnameBox.BackColor = System.Drawing.SystemColors.Control;
             this.firstnameBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
             this.firstnameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.firstnameBox.DefaultText = "Firstname";

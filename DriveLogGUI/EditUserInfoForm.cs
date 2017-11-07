@@ -25,6 +25,10 @@ namespace DriveLogGUI
         private readonly Color _wrongColor = Color.FromArgb(229, 187, 191);
         private readonly Color _neutralColor = Color.FromArgb(200, 212, 225);
         private readonly Color _whitetextColor = Color.FromArgb(251, 251, 251);
+        private readonly Color _standardLabelColor = Color.FromArgb(127, 132, 144);
+        private readonly Color _slurredLableColor = Color.FromArgb(224, 224, 224);
+        private readonly Color _slurredTextBoxColor = Color.FromArgb(240, 240, 240);
+        private readonly Color _standardTextBoxColor = Color.FromArgb(200, 212, 225);
 
         private bool usernameOk;
         private bool passwordOk;
@@ -66,11 +70,14 @@ namespace DriveLogGUI
             {
                 ChangeEnableStatus(true);
                 ChangeBackColorTextBox(verifyPasswordBox, true);
+                ChangeLabelAndBoxColor(_standardLabelColor, _standardTextBoxColor);
             }
             else
             {
                 ChangeEnableStatus(false);
                 ChangeBackColorTextBox(verifyPasswordBox, false);
+                accountDetailsLabel.ForeColor = _slurredLableColor;
+                ChangeLabelAndBoxColor(_slurredLableColor, _slurredTextBoxColor);
             }
         }
 
@@ -89,6 +96,25 @@ namespace DriveLogGUI
 
             editPictureButton.Enabled = enabled;
             saveChangesButton.Enabled = enabled;
+        }
+
+        private void ChangeLabelAndBoxColor(Color lableColor, Color textBoxColor)
+        {
+            accountDetailsLabel.ForeColor = lableColor;
+            personalInformationLabel.ForeColor = lableColor;
+            addressLabel.ForeColor = lableColor;
+
+            usernameBox.BackColor = textBoxColor;
+            editPasswordBox.BackColor = textBoxColor;
+            verifyEditPasswordBox.BackColor = textBoxColor;
+            firstnameBox.BackColor = textBoxColor;
+            lastnameBox.BackColor = textBoxColor;
+            phoneBox.BackColor = textBoxColor;
+            emailBox.BackColor = textBoxColor;
+            addressBox.BackColor = textBoxColor;
+            zipBox.BackColor = textBoxColor;
+            cityBox.BackColor = textBoxColor;
+
         }
 
         private void verifyPasswordBox_MouseClick(object sender, MouseEventArgs e)
