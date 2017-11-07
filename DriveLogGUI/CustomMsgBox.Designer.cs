@@ -30,12 +30,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomMsgBox));
             this.topBar = new System.Windows.Forms.Panel();
             this.captionLabel = new System.Windows.Forms.Label();
-            this.okButton = new System.Windows.Forms.Button();
-            this.textLabel = new System.Windows.Forms.Label();
-            this.symbolpictureBox = new System.Windows.Forms.PictureBox();
             this.closeButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
+            this.textLabel = new System.Windows.Forms.Label();
+            this.symbolpictureBox = new System.Windows.Forms.PictureBox();
             this.topBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.symbolpictureBox)).BeginInit();
             this.SuspendLayout();
@@ -63,38 +63,6 @@
             this.captionLabel.Size = new System.Drawing.Size(77, 13);
             this.captionLabel.TabIndex = 4;
             this.captionLabel.Text = "Error message:";
-            // 
-            // okButton
-            // 
-            this.okButton.Location = new System.Drawing.Point(89, 101);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 3;
-            this.okButton.Text = "Ok";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // textLabel
-            // 
-            this.textLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textLabel.Location = new System.Drawing.Point(58, 36);
-            this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(182, 62);
-            this.textLabel.TabIndex = 4;
-            this.textLabel.Text = "This is how much text you want This is how much text you want This is how much te" +
-    "xt you want";
-            this.textLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // symbolpictureBox
-            // 
-            this.symbolpictureBox.Image = global::DriveLogGUI.Properties.Resources.icons8_checkmark;
-            this.symbolpictureBox.Location = new System.Drawing.Point(12, 45);
-            this.symbolpictureBox.Name = "symbolpictureBox";
-            this.symbolpictureBox.Size = new System.Drawing.Size(40, 40);
-            this.symbolpictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.symbolpictureBox.TabIndex = 6;
-            this.symbolpictureBox.TabStop = false;
             // 
             // closeButton
             // 
@@ -135,6 +103,38 @@
             this.button1.Size = new System.Drawing.Size(25, 22);
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // okButton
+            // 
+            this.okButton.Location = new System.Drawing.Point(89, 101);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.TabIndex = 0;
+            this.okButton.Text = "Ok";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
+            // textLabel
+            // 
+            this.textLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textLabel.Location = new System.Drawing.Point(58, 36);
+            this.textLabel.Name = "textLabel";
+            this.textLabel.Size = new System.Drawing.Size(182, 62);
+            this.textLabel.TabIndex = 4;
+            this.textLabel.Text = "This is how much text you want This is how much text you want This is how much te" +
+    "xt you want";
+            this.textLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // symbolpictureBox
+            // 
+            this.symbolpictureBox.Image = global::DriveLogGUI.Properties.Resources.icons8_checkmark;
+            this.symbolpictureBox.Location = new System.Drawing.Point(12, 45);
+            this.symbolpictureBox.Name = "symbolpictureBox";
+            this.symbolpictureBox.Size = new System.Drawing.Size(40, 40);
+            this.symbolpictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.symbolpictureBox.TabIndex = 6;
+            this.symbolpictureBox.TabStop = false;
             // 
             // CustomMsgBox
             // 
