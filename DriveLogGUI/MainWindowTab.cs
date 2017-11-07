@@ -21,9 +21,8 @@ namespace DriveLogGUI
 
         public MainWindowTab()
         {
-            // asdasd
+            // Initializing
             overviewTab = new OverviewTab();
-            this.Controls.Add(overviewTab);
             profileTab = new ProfileTab();
             doctorsNoteTab = new DoctorsNote();
 
@@ -38,10 +37,17 @@ namespace DriveLogGUI
             settingsButton.Controls.Add(pictureSettingsTab);
             overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
 
+            // setting their location
             overviewTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
             profileTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
             doctorsNoteTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
 
+            // adding them as control panels
+            this.Controls.Add(overviewTab);
+            this.Controls.Add(profileTab);
+            this.Controls.Add(doctorsNoteTab);
+
+            // opening starting page after login
             OpenPage(overviewTab);
         }
 
