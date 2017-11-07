@@ -27,7 +27,7 @@ namespace DriveLogGUI
             addressOutputLabel.Text = user.Address;
             cityOutputLabel.Text = $"{user.City}, {user.Zip}";
 
-            if (user.PicturePath != null)
+            if (user.PicturePath != null || user.PicturePath != string.Empty || user.PicturePath != "null")
             {
                 ProfilePicture.Load(user.PicturePath);
             }
