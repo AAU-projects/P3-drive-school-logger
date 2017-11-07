@@ -1,7 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DriveLogGUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PictureUpload" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://ds315e17.duckdns.org/cityks/pictures/upload.php</Value>
+    </Setting>
+    <Setting Name="DocumentUpload" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://ds315e17.duckdns.org/cityks/documents/upload.php</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

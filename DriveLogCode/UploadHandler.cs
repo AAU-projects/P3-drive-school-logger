@@ -17,7 +17,7 @@ namespace DriveLogCode
             throw new NotImplementedException();
         }
 
-        public string SaveProfilePicture(Image image)
+        public string SaveProfilePicture(Image image, string url)
         {
             string tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.png");
             
@@ -28,7 +28,7 @@ namespace DriveLogCode
 
             Client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
-            byte[] result = Client.UploadFile("http://ds315e17.duckdns.org/cityks/upload.php", "POST", tempFile);
+            byte[] result = Client.UploadFile(url, "POST", tempFile);
 
             return Encoding.UTF8.GetString(result, 0, result.Length);
         }

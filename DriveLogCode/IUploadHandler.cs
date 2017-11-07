@@ -10,6 +10,6 @@ namespace DriveLogCode
     public interface IUploadHandler
     {
         bool UploadFile(string user, string fileLocation);
-        string SaveProfilePicture(Image image);
+        string SaveProfilePicture(Image image, string url);
     }
 }
