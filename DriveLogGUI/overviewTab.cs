@@ -14,6 +14,8 @@ namespace DriveLogGUI
     public partial class OverviewTab : UserControl
     {
         public event EventHandler LogOutButtonClick;
+        public event EventHandler DoctorsNotePictureButtonClick;
+
         public OverviewTab()
         {
             InitializeComponent();
@@ -27,5 +29,9 @@ namespace DriveLogGUI
                 this.LogOutButtonClick(this, e);
         }
 
+        private void doctorsNotePictureButton_Click(object sender, EventArgs e)
+        {
+            DoctorsNotePictureButtonClick?.Invoke(this, e);
+        }
     }
 }

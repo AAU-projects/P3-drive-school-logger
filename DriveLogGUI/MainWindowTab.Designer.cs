@@ -213,6 +213,7 @@
             this.settingsButton.Text = "Settings";
             this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // bookingButton
             // 
@@ -229,6 +230,7 @@
             this.bookingButton.Text = "Booking";
             this.bookingButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bookingButton.UseVisualStyleBackColor = true;
+            this.bookingButton.Click += new System.EventHandler(this.bookingButton_Click);
             // 
             // ProfileButton
             // 
