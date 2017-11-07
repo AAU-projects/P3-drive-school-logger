@@ -15,13 +15,64 @@ namespace DriveLogCode
         private static readonly  MySqlConnection Connection = new MySqlConnection(ConnectionString);
 
         private const string UserTable = "users";
+        private const string DocumnentTable = "documents";
 
-        public static DataTable GetUser(string username, string table = UserTable)
+        public static DataTable GetDocument(string type, int id, string docTable = DocumnentTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {docTable} WHERE user = {id} AND type = {type} LIMIT 1");
+
+            return SendQuery(cmd);
+        }
+
+        public static bool UploadDocument(string title, string type, DateTime date, int userId, string path, string table = DocumnentTable)
+        {
+            var cmd = new MySqlCommand($"INSERT INTO {table} (title, type, date, user, path) VALUES ({title}, {type}, {date}, {userId}, {path})");
+
+            if (ExistTable(table)) return SendNonQuery(cmd);
+
+            var tableCreated = CreateDocumentTabel(table);
+
+            if (tableCreated) return SendNonQuery(cmd);
+
+            return false;
+        }
+
+        public static bool CreateDocumentTabel(string tablename = DocumnentTable)
+        {
+            var query = $"CREATE TABLE `{tablename}` (" +
+                        "`id`  int(11) NOT NULL AUTO_INCREMENT ," +
+                        "`title`  varchar(255) NOT NULL ," +
+                        "`type`  enum('FirstAid','DoctorsNote','Other') NULL ," +
+                        "`date`  datetime NULL ON UPDATE CURRENT_TIMESTAMP ," +
+                        "`user`  int(11) NOT NULL ," +
+                        "`path`  varchar(255) NOT NULL ," +
+                        "PRIMARY KEY (`id`))" +
+                        "ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;";
+
+            var cmd = new MySqlCommand(query);
+
+            return SendNonQuery(cmd);
+        }
+
+        public static DataTable GetUserByName(string username, string table = UserTable)
         {
             if (!ExistUsername(username, table)) return null;
 
             var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE username = '{username}' LIMIT 1");
             return SendQuery(cmd);
+        }
+
+        public static DataTable GetUserByID(int id, string table = UserTable)
+        {
+            if (!ExistUserId(id, table)) return null;
+
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE user_id = '{id}' LIMIT 1");
+            return SendQuery(cmd);
+        }
+
+        public static bool ExistUserId(int id, string table = UserTable)
+        {
+            return Exist("user_id", id.ToString(), table);
         }
 
         public static bool ExistEmail(string email, string table = UserTable)
@@ -61,7 +112,7 @@ namespace DriveLogCode
 
             if (ExistTable(usertable)) return SendNonQuery(cmd);
 
-            var tableCreated = CreateTable(usertable);
+            var tableCreated = CreateUserTable(usertable);
 
             if (tableCreated) return SendNonQuery(cmd);
 
@@ -75,7 +126,7 @@ namespace DriveLogCode
             return SendNonQuery(cmd);
         }
 
-        private static bool CreateTable(string tablename)
+        private static bool CreateUserTable(string tablename)
         {
             var query = $"CREATE TABLE `{tablename}` (" +
                         "`user_id`  int(11) NOT NULL AUTO_INCREMENT ," +
@@ -149,6 +200,5 @@ namespace DriveLogCode
             return results;
 
         }
-
     }
 }

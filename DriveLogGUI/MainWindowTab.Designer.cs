@@ -47,13 +47,7 @@
             this.topPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-<<<<<<< HEAD
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.doctorsNote1 = new DriveLogGUI.DoctorsNote();
-            this.panel1.SuspendLayout();
-=======
             this.leftSidePanel.SuspendLayout();
->>>>>>> master
             this.panel4.SuspendLayout();
             this.panelForProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBookingTab)).BeginInit();
@@ -284,17 +278,6 @@
             // 
             // topPanel
             // 
-<<<<<<< HEAD
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Location = new System.Drawing.Point(132, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(897, 22);
-            this.panel2.TabIndex = 1;
-            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
-            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
-=======
             this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
             this.topPanel.Controls.Add(this.button2);
             this.topPanel.Controls.Add(this.button1);
@@ -304,7 +287,6 @@
             this.topPanel.TabIndex = 1;
             this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
->>>>>>> master
             // 
             // button2
             // 
@@ -334,25 +316,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-<<<<<<< HEAD
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.doctorsNote1);
-            this.panel3.Location = new System.Drawing.Point(132, 20);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(897, 544);
-            this.panel3.TabIndex = 3;
-            // 
-            // doctorsNote1
-            // 
-            this.doctorsNote1.Location = new System.Drawing.Point(0, 0);
-            this.doctorsNote1.Name = "doctorsNote1";
-            this.doctorsNote1.Size = new System.Drawing.Size(897, 544);
-            this.doctorsNote1.TabIndex = 2;
-            this.doctorsNote1.Visible = false;
-            // 
-=======
->>>>>>> master
             // MainWindowTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
