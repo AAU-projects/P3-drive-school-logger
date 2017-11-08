@@ -38,6 +38,7 @@ namespace DriveLogGUI
             EditUserInfoForm editForm = new EditUserInfoForm();
 
             editForm.ShowDialog(this);
+            UpdateInfo();
         }
     }
 }

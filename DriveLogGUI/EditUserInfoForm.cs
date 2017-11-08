@@ -21,6 +21,9 @@ namespace DriveLogGUI
             UpdateInfo();
         }
 
+        private Point _lastClick;
+        private Image _profilePicture;
+
         private readonly Color _correctColor = Color.FromArgb(109, 144, 150);
         private readonly Color _wrongColor = Color.FromArgb(229, 187, 191);
         private readonly Color _neutralColor = Color.FromArgb(200, 212, 225);
@@ -30,16 +33,18 @@ namespace DriveLogGUI
         private readonly Color _slurredTextBoxColor = Color.FromArgb(240, 240, 240);
         private readonly Color _standardTextBoxColor = Color.FromArgb(200, 212, 225);
 
-        private bool usernameOk;
-        private bool passwordOk;
-        private bool verifyPasswordOk;
-        private bool firstnameOk;
-        private bool lastnameOk;
-        private bool phoneOk;
-        private bool emailOk;
-        private bool addressOk;
-        private bool zipOk;
-        private bool cityOk;
+        private bool usernameOk = true;
+        private bool passwordOk = true;
+        private bool verifyPasswordOk = true;
+        private bool firstnameOk = true;
+        private bool lastnameOk = true;
+        private bool phoneOk = true;
+        private bool emailOk = true;
+        private bool addressOk = true;
+        private bool zipOk = true;
+        private bool cityOk = true;
+
+        private IUploadHandler uploader;
 
 
         private void UpdateInfo()
@@ -57,6 +62,8 @@ namespace DriveLogGUI
             {
                 pictureBox.Load(user.PicturePath);
             }
+
+            uploader = new UploadHandler();
         }
 
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
@@ -86,16 +93,16 @@ namespace DriveLogGUI
 
         private void ChangeEnableStatus(bool enabled)
         {
-            usernameBox.ReadOnly = !enabled;
-            editPasswordBox.ReadOnly = !enabled;
-            verifyEditPasswordBox.ReadOnly = !enabled;
-            firstnameBox.ReadOnly = !enabled;
-            lastnameBox.ReadOnly = !enabled;
-            phoneBox.ReadOnly = !enabled;
-            emailBox.ReadOnly = !enabled;
-            addressBox.ReadOnly = !enabled;
-            zipBox.ReadOnly = !enabled;
-            cityBox.ReadOnly = !enabled;
+            usernameBox.Enabled = enabled;
+            editPasswordBox.Enabled = enabled;
+            verifyEditPasswordBox.Enabled = enabled;
+            firstnameBox.Enabled = enabled;
+            lastnameBox.Enabled = enabled;
+            phoneBox.Enabled = enabled;
+            emailBox.Enabled = enabled;
+            addressBox.Enabled = enabled;
+            zipBox.Enabled = enabled;
+            cityBox.Enabled = enabled;
 
             editPictureButton.Enabled = enabled;
             saveChangesButton.Enabled = enabled;
@@ -364,6 +371,68 @@ namespace DriveLogGUI
         {
             label.Text = text;
             label.ForeColor = color;
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void topPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            _lastClick = e.Location;
+        }
+
+        private void topPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - _lastClick.X;
+                this.Top += e.Y - _lastClick.Y;
+            }
+        }
+
+        private void editPictureButton_Click(object sender, EventArgs e)
+        {
+            UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this, ref _profilePicture);
+            this.Hide();
+            uploadPictureForm.ShowDialog();
+            pictureBox.Image = _profilePicture;
+        }
+
+        private void saveChangesButton_Click(object sender, EventArgs e)
+        {
+            if (!(usernameOk && passwordOk && verifyPasswordOk && firstnameOk && lastnameOk && phoneOk && emailOk && addressOk && zipOk && cityOk))
+            {
+                MessageBox.Show("Please fix the red boxes before saving", "Failed",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            bool updateSuccess;
+
+            if (editPasswordBox.Text != editPasswordBox.defaultText)
+            {
+                updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
+                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, uploader.SaveProfilePicture(_profilePicture));
+            }
+            else
+            {
+                updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
+                zipBox.Text, cityBox.Text, usernameBox.Text, user.Password, uploader.SaveProfilePicture(_profilePicture));
+            }
+
+            if(updateSuccess)
+            {
+                MessageBox.Show("You have succesfully updated your profile", "Success", MessageBoxButtons.OK, MessageBoxIcon.None);
+                DataTable user = MySql.GetUser(usernameBox.Text);
+                Session.LoadUserFromDataTable(user);
+                this.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("No connection could be made to the database, please try again later", "No Connection", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
         }
     }
 }

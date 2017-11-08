@@ -32,17 +32,16 @@
             this.verifyPasswordLabel = new System.Windows.Forms.Label();
             this.editProfileHeaderLabel = new System.Windows.Forms.Label();
             this.verifyPasswordInfo = new System.Windows.Forms.Label();
-            this.verifyPasswordBox = new TextboxBorderColor();
             this.topPanel = new System.Windows.Forms.Panel();
             this.closeButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.usernameBox = new TextboxBorderColor();
-            this.editPasswordBox = new TextboxBorderColor();
-            this.verifyEditPasswordBox = new TextboxBorderColor();
             this.passwordStatusLabel = new System.Windows.Forms.Label();
             this.accountDetailsLabel = new System.Windows.Forms.Label();
             this.addressLabel = new System.Windows.Forms.Label();
             this.personalInformationLabel = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.editPictureButton = new System.Windows.Forms.Button();
+            this.saveChangesButton = new System.Windows.Forms.Button();
             this.zipBox = new TextboxBorderColor();
             this.cityBox = new TextboxBorderColor();
             this.addressBox = new TextboxBorderColor();
@@ -50,9 +49,10 @@
             this.phoneBox = new TextboxBorderColor();
             this.lastnameBox = new TextboxBorderColor();
             this.firstnameBox = new TextboxBorderColor();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.editPictureButton = new System.Windows.Forms.Button();
-            this.saveChangesButton = new System.Windows.Forms.Button();
+            this.verifyEditPasswordBox = new TextboxBorderColor();
+            this.editPasswordBox = new TextboxBorderColor();
+            this.usernameBox = new TextboxBorderColor();
+            this.verifyPasswordBox = new TextboxBorderColor();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -90,23 +90,6 @@
             this.verifyPasswordInfo.Text = "Please enter your current password to make changes";
             this.verifyPasswordInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // verifyPasswordBox
-            // 
-            this.verifyPasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
-            this.verifyPasswordBox.BorderColor = System.Drawing.Color.Blue;
-            this.verifyPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.verifyPasswordBox.DefaultText = "Password";
-            this.verifyPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.verifyPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.verifyPasswordBox.Location = new System.Drawing.Point(145, 140);
-            this.verifyPasswordBox.Name = "verifyPasswordBox";
-            this.verifyPasswordBox.Size = new System.Drawing.Size(237, 23);
-            this.verifyPasswordBox.TabIndex = 0;
-            this.verifyPasswordBox.Text = "Password";
-            this.verifyPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.verifyPasswordBox_MouseClick);
-            this.verifyPasswordBox.TextChanged += new System.EventHandler(this.verifyPasswordBox_TextChanged);
-            this.verifyPasswordBox.Leave += new System.EventHandler(this.verifyPasswordBox_Leave);
-            // 
             // topPanel
             // 
             this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
@@ -116,6 +99,8 @@
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(529, 22);
             this.topPanel.TabIndex = 47;
+            this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
+            this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
             // 
             // closeButton
             // 
@@ -129,6 +114,7 @@
             this.closeButton.Size = new System.Drawing.Size(25, 22);
             this.closeButton.TabIndex = 44;
             this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // button1
             // 
@@ -142,58 +128,6 @@
             this.button1.Size = new System.Drawing.Size(25, 22);
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // usernameBox
-            // 
-            this.usernameBox.BorderColor = System.Drawing.Color.Blue;
-            this.usernameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.usernameBox.DefaultText = "Username";
-            this.usernameBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.usernameBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.usernameBox.Location = new System.Drawing.Point(18, 228);
-            this.usernameBox.Name = "usernameBox";
-            this.usernameBox.ReadOnly = true;
-            this.usernameBox.Size = new System.Drawing.Size(237, 23);
-            this.usernameBox.TabIndex = 1;
-            this.usernameBox.Text = "Username";
-            this.usernameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.usernameBox_MouseClick);
-            this.usernameBox.Leave += new System.EventHandler(this.usernameBox_Leave);
-            // 
-            // editPasswordBox
-            // 
-            this.editPasswordBox.BackColor = System.Drawing.SystemColors.Control;
-            this.editPasswordBox.BorderColor = System.Drawing.Color.Blue;
-            this.editPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.editPasswordBox.DefaultText = "Password";
-            this.editPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.editPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.editPasswordBox.Location = new System.Drawing.Point(18, 270);
-            this.editPasswordBox.Name = "editPasswordBox";
-            this.editPasswordBox.ReadOnly = true;
-            this.editPasswordBox.Size = new System.Drawing.Size(237, 23);
-            this.editPasswordBox.TabIndex = 2;
-            this.editPasswordBox.Text = "Password";
-            this.editPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.editPasswordBox_MouseClick);
-            this.editPasswordBox.TextChanged += new System.EventHandler(this.editPasswordBox_TextChanged);
-            this.editPasswordBox.Leave += new System.EventHandler(this.editPasswordBox_Leave);
-            // 
-            // verifyEditPasswordBox
-            // 
-            this.verifyEditPasswordBox.BackColor = System.Drawing.SystemColors.Control;
-            this.verifyEditPasswordBox.BorderColor = System.Drawing.Color.Blue;
-            this.verifyEditPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.verifyEditPasswordBox.DefaultText = "Verify Password";
-            this.verifyEditPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.verifyEditPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.verifyEditPasswordBox.Location = new System.Drawing.Point(18, 316);
-            this.verifyEditPasswordBox.Name = "verifyEditPasswordBox";
-            this.verifyEditPasswordBox.ReadOnly = true;
-            this.verifyEditPasswordBox.Size = new System.Drawing.Size(237, 23);
-            this.verifyEditPasswordBox.TabIndex = 3;
-            this.verifyEditPasswordBox.Text = "Verify Password";
-            this.verifyEditPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.verifyEditPasswordBox_MouseClick);
-            this.verifyEditPasswordBox.TextChanged += new System.EventHandler(this.verifyEditPasswordBox_TextChanged);
-            this.verifyEditPasswordBox.Leave += new System.EventHandler(this.verifyEditPasswordBox_Leave);
             // 
             // passwordStatusLabel
             // 
@@ -237,126 +171,6 @@
             this.personalInformationLabel.TabIndex = 61;
             this.personalInformationLabel.Text = "Personal Information";
             // 
-            // zipBox
-            // 
-            this.zipBox.BackColor = System.Drawing.SystemColors.Control;
-            this.zipBox.BorderColor = System.Drawing.Color.Blue;
-            this.zipBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.zipBox.DefaultText = "Zip Code";
-            this.zipBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.zipBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.zipBox.Location = new System.Drawing.Point(22, 572);
-            this.zipBox.Name = "zipBox";
-            this.zipBox.ReadOnly = true;
-            this.zipBox.Size = new System.Drawing.Size(237, 23);
-            this.zipBox.TabIndex = 9;
-            this.zipBox.Text = "Zip Code";
-            this.zipBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.zipBox_MouseClick);
-            this.zipBox.Leave += new System.EventHandler(this.zipBox_Leave);
-            // 
-            // cityBox
-            // 
-            this.cityBox.BackColor = System.Drawing.SystemColors.Control;
-            this.cityBox.BorderColor = System.Drawing.Color.Blue;
-            this.cityBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cityBox.DefaultText = "City";
-            this.cityBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.cityBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.cityBox.Location = new System.Drawing.Point(270, 572);
-            this.cityBox.Name = "cityBox";
-            this.cityBox.ReadOnly = true;
-            this.cityBox.Size = new System.Drawing.Size(237, 23);
-            this.cityBox.TabIndex = 10;
-            this.cityBox.Text = "City";
-            this.cityBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cityBox_MouseClick);
-            this.cityBox.Leave += new System.EventHandler(this.cityBox_Leave);
-            // 
-            // addressBox
-            // 
-            this.addressBox.BackColor = System.Drawing.SystemColors.Control;
-            this.addressBox.BorderColor = System.Drawing.Color.Blue;
-            this.addressBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.addressBox.DefaultText = "Address";
-            this.addressBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.addressBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.addressBox.Location = new System.Drawing.Point(22, 532);
-            this.addressBox.Name = "addressBox";
-            this.addressBox.ReadOnly = true;
-            this.addressBox.Size = new System.Drawing.Size(237, 23);
-            this.addressBox.TabIndex = 8;
-            this.addressBox.Text = "Address";
-            this.addressBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.addressBox_MouseClick);
-            this.addressBox.Leave += new System.EventHandler(this.addressBox_Leave);
-            // 
-            // emailBox
-            // 
-            this.emailBox.BackColor = System.Drawing.SystemColors.Control;
-            this.emailBox.BorderColor = System.Drawing.Color.Blue;
-            this.emailBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.emailBox.DefaultText = "Email Address";
-            this.emailBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.emailBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.emailBox.Location = new System.Drawing.Point(268, 455);
-            this.emailBox.Name = "emailBox";
-            this.emailBox.ReadOnly = true;
-            this.emailBox.Size = new System.Drawing.Size(237, 23);
-            this.emailBox.TabIndex = 7;
-            this.emailBox.Text = "Email Address";
-            this.emailBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.emailBox_MouseClick);
-            this.emailBox.Leave += new System.EventHandler(this.emailBox_Leave);
-            // 
-            // phoneBox
-            // 
-            this.phoneBox.BackColor = System.Drawing.SystemColors.Control;
-            this.phoneBox.BorderColor = System.Drawing.Color.Blue;
-            this.phoneBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.phoneBox.DefaultText = "Phone Number";
-            this.phoneBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.phoneBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.phoneBox.Location = new System.Drawing.Point(20, 455);
-            this.phoneBox.Name = "phoneBox";
-            this.phoneBox.ReadOnly = true;
-            this.phoneBox.Size = new System.Drawing.Size(237, 23);
-            this.phoneBox.TabIndex = 6;
-            this.phoneBox.Text = "Phone Number";
-            this.phoneBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.phoneBox_MouseClick);
-            this.phoneBox.Leave += new System.EventHandler(this.phoneBox_Leave);
-            // 
-            // lastnameBox
-            // 
-            this.lastnameBox.BackColor = System.Drawing.SystemColors.Control;
-            this.lastnameBox.BorderColor = System.Drawing.Color.Blue;
-            this.lastnameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lastnameBox.DefaultText = "Lastname";
-            this.lastnameBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.lastnameBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.lastnameBox.Location = new System.Drawing.Point(268, 416);
-            this.lastnameBox.Name = "lastnameBox";
-            this.lastnameBox.ReadOnly = true;
-            this.lastnameBox.Size = new System.Drawing.Size(237, 23);
-            this.lastnameBox.TabIndex = 5;
-            this.lastnameBox.Text = "Lastname";
-            this.lastnameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lastnameBox_MouseClick);
-            this.lastnameBox.Leave += new System.EventHandler(this.lastnameBox_Leave);
-            // 
-            // firstnameBox
-            // 
-            this.firstnameBox.BackColor = System.Drawing.SystemColors.Control;
-            this.firstnameBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
-            this.firstnameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.firstnameBox.DefaultText = "Firstname";
-            this.firstnameBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.firstnameBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.firstnameBox.Location = new System.Drawing.Point(20, 416);
-            this.firstnameBox.Name = "firstnameBox";
-            this.firstnameBox.ReadOnly = true;
-            this.firstnameBox.ShortcutsEnabled = false;
-            this.firstnameBox.Size = new System.Drawing.Size(237, 23);
-            this.firstnameBox.TabIndex = 4;
-            this.firstnameBox.Text = "Firstname";
-            this.firstnameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.firstnameBox_MouseClick);
-            this.firstnameBox.Leave += new System.EventHandler(this.firstnameBox_Leave);
-            // 
             // pictureBox
             // 
             this.pictureBox.Image = global::DriveLogGUI.Properties.Resources.avataricon;
@@ -382,6 +196,7 @@
             this.editPictureButton.TabIndex = 11;
             this.editPictureButton.Text = "Edit Picture";
             this.editPictureButton.UseVisualStyleBackColor = false;
+            this.editPictureButton.Click += new System.EventHandler(this.editPictureButton_Click);
             // 
             // saveChangesButton
             // 
@@ -396,6 +211,196 @@
             this.saveChangesButton.TabIndex = 12;
             this.saveChangesButton.Text = "Save";
             this.saveChangesButton.UseVisualStyleBackColor = false;
+            this.saveChangesButton.Click += new System.EventHandler(this.saveChangesButton_Click);
+            // 
+            // zipBox
+            // 
+            this.zipBox.BackColor = System.Drawing.SystemColors.Control;
+            this.zipBox.BorderColor = System.Drawing.Color.Blue;
+            this.zipBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.zipBox.DefaultText = "Zip Code";
+            this.zipBox.Enabled = false;
+            this.zipBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.zipBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.zipBox.Location = new System.Drawing.Point(22, 572);
+            this.zipBox.Name = "zipBox";
+            this.zipBox.Size = new System.Drawing.Size(237, 23);
+            this.zipBox.TabIndex = 9;
+            this.zipBox.Text = "Zip Code";
+            this.zipBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.zipBox_MouseClick);
+            this.zipBox.Leave += new System.EventHandler(this.zipBox_Leave);
+            // 
+            // cityBox
+            // 
+            this.cityBox.BackColor = System.Drawing.SystemColors.Control;
+            this.cityBox.BorderColor = System.Drawing.Color.Blue;
+            this.cityBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cityBox.DefaultText = "City";
+            this.cityBox.Enabled = false;
+            this.cityBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.cityBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.cityBox.Location = new System.Drawing.Point(270, 572);
+            this.cityBox.Name = "cityBox";
+            this.cityBox.Size = new System.Drawing.Size(237, 23);
+            this.cityBox.TabIndex = 10;
+            this.cityBox.Text = "City";
+            this.cityBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cityBox_MouseClick);
+            this.cityBox.Leave += new System.EventHandler(this.cityBox_Leave);
+            // 
+            // addressBox
+            // 
+            this.addressBox.BackColor = System.Drawing.SystemColors.Control;
+            this.addressBox.BorderColor = System.Drawing.Color.Blue;
+            this.addressBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.addressBox.DefaultText = "Address";
+            this.addressBox.Enabled = false;
+            this.addressBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.addressBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.addressBox.Location = new System.Drawing.Point(22, 532);
+            this.addressBox.Name = "addressBox";
+            this.addressBox.Size = new System.Drawing.Size(237, 23);
+            this.addressBox.TabIndex = 8;
+            this.addressBox.Text = "Address";
+            this.addressBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.addressBox_MouseClick);
+            this.addressBox.Leave += new System.EventHandler(this.addressBox_Leave);
+            // 
+            // emailBox
+            // 
+            this.emailBox.BackColor = System.Drawing.SystemColors.Control;
+            this.emailBox.BorderColor = System.Drawing.Color.Blue;
+            this.emailBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.emailBox.DefaultText = "Email Address";
+            this.emailBox.Enabled = false;
+            this.emailBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.emailBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.emailBox.Location = new System.Drawing.Point(268, 455);
+            this.emailBox.Name = "emailBox";
+            this.emailBox.Size = new System.Drawing.Size(237, 23);
+            this.emailBox.TabIndex = 7;
+            this.emailBox.Text = "Email Address";
+            this.emailBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.emailBox_MouseClick);
+            this.emailBox.Leave += new System.EventHandler(this.emailBox_Leave);
+            // 
+            // phoneBox
+            // 
+            this.phoneBox.BackColor = System.Drawing.SystemColors.Control;
+            this.phoneBox.BorderColor = System.Drawing.Color.Blue;
+            this.phoneBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.phoneBox.DefaultText = "Phone Number";
+            this.phoneBox.Enabled = false;
+            this.phoneBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.phoneBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.phoneBox.Location = new System.Drawing.Point(20, 455);
+            this.phoneBox.Name = "phoneBox";
+            this.phoneBox.Size = new System.Drawing.Size(237, 23);
+            this.phoneBox.TabIndex = 6;
+            this.phoneBox.Text = "Phone Number";
+            this.phoneBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.phoneBox_MouseClick);
+            this.phoneBox.Leave += new System.EventHandler(this.phoneBox_Leave);
+            // 
+            // lastnameBox
+            // 
+            this.lastnameBox.BackColor = System.Drawing.SystemColors.Control;
+            this.lastnameBox.BorderColor = System.Drawing.Color.Blue;
+            this.lastnameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lastnameBox.DefaultText = "Lastname";
+            this.lastnameBox.Enabled = false;
+            this.lastnameBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.lastnameBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.lastnameBox.Location = new System.Drawing.Point(268, 416);
+            this.lastnameBox.Name = "lastnameBox";
+            this.lastnameBox.Size = new System.Drawing.Size(237, 23);
+            this.lastnameBox.TabIndex = 5;
+            this.lastnameBox.Text = "Lastname";
+            this.lastnameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lastnameBox_MouseClick);
+            this.lastnameBox.Leave += new System.EventHandler(this.lastnameBox_Leave);
+            // 
+            // firstnameBox
+            // 
+            this.firstnameBox.BackColor = System.Drawing.SystemColors.Control;
+            this.firstnameBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.firstnameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.firstnameBox.DefaultText = "Firstname";
+            this.firstnameBox.Enabled = false;
+            this.firstnameBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.firstnameBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.firstnameBox.Location = new System.Drawing.Point(20, 416);
+            this.firstnameBox.Name = "firstnameBox";
+            this.firstnameBox.ShortcutsEnabled = false;
+            this.firstnameBox.Size = new System.Drawing.Size(237, 23);
+            this.firstnameBox.TabIndex = 4;
+            this.firstnameBox.Text = "Firstname";
+            this.firstnameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.firstnameBox_MouseClick);
+            this.firstnameBox.Leave += new System.EventHandler(this.firstnameBox_Leave);
+            // 
+            // verifyEditPasswordBox
+            // 
+            this.verifyEditPasswordBox.BackColor = System.Drawing.SystemColors.Control;
+            this.verifyEditPasswordBox.BorderColor = System.Drawing.Color.Blue;
+            this.verifyEditPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.verifyEditPasswordBox.DefaultText = "Verify Password";
+            this.verifyEditPasswordBox.Enabled = false;
+            this.verifyEditPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.verifyEditPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.verifyEditPasswordBox.Location = new System.Drawing.Point(18, 316);
+            this.verifyEditPasswordBox.Name = "verifyEditPasswordBox";
+            this.verifyEditPasswordBox.Size = new System.Drawing.Size(237, 23);
+            this.verifyEditPasswordBox.TabIndex = 3;
+            this.verifyEditPasswordBox.Text = "Verify Password";
+            this.verifyEditPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.verifyEditPasswordBox_MouseClick);
+            this.verifyEditPasswordBox.TextChanged += new System.EventHandler(this.verifyEditPasswordBox_TextChanged);
+            this.verifyEditPasswordBox.Leave += new System.EventHandler(this.verifyEditPasswordBox_Leave);
+            // 
+            // editPasswordBox
+            // 
+            this.editPasswordBox.BackColor = System.Drawing.SystemColors.Control;
+            this.editPasswordBox.BorderColor = System.Drawing.Color.Blue;
+            this.editPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.editPasswordBox.DefaultText = "Password";
+            this.editPasswordBox.Enabled = false;
+            this.editPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.editPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.editPasswordBox.Location = new System.Drawing.Point(18, 270);
+            this.editPasswordBox.Name = "editPasswordBox";
+            this.editPasswordBox.Size = new System.Drawing.Size(237, 23);
+            this.editPasswordBox.TabIndex = 2;
+            this.editPasswordBox.Text = "Password";
+            this.editPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.editPasswordBox_MouseClick);
+            this.editPasswordBox.TextChanged += new System.EventHandler(this.editPasswordBox_TextChanged);
+            this.editPasswordBox.Leave += new System.EventHandler(this.editPasswordBox_Leave);
+            // 
+            // usernameBox
+            // 
+            this.usernameBox.BorderColor = System.Drawing.Color.Blue;
+            this.usernameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.usernameBox.DefaultText = "Username";
+            this.usernameBox.Enabled = false;
+            this.usernameBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.usernameBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.usernameBox.Location = new System.Drawing.Point(18, 228);
+            this.usernameBox.Name = "usernameBox";
+            this.usernameBox.Size = new System.Drawing.Size(237, 23);
+            this.usernameBox.TabIndex = 1;
+            this.usernameBox.Text = "Username";
+            this.usernameBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.usernameBox_MouseClick);
+            this.usernameBox.Leave += new System.EventHandler(this.usernameBox_Leave);
+            // 
+            // verifyPasswordBox
+            // 
+            this.verifyPasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.verifyPasswordBox.BorderColor = System.Drawing.Color.Blue;
+            this.verifyPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.verifyPasswordBox.DefaultText = "Password";
+            this.verifyPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.verifyPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.verifyPasswordBox.Location = new System.Drawing.Point(145, 140);
+            this.verifyPasswordBox.Name = "verifyPasswordBox";
+            this.verifyPasswordBox.Size = new System.Drawing.Size(237, 23);
+            this.verifyPasswordBox.TabIndex = 0;
+            this.verifyPasswordBox.Text = "Password";
+            this.verifyPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.verifyPasswordBox_MouseClick);
+            this.verifyPasswordBox.TextChanged += new System.EventHandler(this.verifyPasswordBox_TextChanged);
+            this.verifyPasswordBox.Leave += new System.EventHandler(this.verifyPasswordBox_Leave);
             // 
             // EditUserInfoForm
             // 
