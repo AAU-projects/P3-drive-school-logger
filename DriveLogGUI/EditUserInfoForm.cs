@@ -14,7 +14,9 @@ namespace DriveLogGUI
 {
     public partial class EditUserInfoForm : Form
     {
+        public Image ProfilePicture { get; set; } = null;
         private User user = Session.LoggedInUser;
+        
         public EditUserInfoForm()
         {
             InitializeComponent();
@@ -22,8 +24,7 @@ namespace DriveLogGUI
         }
 
         private Point _lastClick;
-        private Image _profilePicture;
-
+        
         private readonly Color _correctColor = Color.FromArgb(109, 144, 150);
         private readonly Color _wrongColor = Color.FromArgb(229, 187, 191);
         private readonly Color _neutralColor = Color.FromArgb(200, 212, 225);
@@ -61,6 +62,12 @@ namespace DriveLogGUI
             if (!string.IsNullOrEmpty(user.PicturePath) || user.PicturePath != "")
             {
                 pictureBox.Load(user.PicturePath);
+            }
+
+            if (user.Sysmin)
+            {
+                instructorCheckBox.Visible = true;
+                instructorCheckBox.Checked = true;
             }
 
             uploader = new UploadHandler();
@@ -394,10 +401,10 @@ namespace DriveLogGUI
 
         private void editPictureButton_Click(object sender, EventArgs e)
         {
-            UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this, ref _profilePicture);
+            UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
             this.Hide();
             uploadPictureForm.ShowDialog();
-            pictureBox.Image = _profilePicture;
+            pictureBox.Image = ProfilePicture;
         }
 
         private void saveChangesButton_Click(object sender, EventArgs e)
@@ -414,12 +421,12 @@ namespace DriveLogGUI
             if (editPasswordBox.Text != editPasswordBox.defaultText)
             {
                 updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, uploader.SaveProfilePicture(_profilePicture));
+                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, uploader.SaveProfilePicture(ProfilePicture), instructorCheckBox.Checked ? "true" : "false");
             }
             else
             {
                 updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, user.Password, uploader.SaveProfilePicture(_profilePicture));
+                zipBox.Text, cityBox.Text, usernameBox.Text, user.Password, uploader.SaveProfilePicture(ProfilePicture), instructorCheckBox.Checked ? "true" : "false");
             }
 
             if(updateSuccess)

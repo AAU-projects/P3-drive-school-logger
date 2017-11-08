@@ -53,6 +53,7 @@
             this.editPasswordBox = new TextboxBorderColor();
             this.usernameBox = new TextboxBorderColor();
             this.verifyPasswordBox = new TextboxBorderColor();
+            this.instructorCheckBox = new System.Windows.Forms.CheckBox();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -143,7 +144,7 @@
             this.accountDetailsLabel.AutoSize = true;
             this.accountDetailsLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountDetailsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.accountDetailsLabel.Location = new System.Drawing.Point(14, 192);
+            this.accountDetailsLabel.Location = new System.Drawing.Point(14, 187);
             this.accountDetailsLabel.Name = "accountDetailsLabel";
             this.accountDetailsLabel.Size = new System.Drawing.Size(185, 33);
             this.accountDetailsLabel.TabIndex = 53;
@@ -342,7 +343,7 @@
             this.verifyEditPasswordBox.Enabled = false;
             this.verifyEditPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
             this.verifyEditPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.verifyEditPasswordBox.Location = new System.Drawing.Point(18, 316);
+            this.verifyEditPasswordBox.Location = new System.Drawing.Point(18, 311);
             this.verifyEditPasswordBox.Name = "verifyEditPasswordBox";
             this.verifyEditPasswordBox.Size = new System.Drawing.Size(237, 23);
             this.verifyEditPasswordBox.TabIndex = 3;
@@ -360,7 +361,7 @@
             this.editPasswordBox.Enabled = false;
             this.editPasswordBox.Font = new System.Drawing.Font("Calibri Light", 14F);
             this.editPasswordBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.editPasswordBox.Location = new System.Drawing.Point(18, 270);
+            this.editPasswordBox.Location = new System.Drawing.Point(18, 265);
             this.editPasswordBox.Name = "editPasswordBox";
             this.editPasswordBox.Size = new System.Drawing.Size(237, 23);
             this.editPasswordBox.TabIndex = 2;
@@ -371,13 +372,14 @@
             // 
             // usernameBox
             // 
+            this.usernameBox.BackColor = System.Drawing.SystemColors.Control;
             this.usernameBox.BorderColor = System.Drawing.Color.Blue;
             this.usernameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.usernameBox.DefaultText = "Username";
             this.usernameBox.Enabled = false;
             this.usernameBox.Font = new System.Drawing.Font("Calibri Light", 14F);
             this.usernameBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.usernameBox.Location = new System.Drawing.Point(18, 228);
+            this.usernameBox.Location = new System.Drawing.Point(18, 223);
             this.usernameBox.Name = "usernameBox";
             this.usernameBox.Size = new System.Drawing.Size(237, 23);
             this.usernameBox.TabIndex = 1;
@@ -402,12 +404,25 @@
             this.verifyPasswordBox.TextChanged += new System.EventHandler(this.verifyPasswordBox_TextChanged);
             this.verifyPasswordBox.Leave += new System.EventHandler(this.verifyPasswordBox_Leave);
             // 
+            // instructorCheckBox
+            // 
+            this.instructorCheckBox.AutoSize = true;
+            this.instructorCheckBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.instructorCheckBox.Location = new System.Drawing.Point(18, 347);
+            this.instructorCheckBox.Name = "instructorCheckBox";
+            this.instructorCheckBox.Size = new System.Drawing.Size(70, 17);
+            this.instructorCheckBox.TabIndex = 65;
+            this.instructorCheckBox.Text = "Instructor";
+            this.instructorCheckBox.UseVisualStyleBackColor = true;
+            this.instructorCheckBox.Visible = false;
+            // 
             // EditUserInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(529, 673);
+            this.Controls.Add(this.instructorCheckBox);
             this.Controls.Add(this.saveChangesButton);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.editPictureButton);
@@ -466,5 +481,6 @@
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button editPictureButton;
         private System.Windows.Forms.Button saveChangesButton;
+        private System.Windows.Forms.CheckBox instructorCheckBox;
     }
 }

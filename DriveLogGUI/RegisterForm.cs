@@ -32,7 +32,7 @@ namespace DriveLogGUI
         private Point _lastClick;
         private IUploadHandler uploader;
 
-        private Image _profileImage;
+        public Image ProfileImage { get; set; } = null;
 
         public RegisterForm(LoginForm login)
         {
@@ -248,7 +248,7 @@ namespace DriveLogGUI
                 bool UserCreated = MySql.AddUser(registerFirstnameBox.Text, registerLastnameBox.Text,
                     registerPhoneBox.Text, registerEmailBox.Text,
                     registerCprBox.Text, registerAdressBox.Text, registerZipBox.Text, registerCityBox.Text,
-                    registerUsernameBox.Text, registerPasswordBox.Text, uploader.SaveProfilePicture(_profileImage));
+                    registerUsernameBox.Text, registerPasswordBox.Text, uploader.SaveProfilePicture(ProfileImage));
 
                 if (UserCreated)
                 {
@@ -279,10 +279,10 @@ namespace DriveLogGUI
         }
         private void registerUploadPhotoButton_Click(object sender, EventArgs e)
         {
-            UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this, ref _profileImage);
+            UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
             this.Hide();
             uploadPictureForm.ShowDialog();
-            registerPicture.Image = _profileImage;
+            registerPicture.Image = ProfileImage;
         }
 
         private void HideAllStatusLabels()

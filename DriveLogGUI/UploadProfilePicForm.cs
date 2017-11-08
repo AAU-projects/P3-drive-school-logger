@@ -15,16 +15,15 @@ namespace DriveLogGUI
 {
     public partial class UploadProfilePicForm : Form
     {
-        public UploadProfilePicForm(Form registerForm, ref Image location)
+        public UploadProfilePicForm(Form registerForm)
         {
             _registerForm = registerForm;
-            _location = location;
             InitializeComponent();
             this.AllowDrop = true;
         }
 
         private static Form _registerForm;
-        private Image _location;
+
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -61,7 +60,18 @@ namespace DriveLogGUI
         {
             if (editPictureBox.Image == null) return;
 
-            _location = editPictureBox.Image;
+            if (_registerForm is RegisterForm)
+            {
+                RegisterForm tempregisterForm = _registerForm as RegisterForm;
+
+                tempregisterForm.ProfileImage = editPictureBox.Image;
+            }
+            else if (_registerForm is EditUserInfoForm)
+            {
+                EditUserInfoForm tempregisterForm = _registerForm as EditUserInfoForm;
+
+                tempregisterForm.ProfilePicture = editPictureBox.Image;
+            }
             this.Dispose();
             _registerForm.Show();
         }
