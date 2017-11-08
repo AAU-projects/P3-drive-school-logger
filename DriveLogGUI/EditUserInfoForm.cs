@@ -198,6 +198,7 @@ namespace DriveLogGUI
             else
             {
                 ChangeBackColorTextBox(verifyEditPasswordBox, false);
+                verifyPasswordOk = false;
             }
 
             if (editPasswordBox.Text == usernameBox.Text)
@@ -232,6 +233,7 @@ namespace DriveLogGUI
             else
             {
                 ChangeBackColorTextBox(verifyEditPasswordBox, false);
+                verifyPasswordOk = false;
             }
         }
 
@@ -402,7 +404,6 @@ namespace DriveLogGUI
         private void editPictureButton_Click(object sender, EventArgs e)
         {
             UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
-            this.Hide();
             uploadPictureForm.ShowDialog();
             pictureBox.Image = ProfilePicture;
         }
@@ -411,8 +412,7 @@ namespace DriveLogGUI
         {
             if (!(usernameOk && passwordOk && verifyPasswordOk && firstnameOk && lastnameOk && phoneOk && emailOk && addressOk && zipOk && cityOk))
             {
-                MessageBox.Show("Please fix the red boxes before saving", "Failed",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMsgBox.Show("Please fix the red boxes before saving", "Failed", CustomMsgBoxIcon.Warrning);
                 return;
             }
 
@@ -421,24 +421,24 @@ namespace DriveLogGUI
             if (editPasswordBox.Text != editPasswordBox.defaultText)
             {
                 updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, uploader.SaveProfilePicture(ProfilePicture), instructorCheckBox.Checked ? "true" : "false");
+                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString()), instructorCheckBox.Checked ? "true" : "false");
             }
             else
             {
                 updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, user.Password, uploader.SaveProfilePicture(ProfilePicture), instructorCheckBox.Checked ? "true" : "false");
+                zipBox.Text, cityBox.Text, usernameBox.Text, user.Password, uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString()), instructorCheckBox.Checked ? "true" : "false");
             }
 
             if(updateSuccess)
             {
-                MessageBox.Show("You have succesfully updated your profile", "Success", MessageBoxButtons.OK, MessageBoxIcon.None);
-                DataTable user = MySql.GetUser(usernameBox.Text);
+                CustomMsgBox.Show("You have succesfully updated your profile", "Success", CustomMsgBoxIcon.Complete);
+                DataTable user = MySql.GetUserByName(usernameBox.Text);
                 Session.LoadUserFromDataTable(user);
                 this.Dispose();
             }
             else
             {
-                MessageBox.Show("No connection could be made to the database, please try again later", "No Connection", MessageBoxButtons.OK, MessageBoxIcon.None);
+                CustomMsgBox.Show("No connection could be made to the database, please try again later", "No Connection", CustomMsgBoxIcon.Error);
             }
         }
     }
