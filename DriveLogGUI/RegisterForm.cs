@@ -133,7 +133,7 @@ namespace DriveLogGUI
             ChangeBackColorTextBox(registerPasswordBox, verify);
             _isPasswordOk = verify;
 
-            VertifyPassword();
+            VerifyPassword();
 
             if (!usernameNotSameAsPassword)
             {
@@ -162,10 +162,10 @@ namespace DriveLogGUI
             else
                 verifyPasswordBox.PasswordChar = '\0';
 
-            VertifyPassword();
+            VerifyPassword();
         }
 
-        private void VertifyPassword()
+        private void VerifyPassword()
         {
             bool verify = registerPasswordBox.Text == verifyPasswordBox.Text && registerPasswordBox.Text.Length != 0;
 
@@ -253,14 +253,14 @@ namespace DriveLogGUI
 
                 if (UserCreated)
                 {
-                    CustomMsgBox.Show("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete());
+                    CustomMsgBox.Show("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete);
                     this.Dispose();
                     _loginForm.Show();
                 }
                 else
                 {
                     CustomMsgBox.Show("Failed to create new user, please try again later!", "Failed",
-                        CustomMsgBoxIcon.Error());
+                        CustomMsgBoxIcon.Error);
                 }
             }
             else

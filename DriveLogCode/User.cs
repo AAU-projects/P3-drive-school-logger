@@ -10,7 +10,7 @@ namespace DriveLogCode
     public class User
     {
         public User(int id, string firstname, string lastname, string phone, string email, string cpr, 
-            string address, string zip, string city, string username, string picturePath, bool sysmin)
+            string address, string zip, string city, string username, string password, string picturePath, bool sysmin)
         {
             Id = id;
             Firstname = firstname;
@@ -22,6 +22,7 @@ namespace DriveLogCode
             Zip = zip;
             City = city;
             Username = username;
+            Password = password;
             PicturePath = picturePath;
             Sysmin = sysmin;
         }
@@ -38,6 +39,7 @@ namespace DriveLogCode
             Zip = (string)userTable.Rows[0][7];
             City = (string)userTable.Rows[0][8];
             Username = (string)userTable.Rows[0][9];
+            Password = (string)userTable.Rows[0][10];
             PicturePath = (string)userTable.Rows[0][11];
             Sysmin = Convert.ToBoolean((string) userTable.Rows[0][12]);
         }
@@ -54,6 +56,7 @@ namespace DriveLogCode
         public string Zip { get; }
         public string City { get; }
         public string Username { get; }
+        public string Password { get; }
         public string PicturePath { get; }
         public bool Sysmin { get; }
 
