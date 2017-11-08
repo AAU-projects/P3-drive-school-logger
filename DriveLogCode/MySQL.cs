@@ -142,6 +142,18 @@ namespace DriveLogCode
             return false;
         }
 
+        public static bool UpdateUser(string cpr, string firstname, string lastname, string phone, string mail, string address,
+            string zip, string city, string username, string password, string picture = null, string sysmin = "false", string usertable = UserTable)
+        {
+            var cmd = new MySqlCommand($"UPDATE {usertable} SET " +
+                                       $"`firstname` = '{firstname}', `lastname` = '{lastname}', `phone` = '{phone}'," +
+                                       $"`email` = '{mail}', `address` = '{address}', `zip` = '{zip}', `city` = '{city}'," +
+                                       $"`username` = '{username}', `password` = '{password}', `picture` = '{picture}', `sysmin` = '{sysmin}'" +
+                                       $"WHERE `cpr` = '{cpr}'");
+
+            return SendNonQuery(cmd);
+        }
+
         private static bool ExistTable(string tablename)
         {
             var cmd = new MySqlCommand($"SELECT 1 FROM {tablename} LIMIT 1;");

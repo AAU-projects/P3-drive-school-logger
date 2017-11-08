@@ -32,7 +32,7 @@
             this.ProfilePicture = new System.Windows.Forms.PictureBox();
             this.infoHeaderLabel = new System.Windows.Forms.Label();
             this.InfoPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.editButton = new System.Windows.Forms.Button();
             this.cityOutputLabel = new System.Windows.Forms.Label();
             this.emailOutputLabel = new System.Windows.Forms.Label();
             this.cprOutputLabel = new System.Windows.Forms.Label();
@@ -121,7 +121,7 @@
             // InfoPanel
             // 
             this.InfoPanel.BackColor = System.Drawing.Color.White;
-            this.InfoPanel.Controls.Add(this.button1);
+            this.InfoPanel.Controls.Add(this.editButton);
             this.InfoPanel.Controls.Add(this.cityOutputLabel);
             this.InfoPanel.Controls.Add(this.emailOutputLabel);
             this.InfoPanel.Controls.Add(this.cprOutputLabel);
@@ -142,19 +142,20 @@
             this.InfoPanel.Size = new System.Drawing.Size(454, 170);
             this.InfoPanel.TabIndex = 2;
             // 
-            // button1
+            // editButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.button1.Location = new System.Drawing.Point(375, 143);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(69, 22);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Edit Profile";
-            this.button1.UseVisualStyleBackColor = false;
+            this.editButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.editButton.FlatAppearance.BorderSize = 0;
+            this.editButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.editButton.Location = new System.Drawing.Point(375, 143);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(69, 22);
+            this.editButton.TabIndex = 2;
+            this.editButton.Text = "Edit Profile";
+            this.editButton.UseVisualStyleBackColor = false;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // cityOutputLabel
             // 
@@ -754,6 +755,6 @@
         private System.Windows.Forms.Label phoneOutputLabel;
         private System.Windows.Forms.Label nameOutputLabel;
         private System.Windows.Forms.Label cityOutputLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button editButton;
     }
 }
