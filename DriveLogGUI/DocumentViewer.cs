@@ -76,7 +76,7 @@ namespace DriveLogGUI
             {
                 OpenFileDialog fileDialog = new OpenFileDialog();
                 fileDialog.InitialDirectory = "E:\\Dokumenter";
-                fileDialog.Filter = "Files(*.BMP;*.JPG;*.JPEG;*.GIF;*.PDF)|*.BMP;*.JPG;*.JPEG;*.GIF;*.PDF";
+                fileDialog.Filter = "Files(*.BMP;*.JPG;*.JPEG;*.PDF)|*.BMP;*.JPG;*.JPEG;*.PDF";
 
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
