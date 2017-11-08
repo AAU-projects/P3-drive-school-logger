@@ -13,19 +13,15 @@ namespace DriveLogGUI
 {
     public partial class MainWindowTab : Form
     {
-<<<<<<< HEAD
-        private Point lastClick;
-        private Point pageStartPoint;
-        private UserControl lastPage;
-=======
         private Point _lastClick;
+        private Point pageStartPoint;
         private UserControl _lastPage;
         private bool _isOpen;
->>>>>>> master
 
         private OverviewTab overviewTab;
         private ProfileTab profileTab;
         private DocumentViewer documentViewer;
+        private DoctorsNote doctorsNoteTab;
 
         public MainWindowTab()
         {
@@ -33,6 +29,7 @@ namespace DriveLogGUI
             overviewTab = new OverviewTab();
             profileTab = new ProfileTab();
             documentViewer = new DocumentViewer();
+            doctorsNoteTab = new DoctorsNote();
 
             InitializeComponent();
             MoveButtonSpaces(OverviewButton, 8);
@@ -53,11 +50,13 @@ namespace DriveLogGUI
             overviewTab.Location = pageStartPoint;
             profileTab.Location = pageStartPoint;
             documentViewer.Location = pageStartPoint;
+            doctorsNoteTab.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
             this.Controls.Add(profileTab);
             this.Controls.Add(documentViewer);
+            this.Controls.Add(doctorsNoteTab);
 
             // opening starting page after login
             OpenPage(overviewTab);
@@ -179,7 +178,6 @@ namespace DriveLogGUI
             }
         }
 
-<<<<<<< HEAD
         private void firstAidButton_Click(object sender, EventArgs e)
         {
             if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
@@ -189,10 +187,12 @@ namespace DriveLogGUI
             }
             else
             {
+                documentViewer.SetType(Session.TypeFirstAid);
                 documentViewer.Clear();
                 OpenPage(documentViewer);
             }
-=======
+        }
+
         private void bookingButton_Click(object sender, EventArgs e)
         {
             ProfileSubmenuControl(false);
@@ -201,7 +201,6 @@ namespace DriveLogGUI
         private void settingsButton_Click(object sender, EventArgs e)
         {
             ProfileSubmenuControl(false);
->>>>>>> master
         }
     }
 }

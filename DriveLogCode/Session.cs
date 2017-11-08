@@ -10,6 +10,8 @@ namespace DriveLogCode
     public static class Session
     {
         public static User LoggedInUser;
+        public static string TypeFirstAid = "FirstAid";
+        public static string TypeDoctorsNote = "DoctorsNote";
 
         public static void LoadUserFromDataTable(DataTable userTable)
         {

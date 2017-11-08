@@ -16,12 +16,12 @@ namespace DriveLogCode
     {
         public bool UploadDoctorsNote(string title, string fileLocation, string url)
         {
-            return UploadFile(title, "DoctorsNote", fileLocation, url);
+            return UploadFile(title, Session.TypeDoctorsNote, fileLocation, url);
         }
 
         public bool UploadFirstAid(string title, string fileLocation, string url)
         {
-            return UploadFile(title, "FirstAid", fileLocation, url);
+            return UploadFile(title, Session.TypeFirstAid, fileLocation, url);
         }
 
         private bool UploadFile(string title, string type, string fileLocation, string url)
@@ -45,7 +45,7 @@ namespace DriveLogCode
             
             string fileUrl = SendToServer(fileLocation, url);
 
-            if (fileUrl == "Error uploading") return false;
+            if (fileUrl == "null") return false;
 
             if (!MySql.UploadDocument(title, type, DateTime.Today, Session.LoggedInUser.Id, fileUrl)) return false;
 

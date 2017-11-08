@@ -19,14 +19,14 @@ namespace DriveLogCode
 
         public static DataTable GetDocument(string type, int id, string docTable = DocumnentTable)
         {
-            var cmd = new MySqlCommand($"SELECT * FROM {docTable} WHERE user = {id} AND type = {type} LIMIT 1");
+            var cmd = new MySqlCommand($"SELECT * FROM {docTable} WHERE user = {id} AND type = '{type}' LIMIT 1");
 
             return SendQuery(cmd);
         }
 
         public static bool UploadDocument(string title, string type, DateTime date, int userId, string path, string table = DocumnentTable)
         {
-            var cmd = new MySqlCommand($"INSERT INTO {table} (title, type, date, user, path) VALUES ({title}, {type}, {date}, {userId}, {path})");
+            var cmd = new MySqlCommand($"INSERT INTO documents (title, type, `user`, path) VALUES ('{title}', '{type}', {userId}, '{path}')");
 
             if (ExistTable(table)) return SendNonQuery(cmd);
 
@@ -43,7 +43,7 @@ namespace DriveLogCode
                         "`id`  int(11) NOT NULL AUTO_INCREMENT ," +
                         "`title`  varchar(255) NOT NULL ," +
                         "`type`  enum('FirstAid','DoctorsNote','Other') NULL ," +
-                        "`date`  datetime NULL ON UPDATE CURRENT_TIMESTAMP ," +
+                        "`date`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ," +
                         "`user`  int(11) NOT NULL ," +
                         "`path`  varchar(255) NOT NULL ," +
                         "PRIMARY KEY (`id`))" +
@@ -72,7 +72,25 @@ namespace DriveLogCode
 
         public static bool ExistDocument(int id, string type, string table = DocumnentTable)
         {
-            return Exist("type", type, table);
+            var cmd = new MySqlCommand($"SELECT 1 FROM {table} WHERE type = '{type}' AND user = {id} LIMIT 1");
+
+            if (ExistTable(table))
+            {
+                var results = SendQuery(cmd);
+
+                return results.Rows.Count == 1;
+            }
+
+            var tableCreated = CreateDocumentTabel(table);
+
+            if (tableCreated)
+            {
+                var results = SendQuery(cmd);
+
+                return results.Rows.Count == 1;
+            }
+
+            return false;
         }
 
         public static bool ExistUserId(int id, string table = UserTable)
