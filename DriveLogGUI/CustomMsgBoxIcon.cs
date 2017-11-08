@@ -10,7 +10,7 @@ namespace DriveLogGUI
     static class CustomMsgBoxIcon
     {
         public static Image Warrning {
-            get { return Image.FromFile("Ressources/icons8-attention.png"); }
+            get { return Image.FromFile("Resources/icons8-attention.png"); }
         }
 
         public static Image Error {

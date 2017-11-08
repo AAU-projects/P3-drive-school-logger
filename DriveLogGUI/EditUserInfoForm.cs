@@ -111,6 +111,8 @@ namespace DriveLogGUI
             zipBox.Enabled = enabled;
             cityBox.Enabled = enabled;
 
+            instructorCheckBox.Enabled = enabled;
+
             editPictureButton.Enabled = enabled;
             saveChangesButton.Enabled = enabled;
         }
@@ -169,9 +171,6 @@ namespace DriveLogGUI
 
         private void verifyEditPasswordBox_Leave(object sender, EventArgs e)
         {
-            if (verifyEditPasswordBox.Text == editPasswordBox.Text)
-                verifyPasswordOk = true;
-
             DefaultTextBox_Leave(verifyEditPasswordBox, verifyPasswordOk);
         }
 
@@ -194,7 +193,10 @@ namespace DriveLogGUI
             }
 
             if (verifyEditPasswordBox.Text == editPasswordBox.Text)
+            {
                 ChangeBackColorTextBox(verifyEditPasswordBox, true);
+                verifyPasswordOk = true;
+            }
             else
             {
                 ChangeBackColorTextBox(verifyEditPasswordBox, false);
@@ -229,7 +231,10 @@ namespace DriveLogGUI
                 verifyEditPasswordBox.PasswordChar = '\0';
 
             if (verifyEditPasswordBox.Text == editPasswordBox.Text)
+            {
                 ChangeBackColorTextBox(verifyEditPasswordBox, true);
+                verifyPasswordOk = true;
+            }
             else
             {
                 ChangeBackColorTextBox(verifyEditPasswordBox, false);
