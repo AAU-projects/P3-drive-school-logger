@@ -7,16 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
     public partial class MainWindowTab : Form
     {
-        private Point lastClick;
-        private UserControl lastPage;
+        private Point _lastClick;
+        private Point pageStartPoint;
+        private UserControl _lastPage;
+        private bool _isOpen;
 
         private OverviewTab overviewTab;
         private ProfileTab profileTab;
+        private DocumentViewer documentViewer;
         private DoctorsNote doctorsNoteTab;
 
         public MainWindowTab()
@@ -24,6 +28,7 @@ namespace DriveLogGUI
             // Initializing
             overviewTab = new OverviewTab();
             profileTab = new ProfileTab();
+            documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
 
             InitializeComponent();
@@ -36,26 +41,44 @@ namespace DriveLogGUI
             bookingButton.Controls.Add(pictureBookingTab);
             settingsButton.Controls.Add(pictureSettingsTab);
             overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
+            overviewTab.DoctorsNotePictureButtonClick += new EventHandler(doctorsNoteButton_Click);
+
+            //createing the start point for all pages.
+            pageStartPoint = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
 
             // setting their location
-            overviewTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
-            profileTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
-            doctorsNoteTab.Location = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
+            overviewTab.Location = pageStartPoint;
+            profileTab.Location = pageStartPoint;
+            documentViewer.Location = pageStartPoint;
+            doctorsNoteTab.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
             this.Controls.Add(profileTab);
+            this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
 
             // opening starting page after login
             OpenPage(overviewTab);
         }
 
+        private void doctorsNoteButton_Click(object sender, EventArgs e)
+        {
+            OpenPage(doctorsNoteTab);
+
+            ProfileSubmenuControl(true);
+        }
+
         private void ProfileButton_Click(object sender, EventArgs e)
         {
             OpenPage(profileTab);
 
-            if (!panelForProfile.Visible)
+            ProfileSubmenuControl(true);
+        }
+
+        private void ProfileSubmenuControl(bool isProfileClick)
+        {
+            if (!panelForProfile.Visible && isProfileClick)
             {
                 //placing the panel at the correct location
                 panelForProfile.Location = new Point(ProfileButton.Location.X, ProfileButton.Location.Y + ProfileButton.Height);
@@ -63,15 +86,16 @@ namespace DriveLogGUI
                 //moving objects below
                 bookingButton.Location = MoveLocation(bookingButton.Location, panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, panelForProfile.Height);
+                _isOpen = true;
             }
-            else
+            else if (_isOpen)
             {
                 //move objects back
                 bookingButton.Location = MoveLocation(bookingButton.Location, -panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, -panelForProfile.Height);
                 panelForProfile.Hide();
+                _isOpen = false;
             }
-
         }
 
         private void MoveButtonSpaces(Button button, int spaces)
@@ -94,24 +118,20 @@ namespace DriveLogGUI
             //To add a page create a usercontrol and send it as paramater in use OpenPage
             OpenPage(overviewTab);
 
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
+            ProfileSubmenuControl(false);
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
-            lastClick = e.Location;
+            _lastClick = e.Location;
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                this.Left += e.X - lastClick.X;
-                this.Top += e.Y - lastClick.Y;
+                this.Left += e.X - _lastClick.X;
+                this.Top += e.Y - _lastClick.Y;
             }
         }
 
@@ -140,27 +160,47 @@ namespace DriveLogGUI
             this.Close();
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            OpenPage(doctorsNoteTab);
-        }
-
         private void OpenPage(UserControl page)
         {
-            if (lastPage != page) 
+            if (_lastPage != page) 
             {
                 CloseLastPage();
-                lastPage = page;
+                _lastPage = page;
                 page.Show();
             }
         }
 
         private void CloseLastPage()
         {
-            if (lastPage != null)
+            if (_lastPage != null)
             {
-                lastPage.Hide();
+                _lastPage.Hide();
             }
+        }
+
+        private void firstAidButton_Click(object sender, EventArgs e)
+        {
+            if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
+            {
+                OpenPage(documentViewer);
+                documentViewer.LoadFirstAid(Session.LoggedInUser);
+            }
+            else
+            {
+                documentViewer.SetType(Session.TypeFirstAid);
+                documentViewer.Clear();
+                OpenPage(documentViewer);
+            }
+        }
+
+        private void bookingButton_Click(object sender, EventArgs e)
+        {
+            ProfileSubmenuControl(false);
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            ProfileSubmenuControl(false);
         }
     }
 }

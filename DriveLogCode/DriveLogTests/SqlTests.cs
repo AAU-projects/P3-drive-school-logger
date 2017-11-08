@@ -40,14 +40,14 @@ namespace DriveLogTests
         [TestCase("bob")]
         public void GetUser_ValidUser(string username)
         {
-            DataTable resultTable = MySql.GetUser(username, testtable);
+            DataTable resultTable = MySql.GetUserByName(username, testtable);
             Assert.IsTrue((string) resultTable.Rows[0][5] == "bob");
         }
 
         [TestCase("Mustafa")]
         public void GetUser_NonVaildUser(string username)
         {
-            DataTable resultTable = MySql.GetUser(username, testtable);
+            DataTable resultTable = MySql.GetUserByName(username, testtable);
             Assert.IsNull(resultTable);
         }
     }

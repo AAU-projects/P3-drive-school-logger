@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DriveLogCode;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace DriveLogGUI
 {
@@ -30,7 +31,7 @@ namespace DriveLogGUI
         private readonly LoginForm _loginForm;
 
         private Point _lastClick;
-        private IUploadHandler uploader;
+        private readonly IUploadHandler _uploader;
 
         public Image ProfileImage { get; set; } = null;
 
@@ -40,7 +41,7 @@ namespace DriveLogGUI
             InitializeComponent();
 
             HideAllStatusLabels();
-            uploader = new UploadHandler();
+            _uploader = new UploadHandler();
         }
 
         private void registerCancelHyperLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -248,18 +249,18 @@ namespace DriveLogGUI
                 bool UserCreated = MySql.AddUser(registerFirstnameBox.Text, registerLastnameBox.Text,
                     registerPhoneBox.Text, registerEmailBox.Text,
                     registerCprBox.Text, registerAdressBox.Text, registerZipBox.Text, registerCityBox.Text,
-                    registerUsernameBox.Text, registerPasswordBox.Text, uploader.SaveProfilePicture(ProfileImage));
+                    registerUsernameBox.Text, registerPasswordBox.Text, _uploader.SaveProfilePicture(ProfileImage, Properties.Settings.Default["PictureUpload"].ToString()));
 
                 if (UserCreated)
                 {
-                    MessageBox.Show("You have succesfully created a user", "Success", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    CustomMsgBox.Show("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete);
                     this.Dispose();
                     _loginForm.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to create new user, please try again later!", "Failed",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomMsgBox.Show("Failed to create new user, please try again later!", "Failed",
+                        CustomMsgBoxIcon.Error);
                 }
             }
             else

@@ -32,7 +32,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panelForProfile = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
+            this.firstAidButton = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBookingTab = new System.Windows.Forms.PictureBox();
@@ -98,7 +98,7 @@
             // 
             // panelForProfile
             // 
-            this.panelForProfile.Controls.Add(this.button7);
+            this.panelForProfile.Controls.Add(this.firstAidButton);
             this.panelForProfile.Controls.Add(this.button6);
             this.panelForProfile.Controls.Add(this.button5);
             this.panelForProfile.Location = new System.Drawing.Point(0, 188);
@@ -107,21 +107,21 @@
             this.panelForProfile.TabIndex = 1;
             this.panelForProfile.Visible = false;
             // 
-            // button7
+            // firstAidButton
             // 
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(24, 64);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(108, 32);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "First aid";
-            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.firstAidButton.FlatAppearance.BorderSize = 0;
+            this.firstAidButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.firstAidButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.firstAidButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.firstAidButton.ForeColor = System.Drawing.Color.White;
+            this.firstAidButton.Location = new System.Drawing.Point(24, 64);
+            this.firstAidButton.Name = "firstAidButton";
+            this.firstAidButton.Size = new System.Drawing.Size(108, 32);
+            this.firstAidButton.TabIndex = 6;
+            this.firstAidButton.Text = "First aid";
+            this.firstAidButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.firstAidButton.UseVisualStyleBackColor = true;
+            this.firstAidButton.Click += new System.EventHandler(this.firstAidButton_Click);
             // 
             // button6
             // 
@@ -212,6 +212,7 @@
             this.settingsButton.Text = "Settings";
             this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // bookingButton
             // 
@@ -220,7 +221,7 @@
             this.bookingButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bookingButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bookingButton.ForeColor = System.Drawing.Color.White;
-            this.bookingButton.Location = new System.Drawing.Point(0, 72);
+            this.bookingButton.Location = new System.Drawing.Point(-1, 70);
             this.bookingButton.Name = "bookingButton";
             this.bookingButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.bookingButton.Size = new System.Drawing.Size(132, 36);
@@ -228,6 +229,7 @@
             this.bookingButton.Text = "Booking";
             this.bookingButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bookingButton.UseVisualStyleBackColor = true;
+            this.bookingButton.Click += new System.EventHandler(this.bookingButton_Click);
             // 
             // ProfileButton
             // 
@@ -352,7 +354,7 @@
         private System.Windows.Forms.Button OverviewButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelForProfile;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button firstAidButton;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.PictureBox pictureSettingsTab;

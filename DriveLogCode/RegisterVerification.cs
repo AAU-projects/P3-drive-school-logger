@@ -127,7 +127,7 @@ namespace DriveLogCode
         {
             input = input.Replace("-", "");
 
-            if (MySql.ExistCPR(input)) return false;
+            //if (MySql.ExistCPR(input)) return false;
 
             if (input.Length != 10)
                 return false;

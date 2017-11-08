@@ -20,6 +20,13 @@ namespace DriveLogGUI
             Select();
         }
 
+        public void ResetInformation(bool failLogin = false)
+        {
+            UsernameBox.Text = "Username";
+            PasswordBox.Text = "Password";
+            PasswordBox.PasswordChar = '\0';
+        }
+
         private void createNewUserLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
@@ -29,9 +36,14 @@ namespace DriveLogGUI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            DataTable user = MySql.GetUser(UsernameBox.Text);
+            DataTable user = MySql.GetUserByName(UsernameBox.Text);
             if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text) {
-                MessageBox.Show("Wrong username or password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CustomMsgBox.Show("Wrong username or password", "Error", CustomMsgBoxIcon.Error);
+
+                // resets password with false login information
+                if (PasswordBox.Text != "Password") {
+                    PasswordBox.Clear();
+                }
                 return;
             }
 
@@ -40,6 +52,9 @@ namespace DriveLogGUI
             this.Hide();
             MainWindowTab main = new MainWindowTab();
             main.ShowDialog(this);
+
+            // resets information after logout
+            ResetInformation();
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)

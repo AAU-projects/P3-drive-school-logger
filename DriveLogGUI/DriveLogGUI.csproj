@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\DriveLogCode\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\DriveLogCode\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -47,11 +53,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomMsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomMsgBox.Designer.cs">
+      <DependentUpon>CustomMsgBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMsgBoxIcon.cs" />
     <Compile Include="DoctorsNote.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DoctorsNote.Designer.cs">
       <DependentUpon>DoctorsNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DocumentViewer.Designer.cs">
+      <DependentUpon>DocumentViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="DriveLogStarter.cs" />
     <Compile Include="EditUserInfoForm.cs">
@@ -65,12 +84,6 @@
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainWindow.Designer.cs">
-      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindowTab.cs">
       <SubType>Form</SubType>
@@ -115,17 +128,19 @@
     <Compile Include="UploadProfilePicForm.Designer.cs">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CustomMsgBox.resx">
+      <DependentUpon>CustomMsgBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DoctorsNote.resx">
       <DependentUpon>DoctorsNote.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DocumentViewer.resx">
+      <DependentUpon>DocumentViewer.cs</DependentUpon>
     <EmbeddedResource Include="EditUserInfoForm.resx">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
-      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindowTab.resx">
       <DependentUpon>MainWindowTab.cs</DependentUpon>
@@ -147,6 +162,7 @@
     <EmbeddedResource Include="UploadProfilePicForm.resx">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -174,6 +190,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8-checkmark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icons8-close-window.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icons8-attention.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\avataricon.png" />
     <Content Include="Resources\drag_and_drop_icon.png" />
   </ItemGroup>
