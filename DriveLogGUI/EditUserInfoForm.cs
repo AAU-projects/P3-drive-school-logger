@@ -417,16 +417,22 @@ namespace DriveLogGUI
             }
 
             bool updateSuccess;
+            string picturePath;
+
+            if (uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString()) != null)
+                picturePath = uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString());
+            else
+                picturePath = user.PicturePath;
 
             if (editPasswordBox.Text != editPasswordBox.defaultText)
             {
                 updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString()), instructorCheckBox.Checked ? "true" : "false");
+                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, picturePath, instructorCheckBox.Checked ? "true" : "false");
             }
             else
             {
                 updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, user.Password, uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString()), instructorCheckBox.Checked ? "true" : "false");
+                zipBox.Text, cityBox.Text, usernameBox.Text, user.Password, picturePath, instructorCheckBox.Checked ? "true" : "false");
             }
 
             if(updateSuccess)
