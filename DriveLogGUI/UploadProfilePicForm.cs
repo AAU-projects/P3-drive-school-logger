@@ -48,7 +48,7 @@ namespace DriveLogGUI
         }
 
 
-        private static readonly List<string> AcceptedImageExtensions = new List<string> { ".jpg", ".png", ".bmp", };
+        private static readonly List<string> AcceptedImageExtensions = new List<string> { ".jpg", ".png", ".bmp",".jpeg" };
         private bool ValidateDroppedFile(string filepath)
         {
             if (AcceptedImageExtensions.Contains(Path.GetExtension(filepath).ToLower())) return true;

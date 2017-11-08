@@ -36,7 +36,7 @@ namespace DriveLogGUI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            DataTable user = MySql.GetUser(UsernameBox.Text);
+            DataTable user = MySql.GetUserByName(UsernameBox.Text);
             if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text) {
                 CustomMsgBox.Show("Wrong username or password", "Error", CustomMsgBoxIcon.Error);
 
