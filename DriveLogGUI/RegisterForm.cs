@@ -252,14 +252,14 @@ namespace DriveLogGUI
 
                 if (UserCreated)
                 {
-                    CustomMsgBox.Show("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete());
+                    CustomMsgBox.Show("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete);
                     this.Dispose();
                     _loginForm.Show();
                 }
                 else
                 {
                     CustomMsgBox.Show("Failed to create new user, please try again later!", "Failed",
-                        CustomMsgBoxIcon.Error());
+                        CustomMsgBoxIcon.Error);
                 }
             }
             else
