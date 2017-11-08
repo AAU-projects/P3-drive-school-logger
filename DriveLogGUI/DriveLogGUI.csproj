@@ -136,6 +136,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DocumentViewer.resx">
       <DependentUpon>DocumentViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditUserInfoForm.resx">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -42,6 +42,7 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.editPictureButton = new System.Windows.Forms.Button();
             this.saveChangesButton = new System.Windows.Forms.Button();
+            this.instructorCheckBox = new System.Windows.Forms.CheckBox();
             this.zipBox = new TextboxBorderColor();
             this.cityBox = new TextboxBorderColor();
             this.addressBox = new TextboxBorderColor();
@@ -53,7 +54,6 @@
             this.editPasswordBox = new TextboxBorderColor();
             this.usernameBox = new TextboxBorderColor();
             this.verifyPasswordBox = new TextboxBorderColor();
-            this.instructorCheckBox = new System.Windows.Forms.CheckBox();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -134,7 +134,7 @@
             // 
             this.passwordStatusLabel.AutoSize = true;
             this.passwordStatusLabel.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordStatusLabel.Location = new System.Drawing.Point(15, 298);
+            this.passwordStatusLabel.Location = new System.Drawing.Point(15, 294);
             this.passwordStatusLabel.Name = "passwordStatusLabel";
             this.passwordStatusLabel.Size = new System.Drawing.Size(0, 15);
             this.passwordStatusLabel.TabIndex = 51;
@@ -213,6 +213,18 @@
             this.saveChangesButton.Text = "Save";
             this.saveChangesButton.UseVisualStyleBackColor = false;
             this.saveChangesButton.Click += new System.EventHandler(this.saveChangesButton_Click);
+            // 
+            // instructorCheckBox
+            // 
+            this.instructorCheckBox.AutoSize = true;
+            this.instructorCheckBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.instructorCheckBox.Location = new System.Drawing.Point(18, 347);
+            this.instructorCheckBox.Name = "instructorCheckBox";
+            this.instructorCheckBox.Size = new System.Drawing.Size(70, 17);
+            this.instructorCheckBox.TabIndex = 65;
+            this.instructorCheckBox.Text = "Instructor";
+            this.instructorCheckBox.UseVisualStyleBackColor = true;
+            this.instructorCheckBox.Visible = false;
             // 
             // zipBox
             // 
@@ -404,18 +416,6 @@
             this.verifyPasswordBox.TextChanged += new System.EventHandler(this.verifyPasswordBox_TextChanged);
             this.verifyPasswordBox.Leave += new System.EventHandler(this.verifyPasswordBox_Leave);
             // 
-            // instructorCheckBox
-            // 
-            this.instructorCheckBox.AutoSize = true;
-            this.instructorCheckBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.instructorCheckBox.Location = new System.Drawing.Point(18, 347);
-            this.instructorCheckBox.Name = "instructorCheckBox";
-            this.instructorCheckBox.Size = new System.Drawing.Size(70, 17);
-            this.instructorCheckBox.TabIndex = 65;
-            this.instructorCheckBox.Text = "Instructor";
-            this.instructorCheckBox.UseVisualStyleBackColor = true;
-            this.instructorCheckBox.Visible = false;
-            // 
             // EditUserInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -447,6 +447,7 @@
             this.Controls.Add(this.verifyPasswordLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditUserInfoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "EditUserInfoForm";
             this.topPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
