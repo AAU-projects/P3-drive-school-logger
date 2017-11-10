@@ -185,6 +185,11 @@ namespace DriveLogCode
             return SendNonQuery(cmd);
         }
 
+        private static DataTable UserSearch(string searchInput)
+        {
+            string cmd = "";
+        }
+
         private static bool SendNonQuery(MySqlCommand cmd)
         {
             try

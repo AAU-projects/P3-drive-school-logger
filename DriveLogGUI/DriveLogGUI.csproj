@@ -128,6 +128,12 @@
     <Compile Include="UploadProfilePicForm.Designer.cs">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserSearchTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserSearchTab.Designer.cs">
+      <DependentUpon>UserSearchTab.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CustomMsgBox.resx">
       <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UploadProfilePicForm.resx">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserSearchTab.resx">
+      <DependentUpon>UserSearchTab.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
