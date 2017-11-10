@@ -10,8 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DriveLogCode;
-using Spire.Pdf;
-
 namespace DriveLogGUI
 {
     public partial class DocumentViewer : UserControl
@@ -19,11 +17,6 @@ namespace DriveLogGUI
         public DocumentViewer()
         {
             InitializeComponent();
-        }
-
-        private bool HaveDocument()
-        {
-            return true;
         }
 
         private string _documentType = string.Empty;
