@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Spire.PdfViewer.Forms;
 
 namespace DriveLogGUI
 {
@@ -33,7 +34,8 @@ namespace DriveLogGUI
             this.TitleLabel = new System.Windows.Forms.Label();
             this.DateLabel = new System.Windows.Forms.Label();
             this.uploadButton = new System.Windows.Forms.Button();
-            this.viewer = new Spire.PdfViewer.Forms.PdfViewer();
+            this.viewer = new Spire.PdfViewer.Forms.PdfDocumentViewer();
+            this.viewer.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -73,15 +75,15 @@ namespace DriveLogGUI
             // 
             // viewer
             // 
-            this.viewer.FindTextHighLightColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(153)))), ((int)(((byte)(193)))), ((int)(((byte)(218)))));
-            this.viewer.IsToolBarVisible = true;
-            this.viewer.Location = new System.Drawing.Point(50, 84);
+            this.viewer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
+            this.viewer.Location = new System.Drawing.Point(50, 82);
             this.viewer.MultiPagesThreshold = 60;
             this.viewer.Name = "viewer";
             this.viewer.Size = new System.Drawing.Size(797, 460);
             this.viewer.TabIndex = 4;
-            this.viewer.Text = "pdfViewer1";
+            this.viewer.Text = "Pdf Viewer";
             this.viewer.Threshold = 60;
+            this.viewer.ZoomMode = Spire.PdfViewer.Forms.ZoomMode.Default;
             // 
             // DocumentViewer
             // 
@@ -93,6 +95,7 @@ namespace DriveLogGUI
             this.Controls.Add(this.TitleLabel);
             this.Name = "DocumentViewer";
             this.Size = new System.Drawing.Size(897, 544);
+            this.viewer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,6 +105,6 @@ namespace DriveLogGUI
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.Button uploadButton;
-        private Spire.PdfViewer.Forms.PdfViewer viewer;
+        private PdfDocumentViewer viewer;
     }
 }

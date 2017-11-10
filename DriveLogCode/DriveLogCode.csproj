@@ -45,13 +45,10 @@
       <HintPath>packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="Spire.License">
-      <HintPath>..\..\..\Program Files (x86)\e-iceblue\Spire.PdfViewer\Bin\NET4.0\Spire.License.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\e-iceblue\Spire.pdf-fe\Bin\NET4.0\Spire.License.dll</HintPath>
     </Reference>
     <Reference Include="Spire.Pdf">
-      <HintPath>..\..\..\Program Files (x86)\e-iceblue\Spire.PdfViewer\Bin\NET4.0\Spire.Pdf.dll</HintPath>
-    </Reference>
-    <Reference Include="Spire.PdfViewer.Forms">
-      <HintPath>..\..\..\Program Files (x86)\e-iceblue\Spire.PdfViewer\Bin\NET4.0\Spire.PdfViewer.Forms.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\e-iceblue\Spire.pdf-fe\Bin\NET4.0\Spire.Pdf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

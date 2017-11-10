@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DriveLogCode;
+using Spire.Pdf;
+using Spire.PdfViewer.Forms;
+
 namespace DriveLogGUI
 {
     public partial class DocumentViewer : UserControl
@@ -36,7 +40,12 @@ namespace DriveLogGUI
 
         private void LoadDocument(string documentPath)
         {
+            PdfDocument document = new PdfDocument(documentPath);
+            TitleLabel.Text = document.DocumentInformation.Title;
+            DateLabel.Text = document.DocumentInformation.CreationDate.ToString(CultureInfo.InvariantCulture);
+            document.Dispose();
             viewer.LoadFromFile(documentPath);
+            viewer.SetZoom(ZoomMode.FitWidth);
             DateLabel.Location = new Point(TitleLabel.Width + TitleLabel.Location.X + 5, DateLabel.Location.Y);
 
         }
@@ -94,6 +103,11 @@ namespace DriveLogGUI
         private void uploadButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog();
+        }
+
+        internal void DisposePdf()
+        {
+            viewer.Dispose();
         }
     }
 }
