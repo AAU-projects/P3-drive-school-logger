@@ -1,4 +1,6 @@
-﻿namespace DriveLogGUI
+﻿using System.Windows.Forms;
+
+namespace DriveLogGUI
 {
     partial class DocumentViewer
     {
@@ -28,20 +30,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Viewer = new System.Windows.Forms.WebBrowser();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.DateLabel = new System.Windows.Forms.Label();
             this.uploadButton = new System.Windows.Forms.Button();
+            this.viewer = new Spire.PdfViewer.Forms.PdfViewer();
             this.SuspendLayout();
-            // 
-            // Viewer
-            // 
-            this.Viewer.Location = new System.Drawing.Point(50, 66);
-            this.Viewer.MinimumSize = new System.Drawing.Size(20, 20);
-            this.Viewer.Name = "Viewer";
-            this.Viewer.Size = new System.Drawing.Size(797, 475);
-            this.Viewer.TabIndex = 0;
-            this.Viewer.Url = new System.Uri("", System.UriKind.Relative);
             // 
             // TitleLabel
             // 
@@ -78,14 +71,26 @@
             this.uploadButton.UseVisualStyleBackColor = false;
             this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
             // 
+            // viewer
+            // 
+            this.viewer.FindTextHighLightColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(153)))), ((int)(((byte)(193)))), ((int)(((byte)(218)))));
+            this.viewer.IsToolBarVisible = true;
+            this.viewer.Location = new System.Drawing.Point(50, 84);
+            this.viewer.MultiPagesThreshold = 60;
+            this.viewer.Name = "viewer";
+            this.viewer.Size = new System.Drawing.Size(797, 460);
+            this.viewer.TabIndex = 4;
+            this.viewer.Text = "pdfViewer1";
+            this.viewer.Threshold = 60;
+            // 
             // DocumentViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.viewer);
             this.Controls.Add(this.uploadButton);
             this.Controls.Add(this.DateLabel);
             this.Controls.Add(this.TitleLabel);
-            this.Controls.Add(this.Viewer);
             this.Name = "DocumentViewer";
             this.Size = new System.Drawing.Size(897, 544);
             this.ResumeLayout(false);
@@ -94,10 +99,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.WebBrowser Viewer;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.Button uploadButton;
+        private Spire.PdfViewer.Forms.PdfViewer viewer;
     }
 }

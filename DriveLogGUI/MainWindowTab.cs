@@ -187,9 +187,8 @@ namespace DriveLogGUI
             }
             else
             {
-                documentViewer.SetType(Session.TypeFirstAid);
-                documentViewer.Clear();
                 OpenPage(documentViewer);
+                documentViewer.SetType(Session.TypeFirstAid);
             }
         }
 
