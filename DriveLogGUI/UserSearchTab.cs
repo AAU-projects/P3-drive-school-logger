@@ -26,6 +26,9 @@ namespace DriveLogGUI
             if (e.KeyCode != Keys.Enter) return;
             _usersFoundList = DatabaseParser.UserSearchList(searchBox.Text);
 
+            _userPanelList.Clear();
+            resultsPanel.Controls.Clear();
+
             for (int i = 0; i < _usersFoundList.Count; i++)
             {
                GenerateUserPanel(_usersFoundList[i], i);
@@ -44,13 +47,15 @@ namespace DriveLogGUI
             tempPanel.BackColor = Color.White;
 
             if (index % 2 == 0)
-            {
                 tempPanel.Location = new Point(22, 13 + (13 + tempPanel.Height * (index / 2)) * (index / 2));
-            }
             else
-            {
                 tempPanel.Location = new Point(454, 13 + (13 + tempPanel.Height * (index / 2)) * (index / 2));
-            }
+
+            PictureBox profilePictureBox = new PictureBox();
+            profilePictureBox.Load(user.PicturePath);
+            profilePictureBox.Location = new Point(5,5);
+            profilePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            tempPanel.Controls.Add(profilePictureBox);
 
             _userPanelList.Add(tempPanel);
         }

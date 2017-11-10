@@ -26,23 +26,10 @@ namespace DriveLogGUI
 
         public MainWindowTab()
         {
-            // Initializing
-            overviewTab = new OverviewTab();
-            profileTab = new ProfileTab();
-            documentViewer = new DocumentViewer();
-            doctorsNoteTab = new DoctorsNote();
-            userSearchTab = new UserSearchTab();
-
             InitializeComponent();
-            MoveButtonSpaces(OverviewButton, 8);
-            MoveButtonSpaces(ProfileButton, 8);
-            MoveButtonSpaces(bookingButton, 8);
-            MoveButtonSpaces(settingsButton, 8);
-            MoveButtonSpaces(userSearchButton, 8);
-            OverviewButton.Controls.Add(pictureHomeTab);
-            ProfileButton.Controls.Add(pictureProfileTab);
-            bookingButton.Controls.Add(pictureBookingTab);
-            settingsButton.Controls.Add(pictureSettingsTab);
+            InitializeMenuTabs();
+
+
             overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
             overviewTab.DoctorsNotePictureButtonClick += new EventHandler(doctorsNoteButton_Click);
 
@@ -65,6 +52,31 @@ namespace DriveLogGUI
 
             // opening starting page after login
             OpenPage(overviewTab);
+        }
+
+        private void InitializeMenuTabs()
+        {
+            overviewTab = new OverviewTab();
+            profileTab = new ProfileTab();
+            documentViewer = new DocumentViewer();
+            doctorsNoteTab = new DoctorsNote();
+            userSearchTab = new UserSearchTab();
+
+            overviewTab.Hide();
+            profileTab.Hide();
+            documentViewer.Hide();
+            doctorsNoteTab.Hide();
+            userSearchTab.Hide();
+
+            MoveButtonSpaces(OverviewButton, 8);
+            MoveButtonSpaces(ProfileButton, 8);
+            MoveButtonSpaces(bookingButton, 8);
+            MoveButtonSpaces(settingsButton, 8);
+            MoveButtonSpaces(userSearchButton, 8);
+            OverviewButton.Controls.Add(pictureHomeTab);
+            ProfileButton.Controls.Add(pictureProfileTab);
+            bookingButton.Controls.Add(pictureBookingTab);
+            settingsButton.Controls.Add(pictureSettingsTab);
         }
 
         private void doctorsNoteButton_Click(object sender, EventArgs e)
@@ -154,11 +166,10 @@ namespace DriveLogGUI
 
         private void MainWindowTab_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Owner.Visible) {
+            if (Owner.Visible)
                 this.Dispose();
-            } else if (!Owner.Visible) {
+            else if (!Owner.Visible)
                 Application.Exit();
-            }
         }
 
         private void logoutButton_Click(object sender, EventArgs e)

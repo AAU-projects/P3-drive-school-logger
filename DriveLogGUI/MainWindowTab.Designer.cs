@@ -48,7 +48,6 @@
             this.topPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.leftSidePanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelForProfile.SuspendLayout();
@@ -62,7 +61,6 @@
             // leftSidePanel
             // 
             this.leftSidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
-            this.leftSidePanel.Controls.Add(this.button3);
             this.leftSidePanel.Controls.Add(this.label2);
             this.leftSidePanel.Controls.Add(this.panel4);
             this.leftSidePanel.Controls.Add(this.label1);
@@ -339,15 +337,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(24, 444);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // MainWindowTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -396,6 +385,5 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button userSearchButton;
-        private System.Windows.Forms.Button button3;
     }
 }

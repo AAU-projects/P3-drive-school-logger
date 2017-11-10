@@ -38,10 +38,7 @@
             this.headerLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.resultsPanel = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.headerPanel.SuspendLayout();
-            this.resultsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // logoutButton
@@ -109,9 +106,8 @@
             // searchBox
             // 
             this.searchBox.Location = new System.Drawing.Point(22, 55);
-            this.searchBox.Multiline = true;
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(829, 40);
+            this.searchBox.Size = new System.Drawing.Size(829, 20);
             this.searchBox.TabIndex = 1;
             this.searchBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.searchBox_KeyUp);
             // 
@@ -136,26 +132,10 @@
             // 
             this.resultsPanel.AutoScroll = true;
             this.resultsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.resultsPanel.Controls.Add(this.panel2);
-            this.resultsPanel.Controls.Add(this.panel1);
             this.resultsPanel.Location = new System.Drawing.Point(12, 136);
             this.resultsPanel.Name = "resultsPanel";
             this.resultsPanel.Size = new System.Drawing.Size(873, 395);
             this.resultsPanel.TabIndex = 7;
-            // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(454, 16);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(397, 74);
-            this.panel2.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(22, 16);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(397, 74);
-            this.panel1.TabIndex = 0;
             // 
             // UserSearchTab
             // 
@@ -167,7 +147,6 @@
             this.Size = new System.Drawing.Size(897, 544);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
-            this.resultsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -183,7 +162,5 @@
         private System.Windows.Forms.CheckBox studentsOnlyCheckBox;
         private System.Windows.Forms.CheckBox activeCheckBox;
         private System.Windows.Forms.Panel resultsPanel;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
     }
 }
