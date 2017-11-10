@@ -217,6 +217,7 @@
             // instructorCheckBox
             // 
             this.instructorCheckBox.AutoSize = true;
+            this.instructorCheckBox.Enabled = false;
             this.instructorCheckBox.ForeColor = System.Drawing.Color.DarkGray;
             this.instructorCheckBox.Location = new System.Drawing.Point(18, 347);
             this.instructorCheckBox.Name = "instructorCheckBox";
