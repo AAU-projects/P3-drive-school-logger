@@ -84,6 +84,8 @@
             this.maneuverTrackPictureButton = new System.Windows.Forms.PictureBox();
             this.firstAidPictureButton = new System.Windows.Forms.PictureBox();
             this.doctorsNotePictureButton = new System.Windows.Forms.PictureBox();
+            this.calendarLeftArrow = new System.Windows.Forms.Label();
+            this.calendarRightArrow = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.todaysNotePanel.SuspendLayout();
             this.calendarPanel.SuspendLayout();
@@ -388,6 +390,8 @@
             // 
             // monthPanel
             // 
+            this.monthPanel.Controls.Add(this.calendarRightArrow);
+            this.monthPanel.Controls.Add(this.calendarLeftArrow);
             this.monthPanel.Controls.Add(this.calendarLine);
             this.monthPanel.Controls.Add(this.calendarMonth);
             this.monthPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -691,6 +695,31 @@
             this.doctorsNotePictureButton.TabStop = false;
             this.doctorsNotePictureButton.Click += new System.EventHandler(this.doctorsNotePictureButton_Click);
             // 
+            // calendarLeftArrow
+            // 
+            this.calendarLeftArrow.AutoSize = true;
+            this.calendarLeftArrow.BackColor = System.Drawing.Color.Transparent;
+            this.calendarLeftArrow.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calendarLeftArrow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.calendarLeftArrow.Location = new System.Drawing.Point(104, 5);
+            this.calendarLeftArrow.Name = "calendarLeftArrow";
+            this.calendarLeftArrow.Size = new System.Drawing.Size(25, 29);
+            this.calendarLeftArrow.TabIndex = 2;
+            this.calendarLeftArrow.Text = "<";
+            // 
+            // calendarRightArrow
+            // 
+            this.calendarRightArrow.AutoSize = true;
+            this.calendarRightArrow.BackColor = System.Drawing.Color.Transparent;
+            this.calendarRightArrow.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calendarRightArrow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.calendarRightArrow.Location = new System.Drawing.Point(249, 5);
+            this.calendarRightArrow.Name = "calendarRightArrow";
+            this.calendarRightArrow.Size = new System.Drawing.Size(25, 29);
+            this.calendarRightArrow.TabIndex = 3;
+            this.calendarRightArrow.Text = ">";
+            this.calendarRightArrow.Click += new System.EventHandler(this.calendarRightArrow_Click);
+            // 
             // OverviewTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,6 +748,7 @@
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.monthPanel.ResumeLayout(false);
+            this.monthPanel.PerformLayout();
             this.progressBarPanel.ResumeLayout(false);
             this.progressBarPanel.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -792,5 +822,7 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label mondayCalendar;
         private System.Windows.Forms.Panel calendarLine;
+        private System.Windows.Forms.Label calendarRightArrow;
+        private System.Windows.Forms.Label calendarLeftArrow;
     }
 }

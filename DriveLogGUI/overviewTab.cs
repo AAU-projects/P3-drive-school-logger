@@ -15,12 +15,14 @@ namespace DriveLogGUI
     {
         public event EventHandler LogOutButtonClick;
         public event EventHandler DoctorsNotePictureButtonClick;
+        private DateTime selectedMonth;
+        private List<Panel> listOfDays = new List<Panel>();
 
         public OverviewTab()
         {
             InitializeComponent();
             welcomeUserLabel.Text = "Welcome " + Session.LoggedInUser.Firstname;
-            calendarMonth.Text = DateTime.Now.ToString("MMMM").ToUpper();
+            selectedMonth = DateTime.Now;
         }
 
         public void logoutButton_Click(object sender, EventArgs e)
@@ -37,6 +39,12 @@ namespace DriveLogGUI
 
         private void daysForCalendar_Paint(object sender, PaintEventArgs e)
         {
+            DrawCalendar();
+        }
+
+        private void DrawCalendar()
+        {
+            calendarMonth.Text = selectedMonth.ToString("MMMM").ToUpper();
             int widthForEachDay = daysForCalendar.Width / 7;
             int heightForEachDay = daysForCalendar.Height / 5;
 
@@ -63,14 +71,25 @@ namespace DriveLogGUI
                 FormatPanelForDays(ref day, ref currentDateTime);
 
                 daysForCalendar.Controls.Add(day);
+
+                listOfDays.Add(day);
+            }
+        }
+
+        private void UpdateCalender()
+        {
+            foreach (Panel day in listOfDays)
+            {
+                foreach (Control control in day.Controls)
+                {
+                    FormatPanelForDays(ref day, ref selectedMonth);
+                }
             }
         }
 
         private DateTime WhereDoWeStart()
         {
-            DateTime date;
-
-            date = DateTime.Now;
+            DateTime date = selectedMonth;
             DateTime startDate = new DateTime(date.Year, date.Month, 1);
             date = startDate;
 
@@ -85,14 +104,31 @@ namespace DriveLogGUI
         {
             panel.BackColor = Color.FromArgb(251, 251, 251);
             Label dayNumber = new Label();
-
+            
             dayNumber.Text = currentDateTime.Day.ToString();
             dayNumber.AutoSize = false;
             dayNumber.Dock = DockStyle.Fill;
             dayNumber.TextAlign = ContentAlignment.MiddleCenter;
 
+            if (currentDateTime.Month != selectedMonth.Month)
+            {
+                dayNumber.ForeColor = Color.FromArgb(203, 203, 203);
+            }
+            else if (currentDateTime.Day == DateTime.Now.Day)
+            {
+                panel.BackColor = Color.FromArgb(148, 197, 204);
+                dayNumber.ForeColor = Color.FromArgb(251, 251, 251);
+                dayNumber.Font = new Font(dayNumber.Font, FontStyle.Bold);
+            }
+
             panel.Controls.Add(dayNumber);
             currentDateTime = currentDateTime.AddDays(1);
+        }
+
+        private void calendarRightArrow_Click(object sender, EventArgs e)
+        {
+            selectedMonth = selectedMonth.AddMonths(1);
+            UpdateCalender();
         }
     }
 }
