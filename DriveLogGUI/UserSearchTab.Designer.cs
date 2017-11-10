@@ -38,7 +38,9 @@
             this.headerLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.resultsPanel = new System.Windows.Forms.Panel();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
+            this.resultsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // logoutButton
@@ -66,13 +68,13 @@
             this.headerPanel.Controls.Add(this.headerLabel);
             this.headerPanel.Location = new System.Drawing.Point(12, 12);
             this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(873, 118);
+            this.headerPanel.Size = new System.Drawing.Size(873, 104);
             this.headerPanel.TabIndex = 5;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(230, 98);
+            this.checkBox1.Location = new System.Drawing.Point(230, 81);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(127, 17);
             this.checkBox1.TabIndex = 4;
@@ -84,7 +86,7 @@
             this.studentsOnlyCheckBox.AutoSize = true;
             this.studentsOnlyCheckBox.Checked = true;
             this.studentsOnlyCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.studentsOnlyCheckBox.Location = new System.Drawing.Point(134, 98);
+            this.studentsOnlyCheckBox.Location = new System.Drawing.Point(134, 81);
             this.studentsOnlyCheckBox.Name = "studentsOnlyCheckBox";
             this.studentsOnlyCheckBox.Size = new System.Drawing.Size(90, 17);
             this.studentsOnlyCheckBox.TabIndex = 3;
@@ -96,7 +98,7 @@
             this.activeCheckBox.AutoSize = true;
             this.activeCheckBox.Checked = true;
             this.activeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.activeCheckBox.Location = new System.Drawing.Point(22, 98);
+            this.activeCheckBox.Location = new System.Drawing.Point(22, 81);
             this.activeCheckBox.Name = "activeCheckBox";
             this.activeCheckBox.Size = new System.Drawing.Size(106, 17);
             this.activeCheckBox.TabIndex = 2;
@@ -132,10 +134,21 @@
             // 
             this.resultsPanel.AutoScroll = true;
             this.resultsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.resultsPanel.Location = new System.Drawing.Point(12, 136);
+            this.resultsPanel.Controls.Add(this.errorLabel);
+            this.resultsPanel.Location = new System.Drawing.Point(12, 122);
             this.resultsPanel.Name = "resultsPanel";
-            this.resultsPanel.Size = new System.Drawing.Size(873, 395);
+            this.resultsPanel.Size = new System.Drawing.Size(873, 409);
             this.resultsPanel.TabIndex = 7;
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.errorLabel.Location = new System.Drawing.Point(318, 9);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(212, 31);
+            this.errorLabel.TabIndex = 0;
+            this.errorLabel.Text = "No Users Found";
             // 
             // UserSearchTab
             // 
@@ -147,6 +160,8 @@
             this.Size = new System.Drawing.Size(897, 544);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
+            this.resultsPanel.ResumeLayout(false);
+            this.resultsPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -162,5 +177,6 @@
         private System.Windows.Forms.CheckBox studentsOnlyCheckBox;
         private System.Windows.Forms.CheckBox activeCheckBox;
         private System.Windows.Forms.Panel resultsPanel;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
