@@ -31,14 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.logoutButton = new System.Windows.Forms.Button();
             this.headerPanel = new System.Windows.Forms.Panel();
-            this.headerLabel = new System.Windows.Forms.Label();
-            this.searchBox = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.activeCheckBox = new System.Windows.Forms.CheckBox();
-            this.studentsOnlyCheckBox = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.studentsOnlyCheckBox = new System.Windows.Forms.CheckBox();
+            this.activeCheckBox = new System.Windows.Forms.CheckBox();
+            this.searchBox = new System.Windows.Forms.TextBox();
+            this.headerLabel = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.resultsPanel = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.headerPanel.SuspendLayout();
+            this.resultsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // logoutButton
@@ -48,7 +51,7 @@
             this.logoutButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.logoutButton.Location = new System.Drawing.Point(808, 6);
+            this.logoutButton.Location = new System.Drawing.Point(799, 6);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(52, 44);
             this.logoutButton.TabIndex = 1;
@@ -69,42 +72,15 @@
             this.headerPanel.Size = new System.Drawing.Size(873, 118);
             this.headerPanel.TabIndex = 5;
             // 
-            // headerLabel
+            // checkBox1
             // 
-            this.headerLabel.BackColor = System.Drawing.Color.Transparent;
-            this.headerLabel.Font = new System.Drawing.Font("Myanmar Text", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.headerLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.headerLabel.Location = new System.Drawing.Point(12, 6);
-            this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(848, 44);
-            this.headerLabel.TabIndex = 0;
-            this.headerLabel.Text = "Search for Users";
-            this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // searchBox
-            // 
-            this.searchBox.Location = new System.Drawing.Point(22, 55);
-            this.searchBox.Multiline = true;
-            this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(838, 40);
-            this.searchBox.TabIndex = 1;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // activeCheckBox
-            // 
-            this.activeCheckBox.AutoSize = true;
-            this.activeCheckBox.Checked = true;
-            this.activeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.activeCheckBox.Location = new System.Drawing.Point(22, 98);
-            this.activeCheckBox.Name = "activeCheckBox";
-            this.activeCheckBox.Size = new System.Drawing.Size(106, 17);
-            this.activeCheckBox.TabIndex = 2;
-            this.activeCheckBox.Text = "Active users only";
-            this.activeCheckBox.UseVisualStyleBackColor = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(230, 98);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(127, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Eventuel check box?";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // studentsOnlyCheckBox
             // 
@@ -118,24 +94,68 @@
             this.studentsOnlyCheckBox.Text = "Students only";
             this.studentsOnlyCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // activeCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(230, 98);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(127, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Eventuel check box?";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.activeCheckBox.AutoSize = true;
+            this.activeCheckBox.Checked = true;
+            this.activeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.activeCheckBox.Location = new System.Drawing.Point(22, 98);
+            this.activeCheckBox.Name = "activeCheckBox";
+            this.activeCheckBox.Size = new System.Drawing.Size(106, 17);
+            this.activeCheckBox.TabIndex = 2;
+            this.activeCheckBox.Text = "Active users only";
+            this.activeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // searchBox
+            // 
+            this.searchBox.Location = new System.Drawing.Point(22, 55);
+            this.searchBox.Multiline = true;
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(829, 40);
+            this.searchBox.TabIndex = 1;
+            this.searchBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.searchBox_KeyUp);
+            // 
+            // headerLabel
+            // 
+            this.headerLabel.BackColor = System.Drawing.Color.Transparent;
+            this.headerLabel.Font = new System.Drawing.Font("Myanmar Text", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headerLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.headerLabel.Location = new System.Drawing.Point(12, 6);
+            this.headerLabel.Name = "headerLabel";
+            this.headerLabel.Size = new System.Drawing.Size(848, 44);
+            this.headerLabel.TabIndex = 0;
+            this.headerLabel.Text = "Search for Users";
+            this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // resultsPanel
             // 
             this.resultsPanel.AutoScroll = true;
             this.resultsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.resultsPanel.Controls.Add(this.panel2);
+            this.resultsPanel.Controls.Add(this.panel1);
             this.resultsPanel.Location = new System.Drawing.Point(12, 136);
             this.resultsPanel.Name = "resultsPanel";
             this.resultsPanel.Size = new System.Drawing.Size(873, 395);
             this.resultsPanel.TabIndex = 7;
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(454, 16);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(397, 74);
+            this.panel2.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(22, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(397, 74);
+            this.panel1.TabIndex = 0;
             // 
             // UserSearchTab
             // 
@@ -147,6 +167,7 @@
             this.Size = new System.Drawing.Size(897, 544);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
+            this.resultsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -162,5 +183,7 @@
         private System.Windows.Forms.CheckBox studentsOnlyCheckBox;
         private System.Windows.Forms.CheckBox activeCheckBox;
         private System.Windows.Forms.Panel resultsPanel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

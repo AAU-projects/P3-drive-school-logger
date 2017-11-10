@@ -22,6 +22,7 @@ namespace DriveLogGUI
         private ProfileTab profileTab;
         private DocumentViewer documentViewer;
         private DoctorsNote doctorsNoteTab;
+        private UserSearchTab userSearchTab;
 
         public MainWindowTab()
         {
@@ -30,12 +31,14 @@ namespace DriveLogGUI
             profileTab = new ProfileTab();
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
+            userSearchTab = new UserSearchTab();
 
             InitializeComponent();
             MoveButtonSpaces(OverviewButton, 8);
             MoveButtonSpaces(ProfileButton, 8);
             MoveButtonSpaces(bookingButton, 8);
             MoveButtonSpaces(settingsButton, 8);
+            MoveButtonSpaces(userSearchButton, 8);
             OverviewButton.Controls.Add(pictureHomeTab);
             ProfileButton.Controls.Add(pictureProfileTab);
             bookingButton.Controls.Add(pictureBookingTab);
@@ -51,12 +54,14 @@ namespace DriveLogGUI
             profileTab.Location = pageStartPoint;
             documentViewer.Location = pageStartPoint;
             doctorsNoteTab.Location = pageStartPoint;
+            userSearchTab.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
             this.Controls.Add(profileTab);
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
+            this.Controls.Add(userSearchTab);
 
             // opening starting page after login
             OpenPage(overviewTab);
@@ -86,6 +91,7 @@ namespace DriveLogGUI
                 //moving objects below
                 bookingButton.Location = MoveLocation(bookingButton.Location, panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, panelForProfile.Height);
+                userSearchButton.Location = MoveLocation(userSearchButton.Location, panelForProfile.Height);
                 _isOpen = true;
             }
             else if (_isOpen)
@@ -93,6 +99,7 @@ namespace DriveLogGUI
                 //move objects back
                 bookingButton.Location = MoveLocation(bookingButton.Location, -panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, -panelForProfile.Height);
+                userSearchButton.Location = MoveLocation(userSearchButton.Location, -panelForProfile.Height);
                 panelForProfile.Hide();
                 _isOpen = false;
             }
@@ -200,6 +207,12 @@ namespace DriveLogGUI
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
+            ProfileSubmenuControl(false);
+        }
+
+        private void userSearchButton_Click(object sender, EventArgs e)
+        {
+            OpenPage(userSearchTab);
             ProfileSubmenuControl(false);
         }
     }

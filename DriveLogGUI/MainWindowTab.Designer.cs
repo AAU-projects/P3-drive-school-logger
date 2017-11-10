@@ -31,6 +31,7 @@
             this.leftSidePanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.userSearchButton = new System.Windows.Forms.Button();
             this.panelForProfile = new System.Windows.Forms.Panel();
             this.firstAidButton = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -47,7 +48,7 @@
             this.topPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.userSearchButton = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.leftSidePanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelForProfile.SuspendLayout();
@@ -61,6 +62,7 @@
             // leftSidePanel
             // 
             this.leftSidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
+            this.leftSidePanel.Controls.Add(this.button3);
             this.leftSidePanel.Controls.Add(this.label2);
             this.leftSidePanel.Controls.Add(this.panel4);
             this.leftSidePanel.Controls.Add(this.label1);
@@ -98,6 +100,23 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(132, 315);
             this.panel4.TabIndex = 0;
+            // 
+            // userSearchButton
+            // 
+            this.userSearchButton.FlatAppearance.BorderSize = 0;
+            this.userSearchButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.userSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userSearchButton.ForeColor = System.Drawing.Color.White;
+            this.userSearchButton.Location = new System.Drawing.Point(0, 104);
+            this.userSearchButton.Name = "userSearchButton";
+            this.userSearchButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.userSearchButton.Size = new System.Drawing.Size(132, 36);
+            this.userSearchButton.TabIndex = 4;
+            this.userSearchButton.Text = "Users";
+            this.userSearchButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.userSearchButton.UseVisualStyleBackColor = true;
+            this.userSearchButton.Click += new System.EventHandler(this.userSearchButton_Click);
             // 
             // panelForProfile
             // 
@@ -320,21 +339,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // userSearchButton
+            // button3
             // 
-            this.userSearchButton.FlatAppearance.BorderSize = 0;
-            this.userSearchButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.userSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userSearchButton.ForeColor = System.Drawing.Color.White;
-            this.userSearchButton.Location = new System.Drawing.Point(0, 104);
-            this.userSearchButton.Name = "userSearchButton";
-            this.userSearchButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.userSearchButton.Size = new System.Drawing.Size(132, 36);
-            this.userSearchButton.TabIndex = 4;
-            this.userSearchButton.Text = "Users";
-            this.userSearchButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userSearchButton.UseVisualStyleBackColor = true;
+            this.button3.Location = new System.Drawing.Point(24, 444);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // MainWindowTab
             // 
@@ -384,5 +396,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button userSearchButton;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,19 @@ namespace DriveLogCode
             {
                 return null;
             }
+        }
+
+        public static List<User> UserSearchList(string searchInput)
+        {
+            DataTable queryInfo = MySql.UserSearch(searchInput);
+            List<User> usersFound = new List<User>();
+
+            for (int i = 0; i < queryInfo.Rows.Count; i++)
+            {
+                usersFound.Add(new User(queryInfo, i));   
+            }
+
+            return usersFound;
         }
     }
 }
