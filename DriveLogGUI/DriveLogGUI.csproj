@@ -137,6 +137,12 @@
     <Compile Include="RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TemplateCreator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TemplateCreator.Designer.cs">
+      <DependentUpon>TemplateCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextboxBorderColor.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -185,6 +191,9 @@
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TemplateCreator.resx">
+      <DependentUpon>TemplateCreator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UploadProfilePicForm.resx">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,6 +228,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ic_mode_edit_black_24dp_1x.png" />
+    <None Include="Resources\ic_remove_black_24dp_2x.png" />
+    <None Include="Resources\ic_remove_black_24dp_1x.png" />
+    <None Include="Resources\ic_add_black_24dp_2x.png" />
+    <None Include="Resources\ic_add_black_24dp_1x.png" />
+    <None Include="Resources\ic_edit_black_24dp_2x.png" />
+    <None Include="Resources\ic_edit_black_24dp_1x.png" />
     <None Include="Resources\icons8-checkmark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

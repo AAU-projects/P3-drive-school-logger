@@ -18,23 +18,34 @@ namespace DriveLogCode
         private const string DocumnentTable = "documents";
         private const string LessonTemplateTable = "lessonTemplates";
 
+        public static bool DeleteTemplate(int id, string table = LessonTemplateTable)
+        {
+            MySqlCommand cmd = new MySqlCommand($"DELETE FROM {table} WHERE id = {id}");
+
+            if (ExistTable(table)) return SendNonQuery(cmd);
+            return false;
+        }
+
         public static DataTable GetCreatedLessonNames(string table = LessonTemplateTable)
         {
-            var cmd = new MySqlCommand($"SELECT title FROM {table} WHERE 1");
+            var cmd = new MySqlCommand($"SELECT `title` FROM {table} WHERE 1");
 
-            return SendQuery(cmd);
+            if (ExistTable(table)) return SendQuery(cmd);
+            return CreateTemplateTable(table) ? SendQuery(cmd) : null;
         }
 
         public static DataTable GetLessonData(string title, string table = LessonTemplateTable)
         {
-            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE title = {title} LIMIT 1");
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE title = '{title}' LIMIT 1");
 
-            return SendQuery(cmd);
+            if (ExistTable(table)) return SendQuery(cmd);
+            return CreateTemplateTable(table) ? SendQuery(cmd) : null;
         }
 
-        public static bool UploadLessonTemp(string title, string description, string time, string reading, string table = LessonTemplateTable)
+        private static bool UpdateLessonTemplate(string id, string title, string description, string type, string time, string reading, string table = LessonTemplateTable)
         {
-            var cmd = new MySqlCommand($"INSERT INTO {table} (title, description, time, reading) VALUES ('{title}', '{description}', {title}, '{reading}')");
+            var cmd = new MySqlCommand($"UPDATE {table} SET title = '{title}', description = '{description}', type = '{type}', time = '{time}', reading = '{reading}' WHERE id = {id}");
+            
 
             if (ExistTable(table)) return SendNonQuery(cmd);
             if (CreateTemplateTable(table)) return SendNonQuery(cmd);
@@ -42,11 +53,27 @@ namespace DriveLogCode
             return false;
         }
 
+        public static bool UploadLessonTemplate(string id, string title, string description, string type, string time, string reading, string table = LessonTemplateTable)
+        {
+           var cmd = new MySqlCommand($"INSERT INTO {table} (title, description, type, time, reading) VALUES ('{title}', '{description}', '{type}', '{time}', '{reading}')");
+
+            if (ExistTable(table))
+            {
+                if (id != null && Exist("id", id, LessonTemplateTable)) return UpdateLessonTemplate(id, title, description, type, time, reading, table);
+                return SendNonQuery(cmd);
+            }
+            if (CreateTemplateTable(table)) return SendNonQuery(cmd);
+
+            return false;
+        }
+
         private static bool CreateTemplateTable(string table = LessonTemplateTable)
         {
-            var cmd = new MySqlCommand($"CREATE TABLE `{table}` (`id`  int NOT NULL ," +
+            var cmd = new MySqlCommand($"CREATE TABLE `{table}` (" +
+                                       $"`id`  int(11) NOT NULL AUTO_INCREMENT ," +
                                        $"`title`  varchar(255) NOT NULL ," +
                                        $"`description`  varchar(255) NOT NULL ," +
+                                       $"`type`  enum('Practical','Theoretical') NOT NULL ," +
                                        $"`time`  varchar(255) NOT NULL ," +
                                        $"`reading`  varchar(255) NULL ," +
                                        $"PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");

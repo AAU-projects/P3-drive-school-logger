@@ -10,6 +10,52 @@ namespace DriveLogCode
 {
     public static class DatabaseParser
     {
+        public static void DeleteTemplate(int id)
+        {
+            MySql.DeleteTemplate(id);
+        }
+
+        public static bool UploadTemplate(string id, string title, string description, string type, string time,
+            string reading)
+        {
+            return MySql.UploadLessonTemplate(id, title, description, type, time, reading);
+        }
+
+        public static Dictionary<string, string> GetTemplate(string templateName)
+        {
+            DataTable lessonInfo = MySql.GetLessonData(templateName);
+
+            return GetDict(lessonInfo);
+        }
+
+        private static Dictionary<string, string> GetDict(DataTable dt)
+        {
+            Dictionary<string, string> TempDict = new Dictionary<string, string>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (DataColumn column in dt.Columns)
+                {
+                    TempDict.Add(column.ColumnName, row[column].ToString());
+                }
+            }
+
+            return TempDict;
+        }
+
+        public static List<string> GetLessonTemplates()
+        {
+            List<string> results = new List<string>();
+            DataTable DatabaseResults = MySql.GetCreatedLessonNames();
+
+            foreach (DataRow row in DatabaseResults.Rows)
+            {
+                results.Add((string) row[0]);
+            }
+
+            return results;
+        }
+
         public static bool ExistDoctorsNote(User user)
         {
             return ExistDocument(user, Session.TypeDoctorsNote);

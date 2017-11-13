@@ -24,6 +24,8 @@ namespace DriveLogGUI
         private DoctorsNote doctorsNoteTab;
         private UserSearchTab userSearchTab;
 
+        private TemplateCreator lessonTemplates;
+
         public MainWindowTab()
         {
             InitializeComponent();
@@ -42,6 +44,7 @@ namespace DriveLogGUI
             documentViewer.Location = pageStartPoint;
             doctorsNoteTab.Location = pageStartPoint;
             userSearchTab.Location = pageStartPoint;
+            lessonTemplates.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
@@ -49,6 +52,7 @@ namespace DriveLogGUI
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
             this.Controls.Add(userSearchTab);
+            this.Controls.Add(lessonTemplates);
 
             // opening starting page after login
             OpenPage(overviewTab);
@@ -61,6 +65,7 @@ namespace DriveLogGUI
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();
+            lessonTemplates = new TemplateCreator();
 
             overviewTab.Hide();
             profileTab.Hide();
@@ -218,6 +223,7 @@ namespace DriveLogGUI
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
+            OpenPage(lessonTemplates);
             ProfileSubmenuControl(false);
         }
 
