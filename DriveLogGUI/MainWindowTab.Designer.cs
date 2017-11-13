@@ -33,7 +33,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panelForProfile = new System.Windows.Forms.Panel();
             this.firstAidButton = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.doctorsNoteButton = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBookingTab = new System.Windows.Forms.PictureBox();
             this.pictureSettingsTab = new System.Windows.Forms.PictureBox();
@@ -100,7 +100,7 @@
             // panelForProfile
             // 
             this.panelForProfile.Controls.Add(this.firstAidButton);
-            this.panelForProfile.Controls.Add(this.button6);
+            this.panelForProfile.Controls.Add(this.doctorsNoteButton);
             this.panelForProfile.Controls.Add(this.button5);
             this.panelForProfile.Location = new System.Drawing.Point(0, 188);
             this.panelForProfile.Name = "panelForProfile";
@@ -124,20 +124,21 @@
             this.firstAidButton.UseVisualStyleBackColor = true;
             this.firstAidButton.Click += new System.EventHandler(this.firstAidButton_Click);
             // 
-            // button6
+            // doctorsNoteButton
             // 
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(24, 32);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(108, 32);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Doctors note";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.UseVisualStyleBackColor = true;
+            this.doctorsNoteButton.FlatAppearance.BorderSize = 0;
+            this.doctorsNoteButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.doctorsNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.doctorsNoteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doctorsNoteButton.ForeColor = System.Drawing.Color.White;
+            this.doctorsNoteButton.Location = new System.Drawing.Point(24, 32);
+            this.doctorsNoteButton.Name = "doctorsNoteButton";
+            this.doctorsNoteButton.Size = new System.Drawing.Size(108, 32);
+            this.doctorsNoteButton.TabIndex = 5;
+            this.doctorsNoteButton.Text = "Doctors note";
+            this.doctorsNoteButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.doctorsNoteButton.UseVisualStyleBackColor = true;
+            this.doctorsNoteButton.Click += new System.EventHandler(this.doctorsNoteButton_Click_1);
             // 
             // button5
             // 
@@ -357,7 +358,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelForProfile;
         private System.Windows.Forms.Button firstAidButton;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button doctorsNoteButton;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.PictureBox pictureSettingsTab;
         private System.Windows.Forms.PictureBox pictureBookingTab;

@@ -52,8 +52,16 @@ namespace DriveLogGUI
 
         public void SetType(string type)
         {
+            ClearDocument();
             _documentType = type;
             _documentName = $"{Session.LoggedInUser.Fullname} - {_documentType}";
+        }
+
+        private void ClearDocument()
+        {
+            viewer.CloseDocument();
+            TitleLabel.Text = "No Document";
+            DateLabel.Text = string.Empty;
         }
 
         private void OpenFileDialog()
@@ -108,6 +116,11 @@ namespace DriveLogGUI
         internal void DisposePdf()
         {
             viewer.Dispose();
+        }
+
+        private void DocumentViewer_VisibleChanged(object sender, EventArgs e)
+        {
+            ClearDocument();
         }
     }
 }

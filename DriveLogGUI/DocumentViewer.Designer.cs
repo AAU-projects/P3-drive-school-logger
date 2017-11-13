@@ -35,7 +35,6 @@ namespace DriveLogGUI
             this.DateLabel = new System.Windows.Forms.Label();
             this.uploadButton = new System.Windows.Forms.Button();
             this.viewer = new Spire.PdfViewer.Forms.PdfDocumentViewer();
-            this.viewer.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -95,7 +94,7 @@ namespace DriveLogGUI
             this.Controls.Add(this.TitleLabel);
             this.Name = "DocumentViewer";
             this.Size = new System.Drawing.Size(897, 544);
-            this.viewer.ResumeLayout(false);
+            this.VisibleChanged += new System.EventHandler(this.DocumentViewer_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
