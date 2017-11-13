@@ -24,6 +24,7 @@ namespace DriveLogGUI
         private DoctorsNote doctorsNoteTab;
         private UserSearchTab userSearchTab;
         private CalendarTabG calendarTab;
+        private SettingsTab settingsTab;
 
         public MainWindowTab()
         {
@@ -44,6 +45,7 @@ namespace DriveLogGUI
             doctorsNoteTab.Location = pageStartPoint;
             userSearchTab.Location = pageStartPoint;
             calendarTab.Location = pageStartPoint;
+            settingsTab.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
@@ -52,9 +54,12 @@ namespace DriveLogGUI
             this.Controls.Add(doctorsNoteTab);
             this.Controls.Add(userSearchTab);
             this.Controls.Add(calendarTab);
+            this.Controls.Add(settingsTab);
+            
             if (Session.LoggedInUser.Sysmin)
             {
                 this.Controls.Add(userSearchTab);
+
                 userSearchButton.Enabled = true;
                 userSearchButton.Visible = true;
                 pictureSearchTab.Enabled = true;
@@ -74,6 +79,7 @@ namespace DriveLogGUI
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();
             calendarTab = new CalendarTabG(overviewTab, this);
+            settingsTab = new SettingsTab();
 
             overviewTab.Hide();
             profileTab.Hide();
@@ -81,7 +87,7 @@ namespace DriveLogGUI
             doctorsNoteTab.Hide();
             userSearchTab.Hide();
             calendarTab.Hide();
-
+            settingsTab.Hide();
 
             MoveButtonSpaces(OverviewButton, 8);
             MoveButtonSpaces(ProfileButton, 8);
@@ -235,6 +241,7 @@ namespace DriveLogGUI
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
+            OpenPage(settingsTab);
             ProfileSubmenuControl(false);
         }
 
