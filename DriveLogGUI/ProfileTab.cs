@@ -50,7 +50,7 @@ namespace DriveLogGUI
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            EditUserInfoForm editForm = new EditUserInfoForm();
+            EditUserInfoForm editForm = new EditUserInfoForm(_user);
 
             editForm.ShowDialog(this);
             UpdateInfo();
