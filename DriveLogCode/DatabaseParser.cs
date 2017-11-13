@@ -54,5 +54,18 @@ namespace DriveLogCode
                 return string.Empty;
             }
         }
+
+        public static List<User> UserSearchList(string searchInput)
+        {
+            DataTable queryInfo = MySql.UserSearch(searchInput);
+            List<User> usersFound = new List<User>();
+
+            for (int i = 0; i < queryInfo.Rows.Count; i++)
+            {
+                usersFound.Add(new User(queryInfo, i));   
+            }
+
+            return usersFound;
+        }
     }
 }

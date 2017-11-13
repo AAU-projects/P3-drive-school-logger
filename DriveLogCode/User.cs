@@ -27,21 +27,21 @@ namespace DriveLogCode
             Sysmin = sysmin;
         }
 
-        public User(DataTable userTable)
+        public User(DataTable userTable, int index = 0)
         {
-            Id = (int)userTable.Rows[0][0];
-            Firstname = (string)userTable.Rows[0][1];
-            Lastname = (string)userTable.Rows[0][2];
-            Phone = (string)userTable.Rows[0][3];
-            Email = (string)userTable.Rows[0][4];
-            Cpr = (string)userTable.Rows[0][5];
-            Address = (string)userTable.Rows[0][6];
-            Zip = (string)userTable.Rows[0][7];
-            City = (string)userTable.Rows[0][8];
-            Username = (string)userTable.Rows[0][9];
-            Password = (string)userTable.Rows[0][10];
-            PicturePath = (string)userTable.Rows[0][11];
-            Sysmin = Convert.ToBoolean((string) userTable.Rows[0][12]);
+            Id = (int)userTable.Rows[index][0];
+            Firstname = (string)userTable.Rows[index][1];
+            Lastname = (string)userTable.Rows[index][2];
+            Phone = (string)userTable.Rows[index][3];
+            Email = (string)userTable.Rows[index][4];
+            Cpr = (string)userTable.Rows[index][5];
+            Address = (string)userTable.Rows[index][6];
+            Zip = (string)userTable.Rows[index][7];
+            City = (string)userTable.Rows[index][8];
+            Username = (string)userTable.Rows[index][9];
+            Password = (string)userTable.Rows[index][10];
+            PicturePath = (string)userTable.Rows[index][11];
+            Sysmin = Convert.ToBoolean((string) userTable.Rows[index][12]);
         }
 
         public int Id { get;}

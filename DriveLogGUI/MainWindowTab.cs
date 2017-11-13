@@ -13,8 +13,8 @@ namespace DriveLogGUI
 {
     public partial class MainWindowTab : Form
     {
+        public Point pageStartPoint { get; set; }
         private Point _lastClick;
-        private Point pageStartPoint;
         private UserControl _lastPage;
         private bool _isOpen;
 
@@ -22,24 +22,14 @@ namespace DriveLogGUI
         private ProfileTab profileTab;
         private DocumentViewer documentViewer;
         private DoctorsNote doctorsNoteTab;
+        private UserSearchTab userSearchTab;
 
         public MainWindowTab()
         {
-            // Initializing
-            overviewTab = new OverviewTab();
-            profileTab = new ProfileTab();
-            documentViewer = new DocumentViewer();
-            doctorsNoteTab = new DoctorsNote();
-
             InitializeComponent();
-            MoveButtonSpaces(OverviewButton, 8);
-            MoveButtonSpaces(ProfileButton, 8);
-            MoveButtonSpaces(bookingButton, 8);
-            MoveButtonSpaces(settingsButton, 8);
-            OverviewButton.Controls.Add(pictureHomeTab);
-            ProfileButton.Controls.Add(pictureProfileTab);
-            bookingButton.Controls.Add(pictureBookingTab);
-            settingsButton.Controls.Add(pictureSettingsTab);
+            InitializeMenuTabs();
+
+
             overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
             overviewTab.DoctorsNotePictureButtonClick += new EventHandler(doctorsNoteButton_Click);
 
@@ -51,15 +41,42 @@ namespace DriveLogGUI
             profileTab.Location = pageStartPoint;
             documentViewer.Location = pageStartPoint;
             doctorsNoteTab.Location = pageStartPoint;
+            userSearchTab.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
             this.Controls.Add(profileTab);
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
+            this.Controls.Add(userSearchTab);
 
             // opening starting page after login
             OpenPage(overviewTab);
+        }
+
+        private void InitializeMenuTabs()
+        {
+            overviewTab = new OverviewTab();
+            profileTab = new ProfileTab(Session.LoggedInUser);
+            documentViewer = new DocumentViewer();
+            doctorsNoteTab = new DoctorsNote();
+            userSearchTab = new UserSearchTab();
+
+            overviewTab.Hide();
+            profileTab.Hide();
+            documentViewer.Hide();
+            doctorsNoteTab.Hide();
+            userSearchTab.Hide();
+
+            MoveButtonSpaces(OverviewButton, 8);
+            MoveButtonSpaces(ProfileButton, 8);
+            MoveButtonSpaces(bookingButton, 8);
+            MoveButtonSpaces(settingsButton, 8);
+            MoveButtonSpaces(userSearchButton, 8);
+            OverviewButton.Controls.Add(pictureHomeTab);
+            ProfileButton.Controls.Add(pictureProfileTab);
+            bookingButton.Controls.Add(pictureBookingTab);
+            settingsButton.Controls.Add(pictureSettingsTab);
         }
 
         private void doctorsNoteButton_Click(object sender, EventArgs e)
@@ -86,6 +103,7 @@ namespace DriveLogGUI
                 //moving objects below
                 bookingButton.Location = MoveLocation(bookingButton.Location, panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, panelForProfile.Height);
+                userSearchButton.Location = MoveLocation(userSearchButton.Location, panelForProfile.Height);
                 _isOpen = true;
             }
             else if (_isOpen)
@@ -93,6 +111,7 @@ namespace DriveLogGUI
                 //move objects back
                 bookingButton.Location = MoveLocation(bookingButton.Location, -panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, -panelForProfile.Height);
+                userSearchButton.Location = MoveLocation(userSearchButton.Location, -panelForProfile.Height);
                 panelForProfile.Hide();
                 _isOpen = false;
             }
@@ -148,11 +167,10 @@ namespace DriveLogGUI
 
         private void MainWindowTab_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Owner.Visible) {
+            if (Owner.Visible)
                 this.Dispose();
-            } else if (!Owner.Visible) {
+            else if (!Owner.Visible)
                 Application.Exit();
-            }
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -203,6 +221,12 @@ namespace DriveLogGUI
             ProfileSubmenuControl(false);
         }
 
+        private void userSearchButton_Click(object sender, EventArgs e)
+        {
+            OpenPage(userSearchTab);
+            ProfileSubmenuControl(false);
+        }
+        
         private void doctorsNoteButton_Click_1(object sender, EventArgs e)
         {
             if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))

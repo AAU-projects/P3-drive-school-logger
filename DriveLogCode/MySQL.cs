@@ -237,6 +237,16 @@ namespace DriveLogCode
             return SendNonQuery(cmd);
         }
 
+        public static DataTable UserSearch(string searchInput, string table = UserTable)
+        {
+            string query = $"SELECT * FROM {table} WHERE username LIKE '%{searchInput}%' OR  firstname LIKE '%{searchInput}%' OR" +
+                           $" lastname LIKE '%{searchInput}%' OR phone LIKE '%{searchInput}%' OR email LIKE '%{searchInput}%' OR" +
+                           $" cpr LIKE '%{searchInput}%' OR address LIKE '%{searchInput}%' OR zip LIKE '%{searchInput}%' OR city LIKE '%{searchInput}%'";
+            var cmd = new MySqlCommand(query);
+
+            return SendQuery(cmd);
+        }
+
         private static bool SendNonQuery(MySqlCommand cmd)
         {
             try
