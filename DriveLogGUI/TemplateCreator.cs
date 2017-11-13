@@ -13,10 +13,12 @@ namespace DriveLogGUI
 {
     public partial class TemplateCreator : UserControl
     {
-        private CheckBox lastChecked;
+        public delegate void SlideEvent();
+        public SlideEvent ActivateSlide;
+
+        private CheckBox _lastChecked;
         private Button _actriveButton = null;
         private string _currentId = null;
-
 
         public TemplateCreator()
         {
@@ -93,8 +95,8 @@ namespace DriveLogGUI
         private void TypeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox activeCheckBox = sender as CheckBox;
-            if (activeCheckBox != lastChecked && lastChecked != null) lastChecked.Checked = false;
-            lastChecked = activeCheckBox.Checked ? activeCheckBox : null;
+            if (activeCheckBox != _lastChecked && _lastChecked != null) _lastChecked.Checked = false;
+            _lastChecked = activeCheckBox.Checked ? activeCheckBox : null;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -128,7 +130,12 @@ namespace DriveLogGUI
             descriptionTextbox.Text = "";
             readingTextbox.Text = "";
             timeAmount.Value = 0;
-            if (lastChecked != null) lastChecked.Checked = false;
+            if (_lastChecked != null) _lastChecked.Checked = false;
+        }
+
+        private void menuButton_Click(object sender, EventArgs e)
+        {
+            ActivateSlide?.Invoke();
         }
     }
 }

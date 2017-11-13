@@ -23,8 +23,7 @@ namespace DriveLogGUI
         private DocumentViewer documentViewer;
         private DoctorsNote doctorsNoteTab;
         private UserSearchTab userSearchTab;
-
-        private TemplateCreator lessonTemplates;
+        private SettingsTab settingsTab;
 
         public MainWindowTab()
         {
@@ -44,27 +43,25 @@ namespace DriveLogGUI
             documentViewer.Location = pageStartPoint;
             doctorsNoteTab.Location = pageStartPoint;
             userSearchTab.Location = pageStartPoint;
-            lessonTemplates.Location = pageStartPoint;
+            settingsTab.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
             this.Controls.Add(profileTab);
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
-<<<<<<< HEAD
-            this.Controls.Add(userSearchTab);
-            this.Controls.Add(lessonTemplates);
-=======
+            this.Controls.Add(settingsTab);
+
             if (Session.LoggedInUser.Sysmin)
             {
                 this.Controls.Add(userSearchTab);
+
                 userSearchButton.Enabled = true;
                 userSearchButton.Visible = true;
                 pictureSearchTab.Enabled = true;
                 pictureSearchTab.Visible = true;
                 settingsButton.Location = new Point(0, 138);
             }
->>>>>>> master
 
             // opening starting page after login
             OpenPage(overviewTab);
@@ -77,13 +74,14 @@ namespace DriveLogGUI
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();
-            lessonTemplates = new TemplateCreator();
+            settingsTab = new SettingsTab();
 
             overviewTab.Hide();
             profileTab.Hide();
             documentViewer.Hide();
             doctorsNoteTab.Hide();
             userSearchTab.Hide();
+            settingsTab.Hide();
 
             MoveButtonSpaces(OverviewButton, 8);
             MoveButtonSpaces(ProfileButton, 8);
@@ -236,7 +234,7 @@ namespace DriveLogGUI
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            OpenPage(lessonTemplates);
+            OpenPage(settingsTab);
             ProfileSubmenuControl(false);
         }
 

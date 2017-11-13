@@ -123,6 +123,26 @@ namespace DriveLogGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_menu_black_24dp_1x {
+            get {
+                object obj = ResourceManager.GetObject("ic_menu_black_24dp_1x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_menu_black_24dp_2x {
+            get {
+                object obj = ResourceManager.GetObject("ic_menu_black_24dp_2x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_mode_edit_black_24dp_1x {
             get {
                 object obj = ResourceManager.GetObject("ic_mode_edit_black_24dp_1x", resourceCulture);

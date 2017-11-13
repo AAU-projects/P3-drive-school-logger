@@ -137,6 +137,12 @@
     <Compile Include="RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsTab.Designer.cs">
+      <DependentUpon>SettingsTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="TemplateCreator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SettingsTab.resx">
+      <DependentUpon>SettingsTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TemplateCreator.resx">
       <DependentUpon>TemplateCreator.cs</DependentUpon>
     </EmbeddedResource>
@@ -228,6 +237,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ic_menu_black_24dp_2x.png" />
+    <None Include="Resources\ic_menu_black_24dp_1x.png" />
     <None Include="Resources\ic_mode_edit_black_24dp_1x.png" />
     <None Include="Resources\ic_remove_black_24dp_2x.png" />
     <None Include="Resources\ic_remove_black_24dp_1x.png" />
