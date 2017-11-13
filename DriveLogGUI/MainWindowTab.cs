@@ -203,9 +203,18 @@ namespace DriveLogGUI
             ProfileSubmenuControl(false);
         }
 
-        private void button1_MouseCaptureChanged(object sender, EventArgs e)
+        private void doctorsNoteButton_Click_1(object sender, EventArgs e)
         {
-
+            if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
+            {
+                OpenPage(documentViewer);
+                documentViewer.LoadDoctorsNote(Session.LoggedInUser);
+            }
+            else
+            {
+                OpenPage(documentViewer);
+                documentViewer.SetType(Session.TypeDoctorsNote);
+            }
         }
     }
 }
