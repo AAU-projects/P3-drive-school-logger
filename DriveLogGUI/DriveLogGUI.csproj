@@ -71,6 +71,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appointment.cs" />
+    <Compile Include="CalendarData.cs" />
+    <Compile Include="CalendarTabG.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CalendarTabG.Designer.cs">
+      <DependentUpon>CalendarTabG.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomMsgBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +160,9 @@
     <Compile Include="UserSearchTab.Designer.cs">
       <DependentUpon>UserSearchTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CalendarTabG.resx">
+      <DependentUpon>CalendarTabG.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomMsgBox.resx">
       <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </EmbeddedResource>

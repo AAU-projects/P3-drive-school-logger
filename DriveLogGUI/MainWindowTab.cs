@@ -23,6 +23,7 @@ namespace DriveLogGUI
         private DocumentViewer documentViewer;
         private DoctorsNote doctorsNoteTab;
         private UserSearchTab userSearchTab;
+        private CalendarTabG calendarTab;
 
         public MainWindowTab()
         {
@@ -42,6 +43,7 @@ namespace DriveLogGUI
             documentViewer.Location = pageStartPoint;
             doctorsNoteTab.Location = pageStartPoint;
             userSearchTab.Location = pageStartPoint;
+            calendarTab.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
@@ -49,9 +51,10 @@ namespace DriveLogGUI
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
             this.Controls.Add(userSearchTab);
+            this.Controls.Add(calendarTab);
 
             // opening starting page after login
-            OpenPage(overviewTab);
+            //OpenPage(overviewTab);
         }
 
         private void InitializeMenuTabs()
@@ -61,12 +64,14 @@ namespace DriveLogGUI
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();
+            calendarTab = new CalendarTabG();
 
             overviewTab.Hide();
             profileTab.Hide();
             documentViewer.Hide();
             doctorsNoteTab.Hide();
             userSearchTab.Hide();
+
 
             MoveButtonSpaces(OverviewButton, 8);
             MoveButtonSpaces(ProfileButton, 8);
