@@ -14,16 +14,25 @@ namespace DriveLogGUI
     {
         private const int WEEKDAYS = 7;
         private DateTime dayNow;
-        private DateTime lastWeek;
+        private DateTime lastWeek = DateTime.Now;
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
         private List<Label> allElements = new List<Label>();
 
         Random test = new Random();
 
-        public CalendarTabG()
+        public CalendarTabG(OverviewTab overviewTab)
         {
             InitializeComponent();
+            
+
+            overviewTab.ClickOnDate += OverviewTabOnClickOnDate;
+
+        }
+
+        public void OverviewTabOnClickOnDate(object sender, DateClickEventArgs eventArgs)
+        {
+            UpdateCalendar(eventArgs.Date);
         }
 
         private void test_Click(object sender, EventArgs e)
@@ -92,7 +101,7 @@ namespace DriveLogGUI
             //drawing a line below dates
             foreach (var data in calendarData)
             {
-                var test = data.TopPanelForCalendar;
+                var test = data.PanelForCalendarDay;
                 using (Graphics g = test.CreateGraphics()) {
                     var p = new Pen(Color.FromArgb(128, 132, 144), 5);
                     g.DrawLine(p, test.Location.X + 15, test.Height - 10, test.Width - 15, test.Height - 10);
@@ -125,6 +134,13 @@ namespace DriveLogGUI
             UpdateDates();
         }
 
+        private void UpdateCalendar(DateTime day)
+        {
+            lastWeek = day;
+            UpdateDateMonday();
+            UpdateDates();
+        }
+
         private void UpdateDates()
         {
             dayNow = lastWeek;
@@ -134,7 +150,7 @@ namespace DriveLogGUI
             {
                 day.LabelForDate.Text = dayNow.Day.ToString();
                 day.LabelForWeekday.Text = GetShortWeekday(dayNow.DayOfWeek.ToString()).ToUpper();
-                day.date = dayNow;
+                day.Date = dayNow;
                 dayNow = dayNow.AddDays(1);
             }
 
@@ -176,9 +192,9 @@ namespace DriveLogGUI
             {
                 foreach (var appointment in appointments)
                 {
-                    if (day.date.Day == appointment.date.Day) 
+                    if (day.Date.Day == appointment.date.Day) 
                     {
-                        appointment.label.Location = new Point(0, day.TopPanelForCalendar.Height + prevLocation);
+                        appointment.label.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
                         prevLocation += appointment.label.Height;
                         day.BottomPanelForCalendar.Controls.Add(appointment.label);
                         allElements.Add(appointment.label);
@@ -189,8 +205,6 @@ namespace DriveLogGUI
 
         private void UpdateDateMonday()
         {
-            lastWeek = DateTime.Now;
-
             while (lastWeek.DayOfWeek.ToString().ToLower() != "monday") {
                 lastWeek = lastWeek.AddDays(-1);
             }
@@ -227,6 +241,7 @@ namespace DriveLogGUI
 
         private void gotoTodayButton_Click(object sender, EventArgs e)
         {
+            lastWeek = DateTime.Now;
             UpdateDateMonday();
             UpdateCalendar(0);
         }

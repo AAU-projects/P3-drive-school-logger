@@ -64,7 +64,7 @@ namespace DriveLogGUI
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();
-            calendarTab = new CalendarTabG();
+            calendarTab = new CalendarTabG(overviewTab);
 
             overviewTab.Hide();
             profileTab.Hide();
