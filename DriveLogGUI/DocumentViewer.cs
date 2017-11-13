@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DriveLogCode;
+using Spire.Pdf;
+using Spire.PdfViewer.Forms;
 
 namespace DriveLogGUI
 {
@@ -20,7 +23,6 @@ namespace DriveLogGUI
             InitializeComponent();
         }
 
-        private bool _haveDocument = false;
         private string _documentType = string.Empty;
         private string _documentName = string.Empty;
 
@@ -36,23 +38,16 @@ namespace DriveLogGUI
             LoadDocument(DatabaseParser.GetDoctorsNote(user));
         }
 
-        private void LoadDocument(Document document)
+        private void LoadDocument(string documentPath)
         {
-            Viewer.Navigate(document.Url);
-            Viewer.Show();
-            _haveDocument = true;
-            TitleLabel.Text = document.Title;
-            DateLabel.Text = document.UploadDate.ToShortDateString();
+            PdfDocument document = new PdfDocument(documentPath);
+            TitleLabel.Text = document.DocumentInformation.Title;
+            DateLabel.Text = document.DocumentInformation.CreationDate.ToString(CultureInfo.InvariantCulture);
+            document.Dispose();
+            viewer.LoadFromFile(documentPath);
+            viewer.SetZoom(ZoomMode.FitWidth);
             DateLabel.Location = new Point(TitleLabel.Width + TitleLabel.Location.X + 5, DateLabel.Location.Y);
 
-        }
-
-        public void Clear()
-        {
-            _haveDocument = false;
-            Viewer.Hide();
-            TitleLabel.Text = "No Document";
-            DateLabel.Text = "";
         }
 
         public void SetType(string type)
@@ -61,45 +56,58 @@ namespace DriveLogGUI
             _documentName = $"{Session.LoggedInUser.Fullname} - {_documentType}";
         }
 
-        private void UpdateViewer()
+        private void OpenFileDialog()
         {
-            LoadFirstAid(Session.LoggedInUser);
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.InitialDirectory = "E:\\Dokumenter";
+            fileDialog.Filter = "Files(*.BMP;*.JPG;*.JPEG;*.PDF)|*.BMP;*.JPG;*.JPEG;*.PDF";
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                IUploadHandler uploader = new UploadHandler();
+
+                if (fileDialog.CheckFileExists)
+                {
+                    if (_documentType == Session.TypeFirstAid)
+                    {
+                        if (uploader.UploadFirstAid(_documentName, fileDialog.FileName,
+                            Properties.Settings.Default["DocumentUpload"].ToString()))
+                        {
+                            LoadFirstAid(Session.LoggedInUser);
+                        }
+                        else
+                        {
+                            CustomMsgBox.Show("Unable to upload document", "Error", CustomMsgBoxIcon.Error);
+                        }
+                    }
+                    else if (_documentType == Session.TypeDoctorsNote)
+                    {
+                        if (uploader.UploadDoctorsNote(_documentName, fileDialog.FileName,
+                            Properties.Settings.Default["DocumentUpload"].ToString()))
+                        {
+                            LoadDoctorsNote(Session.LoggedInUser);
+                        }
+                        else
+                        {
+                            CustomMsgBox.Show("Unable to upload document", "Error", CustomMsgBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    CustomMsgBox.Show("File does not exist", "Warrning!", CustomMsgBoxIcon.Warrning);
+                }
+            }
         }
 
         private void uploadButton_Click(object sender, EventArgs e)
         {
-            if (_haveDocument)
-            {
-                LoadFirstAid(Session.LoggedInUser);
-            }
-            else
-            {
-                OpenFileDialog fileDialog = new OpenFileDialog();
-                fileDialog.InitialDirectory = "E:\\Dokumenter";
-                fileDialog.Filter = "Files(*.BMP;*.JPG;*.JPEG;*.PDF)|*.BMP;*.JPG;*.JPEG;*.PDF";
+            OpenFileDialog();
+        }
 
-                if (fileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    IUploadHandler uploader = new UploadHandler();
-
-                    if (fileDialog.CheckFileExists)
-                    {
-                        if (_documentType == Session.TypeFirstAid)
-                        {
-                            if (uploader.UploadFirstAid(_documentName, fileDialog.FileName,
-                                Properties.Settings.Default["DocumentUpload"].ToString()))
-                            {
-                                UpdateViewer();
-                            }
-                            else
-                            {
-                                TitleLabel.Text = "Nope";
-                            }
-                        }
-                    }
-                }
-
-            }
+        internal void DisposePdf()
+        {
+            viewer.Dispose();
         }
     }
 }

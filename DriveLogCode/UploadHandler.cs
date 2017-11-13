@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using Spire.Pdf.Graphics;
 
 namespace DriveLogCode
 {
@@ -26,22 +27,45 @@ namespace DriveLogCode
 
         private bool UploadFile(string title, string type, string fileLocation, string url)
         {
+            Spire.Pdf.PdfDocument document = new Spire.Pdf.PdfDocument();
             FileInfo file = new FileInfo(fileLocation);
 
             if (!file.Exists) return false;
 
             if (file.Extension != ".pdf")
             {
-                PdfDocument doc = new PdfDocument();
-                doc.Pages.Add(new PdfPage());
-                XGraphics xgr = XGraphics.FromPdfPage(doc.Pages[0]);
-                XImage img = XImage.FromFile(fileLocation);
+                Spire.Pdf.PdfPageBase page = document.Pages.Add();
 
-                xgr.DrawImage(img, 0, 0);
-                fileLocation = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.png");
-                doc.Save(fileLocation);
-                doc.Close();
+                PdfImage image = PdfImage.FromFile(fileLocation);
+                fileLocation = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
+                
+                float widthFitRate = image.PhysicalDimension.Width / page.Canvas.ClientSize.Width;
+                float heightFitRate = image.PhysicalDimension.Height / page.Canvas.ClientSize.Height;
+                float fitRate = Math.Max(widthFitRate, heightFitRate);
+                float fitWidth = image.PhysicalDimension.Width / fitRate;
+                float fitHeight = image.PhysicalDimension.Height / fitRate;
+                page.Canvas.DrawImage(image, 30, 30, fitWidth, fitHeight);
+
+                document.DocumentInformation.Title = $"{Session.LoggedInUser.Fullname} - {type}";
+                document.DocumentInformation.Author = Session.LoggedInUser.Fullname;
+                document.DocumentInformation.CreationDate = DateTime.Now;
+
+                document.SaveToFile(fileLocation);
+                document.Close();
+
             }
+            else
+            {
+                document.LoadFromFile(fileLocation);
+                document.DocumentInformation.Title = $"{Session.LoggedInUser.Fullname} - {type}";
+                document.DocumentInformation.Author = Session.LoggedInUser.Fullname;
+                document.DocumentInformation.CreationDate = DateTime.Now;
+
+                document.SaveToFile(fileLocation);
+                document.Close();
+            }
+
+            document.Dispose();
             
             string fileUrl = SendToServer(fileLocation, url);
 

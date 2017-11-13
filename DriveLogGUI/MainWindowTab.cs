@@ -142,6 +142,7 @@ namespace DriveLogGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.documentViewer.DisposePdf();
             this.Close();
         }
 
@@ -187,9 +188,8 @@ namespace DriveLogGUI
             }
             else
             {
-                documentViewer.SetType(Session.TypeFirstAid);
-                documentViewer.Clear();
                 OpenPage(documentViewer);
+                documentViewer.SetType(Session.TypeFirstAid);
             }
         }
 
@@ -201,6 +201,11 @@ namespace DriveLogGUI
         private void settingsButton_Click(object sender, EventArgs e)
         {
             ProfileSubmenuControl(false);
+        }
+
+        private void button1_MouseCaptureChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
