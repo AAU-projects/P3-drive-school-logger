@@ -17,6 +17,7 @@ namespace DriveLogGUI
         {
             InitializeComponent();
             errorLabel.Text = string.Empty;
+            userCollectionMenu.SelectedIndex = 0;
         }
 
         private List<User> _usersFoundList = new List<User>();
@@ -25,10 +26,19 @@ namespace DriveLogGUI
         private void searchBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
+            ExecuteSearch();
+            Cursor = Cursors.Arrow;
+        }
+
+        private void ExecuteSearch()
+        {
+            Cursor = Cursors.AppStarting;
+            if (searchBox.Text.Contains("'")) return;
             _usersFoundList = DatabaseParser.UserSearchList(searchBox.Text);
 
             _userPanelList.Clear();
             resultsPanel.Controls.Clear();
+            int idx = 0;
 
             if (_usersFoundList.Count == 0)
             {
@@ -38,7 +48,11 @@ namespace DriveLogGUI
 
             for (int i = 0; i < _usersFoundList.Count; i++)
             {
-               GenerateUserPanel(_usersFoundList[i], i);
+                if (userCollectionMenu.Text == "Students Only" && _usersFoundList[i].Sysmin == true) continue;
+                if (userCollectionMenu.Text == "Instructors Only" && _usersFoundList[i].Sysmin == false) continue;
+
+                GenerateUserPanel(_usersFoundList[i], idx);
+                idx++;
             }
 
             foreach (Panel panel in _userPanelList)
@@ -111,6 +125,22 @@ namespace DriveLogGUI
             foundUserProfile.Parent = this;
             this.Parent.Controls.Add(foundUserProfile);
             foundUserProfile.Show();
+        }
+
+        private void pictureSearchButton_Click(object sender, EventArgs e)
+        {
+            ExecuteSearch();
+            Cursor = Cursors.Arrow;
+        }
+
+        private void pictureSearchButton_MouseEnter(object sender, EventArgs e)
+        {
+            pictureSearchButton.BackColor = Color.FromArgb(230, 230, 230);
+        }
+
+        private void pictureSearchButton_MouseLeave(object sender, EventArgs e)
+        {
+            pictureSearchButton.BackColor = Color.FromArgb(255, 255, 255);
         }
     }
 }

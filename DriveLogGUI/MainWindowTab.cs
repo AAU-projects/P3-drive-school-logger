@@ -48,7 +48,15 @@ namespace DriveLogGUI
             this.Controls.Add(profileTab);
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
-            this.Controls.Add(userSearchTab);
+            if (Session.LoggedInUser.Sysmin)
+            {
+                this.Controls.Add(userSearchTab);
+                userSearchButton.Enabled = true;
+                userSearchButton.Visible = true;
+                pictureSearchTab.Enabled = true;
+                pictureSearchTab.Visible = true;
+                settingsButton.Location = new Point(0, 138);
+            }
 
             // opening starting page after login
             OpenPage(overviewTab);
@@ -77,6 +85,7 @@ namespace DriveLogGUI
             ProfileButton.Controls.Add(pictureProfileTab);
             bookingButton.Controls.Add(pictureBookingTab);
             settingsButton.Controls.Add(pictureSettingsTab);
+            userSearchButton.Controls.Add(pictureSearchTab);
         }
 
         private void doctorsNoteButton_Click(object sender, EventArgs e)
