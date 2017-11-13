@@ -8,13 +8,16 @@ using System.Windows.Forms;
 namespace DriveLogGUI
 {
 
-    class CalendarData
+    public class CalendarData
     {
         public Panel PanelForCalendarDay;
         public Panel BottomPanelForCalendar;
         public Label LabelForDate;
         public Label LabelForWeekday;
         public DateTime Date;
+
+        public event EventHandler<DateClickEventArgs> ClickOnDateTriggered;
+
 
         public CalendarData(Panel topPanelForCalendar, Panel bottomPanelForCalendar, Label labelForDate,
             Label labelForWeekday, DateTime date)
@@ -31,6 +34,14 @@ namespace DriveLogGUI
             PanelForCalendarDay = inputPanel;
             LabelForDate = inputLabel;
             Date = inputDate;
+
+            LabelForDate.Click += (s, e) => panel_Click(new DateClickEventArgs(Date));
+
+        }
+
+        private void panel_Click(DateClickEventArgs e)
+        {
+            ClickOnDateTriggered?.Invoke(this, e);
         }
     }
 

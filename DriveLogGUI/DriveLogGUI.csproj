@@ -86,6 +86,7 @@
       <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomMsgBoxIcon.cs" />
+    <Compile Include="DateClickEventArgs.cs" />
     <Compile Include="DoctorsNote.cs">
       <SubType>UserControl</SubType>
     </Compile>

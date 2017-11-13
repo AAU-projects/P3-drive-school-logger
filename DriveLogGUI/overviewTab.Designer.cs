@@ -217,7 +217,6 @@
             this.daysForCalendar.Name = "daysForCalendar";
             this.daysForCalendar.Size = new System.Drawing.Size(340, 240);
             this.daysForCalendar.TabIndex = 2;
-            this.daysForCalendar.Paint += new System.Windows.Forms.PaintEventHandler(this.daysForCalendar_Paint);
             // 
             // daysInCalendar
             // 

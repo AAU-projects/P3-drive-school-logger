@@ -30,15 +30,17 @@
             this.panelForCalendar = new System.Windows.Forms.Panel();
             this.backPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.weekSelectButton = new System.Windows.Forms.Button();
             this.gotoTodayButton = new System.Windows.Forms.Button();
             this.buttonRightWeek = new System.Windows.Forms.Label();
             this.buttonLeftWeek = new System.Windows.Forms.Label();
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.weekNumber = new System.Windows.Forms.Label();
             this.panelForCalendar.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelForCalendar
@@ -62,7 +64,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.weekNumber);
             this.panel1.Controls.Add(this.weekSelectButton);
             this.panel1.Controls.Add(this.gotoTodayButton);
             this.panel1.Controls.Add(this.buttonRightWeek);
@@ -73,6 +75,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(686, 93);
             this.panel1.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Lime;
+            this.button1.ForeColor = System.Drawing.Color.Maroon;
+            this.button1.Location = new System.Drawing.Point(36, 496);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "add ";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // weekSelectButton
             // 
@@ -107,7 +121,7 @@
             this.buttonRightWeek.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRightWeek.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRightWeek.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonRightWeek.Location = new System.Drawing.Point(344, 32);
+            this.buttonRightWeek.Location = new System.Drawing.Point(286, 31);
             this.buttonRightWeek.Name = "buttonRightWeek";
             this.buttonRightWeek.Size = new System.Drawing.Size(25, 29);
             this.buttonRightWeek.TabIndex = 2;
@@ -120,7 +134,7 @@
             this.buttonLeftWeek.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonLeftWeek.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLeftWeek.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonLeftWeek.Location = new System.Drawing.Point(311, 32);
+            this.buttonLeftWeek.Location = new System.Drawing.Point(253, 31);
             this.buttonLeftWeek.Name = "buttonLeftWeek";
             this.buttonLeftWeek.Size = new System.Drawing.Size(25, 29);
             this.buttonLeftWeek.TabIndex = 1;
@@ -132,7 +146,7 @@
             this.datesInWeek.AutoSize = true;
             this.datesInWeek.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.datesInWeek.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.datesInWeek.Location = new System.Drawing.Point(55, 32);
+            this.datesInWeek.Location = new System.Drawing.Point(14, 32);
             this.datesInWeek.Name = "datesInWeek";
             this.datesInWeek.Size = new System.Drawing.Size(216, 29);
             this.datesInWeek.TabIndex = 0;
@@ -141,22 +155,22 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(211, 544);
             this.panel2.TabIndex = 3;
             // 
-            // button1
+            // weekNumber
             // 
-            this.button1.BackColor = System.Drawing.Color.Lime;
-            this.button1.ForeColor = System.Drawing.Color.Maroon;
-            this.button1.Location = new System.Drawing.Point(401, 39);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "add ";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.weekNumber.AutoSize = true;
+            this.weekNumber.Font = new System.Drawing.Font("Calibri Light", 12F);
+            this.weekNumber.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.weekNumber.Location = new System.Drawing.Point(15, 61);
+            this.weekNumber.Name = "weekNumber";
+            this.weekNumber.Size = new System.Drawing.Size(63, 19);
+            this.weekNumber.TabIndex = 6;
+            this.weekNumber.Text = "week 41";
             // 
             // CalendarTabG
             // 
@@ -170,6 +184,7 @@
             this.panelForCalendar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -185,5 +200,6 @@
         private System.Windows.Forms.Button weekSelectButton;
         private System.Windows.Forms.Panel backPanel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label weekNumber;
     }
 }

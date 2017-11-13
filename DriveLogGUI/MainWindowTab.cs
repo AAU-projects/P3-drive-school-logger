@@ -15,7 +15,7 @@ namespace DriveLogGUI
     {
         public Point pageStartPoint { get; set; }
         private Point _lastClick;
-        private UserControl _lastPage;
+        public UserControl _lastPage;
         private bool _isOpen;
 
         private OverviewTab overviewTab;
@@ -54,7 +54,7 @@ namespace DriveLogGUI
             this.Controls.Add(calendarTab);
 
             // opening starting page after login
-            //OpenPage(overviewTab);
+            OpenPage(overviewTab);
         }
 
         private void InitializeMenuTabs()
@@ -64,13 +64,14 @@ namespace DriveLogGUI
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();
-            calendarTab = new CalendarTabG(overviewTab);
+            calendarTab = new CalendarTabG(overviewTab, this);
 
             overviewTab.Hide();
             profileTab.Hide();
             documentViewer.Hide();
             doctorsNoteTab.Hide();
             userSearchTab.Hide();
+            calendarTab.Hide();
 
 
             MoveButtonSpaces(OverviewButton, 8);
@@ -218,6 +219,7 @@ namespace DriveLogGUI
 
         private void bookingButton_Click(object sender, EventArgs e)
         {
+            OpenPage(calendarTab);
             ProfileSubmenuControl(false);
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,26 +18,37 @@ namespace DriveLogGUI
         private DateTime lastWeek = DateTime.Now;
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
-        private List<Label> allElements = new List<Label>();
+        private MainWindowTab mainWindow;
+
+        private OverviewTab overviewTab;
 
         Random test = new Random();
 
-        public CalendarTabG(OverviewTab overviewTab)
+        public CalendarTabG(OverviewTab overviewTab, MainWindowTab mainWindow)
         {
             InitializeComponent();
-            
+            this.mainWindow = mainWindow;
+            this.overviewTab = overviewTab;
+            SubscribeToAllClickPanels(overviewTab.listOfDays);
 
-            overviewTab.ClickOnDate += OverviewTabOnClickOnDate;
+            TestAppointments();
 
+        }
+
+        private void SubscribeToAllClickPanels(List<CalendarData> listOfDays)
+        {
+            foreach (var day in listOfDays)
+            {
+                day.ClickOnDateTriggered += OverviewTabOnClickOnDate;
+            }
         }
 
         public void OverviewTabOnClickOnDate(object sender, DateClickEventArgs eventArgs)
         {
+            this.mainWindow._lastPage = this;
+            overviewTab.Hide();
+            this.Show();
             UpdateCalendar(eventArgs.Date);
-        }
-
-        private void test_Click(object sender, EventArgs e)
-        {
         }
 
         private void GenerateWeeklyCalendar()
@@ -97,17 +109,19 @@ namespace DriveLogGUI
         private void panelForCalendar_Paint(object sender, PaintEventArgs e)
         {
             GenerateWeeklyCalendar();
+            DrawLineBelowDates();  
+        }
 
+        private void DrawLineBelowDates()
+        {
             //drawing a line below dates
-            foreach (var data in calendarData)
-            {
+            foreach (var data in calendarData) {
                 var test = data.PanelForCalendarDay;
                 using (Graphics g = test.CreateGraphics()) {
                     var p = new Pen(Color.FromArgb(128, 132, 144), 5);
                     g.DrawLine(p, test.Location.X + 15, test.Height - 10, test.Width - 15, test.Height - 10);
                 }
             }
-            
         }
 
         private string GetShortWeekday(string weekday)
@@ -145,6 +159,7 @@ namespace DriveLogGUI
         {
             dayNow = lastWeek;
             datesInWeek.Text = GetDatesInWeek(dayNow);
+            weekNumber.Text = GetWeekNumber(dayNow);
 
             foreach (var day in calendarData) 
             {
@@ -154,24 +169,37 @@ namespace DriveLogGUI
                 dayNow = dayNow.AddDays(1);
             }
 
-            RemoveAllElements();
             AddAllElements();
         }
 
+
         private void RemoveAllElements()
         {
-            if (allElements != null)
+            if (appointments != null)
             {
-                foreach (var element in allElements)
+                foreach (var element in appointments)
                 {
-                    element.Dispose();
+                    element.label.Hide();
                 }
             }
         }
 
         private string GetDatesInWeek(DateTime now)
         {
-            return $"{now.Day} - {now.AddDays(6).Day} {now.ToString("MMMM")} {now.Year}";
+            return $"{now.Day}  - {now.AddDays(6).Day} {now.ToString("MMMM")} {now.Year}";
+        }
+
+        private string GetWeekNumber(DateTime dateTime)
+        {
+            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(dateTime);
+            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday) {
+                dateTime = dateTime.AddDays(3);
+            }
+
+            int weekNumber =
+                CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstFourDayWeek,
+                    DayOfWeek.Monday);
+            return $"week {weekNumber}";
         }
 
 
@@ -180,24 +208,29 @@ namespace DriveLogGUI
             Label labelAppointment = new Label();
             labelAppointment.Text = text;
             labelAppointment.BackColor = color;
+            labelAppointment.TextAlign = ContentAlignment.MiddleCenter;
+            labelAppointment.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, labelAppointment.Font.Unit);
+
 
             appointments.Add(new Appointment(date, labelAppointment));
         }
 
         private void AddAllElements()
         {
-            int prevLocation = 0;
+            RemoveAllElements();
 
             foreach (var day in calendarData)
             {
+                int prevLocation = 0;
+
                 foreach (var appointment in appointments)
                 {
-                    if (day.Date.Day == appointment.date.Day) 
+                    if (day.Date.ToShortDateString() == appointment.date.ToShortDateString()) 
                     {
+                        appointment.label.Show();
                         appointment.label.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
-                        prevLocation += appointment.label.Height;
+                        prevLocation += appointment.label.Height + 5;
                         day.BottomPanelForCalendar.Controls.Add(appointment.label);
-                        allElements.Add(appointment.label);
                     }
                 }
             }
@@ -249,6 +282,42 @@ namespace DriveLogGUI
         private void button1_Click(object sender, EventArgs e)
         {
             AddAppointment(DateTime.Now, "fuck you", Color.Gold);
+        }
+
+        private void TestAppointments()
+        {
+            AddAppointment(DateTime.Now, "fuck you", Color.Gold);
+            AddAppointment(DateTime.Now.AddDays(3), "fuck you", Color.Gold);
+            AddAppointment(DateTime.Now.AddDays(3), "fuck you", Color.Gold);
+            AddAppointment(DateTime.Now, "fuck you", Color.Gold);
+            AddAppointment(DateTime.Now, "hmmmm", Color.Green);
+            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
+            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
+            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
+            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
+            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
+            AddAppointment(DateTime.Now.AddDays(1), "wildcard", RandomColor());
+            AddAppointment(DateTime.Now.AddDays(4), "wildcard", RandomColor());
+            AddAppointment(DateTime.Now.AddDays(2), "wildcard", RandomColor());
+            AddAppointment(DateTime.Now.AddDays(0), "wildcard", RandomColor());
+            AddAppointment(DateTime.Now.AddDays(3), "wildcard", RandomColor());
+            AddAppointment(DateTime.Now.AddDays(2), "wildcard", RandomColor());
+            AddAppointment(DateTime.Now.AddDays(4), "goya", Color.OrangeRed);
+            AddAppointment(DateTime.Now.AddDays(2), "goya", Color.OrangeRed);
+            AddAppointment(DateTime.Now.AddDays(3), "goya", Color.OrangeRed);
+            AddAppointment(DateTime.Now.AddDays(4), "goya", Color.OrangeRed);
+            AddAppointment(DateTime.Now.AddDays(4), "goya", Color.OrangeRed);
+            AddAppointment(DateTime.Now.AddDays(6), "goya", Color.OrangeRed);
+            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Green);
+            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Gold);
+            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Gold);
+            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Gold);
+            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Gold);
+            AddAppointment(DateTime.Now.AddDays(-1), "idk", Color.Red);
+            AddAppointment(DateTime.Now.AddDays(-2), "idk", Color.Red);
+            AddAppointment(DateTime.Now.AddDays(5), "idk", Color.Red);
+            AddAppointment(DateTime.Now.AddDays(3), "idk", Color.Red);
+            AddAppointment(DateTime.Now.AddDays(6), "idk", Color.Red);
         }
     }
 }
