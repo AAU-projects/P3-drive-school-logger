@@ -16,7 +16,8 @@ namespace DriveLogGUI
         public event EventHandler LogOutButtonClick;
         public event EventHandler DoctorsNotePictureButtonClick;
         private DateTime selectedMonth;
-        private List<Panel> listOfDays = new List<Panel>();
+        private DateTime formatDateTime;
+        private List<CalendarData> listOfDays = new List<CalendarData>();
 
         public OverviewTab()
         {
@@ -44,7 +45,6 @@ namespace DriveLogGUI
 
         private void DrawCalendar()
         {
-            calendarMonth.Text = selectedMonth.ToString("MMMM").ToUpper();
             int widthForEachDay = daysForCalendar.Width / 7;
             int heightForEachDay = daysForCalendar.Height / 5;
 
@@ -56,6 +56,9 @@ namespace DriveLogGUI
             for (var i = 0; i < 35; i++)
             {
                 Panel day = new Panel();
+                Label dayNumber = new Label();
+                listOfDays.Add(new CalendarData(day, dayNumber));
+                
                 day.Width = widthForEachDay;
                 day.Height = heightForEachDay;
 
@@ -68,22 +71,18 @@ namespace DriveLogGUI
                 day.Location = new Point(locationForRow, locationForColumn);
                 locationForRow += widthForEachDay;
 
-                FormatPanelForDays(ref day, ref currentDateTime);
-
+                FormatPanelForDays(ref day, ref dayNumber, ref currentDateTime);
                 daysForCalendar.Controls.Add(day);
-
-                listOfDays.Add(day);
             }
         }
 
         private void UpdateCalender()
         {
-            foreach (Panel day in listOfDays)
+            foreach (CalendarData day in listOfDays)
             {
-                foreach (Control control in day.Controls)
-                {
-                    FormatPanelForDays(ref day, ref selectedMonth);
-                }
+                Panel p = day.Panel;
+                Label l = day.Label;
+                FormatPanelForDays(ref p, ref l, ref formatDateTime);
             }
         }
 
@@ -100,11 +99,11 @@ namespace DriveLogGUI
             return date;
         }
 
-        private void FormatPanelForDays(ref Panel panel, ref DateTime currentDateTime)
+        private void FormatPanelForDays(ref Panel panel, ref Label dayNumber, ref DateTime currentDateTime)
         {
-            panel.BackColor = Color.FromArgb(251, 251, 251);
-            Label dayNumber = new Label();
+            calendarMonth.Text = selectedMonth.ToString("MMMM").ToUpper();
             
+            panel.BackColor = Color.FromArgb(251, 251, 251);
             dayNumber.Text = currentDateTime.Day.ToString();
             dayNumber.AutoSize = false;
             dayNumber.Dock = DockStyle.Fill;
@@ -114,7 +113,7 @@ namespace DriveLogGUI
             {
                 dayNumber.ForeColor = Color.FromArgb(203, 203, 203);
             }
-            else if (currentDateTime.Day == DateTime.Now.Day)
+            else if (currentDateTime == DateTime.Now)
             {
                 panel.BackColor = Color.FromArgb(148, 197, 204);
                 dayNumber.ForeColor = Color.FromArgb(251, 251, 251);
@@ -128,6 +127,14 @@ namespace DriveLogGUI
         private void calendarRightArrow_Click(object sender, EventArgs e)
         {
             selectedMonth = selectedMonth.AddMonths(1);
+            formatDateTime = WhereDoWeStart();
+            UpdateCalender();
+        }
+
+        private void calendarLeftArrow_Click(object sender, EventArgs e)
+        {
+            selectedMonth = selectedMonth.AddMonths(-1);
+            formatDateTime = WhereDoWeStart();
             UpdateCalender();
         }
     }

@@ -56,6 +56,8 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.mondayCalendar = new System.Windows.Forms.Label();
             this.monthPanel = new System.Windows.Forms.Panel();
+            this.calendarRightArrow = new System.Windows.Forms.Label();
+            this.calendarLeftArrow = new System.Windows.Forms.Label();
             this.calendarLine = new System.Windows.Forms.Panel();
             this.calendarMonth = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -84,8 +86,6 @@
             this.maneuverTrackPictureButton = new System.Windows.Forms.PictureBox();
             this.firstAidPictureButton = new System.Windows.Forms.PictureBox();
             this.doctorsNotePictureButton = new System.Windows.Forms.PictureBox();
-            this.calendarLeftArrow = new System.Windows.Forms.Label();
-            this.calendarRightArrow = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.todaysNotePanel.SuspendLayout();
             this.calendarPanel.SuspendLayout();
@@ -400,6 +400,32 @@
             this.monthPanel.Size = new System.Drawing.Size(380, 40);
             this.monthPanel.TabIndex = 0;
             // 
+            // calendarRightArrow
+            // 
+            this.calendarRightArrow.AutoSize = true;
+            this.calendarRightArrow.BackColor = System.Drawing.Color.Transparent;
+            this.calendarRightArrow.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calendarRightArrow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.calendarRightArrow.Location = new System.Drawing.Point(249, 5);
+            this.calendarRightArrow.Name = "calendarRightArrow";
+            this.calendarRightArrow.Size = new System.Drawing.Size(25, 29);
+            this.calendarRightArrow.TabIndex = 3;
+            this.calendarRightArrow.Text = ">";
+            this.calendarRightArrow.Click += new System.EventHandler(this.calendarRightArrow_Click);
+            // 
+            // calendarLeftArrow
+            // 
+            this.calendarLeftArrow.AutoSize = true;
+            this.calendarLeftArrow.BackColor = System.Drawing.Color.Transparent;
+            this.calendarLeftArrow.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calendarLeftArrow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.calendarLeftArrow.Location = new System.Drawing.Point(104, 5);
+            this.calendarLeftArrow.Name = "calendarLeftArrow";
+            this.calendarLeftArrow.Size = new System.Drawing.Size(25, 29);
+            this.calendarLeftArrow.TabIndex = 2;
+            this.calendarLeftArrow.Text = "<";
+            this.calendarLeftArrow.Click += new System.EventHandler(this.calendarLeftArrow_Click);
+            // 
             // calendarLine
             // 
             this.calendarLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
@@ -694,31 +720,6 @@
             this.doctorsNotePictureButton.TabIndex = 0;
             this.doctorsNotePictureButton.TabStop = false;
             this.doctorsNotePictureButton.Click += new System.EventHandler(this.doctorsNotePictureButton_Click);
-            // 
-            // calendarLeftArrow
-            // 
-            this.calendarLeftArrow.AutoSize = true;
-            this.calendarLeftArrow.BackColor = System.Drawing.Color.Transparent;
-            this.calendarLeftArrow.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calendarLeftArrow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.calendarLeftArrow.Location = new System.Drawing.Point(104, 5);
-            this.calendarLeftArrow.Name = "calendarLeftArrow";
-            this.calendarLeftArrow.Size = new System.Drawing.Size(25, 29);
-            this.calendarLeftArrow.TabIndex = 2;
-            this.calendarLeftArrow.Text = "<";
-            // 
-            // calendarRightArrow
-            // 
-            this.calendarRightArrow.AutoSize = true;
-            this.calendarRightArrow.BackColor = System.Drawing.Color.Transparent;
-            this.calendarRightArrow.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calendarRightArrow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.calendarRightArrow.Location = new System.Drawing.Point(249, 5);
-            this.calendarRightArrow.Name = "calendarRightArrow";
-            this.calendarRightArrow.Size = new System.Drawing.Size(25, 29);
-            this.calendarRightArrow.TabIndex = 3;
-            this.calendarRightArrow.Text = ">";
-            this.calendarRightArrow.Click += new System.EventHandler(this.calendarRightArrow_Click);
             // 
             // OverviewTab
             // 
