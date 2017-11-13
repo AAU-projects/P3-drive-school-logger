@@ -6,10 +6,26 @@ namespace DriveLogGUI
 {
     public partial class ProfileTab : UserControl
     {
-        public ProfileTab()
+        private User _user;
+        private bool _search;
+        public ProfileTab(User user, bool search = false)
         {
             InitializeComponent();
+            _user = user;
+            _search = search;
+            UpdateLayout();
             UpdateInfo();
+        }
+
+        private void UpdateLayout()
+        {
+            if(_search)
+            {
+                backButton.Enabled = true;
+                backButton.Visible = true;
+                logoutButton.Enabled = false;
+                logoutButton.Visible = false;
+            }
         }
 
         /// <summary>
@@ -17,19 +33,18 @@ namespace DriveLogGUI
         /// </summary>
         private void UpdateInfo()
         {
-            User user = Session.LoggedInUser;
 
-            profileHeaderLabel.Text = "Profile: " + user.Username;
-            nameOutputLabel.Text = user.Fullname;
-            phoneOutputLabel.Text = user.Phone;
-            cprOutputLabel.Text = user.Cpr;
-            emailOutputLabel.Text = user.Email;
-            addressOutputLabel.Text = user.Address;
-            cityOutputLabel.Text = $"{user.City}, {user.Zip}";
+            profileHeaderLabel.Text = "Profile: " + _user.Username;
+            nameOutputLabel.Text = _user.Fullname;
+            phoneOutputLabel.Text = _user.Phone;
+            cprOutputLabel.Text = _user.Cpr;
+            emailOutputLabel.Text = _user.Email;
+            addressOutputLabel.Text = _user.Address;
+            cityOutputLabel.Text = $"{_user.City}, {_user.Zip}";
 
-            if (!string.IsNullOrEmpty(user.PicturePath) || user.PicturePath != "")
+            if (!string.IsNullOrEmpty(_user.PicturePath) || _user.PicturePath != "")
             {
-                ProfilePicture.Load(user.PicturePath);
+                ProfilePicture.Load(_user.PicturePath);
             }
         }
 
@@ -39,6 +54,12 @@ namespace DriveLogGUI
 
             editForm.ShowDialog(this);
             UpdateInfo();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            this.Parent.Controls.Find("userSearchTab", false)[0].Show();
+            this.Dispose();
         }
     }
 }
