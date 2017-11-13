@@ -29,23 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserSearchTab));
             this.logoutButton = new System.Windows.Forms.Button();
             this.headerPanel = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.studentsOnlyCheckBox = new System.Windows.Forms.CheckBox();
             this.activeCheckBox = new System.Windows.Forms.CheckBox();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.headerLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.pictureSearchButton = new System.Windows.Forms.PictureBox();
+            this.userCollectionMenu = new System.Windows.Forms.ComboBox();
             this.headerPanel.SuspendLayout();
             this.resultsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSearchButton)).BeginInit();
             this.SuspendLayout();
             // 
             // logoutButton
             // 
             this.logoutButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
+            this.logoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logoutButton.FlatAppearance.BorderSize = 0;
             this.logoutButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -60,8 +63,8 @@
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.headerPanel.Controls.Add(this.checkBox1);
-            this.headerPanel.Controls.Add(this.studentsOnlyCheckBox);
+            this.headerPanel.Controls.Add(this.pictureSearchButton);
+            this.headerPanel.Controls.Add(this.userCollectionMenu);
             this.headerPanel.Controls.Add(this.activeCheckBox);
             this.headerPanel.Controls.Add(this.logoutButton);
             this.headerPanel.Controls.Add(this.searchBox);
@@ -71,34 +74,13 @@
             this.headerPanel.Size = new System.Drawing.Size(873, 104);
             this.headerPanel.TabIndex = 5;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(230, 81);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(127, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Eventuel check box?";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // studentsOnlyCheckBox
-            // 
-            this.studentsOnlyCheckBox.AutoSize = true;
-            this.studentsOnlyCheckBox.Checked = true;
-            this.studentsOnlyCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.studentsOnlyCheckBox.Location = new System.Drawing.Point(134, 81);
-            this.studentsOnlyCheckBox.Name = "studentsOnlyCheckBox";
-            this.studentsOnlyCheckBox.Size = new System.Drawing.Size(90, 17);
-            this.studentsOnlyCheckBox.TabIndex = 3;
-            this.studentsOnlyCheckBox.Text = "Students only";
-            this.studentsOnlyCheckBox.UseVisualStyleBackColor = true;
-            // 
             // activeCheckBox
             // 
             this.activeCheckBox.AutoSize = true;
             this.activeCheckBox.Checked = true;
             this.activeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.activeCheckBox.Location = new System.Drawing.Point(22, 81);
+            this.activeCheckBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.activeCheckBox.Location = new System.Drawing.Point(149, 36);
             this.activeCheckBox.Name = "activeCheckBox";
             this.activeCheckBox.Size = new System.Drawing.Size(106, 17);
             this.activeCheckBox.TabIndex = 2;
@@ -107,9 +89,10 @@
             // 
             // searchBox
             // 
-            this.searchBox.Location = new System.Drawing.Point(22, 55);
+            this.searchBox.Font = new System.Drawing.Font("Calibri", 15F);
+            this.searchBox.Location = new System.Drawing.Point(22, 61);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(829, 20);
+            this.searchBox.Size = new System.Drawing.Size(829, 32);
             this.searchBox.TabIndex = 1;
             this.searchBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.searchBox_KeyUp);
             // 
@@ -143,12 +126,41 @@
             // errorLabel
             // 
             this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.errorLabel.Font = new System.Drawing.Font("Calibri", 20F);
             this.errorLabel.Location = new System.Drawing.Point(318, 9);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(212, 31);
+            this.errorLabel.Size = new System.Drawing.Size(187, 33);
             this.errorLabel.TabIndex = 0;
             this.errorLabel.Text = "No Users Found";
+            // 
+            // pictureSearchButton
+            // 
+            this.pictureSearchButton.BackColor = System.Drawing.Color.White;
+            this.pictureSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureSearchButton.Image = ((System.Drawing.Image)(resources.GetObject("pictureSearchButton.Image")));
+            this.pictureSearchButton.Location = new System.Drawing.Point(820, 62);
+            this.pictureSearchButton.Name = "pictureSearchButton";
+            this.pictureSearchButton.Size = new System.Drawing.Size(30, 30);
+            this.pictureSearchButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureSearchButton.TabIndex = 8;
+            this.pictureSearchButton.TabStop = false;
+            this.pictureSearchButton.Click += new System.EventHandler(this.pictureSearchButton_Click);
+            this.pictureSearchButton.MouseEnter += new System.EventHandler(this.pictureSearchButton_MouseEnter);
+            this.pictureSearchButton.MouseLeave += new System.EventHandler(this.pictureSearchButton_MouseLeave);
+            // 
+            // userCollectionMenu
+            // 
+            this.userCollectionMenu.BackColor = System.Drawing.SystemColors.Window;
+            this.userCollectionMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.userCollectionMenu.FormattingEnabled = true;
+            this.userCollectionMenu.Items.AddRange(new object[] {
+            "Students Only",
+            "Instructors Only",
+            "All Users"});
+            this.userCollectionMenu.Location = new System.Drawing.Point(22, 34);
+            this.userCollectionMenu.Name = "userCollectionMenu";
+            this.userCollectionMenu.Size = new System.Drawing.Size(121, 21);
+            this.userCollectionMenu.TabIndex = 9;
             // 
             // UserSearchTab
             // 
@@ -162,6 +174,7 @@
             this.headerPanel.PerformLayout();
             this.resultsPanel.ResumeLayout(false);
             this.resultsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSearchButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -173,10 +186,10 @@
         private System.Windows.Forms.Label headerLabel;
         private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox studentsOnlyCheckBox;
         private System.Windows.Forms.CheckBox activeCheckBox;
         private System.Windows.Forms.Panel resultsPanel;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.PictureBox pictureSearchButton;
+        private System.Windows.Forms.ComboBox userCollectionMenu;
     }
 }

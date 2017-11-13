@@ -31,6 +31,7 @@
             this.leftSidePanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.pictureSearchTab = new System.Windows.Forms.PictureBox();
             this.userSearchButton = new System.Windows.Forms.Button();
             this.panelForProfile = new System.Windows.Forms.Panel();
             this.firstAidButton = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.leftSidePanel.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSearchTab)).BeginInit();
             this.panelForProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBookingTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSettingsTab)).BeginInit();
@@ -84,6 +86,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.pictureSearchTab);
             this.panel4.Controls.Add(this.userSearchButton);
             this.panel4.Controls.Add(this.panelForProfile);
             this.panel4.Controls.Add(this.pictureBookingTab);
@@ -99,8 +102,23 @@
             this.panel4.Size = new System.Drawing.Size(132, 315);
             this.panel4.TabIndex = 0;
             // 
+            // pictureSearchTab
+            // 
+            this.pictureSearchTab.BackColor = System.Drawing.Color.Transparent;
+            this.pictureSearchTab.Enabled = false;
+            this.pictureSearchTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureSearchTab.Image")));
+            this.pictureSearchTab.Location = new System.Drawing.Point(3, 0);
+            this.pictureSearchTab.Name = "pictureSearchTab";
+            this.pictureSearchTab.Size = new System.Drawing.Size(30, 30);
+            this.pictureSearchTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureSearchTab.TabIndex = 7;
+            this.pictureSearchTab.TabStop = false;
+            this.pictureSearchTab.Visible = false;
+            // 
             // userSearchButton
             // 
+            this.userSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.userSearchButton.Enabled = false;
             this.userSearchButton.FlatAppearance.BorderSize = 0;
             this.userSearchButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
             this.userSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -114,6 +132,7 @@
             this.userSearchButton.Text = "Users";
             this.userSearchButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.userSearchButton.UseVisualStyleBackColor = true;
+            this.userSearchButton.Visible = false;
             this.userSearchButton.Click += new System.EventHandler(this.userSearchButton_Click);
             // 
             // panelForProfile
@@ -225,7 +244,7 @@
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.settingsButton.ForeColor = System.Drawing.Color.White;
-            this.settingsButton.Location = new System.Drawing.Point(0, 138);
+            this.settingsButton.Location = new System.Drawing.Point(0, 104);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.settingsButton.Size = new System.Drawing.Size(132, 36);
@@ -237,6 +256,7 @@
             // 
             // bookingButton
             // 
+            this.bookingButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bookingButton.FlatAppearance.BorderSize = 0;
             this.bookingButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
             this.bookingButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -254,6 +274,7 @@
             // 
             // ProfileButton
             // 
+            this.ProfileButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ProfileButton.FlatAppearance.BorderSize = 0;
             this.ProfileButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
             this.ProfileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -271,6 +292,7 @@
             // 
             // OverviewButton
             // 
+            this.OverviewButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.OverviewButton.FlatAppearance.BorderSize = 0;
             this.OverviewButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
             this.OverviewButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -354,6 +376,7 @@
             this.leftSidePanel.ResumeLayout(false);
             this.leftSidePanel.PerformLayout();
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSearchTab)).EndInit();
             this.panelForProfile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBookingTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSettingsTab)).EndInit();
@@ -386,5 +409,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button userSearchButton;
+        private System.Windows.Forms.PictureBox pictureSearchTab;
     }
 }
