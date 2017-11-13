@@ -13,8 +13,8 @@ namespace DriveLogGUI
 {
     public partial class MainWindowTab : Form
     {
+        public Point pageStartPoint { get; set; }
         private Point _lastClick;
-        private Point pageStartPoint;
         private UserControl _lastPage;
         private bool _isOpen;
 
@@ -57,7 +57,7 @@ namespace DriveLogGUI
         private void InitializeMenuTabs()
         {
             overviewTab = new OverviewTab();
-            profileTab = new ProfileTab();
+            profileTab = new ProfileTab(Session.LoggedInUser);
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();

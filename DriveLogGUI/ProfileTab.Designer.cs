@@ -82,6 +82,7 @@
             this.nextTheoreticalLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.theoreticalLessonLabel = new System.Windows.Forms.Label();
+            this.backButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).BeginInit();
             this.InfoPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
@@ -318,6 +319,7 @@
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.headerPanel.Controls.Add(this.backButton);
             this.headerPanel.Controls.Add(this.logoutButton);
             this.headerPanel.Controls.Add(this.profileHeaderLabel);
             this.headerPanel.Location = new System.Drawing.Point(12, 12);
@@ -668,6 +670,23 @@
             this.theoreticalLessonLabel.TabIndex = 11;
             this.theoreticalLessonLabel.Text = "Theoretical Lessons";
             // 
+            // backButton
+            // 
+            this.backButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.backButton.Enabled = false;
+            this.backButton.FlatAppearance.BorderSize = 0;
+            this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.backButton.Location = new System.Drawing.Point(808, 6);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(52, 44);
+            this.backButton.TabIndex = 2;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = false;
+            this.backButton.Visible = false;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // ProfileTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -756,5 +775,6 @@
         private System.Windows.Forms.Label nameOutputLabel;
         private System.Windows.Forms.Label cityOutputLabel;
         private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button backButton;
     }
 }

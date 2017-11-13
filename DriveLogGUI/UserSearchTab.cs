@@ -66,7 +66,7 @@ namespace DriveLogGUI
             profilePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             tempPanel.Controls.Add(profilePictureBox);
 
-            int labelWidth = 150;
+            int labelWidth = 160;
             int labelHeight = 14;
 
             Label nameLabel = new Label();
@@ -87,13 +87,30 @@ namespace DriveLogGUI
             addressLabel.Text = "Address: " + user.Address;
             tempPanel.Controls.Add(addressLabel);
 
-            Label cprLabel = new Label();
-            cprLabel.Location = new Point(70, 52);
-            cprLabel.Size = new Size(labelWidth, labelHeight);
-            cprLabel.Text = "CPR: " + user.Cpr;
-            tempPanel.Controls.Add(cprLabel);
+            Label phoneLabel = new Label();
+            phoneLabel.Location = new Point(70, 52);
+            phoneLabel.Size = new Size(labelWidth, labelHeight);
+            phoneLabel.Text = "Phone: " + user.Phone;
+            tempPanel.Controls.Add(phoneLabel);
+
+            profilePictureBox.Click += (sender, e) => OnTempPanelClick(sender, e, user);
+            nameLabel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
+            emailLabel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
+            addressLabel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
+            phoneLabel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
+            tempPanel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
 
             _userPanelList.Add(tempPanel);
+        }
+
+        private void OnTempPanelClick(object sender, EventArgs e, User user)
+        {
+            this.Hide();
+            ProfileTab foundUserProfile = new ProfileTab(user, true);
+            foundUserProfile.Location = this.Location;
+            foundUserProfile.Parent = this;
+            this.Parent.Controls.Add(foundUserProfile);
+            foundUserProfile.Show();
         }
     }
 }
