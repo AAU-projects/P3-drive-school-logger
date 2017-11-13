@@ -36,18 +36,28 @@ namespace DriveLogGUI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            DataTable user = MySql.GetUserByName(UsernameBox.Text);
-            if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text) {
-                CustomMsgBox.Show("Wrong username or password", "Error", CustomMsgBoxIcon.Error);
 
-                // resets password with false login information
-                if (PasswordBox.Text != "Password") {
-                    PasswordBox.Clear();
+            // TODO remove else when program is done
+            if (UsernameBox.Text != "Username")
+            {
+                DataTable user = MySql.GetUserByName(UsernameBox.Text);
+                if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text) {
+                    CustomMsgBox.Show("Wrong username or password", "Error", CustomMsgBoxIcon.Error);
+
+                    // resets password with false login information
+                    if (PasswordBox.Text != "Password") {
+                        PasswordBox.Clear();
+                    }
+                    return;
                 }
-                return;
-            }
 
-            Session.LoadUserFromDataTable(user);
+                Session.LoadUserFromDataTable(user);
+
+            }
+            else
+            {
+                Session.LoadUserFromDataTable(MySql.GetUserByName("testuser"));
+            }
 
             this.Hide();
             MainWindowTab main = new MainWindowTab();

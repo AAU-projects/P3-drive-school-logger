@@ -15,7 +15,7 @@ namespace DriveLogGUI
     {
         public Point pageStartPoint { get; set; }
         private Point _lastClick;
-        private UserControl _lastPage;
+        public UserControl _lastPage;
         private bool _isOpen;
 
         private OverviewTab overviewTab;
@@ -23,6 +23,7 @@ namespace DriveLogGUI
         private DocumentViewer documentViewer;
         private DoctorsNote doctorsNoteTab;
         private UserSearchTab userSearchTab;
+        private CalendarTabG calendarTab;
         private SettingsTab settingsTab;
 
         public MainWindowTab()
@@ -43,6 +44,7 @@ namespace DriveLogGUI
             documentViewer.Location = pageStartPoint;
             doctorsNoteTab.Location = pageStartPoint;
             userSearchTab.Location = pageStartPoint;
+            calendarTab.Location = pageStartPoint;
             settingsTab.Location = pageStartPoint;
 
             // adding them as control panels
@@ -50,8 +52,10 @@ namespace DriveLogGUI
             this.Controls.Add(profileTab);
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
+            this.Controls.Add(userSearchTab);
+            this.Controls.Add(calendarTab);
             this.Controls.Add(settingsTab);
-
+            
             if (Session.LoggedInUser.Sysmin)
             {
                 this.Controls.Add(userSearchTab);
@@ -74,6 +78,7 @@ namespace DriveLogGUI
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();
+            calendarTab = new CalendarTabG(overviewTab, this);
             settingsTab = new SettingsTab();
 
             overviewTab.Hide();
@@ -81,6 +86,7 @@ namespace DriveLogGUI
             documentViewer.Hide();
             doctorsNoteTab.Hide();
             userSearchTab.Hide();
+            calendarTab.Hide();
             settingsTab.Hide();
 
             MoveButtonSpaces(OverviewButton, 8);
@@ -229,6 +235,7 @@ namespace DriveLogGUI
 
         private void bookingButton_Click(object sender, EventArgs e)
         {
+            OpenPage(calendarTab);
             ProfileSubmenuControl(false);
         }
 
