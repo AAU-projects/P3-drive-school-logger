@@ -11,11 +11,13 @@ namespace DriveLogGUI
     {
         public Panel Panel { get; set; }
         public Label Label { get; set; }
+        public DateTime Date { get; set; }
 
-        public CalendarData(Panel inputPanel, Label inputLabel)
+        public CalendarData(Panel inputPanel, Label inputLabel, DateTime inputDate)
         {
             Panel = inputPanel;
             Label = inputLabel;
+            Date = inputDate;
         }
     }
 }

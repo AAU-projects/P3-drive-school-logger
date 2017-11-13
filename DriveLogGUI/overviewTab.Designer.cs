@@ -125,6 +125,7 @@
             // logoutButton
             // 
             this.logoutButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
+            this.logoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logoutButton.FlatAppearance.BorderSize = 0;
             this.logoutButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -214,7 +215,7 @@
             // 
             this.daysForCalendar.Location = new System.Drawing.Point(24, 67);
             this.daysForCalendar.Name = "daysForCalendar";
-            this.daysForCalendar.Size = new System.Drawing.Size(340, 200);
+            this.daysForCalendar.Size = new System.Drawing.Size(340, 240);
             this.daysForCalendar.TabIndex = 2;
             this.daysForCalendar.Paint += new System.Windows.Forms.PaintEventHandler(this.daysForCalendar_Paint);
             // 
@@ -404,6 +405,7 @@
             // 
             this.calendarRightArrow.AutoSize = true;
             this.calendarRightArrow.BackColor = System.Drawing.Color.Transparent;
+            this.calendarRightArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.calendarRightArrow.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.calendarRightArrow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.calendarRightArrow.Location = new System.Drawing.Point(249, 5);
@@ -417,6 +419,7 @@
             // 
             this.calendarLeftArrow.AutoSize = true;
             this.calendarLeftArrow.BackColor = System.Drawing.Color.Transparent;
+            this.calendarLeftArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.calendarLeftArrow.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.calendarLeftArrow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.calendarLeftArrow.Location = new System.Drawing.Point(104, 5);
