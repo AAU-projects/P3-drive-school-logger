@@ -27,14 +27,14 @@ namespace DriveLogCode
 
         public static string GetDoctorsNote(User user)
         {
-            return GetDocumentFromDatabase(user, Session.TypeDoctorsNote);
+            return GetUserDocumentFromDatabase(user, Session.TypeDoctorsNote);
         }
         public static string GetFirstAid(User user)
         {
-            return GetDocumentFromDatabase(user, Session.TypeFirstAid);
+            return GetUserDocumentFromDatabase(user, Session.TypeFirstAid);
         }
 
-        private static string GetDocumentFromDatabase(User user, string type)
+        private static string GetUserDocumentFromDatabase(User user, string type)
         {
             try
             {

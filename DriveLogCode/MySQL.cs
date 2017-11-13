@@ -16,6 +16,43 @@ namespace DriveLogCode
 
         private const string UserTable = "users";
         private const string DocumnentTable = "documents";
+        private const string LessonTemplateTable = "lessonTemplates";
+
+        public static DataTable GetCreatedLessonNames(string table = LessonTemplateTable)
+        {
+            var cmd = new MySqlCommand($"SELECT title FROM {table} WHERE 1");
+
+            return SendQuery(cmd);
+        }
+
+        public static DataTable GetLessonData(string title, string table = LessonTemplateTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE title = {title} LIMIT 1");
+
+            return SendQuery(cmd);
+        }
+
+        public static bool UploadLessonTemp(string title, string description, string time, string reading, string table = LessonTemplateTable)
+        {
+            var cmd = new MySqlCommand($"INSERT INTO {table} (title, description, time, reading) VALUES ('{title}', '{description}', {title}, '{reading}')");
+
+            if (ExistTable(table)) return SendNonQuery(cmd);
+            if (CreateTemplateTable(table)) return SendNonQuery(cmd);
+
+            return false;
+        }
+
+        private static bool CreateTemplateTable(string table = LessonTemplateTable)
+        {
+            var cmd = new MySqlCommand($"CREATE TABLE `{table}` (`id`  int NOT NULL ," +
+                                       $"`title`  varchar(255) NOT NULL ," +
+                                       $"`description`  varchar(255) NOT NULL ," +
+                                       $"`time`  varchar(255) NOT NULL ," +
+                                       $"`reading`  varchar(255) NULL ," +
+                                       $"PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
+
+            return SendNonQuery(cmd);
+        }
 
         public static DataTable GetDocument(string type, int id, string docTable = DocumnentTable)
         {
