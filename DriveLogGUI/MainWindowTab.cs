@@ -161,6 +161,7 @@ namespace DriveLogGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.documentViewer.DisposePdf();
             this.Close();
         }
 
@@ -205,9 +206,8 @@ namespace DriveLogGUI
             }
             else
             {
-                documentViewer.SetType(Session.TypeFirstAid);
-                documentViewer.Clear();
                 OpenPage(documentViewer);
+                documentViewer.SetType(Session.TypeFirstAid);
             }
         }
 
@@ -225,6 +225,20 @@ namespace DriveLogGUI
         {
             OpenPage(userSearchTab);
             ProfileSubmenuControl(false);
+        }
+        
+        private void doctorsNoteButton_Click_1(object sender, EventArgs e)
+        {
+            if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
+            {
+                OpenPage(documentViewer);
+                documentViewer.LoadDoctorsNote(Session.LoggedInUser);
+            }
+            else
+            {
+                OpenPage(documentViewer);
+                documentViewer.SetType(Session.TypeDoctorsNote);
+            }
         }
     }
 }

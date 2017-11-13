@@ -24,8 +24,23 @@ namespace DriveLogCode
             return SendQuery(cmd);
         }
 
+        public static bool Updatedocument(string type, int userId, string newPath, string docTable = DocumnentTable)
+        {
+            var cmd = new MySqlCommand($"UPDATE {docTable} SET path = '{newPath}' WHERE type = '{type}' AND `user` = {userId}");
+
+            if (ExistTable(docTable)) return SendNonQuery(cmd);
+
+            var tableCreated = CreateDocumentTabel(docTable);
+
+            if (tableCreated) return SendNonQuery(cmd);
+
+            return false;
+        }
+
         public static bool UploadDocument(string title, string type, DateTime date, int userId, string path, string table = DocumnentTable)
         {
+            if (ExistDocument(userId, type, table)) return Updatedocument(type, userId, path, table);
+
             var cmd = new MySqlCommand($"INSERT INTO documents (title, type, `user`, path) VALUES ('{title}', '{type}', {userId}, '{path}')");
 
             if (ExistTable(table)) return SendNonQuery(cmd);
