@@ -23,6 +23,7 @@ namespace DriveLogGUI
         private DocumentViewer documentViewer;
         private DoctorsNote doctorsNoteTab;
         private UserSearchTab userSearchTab;
+        private SettingsTab settingsTab;
 
         public MainWindowTab()
         {
@@ -42,15 +43,19 @@ namespace DriveLogGUI
             documentViewer.Location = pageStartPoint;
             doctorsNoteTab.Location = pageStartPoint;
             userSearchTab.Location = pageStartPoint;
+            settingsTab.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
             this.Controls.Add(profileTab);
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
+            this.Controls.Add(settingsTab);
+
             if (Session.LoggedInUser.Sysmin)
             {
                 this.Controls.Add(userSearchTab);
+
                 userSearchButton.Enabled = true;
                 userSearchButton.Visible = true;
                 pictureSearchTab.Enabled = true;
@@ -69,12 +74,14 @@ namespace DriveLogGUI
             documentViewer = new DocumentViewer();
             doctorsNoteTab = new DoctorsNote();
             userSearchTab = new UserSearchTab();
+            settingsTab = new SettingsTab();
 
             overviewTab.Hide();
             profileTab.Hide();
             documentViewer.Hide();
             doctorsNoteTab.Hide();
             userSearchTab.Hide();
+            settingsTab.Hide();
 
             MoveButtonSpaces(OverviewButton, 8);
             MoveButtonSpaces(ProfileButton, 8);
@@ -227,6 +234,7 @@ namespace DriveLogGUI
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
+            OpenPage(settingsTab);
             ProfileSubmenuControl(false);
         }
 
