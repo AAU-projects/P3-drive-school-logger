@@ -15,11 +15,12 @@ namespace DriveLogGUI
     public partial class EditUserInfoForm : Form
     {
         public Image ProfilePicture { get; set; } = null;
-        private User user = Session.LoggedInUser;
+        private User _user;
         
-        public EditUserInfoForm()
+        public EditUserInfoForm(User user)
         {
             InitializeComponent();
+            _user = user;
             UpdateInfo();
         }
 
@@ -50,24 +51,25 @@ namespace DriveLogGUI
 
         private void UpdateInfo()
         {
-            usernameBox.Text = user.Username;
-            firstnameBox.Text = user.Firstname;
-            lastnameBox.Text = user.Lastname;
-            phoneBox.Text = user.Phone;
-            emailBox.Text = user.Email;
-            addressBox.Text = user.Address;
-            zipBox.Text = user.Zip;
-            cityBox.Text = user.City;
+            usernameBox.Text = _user.Username;
+            firstnameBox.Text = _user.Firstname;
+            lastnameBox.Text = _user.Lastname;
+            phoneBox.Text = _user.Phone;
+            emailBox.Text = _user.Email;
+            addressBox.Text = _user.Address;
+            zipBox.Text = _user.Zip;
+            cityBox.Text = _user.City;
 
-            if (!string.IsNullOrEmpty(user.PicturePath) || user.PicturePath != "")
+            if (!string.IsNullOrEmpty(_user.PicturePath) || _user.PicturePath != "")
             {
-                pictureBox.Load(user.PicturePath);
+                pictureBox.Load(_user.PicturePath);
             }
 
-            if (user.Sysmin)
+            if (Session.LoggedInUser.Sysmin)
             {
                 instructorCheckBox.Visible = true;
-                instructorCheckBox.Checked = true;
+                if(_user.Sysmin)
+                    instructorCheckBox.Checked = true;
             }
 
             uploader = new UploadHandler();
@@ -80,7 +82,7 @@ namespace DriveLogGUI
             else
                 verifyPasswordBox.PasswordChar = '\0';
 
-            if (verifyPasswordBox.Text == user.Password)
+            if (verifyPasswordBox.Text == Session.LoggedInUser.Password)
             {
                 ChangeEnableStatus(true);
                 ChangeBackColorTextBox(verifyPasswordBox, true);
@@ -156,7 +158,7 @@ namespace DriveLogGUI
 
         private void usernameBox_Leave(object sender, EventArgs e)
         {
-            if (usernameBox.Text == user.Username)
+            if (usernameBox.Text == _user.Username)
                 usernameOk = true;
             else
                 usernameOk = RegisterVerification.UsernameVerifacation(usernameBox.Text);
@@ -256,7 +258,7 @@ namespace DriveLogGUI
 
         private void phoneBox_Leave(object sender, EventArgs e)
         {
-            if (phoneBox.Text == user.Phone)
+            if (phoneBox.Text == _user.Phone)
                 phoneOk = true;
             else
                 phoneOk = RegisterVerification.PhoneVerifacation(phoneBox.Text);
@@ -266,7 +268,7 @@ namespace DriveLogGUI
 
         private void emailBox_Leave(object sender, EventArgs e)
         {
-            if (emailBox.Text == user.Email)
+            if (emailBox.Text == _user.Email)
                 emailOk = true;
             else
                 emailOk = RegisterVerification.EmailVerification(emailBox.Text);
@@ -427,22 +429,22 @@ namespace DriveLogGUI
             if (uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString()) != null)
                 picturePath = uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString());
             else
-                picturePath = user.PicturePath;
+                picturePath = _user.PicturePath;
 
             if (editPasswordBox.Text != editPasswordBox.defaultText)
             {
-                updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
+                updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
                 zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, picturePath, instructorCheckBox.Checked ? "true" : "false");
             }
             else
             {
-                updateSuccess = MySql.UpdateUser(user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, user.Password, picturePath, instructorCheckBox.Checked ? "true" : "false");
+                updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
+                zipBox.Text, cityBox.Text, usernameBox.Text, _user.Password, picturePath, instructorCheckBox.Checked ? "true" : "false");
             }
 
             if(updateSuccess)
             {
-                CustomMsgBox.Show("You have succesfully updated your profile", "Success", CustomMsgBoxIcon.Complete);
+                CustomMsgBox.Show("You have succesfully updated the profile", "Success", CustomMsgBoxIcon.Complete);
                 DataTable user = MySql.GetUserByName(usernameBox.Text);
                 Session.LoadUserFromDataTable(user);
                 this.Dispose();
