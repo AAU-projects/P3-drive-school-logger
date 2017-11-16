@@ -69,16 +69,20 @@ namespace DriveLogGUI
             tempPanel.BorderStyle = BorderStyle.FixedSingle;
 
             if (index % 2 == 0)
-                tempPanel.Location = new Point(22, 13 + (13 + tempPanel.Height * (index / 2)) * (index / 2));
+                tempPanel.Location = new Point(22, 13 + (13 + tempPanel.Height) * (index / 2));
             else
-                tempPanel.Location = new Point(454, 13 + (13 + tempPanel.Height * (index / 2)) * (index / 2));
+                tempPanel.Location = new Point(454, 13 + (13 + tempPanel.Height) * (index / 2));
 
             PictureBox profilePictureBox = new PictureBox();
-            profilePictureBox.Load(user.PicturePath);
             profilePictureBox.Location = new Point(5, 5);
             profilePictureBox.Size = new Size(64, 64);
             profilePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             tempPanel.Controls.Add(profilePictureBox);
+
+            if (!String.IsNullOrEmpty(user.PicturePath))
+                profilePictureBox.Load(user.PicturePath);
+            else
+                profilePictureBox.Image = Properties.Resources.avataricon;
 
             int labelWidth = 160;
             int labelHeight = 14;
@@ -107,11 +111,39 @@ namespace DriveLogGUI
             phoneLabel.Text = "Phone: " + user.Phone;
             tempPanel.Controls.Add(phoneLabel);
 
-            profilePictureBox.Click += (sender, e) => OnTempPanelClick(sender, e, user);
-            nameLabel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
-            emailLabel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
-            addressLabel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
-            phoneLabel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
+            Label usernameLabel = new Label();
+            usernameLabel.Location = new Point(240, 4);
+            usernameLabel.Size = new Size(labelWidth, labelHeight);
+            usernameLabel.Text = "Username: " + user.Username;
+            tempPanel.Controls.Add(usernameLabel);
+
+            Label teamLabel = new Label();
+            teamLabel.Location = new Point(240, 20);
+            teamLabel.Size = new Size(labelWidth, labelHeight);
+            teamLabel.Text = "Class: " + "N/A";
+            tempPanel.Controls.Add(teamLabel);
+
+            Label progressLabel = new Label();
+            progressLabel.Location = new Point(240, 36);
+            progressLabel.Size = new Size(labelWidth, labelHeight);
+            progressLabel.Text = "Theo/Prac: " + "#/24 - #/14";
+            tempPanel.Controls.Add(progressLabel);
+
+            Label roleLabel = new Label();
+            roleLabel.Location = new Point(240, 52);
+            roleLabel.Size = new Size(labelWidth, labelHeight);
+            roleLabel.Text = "Role: " + (user.Sysmin ? "Instructor" : "Student");
+            tempPanel.Controls.Add(roleLabel);
+
+            foreach (Control c in tempPanel.Controls)
+            {
+                c.Click += (sender, e) => OnTempPanelClick(sender, e, user);
+                c.MouseEnter += OnTempPanelEnter;
+                c.MouseLeave += OnTempPanelLeave;
+            }
+
+            tempPanel.MouseEnter += OnTempPanelEnter;
+            tempPanel.MouseLeave += OnTempPanelLeave;
             tempPanel.Click += (sender, e) => OnTempPanelClick(sender, e, user);
 
             _userPanelList.Add(tempPanel);
@@ -119,12 +151,43 @@ namespace DriveLogGUI
 
         private void OnTempPanelClick(object sender, EventArgs e, User user)
         {
+            OnTempPanelLeave(sender, e);
             this.Hide();
             ProfileTab foundUserProfile = new ProfileTab(user, true);
             foundUserProfile.Location = this.Location;
             foundUserProfile.Parent = this;
             this.Parent.Controls.Add(foundUserProfile);
             foundUserProfile.Show();
+        }
+
+        private void OnTempPanelEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+            if (sender is Panel)
+            {
+                Panel panel = sender as Panel;
+                panel.BackColor = Color.FromArgb(229, 243, 255);
+            }
+            else
+            {
+                Control control = sender as Control;
+                control.Parent.BackColor = Color.FromArgb(229, 243, 255);
+            }
+        }
+
+        private void OnTempPanelLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+            if (sender is Panel)
+            {
+                Panel panel = sender as Panel;
+                panel.BackColor = Color.White;
+            }
+            else
+            {
+                Control control = sender as Control;
+                control.Parent.BackColor = Color.White;
+            }
         }
 
         private void pictureSearchButton_Click(object sender, EventArgs e)
