@@ -25,6 +25,8 @@ namespace DriveLogGUI
         private UserSearchTab userSearchTab;
         private CalendarTabG calendarTab;
         private SettingsTab settingsTab;
+        private DriveLogTab driveLogTab;
+
 
         public MainWindowTab()
         {
@@ -41,6 +43,7 @@ namespace DriveLogGUI
             // setting their location
             overviewTab.Location = pageStartPoint;
             profileTab.Location = pageStartPoint;
+            driveLogTab.Location = pageStartPoint;
             documentViewer.Location = pageStartPoint;
             doctorsNoteTab.Location = pageStartPoint;
             userSearchTab.Location = pageStartPoint;
@@ -50,6 +53,7 @@ namespace DriveLogGUI
             // adding them as control panels
             this.Controls.Add(overviewTab);
             this.Controls.Add(profileTab);
+            this.Controls.Add(driveLogTab);
             this.Controls.Add(documentViewer);
             this.Controls.Add(doctorsNoteTab);
             this.Controls.Add(userSearchTab);
@@ -64,6 +68,9 @@ namespace DriveLogGUI
                 userSearchButton.Visible = true;
                 pictureSearchTab.Enabled = true;
                 pictureSearchTab.Visible = true;
+                driveLogButton.Visible = false;
+                driveLogButton.Enabled = false;
+
                 settingsButton.Location = new Point(0, 138);
             }
 
@@ -80,9 +87,11 @@ namespace DriveLogGUI
             userSearchTab = new UserSearchTab();
             calendarTab = new CalendarTabG(overviewTab, this);
             settingsTab = new SettingsTab();
+            driveLogTab = new DriveLogTab(Session.LoggedInUser);
 
             overviewTab.Hide();
             profileTab.Hide();
+            driveLogTab.Hide();
             documentViewer.Hide();
             doctorsNoteTab.Hide();
             userSearchTab.Hide();
@@ -263,6 +272,11 @@ namespace DriveLogGUI
                 OpenPage(documentViewer);
                 documentViewer.SetType(Session.TypeDoctorsNote);
             }
+        }
+
+        private void driveLogButton_Click(object sender, EventArgs e)
+        {
+            OpenPage(driveLogTab);
         }
     }
 }
