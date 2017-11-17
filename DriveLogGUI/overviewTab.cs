@@ -61,7 +61,11 @@ namespace DriveLogGUI
             for (var i = 0; i < 42; i++) // 42 is number of days in our calendar, therefor static.
             {
                 CalendarData calendarDay = new CalendarData(new Panel(), new Label(), formatDateTime);
-                calendarDay.LabelForDate.MouseEnter += (s, e) => calendarDay.LabelForDate.Cursor = Cursors.Hand;
+                calendarDay.LabelForDate.MouseEnter += (s, e) =>
+                    LabelForDateMouseEnter(calendarDay.LabelForDate, calendarDay.PanelForCalendarDay, calendarDay.Date);
+
+                calendarDay.LabelForDate.MouseLeave +=
+                    (s, e) => LabelForDateMouseLeave(calendarDay.PanelForCalendarDay, calendarDay.Date);
 
                 listOfDays.Add(calendarDay);
                 
@@ -80,6 +84,21 @@ namespace DriveLogGUI
                 FormatPanelForDays(calendarDay, ref formatDateTime);
                 daysForCalendar.Controls.Add(calendarDay.PanelForCalendarDay);
             }
+        }
+
+        private void LabelForDateMouseEnter(Label label, Panel panel, DateTime panelDate)
+        {
+            if (panelDate != DateTime.Today)
+            {
+                label.Cursor = Cursors.Hand;
+                panel.BackColor = Color.FromArgb(229, 243, 255);
+            }
+        }
+
+        private void LabelForDateMouseLeave(Panel panel, DateTime panelDate)
+        {
+            if (panelDate != DateTime.Today)
+                panel.BackColor = Color.White;
         }
 
         private void UpdateCalender()
