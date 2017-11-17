@@ -4,42 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
-    class Appointment
+    class Appointment : AppointmentStructure
     {
         public Label LabelAppointment;
-        public DateTime FromDate;
-        public DateTime ToDate;
-        public string Context;
-        public string Instructor;
+
+        public DateTime ToTime => GetToTime();
+
+        private DateTime GetToTime()
+        {
+            return StartTime.AddMinutes(AvailableTime * 45);
+        }
 
         public event EventHandler<ApppointmentEventArgs> ClickOnAppointmentTriggered;
 
-        public Appointment(DateTime fromDate, DateTime toDate, Label labelAppointment)
+        public Appointment(int id, int instructorID, DateTime startTime, int availableTime, string lessonType, bool fullyBooked) 
+            : base(id, instructorID, startTime, availableTime, lessonType, fullyBooked)
         {
-            FromDate = fromDate;
-            ToDate = toDate;
-            LabelAppointment = labelAppointment;
-
-            SubscribeToEvents();
+            
         }
 
-        public Appointment(Label labelAppointment, DateTime fromDate, DateTime toDate, string context, string instructor)
+        public void SubscribeToEvents()
         {
-            LabelAppointment = labelAppointment;
-            FromDate = fromDate;
-            ToDate = toDate;
-            Context = context;
-            Instructor = instructor;
-
-            SubscribeToEvents();
-        }
-
-        private void SubscribeToEvents()
-        {
-            LabelAppointment.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(LabelAppointment, FromDate, ToDate, Context, Instructor));
+            LabelAppointment.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(LabelAppointment, StartTime, ToTime, Context, Instructor));
             LabelAppointment.MouseEnter += (s, e) => LabelAppointment.Cursor = Cursors.Hand;
         }
 
@@ -47,5 +37,7 @@ namespace DriveLogGUI
         {
             ClickOnAppointmentTriggered?.Invoke(this, e);
         }
+
+ 
     }
 }

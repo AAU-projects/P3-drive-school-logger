@@ -32,7 +32,7 @@
             this.backPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.weekNumberTextbox = new System.Windows.Forms.TextBox();
-            this.weekNumber = new System.Windows.Forms.Label();
+            this.weekNumberLabel = new System.Windows.Forms.Label();
             this.weekSelectButton = new System.Windows.Forms.Button();
             this.gotoTodayButton = new System.Windows.Forms.Button();
             this.buttonRightWeek = new System.Windows.Forms.Label();
@@ -78,7 +78,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.panel1.Controls.Add(this.weekNumberTextbox);
-            this.panel1.Controls.Add(this.weekNumber);
+            this.panel1.Controls.Add(this.weekNumberLabel);
             this.panel1.Controls.Add(this.weekSelectButton);
             this.panel1.Controls.Add(this.gotoTodayButton);
             this.panel1.Controls.Add(this.buttonRightWeek);
@@ -106,16 +106,16 @@
             this.weekNumberTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.weekNumberTextbox_KeyPress);
             this.weekNumberTextbox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.weekNumberTextbox_KeyUp);
             // 
-            // weekNumber
+            // weekNumberLabel
             // 
-            this.weekNumber.AutoSize = true;
-            this.weekNumber.Font = new System.Drawing.Font("Calibri Light", 12F);
-            this.weekNumber.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.weekNumber.Location = new System.Drawing.Point(15, 61);
-            this.weekNumber.Name = "weekNumber";
-            this.weekNumber.Size = new System.Drawing.Size(63, 19);
-            this.weekNumber.TabIndex = 6;
-            this.weekNumber.Text = "week 41";
+            this.weekNumberLabel.AutoSize = true;
+            this.weekNumberLabel.Font = new System.Drawing.Font("Calibri Light", 12F);
+            this.weekNumberLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.weekNumberLabel.Location = new System.Drawing.Point(15, 61);
+            this.weekNumberLabel.Name = "weekNumberLabel";
+            this.weekNumberLabel.Size = new System.Drawing.Size(63, 19);
+            this.weekNumberLabel.TabIndex = 6;
+            this.weekNumberLabel.Text = "week 41";
             // 
             // weekSelectButton
             // 
@@ -214,9 +214,9 @@
             this.bookingInformationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bookingInformationButton.Font = new System.Drawing.Font("Calibri Light", 9.75F);
             this.bookingInformationButton.ForeColor = System.Drawing.Color.White;
-            this.bookingInformationButton.Location = new System.Drawing.Point(42, 356);
+            this.bookingInformationButton.Location = new System.Drawing.Point(50, 357);
             this.bookingInformationButton.Name = "bookingInformationButton";
-            this.bookingInformationButton.Size = new System.Drawing.Size(75, 23);
+            this.bookingInformationButton.Size = new System.Drawing.Size(71, 23);
             this.bookingInformationButton.TabIndex = 12;
             this.bookingInformationButton.Text = "BOOK";
             this.bookingInformationButton.UseVisualStyleBackColor = false;
@@ -330,7 +330,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button weekSelectButton;
         private System.Windows.Forms.Panel backPanel;
-        private System.Windows.Forms.Label weekNumber;
+        private System.Windows.Forms.Label weekNumberLabel;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label instructorTitleInformationLabel;
         private System.Windows.Forms.Label instructorInformationLabel;

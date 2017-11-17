@@ -101,6 +101,19 @@ namespace DriveLogCode
             }
         }
 
+        public static List<AppointmentStructure> AppointmentsList()
+        {
+            List<AppointmentStructure> appointments = new List<AppointmentStructure>();
+            DataTable queryInfo = MySql.GetAllAppointments();
+
+            foreach (DataRow appointment in queryInfo.Rows)
+            {
+                appointments.Add(new AppointmentStructure((int) appointment[0], (int) appointment[1], (DateTime) appointment[2], (int) appointment[3], (string) appointment[4], Convert.ToBoolean(appointment[5])));
+            }
+
+            return appointments;
+        }
+
         public static List<User> UserSearchList(string searchInput)
         {
             DataTable queryInfo = MySql.UserSearch(searchInput);

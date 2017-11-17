@@ -17,7 +17,7 @@ namespace DriveLogCode
         private const string UserTable = "users";
         private const string DocumnentTable = "documents";
         private const string LessonTemplateTable = "lessonTemplates";
-        private const string AppointmentTable = "appoinments";
+        private const string AppointmentTable = "appointments";
         private const string LessonTable = "lessons";
 
         public static DataTable GetLessonsByAppointmentID(int appointmentid, string table = AppointmentTable)
@@ -35,10 +35,17 @@ namespace DriveLogCode
             return GetFromDB("userID", userID.ToString(), table);
         }
 
-        public static DataTable GetLessonsByUserAndAppointment(int userID, int appoinmentID,
+        public static DataTable GetLessonsByUserAndAppointment(int userID, int appointmentID,
             string table = AppointmentTable)
         {
-            var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `userID` = '{userID}' AND `appointmentID` = '{appoinmentID}'");
+            var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `userID` = '{userID}' AND `appointmentID` = '{appointmentID}'");
+
+            return ExistTable(table) ? SendQuery(cmd) : null;
+        }
+
+        public static DataTable GetAllAppointments(string table = AppointmentTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM `{table}`");
 
             return ExistTable(table) ? SendQuery(cmd) : null;
         }

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
@@ -20,10 +16,10 @@ namespace DriveLogGUI
         private List<Appointment> appointments = new List<Appointment>();
         private MainWindowTab mainWindow;
 
-        private Color Red = Color.FromArgb(229, 187, 191);
-        private Color Blue = Color.FromArgb(148, 197, 204);
-        private Color Green = Color.FromArgb(175, 212, 167);
-        private Color Yellow = Color.FromArgb(246, 228, 125);
+        private Color ColorRed = Color.FromArgb(229, 187, 191);
+        private Color ColorBlue = Color.FromArgb(148, 197, 204);
+        private Color ColorGreen = Color.FromArgb(175, 212, 167);
+        private Color ColorYellow = Color.FromArgb(246, 228, 125);
 
         private OverviewTab overviewTab;
 
@@ -36,8 +32,16 @@ namespace DriveLogGUI
             this.overviewTab = overviewTab;
             SubscribeToAllClickPanels(overviewTab.listOfDays);
 
-            TestAppointments();
+            GetAppointsments();
             SubscribeToAllClickAppointments(appointments);
+        }
+
+        private void GetAppointsments()
+        {
+            foreach (var appointment in DatabaseParser.AppointmentsList())
+            {
+                AddAppointment(appointment);
+            }
         }
 
         private void SubscribeToAllClickAppointments(List<Appointment> appointments)
@@ -186,7 +190,7 @@ namespace DriveLogGUI
         {
             dayNow = lastWeek;
             datesInWeek.Text = GetDatesInWeek(dayNow);
-            weekNumber.Text = GetWeekNumber(dayNow);
+            weekNumberLabel.Text = $"week {GetWeekNumber(dayNow)}";
 
             foreach (var day in calendarData) 
             {
@@ -226,7 +230,7 @@ namespace DriveLogGUI
             int weekNumber =
                 CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstFourDayWeek,
                     DayOfWeek.Monday);
-            return $"week {weekNumber}";
+            return $"{weekNumber}";
         }
 
         private DateTime GetDateFromWeek(int weekOfYear)
@@ -248,22 +252,50 @@ namespace DriveLogGUI
         }
 
 
-        private void AddAppointment(DateTime fromDate, DateTime toDate, string text, Color color)
+        private void AddAppointment(AppointmentStructure appointment)
         {
-            Label labelAppointment = new Label();
-            labelAppointment.Text = text;
-            labelAppointment.BackColor = color;
-            labelAppointment.TextAlign = ContentAlignment.MiddleCenter;
-            labelAppointment.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, labelAppointment.Font.Unit);
+            Appointment newAppointment = new Appointment(appointment.Id, appointment.InstructorID, appointment.StartTime, appointment.AvailableTime, appointment.LessonType, appointment.FullyBooked);
 
-            //this is just for testing purp
-            Appointment test = new Appointment(fromDate, toDate, labelAppointment);
-            test.Instructor = "Karl";
-            test.Context =
+            newAppointment.LabelAppointment = GenerateLabel(appointment);
+            newAppointment.SubscribeToEvents();
+            newAppointment.Context =
                 "Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug. Introduced imprudence see say unpleasing devonshire acceptance son. Exeter longer wisdom gay nor design age. Am weather to entered norland no in showing service. Nor repeated speaking shy appetite. Excited it hastily an pasture it observe. Snug hand how dare here too. ";
 
+            appointments.Add(newAppointment);
+        }
 
-            appointments.Add(test);
+        private Label GenerateLabel(AppointmentStructure appointment)
+        {
+            Label newLabel = new Label();
+            newLabel.Text = "Fed pik";
+            newLabel.BackColor = GetColorForLabel(appointment.LessonType);
+            newLabel.TextAlign = ContentAlignment.MiddleCenter;
+            newLabel.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, newLabel.Font.Unit);
+
+            return newLabel;
+        }
+
+        private Color GetColorForLabel(string appointmentLessonType)
+        {
+            if (appointmentLessonType.ToLower() == "theoretical")
+            {
+                return ColorBlue;
+            }
+            if (appointmentLessonType.ToLower() == "practical") {
+                return ColorBlue;
+            }
+            if (appointmentLessonType.ToLower() == "manoeuvre") {
+                return ColorYellow;
+            }
+            if (appointmentLessonType.ToLower() == "slippery") {
+                return ColorYellow;
+            }
+            if (appointmentLessonType.ToLower() == "other") {
+                return ColorYellow;
+            }
+
+            return ColorRed;
+
         }
 
         private void AddAllElements()
@@ -276,7 +308,7 @@ namespace DriveLogGUI
 
                 foreach (var appointment in appointments)
                 {
-                    if (day.Date.ToShortDateString() == appointment.FromDate.ToShortDateString()) 
+                    if (day.Date.ToShortDateString() == appointment.ToTime.ToShortDateString()) 
                     {
                         appointment.LabelAppointment.Show();
                         appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
@@ -326,43 +358,9 @@ namespace DriveLogGUI
             UpdateCalendar(0);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddAppointment(DateTime.Now, DateTime.Now.AddHours(4), "fuck you", Color.Gold);
-        }
-
         private void TestAppointments()
         {
-            AddAppointment(DateTime.Now, DateTime.Now.AddHours(4), "fuck you", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(3), DateTime.Now.AddHours(4), "fuck you", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(3), DateTime.Now.AddHours(4), "fuck you", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(6), DateTime.Now.AddHours(4), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), DateTime.Now.AddHours(4), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), DateTime.Now.AddHours(4), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), DateTime.Now.AddHours(4), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), DateTime.Now.AddHours(4), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(1), DateTime.Now.AddHours(4), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(4), DateTime.Now.AddHours(4), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(2), DateTime.Now.AddHours(4), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(0), DateTime.Now.AddHours(4), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(3), DateTime.Now.AddHours(4), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(2), DateTime.Now.AddHours(4), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(4), DateTime.Now.AddHours(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(2), DateTime.Now.AddHours(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(3), DateTime.Now.AddHours(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(4), DateTime.Now.AddHours(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(4), DateTime.Now.AddHours(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(6), DateTime.Now.AddHours(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(2), DateTime.Now.AddHours(4), "die", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(2), DateTime.Now.AddHours(4), "die", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(2), DateTime.Now.AddHours(4), "die", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(2), DateTime.Now.AddHours(4), "die", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(2), DateTime.Now.AddHours(4), "die", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(-1), DateTime.Now.AddHours(4), "idk", Color.Red);
-            AddAppointment(DateTime.Now.AddDays(-2), DateTime.Now.AddHours(4), "idk", Color.Red);
-            AddAppointment(DateTime.Now.AddDays(5), DateTime.Now.AddHours(4), "idk", Color.Red);
-            AddAppointment(DateTime.Now.AddDays(3), DateTime.Now.AddHours(4), "idk", Color.Red);
-            AddAppointment(DateTime.Now.AddDays(6), DateTime.Now.AddHours(4), "idk", Color.Red);
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -387,6 +385,8 @@ namespace DriveLogGUI
             if (!weekNumberTextbox.Visible)
             {
                 weekNumberTextbox.Show();
+                weekNumberTextbox.Text = GetWeekNumber(lastWeek);
+                this.ActiveControl = weekNumberTextbox;
             }
             else
             {
