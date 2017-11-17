@@ -20,6 +20,11 @@ namespace DriveLogGUI
         private List<Appointment> appointments = new List<Appointment>();
         private MainWindowTab mainWindow;
 
+        private Color Red = Color.FromArgb(229, 187, 191);
+        private Color Blue = Color.FromArgb(148, 197, 204);
+        private Color Green = Color.FromArgb(175, 212, 167);
+        private Color Yellow = Color.FromArgb(246, 228, 125);
+
         private OverviewTab overviewTab;
 
         Random test = new Random();
@@ -175,6 +180,8 @@ namespace DriveLogGUI
             UpdateDates();
         }
 
+
+
         private void UpdateDates()
         {
             dayNow = lastWeek;
@@ -220,6 +227,24 @@ namespace DriveLogGUI
                 CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstFourDayWeek,
                     DayOfWeek.Monday);
             return $"week {weekNumber}";
+        }
+
+        private DateTime GetDateFromWeek(int weekOfYear)
+        {
+            int year = lastWeek.Year;
+            DateTime jan1 = new DateTime(year, 1, 1);
+            int daysOffset = DayOfWeek.Thursday - jan1.DayOfWeek;
+
+            DateTime firstThursday = jan1.AddDays(daysOffset);
+            var cal = CultureInfo.CurrentCulture.Calendar;
+            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            var weekNum = weekOfYear;
+            if (firstWeek <= 1) {
+                weekNum -= 1;
+            }
+            var result = firstThursday.AddDays(weekNum * 7);
+            return result.AddDays(-3);
         }
 
 
@@ -271,19 +296,15 @@ namespace DriveLogGUI
 
         private Color RandomColor()
         {
-            int lol = test.Next(0, 5);
+            int lol = test.Next(0, 3);
             if (lol == 0) {
-                return Color.GreenYellow;
+                return Color.FromArgb(255, 229, 187, 191);
             } else if (lol == 1) {
-                return Color.Aqua;
+                return Color.FromArgb(255, 148, 197, 204);
             } else if (lol == 2) {
-                return Color.Red;
+                return Color.FromArgb(255, 175, 212, 167);
             } else if (lol == 3) {
-                return Color.BurlyWood;
-            } else if (lol == 4) {
-                return Color.SlateBlue;
-            } else if (lol == 5) {
-                return Color.CadetBlue;
+                return Color.FromArgb(255, 246, 228, 125);
             }
             return Color.Aquamarine;
         }
@@ -342,6 +363,43 @@ namespace DriveLogGUI
             AddAppointment(DateTime.Now.AddDays(5), DateTime.Now.AddHours(4), "idk", Color.Red);
             AddAppointment(DateTime.Now.AddDays(3), DateTime.Now.AddHours(4), "idk", Color.Red);
             AddAppointment(DateTime.Now.AddDays(6), DateTime.Now.AddHours(4), "idk", Color.Red);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void weekNumberTextbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            int weekNumber = Convert.ToInt32(weekNumberTextbox.Text);
+
+            if (weekNumber <= 52)
+            {
+                UpdateCalendar(GetDateFromWeek(weekNumber));
+            }
+        }
+
+        private void weekSelectButton_Click(object sender, EventArgs e)
+        {
+            if (!weekNumberTextbox.Visible)
+            {
+                weekNumberTextbox.Show();
+            }
+            else
+            {
+                weekNumberTextbox.Hide();
+            }
+        }
+
+        private void weekNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) 
+            {
+                e.Handled = true;
+            }
         }
     }
 }

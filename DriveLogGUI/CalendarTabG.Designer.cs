@@ -31,6 +31,7 @@
             this.panelForCalendar = new System.Windows.Forms.Panel();
             this.backPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.weekNumberTextbox = new System.Windows.Forms.TextBox();
             this.weekNumber = new System.Windows.Forms.Label();
             this.weekSelectButton = new System.Windows.Forms.Button();
             this.gotoTodayButton = new System.Windows.Forms.Button();
@@ -39,6 +40,7 @@
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.bookingInformationButton = new System.Windows.Forms.Button();
             this.instructorTitleInformationLabel = new System.Windows.Forms.Label();
             this.instructorInformationLabel = new System.Windows.Forms.Label();
             this.contextTitleInformationLabel = new System.Windows.Forms.Label();
@@ -75,6 +77,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.panel1.Controls.Add(this.weekNumberTextbox);
             this.panel1.Controls.Add(this.weekNumber);
             this.panel1.Controls.Add(this.weekSelectButton);
             this.panel1.Controls.Add(this.gotoTodayButton);
@@ -86,6 +89,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(687, 93);
             this.panel1.TabIndex = 2;
+            // 
+            // weekNumberTextbox
+            // 
+            this.weekNumberTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.weekNumberTextbox.Font = new System.Drawing.Font("Calibri Light", 9.75F);
+            this.weekNumberTextbox.Location = new System.Drawing.Point(595, 60);
+            this.weekNumberTextbox.MaxLength = 2;
+            this.weekNumberTextbox.Name = "weekNumberTextbox";
+            this.weekNumberTextbox.Size = new System.Drawing.Size(77, 23);
+            this.weekNumberTextbox.TabIndex = 0;
+            this.weekNumberTextbox.Text = "42";
+            this.weekNumberTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.weekNumberTextbox.Visible = false;
+            this.weekNumberTextbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.weekNumberTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.weekNumberTextbox_KeyPress);
+            this.weekNumberTextbox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.weekNumberTextbox_KeyUp);
             // 
             // weekNumber
             // 
@@ -108,8 +127,9 @@
             this.weekSelectButton.Name = "weekSelectButton";
             this.weekSelectButton.Size = new System.Drawing.Size(75, 23);
             this.weekSelectButton.TabIndex = 4;
-            this.weekSelectButton.Text = "WEEK ↓";
+            this.weekSelectButton.Text = "WEEK NR.";
             this.weekSelectButton.UseVisualStyleBackColor = false;
+            this.weekSelectButton.Click += new System.EventHandler(this.weekSelectButton_Click);
             // 
             // gotoTodayButton
             // 
@@ -175,6 +195,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel4.Controls.Add(this.bookingInformationButton);
             this.panel4.Controls.Add(this.instructorTitleInformationLabel);
             this.panel4.Controls.Add(this.instructorInformationLabel);
             this.panel4.Controls.Add(this.contextTitleInformationLabel);
@@ -186,11 +207,25 @@
             this.panel4.Size = new System.Drawing.Size(171, 401);
             this.panel4.TabIndex = 9;
             // 
+            // bookingInformationButton
+            // 
+            this.bookingInformationButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
+            this.bookingInformationButton.FlatAppearance.BorderSize = 0;
+            this.bookingInformationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bookingInformationButton.Font = new System.Drawing.Font("Calibri Light", 9.75F);
+            this.bookingInformationButton.ForeColor = System.Drawing.Color.White;
+            this.bookingInformationButton.Location = new System.Drawing.Point(42, 356);
+            this.bookingInformationButton.Name = "bookingInformationButton";
+            this.bookingInformationButton.Size = new System.Drawing.Size(75, 23);
+            this.bookingInformationButton.TabIndex = 12;
+            this.bookingInformationButton.Text = "BOOK";
+            this.bookingInformationButton.UseVisualStyleBackColor = false;
+            // 
             // instructorTitleInformationLabel
             // 
             this.instructorTitleInformationLabel.AutoSize = true;
             this.instructorTitleInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instructorTitleInformationLabel.Location = new System.Drawing.Point(11, 337);
+            this.instructorTitleInformationLabel.Location = new System.Drawing.Point(12, 290);
             this.instructorTitleInformationLabel.Name = "instructorTitleInformationLabel";
             this.instructorTitleInformationLabel.Size = new System.Drawing.Size(82, 19);
             this.instructorTitleInformationLabel.TabIndex = 11;
@@ -200,7 +235,7 @@
             // 
             this.instructorInformationLabel.AutoSize = true;
             this.instructorInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instructorInformationLabel.Location = new System.Drawing.Point(12, 356);
+            this.instructorInformationLabel.Location = new System.Drawing.Point(13, 309);
             this.instructorInformationLabel.Name = "instructorInformationLabel";
             this.instructorInformationLabel.Size = new System.Drawing.Size(34, 19);
             this.instructorInformationLabel.TabIndex = 10;
@@ -210,7 +245,7 @@
             // 
             this.contextTitleInformationLabel.AutoSize = true;
             this.contextTitleInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contextTitleInformationLabel.Location = new System.Drawing.Point(11, 115);
+            this.contextTitleInformationLabel.Location = new System.Drawing.Point(11, 94);
             this.contextTitleInformationLabel.Name = "contextTitleInformationLabel";
             this.contextTitleInformationLabel.Size = new System.Drawing.Size(96, 19);
             this.contextTitleInformationLabel.TabIndex = 9;
@@ -219,7 +254,7 @@
             // contextInformationLabel
             // 
             this.contextInformationLabel.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.contextInformationLabel.Location = new System.Drawing.Point(12, 140);
+            this.contextInformationLabel.Location = new System.Drawing.Point(12, 119);
             this.contextInformationLabel.Name = "contextInformationLabel";
             this.contextInformationLabel.Size = new System.Drawing.Size(156, 156);
             this.contextInformationLabel.TabIndex = 8;
@@ -305,5 +340,7 @@
         private System.Windows.Forms.Label dateInformationLabel;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label informationLabel;
+        private System.Windows.Forms.Button bookingInformationButton;
+        private System.Windows.Forms.TextBox weekNumberTextbox;
     }
 }
