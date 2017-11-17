@@ -53,8 +53,9 @@ namespace DriveLogGUI
             Label titleLabel = new Label();
             titleLabel.Location = new Point(5, 5);
             titleLabel.Font = new Font("Myanmar Text", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            titleLabel.Size = new Size(labelWidth, labelHeight);
-            titleLabel.Text = "Lesson title: ...";
+            titleLabel.TextAlign = ContentAlignment.MiddleCenter;
+            titleLabel.Size = new Size(labelWidth, labelHeight + 10);
+            titleLabel.Text = "Practical Lesson 1";
             driveLogPanel.Controls.Add(titleLabel);
 
             Label dateCompletedLabel = new Label();
@@ -64,13 +65,13 @@ namespace DriveLogGUI
             driveLogPanel.Controls.Add(dateCompletedLabel);
 
             Label lessonNumberLabel = new Label();
-            lessonNumberLabel.Location = new Point(5, 21);
-            lessonNumberLabel.Size = new Size(labelWidth, labelHeight);
+            lessonNumberLabel.Location = new Point(5, titleLabel.Height + 10);
+            lessonNumberLabel.Size = new Size(labelWidth / 4, labelHeight);
             lessonNumberLabel.Text = "Lesson Number: #/#";
             driveLogPanel.Controls.Add(lessonNumberLabel);
 
             Label lessonDescriptionLabel = new Label();
-            lessonDescriptionLabel.Location = new Point(5, 37);
+            lessonDescriptionLabel.Location = new Point(5, lessonNumberLabel.Location.Y + lessonNumberLabel.Height + 10);
             lessonDescriptionLabel.MaximumSize = new Size(labelWidth, 0);
             lessonDescriptionLabel.AutoSize = true;
             lessonDescriptionLabel.Text ="Description:\n" + "Forberedelse til manøvre på køreteknisk anlæg. 9.1 Vejgreb og belæsning 9.2" +
@@ -80,7 +81,7 @@ namespace DriveLogGUI
             driveLogPanel.Controls.Add(lessonDescriptionLabel);
 
             Label instructorNameLabel = new Label();
-            instructorNameLabel.Location = new Point(5, 53 + lessonDescriptionLabel.Height);
+            instructorNameLabel.Location = new Point(5, lessonDescriptionLabel.Location.Y + lessonDescriptionLabel.Height + 10);
             instructorNameLabel.Size = new Size(labelWidth, labelHeight);
             instructorNameLabel.Text = "Instructor: Alecs Far";
             driveLogPanel.Controls.Add(instructorNameLabel);

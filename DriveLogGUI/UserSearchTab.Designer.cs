@@ -32,17 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserSearchTab));
             this.logoutButton = new System.Windows.Forms.Button();
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.pictureSearchButton = new System.Windows.Forms.PictureBox();
+            this.userCollectionMenu = new System.Windows.Forms.ComboBox();
             this.activeCheckBox = new System.Windows.Forms.CheckBox();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.headerLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
-            this.pictureSearchButton = new System.Windows.Forms.PictureBox();
-            this.userCollectionMenu = new System.Windows.Forms.ComboBox();
             this.headerPanel.SuspendLayout();
-            this.resultsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSearchButton)).BeginInit();
+            this.resultsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // logoutButton
@@ -73,6 +73,35 @@
             this.headerPanel.Name = "headerPanel";
             this.headerPanel.Size = new System.Drawing.Size(873, 104);
             this.headerPanel.TabIndex = 5;
+            // 
+            // pictureSearchButton
+            // 
+            this.pictureSearchButton.BackColor = System.Drawing.Color.White;
+            this.pictureSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureSearchButton.Image = ((System.Drawing.Image)(resources.GetObject("pictureSearchButton.Image")));
+            this.pictureSearchButton.Location = new System.Drawing.Point(820, 62);
+            this.pictureSearchButton.Name = "pictureSearchButton";
+            this.pictureSearchButton.Size = new System.Drawing.Size(30, 30);
+            this.pictureSearchButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureSearchButton.TabIndex = 8;
+            this.pictureSearchButton.TabStop = false;
+            this.pictureSearchButton.Click += new System.EventHandler(this.pictureSearchButton_Click);
+            this.pictureSearchButton.MouseEnter += new System.EventHandler(this.pictureSearchButton_MouseEnter);
+            this.pictureSearchButton.MouseLeave += new System.EventHandler(this.pictureSearchButton_MouseLeave);
+            // 
+            // userCollectionMenu
+            // 
+            this.userCollectionMenu.BackColor = System.Drawing.SystemColors.Window;
+            this.userCollectionMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.userCollectionMenu.FormattingEnabled = true;
+            this.userCollectionMenu.Items.AddRange(new object[] {
+            "Students Only",
+            "Instructors Only",
+            "All Users"});
+            this.userCollectionMenu.Location = new System.Drawing.Point(22, 34);
+            this.userCollectionMenu.Name = "userCollectionMenu";
+            this.userCollectionMenu.Size = new System.Drawing.Size(121, 21);
+            this.userCollectionMenu.TabIndex = 9;
             // 
             // activeCheckBox
             // 
@@ -133,35 +162,6 @@
             this.errorLabel.TabIndex = 0;
             this.errorLabel.Text = "No Users Found";
             // 
-            // pictureSearchButton
-            // 
-            this.pictureSearchButton.BackColor = System.Drawing.Color.White;
-            this.pictureSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureSearchButton.Image = ((System.Drawing.Image)(resources.GetObject("pictureSearchButton.Image")));
-            this.pictureSearchButton.Location = new System.Drawing.Point(820, 62);
-            this.pictureSearchButton.Name = "pictureSearchButton";
-            this.pictureSearchButton.Size = new System.Drawing.Size(30, 30);
-            this.pictureSearchButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureSearchButton.TabIndex = 8;
-            this.pictureSearchButton.TabStop = false;
-            this.pictureSearchButton.Click += new System.EventHandler(this.pictureSearchButton_Click);
-            this.pictureSearchButton.MouseEnter += new System.EventHandler(this.pictureSearchButton_MouseEnter);
-            this.pictureSearchButton.MouseLeave += new System.EventHandler(this.pictureSearchButton_MouseLeave);
-            // 
-            // userCollectionMenu
-            // 
-            this.userCollectionMenu.BackColor = System.Drawing.SystemColors.Window;
-            this.userCollectionMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.userCollectionMenu.FormattingEnabled = true;
-            this.userCollectionMenu.Items.AddRange(new object[] {
-            "Students Only",
-            "Instructors Only",
-            "All Users"});
-            this.userCollectionMenu.Location = new System.Drawing.Point(22, 34);
-            this.userCollectionMenu.Name = "userCollectionMenu";
-            this.userCollectionMenu.Size = new System.Drawing.Size(121, 21);
-            this.userCollectionMenu.TabIndex = 9;
-            // 
             // UserSearchTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -172,9 +172,9 @@
             this.Size = new System.Drawing.Size(897, 544);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSearchButton)).EndInit();
             this.resultsPanel.ResumeLayout(false);
             this.resultsPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureSearchButton)).EndInit();
             this.ResumeLayout(false);
 
         }

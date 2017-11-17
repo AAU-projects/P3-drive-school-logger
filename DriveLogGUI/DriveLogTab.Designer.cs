@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.headerPanel = new System.Windows.Forms.Panel();
-            this.logoutButton = new System.Windows.Forms.Button();
             this.driveLogHeaderLabel = new System.Windows.Forms.Label();
+            this.logoutButton = new System.Windows.Forms.Button();
             this.backPanel = new System.Windows.Forms.Panel();
             this.headerPanel.SuspendLayout();
             this.SuspendLayout();
@@ -45,6 +45,17 @@
             this.headerPanel.Size = new System.Drawing.Size(873, 56);
             this.headerPanel.TabIndex = 4;
             // 
+            // driveLogHeaderLabel
+            // 
+            this.driveLogHeaderLabel.BackColor = System.Drawing.Color.Transparent;
+            this.driveLogHeaderLabel.Font = new System.Drawing.Font("Myanmar Text", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.driveLogHeaderLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.driveLogHeaderLabel.Location = new System.Drawing.Point(3, 6);
+            this.driveLogHeaderLabel.Name = "driveLogHeaderLabel";
+            this.driveLogHeaderLabel.Size = new System.Drawing.Size(788, 44);
+            this.driveLogHeaderLabel.TabIndex = 0;
+            this.driveLogHeaderLabel.Text = "Drive Log: N/A";
+            // 
             // logoutButton
             // 
             this.logoutButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
@@ -58,17 +69,6 @@
             this.logoutButton.TabIndex = 1;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = false;
-            // 
-            // driveLogHeaderLabel
-            // 
-            this.driveLogHeaderLabel.BackColor = System.Drawing.Color.Transparent;
-            this.driveLogHeaderLabel.Font = new System.Drawing.Font("Myanmar Text", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.driveLogHeaderLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.driveLogHeaderLabel.Location = new System.Drawing.Point(3, 6);
-            this.driveLogHeaderLabel.Name = "driveLogHeaderLabel";
-            this.driveLogHeaderLabel.Size = new System.Drawing.Size(788, 44);
-            this.driveLogHeaderLabel.TabIndex = 0;
-            this.driveLogHeaderLabel.Text = "Drive Log: N/A";
             // 
             // backPanel
             // 
