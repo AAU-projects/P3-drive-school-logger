@@ -17,10 +17,103 @@ namespace DriveLogCode
         private const string UserTable = "users";
         private const string DocumnentTable = "documents";
         private const string LessonTemplateTable = "lessonTemplates";
+        private const string AppointmentTable = "appoinments";
+        private const string LessonTable = "lessons";
+
+        public static DataTable GetLessonsByAppointmentID(int appointmentid, string table = AppointmentTable)
+        {
+            return GetFromDB("appointmentID", appointmentid.ToString(), table);
+        }
+
+        public static DataTable GetLessonByID(int id, string table = LessonTable)
+        {
+            return GetFromDB("id", id.ToString(), table);
+        }
+
+        public static DataTable GetLessonsByUser(int userID, string table = LessonTable)
+        {
+            return GetFromDB("userID", userID.ToString(), table);
+        }
+
+        public static DataTable GetLessonsByUserAndAppointment(int userID, int appoinmentID,
+            string table = AppointmentTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `userID` = '{userID}' AND `appointmentID` = '{appoinmentID}'");
+
+            return ExistTable(table) ? SendQuery(cmd) : null;
+        }
+
+        public static bool AddLesson(int userId, int appointmentID, int templateID, int part, string table = LessonTable)
+        {
+            var cmd = new MySqlCommand($"INSERT INTO `{table}` (`userID`, `appointmentID`, `lessonID`, `lessonPart`)" +
+                                       $"VALUES ('{userId}', '{appointmentID}', '{templateID}', '{part}')");
+
+            if (ExistTable(table)) return SendNonQuery(cmd);
+            return CreateAppointmentTable(table) && SendNonQuery(cmd);
+        }
+
+        public static DataTable GetAppointmentsByInstuctor(int instructorID, string table = AppointmentTable)
+        {
+            return GetFromDB("instructorID", instructorID.ToString(), table);
+        }
+
+        public static DataTable GetAppointmentByID(int id, string table = AppointmentTable)
+        {
+            return GetFromDB("id", id.ToString(), table);
+        }
+
+        private static DataTable GetFromDB(string column, string value, string table)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `{column}` = '{value}'" + column == "id" ? " LIMIT 1" : "");
+
+            return ExistTable(table) ? SendQuery(cmd) : null;
+        }
+
+        public static bool AddAppointment(string instructor, DataTable startTime, int availableTime, string type, string table = AppointmentTable)
+        {
+            var cmd = new MySqlCommand($"INSERT INTO `{table}` (`instructor`, `startTime`, `availableTime`, `lessonType`) " +
+                                       $"VALUES ('{instructor}', '{startTime}', '{availableTime}', '{type}')");
+
+            if (ExistTable(table)) return SendNonQuery(cmd);
+            return CreateAppointmentTable(table) && SendNonQuery(cmd);
+        }
+
+        private static bool CreateLessonTable(string tableName = LessonTable)
+        {
+            var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
+                                       $"`id`  int NOT NULL AUTO_INCREMENT ," +
+                                       $"`userID`  int NOT NULL ," +
+                                       $"`appointmentID`  int NOT NULL ," +
+                                       $"`lessonID`  int NOT NULL ," +
+                                       $"`lessonPart`  int NOT NULL ," +
+                                       $"`endDate`  datetime NULL DEFAULT NULL ," +
+                                       $"`completed`  enum(\'True\',\'False\') NOT NULL DEFAULT \'False\' ," +
+                                       $"PRIMARY KEY (`id`)" +
+                                       $")" +
+                                       $"ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
+
+            return SendNonQuery(cmd);
+        }
+
+        private static bool CreateAppointmentTable(string tableName = AppointmentTable)
+        {
+            var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
+                                       $"`id`  int NOT NULL AUTO_INCREMENT ," +
+                                       $"`instructorID`  int NOT NULL ," +
+                                       $"`startTime`  datetime NOT NULL ," +
+                                       $"`availableTime`  int NOT NULL ," +
+                                       $"`lessonType`  enum(\'Theoretical\',\'Practical\',\'Manoeuvre\',\'Slippery\',\'Other\') NOT NULL ," +
+                                       $"`fullyBooked`  enum(\'True\',\'False\') NOT NULL DEFAULT \'False\' ," +
+                                       $"PRIMARY KEY (`id`)" +
+                                       $")" +
+                                       $"ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
+
+            return SendNonQuery(cmd);
+        }
 
         public static bool DeleteTemplate(int id, string table = LessonTemplateTable)
         {
-            MySqlCommand cmd = new MySqlCommand($"DELETE FROM {table} WHERE id = {id}");
+            var cmd = new MySqlCommand($"DELETE FROM {table} WHERE id = {id}");
 
             if (ExistTable(table)) return SendNonQuery(cmd);
             return false;
@@ -198,7 +291,14 @@ namespace DriveLogCode
 
             var results = SendQuery(cmd);
 
-            return results.Rows.Count == 1;
+            try
+            {
+                return results.Rows.Count == 1;
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
 
         }
 
