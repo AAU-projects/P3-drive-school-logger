@@ -9,13 +9,43 @@ namespace DriveLogGUI
 {
     class Appointment
     {
-        public DateTime date;
-        public Label label;
+        public Label LabelAppointment;
+        public DateTime FromDate;
+        public DateTime ToDate;
+        public string Context;
+        public string Instructor;
 
-        public Appointment(DateTime date, Label label)
+        public event EventHandler<ApppointmentEventArgs> ClickOnAppointmentTriggered;
+
+        public Appointment(DateTime fromDate, DateTime toDate, Label labelAppointment)
         {
-            this.date = date;
-            this.label = label;
+            FromDate = fromDate;
+            ToDate = toDate;
+            LabelAppointment = labelAppointment;
+
+            SubscribeToEvents();
+        }
+
+        public Appointment(Label labelAppointment, DateTime fromDate, DateTime toDate, string context, string instructor)
+        {
+            LabelAppointment = labelAppointment;
+            FromDate = fromDate;
+            ToDate = toDate;
+            Context = context;
+            Instructor = instructor;
+
+            SubscribeToEvents();
+        }
+
+        private void SubscribeToEvents()
+        {
+            LabelAppointment.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(LabelAppointment, FromDate, ToDate, Context, Instructor));
+            LabelAppointment.MouseEnter += (s, e) => LabelAppointment.Cursor = Cursors.Hand;
+        }
+
+        private void label_Clicked(ApppointmentEventArgs e)
+        {
+            ClickOnAppointmentTriggered?.Invoke(this, e);
         }
     }
 }

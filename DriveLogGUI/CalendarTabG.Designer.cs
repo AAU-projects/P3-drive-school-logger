@@ -27,20 +27,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalendarTabG));
             this.panelForCalendar = new System.Windows.Forms.Panel();
             this.backPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.weekNumber = new System.Windows.Forms.Label();
             this.weekSelectButton = new System.Windows.Forms.Button();
             this.gotoTodayButton = new System.Windows.Forms.Button();
             this.buttonRightWeek = new System.Windows.Forms.Label();
             this.buttonLeftWeek = new System.Windows.Forms.Label();
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.weekNumber = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.instructorTitleInformationLabel = new System.Windows.Forms.Label();
+            this.instructorInformationLabel = new System.Windows.Forms.Label();
+            this.contextTitleInformationLabel = new System.Windows.Forms.Label();
+            this.contextInformationLabel = new System.Windows.Forms.Label();
+            this.timeInformationLabel = new System.Windows.Forms.Label();
+            this.dateInformationLabel = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.informationLabel = new System.Windows.Forms.Label();
             this.panelForCalendar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelForCalendar
@@ -58,7 +69,7 @@
             this.backPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.backPanel.Location = new System.Drawing.Point(0, 25);
             this.backPanel.Name = "backPanel";
-            this.backPanel.Size = new System.Drawing.Size(686, 401);
+            this.backPanel.Size = new System.Drawing.Size(687, 401);
             this.backPanel.TabIndex = 0;
             // 
             // panel1
@@ -73,20 +84,19 @@
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(211, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(686, 93);
+            this.panel1.Size = new System.Drawing.Size(687, 93);
             this.panel1.TabIndex = 2;
             // 
-            // button1
+            // weekNumber
             // 
-            this.button1.BackColor = System.Drawing.Color.Lime;
-            this.button1.ForeColor = System.Drawing.Color.Maroon;
-            this.button1.Location = new System.Drawing.Point(36, 496);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "add ";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.weekNumber.AutoSize = true;
+            this.weekNumber.Font = new System.Drawing.Font("Calibri Light", 12F);
+            this.weekNumber.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.weekNumber.Location = new System.Drawing.Point(15, 61);
+            this.weekNumber.Name = "weekNumber";
+            this.weekNumber.Size = new System.Drawing.Size(63, 19);
+            this.weekNumber.TabIndex = 6;
+            this.weekNumber.Text = "week 41";
             // 
             // weekSelectButton
             // 
@@ -154,23 +164,105 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(211, 544);
             this.panel2.TabIndex = 3;
             // 
-            // weekNumber
+            // panel4
             // 
-            this.weekNumber.AutoSize = true;
-            this.weekNumber.Font = new System.Drawing.Font("Calibri Light", 12F);
-            this.weekNumber.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.weekNumber.Location = new System.Drawing.Point(15, 61);
-            this.weekNumber.Name = "weekNumber";
-            this.weekNumber.Size = new System.Drawing.Size(63, 19);
-            this.weekNumber.TabIndex = 6;
-            this.weekNumber.Text = "week 41";
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel4.Controls.Add(this.instructorTitleInformationLabel);
+            this.panel4.Controls.Add(this.instructorInformationLabel);
+            this.panel4.Controls.Add(this.contextTitleInformationLabel);
+            this.panel4.Controls.Add(this.contextInformationLabel);
+            this.panel4.Controls.Add(this.timeInformationLabel);
+            this.panel4.Controls.Add(this.dateInformationLabel);
+            this.panel4.Location = new System.Drawing.Point(20, 118);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(171, 401);
+            this.panel4.TabIndex = 9;
+            // 
+            // instructorTitleInformationLabel
+            // 
+            this.instructorTitleInformationLabel.AutoSize = true;
+            this.instructorTitleInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instructorTitleInformationLabel.Location = new System.Drawing.Point(11, 337);
+            this.instructorTitleInformationLabel.Name = "instructorTitleInformationLabel";
+            this.instructorTitleInformationLabel.Size = new System.Drawing.Size(82, 19);
+            this.instructorTitleInformationLabel.TabIndex = 11;
+            this.instructorTitleInformationLabel.Text = "Instructor";
+            // 
+            // instructorInformationLabel
+            // 
+            this.instructorInformationLabel.AutoSize = true;
+            this.instructorInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instructorInformationLabel.Location = new System.Drawing.Point(12, 356);
+            this.instructorInformationLabel.Name = "instructorInformationLabel";
+            this.instructorInformationLabel.Size = new System.Drawing.Size(34, 19);
+            this.instructorInformationLabel.TabIndex = 10;
+            this.instructorInformationLabel.Text = "Kim";
+            // 
+            // contextTitleInformationLabel
+            // 
+            this.contextTitleInformationLabel.AutoSize = true;
+            this.contextTitleInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contextTitleInformationLabel.Location = new System.Drawing.Point(11, 115);
+            this.contextTitleInformationLabel.Name = "contextTitleInformationLabel";
+            this.contextTitleInformationLabel.Size = new System.Drawing.Size(96, 19);
+            this.contextTitleInformationLabel.TabIndex = 9;
+            this.contextTitleInformationLabel.Text = "Information";
+            // 
+            // contextInformationLabel
+            // 
+            this.contextInformationLabel.Font = new System.Drawing.Font("Calibri Light", 10F);
+            this.contextInformationLabel.Location = new System.Drawing.Point(12, 140);
+            this.contextInformationLabel.Name = "contextInformationLabel";
+            this.contextInformationLabel.Size = new System.Drawing.Size(156, 156);
+            this.contextInformationLabel.TabIndex = 8;
+            this.contextInformationLabel.Text = resources.GetString("contextInformationLabel.Text");
+            // 
+            // timeInformationLabel
+            // 
+            this.timeInformationLabel.AutoSize = true;
+            this.timeInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeInformationLabel.Location = new System.Drawing.Point(12, 61);
+            this.timeInformationLabel.Name = "timeInformationLabel";
+            this.timeInformationLabel.Size = new System.Drawing.Size(127, 19);
+            this.timeInformationLabel.TabIndex = 7;
+            this.timeInformationLabel.Text = "Time: 09:00-12:00";
+            // 
+            // dateInformationLabel
+            // 
+            this.dateInformationLabel.AutoSize = true;
+            this.dateInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateInformationLabel.Location = new System.Drawing.Point(11, 29);
+            this.dateInformationLabel.Name = "dateInformationLabel";
+            this.dateInformationLabel.Size = new System.Drawing.Size(124, 19);
+            this.dateInformationLabel.TabIndex = 6;
+            this.dateInformationLabel.Text = "Date: 12/04/2017";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel3.Controls.Add(this.informationLabel);
+            this.panel3.Location = new System.Drawing.Point(20, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(171, 93);
+            this.panel3.TabIndex = 8;
+            // 
+            // informationLabel
+            // 
+            this.informationLabel.AutoSize = true;
+            this.informationLabel.Font = new System.Drawing.Font("Calibri Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.informationLabel.Location = new System.Drawing.Point(22, 31);
+            this.informationLabel.Name = "informationLabel";
+            this.informationLabel.Size = new System.Drawing.Size(111, 26);
+            this.informationLabel.TabIndex = 6;
+            this.informationLabel.Text = "Information";
             // 
             // CalendarTabG
             // 
@@ -180,11 +272,15 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelForCalendar);
             this.Name = "CalendarTabG";
-            this.Size = new System.Drawing.Size(897, 544);
+            this.Size = new System.Drawing.Size(898, 544);
             this.panelForCalendar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -199,7 +295,15 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button weekSelectButton;
         private System.Windows.Forms.Panel backPanel;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label weekNumber;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label instructorTitleInformationLabel;
+        private System.Windows.Forms.Label instructorInformationLabel;
+        private System.Windows.Forms.Label contextTitleInformationLabel;
+        private System.Windows.Forms.Label contextInformationLabel;
+        private System.Windows.Forms.Label timeInformationLabel;
+        private System.Windows.Forms.Label dateInformationLabel;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label informationLabel;
     }
 }

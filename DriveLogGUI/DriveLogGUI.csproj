@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Appointment.cs" />
+    <Compile Include="ApppointmentEventArgs.cs" />
     <Compile Include="CalendarData.cs" />
     <Compile Include="CalendarTabG.cs">
       <SubType>UserControl</SubType>
