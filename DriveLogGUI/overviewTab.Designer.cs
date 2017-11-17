@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OverviewTab));
             this.headerPanel = new System.Windows.Forms.Panel();
             this.logoutButton = new System.Windows.Forms.Button();
             this.welcomeUserLabel = new System.Windows.Forms.Label();
@@ -659,7 +658,7 @@
             // praticalTestPictureButton
             // 
             this.praticalTestPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.praticalTestPictureButton.Image = ((System.Drawing.Image)(resources.GetObject("praticalTestPictureButton.Image")));
+            this.praticalTestPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
             this.praticalTestPictureButton.Location = new System.Drawing.Point(670, 31);
             this.praticalTestPictureButton.Name = "praticalTestPictureButton";
             this.praticalTestPictureButton.Size = new System.Drawing.Size(40, 40);
@@ -670,7 +669,7 @@
             // theroraticalPictureButton
             // 
             this.theroraticalPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.theroraticalPictureButton.Image = ((System.Drawing.Image)(resources.GetObject("theroraticalPictureButton.Image")));
+            this.theroraticalPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
             this.theroraticalPictureButton.Location = new System.Drawing.Point(575, 31);
             this.theroraticalPictureButton.Name = "theroraticalPictureButton";
             this.theroraticalPictureButton.Size = new System.Drawing.Size(40, 40);
@@ -681,7 +680,7 @@
             // slippertTrackPictureButton
             // 
             this.slippertTrackPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.slippertTrackPictureButton.Image = ((System.Drawing.Image)(resources.GetObject("slippertTrackPictureButton.Image")));
+            this.slippertTrackPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
             this.slippertTrackPictureButton.Location = new System.Drawing.Point(480, 31);
             this.slippertTrackPictureButton.Name = "slippertTrackPictureButton";
             this.slippertTrackPictureButton.Size = new System.Drawing.Size(40, 40);
@@ -692,7 +691,7 @@
             // maneuverTrackPictureButton
             // 
             this.maneuverTrackPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.maneuverTrackPictureButton.Image = ((System.Drawing.Image)(resources.GetObject("maneuverTrackPictureButton.Image")));
+            this.maneuverTrackPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
             this.maneuverTrackPictureButton.Location = new System.Drawing.Point(385, 31);
             this.maneuverTrackPictureButton.Name = "maneuverTrackPictureButton";
             this.maneuverTrackPictureButton.Size = new System.Drawing.Size(40, 40);
@@ -703,18 +702,20 @@
             // firstAidPictureButton
             // 
             this.firstAidPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.firstAidPictureButton.Image = ((System.Drawing.Image)(resources.GetObject("firstAidPictureButton.Image")));
+            this.firstAidPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
             this.firstAidPictureButton.Location = new System.Drawing.Point(290, 31);
             this.firstAidPictureButton.Name = "firstAidPictureButton";
             this.firstAidPictureButton.Size = new System.Drawing.Size(40, 40);
             this.firstAidPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.firstAidPictureButton.TabIndex = 1;
             this.firstAidPictureButton.TabStop = false;
+            this.firstAidPictureButton.MouseEnter += new System.EventHandler(this.firstAidPictureButton_Enter);
+            this.firstAidPictureButton.MouseLeave += new System.EventHandler(this.firstAidPictureButton_Leave);
             // 
             // doctorsNotePictureButton
             // 
             this.doctorsNotePictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.doctorsNotePictureButton.Image = ((System.Drawing.Image)(resources.GetObject("doctorsNotePictureButton.Image")));
+            this.doctorsNotePictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
             this.doctorsNotePictureButton.Location = new System.Drawing.Point(195, 31);
             this.doctorsNotePictureButton.Name = "doctorsNotePictureButton";
             this.doctorsNotePictureButton.Size = new System.Drawing.Size(40, 40);
@@ -722,6 +723,8 @@
             this.doctorsNotePictureButton.TabIndex = 0;
             this.doctorsNotePictureButton.TabStop = false;
             this.doctorsNotePictureButton.Click += new System.EventHandler(this.doctorsNotePictureButton_Click);
+            this.doctorsNotePictureButton.MouseEnter += new System.EventHandler(this.doctorsNotePictureButton_Hover);
+            this.doctorsNotePictureButton.MouseLeave += new System.EventHandler(this.doctorsNotePictureButton_Leave);
             // 
             // OverviewTab
             // 

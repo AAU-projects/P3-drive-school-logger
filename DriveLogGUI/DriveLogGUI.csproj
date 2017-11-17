@@ -269,6 +269,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\avataricon.png" />
+    <None Include="Resources\crossIncomplete.png" />
+    <None Include="Resources\crossHover.png" />
+    <None Include="Resources\checkCompleted.png" />
+    <None Include="Resources\checkHover.png" />
     <Content Include="Resources\drag_and_drop_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

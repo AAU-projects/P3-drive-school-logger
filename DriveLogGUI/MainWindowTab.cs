@@ -16,6 +16,7 @@ namespace DriveLogGUI
         public Point pageStartPoint { get; set; }
         private Point _lastClick;
         public UserControl _lastPage;
+        private Button _lastButton;
         private bool _isOpen;
 
         private OverviewTab overviewTab;
@@ -68,7 +69,8 @@ namespace DriveLogGUI
             }
 
             // opening starting page after login
-            OpenPage(overviewTab);
+            _lastButton = OverviewButton;
+            OpenPage(OverviewButton, overviewTab);
         }
 
         private void InitializeMenuTabs()
@@ -103,14 +105,14 @@ namespace DriveLogGUI
 
         private void doctorsNoteButton_Click(object sender, EventArgs e)
         {
-            OpenPage(doctorsNoteTab);
+            OpenPage(sender, doctorsNoteTab);
 
             ProfileSubmenuControl(true);
         }
 
         private void ProfileButton_Click(object sender, EventArgs e)
         {
-            OpenPage(profileTab);
+            OpenPage(sender, profileTab);
 
             ProfileSubmenuControl(true);
         }
@@ -157,7 +159,7 @@ namespace DriveLogGUI
         private void OverviewButton_Click(object sender, EventArgs e)
         {
             //To add a page create a usercontrol and send it as paramater in use OpenPage
-            OpenPage(overviewTab);
+            OpenPage(sender, overviewTab);
 
             ProfileSubmenuControl(false);
         }
@@ -201,14 +203,24 @@ namespace DriveLogGUI
             this.Close();
         }
 
-        private void OpenPage(UserControl page)
+        private void OpenPage(object sender, UserControl page)
         {
             if (_lastPage != page) 
             {
                 CloseLastPage();
                 _lastPage = page;
+                
                 page.Show();
+
+                HighlightCurrentButton((Button)sender, _lastButton);
+                _lastButton = (Button)sender;
             }
+        }
+
+        private void HighlightCurrentButton(Button sender, Button lastButton)
+        {
+            _lastButton.BackColor = Color.FromArgb(81, 108, 112);
+            sender.BackColor = Color.FromArgb(148, 197, 204);
         }
 
         private void CloseLastPage()
@@ -223,31 +235,31 @@ namespace DriveLogGUI
         {
             if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
             {
-                OpenPage(documentViewer);
+                OpenPage(sender, documentViewer);
                 documentViewer.LoadFirstAid(Session.LoggedInUser);
             }
             else
             {
-                OpenPage(documentViewer);
+                OpenPage(sender, documentViewer);
                 documentViewer.SetType(Session.TypeFirstAid);
             }
         }
 
         private void bookingButton_Click(object sender, EventArgs e)
         {
-            OpenPage(calendarTab);
+            OpenPage(sender, calendarTab);
             ProfileSubmenuControl(false);
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            OpenPage(settingsTab);
+            OpenPage(sender, settingsTab);
             ProfileSubmenuControl(false);
         }
 
         private void userSearchButton_Click(object sender, EventArgs e)
         {
-            OpenPage(userSearchTab);
+            OpenPage(sender, userSearchTab);
             ProfileSubmenuControl(false);
         }
         
@@ -255,12 +267,12 @@ namespace DriveLogGUI
         {
             if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
             {
-                OpenPage(documentViewer);
+                OpenPage(sender, documentViewer);
                 documentViewer.LoadDoctorsNote(Session.LoggedInUser);
             }
             else
             {
-                OpenPage(documentViewer);
+                OpenPage(sender, documentViewer);
                 documentViewer.SetType(Session.TypeDoctorsNote);
             }
         }

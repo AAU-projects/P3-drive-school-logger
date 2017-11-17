@@ -29,14 +29,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindowTab));
             this.leftSidePanel = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelForTitle2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureSearchTab = new System.Windows.Forms.PictureBox();
             this.userSearchButton = new System.Windows.Forms.Button();
             this.panelForProfile = new System.Windows.Forms.Panel();
             this.firstAidButton = new System.Windows.Forms.Button();
             this.doctorsNoteButton = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.driversLogButton = new System.Windows.Forms.Button();
             this.pictureBookingTab = new System.Windows.Forms.PictureBox();
             this.pictureSettingsTab = new System.Windows.Forms.PictureBox();
             this.pictureProfileTab = new System.Windows.Forms.PictureBox();
@@ -45,7 +45,7 @@
             this.bookingButton = new System.Windows.Forms.Button();
             this.ProfileButton = new System.Windows.Forms.Button();
             this.OverviewButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelForTitle = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -63,26 +63,26 @@
             // leftSidePanel
             // 
             this.leftSidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
-            this.leftSidePanel.Controls.Add(this.label2);
+            this.leftSidePanel.Controls.Add(this.labelForTitle2);
             this.leftSidePanel.Controls.Add(this.panel4);
-            this.leftSidePanel.Controls.Add(this.label1);
+            this.leftSidePanel.Controls.Add(this.labelForTitle);
             this.leftSidePanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
             this.leftSidePanel.Location = new System.Drawing.Point(0, 0);
             this.leftSidePanel.Name = "leftSidePanel";
             this.leftSidePanel.Size = new System.Drawing.Size(132, 564);
             this.leftSidePanel.TabIndex = 0;
             // 
-            // label2
+            // labelForTitle2
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(4, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 18);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Køreskolen";
+            this.labelForTitle2.AutoSize = true;
+            this.labelForTitle2.BackColor = System.Drawing.Color.Transparent;
+            this.labelForTitle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelForTitle2.ForeColor = System.Drawing.Color.White;
+            this.labelForTitle2.Location = new System.Drawing.Point(4, 20);
+            this.labelForTitle2.Name = "labelForTitle2";
+            this.labelForTitle2.Size = new System.Drawing.Size(84, 18);
+            this.labelForTitle2.TabIndex = 1;
+            this.labelForTitle2.Text = "Køreskolen";
             // 
             // panel4
             // 
@@ -139,7 +139,7 @@
             // 
             this.panelForProfile.Controls.Add(this.firstAidButton);
             this.panelForProfile.Controls.Add(this.doctorsNoteButton);
-            this.panelForProfile.Controls.Add(this.button5);
+            this.panelForProfile.Controls.Add(this.driversLogButton);
             this.panelForProfile.Location = new System.Drawing.Point(0, 188);
             this.panelForProfile.Name = "panelForProfile";
             this.panelForProfile.Size = new System.Drawing.Size(200, 96);
@@ -178,20 +178,20 @@
             this.doctorsNoteButton.UseVisualStyleBackColor = true;
             this.doctorsNoteButton.Click += new System.EventHandler(this.doctorsNoteButton_Click_1);
             // 
-            // button5
+            // driversLogButton
             // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(24, 0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(108, 32);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Drivers log";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.UseVisualStyleBackColor = true;
+            this.driversLogButton.FlatAppearance.BorderSize = 0;
+            this.driversLogButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.driversLogButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.driversLogButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.driversLogButton.ForeColor = System.Drawing.Color.White;
+            this.driversLogButton.Location = new System.Drawing.Point(24, 0);
+            this.driversLogButton.Name = "driversLogButton";
+            this.driversLogButton.Size = new System.Drawing.Size(108, 32);
+            this.driversLogButton.TabIndex = 4;
+            this.driversLogButton.Text = "Drivers log";
+            this.driversLogButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.driversLogButton.UseVisualStyleBackColor = true;
             // 
             // pictureBookingTab
             // 
@@ -308,17 +308,17 @@
             this.OverviewButton.UseVisualStyleBackColor = true;
             this.OverviewButton.Click += new System.EventHandler(this.OverviewButton_Click);
             // 
-            // label1
+            // labelForTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "CITY";
+            this.labelForTitle.AutoSize = true;
+            this.labelForTitle.BackColor = System.Drawing.Color.Transparent;
+            this.labelForTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelForTitle.ForeColor = System.Drawing.Color.White;
+            this.labelForTitle.Location = new System.Drawing.Point(3, 0);
+            this.labelForTitle.Name = "labelForTitle";
+            this.labelForTitle.Size = new System.Drawing.Size(51, 24);
+            this.labelForTitle.TabIndex = 0;
+            this.labelForTitle.Text = "CITY";
             // 
             // topPanel
             // 
@@ -391,17 +391,17 @@
 
         private System.Windows.Forms.Panel leftSidePanel;
         private System.Windows.Forms.Panel topPanel;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelForTitle2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.Button bookingButton;
         private System.Windows.Forms.Button ProfileButton;
         private System.Windows.Forms.Button OverviewButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelForTitle;
         private System.Windows.Forms.Panel panelForProfile;
         private System.Windows.Forms.Button firstAidButton;
         private System.Windows.Forms.Button doctorsNoteButton;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button driversLogButton;
         private System.Windows.Forms.PictureBox pictureSettingsTab;
         private System.Windows.Forms.PictureBox pictureBookingTab;
         private System.Windows.Forms.PictureBox pictureHomeTab;
