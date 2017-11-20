@@ -190,7 +190,6 @@
             this.readingTextbox.MaxLength = 255;
             this.readingTextbox.Multiline = true;
             this.readingTextbox.Name = "readingTextbox";
-            this.readingTextbox.ShortcutsEnabled = false;
             this.readingTextbox.Size = new System.Drawing.Size(261, 111);
             this.readingTextbox.TabIndex = 49;
             // 
@@ -230,7 +229,6 @@
             this.descriptionTextbox.Multiline = true;
             this.descriptionTextbox.Name = "descriptionTextbox";
             this.descriptionTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.descriptionTextbox.ShortcutsEnabled = false;
             this.descriptionTextbox.Size = new System.Drawing.Size(300, 304);
             this.descriptionTextbox.TabIndex = 46;
             // 
@@ -244,7 +242,6 @@
             this.titleTextBox.ForeColor = System.Drawing.Color.Black;
             this.titleTextBox.Location = new System.Drawing.Point(19, 46);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.ShortcutsEnabled = false;
             this.titleTextBox.Size = new System.Drawing.Size(300, 23);
             this.titleTextBox.TabIndex = 45;
             // 
@@ -294,13 +291,15 @@
             // 
             // leftPanel
             // 
+            this.leftPanel.HorizontalScroll.Maximum = 0;
+            this.leftPanel.AutoScroll = false;
+            this.leftPanel.VerticalScroll.Visible = false;
+            this.leftPanel.AutoScroll = true;
             this.leftPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.leftPanel.Controls.Add(this.removebutton);
-            this.leftPanel.Controls.Add(this.addButton);
             this.leftPanel.Controls.Add(this.leftPanelLabel);
             this.leftPanel.Location = new System.Drawing.Point(685, 74);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(200, 457);
+            this.leftPanel.Size = new System.Drawing.Size(200, 434);
             this.leftPanel.TabIndex = 3;
             // 
             // removebutton
@@ -310,7 +309,7 @@
             this.removebutton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.removebutton.FlatAppearance.BorderSize = 0;
             this.removebutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.removebutton.Location = new System.Drawing.Point(33, 431);
+            this.removebutton.Location = new System.Drawing.Point(718, 508);
             this.removebutton.Name = "removebutton";
             this.removebutton.Size = new System.Drawing.Size(24, 23);
             this.removebutton.TabIndex = 3;
@@ -324,7 +323,7 @@
             this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.addButton.FlatAppearance.BorderSize = 0;
             this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addButton.Location = new System.Drawing.Point(3, 431);
+            this.addButton.Location = new System.Drawing.Point(688, 508);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(24, 23);
             this.addButton.TabIndex = 2;
@@ -346,7 +345,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.removebutton);
             this.Controls.Add(this.leftPanel);
+            this.Controls.Add(this.addButton);
             this.Controls.Add(this.rightPanel);
             this.Controls.Add(this.headerPanel);
             this.Name = "TemplateCreator";
