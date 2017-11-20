@@ -33,9 +33,14 @@ namespace DriveLogGUI
             this.lessonTemplate = GetLessonTemplate(lesson);
         }
 
+        public void UpdateLabel()
+        {
+            LabelAppointment.Text = Title;
+        }
+
         private LessonTemplate GetLessonTemplate(Lesson lesson)
         {
-            return DatabaseParser.GetLessonTemplateFromID(lesson.LessonId);
+            return DatabaseParser.GetLessonTemplateFromID(lesson.TemplateID);
         }
 
         private string GetContext()

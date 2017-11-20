@@ -35,14 +35,15 @@ namespace DriveLogGUI
             this.overviewTab = overviewTab;
             SubscribeToAllClickPanels(overviewTab.listOfDays);
 
+            GetAllLessonsForUser();
             GetAppointsments();
-            //GetAllLessonsForUser();
+
             SubscribeToAllClickAppointments(appointments);
         }
 
         private void GetAllLessonsForUser()
         {
-            throw new NotImplementedException();
+            lessons = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Session.LoggedInUser.Id);
         }
 
         private void GetAppointsments()
@@ -66,10 +67,10 @@ namespace DriveLogGUI
             informationLabel.Text = e.Appointment.LabelAppointment.Text;
             dateInformationLabel.Text = e.Date;
             timeInformationLabel.Text = e.Time;
-            contextInformationLabel.Text = e.Appointment.Context;
+            contextInformationTextbox.Text = e.Appointment.Context;
             contextTitleInformationLabel.Text = e.Appointment.LabelAppointment.Text;
-            contextInformationLabel.Text = e.Appointment.Context;
             instructorInformationLabel.Text = e.Appointment.Instructor;
+            
 
         }
 
@@ -266,6 +267,7 @@ namespace DriveLogGUI
             Appointment newAppointment = new Appointment(appointment, lessons.LastOrDefault());
 
             newAppointment.LabelAppointment = GenerateLabel(appointment);
+            newAppointment.UpdateLabel();
             newAppointment.SubscribeToEvent();
             appointments.Add(newAppointment);
         }

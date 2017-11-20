@@ -20,9 +20,23 @@ namespace DriveLogCode
         private const string AppointmentTable = "appointments";
         private const string LessonTable = "lessons";
 
-        public static DataTable GetLessonsByAppointmentID(int appointmentid, string table = AppointmentTable)
+        public static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string table1 = LessonTable, string table2 = AppointmentTable, string table3 = UserTable)
         {
-            return GetFromDB("appointmentID", appointmentid.ToString(), table);
+            var cmd = new MySqlCommand("SELECT " +
+                $"{table3}.firstname AS InstructorFirstname, " +
+                $"{table3}.lastname AS InstructorLastname, " +
+                $"{table1}.LessonID AS TemplateID, " +
+                $"{table1}.LessonPart AS Progress, " +
+                $"{table1}.EndDate, " +
+                $"{table1}.Completed " +
+                $"FROM {table2}, {table1}, {table3} " +
+                "WHERE " +
+                $"{table1}.AppointmentID = {table2}.id AND " + 
+                $"{table1}.UserID = '{userid}' AND " +
+                $"{table3}.user_id = {table2}.instructorID " +
+                $"ORDER BY {table1}.id");
+
+            return SendQuery(cmd);
         }
 
         public static DataTable GetLessonByID(int id, string table = LessonTable)
@@ -76,7 +90,7 @@ namespace DriveLogCode
 
         private static DataTable GetFromDB(string column, string value, string table)
         {
-            var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `{column}` = '{value}'" + column == "id" ? " LIMIT 1" : "");
+            var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `{column}` = '{value}'");
 
             return ExistTable(table) ? SendQuery(cmd) : null;
         }
@@ -139,6 +153,13 @@ namespace DriveLogCode
             return CreateTemplateTable(table) ? SendQuery(cmd) : null;
         }
 
+        public static DataTable GetAllRows(string table)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {table}");
+
+            return SendQuery(cmd);
+        }
+
         public static DataTable GetLessonData(string title, string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE title = '{title}' LIMIT 1");
@@ -177,7 +198,7 @@ namespace DriveLogCode
             var cmd = new MySqlCommand($"CREATE TABLE `{table}` (" +
                                        $"`id`  int(11) NOT NULL AUTO_INCREMENT ," +
                                        $"`title`  varchar(255) NOT NULL ," +
-                                       $"`description`  varchar(255) NOT NULL ," +
+                                       $"`description`  varchar(2000) NOT NULL ," +
                                        $"`type`  enum('Practical','Theoretical') NOT NULL ," +
                                        $"`time`  varchar(255) NOT NULL ," +
                                        $"`reading`  varchar(255) NULL ," +

@@ -21,6 +21,24 @@ namespace DriveLogCode
             return MySql.UploadLessonTemplate(id, title, description, type, time, reading);
         }
 
+        /// <summary>
+        /// Gets all lessons and associated instructor from database for userid param.
+        /// </summary>
+        /// <param name="userid">userid param</param>
+        /// <returns></returns>
+        public static List<Lesson> GetScheduledAndCompletedLessonsByUserIdList(int userid)
+        {
+            DataTable results = MySql.GetLessonsAndAttachedAppointmentByUserId(userid);
+            List<Lesson> lessonsList = new List<Lesson>();
+
+            foreach (DataRow row in results.Rows)
+            {
+                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], Convert.ToBoolean(row[5])));
+            }
+
+            return lessonsList;
+        }
+
         public static Dictionary<string, string> GetTemplate(string templateName)
         {
             DataTable lessonInfo = MySql.GetLessonData(templateName);
@@ -41,6 +59,19 @@ namespace DriveLogCode
             }
 
             return TempDict;
+        }
+
+        public static List<LessonTemplate> GetTemplatesList()
+        {
+            DataTable results = MySql.GetAllRows("lessonTemplates");
+            List<LessonTemplate> templateslist = new List<LessonTemplate>();
+
+            foreach (DataRow row in results.Rows)
+            {
+                templateslist.Add(new LessonTemplate(Convert.ToInt32(row[0]), (string)row[1], (string)row[2], (string)row[3], Convert.ToInt32(row[4]), (string)row[5]));
+            }
+
+            return templateslist;
         }
 
         public static List<string> GetLessonTemplates()
@@ -129,15 +160,16 @@ namespace DriveLogCode
 
         public static LessonTemplate GetLessonTemplateFromID(int lessonId)
         {
-            LessonTemplate lessonTemplate = new LessonTemplate();
+
             DataTable DatabaseResults = MySql.GetLessonTemplateByID(lessonId);
 
-            lessonTemplate.ID = Convert.ToInt32(DatabaseResults.Columns[0]);
-            lessonTemplate.Title = DatabaseResults.Columns[1].ToString();
-            lessonTemplate.Description = DatabaseResults.Columns[2].ToString();
-            lessonTemplate.Type = DatabaseResults.Columns[3].ToString();
-            lessonTemplate.Time = Convert.ToInt32(DatabaseResults.Columns[4]);
-            lessonTemplate.Reading = DatabaseResults.Columns[5].ToString();
+            LessonTemplate lessonTemplate = new LessonTemplate(
+                Convert.ToInt32(DatabaseResults.Rows[0][0]), 
+                DatabaseResults.Rows[0][1].ToString(), 
+                DatabaseResults.Rows[0][2].ToString(),
+                DatabaseResults.Rows[0][3].ToString(), 
+                Convert.ToInt32(DatabaseResults.Rows[0][4]), 
+                DatabaseResults.Rows[0][5].ToString());
 
             return lessonTemplate;
         }

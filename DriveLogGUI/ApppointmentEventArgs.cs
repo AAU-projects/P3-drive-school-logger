@@ -43,7 +43,7 @@ namespace DriveLogGUI
 
         private DateTime GetEndDate()
         {
-            return EndDate.AddMinutes(45 * Appointment.AvailableTime);
+            return Appointment.StartTime.AddMinutes(45 * Appointment.AvailableTime);
         }
     }
 }

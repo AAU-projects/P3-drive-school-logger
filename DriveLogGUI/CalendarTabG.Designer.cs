@@ -44,11 +44,11 @@
             this.instructorTitleInformationLabel = new System.Windows.Forms.Label();
             this.instructorInformationLabel = new System.Windows.Forms.Label();
             this.contextTitleInformationLabel = new System.Windows.Forms.Label();
-            this.contextInformationLabel = new System.Windows.Forms.Label();
             this.timeInformationLabel = new System.Windows.Forms.Label();
             this.dateInformationLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.informationLabel = new System.Windows.Forms.Label();
+            this.contextInformationTextbox = new System.Windows.Forms.TextBox();
             this.panelForCalendar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -195,11 +195,11 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel4.Controls.Add(this.contextInformationTextbox);
             this.panel4.Controls.Add(this.bookingInformationButton);
             this.panel4.Controls.Add(this.instructorTitleInformationLabel);
             this.panel4.Controls.Add(this.instructorInformationLabel);
             this.panel4.Controls.Add(this.contextTitleInformationLabel);
-            this.panel4.Controls.Add(this.contextInformationLabel);
             this.panel4.Controls.Add(this.timeInformationLabel);
             this.panel4.Controls.Add(this.dateInformationLabel);
             this.panel4.Location = new System.Drawing.Point(20, 118);
@@ -251,15 +251,6 @@
             this.contextTitleInformationLabel.TabIndex = 9;
             this.contextTitleInformationLabel.Text = "Information";
             // 
-            // contextInformationLabel
-            // 
-            this.contextInformationLabel.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.contextInformationLabel.Location = new System.Drawing.Point(12, 119);
-            this.contextInformationLabel.Name = "contextInformationLabel";
-            this.contextInformationLabel.Size = new System.Drawing.Size(156, 156);
-            this.contextInformationLabel.TabIndex = 8;
-            this.contextInformationLabel.Text = resources.GetString("contextInformationLabel.Text");
-            // 
             // timeInformationLabel
             // 
             this.timeInformationLabel.AutoSize = true;
@@ -299,6 +290,19 @@
             this.informationLabel.TabIndex = 6;
             this.informationLabel.Text = "Information";
             // 
+            // contextInformationTextbox
+            // 
+            this.contextInformationTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.contextInformationTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.contextInformationTextbox.Font = new System.Drawing.Font("Calibri Light", 10F);
+            this.contextInformationTextbox.Location = new System.Drawing.Point(15, 114);
+            this.contextInformationTextbox.Multiline = true;
+            this.contextInformationTextbox.Name = "contextInformationTextbox";
+            this.contextInformationTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.contextInformationTextbox.Size = new System.Drawing.Size(156, 171);
+            this.contextInformationTextbox.TabIndex = 13;
+            this.contextInformationTextbox.Text = resources.GetString("contextInformationTextbox.Text");
+            // 
             // CalendarTabG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -335,12 +339,12 @@
         private System.Windows.Forms.Label instructorTitleInformationLabel;
         private System.Windows.Forms.Label instructorInformationLabel;
         private System.Windows.Forms.Label contextTitleInformationLabel;
-        private System.Windows.Forms.Label contextInformationLabel;
         private System.Windows.Forms.Label timeInformationLabel;
         private System.Windows.Forms.Label dateInformationLabel;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label informationLabel;
         private System.Windows.Forms.Button bookingInformationButton;
         private System.Windows.Forms.TextBox weekNumberTextbox;
+        private System.Windows.Forms.TextBox contextInformationTextbox;
     }
 }

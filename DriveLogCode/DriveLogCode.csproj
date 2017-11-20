@@ -68,6 +68,7 @@
     <Compile Include="EmptyDataTableException.cs" />
     <Compile Include="IUploadHandler.cs" />
     <Compile Include="JSONReader.cs" />
+    <Compile Include="Lesson.cs" />
     <Compile Include="LessonTemplate.cs" />
     <Compile Include="MySQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

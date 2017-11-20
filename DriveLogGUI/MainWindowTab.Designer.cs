@@ -36,7 +36,7 @@
             this.panelForProfile = new System.Windows.Forms.Panel();
             this.firstAidButton = new System.Windows.Forms.Button();
             this.doctorsNoteButton = new System.Windows.Forms.Button();
-            this.driversLogButton = new System.Windows.Forms.Button();
+            this.driveLogButton = new System.Windows.Forms.Button();
             this.pictureBookingTab = new System.Windows.Forms.PictureBox();
             this.pictureSettingsTab = new System.Windows.Forms.PictureBox();
             this.pictureProfileTab = new System.Windows.Forms.PictureBox();
@@ -139,7 +139,7 @@
             // 
             this.panelForProfile.Controls.Add(this.firstAidButton);
             this.panelForProfile.Controls.Add(this.doctorsNoteButton);
-            this.panelForProfile.Controls.Add(this.driversLogButton);
+            this.panelForProfile.Controls.Add(this.driveLogButton);
             this.panelForProfile.Location = new System.Drawing.Point(0, 188);
             this.panelForProfile.Name = "panelForProfile";
             this.panelForProfile.Size = new System.Drawing.Size(200, 96);
@@ -178,20 +178,21 @@
             this.doctorsNoteButton.UseVisualStyleBackColor = true;
             this.doctorsNoteButton.Click += new System.EventHandler(this.doctorsNoteButton_Click_1);
             // 
-            // driversLogButton
+            // driveLogButton
             // 
-            this.driversLogButton.FlatAppearance.BorderSize = 0;
-            this.driversLogButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.driversLogButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.driversLogButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.driversLogButton.ForeColor = System.Drawing.Color.White;
-            this.driversLogButton.Location = new System.Drawing.Point(24, 0);
-            this.driversLogButton.Name = "driversLogButton";
-            this.driversLogButton.Size = new System.Drawing.Size(108, 32);
-            this.driversLogButton.TabIndex = 4;
-            this.driversLogButton.Text = "Drivers log";
-            this.driversLogButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.driversLogButton.UseVisualStyleBackColor = true;
+            this.driveLogButton.FlatAppearance.BorderSize = 0;
+            this.driveLogButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.driveLogButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.driveLogButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.driveLogButton.ForeColor = System.Drawing.Color.White;
+            this.driveLogButton.Location = new System.Drawing.Point(24, 0);
+            this.driveLogButton.Name = "driveLogButton";
+            this.driveLogButton.Size = new System.Drawing.Size(108, 32);
+            this.driveLogButton.TabIndex = 4;
+            this.driveLogButton.Text = "Drivers log";
+            this.driveLogButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.driveLogButton.UseVisualStyleBackColor = true;
+            this.driveLogButton.Click += new System.EventHandler(this.driveLogButton_Click);
             // 
             // pictureBookingTab
             // 
@@ -401,7 +402,7 @@
         private System.Windows.Forms.Panel panelForProfile;
         private System.Windows.Forms.Button firstAidButton;
         private System.Windows.Forms.Button doctorsNoteButton;
-        private System.Windows.Forms.Button driversLogButton;
+        private System.Windows.Forms.Button driveLogButton;
         private System.Windows.Forms.PictureBox pictureSettingsTab;
         private System.Windows.Forms.PictureBox pictureBookingTab;
         private System.Windows.Forms.PictureBox pictureHomeTab;

@@ -101,13 +101,18 @@
       <DependentUpon>DocumentViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="DriveLogStarter.cs" />
+    <Compile Include="DriveLogTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DriveLogTab.Designer.cs">
+      <DependentUpon>DriveLogTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditUserInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditUserInfoForm.Designer.cs">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Lesson.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DocumentViewer.resx">
       <DependentUpon>DocumentViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DriveLogTab.resx">
+      <DependentUpon>DriveLogTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditUserInfoForm.resx">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
