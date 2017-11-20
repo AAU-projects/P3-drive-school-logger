@@ -262,7 +262,7 @@ namespace DriveLogGUI
 
         private void AddAppointment(AppointmentStructure appointment)
         {
-            Appointment newAppointment = new Appointment(appointment,lessons.FindLast());
+            Appointment newAppointment = new Appointment(appointment, lessons.FindLast());
 
             newAppointment.LabelAppointment = GenerateLabel(appointment);
             newAppointment.SubscribeToEvent();

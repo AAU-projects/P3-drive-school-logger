@@ -21,7 +21,7 @@ namespace DriveLogGUI
 
         }
 
-        public Appointment(AppointmentStructure appointment)
+        public Appointment(AppointmentStructure appointment, Lesson lesson)
         {
             this.Id = appointment.Id;
             this.InstructorID = appointment.InstructorID;
