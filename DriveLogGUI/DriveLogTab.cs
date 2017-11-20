@@ -24,6 +24,7 @@ namespace DriveLogGUI
             driveLogHeaderLabel.Text = "Drive Log: " + user.Fullname;
             _user = user;
             templateslist = DatabaseParser.GetTemplatesList();
+            lessonslist = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(user.Id);
 
             for (int i = 0; i < templateslist.Count; i++)
             {
@@ -34,14 +35,14 @@ namespace DriveLogGUI
             {
                 backPanel.Controls.Add(panel);
             }
-
-            lessonslist = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(user.Id);
         }
 
-        private void GenerateDriveLogPanel(int idx, LessonTemplate lesson)
+        private void GenerateDriveLogPanel(int idx, LessonTemplate template)
         {
             int labelWidth = backPanel.Width - 30;
             int labelHeight = 14;
+            bool lessonCompleted = false;
+            List<Lesson> lessonquery = new List<Lesson>();
 
             Panel driveLogPanel = new Panel();
             driveLogPanel.BackColor = Color.White;
@@ -55,32 +56,39 @@ namespace DriveLogGUI
                     (6, driveLogPanelList[idx - 1].Location.Y + driveLogPanelList[idx - 1].Height + 13);
             }
 
+            foreach (Lesson lesson in lessonslist)
+            {
+                if(lesson.TemplateID == template.Id)
+                    lessonquery.Add(lesson);
+            }
+
+            if (lessonquery.Count > 0 && lessonquery[lessonquery.Count - 1].Progress == template.Time && lessonquery[lessonquery.Count - 1].Completed)
+                lessonCompleted = true;
+
             Label titleLabel = new Label();
+            titleLabel.TextAlign = ContentAlignment.MiddleCenter;
             titleLabel.Location = new Point(5, 5);
             titleLabel.Font = new Font("Myanmar Text", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            titleLabel.TextAlign = ContentAlignment.MiddleCenter;
             titleLabel.Size = new Size(labelWidth, labelHeight + 10);
-            titleLabel.Text = lesson.Title;
+            titleLabel.Text = template.Title;
             driveLogPanel.Controls.Add(titleLabel);
-
-            Label dateCompletedLabel = new Label();
-            dateCompletedLabel.Location = new Point(5, 5);
-            dateCompletedLabel.Size = new Size(labelWidth, labelHeight);
-            dateCompletedLabel.Text = "Date Completed: " + "N/A";
-            driveLogPanel.Controls.Add(dateCompletedLabel);
 
             Label lessonDescriptionLabel = new Label();
             lessonDescriptionLabel.Location = new Point(5, titleLabel.Height + 10);
             lessonDescriptionLabel.MaximumSize = new Size(labelWidth, 0);
             lessonDescriptionLabel.AutoSize = true;
-            lessonDescriptionLabel.Text ="Description:\n" + lesson.Description;
+            lessonDescriptionLabel.Text ="Description:\n" + template.Description;
             driveLogPanel.Controls.Add(lessonDescriptionLabel);
 
             Label instructorNameLabel = new Label();
-            instructorNameLabel.Location = new Point(5, lessonDescriptionLabel.Location.Y + lessonDescriptionLabel.Height + 10);
+            instructorNameLabel.Location = new Point(5,
+            lessonDescriptionLabel.Location.Y + lessonDescriptionLabel.Height + 10);
             instructorNameLabel.Size = new Size(labelWidth, labelHeight);
-            instructorNameLabel.Text = "Instructor:" + "";
-            driveLogPanel.Controls.Add(instructorNameLabel);   
+            if(lessonCompleted)
+                instructorNameLabel.Text = "Instructor: " + lessonquery[lessonquery.Count - 1].InstructorFullname;
+            else
+                instructorNameLabel.Text = "Instructor: " + "N/A";
+            driveLogPanel.Controls.Add(instructorNameLabel);
 
             Label instructorSignLabel = new Label();
             instructorSignLabel.Location = new Point(backPanel.Width / 4 + 50, instructorNameLabel.Location.Y + 16);
@@ -93,6 +101,16 @@ namespace DriveLogGUI
             studentSignLabel.Size = new Size(140, labelHeight * 4);
             studentSignLabel.Text = "\n\n____________________\n      Student Signature";
             driveLogPanel.Controls.Add(studentSignLabel);
+
+            if (lessonCompleted)
+            {
+                Label dateCompletedLabel = new Label();
+                dateCompletedLabel.Location = new Point(600, 12);
+                dateCompletedLabel.Size = new Size(195, labelHeight);
+                dateCompletedLabel.Text = "Date Completed: " + lessonquery[lessonquery.Count - 1].EndDate;
+                driveLogPanel.Controls.Add(dateCompletedLabel);
+                dateCompletedLabel.BringToFront();
+            }
 
             driveLogPanel.Size = new Size(backPanel.Width - 30,  studentSignLabel.Location.Y + studentSignLabel.Height + 5);
             driveLogPanelList.Add(driveLogPanel);
