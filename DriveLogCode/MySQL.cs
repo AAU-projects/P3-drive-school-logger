@@ -30,6 +30,11 @@ namespace DriveLogCode
             return GetFromDB("id", id.ToString(), table);
         }
 
+        public static DataTable GetLessonTemplateByID(int lessonId, string table = LessonTemplateTable)
+        {
+            return GetFromDB("id", lessonId.ToString(), table);
+        }
+
         public static DataTable GetLessonsByUser(int userID, string table = LessonTable)
         {
             return GetFromDB("userID", userID.ToString(), table);

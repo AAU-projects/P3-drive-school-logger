@@ -14,6 +14,7 @@ namespace DriveLogGUI
         public string Title => GetTitle();
         public string Context => GetContext();
         public DateTime ToTime => GetToTime();
+        private LessonTemplate lessonTemplate;
 
         public Appointment(int id, int instructorID, DateTime startTime, int availableTime, string lessonType, bool fullyBooked)
             : base(id, instructorID, startTime, availableTime, lessonType, fullyBooked)
@@ -29,11 +30,17 @@ namespace DriveLogGUI
             this.AvailableTime = appointment.AvailableTime;
             this.LessonType = appointment.LessonType;
             this.FullyBooked = appointment.FullyBooked;
+            this.lessonTemplate = GetLessonTemplate(lesson);
+        }
+
+        private LessonTemplate GetLessonTemplate(Lesson lesson)
+        {
+            return DatabaseParser.GetLessonTemplateFromID(lesson.LessonId);
         }
 
         private string GetContext()
         {
-            throw new NotImplementedException();
+            return lessonTemplate.Description;
         }
 
         private DateTime GetToTime()
@@ -43,7 +50,7 @@ namespace DriveLogGUI
 
         private string GetTitle()
         {
-            throw new NotImplementedException();
+            return lessonTemplate.Title;
         }
 
 
@@ -51,7 +58,7 @@ namespace DriveLogGUI
 
         public void SubscribeToEvent()
         {
-            LabelAppointment.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(LabelAppointment, StartTime, ToTime, Instructor));
+            LabelAppointment.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(this));
             LabelAppointment.MouseEnter += (s, e) => LabelAppointment.Cursor = Cursors.Hand;
         }
 
@@ -59,7 +66,5 @@ namespace DriveLogGUI
         {
             ClickOnAppointmentTriggered?.Invoke(this, e);
         }
-
- 
     }
 }

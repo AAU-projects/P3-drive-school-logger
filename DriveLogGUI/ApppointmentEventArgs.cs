@@ -9,33 +9,26 @@ namespace DriveLogGUI
 {
     class ApppointmentEventArgs : EventArgs
     {
-        public Label LabelAppointment;
-        public DateTime FromDate;
-        public DateTime ToDate;
-        public string Context;
+        public Appointment Appointment;
+        private DateTime EndDate => GetEndDate();
 
-        public string Instructor;
 
         public string Time => GetTime();
         public string Date => GetDate();
 
-
-        public ApppointmentEventArgs(Label labelAppointment, DateTime fromDate, DateTime toDate, string instructor)
+        public ApppointmentEventArgs(Appointment appointment)
         {
-            LabelAppointment = labelAppointment;
-            FromDate = fromDate;
-            ToDate = toDate;
-            Instructor = instructor;
+            this.Appointment = appointment;
         }
 
         private string GetTime()
         {
-            return $"Time: {AddZeroToDates(FromDate.Hour)}:{AddZeroToDates(FromDate.Minute)} - {AddZeroToDates(ToDate.Hour)}:{AddZeroToDates(ToDate.Minute)}";
+            return $"Time: {AddZeroToDates(Appointment.StartTime.Hour)}:{AddZeroToDates(Appointment.StartTime.Minute)} - {AddZeroToDates(EndDate.Hour)}:{AddZeroToDates(EndDate.Minute)}";
         }
 
         private string GetDate()
         {
-            return $"Date: {FromDate.ToShortDateString().Replace('/', '-')}";
+            return $"Date: {EndDate.ToShortDateString().Replace('/', '-')}";
         }
         private string AddZeroToDates(int checkString)
         {
@@ -48,5 +41,9 @@ namespace DriveLogGUI
             return checkString.ToString();
         }
 
+        private DateTime GetEndDate()
+        {
+            return EndDate.AddMinutes(45 * Appointment.AvailableTime);
+        }
     }
 }

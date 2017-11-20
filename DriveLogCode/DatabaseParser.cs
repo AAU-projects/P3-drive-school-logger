@@ -126,5 +126,20 @@ namespace DriveLogCode
 
             return usersFound;
         }
+
+        public static LessonTemplate GetLessonTemplateFromID(int lessonId)
+        {
+            LessonTemplate lessonTemplate = new LessonTemplate();
+            DataTable DatabaseResults = MySql.GetLessonTemplateByID(lessonId);
+
+            lessonTemplate.ID = Convert.ToInt32(DatabaseResults.Columns[0]);
+            lessonTemplate.Title = DatabaseResults.Columns[1].ToString();
+            lessonTemplate.Description = DatabaseResults.Columns[2].ToString();
+            lessonTemplate.Type = DatabaseResults.Columns[3].ToString();
+            lessonTemplate.Time = Convert.ToInt32(DatabaseResults.Columns[4]);
+            lessonTemplate.Reading = DatabaseResults.Columns[5].ToString();
+
+            return lessonTemplate;
+        }
     }
 }

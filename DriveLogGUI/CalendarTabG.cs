@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using DriveLogCode;
 
@@ -62,13 +63,13 @@ namespace DriveLogGUI
 
         private void UpdateInformation(object sender, ApppointmentEventArgs e)
         {
-            informationLabel.Text = e.LabelAppointment.Text;
+            informationLabel.Text = e.Appointment.LabelAppointment.Text;
             dateInformationLabel.Text = e.Date;
             timeInformationLabel.Text = e.Time;
-            contextInformationLabel.Text = e.Context;
-            contextTitleInformationLabel.Text = e.LabelAppointment.Text;
-            contextInformationLabel.Text = e.Context;
-            instructorInformationLabel.Text = e.Instructor;
+            contextInformationLabel.Text = e.Appointment.Context;
+            contextTitleInformationLabel.Text = e.Appointment.LabelAppointment.Text;
+            contextInformationLabel.Text = e.Appointment.Context;
+            instructorInformationLabel.Text = e.Appointment.Instructor;
 
         }
 
@@ -262,7 +263,7 @@ namespace DriveLogGUI
 
         private void AddAppointment(AppointmentStructure appointment)
         {
-            Appointment newAppointment = new Appointment(appointment, lessons.FindLast());
+            Appointment newAppointment = new Appointment(appointment, lessons.LastOrDefault());
 
             newAppointment.LabelAppointment = GenerateLabel(appointment);
             newAppointment.SubscribeToEvent();
