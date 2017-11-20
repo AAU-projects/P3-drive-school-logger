@@ -14,6 +14,8 @@ namespace DriveLogGUI
         private DateTime lastWeek = DateTime.Now;
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
+        private List<Lesson> lessons = new List<Lesson>();
+
         private MainWindowTab mainWindow;
 
         private Color ColorRed = Color.FromArgb(229, 187, 191);
@@ -33,7 +35,13 @@ namespace DriveLogGUI
             SubscribeToAllClickPanels(overviewTab.listOfDays);
 
             GetAppointsments();
+            //GetAllLessonsForUser();
             SubscribeToAllClickAppointments(appointments);
+        }
+
+        private void GetAllLessonsForUser()
+        {
+            throw new NotImplementedException();
         }
 
         private void GetAppointsments()
@@ -254,13 +262,10 @@ namespace DriveLogGUI
 
         private void AddAppointment(AppointmentStructure appointment)
         {
-            Appointment newAppointment = new Appointment(appointment.Id, appointment.InstructorID, appointment.StartTime, appointment.AvailableTime, appointment.LessonType, appointment.FullyBooked);
+            Appointment newAppointment = new Appointment(appointment,lessons.FindLast());
 
             newAppointment.LabelAppointment = GenerateLabel(appointment);
-            newAppointment.SubscribeToEvents();
-            newAppointment.Context =
-                "Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug. Introduced imprudence see say unpleasing devonshire acceptance son. Exeter longer wisdom gay nor design age. Am weather to entered norland no in showing service. Nor repeated speaking shy appetite. Excited it hastily an pasture it observe. Snug hand how dare here too. ";
-
+            newAppointment.SubscribeToEvent();
             appointments.Add(newAppointment);
         }
 

@@ -15,10 +15,6 @@ namespace DriveLogCode
         public string LessonType;
         public bool FullyBooked;
 
-        //TODO disse mangler i databasen
-        public string Title;
-        public string Context;
-
         public string Instructor => GetInstructorByID(InstructorID);
 
 
