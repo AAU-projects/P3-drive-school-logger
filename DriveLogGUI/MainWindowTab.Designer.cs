@@ -36,7 +36,7 @@
             this.panelForProfile = new System.Windows.Forms.Panel();
             this.firstAidButton = new System.Windows.Forms.Button();
             this.doctorsNoteButton = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.driveLogButton = new System.Windows.Forms.Button();
             this.pictureBookingTab = new System.Windows.Forms.PictureBox();
             this.pictureSettingsTab = new System.Windows.Forms.PictureBox();
             this.pictureProfileTab = new System.Windows.Forms.PictureBox();
@@ -139,7 +139,7 @@
             // 
             this.panelForProfile.Controls.Add(this.firstAidButton);
             this.panelForProfile.Controls.Add(this.doctorsNoteButton);
-            this.panelForProfile.Controls.Add(this.button5);
+            this.panelForProfile.Controls.Add(this.driveLogButton);
             this.panelForProfile.Location = new System.Drawing.Point(0, 188);
             this.panelForProfile.Name = "panelForProfile";
             this.panelForProfile.Size = new System.Drawing.Size(200, 96);
@@ -178,20 +178,21 @@
             this.doctorsNoteButton.UseVisualStyleBackColor = true;
             this.doctorsNoteButton.Click += new System.EventHandler(this.doctorsNoteButton_Click_1);
             // 
-            // button5
+            // driveLogButton
             // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(24, 0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(108, 32);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Drivers log";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.UseVisualStyleBackColor = true;
+            this.driveLogButton.FlatAppearance.BorderSize = 0;
+            this.driveLogButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.driveLogButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.driveLogButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.driveLogButton.ForeColor = System.Drawing.Color.White;
+            this.driveLogButton.Location = new System.Drawing.Point(24, 0);
+            this.driveLogButton.Name = "driveLogButton";
+            this.driveLogButton.Size = new System.Drawing.Size(108, 32);
+            this.driveLogButton.TabIndex = 4;
+            this.driveLogButton.Text = "Drivers log";
+            this.driveLogButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.driveLogButton.UseVisualStyleBackColor = true;
+            this.driveLogButton.Click += new System.EventHandler(this.driveLogButton_Click);
             // 
             // pictureBookingTab
             // 
@@ -401,7 +402,7 @@
         private System.Windows.Forms.Panel panelForProfile;
         private System.Windows.Forms.Button firstAidButton;
         private System.Windows.Forms.Button doctorsNoteButton;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button driveLogButton;
         private System.Windows.Forms.PictureBox pictureSettingsTab;
         private System.Windows.Forms.PictureBox pictureBookingTab;
         private System.Windows.Forms.PictureBox pictureHomeTab;
