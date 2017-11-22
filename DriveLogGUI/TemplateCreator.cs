@@ -84,11 +84,11 @@ namespace DriveLogGUI
 
             if (template["type"] == "Practical")
             {
-                checkBoxPractical.Checked = true;
+                radioPractical.Checked = true;
             }
             else
             {
-                checkboxTheoratical.Checked = true;
+                radioTheoretical.Checked = true;
             }
         }
 
@@ -101,10 +101,36 @@ namespace DriveLogGUI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            DatabaseParser.UploadTemplate(_currentId, titleTextBox.Text, descriptionTextbox.Text, checkBoxPractical.Checked ? "Practical" : "Theoretical",
-                timeAmount.Value.ToString(), readingTextbox.Text);
+            if (IsAllRequiredFilledOut())
+            {
+                DatabaseParser.UploadTemplate(_currentId, titleTextBox.Text, descriptionTextbox.Text, radioPractical.Checked ? "Practical" : "Theoretical",
+                    timeAmount.Value.ToString(), readingTextbox.Text);
 
-            UpdateTemplateButtons();
+                UpdateTemplateButtons();
+
+            }
+            else
+            {
+                errorLabel.Text = "Please fill out all required fields";
+            }
+        }
+
+        private bool IsAllRequiredFilledOut()
+        {
+            Color normalColor = Color.FromArgb(127, 132, 144);
+            bool temp = true;
+
+            timeAmountLabel.ForeColor = normalColor;
+            titleLabel.ForeColor = normalColor;
+            descriptionLabel.ForeColor = normalColor;
+            typeLabel.ForeColor = normalColor;
+
+            if (string.IsNullOrWhiteSpace(titleTextBox.Text)) {titleLabel.ForeColor = Color.Red; temp = false;}
+            if (string.IsNullOrWhiteSpace(descriptionTextbox.Text)) {descriptionLabel.ForeColor = Color.Red; temp = false;}
+            if (!radioPractical.Checked && !radioTheoretical.Checked) {typeLabel.ForeColor = Color.Red; temp = false;}
+            if (timeAmount.Value == 0) {timeLabel.ForeColor = Color.Red; temp = false;}
+
+            return temp;
         }
 
         private void removebutton_Click(object sender, EventArgs e)
