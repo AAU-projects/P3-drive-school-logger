@@ -75,6 +75,9 @@ namespace DriveLogGUI
                 settingsButton.Location = new Point(0, 138);
             }
 
+            overviewTab.SubPageCreated += OpenPageEvent;
+            profileTab.SubPageCreated += OpenPageEvent;
+
             // opening starting page after login
             _lastButton = OverviewButton;
             OpenPage(OverviewButton, overviewTab);
@@ -232,11 +235,25 @@ namespace DriveLogGUI
             sender.BackColor = Color.FromArgb(148, 197, 204);
         }
 
+        private void OpenPageEvent(UserControl page)
+        {
+            if (Session.LoggedInUser.Sysmin) return;
+            if (page is OverviewTab || page is ProfileTab)
+            {
+                OpenPage(this, driveLogTab);
+            }
+        }
+
         private void CloseLastPage()
         {
             if (_lastPage != null)
             {
                 _lastPage.Hide();
+                foreach (Control lastPageControl in _lastPage.Controls)
+                {
+                    if (lastPageControl is UserControl)
+                        lastPageControl.Dispose();
+                }
             }
         }
 
@@ -286,7 +303,7 @@ namespace DriveLogGUI
             }
         }
 
-        private void driveLogButton_Click(object sender, EventArgs e)
+        internal void driveLogButton_Click(object sender, EventArgs e)
         {
             OpenPage(sender, driveLogTab);
         }
