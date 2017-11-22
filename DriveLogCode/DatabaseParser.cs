@@ -33,7 +33,8 @@ namespace DriveLogCode
 
             foreach (DataRow row in results.Rows)
             {
-                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], Convert.ToBoolean(row[5])));
+                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[2]), (string)row[6], (string)row[7], (string)row[8], Convert.ToInt32(row[9]), (string)row[10]);
+                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], Convert.ToBoolean(row[5]), newTemplate));
             }
 
             return lessonsList;
@@ -44,6 +45,12 @@ namespace DriveLogCode
             DataTable lessonInfo = MySql.GetLessonData(templateName);
 
             return GetDict(lessonInfo);
+        }
+
+        public static User GetInstructorByID(int id)
+        {
+            DataTable result = MySql.GetInstructorByID(id);
+            return new User(result);
         }
 
         private static Dictionary<string, string> GetDict(DataTable dt)
@@ -132,6 +139,20 @@ namespace DriveLogCode
             }
         }
 
+        public static List<AppointmentStructure> AppointmentsList()
+        {
+            List<AppointmentStructure> appointments = new List<AppointmentStructure>();
+            DataTable queryInfo = MySql.GetAllAppointments();
+
+            foreach (DataRow appointment in queryInfo.Rows)
+            {
+                string instructorName = $"{(string) appointment[6]} {(string) appointment[7]}";
+                appointments.Add(new AppointmentStructure((int) appointment[0], (int) appointment[1], (DateTime) appointment[2], (int) appointment[3], (string) appointment[4], Convert.ToBoolean(appointment[5]), instructorName));
+            }
+
+            return appointments;
+        }
+
         public static List<User> UserSearchList(string searchInput)
         {
             DataTable queryInfo = MySql.UserSearch(searchInput);
@@ -143,6 +164,22 @@ namespace DriveLogCode
             }
 
             return usersFound;
+        }
+
+        public static LessonTemplate GetLessonTemplateFromID(int lessonId)
+        {
+
+            DataTable DatabaseResults = MySql.GetLessonTemplateByID(lessonId);
+
+            LessonTemplate lessonTemplate = new LessonTemplate(
+                Convert.ToInt32(DatabaseResults.Rows[0][0]), 
+                DatabaseResults.Rows[0][1].ToString(), 
+                DatabaseResults.Rows[0][2].ToString(),
+                DatabaseResults.Rows[0][3].ToString(), 
+                Convert.ToInt32(DatabaseResults.Rows[0][4]), 
+                DatabaseResults.Rows[0][5].ToString());
+
+            return lessonTemplate;
         }
     }
 }

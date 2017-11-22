@@ -36,9 +36,9 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.passwordStatusLabel = new System.Windows.Forms.Label();
             this.registerPicture = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelForPersonalInformation = new System.Windows.Forms.Label();
+            this.labelForAddress = new System.Windows.Forms.Label();
+            this.labelForAccountDetails = new System.Windows.Forms.Label();
             this.verifyPasswordBox = new TextboxBorderColor();
             this.registerZipBox = new TextboxBorderColor();
             this.registerCityBox = new TextboxBorderColor();
@@ -51,13 +51,13 @@
             this.registerPasswordBox = new TextboxBorderColor();
             this.registerUsernameBox = new TextboxBorderColor();
             this.vertifyPasswordStatusLabel = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.topBarPanel = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.registerPicture)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.topBarPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // registerSubtitleLabel
@@ -135,38 +135,38 @@
             this.registerPicture.TabIndex = 29;
             this.registerPicture.TabStop = false;
             // 
-            // label1
+            // labelForPersonalInformation
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.label1.Location = new System.Drawing.Point(17, 214);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(243, 33);
-            this.label1.TabIndex = 40;
-            this.label1.Text = "Personal Information";
+            this.labelForPersonalInformation.AutoSize = true;
+            this.labelForPersonalInformation.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelForPersonalInformation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.labelForPersonalInformation.Location = new System.Drawing.Point(17, 214);
+            this.labelForPersonalInformation.Name = "labelForPersonalInformation";
+            this.labelForPersonalInformation.Size = new System.Drawing.Size(243, 33);
+            this.labelForPersonalInformation.TabIndex = 40;
+            this.labelForPersonalInformation.Text = "Personal Information";
             // 
-            // label2
+            // labelForAddress
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.label2.Location = new System.Drawing.Point(17, 383);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 33);
-            this.label2.TabIndex = 41;
-            this.label2.Text = "Address";
+            this.labelForAddress.AutoSize = true;
+            this.labelForAddress.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelForAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.labelForAddress.Location = new System.Drawing.Point(17, 383);
+            this.labelForAddress.Name = "labelForAddress";
+            this.labelForAddress.Size = new System.Drawing.Size(103, 33);
+            this.labelForAddress.TabIndex = 41;
+            this.labelForAddress.Text = "Address";
             // 
-            // label3
+            // labelForAccountDetails
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.label3.Location = new System.Drawing.Point(17, 504);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(185, 33);
-            this.label3.TabIndex = 42;
-            this.label3.Text = "Account Details";
+            this.labelForAccountDetails.AutoSize = true;
+            this.labelForAccountDetails.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelForAccountDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.labelForAccountDetails.Location = new System.Drawing.Point(17, 504);
+            this.labelForAccountDetails.Name = "labelForAccountDetails";
+            this.labelForAccountDetails.Size = new System.Drawing.Size(185, 33);
+            this.labelForAccountDetails.TabIndex = 42;
+            this.labelForAccountDetails.Text = "Account Details";
             // 
             // verifyPasswordBox
             // 
@@ -355,19 +355,19 @@
             this.vertifyPasswordStatusLabel.TabIndex = 30;
             this.vertifyPasswordStatusLabel.Text = "StatusVerify";
             // 
-            // panel2
+            // topBarPanel
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(529, 22);
-            this.panel2.TabIndex = 43;
-            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
-            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
+            this.topBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
+            this.topBarPanel.Controls.Add(this.button3);
+            this.topBarPanel.Controls.Add(this.button2);
+            this.topBarPanel.Controls.Add(this.button4);
+            this.topBarPanel.Controls.Add(this.button1);
+            this.topBarPanel.Location = new System.Drawing.Point(0, 0);
+            this.topBarPanel.Name = "topBarPanel";
+            this.topBarPanel.Size = new System.Drawing.Size(529, 22);
+            this.topBarPanel.TabIndex = 43;
+            this.topBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topBarPanel_MouseDown);
+            this.topBarPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topBarPanel_MouseMove);
             // 
             // button3
             // 
@@ -429,10 +429,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(529, 727);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.topBarPanel);
+            this.Controls.Add(this.labelForAccountDetails);
+            this.Controls.Add(this.labelForAddress);
+            this.Controls.Add(this.labelForPersonalInformation);
             this.Controls.Add(this.vertifyPasswordStatusLabel);
             this.Controls.Add(this.registerPicture);
             this.Controls.Add(this.passwordStatusLabel);
@@ -457,7 +457,7 @@
             this.Text = "Register";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.registerPicture)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.topBarPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -482,11 +482,11 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label passwordStatusLabel;
         private System.Windows.Forms.PictureBox registerPicture;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelForPersonalInformation;
+        private System.Windows.Forms.Label labelForAddress;
+        private System.Windows.Forms.Label labelForAccountDetails;
         private System.Windows.Forms.Label vertifyPasswordStatusLabel;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel topBarPanel;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;

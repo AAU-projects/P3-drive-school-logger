@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
@@ -18,7 +15,13 @@ namespace DriveLogGUI
         private DateTime lastWeek = DateTime.Now;
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
+
         private MainWindowTab mainWindow;
+
+        private Color ColorRed = Color.FromArgb(229, 187, 191);
+        private Color ColorBlue = Color.FromArgb(148, 197, 204);
+        private Color ColorGreen = Color.FromArgb(175, 212, 167);
+        private Color ColorYellow = Color.FromArgb(246, 228, 125);
 
         private OverviewTab overviewTab;
 
@@ -31,7 +34,40 @@ namespace DriveLogGUI
             this.overviewTab = overviewTab;
             SubscribeToAllClickPanels(overviewTab.listOfDays);
 
-            TestAppointments();
+
+            if (Session.LoggedInUser.Sysmin)
+            {
+                GetAppointsments();
+            }
+
+            SubscribeToAllClickAppointments(appointments);
+        }
+
+        private void GetAppointsments()
+        {
+            foreach (var appointment in DatabaseParser.AppointmentsList())
+            {
+                AddAppointment(appointment);
+            }
+        }
+
+        private void SubscribeToAllClickAppointments(List<Appointment> appointments)
+        {
+            foreach (var appointment in appointments)
+            {
+                appointment.ClickOnAppointmentTriggered += UpdateInformation;
+            }
+        }
+
+        private void UpdateInformation(object sender, ApppointmentEventArgs e)
+        {
+            informationLabel.Text = e.Appointment.LabelAppointment.Text;
+            dateInformationLabel.Text = e.Date;
+            timeInformationLabel.Text = e.Time;
+            contextInformationTextbox.Text = e.Appointment.Context;
+            contextTitleInformationLabel.Text = e.Appointment.LabelAppointment.Text;
+            instructorInformationLabel.Text = e.Appointment.InstructorName;
+            
 
         }
 
@@ -43,12 +79,12 @@ namespace DriveLogGUI
             }
         }
 
-        public void OverviewTabOnClickOnDate(object sender, DateClickEventArgs eventArgs)
+        public void OverviewTabOnClickOnDate(object sender, DateClickEventArgs dateEvent)
         {
             this.mainWindow._lastPage = this;
             overviewTab.Hide();
             this.Show();
-            UpdateCalendar(eventArgs.Date);
+            UpdateCalendar(dateEvent.Date);
         }
 
         private void GenerateWeeklyCalendar()
@@ -109,7 +145,36 @@ namespace DriveLogGUI
         private void panelForCalendar_Paint(object sender, PaintEventArgs e)
         {
             GenerateWeeklyCalendar();
-            DrawLineBelowDates();  
+            DrawLineBelowDates();
+            if (true)//remember to add sysadmin here
+            {
+                DrawAddAppointmentButtons();
+            }
+        }
+
+        private void DrawAddAppointmentButtons()
+        {
+            //drawing buttons to add appointments
+            foreach (var data in calendarData)
+            {
+                Button addAppointmentButton = new Button();
+                addAppointmentButton.FlatStyle = FlatStyle.Flat;
+                addAppointmentButton.BackgroundImage = Image.FromFile("Resources/addlessongrey.png");
+                addAppointmentButton.Size = new Size(26, 26);
+                addAppointmentButton.Location = new Point(data.BottomPanelForCalendar.Width/2 - 13, data.BottomPanelForCalendar.Height - 50);
+                addAppointmentButton.FlatAppearance.BorderSize = 0;
+                addAppointmentButton.Click += (s, e) => OpenAppointment(new DateClickEventArgs(data.Date));
+
+                data.BottomPanelForCalendar.Controls.Add(addAppointmentButton);
+
+            }
+            
+        }
+
+        private void OpenAppointment(DateClickEventArgs e)
+        {
+            AddAppointmentWindow addAppointmentWindow = new AddAppointmentWindow(e.Date, MousePosition);
+            addAppointmentWindow.ShowDialog();
         }
 
         private void DrawLineBelowDates()
@@ -155,11 +220,12 @@ namespace DriveLogGUI
             UpdateDates();
         }
 
+
         private void UpdateDates()
         {
             dayNow = lastWeek;
             datesInWeek.Text = GetDatesInWeek(dayNow);
-            weekNumber.Text = GetWeekNumber(dayNow);
+            weekNumberLabel.Text = $"week {GetWeekNumber(dayNow)}";
 
             foreach (var day in calendarData) 
             {
@@ -179,7 +245,7 @@ namespace DriveLogGUI
             {
                 foreach (var element in appointments)
                 {
-                    element.label.Hide();
+                    element.LabelAppointment.Hide();
                 }
             }
         }
@@ -199,20 +265,80 @@ namespace DriveLogGUI
             int weekNumber =
                 CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstFourDayWeek,
                     DayOfWeek.Monday);
-            return $"week {weekNumber}";
+            return $"{weekNumber}";
+        }
+
+        private DateTime GetDateFromWeek(int weekOfYear)
+        {
+            int year = lastWeek.Year;
+            DateTime jan1 = new DateTime(year, 1, 1);
+            int daysOffset = DayOfWeek.Thursday - jan1.DayOfWeek;
+
+            DateTime firstThursday = jan1.AddDays(daysOffset);
+            var cal = CultureInfo.CurrentCulture.Calendar;
+            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            var weekNum = weekOfYear;
+            if (firstWeek <= 1) {
+                weekNum -= 1;
+            }
+            var result = firstThursday.AddDays(weekNum * 7);
+            return result.AddDays(-3);
         }
 
 
-        private void AddAppointment(DateTime date, string text, Color color)
+        private void AddAppointment(AppointmentStructure appointment)
         {
-            Label labelAppointment = new Label();
-            labelAppointment.Text = text;
-            labelAppointment.BackColor = color;
-            labelAppointment.TextAlign = ContentAlignment.MiddleCenter;
-            labelAppointment.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, labelAppointment.Font.Unit);
+            Lesson progress = null;
+            if (appointment.LessonType == "Practical")
+            {
+                progress = Session.LastPracticalLesson;
+            }
+            if (appointment.LessonType == "Theoretical") 
+            {
+                progress = Session.LastTheoraticalLesson;
+            } 
 
+            Appointment newAppointment = new Appointment(appointment, progress);
 
-            appointments.Add(new Appointment(date, labelAppointment));
+            newAppointment.LabelAppointment = GenerateLabel(appointment);
+            newAppointment.UpdateLabel();
+            newAppointment.SubscribeToEvent();
+            appointments.Add(newAppointment);
+        }
+
+        private Label GenerateLabel(AppointmentStructure appointment)
+        {
+            Label newLabel = new Label();
+            newLabel.Text = "no?";
+            newLabel.BackColor = GetColorForLabel(appointment.LessonType);
+            newLabel.TextAlign = ContentAlignment.MiddleCenter;
+            newLabel.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, newLabel.Font.Unit);
+
+            return newLabel;
+        }
+
+        private Color GetColorForLabel(string appointmentLessonType)
+        {
+            if (appointmentLessonType.ToLower() == "theoretical")
+            {
+                return ColorBlue;
+            }
+            if (appointmentLessonType.ToLower() == "practical") {
+                return ColorGreen;
+            }
+            if (appointmentLessonType.ToLower() == "manoeuvre") {
+                return ColorYellow;
+            }
+            if (appointmentLessonType.ToLower() == "slippery") {
+                return ColorYellow;
+            }
+            if (appointmentLessonType.ToLower() == "other") {
+                return ColorYellow;
+            }
+
+            return ColorRed;
+
         }
 
         private void AddAllElements()
@@ -225,12 +351,12 @@ namespace DriveLogGUI
 
                 foreach (var appointment in appointments)
                 {
-                    if (day.Date.ToShortDateString() == appointment.date.ToShortDateString()) 
+                    if (day.Date.ToShortDateString() == appointment.ToTime.ToShortDateString()) 
                     {
-                        appointment.label.Show();
-                        appointment.label.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
-                        prevLocation += appointment.label.Height + 5;
-                        day.BottomPanelForCalendar.Controls.Add(appointment.label);
+                        appointment.LabelAppointment.Show();
+                        appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
+                        prevLocation += appointment.LabelAppointment.Height + 5;
+                        day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
                     }
                 }
             }
@@ -245,19 +371,15 @@ namespace DriveLogGUI
 
         private Color RandomColor()
         {
-            int lol = test.Next(0, 5);
+            int lol = test.Next(0, 3);
             if (lol == 0) {
-                return Color.GreenYellow;
+                return Color.FromArgb(255, 229, 187, 191);
             } else if (lol == 1) {
-                return Color.Aqua;
+                return Color.FromArgb(255, 148, 197, 204);
             } else if (lol == 2) {
-                return Color.Red;
+                return Color.FromArgb(255, 175, 212, 167);
             } else if (lol == 3) {
-                return Color.BurlyWood;
-            } else if (lol == 4) {
-                return Color.SlateBlue;
-            } else if (lol == 5) {
-                return Color.CadetBlue;
+                return Color.FromArgb(255, 246, 228, 125);
             }
             return Color.Aquamarine;
         }
@@ -279,45 +401,48 @@ namespace DriveLogGUI
             UpdateCalendar(0);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddAppointment(DateTime.Now, "fuck you", Color.Gold);
-        }
-
         private void TestAppointments()
         {
-            AddAppointment(DateTime.Now, "fuck you", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(3), "fuck you", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(3), "fuck you", Color.Gold);
-            AddAppointment(DateTime.Now, "fuck you", Color.Gold);
-            AddAppointment(DateTime.Now, "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(6), "hmmmm", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(1), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(4), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(2), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(0), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(3), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(2), "wildcard", RandomColor());
-            AddAppointment(DateTime.Now.AddDays(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(2), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(3), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(4), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(6), "goya", Color.OrangeRed);
-            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Green);
-            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(2), "die", Color.Gold);
-            AddAppointment(DateTime.Now.AddDays(-1), "idk", Color.Red);
-            AddAppointment(DateTime.Now.AddDays(-2), "idk", Color.Red);
-            AddAppointment(DateTime.Now.AddDays(5), "idk", Color.Red);
-            AddAppointment(DateTime.Now.AddDays(3), "idk", Color.Red);
-            AddAppointment(DateTime.Now.AddDays(6), "idk", Color.Red);
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void weekNumberTextbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            int weekNumber = Convert.ToInt32(weekNumberTextbox.Text);
+
+            if (weekNumber <= 52)
+            {
+                UpdateCalendar(GetDateFromWeek(weekNumber));
+            }
+        }
+
+        private void weekSelectButton_Click(object sender, EventArgs e)
+        {
+            if (!weekNumberTextbox.Visible)
+            {
+                weekNumberTextbox.Show();
+                weekNumberTextbox.Text = GetWeekNumber(lastWeek);
+                this.ActiveControl = weekNumberTextbox;
+            }
+            else
+            {
+                weekNumberTextbox.Hide();
+            }
+        }
+
+        private void weekNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) 
+            {
+                e.Handled = true;
+            }
         }
     }
 }

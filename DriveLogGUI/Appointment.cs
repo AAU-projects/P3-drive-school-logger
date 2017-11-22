@@ -4,18 +4,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
-    class Appointment
+    class Appointment : AppointmentStructure
     {
-        public DateTime date;
-        public Label label;
+        public Label LabelAppointment;
 
-        public Appointment(DateTime date, Label label)
+        public string Title => GetTitle();
+        public string Context => GetContext();
+        public DateTime ToTime => GetToTime();
+        private LessonTemplate lessonTemplate;
+
+        public Appointment(AppointmentStructure appointment, Lesson lesson)
         {
-            this.date = date;
-            this.label = label;
+            this.Id = appointment.Id;
+            this.InstructorID = appointment.InstructorID;
+            this.StartTime = appointment.StartTime;
+            this.AvailableTime = appointment.AvailableTime;
+            this.LessonType = appointment.LessonType;
+            this.FullyBooked = appointment.FullyBooked;
+            this.InstructorName = appointment.InstructorName;
+            this.lessonTemplate = GetLessonTemplate(lesson);
+        }
+
+        public void UpdateLabel()
+        {
+            LabelAppointment.Text = Title;
+        }
+
+        private LessonTemplate GetLessonTemplate(Lesson lesson)
+        {
+            return DatabaseParser.GetLessonTemplateFromID(lesson.TemplateID);
+        }
+
+        private string GetContext()
+        {
+            return lessonTemplate.Description;
+        }
+
+        private DateTime GetToTime()
+        {
+            return StartTime.AddMinutes(AvailableTime * 45);
+        }
+
+        private string GetTitle()
+        {
+            return lessonTemplate.Title;
+        }
+
+
+        public event EventHandler<ApppointmentEventArgs> ClickOnAppointmentTriggered;
+
+        public void SubscribeToEvent()
+        {
+            LabelAppointment.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(this));
+            LabelAppointment.MouseEnter += (s, e) => LabelAppointment.Cursor = Cursors.Hand;
+        }
+
+        private void label_Clicked(ApppointmentEventArgs e)
+        {
+            ClickOnAppointmentTriggered?.Invoke(this, e);
         }
     }
 }
