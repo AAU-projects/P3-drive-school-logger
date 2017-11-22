@@ -124,6 +124,7 @@
             this.StartTimecomboBox.Name = "StartTimecomboBox";
             this.StartTimecomboBox.Size = new System.Drawing.Size(142, 21);
             this.StartTimecomboBox.TabIndex = 9;
+            this.StartTimecomboBox.SelectedValueChanged += new System.EventHandler(this.StartTimecomboBox_SelectedValueChanged);
             // 
             // EndTimecomboBox
             // 
@@ -160,6 +161,7 @@
             this.CancelButton1.TabIndex = 14;
             this.CancelButton1.Text = "Cancel";
             this.CancelButton1.UseVisualStyleBackColor = false;
+            this.CancelButton1.Click += new System.EventHandler(this.CancelButton1_Click);
             // 
             // AddAppointmentWindow
             // 

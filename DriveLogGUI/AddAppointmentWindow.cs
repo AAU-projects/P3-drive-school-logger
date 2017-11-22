@@ -23,6 +23,20 @@ namespace DriveLogGUI
             date = eDate;
             UpdateTitle();
             SetWindowPosition();
+            FillComboBox(StartTimecomboBox);
+            FillComboBox(EndTimecomboBox);
+        }
+
+        private void FillComboBox(ComboBox comboBox)
+        {
+            DateTime time = new DateTime();
+            time = time.AddHours(6);
+
+            for (int i = 0; i < 96; i++)
+            {
+                comboBox.Items.Add(time.ToString("HH:mm"));
+                time = time.AddMinutes(15);
+            }
         }
 
         private void SetWindowPosition()
@@ -33,7 +47,7 @@ namespace DriveLogGUI
 
         private void UpdateTitle()
         {
-            TitleLabel.Text = $"Add apointment to {date.ToShortDateString().Replace('/', '-')}";
+            TitleLabel.Text = $"Add appointment to {date.ToShortDateString().Replace('/', '-')}";
         }
 
         private void topPanel_MouseDown(object sender, MouseEventArgs e)
@@ -53,6 +67,16 @@ namespace DriveLogGUI
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();;
+        }
+
+        private void CancelButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void StartTimecomboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EndTimecomboBox.Text = StartTimecomboBox.Items[StartTimecomboBox.SelectedIndex + 3].ToString();
         }
     }
 }
