@@ -14,17 +14,9 @@ namespace DriveLogCode
         public int AvailableTime;
         public string LessonType;
         public bool FullyBooked;
+        public string InstructorName;
 
-        public string Instructor => GetInstructorByID(InstructorID);
-
-
-        private string GetInstructorByID(int instructorID)
-        {
-            //TODO :)
-            return null;
-        }
-
-        public AppointmentStructure(int id, int instructorID, DateTime startTime, int availableTime, string lessonType, bool fullyBooked)
+        public AppointmentStructure(int id, int instructorID, DateTime startTime, int availableTime, string lessonType, bool fullyBooked, string instructorName)
         {
             Id = id;
             InstructorID = instructorID;
@@ -32,6 +24,7 @@ namespace DriveLogCode
             AvailableTime = availableTime;
             LessonType = lessonType;
             FullyBooked = fullyBooked;
+            InstructorName = instructorName;
         }
 
         public AppointmentStructure()

@@ -63,6 +63,16 @@ namespace DriveLogGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap addlesson {
+            get {
+                object obj = ResourceManager.GetObject("addlesson", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap avataricon {
             get {
                 object obj = ResourceManager.GetObject("avataricon", resourceCulture);
@@ -123,6 +133,16 @@ namespace DriveLogGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap exit6 {
+            get {
+                object obj = ResourceManager.GetObject("exit6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_add_black_24dp_1x {
             get {
                 object obj = ResourceManager.GetObject("ic_add_black_24dp_1x", resourceCulture);
@@ -136,6 +156,16 @@ namespace DriveLogGUI.Properties {
         internal static System.Drawing.Bitmap ic_add_black_24dp_2x {
             get {
                 object obj = ResourceManager.GetObject("ic_add_black_24dp_2x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_clear_black_48px {
+            get {
+                object obj = ResourceManager.GetObject("ic_clear_black_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

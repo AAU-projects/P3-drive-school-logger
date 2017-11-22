@@ -71,6 +71,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddApointmentEventArgs.cs" />
+    <Compile Include="AddAppointmentWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAppointmentWindow.Designer.cs">
+      <DependentUpon>AddAppointmentWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Appointment.cs" />
     <Compile Include="ApppointmentEventArgs.cs" />
     <Compile Include="CalendarData.cs" />
@@ -180,6 +187,9 @@
     <Compile Include="UserSearchTab.Designer.cs">
       <DependentUpon>UserSearchTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddAppointmentWindow.resx">
+      <DependentUpon>AddAppointmentWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CalendarTabG.resx">
       <DependentUpon>CalendarTabG.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,11 +256,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\rubber-duck.png" />
+    <None Include="Resources\rubber-duck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\green.png" />
-    <None Include="Resources\Discord_2017-10-17_13-33-05.png" />
+    <None Include="Resources\green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Discord_2017-10-17_13-33-05.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DriveLogCode\DriveLogCode.csproj">
@@ -259,15 +275,39 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ic_menu_black_24dp_2x.png" />
-    <None Include="Resources\ic_menu_black_24dp_1x.png" />
-    <None Include="Resources\ic_mode_edit_black_24dp_1x.png" />
-    <None Include="Resources\ic_remove_black_24dp_2x.png" />
-    <None Include="Resources\ic_remove_black_24dp_1x.png" />
-    <None Include="Resources\ic_add_black_24dp_2x.png" />
-    <None Include="Resources\ic_add_black_24dp_1x.png" />
-    <None Include="Resources\ic_edit_black_24dp_2x.png" />
-    <None Include="Resources\ic_edit_black_24dp_1x.png" />
+    <None Include="Resources\exit6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_clear_black_48px.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_menu_black_24dp_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_menu_black_24dp_1x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_mode_edit_black_24dp_1x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_remove_black_24dp_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_remove_black_24dp_1x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_add_black_24dp_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_add_black_24dp_1x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_edit_black_24dp_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ic_edit_black_24dp_1x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\icons8-checkmark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -277,12 +317,30 @@
     <None Include="Resources\icons8-attention.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\avataricon.png" />
-    <None Include="Resources\crossIncomplete.png" />
-    <None Include="Resources\crossHover.png" />
-    <None Include="Resources\checkCompleted.png" />
-    <None Include="Resources\checkHover.png" />
-    <Content Include="Resources\drag_and_drop_icon.png" />
+    <None Include="Resources\avataricon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\crossIncomplete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\crossHover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\checkCompleted.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\checkHover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addlesson.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Resources\addlessongrey.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\drag_and_drop_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

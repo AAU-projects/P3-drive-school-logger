@@ -20,21 +20,27 @@ namespace DriveLogCode
         private const string AppointmentTable = "appointments";
         private const string LessonTable = "lessons";
 
-        public static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string table1 = LessonTable, string table2 = AppointmentTable, string table3 = UserTable)
+        public static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string LessonTable = LessonTable, string AppointmentTable = AppointmentTable, string UserTable = UserTable, string LessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand("SELECT " +
-                $"{table3}.firstname AS InstructorFirstname, " +
-                $"{table3}.lastname AS InstructorLastname, " +
-                $"{table1}.LessonID AS TemplateID, " +
-                $"{table1}.LessonPart AS Progress, " +
-                $"{table1}.EndDate, " +
-                $"{table1}.Completed " +
-                $"FROM {table2}, {table1}, {table3} " +
+                $"{UserTable}.firstname AS InstructorFirstname, " +
+                $"{UserTable}.lastname AS InstructorLastname, " +
+                $"{LessonTable}.LessonID AS TemplateID, " +
+                $"{LessonTable}.LessonPart AS Progress, " +
+                $"{LessonTable}.EndDate, " +
+                $"{LessonTable}.Completed, " +
+                $"{LessonTemplateTable}.title, " +
+                $"{LessonTemplateTable}.description, " +
+                $"{LessonTemplateTable}.type, " +
+                $"{LessonTemplateTable}.time, " +
+                $"{LessonTemplateTable}.reading " +
+                $"FROM {AppointmentTable}, {LessonTable}, {UserTable}, {LessonTemplateTable} " + 
                 "WHERE " +
-                $"{table1}.AppointmentID = {table2}.id AND " + 
-                $"{table1}.UserID = '{userid}' AND " +
-                $"{table3}.user_id = {table2}.instructorID " +
-                $"ORDER BY {table1}.id");
+                $"{LessonTable}.AppointmentID = {AppointmentTable}.id AND " + 
+                $"{LessonTable}.UserID = '{userid}' AND " +
+                $"{UserTable}.user_id = {AppointmentTable}.instructorID AND " +
+                $"{LessonTemplateTable}.id = {LessonTable}.LessonID " +
+                $"ORDER BY {LessonTable}.id");
 
             return SendQuery(cmd);
         }
@@ -42,6 +48,11 @@ namespace DriveLogCode
         public static DataTable GetLessonByID(int id, string table = LessonTable)
         {
             return GetFromDB("id", id.ToString(), table);
+        }
+
+        public static DataTable GetInstructorByID(int id, string table = UserTable)
+        {
+            return GetFromDB("user_id", id.ToString(), table);
         }
 
         public static DataTable GetLessonTemplateByID(int lessonId, string table = LessonTemplateTable)
@@ -62,11 +73,22 @@ namespace DriveLogCode
             return ExistTable(table) ? SendQuery(cmd) : null;
         }
 
-        public static DataTable GetAllAppointments(string table = AppointmentTable)
+        public static DataTable GetAllAppointments(string appointmentTable = AppointmentTable, string userTable = UserTable)
         {
-            var cmd = new MySqlCommand($"SELECT * FROM `{table}`");
+            var cmd = new MySqlCommand("SELECT " +
+                                       $"{appointmentTable}.id, " +
+                                       $"{appointmentTable}.instructorID, " +
+                                       $"{appointmentTable}.startTime, " +
+                                       $"{appointmentTable}.availableTime, " +
+                                       $"{appointmentTable}.lessonType, " +
+                                       $"{appointmentTable}.fullyBooked, " +
+                                       $"{userTable}.firstname, " +
+                                       $"{userTable}.lastname " +
+                                       $"FROM {AppointmentTable}, {userTable} " +
+                                       "WHERE " +
+                                       $"{userTable}.user_id = {AppointmentTable}.instructorID ");
 
-            return ExistTable(table) ? SendQuery(cmd) : null;
+            return SendQuery(cmd);
         }
 
         public static bool AddLesson(int userId, int appointmentID, int templateID, int part, string table = LessonTable)

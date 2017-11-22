@@ -40,6 +40,7 @@
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.contextInformationTextbox = new System.Windows.Forms.TextBox();
             this.bookingInformationButton = new System.Windows.Forms.Button();
             this.instructorTitleInformationLabel = new System.Windows.Forms.Label();
             this.instructorInformationLabel = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.dateInformationLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.informationLabel = new System.Windows.Forms.Label();
-            this.contextInformationTextbox = new System.Windows.Forms.TextBox();
             this.panelForCalendar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -207,6 +207,19 @@
             this.panel4.Size = new System.Drawing.Size(171, 401);
             this.panel4.TabIndex = 9;
             // 
+            // contextInformationTextbox
+            // 
+            this.contextInformationTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.contextInformationTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.contextInformationTextbox.Font = new System.Drawing.Font("Calibri Light", 10F);
+            this.contextInformationTextbox.Location = new System.Drawing.Point(15, 114);
+            this.contextInformationTextbox.Multiline = true;
+            this.contextInformationTextbox.Name = "contextInformationTextbox";
+            this.contextInformationTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.contextInformationTextbox.Size = new System.Drawing.Size(156, 171);
+            this.contextInformationTextbox.TabIndex = 13;
+            this.contextInformationTextbox.Text = resources.GetString("contextInformationTextbox.Text");
+            // 
             // bookingInformationButton
             // 
             this.bookingInformationButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
@@ -282,26 +295,13 @@
             // 
             // informationLabel
             // 
-            this.informationLabel.AutoSize = true;
             this.informationLabel.Font = new System.Drawing.Font("Calibri Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.informationLabel.Location = new System.Drawing.Point(22, 31);
+            this.informationLabel.Location = new System.Drawing.Point(0, 3);
             this.informationLabel.Name = "informationLabel";
-            this.informationLabel.Size = new System.Drawing.Size(111, 26);
+            this.informationLabel.Size = new System.Drawing.Size(171, 80);
             this.informationLabel.TabIndex = 6;
             this.informationLabel.Text = "Information";
-            // 
-            // contextInformationTextbox
-            // 
-            this.contextInformationTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.contextInformationTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contextInformationTextbox.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.contextInformationTextbox.Location = new System.Drawing.Point(15, 114);
-            this.contextInformationTextbox.Multiline = true;
-            this.contextInformationTextbox.Name = "contextInformationTextbox";
-            this.contextInformationTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.contextInformationTextbox.Size = new System.Drawing.Size(156, 171);
-            this.contextInformationTextbox.TabIndex = 13;
-            this.contextInformationTextbox.Text = resources.GetString("contextInformationTextbox.Text");
+            this.informationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CalendarTabG
             // 
@@ -319,7 +319,6 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -290,5 +290,15 @@ namespace DriveLogGUI
         {
             OpenPage(sender, driveLogTab);
         }
+
+        private void topPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

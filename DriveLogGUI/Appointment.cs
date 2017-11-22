@@ -11,16 +11,11 @@ namespace DriveLogGUI
     class Appointment : AppointmentStructure
     {
         public Label LabelAppointment;
+
         public string Title => GetTitle();
         public string Context => GetContext();
         public DateTime ToTime => GetToTime();
         private LessonTemplate lessonTemplate;
-
-        public Appointment(int id, int instructorID, DateTime startTime, int availableTime, string lessonType, bool fullyBooked)
-            : base(id, instructorID, startTime, availableTime, lessonType, fullyBooked)
-        {
-
-        }
 
         public Appointment(AppointmentStructure appointment, Lesson lesson)
         {
@@ -30,6 +25,7 @@ namespace DriveLogGUI
             this.AvailableTime = appointment.AvailableTime;
             this.LessonType = appointment.LessonType;
             this.FullyBooked = appointment.FullyBooked;
+            this.InstructorName = appointment.InstructorName;
             this.lessonTemplate = GetLessonTemplate(lesson);
         }
 

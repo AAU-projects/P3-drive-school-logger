@@ -15,7 +15,6 @@ namespace DriveLogGUI
         private DateTime lastWeek = DateTime.Now;
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
-        private List<Lesson> lessons = new List<Lesson>();
 
         private MainWindowTab mainWindow;
 
@@ -35,15 +34,13 @@ namespace DriveLogGUI
             this.overviewTab = overviewTab;
             SubscribeToAllClickPanels(overviewTab.listOfDays);
 
-            GetAllLessonsForUser();
-            GetAppointsments();
+
+            if (Session.LoggedInUser.Sysmin)
+            {
+                GetAppointsments();
+            }
 
             SubscribeToAllClickAppointments(appointments);
-        }
-
-        private void GetAllLessonsForUser()
-        {
-            lessons = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Session.LoggedInUser.Id);
         }
 
         private void GetAppointsments()
@@ -69,7 +66,7 @@ namespace DriveLogGUI
             timeInformationLabel.Text = e.Time;
             contextInformationTextbox.Text = e.Appointment.Context;
             contextTitleInformationLabel.Text = e.Appointment.LabelAppointment.Text;
-            instructorInformationLabel.Text = e.Appointment.Instructor;
+            instructorInformationLabel.Text = e.Appointment.InstructorName;
             
 
         }
@@ -148,7 +145,36 @@ namespace DriveLogGUI
         private void panelForCalendar_Paint(object sender, PaintEventArgs e)
         {
             GenerateWeeklyCalendar();
-            DrawLineBelowDates();  
+            DrawLineBelowDates();
+            if (true)//remember to add sysadmin here
+            {
+                DrawAddAppointmentButtons();
+            }
+        }
+
+        private void DrawAddAppointmentButtons()
+        {
+            //drawing buttons to add appointments
+            foreach (var data in calendarData)
+            {
+                Button addAppointmentButton = new Button();
+                addAppointmentButton.FlatStyle = FlatStyle.Flat;
+                addAppointmentButton.BackgroundImage = Image.FromFile("Resources/addlessongrey.png");
+                addAppointmentButton.Size = new Size(26, 26);
+                addAppointmentButton.Location = new Point(data.BottomPanelForCalendar.Width/2 - 13, data.BottomPanelForCalendar.Height - 50);
+                addAppointmentButton.FlatAppearance.BorderSize = 0;
+                addAppointmentButton.Click += (s, e) => OpenAppointment(new DateClickEventArgs(data.Date));
+
+                data.BottomPanelForCalendar.Controls.Add(addAppointmentButton);
+
+            }
+            
+        }
+
+        private void OpenAppointment(DateClickEventArgs e)
+        {
+            AddAppointmentWindow addAppointmentWindow = new AddAppointmentWindow(e.Date, MousePosition);
+            addAppointmentWindow.ShowDialog();
         }
 
         private void DrawLineBelowDates()
@@ -193,7 +219,6 @@ namespace DriveLogGUI
             UpdateDateMonday();
             UpdateDates();
         }
-
 
 
         private void UpdateDates()
@@ -264,7 +289,17 @@ namespace DriveLogGUI
 
         private void AddAppointment(AppointmentStructure appointment)
         {
-            Appointment newAppointment = new Appointment(appointment, lessons.LastOrDefault());
+            Lesson progress = null;
+            if (appointment.LessonType == "Practical")
+            {
+                progress = Session.LastPracticalLesson;
+            }
+            if (appointment.LessonType == "Theoretical") 
+            {
+                progress = Session.LastTheoraticalLesson;
+            } 
+
+            Appointment newAppointment = new Appointment(appointment, progress);
 
             newAppointment.LabelAppointment = GenerateLabel(appointment);
             newAppointment.UpdateLabel();
@@ -275,7 +310,7 @@ namespace DriveLogGUI
         private Label GenerateLabel(AppointmentStructure appointment)
         {
             Label newLabel = new Label();
-            newLabel.Text = "Fed pik";
+            newLabel.Text = "no?";
             newLabel.BackColor = GetColorForLabel(appointment.LessonType);
             newLabel.TextAlign = ContentAlignment.MiddleCenter;
             newLabel.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, newLabel.Font.Unit);
@@ -290,7 +325,7 @@ namespace DriveLogGUI
                 return ColorBlue;
             }
             if (appointmentLessonType.ToLower() == "practical") {
-                return ColorBlue;
+                return ColorGreen;
             }
             if (appointmentLessonType.ToLower() == "manoeuvre") {
                 return ColorYellow;
