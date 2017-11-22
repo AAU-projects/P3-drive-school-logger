@@ -258,6 +258,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\greentick.png" />
     <None Include="Resources\ic_menu_black_24dp_2x.png" />
     <None Include="Resources\ic_menu_black_24dp_1x.png" />
     <None Include="Resources\ic_mode_edit_black_24dp_1x.png" />

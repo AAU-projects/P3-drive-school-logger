@@ -17,6 +17,8 @@ namespace DriveLogGUI
         private List<Panel> driveLogPanelList = new List<Panel>();
         private List<LessonTemplate> templateslist = new List<LessonTemplate>();
         private List<Lesson> lessonslist = new List<Lesson>();
+        private Color standartTextColor = Color.FromArgb(127, 132, 144);
+        private Color standartTitleColor = Color.FromArgb(67, 72, 84);
 
         public DriveLogTab(User user)
         {
@@ -35,6 +37,8 @@ namespace DriveLogGUI
             {
                 backPanel.Controls.Add(panel);
             }
+
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
         }
 
         private void GenerateDriveLogPanel(int idx, LessonTemplate template)
@@ -68,48 +72,80 @@ namespace DriveLogGUI
             Label titleLabel = new Label();
             titleLabel.TextAlign = ContentAlignment.MiddleCenter;
             titleLabel.Location = new Point(5, 5);
-            titleLabel.Font = new Font("Myanmar Text", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            titleLabel.Font = new Font("Myanmar Text", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            titleLabel.ForeColor = standartTitleColor;
             titleLabel.Size = new Size(labelWidth, labelHeight + 10);
             titleLabel.Text = template.Title;
             driveLogPanel.Controls.Add(titleLabel);
 
+            Label lessonDescriptionTitleLabel = new Label();
+            lessonDescriptionTitleLabel.Location = new Point(1, titleLabel.Height + 10);
+            lessonDescriptionTitleLabel.Size = new Size(labelWidth, labelHeight + 8);
+            lessonDescriptionTitleLabel.Font = new Font("Myanmar Text", 13F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lessonDescriptionTitleLabel.ForeColor = standartTitleColor;
+            lessonDescriptionTitleLabel.Text = "Description";
+            driveLogPanel.Controls.Add(lessonDescriptionTitleLabel);
+
             Label lessonDescriptionLabel = new Label();
-            lessonDescriptionLabel.Location = new Point(5, titleLabel.Height + 10);
+            lessonDescriptionLabel.Location = new Point(5, lessonDescriptionTitleLabel.Location.Y + labelHeight + 10);
             lessonDescriptionLabel.MaximumSize = new Size(labelWidth, 0);
             lessonDescriptionLabel.AutoSize = true;
-            lessonDescriptionLabel.Text ="Description:\n" + template.Description;
+            lessonDescriptionLabel.ForeColor = standartTextColor;
+            lessonDescriptionLabel.Text = template.Description;
             driveLogPanel.Controls.Add(lessonDescriptionLabel);
 
+            Label instructorNameTitleLabel = new Label();
+            instructorNameTitleLabel.Location = new Point(2, lessonDescriptionLabel.Location.Y + lessonDescriptionLabel.Height + 10);
+            instructorNameTitleLabel.ForeColor = standartTitleColor;
+            instructorNameTitleLabel.Size = new Size(labelWidth, labelHeight + 8);
+            instructorNameTitleLabel.TextAlign = ContentAlignment.TopLeft;
+            instructorNameTitleLabel.Font = new Font("Myanmar Text", 13F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            instructorNameTitleLabel.Text = "Instructor";
+            driveLogPanel.Controls.Add(instructorNameTitleLabel);
+
             Label instructorNameLabel = new Label();
-            instructorNameLabel.Location = new Point(5,
-            lessonDescriptionLabel.Location.Y + lessonDescriptionLabel.Height + 10);
+            instructorNameLabel.Location = new Point(5, instructorNameTitleLabel.Location.Y + labelHeight + 10);
+            instructorNameLabel.ForeColor = standartTextColor;
             instructorNameLabel.Size = new Size(labelWidth, labelHeight);
-            if(lessonCompleted)
-                instructorNameLabel.Text = "Instructor: " + lessonquery[lessonquery.Count - 1].InstructorFullname;
+            instructorNameLabel.TextAlign = ContentAlignment.TopLeft;
+            if (lessonCompleted)
+                instructorNameLabel.Text = lessonquery[lessonquery.Count - 1].InstructorFullname;
             else
-                instructorNameLabel.Text = "Instructor: " + "N/A";
+                instructorNameLabel.Text = "N/A";
             driveLogPanel.Controls.Add(instructorNameLabel);
 
             Label instructorSignLabel = new Label();
             instructorSignLabel.Location = new Point(backPanel.Width / 4 + 50, instructorNameLabel.Location.Y + 16);
             instructorSignLabel.Size = new Size(140, labelHeight * 4);
+            instructorSignLabel.ForeColor = standartTextColor;
             instructorSignLabel.Text = "\n\n____________________\n     Instructor Signature";
             driveLogPanel.Controls.Add(instructorSignLabel);
 
             Label studentSignLabel = new Label();
             studentSignLabel.Location = new Point(backPanel.Width / 2 + 50, instructorNameLabel.Location.Y + 16);
             studentSignLabel.Size = new Size(140, labelHeight * 4);
+            studentSignLabel.ForeColor = standartTextColor;
             studentSignLabel.Text = "\n\n____________________\n      Student Signature";
             driveLogPanel.Controls.Add(studentSignLabel);
 
             if (lessonCompleted)
             {
                 Label dateCompletedLabel = new Label();
-                dateCompletedLabel.Location = new Point(600, 12);
+                dateCompletedLabel.Location = new Point(630, 12);
                 dateCompletedLabel.Size = new Size(195, labelHeight);
+                dateCompletedLabel.ForeColor = standartTextColor;
                 dateCompletedLabel.Text = "Date Completed: " + lessonquery[lessonquery.Count - 1].EndDate;
                 driveLogPanel.Controls.Add(dateCompletedLabel);
                 dateCompletedLabel.BringToFront();
+
+                PictureBox checkMarkPictureBox = new PictureBox();
+                checkMarkPictureBox.Location = new Point(700, instructorNameTitleLabel.Location.Y);
+                checkMarkPictureBox.Size = new Size(90, 90);
+                checkMarkPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                checkMarkPictureBox.Image = Properties.Resources.greentick;
+                checkMarkPictureBox.BackColor = Color.Transparent;
+                driveLogPanel.Controls.Add(checkMarkPictureBox);
+                checkMarkPictureBox.BringToFront();
             }
 
             driveLogPanel.Size = new Size(backPanel.Width - 30,  studentSignLabel.Location.Y + studentSignLabel.Height + 5);
