@@ -101,10 +101,40 @@ namespace DriveLogGUI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            DatabaseParser.UploadTemplate(_currentId, titleTextBox.Text, descriptionTextbox.Text, checkBoxPractical.Checked ? "Practical" : "Theoretical",
-                timeAmount.Value.ToString(), readingTextbox.Text);
+            if (IsAllRequiredFilledOut())
+            {
+                DatabaseParser.UploadTemplate(_currentId, titleTextBox.Text, descriptionTextbox.Text, checkBoxPractical.Checked ? "Practical" : "Theoretical",
+                    timeAmount.Value.ToString(), readingTextbox.Text);
 
-            UpdateTemplateButtons();
+                UpdateTemplateButtons();
+
+            }
+            else
+            {
+                
+            }
+        }
+
+        private bool IsAllRequiredFilledOut()
+        {
+            NormalizeTextbox(titleTextBox);
+            NormalizeTextbox(descriptionTextbox);
+
+            if (string.IsNullOrWhiteSpace(titleTextBox.Text)) SetTextBoxAsInvalid(titleTextBox);
+            if (string.IsNullOrWhiteSpace(descriptionTextbox.Text)) SetTextBoxAsInvalid(descriptionTextbox);
+
+            return false;
+        }
+
+        private void SetTextBoxAsInvalid(TextboxBorderColor textbox)
+        {
+            textbox.BorderStyle = BorderStyle.FixedSingle;
+            textbox.BorderColor = Color.Red;
+        }
+
+        private void NormalizeTextbox(TextboxBorderColor textbox)
+        {
+            textbox.BorderStyle = BorderStyle.None;
         }
 
         private void removebutton_Click(object sender, EventArgs e)

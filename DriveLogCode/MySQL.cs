@@ -113,7 +113,7 @@ namespace DriveLogCode
 
         public static bool DeleteTemplate(int id, string table = LessonTemplateTable)
         {
-            var cmd = new MySqlCommand($"DELETE FROM {table} WHERE id = {id}");
+            var cmd = new MySqlCommand($"UPDATE {table} SET active = 'False' WHERE id = {id}");
 
             if (ExistTable(table)) return SendNonQuery(cmd);
             return false;
@@ -121,7 +121,7 @@ namespace DriveLogCode
 
         public static DataTable GetCreatedLessonNames(string table = LessonTemplateTable)
         {
-            var cmd = new MySqlCommand($"SELECT `title` FROM {table} WHERE 1");
+            var cmd = new MySqlCommand($"SELECT `title` FROM {table} WHERE active = 'True'");
 
             if (ExistTable(table)) return SendQuery(cmd);
             return CreateTemplateTable(table) ? SendQuery(cmd) : null;
@@ -169,6 +169,7 @@ namespace DriveLogCode
                                        $"`type`  enum('Practical','Theoretical') NOT NULL ," +
                                        $"`time`  varchar(255) NOT NULL ," +
                                        $"`reading`  varchar(255) NULL ," +
+                                       $"`active`  enum('True','False') NOT NULL DEFAULT 'True'" +
                                        $"PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
 
             return SendNonQuery(cmd);
