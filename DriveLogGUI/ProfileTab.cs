@@ -42,7 +42,6 @@ namespace DriveLogGUI
         /// </summary>
         private void UpdateInfo()
         {
-
             profileHeaderLabel.Text = "Profile: " + _user.Username;
             nameOutputLabel.Text = _user.Fullname;
             phoneOutputLabel.Text = _user.Phone;
@@ -50,12 +49,23 @@ namespace DriveLogGUI
             emailOutputLabel.Text = _user.Email;
             addressOutputLabel.Text = _user.Address;
             cityOutputLabel.Text = $"{_user.City}, {_user.Zip}";
+            theoreticalStatus.Text = "Bette metode" + "/24";
 
             if (!string.IsNullOrEmpty(_user.PicturePath) || _user.PicturePath != "")
             {
                 ProfilePicture.Load(_user.PicturePath);
             }
         }
+
+        /*
+        private int LessonProgress(string lessonType)
+        {
+            if (lessonType.ToLower() == "theoretical")
+            {
+                
+            }
+        }
+        */
 
         private void editButton_Click(object sender, EventArgs e)
         {
