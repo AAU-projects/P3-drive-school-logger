@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,11 +11,12 @@ using DriveLogCode;
 
 namespace DriveLogGUI
 {
+    internal delegate void SubPageNotification(UserControl origin);
     public partial class OverviewTab : UserControl
     {
         public event EventHandler LogOutButtonClick;
         public event EventHandler DoctorsNotePictureButtonClick;
-
+        internal event SubPageNotification SubPageCreated;
         private DateTime selectedMonth;
         private DateTime formatDateTime;
         public List<CalendarData> listOfDays = new List<CalendarData>();
@@ -28,6 +28,14 @@ namespace DriveLogGUI
             selectedMonth = DateTime.Now;
 
             DrawCalendar();
+
+            foreach (Control control in progressBarPanel.Controls)
+            {
+                control.MouseClick += progressBarPanel_Click;
+
+                foreach (Control childControl in control.Controls)
+                    childControl.MouseClick += progressBarPanel_Click;
+            }
 
         }
 
@@ -154,6 +162,19 @@ namespace DriveLogGUI
             selectedMonth = selectedMonth.AddMonths(-1);
             formatDateTime = WhereDoWeStart();
             UpdateCalender();
+        }
+
+        private void progressBarPanel_Click(object sender, EventArgs e)
+        {
+            SubPageCreated?.Invoke(this);
+            /*
+            this.Hide();
+            DriveLogTab studentFoundDriveLogTab = new DriveLogTab(Session.LoggedInUser, true);
+            studentFoundDriveLogTab.Location = this.Location;
+            studentFoundDriveLogTab.Parent = this;
+            this.Parent.Controls.Add(studentFoundDriveLogTab);
+            studentFoundDriveLogTab.Show();
+            */
         }
     }
 }

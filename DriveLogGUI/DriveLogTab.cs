@@ -19,12 +19,14 @@ namespace DriveLogGUI
         private List<Lesson> lessonslist = new List<Lesson>();
         private Color standartTextColor = Color.FromArgb(127, 132, 144);
         private Color standartTitleColor = Color.FromArgb(67, 72, 84);
+        private bool _search;
 
-        public DriveLogTab(User user)
+        public DriveLogTab(User user, bool search = false)
         {
             InitializeComponent();
             driveLogHeaderLabel.Text = "Drive Log: " + user.Fullname;
             _user = user;
+            _search = search;
             templateslist = DatabaseParser.GetTemplatesList();
             lessonslist = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(user.Id);
 
@@ -38,7 +40,18 @@ namespace DriveLogGUI
                 backPanel.Controls.Add(panel);
             }
 
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            UpdateLayout();
+        }
+
+        private void UpdateLayout()
+        {
+            if (_search)
+            {
+                backButton.Enabled = true;
+                backButton.Visible = true;
+                logoutButton.Enabled = false;
+                logoutButton.Visible = false;
+            }
         }
 
         private void GenerateDriveLogPanel(int idx, LessonTemplate template)
@@ -150,6 +163,12 @@ namespace DriveLogGUI
 
             driveLogPanel.Size = new Size(backPanel.Width - 30,  studentSignLabel.Location.Y + studentSignLabel.Height + 5);
             driveLogPanelList.Add(driveLogPanel);
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            this.Parent.Controls.Find("profileTab", true).Last().Show();
+            this.Dispose();
         }
     }
 }

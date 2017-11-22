@@ -359,6 +359,7 @@
             this.progressBarPanel.Name = "progressBarPanel";
             this.progressBarPanel.Size = new System.Drawing.Size(454, 152);
             this.progressBarPanel.TabIndex = 4;
+            this.progressBarPanel.Click += new System.EventHandler(this.progressBarPanel_Click);
             // 
             // practicalStatus
             // 

@@ -8,6 +8,7 @@ namespace DriveLogGUI
     {
         private User _user;
         private bool _search;
+        internal event SubPageNotification SubPageCreated;
         public ProfileTab(User user, bool search = false)
         {
             InitializeComponent();
@@ -15,6 +16,14 @@ namespace DriveLogGUI
             _search = search;
             UpdateLayout();
             UpdateInfo();
+
+            foreach (Control c in progressBarPanel.Controls)
+            {
+                c.MouseClick += progressBarPanel_Click;
+
+                foreach (Control childControl in c.Controls)
+                    childControl.MouseClick += progressBarPanel_Click;
+            }
         }
 
         private void UpdateLayout()
@@ -60,6 +69,23 @@ namespace DriveLogGUI
         {
             this.Parent.Controls.Find("userSearchTab", false)[0].Show();
             this.Dispose();
+        }
+
+        private void progressBarPanel_Click(object sender, EventArgs e)
+        {
+            if (!_search)
+            {
+                SubPageCreated?.Invoke(this);
+            }
+            else
+            {
+                this.Hide();
+                DriveLogTab studentFoundDriveLogTab = new DriveLogTab(_user, true);
+                studentFoundDriveLogTab.Location = this.Location;
+                studentFoundDriveLogTab.Parent = this;
+                this.Parent.Controls.Add(studentFoundDriveLogTab);
+                studentFoundDriveLogTab.Show();
+            }
         }
     }
 }
