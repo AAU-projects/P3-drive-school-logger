@@ -280,7 +280,7 @@ namespace DriveLogGUI
             if (!Session.LoggedInUser.Sysmin)
             {
                 // if no lessons user gets the first lesson :)
-                Lesson progress = new Lesson("get lessons", "get lessons", 1, 1, DateTime.Now, false, new LessonTemplate());
+                Lesson progress = new Lesson("get lessons", "get lessons", 1, 1, DateTime.Now, false, new LessonTemplate(), "path");
 
                 if (appointment.LessonType == "Practical" && Session.LastPracticalLesson != null) {
                     progress = Session.LastPracticalLesson;
