@@ -5,10 +5,12 @@ using System.Data;
 using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DriveLogCode;
+using DriveLogGUI.Properties;
 
 namespace DriveLogGUI
 {
@@ -16,7 +18,9 @@ namespace DriveLogGUI
     {
         public Image ProfilePicture { get; set; } = null;
         private User _user;
-        
+        private Image _signatureImage;
+
+
         public EditUserInfoForm(User user)
         {
             InitializeComponent();
@@ -45,6 +49,7 @@ namespace DriveLogGUI
         private bool addressOk = true;
         private bool zipOk = true;
         private bool cityOk = true;
+        private bool signatureOk = true;
 
         private IUploadHandler uploader;
 
@@ -60,10 +65,13 @@ namespace DriveLogGUI
             zipBox.Text = _user.Zip;
             cityBox.Text = _user.City;
 
-            if (!string.IsNullOrEmpty(_user.PicturePath) || _user.PicturePath != "")
-            {
+            if (!string.IsNullOrEmpty(_user.PicturePath))
                 pictureBox.Load(_user.PicturePath);
-            }
+            else
+                pictureBox.Image = Resources.avataricon;
+
+            if (!string.IsNullOrEmpty(_user.SignaturePath))
+                signatureBox.Load(_user.SignaturePath);
 
             if (Session.LoggedInUser.Sysmin)
             {
@@ -116,6 +124,7 @@ namespace DriveLogGUI
             instructorCheckBox.Enabled = enabled;
 
             editPictureButton.Enabled = enabled;
+            signatureButton.Enabled = enabled;
             saveChangesButton.Enabled = enabled;
         }
 
@@ -424,22 +433,24 @@ namespace DriveLogGUI
             }
 
             bool updateSuccess;
-            string picturePath;
+            string picturePath = uploader.SaveProfilePicture(ProfilePicture, Settings.Default["PictureUpload"].ToString());
+            string signaturePath = uploader.SavePicture(_signatureImage, Settings.Default["PictureUpload"].ToString());
 
-            if (uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString()) != null)
-                picturePath = uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString());
-            else
+            if (picturePath == null)
                 picturePath = _user.PicturePath;
+
+            if (signaturePath == null)
+                signaturePath = _user.SignaturePath;
 
             if (editPasswordBox.Text != editPasswordBox.defaultText)
             {
                 updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, picturePath, instructorCheckBox.Checked ? "true" : "false");
+                zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, picturePath, signaturePath, instructorCheckBox.Checked ? "true" : "false");
             }
             else
             {
                 updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
-                zipBox.Text, cityBox.Text, usernameBox.Text, _user.Password, picturePath, instructorCheckBox.Checked ? "true" : "false");
+                zipBox.Text, cityBox.Text, usernameBox.Text, _user.Password, picturePath, signaturePath, instructorCheckBox.Checked ? "true" : "false");
             }
 
             if(updateSuccess)
@@ -453,6 +464,18 @@ namespace DriveLogGUI
             {
                 CustomMsgBox.Show("No connection could be made to the database, please try again later", "No Connection", CustomMsgBoxIcon.Error);
             }
+        }
+
+        private void signatureButton_Click(object sender, EventArgs e)
+        {
+            SignatureEdit signatureEditForm = new SignatureEdit();
+
+            signatureEditForm.ShowDialog();
+            _signatureImage = signatureEditForm.SignatureImage;
+            if (_signatureImage != null)
+                signatureOk = true;
+            signatureEditForm.Dispose();
+            signatureBox.Image = _signatureImage;
         }
     }
 }

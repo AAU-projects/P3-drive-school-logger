@@ -139,6 +139,7 @@
             this.Controls.Add(this.topBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SignatureEdit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SignatureEdit";
             this.topBarPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.signatureBox)).EndInit();

@@ -79,7 +79,7 @@ namespace DriveLogGUI
                     lessonquery.Add(lesson);
             }
 
-            if (lessonquery.Count > 0 && lessonquery[lessonquery.Count - 1].Progress == template.Time && lessonquery[lessonquery.Count - 1].Completed)
+            if (lessonquery.Count > 0 && lessonquery.Last().Progress == template.Time && lessonquery.Last().Completed)
                 lessonCompleted = true;
 
             Label titleLabel = new Label();
@@ -122,7 +122,7 @@ namespace DriveLogGUI
             instructorNameLabel.Size = new Size(labelWidth, labelHeight);
             instructorNameLabel.TextAlign = ContentAlignment.TopLeft;
             if (lessonCompleted)
-                instructorNameLabel.Text = lessonquery[lessonquery.Count - 1].InstructorFullname;
+                instructorNameLabel.Text = lessonquery.Last().InstructorFullname;
             else
                 instructorNameLabel.Text = "N/A";
             driveLogPanel.Controls.Add(instructorNameLabel);
@@ -147,7 +147,7 @@ namespace DriveLogGUI
                 dateCompletedLabel.Location = new Point(630, 12);
                 dateCompletedLabel.Size = new Size(195, labelHeight);
                 dateCompletedLabel.ForeColor = standartTextColor;
-                dateCompletedLabel.Text = "Date Completed: " + lessonquery[lessonquery.Count - 1].EndDate;
+                dateCompletedLabel.Text = "Date Completed: " + lessonquery.Last().EndDate;
                 driveLogPanel.Controls.Add(dateCompletedLabel);
                 dateCompletedLabel.BringToFront();
 
@@ -159,6 +159,24 @@ namespace DriveLogGUI
                 checkMarkPictureBox.BackColor = Color.Transparent;
                 driveLogPanel.Controls.Add(checkMarkPictureBox);
                 checkMarkPictureBox.BringToFront();
+
+                PictureBox studentSignaturePictureBox = new PictureBox();
+                studentSignaturePictureBox.Location = new Point(studentSignLabel.Location.X - 10, studentSignLabel.Location.Y - 15);
+                studentSignaturePictureBox.Size = new Size(180, 45);
+                studentSignaturePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                studentSignaturePictureBox.Load(_user.SignaturePath);
+                studentSignaturePictureBox.BackColor = Color.Transparent;
+                driveLogPanel.Controls.Add(studentSignaturePictureBox);
+                studentSignaturePictureBox.BringToFront();
+
+                PictureBox instructorSignaturePictureBox = new PictureBox();
+                instructorSignaturePictureBox.Location = new Point(instructorSignLabel.Location.X - 10, instructorSignLabel.Location.Y - 15);
+                instructorSignaturePictureBox.Size = new Size(180, 45);
+                instructorSignaturePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                instructorSignaturePictureBox.Load(lessonquery.Last().InstructorSignaturePath);
+                instructorSignaturePictureBox.BackColor = Color.Transparent;
+                driveLogPanel.Controls.Add(instructorSignaturePictureBox);
+                instructorSignaturePictureBox.BringToFront();
             }
 
             driveLogPanel.Size = new Size(backPanel.Width - 30,  studentSignLabel.Location.Y + studentSignLabel.Height + 5);

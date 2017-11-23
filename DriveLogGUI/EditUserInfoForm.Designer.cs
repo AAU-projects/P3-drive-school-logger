@@ -54,8 +54,11 @@
             this.editPasswordBox = new TextboxBorderColor();
             this.usernameBox = new TextboxBorderColor();
             this.verifyPasswordBox = new TextboxBorderColor();
+            this.signatureButton = new System.Windows.Forms.Button();
+            this.signatureBox = new System.Windows.Forms.PictureBox();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signatureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // verifyPasswordLabel
@@ -155,7 +158,7 @@
             this.addressLabel.AutoSize = true;
             this.addressLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.addressLabel.Location = new System.Drawing.Point(16, 491);
+            this.addressLabel.Location = new System.Drawing.Point(16, 514);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(103, 33);
             this.addressLabel.TabIndex = 62;
@@ -206,7 +209,7 @@
             this.saveChangesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveChangesButton.Font = new System.Drawing.Font("Calibri Light", 16.25F);
             this.saveChangesButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.saveChangesButton.Location = new System.Drawing.Point(195, 625);
+            this.saveChangesButton.Location = new System.Drawing.Point(195, 648);
             this.saveChangesButton.Name = "saveChangesButton";
             this.saveChangesButton.Size = new System.Drawing.Size(138, 36);
             this.saveChangesButton.TabIndex = 12;
@@ -236,7 +239,7 @@
             this.zipBox.Enabled = false;
             this.zipBox.Font = new System.Drawing.Font("Calibri Light", 14F);
             this.zipBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.zipBox.Location = new System.Drawing.Point(22, 572);
+            this.zipBox.Location = new System.Drawing.Point(22, 595);
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(237, 23);
             this.zipBox.TabIndex = 9;
@@ -253,7 +256,7 @@
             this.cityBox.Enabled = false;
             this.cityBox.Font = new System.Drawing.Font("Calibri Light", 14F);
             this.cityBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.cityBox.Location = new System.Drawing.Point(270, 572);
+            this.cityBox.Location = new System.Drawing.Point(270, 595);
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(237, 23);
             this.cityBox.TabIndex = 10;
@@ -270,7 +273,7 @@
             this.addressBox.Enabled = false;
             this.addressBox.Font = new System.Drawing.Font("Calibri Light", 14F);
             this.addressBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.addressBox.Location = new System.Drawing.Point(22, 532);
+            this.addressBox.Location = new System.Drawing.Point(22, 555);
             this.addressBox.Name = "addressBox";
             this.addressBox.Size = new System.Drawing.Size(237, 23);
             this.addressBox.TabIndex = 8;
@@ -417,12 +420,39 @@
             this.verifyPasswordBox.TextChanged += new System.EventHandler(this.verifyPasswordBox_TextChanged);
             this.verifyPasswordBox.Leave += new System.EventHandler(this.verifyPasswordBox_Leave);
             // 
+            // signatureButton
+            // 
+            this.signatureButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.signatureButton.Enabled = false;
+            this.signatureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.signatureButton.Font = new System.Drawing.Font("Calibri Light", 10F);
+            this.signatureButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.signatureButton.Location = new System.Drawing.Point(336, 544);
+            this.signatureButton.Name = "signatureButton";
+            this.signatureButton.Size = new System.Drawing.Size(106, 30);
+            this.signatureButton.TabIndex = 67;
+            this.signatureButton.Text = "Edit Signature";
+            this.signatureButton.UseVisualStyleBackColor = false;
+            this.signatureButton.Click += new System.EventHandler(this.signatureButton_Click);
+            // 
+            // signatureBox
+            // 
+            this.signatureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.signatureBox.Location = new System.Drawing.Point(298, 493);
+            this.signatureBox.Name = "signatureBox";
+            this.signatureBox.Size = new System.Drawing.Size(180, 45);
+            this.signatureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.signatureBox.TabIndex = 66;
+            this.signatureBox.TabStop = false;
+            // 
             // EditUserInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.ClientSize = new System.Drawing.Size(529, 673);
+            this.ClientSize = new System.Drawing.Size(529, 695);
+            this.Controls.Add(this.signatureButton);
+            this.Controls.Add(this.signatureBox);
             this.Controls.Add(this.instructorCheckBox);
             this.Controls.Add(this.saveChangesButton);
             this.Controls.Add(this.pictureBox);
@@ -452,6 +482,7 @@
             this.Text = "EditUserInfoForm";
             this.topPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.signatureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -484,5 +515,7 @@
         private System.Windows.Forms.Button editPictureButton;
         private System.Windows.Forms.Button saveChangesButton;
         private System.Windows.Forms.CheckBox instructorCheckBox;
+        private System.Windows.Forms.Button signatureButton;
+        private System.Windows.Forms.PictureBox signatureBox;
     }
 }

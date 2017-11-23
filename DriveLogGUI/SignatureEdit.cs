@@ -7,19 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
     public partial class SignatureEdit : Form
     {
+        public Bitmap SignatureImage { get; private set; } = new Bitmap(540, 135);
         private Point _lastClick;
-        private Bitmap _signatureImage = new Bitmap(540, 135);
         private bool _draw = false;
         private bool edited = false;
         public SignatureEdit()
         {
             InitializeComponent();
-            signatureBox.Image = _signatureImage;
+            signatureBox.Image = SignatureImage;
         }
 
         private void topBarPanel_MouseDown(object sender, MouseEventArgs e)
@@ -44,11 +45,11 @@ namespace DriveLogGUI
         private void signatureBox_MouseDown(object sender, MouseEventArgs e)
         {
             _draw = true;
-            Graphics graphics = Graphics.FromImage(_signatureImage);
-            Pen pen = new Pen(Color.Black, 4);
+            Graphics graphics = Graphics.FromImage(SignatureImage);
+            Pen pen = new Pen(Color.Black, 1);
             graphics.DrawRectangle(pen, e.X, e.Y, 2f, 2f);
             graphics.Save();
-            signatureBox.Image = _signatureImage;
+            signatureBox.Image = SignatureImage;
         }
 
         private void signatureBox_MouseUp(object sender, MouseEventArgs e)
@@ -61,11 +62,11 @@ namespace DriveLogGUI
             if (_draw)
             {
                 edited = true;
-                Graphics graphics = Graphics.FromImage(_signatureImage);
+                Graphics graphics = Graphics.FromImage(SignatureImage);
                 SolidBrush brush = new SolidBrush(Color.Black);
                 graphics.FillRectangle(brush, e.X, e.Y, 2, 2);
                 graphics.Save();
-                signatureBox.Image = _signatureImage;
+                signatureBox.Image = SignatureImage;
             }
         }
 
@@ -73,7 +74,7 @@ namespace DriveLogGUI
         {
             if (edited)
             {
-                
+                this.Hide();
             }
             else
             {

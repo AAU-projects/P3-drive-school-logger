@@ -32,6 +32,7 @@
             this.logoutButton = new System.Windows.Forms.Button();
             this.welcomeUserLabel = new System.Windows.Forms.Label();
             this.todaysNotePanel = new System.Windows.Forms.Panel();
+            this.overviewUpdateTodaysNote = new System.Windows.Forms.Button();
             this.todaysNoteUnderline = new System.Windows.Forms.Panel();
             this.todaysNoteLabel = new System.Windows.Forms.Label();
             this.todaysNoteTextbox = new System.Windows.Forms.TextBox();
@@ -151,6 +152,7 @@
             // todaysNotePanel
             // 
             this.todaysNotePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.todaysNotePanel.Controls.Add(this.overviewUpdateTodaysNote);
             this.todaysNotePanel.Controls.Add(this.todaysNoteUnderline);
             this.todaysNotePanel.Controls.Add(this.todaysNoteLabel);
             this.todaysNotePanel.Controls.Add(this.todaysNoteTextbox);
@@ -158,6 +160,20 @@
             this.todaysNotePanel.Name = "todaysNotePanel";
             this.todaysNotePanel.Size = new System.Drawing.Size(454, 180);
             this.todaysNotePanel.TabIndex = 1;
+            // 
+            // overviewUpdateTodaysNote
+            // 
+            this.overviewUpdateTodaysNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.overviewUpdateTodaysNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.overviewUpdateTodaysNote.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overviewUpdateTodaysNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.overviewUpdateTodaysNote.Location = new System.Drawing.Point(383, 147);
+            this.overviewUpdateTodaysNote.Name = "overviewUpdateTodaysNote";
+            this.overviewUpdateTodaysNote.Size = new System.Drawing.Size(59, 22);
+            this.overviewUpdateTodaysNote.TabIndex = 13;
+            this.overviewUpdateTodaysNote.Text = "Update";
+            this.overviewUpdateTodaysNote.UseVisualStyleBackColor = false;
+            this.overviewUpdateTodaysNote.Click += new System.EventHandler(this.overviewUpdateTodaysNote_Click);
             // 
             // todaysNoteUnderline
             // 
@@ -181,13 +197,13 @@
             // 
             this.todaysNoteTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.todaysNoteTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.todaysNoteTextbox.Enabled = false;
             this.todaysNoteTextbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
             this.todaysNoteTextbox.Location = new System.Drawing.Point(22, 29);
             this.todaysNoteTextbox.Multiline = true;
             this.todaysNoteTextbox.Name = "todaysNoteTextbox";
             this.todaysNoteTextbox.Size = new System.Drawing.Size(420, 136);
             this.todaysNoteTextbox.TabIndex = 0;
-            this.todaysNoteTextbox.Text = "There will be free cake today";
             // 
             // calendarPanel
             // 
@@ -831,5 +847,6 @@
         private System.Windows.Forms.Panel calendarLine;
         private System.Windows.Forms.Label calendarRightArrow;
         private System.Windows.Forms.Label calendarLeftArrow;
+        private System.Windows.Forms.Button overviewUpdateTodaysNote;
     }
 }

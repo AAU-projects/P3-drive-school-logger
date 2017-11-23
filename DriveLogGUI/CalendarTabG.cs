@@ -278,7 +278,7 @@ namespace DriveLogGUI
         private void AddAppointment(AppointmentStructure appointment)
         {
             Appointment newAppointment;
-            Lesson progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate());
+            Lesson progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate(), "path");
 
             if (!Session.LoggedInUser.Sysmin)
             {
@@ -286,13 +286,13 @@ namespace DriveLogGUI
                 if (appointment.LessonType == "Practical" && Session.LastPracticalLesson != null) {
                     progress = Session.LastPracticalLesson;
                 } else if (appointment.LessonType == "Practical") {
-                    progress = new Lesson("Your first driving lesson :)", "idk", 4, 1, DateTime.Now, false, new LessonTemplate());
+                    progress = new Lesson("Your first driving lesson :)", "idk", 4, 1, DateTime.Now, false, new LessonTemplate(), "path");
                 }
 
                 if (appointment.LessonType == "Theoretical" && Session.LastTheoraticalLesson != null) {
                     progress = Session.LastTheoraticalLesson;
                 } else if (appointment.LessonType == "Theoretical") {
-                    progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate());
+                    progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate(), "path");
                 }
 
 

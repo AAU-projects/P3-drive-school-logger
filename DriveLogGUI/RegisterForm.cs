@@ -22,6 +22,8 @@ namespace DriveLogGUI
         private bool _isAdressOk;
         private bool _isCityOk;
         private bool _isZipOk;
+        private bool _isSignatureOk;
+        private Image _signatureImage = null;
 
         private readonly Color _correctColor = Color.FromArgb(109, 144, 150);
         private readonly Color _wrongColor = Color.FromArgb(229, 187, 191);
@@ -243,13 +245,14 @@ namespace DriveLogGUI
         private void registerCreateNewUserButton_Click(object sender, EventArgs e)
         {
             if (_isFirstnameOk && _isLastnameOk && _isPhoneOk && _isEmailOk && _isCprOk && _isAdressOk &&
-                _isCityOk && _isZipOk && _isUsernameOk && _isPasswordOk && _isVerifyPasswordOk)
+                _isCityOk && _isZipOk && _isUsernameOk && _isPasswordOk && _isVerifyPasswordOk && _isSignatureOk)
             {
                 
                 bool UserCreated = MySql.AddUser(registerFirstnameBox.Text, registerLastnameBox.Text,
                     registerPhoneBox.Text, registerEmailBox.Text,
                     registerCprBox.Text, registerAdressBox.Text, registerZipBox.Text, registerCityBox.Text,
-                    registerUsernameBox.Text, registerPasswordBox.Text, _uploader.SaveProfilePicture(ProfileImage, Properties.Settings.Default["PictureUpload"].ToString()));
+                    registerUsernameBox.Text, registerPasswordBox.Text, _uploader.SaveProfilePicture(ProfileImage, Properties.Settings.Default["PictureUpload"].ToString()), 
+                    _uploader.SavePicture(_signatureImage, Properties.Settings.Default["PictureUpload"].ToString()));
 
                 if (UserCreated)
                 {
@@ -381,6 +384,18 @@ namespace DriveLogGUI
                 this.Left += e.X - _lastClick.X;
                 this.Top += e.Y - _lastClick.Y;
             }
+        }
+
+        private void signatureButton_Click(object sender, EventArgs e)
+        {
+            SignatureEdit signatureEditForm = new SignatureEdit();
+
+            signatureEditForm.ShowDialog();
+            _signatureImage = signatureEditForm.SignatureImage;
+            if (_signatureImage != null)
+                _isSignatureOk = true;
+            signatureEditForm.Dispose();
+            signatureBox.Image = _signatureImage;
         }
     }
 }
