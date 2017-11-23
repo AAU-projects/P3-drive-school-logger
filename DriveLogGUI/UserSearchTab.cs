@@ -126,7 +126,7 @@ namespace DriveLogGUI
             Label progressLabel = new Label();
             progressLabel.Location = new Point(240, 36);
             progressLabel.Size = new Size(labelWidth, labelHeight);
-            progressLabel.Text = "Theo/Prac: " + "#/24 - #/14";
+            progressLabel.Text = $"Theo/Prac: {user.TheoreticalProgress}/24 - {user.PracticalProgress}/14";
             tempPanel.Controls.Add(progressLabel);
 
             Label roleLabel = new Label();
