@@ -55,9 +55,9 @@
             this.theoreticalStatus = new System.Windows.Forms.Label();
             this.practicalLabel = new System.Windows.Forms.Label();
             this.theoreticalLabel = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.practicalBar = new System.Windows.Forms.Panel();
             this.practicalProgressFill = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.theoreticalBar = new System.Windows.Forms.Panel();
             this.theoreticalProgressFill = new System.Windows.Forms.Panel();
             this.progressLabel = new System.Windows.Forms.Label();
             this.progressUnderline = new System.Windows.Forms.Panel();
@@ -87,8 +87,8 @@
             this.InfoPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
             this.progressBarPanel.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.practicalBar.SuspendLayout();
+            this.theoreticalBar.SuspendLayout();
             this.miscPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -351,8 +351,8 @@
             this.progressBarPanel.Controls.Add(this.theoreticalStatus);
             this.progressBarPanel.Controls.Add(this.practicalLabel);
             this.progressBarPanel.Controls.Add(this.theoreticalLabel);
-            this.progressBarPanel.Controls.Add(this.panel3);
-            this.progressBarPanel.Controls.Add(this.panel2);
+            this.progressBarPanel.Controls.Add(this.practicalBar);
+            this.progressBarPanel.Controls.Add(this.theoreticalBar);
             this.progressBarPanel.Controls.Add(this.progressLabel);
             this.progressBarPanel.Controls.Add(this.progressUnderline);
             this.progressBarPanel.Location = new System.Drawing.Point(12, 250);
@@ -399,14 +399,14 @@
             this.theoreticalLabel.TabIndex = 9;
             this.theoreticalLabel.Text = "Theoretical";
             // 
-            // panel3
+            // practicalBar
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.panel3.Controls.Add(this.practicalProgressFill);
-            this.panel3.Location = new System.Drawing.Point(22, 104);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(420, 28);
-            this.panel3.TabIndex = 8;
+            this.practicalBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.practicalBar.Controls.Add(this.practicalProgressFill);
+            this.practicalBar.Location = new System.Drawing.Point(22, 104);
+            this.practicalBar.Name = "practicalBar";
+            this.practicalBar.Size = new System.Drawing.Size(420, 28);
+            this.practicalBar.TabIndex = 8;
             // 
             // practicalProgressFill
             // 
@@ -417,14 +417,14 @@
             this.practicalProgressFill.Size = new System.Drawing.Size(190, 28);
             this.practicalProgressFill.TabIndex = 0;
             // 
-            // panel2
+            // theoreticalBar
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.panel2.Controls.Add(this.theoreticalProgressFill);
-            this.panel2.Location = new System.Drawing.Point(22, 49);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(420, 28);
-            this.panel2.TabIndex = 7;
+            this.theoreticalBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.theoreticalBar.Controls.Add(this.theoreticalProgressFill);
+            this.theoreticalBar.Location = new System.Drawing.Point(22, 49);
+            this.theoreticalBar.Name = "theoreticalBar";
+            this.theoreticalBar.Size = new System.Drawing.Size(420, 28);
+            this.theoreticalBar.TabIndex = 7;
             // 
             // theoreticalProgressFill
             // 
@@ -705,8 +705,8 @@
             this.headerPanel.ResumeLayout(false);
             this.progressBarPanel.ResumeLayout(false);
             this.progressBarPanel.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.practicalBar.ResumeLayout(false);
+            this.theoreticalBar.ResumeLayout(false);
             this.miscPanel.ResumeLayout(false);
             this.miscPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -741,9 +741,9 @@
         private System.Windows.Forms.Label theoreticalStatus;
         private System.Windows.Forms.Label practicalLabel;
         private System.Windows.Forms.Label theoreticalLabel;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel practicalBar;
         private System.Windows.Forms.Panel practicalProgressFill;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel theoreticalBar;
         private System.Windows.Forms.Panel theoreticalProgressFill;
         private System.Windows.Forms.Label progressLabel;
         private System.Windows.Forms.Panel progressUnderline;
