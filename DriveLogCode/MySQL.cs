@@ -19,6 +19,7 @@ namespace DriveLogCode
         private const string LessonTemplateTable = "lessonTemplates";
         private const string AppointmentTable = "appointments";
         private const string LessonTable = "lessons";
+        private const string TodaysNoteTable = "todaysNoteTable";
 
         public static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string LessonTable = LessonTable, string AppointmentTable = AppointmentTable, string UserTable = UserTable, string LessonTemplateTable = LessonTemplateTable)
         {
@@ -429,6 +430,28 @@ namespace DriveLogCode
             var cmd = new MySqlCommand(query);
 
             return SendQuery(cmd);
+        }
+
+        public static bool AddTodaysNote(User user, string todayNoteText, string table = TodaysNoteTable)
+        {
+            var cmd = new MySqlCommand($"INSERT INTO {table} (" +
+                                       $"userID, description)" +
+                                       $"VALUES (" +
+                                       $"'{user.Id}', '{todayNoteText}')");
+
+            if (ExistTable(table)) return SendNonQuery(cmd);
+            return CreateTodaysNoteTable(table) && SendNonQuery(cmd);
+        }
+
+        private static bool CreateTodaysNoteTable(string tableName)
+        {
+            var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
+                                       $"`id`  int NOT NULL AUTO_INCREMENT ," +
+                                       $"`userID`  int NOT NULL ," +
+                                       $"`description`  varchar(2000) NOT NULL ," +
+                                       $"ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
+
+            return SendNonQuery(cmd);
         }
 
         private static bool SendNonQuery(MySqlCommand cmd)

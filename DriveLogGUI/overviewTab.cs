@@ -243,5 +243,18 @@ namespace DriveLogGUI
         {
             SubPageCreated?.Invoke(this);
         }
+
+        private void overviewUpdateTodaysNote_Click(object sender, EventArgs e)
+        {
+            if (todaysNoteTextbox.Enabled)
+            {
+                todaysNoteTextbox.Enabled = false;
+
+            }
+            else
+            {
+                todaysNoteTextbox.Enabled = true;
+            }
+        }
     }
 }

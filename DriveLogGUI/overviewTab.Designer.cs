@@ -85,6 +85,7 @@
             this.maneuverTrackPictureButton = new System.Windows.Forms.PictureBox();
             this.firstAidPictureButton = new System.Windows.Forms.PictureBox();
             this.doctorsNotePictureButton = new System.Windows.Forms.PictureBox();
+            this.overviewUpdateTodaysNote = new System.Windows.Forms.Button();
             this.headerPanel.SuspendLayout();
             this.todaysNotePanel.SuspendLayout();
             this.calendarPanel.SuspendLayout();
@@ -151,6 +152,7 @@
             // todaysNotePanel
             // 
             this.todaysNotePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.todaysNotePanel.Controls.Add(this.overviewUpdateTodaysNote);
             this.todaysNotePanel.Controls.Add(this.todaysNoteUnderline);
             this.todaysNotePanel.Controls.Add(this.todaysNoteLabel);
             this.todaysNotePanel.Controls.Add(this.todaysNoteTextbox);
@@ -181,6 +183,7 @@
             // 
             this.todaysNoteTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.todaysNoteTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.todaysNoteTextbox.Enabled = false;
             this.todaysNoteTextbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
             this.todaysNoteTextbox.Location = new System.Drawing.Point(22, 29);
             this.todaysNoteTextbox.Multiline = true;
@@ -727,6 +730,20 @@
             this.doctorsNotePictureButton.MouseEnter += new System.EventHandler(this.doctorsNotePictureButton_Hover);
             this.doctorsNotePictureButton.MouseLeave += new System.EventHandler(this.doctorsNotePictureButton_Leave);
             // 
+            // overviewUpdateTodaysNote
+            // 
+            this.overviewUpdateTodaysNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.overviewUpdateTodaysNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.overviewUpdateTodaysNote.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overviewUpdateTodaysNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.overviewUpdateTodaysNote.Location = new System.Drawing.Point(383, 147);
+            this.overviewUpdateTodaysNote.Name = "overviewUpdateTodaysNote";
+            this.overviewUpdateTodaysNote.Size = new System.Drawing.Size(59, 22);
+            this.overviewUpdateTodaysNote.TabIndex = 13;
+            this.overviewUpdateTodaysNote.Text = "Update";
+            this.overviewUpdateTodaysNote.UseVisualStyleBackColor = false;
+            this.overviewUpdateTodaysNote.Click += new System.EventHandler(this.overviewUpdateTodaysNote_Click);
+            // 
             // OverviewTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -831,5 +848,6 @@
         private System.Windows.Forms.Panel calendarLine;
         private System.Windows.Forms.Label calendarRightArrow;
         private System.Windows.Forms.Label calendarLeftArrow;
+        private System.Windows.Forms.Button overviewUpdateTodaysNote;
     }
 }
