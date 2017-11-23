@@ -33,14 +33,11 @@ namespace DriveLogGUI
             this.mainWindow = mainWindow;
             this.overviewTab = overviewTab;
             SubscribeToAllClickPanels(overviewTab.listOfDays);
-
+            GetAppointsments();
+            SubscribeToAllClickAppointments(appointments);
 
             if (Session.LoggedInUser.Sysmin)
-            {
-                GetAppointsments();
-            }
-
-            SubscribeToAllClickAppointments(appointments);
+                bookingInformationButton.Hide();
         }
 
         private void GetAppointsments()
@@ -146,7 +143,7 @@ namespace DriveLogGUI
         {
             GenerateWeeklyCalendar();
             DrawLineBelowDates();
-            if (true)//remember to add sysadmin here
+            if (Session.LoggedInUser.Sysmin)
             {
                 DrawAddAppointmentButtons();
             }
@@ -173,7 +170,7 @@ namespace DriveLogGUI
 
         private void OpenAppointment(DateClickEventArgs e)
         {
-            AddAppointmentWindow addAppointmentWindow = new AddAppointmentWindow(e.Date, MousePosition);
+            AddAppointmentWindow addAppointmentWindow = new AddAppointmentWindow(e.Date, MousePosition, appointments);
             addAppointmentWindow.ShowDialog();
         }
 

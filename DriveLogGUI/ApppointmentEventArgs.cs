@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace DriveLogGUI
 {
-    class ApppointmentEventArgs : EventArgs
+    public class ApppointmentEventArgs : EventArgs
     {
         public Appointment Appointment;
         private DateTime EndDate => GetEndDate();

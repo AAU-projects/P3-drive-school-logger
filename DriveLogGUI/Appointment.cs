@@ -8,7 +8,7 @@ using DriveLogCode;
 
 namespace DriveLogGUI
 {
-    class Appointment : AppointmentStructure
+    public class Appointment : AppointmentStructure
     {
         public Label LabelAppointment;
 
