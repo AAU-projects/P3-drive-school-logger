@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DriveLogCode;
+using DriveLogCode.DataAccess;
 using NUnit.Framework;
 
 namespace DriveLogTests

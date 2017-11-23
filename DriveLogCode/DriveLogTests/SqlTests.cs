@@ -2,6 +2,7 @@
 using System.Data;
 using NUnit.Framework;
 using DriveLogCode;
+using DriveLogCode.DataAccess;
 
 namespace DriveLogTests
 {

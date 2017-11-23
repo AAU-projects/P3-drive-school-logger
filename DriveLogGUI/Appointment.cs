@@ -6,6 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DriveLogCode;
+using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
+using DriveLogCode.Objects;
+using DriveLogGUI.CustomEventArgs;
 
 namespace DriveLogGUI
 {
@@ -13,6 +17,10 @@ namespace DriveLogGUI
     {
         public Label LabelAppointment;
         public DateTime ToTime => GetToTime();
+        public DateTime EndDate => GetEndDate();
+        public string Time => GetTime();
+        public string Date => GetDate();
+
         public LessonTemplate lessonTemplate = new LessonTemplate();
 
         public Appointment(AppointmentStructure appointment, Lesson lesson)
@@ -64,27 +72,33 @@ namespace DriveLogGUI
         private Color GetColorForLabel(string appointmentLessonType)
         {
             if (appointmentLessonType.ToLower() == "theoretical") {
-                return ColorScheme.ColorBlue;
+                return ColorScheme.CalendarBlue;
             }
             if (appointmentLessonType.ToLower() == "practical") {
-                return ColorScheme.ColorGreen;
+                return ColorScheme.CalendarGreen;
             }
             if (appointmentLessonType.ToLower() == "manoeuvre") {
-                return ColorScheme.ColorYellow;
+                return ColorScheme.CalendarYellow;
             }
             if (appointmentLessonType.ToLower() == "slippery") {
-                return ColorScheme.ColorYellow;
+                return ColorScheme.CalendarYellow;
             }
             if (appointmentLessonType.ToLower() == "other") {
-                return ColorScheme.ColorYellow;
+                return ColorScheme.CalendarYellow;
             }
 
-            return ColorScheme.ColorRed;
+            return ColorScheme.CalendarRed;
 
         }
         public void UpdateLabel()
         {
             LabelAppointment.Text = lessonTemplate.Title;
+        }
+
+        public void UpdateTemplate(LessonTemplate lessonTemplate)
+        {
+            this.lessonTemplate = lessonTemplate;
+            UpdateLabel();
         }
 
         private LessonTemplate GetLessonTemplate(Lesson lesson)
@@ -108,6 +122,30 @@ namespace DriveLogGUI
         private void label_Clicked(ApppointmentEventArgs e)
         {
             ClickOnAppointmentTriggered?.Invoke(this, e);
+        }
+        private string GetTime()
+        {
+            return $"Time: {AddZeroToDates(StartTime.Hour)}:{AddZeroToDates(StartTime.Minute)} - {AddZeroToDates(EndDate.Hour)}:{AddZeroToDates(EndDate.Minute)}";
+        }
+
+        private string GetDate()
+        {
+            return $"Date: {EndDate.ToShortDateString().Replace('/', '-')}";
+        }
+        private string AddZeroToDates(int checkString)
+        {
+            string fixedString;
+
+            if (checkString < 10) {
+                fixedString = $"0{checkString}";
+                return fixedString;
+            }
+            return checkString.ToString();
+        }
+
+        private DateTime GetEndDate()
+        {
+            return StartTime.AddMinutes(45 * AvailableTime);
         }
     }
 }

@@ -71,159 +71,146 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddApointmentEventArgs.cs" />
-    <Compile Include="AddAppointmentWindow.cs">
+    <Compile Include="Windows\AddAppointmentWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddAppointmentWindow.Designer.cs">
+    <Compile Include="Windows\AddAppointmentWindow.Designer.cs">
       <DependentUpon>AddAppointmentWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Appointment.cs" />
-    <Compile Include="ApppointmentEventArgs.cs" />
+    <Compile Include="CustomEventArgs\ApppointmentEventArgs.cs" />
     <Compile Include="CalendarData.cs" />
-    <Compile Include="CalendarTabG.cs">
+    <Compile Include="MenuTabs\CalendarTabG.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CalendarTabG.Designer.cs">
+    <Compile Include="MenuTabs\CalendarTabG.Designer.cs">
       <DependentUpon>CalendarTabG.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomMsgBox.cs">
+    <Compile Include="Windows\CustomMsgBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomMsgBox.Designer.cs">
+    <Compile Include="Windows\CustomMsgBox.Designer.cs">
       <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomMsgBoxIcon.cs" />
-    <Compile Include="DateClickEventArgs.cs" />
-    <Compile Include="DoctorsNote.cs">
+    <Compile Include="CustomEventArgs\DateClickEventArgs.cs" />
+    <Compile Include="MenuTabs\DocumentViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DoctorsNote.Designer.cs">
-      <DependentUpon>DoctorsNote.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DocumentViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DocumentViewer.Designer.cs">
+    <Compile Include="MenuTabs\DocumentViewer.Designer.cs">
       <DependentUpon>DocumentViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="DriveLogStarter.cs" />
-    <Compile Include="DriveLogTab.cs">
+    <Compile Include="MenuTabs\DriveLogTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DriveLogTab.Designer.cs">
+    <Compile Include="MenuTabs\DriveLogTab.Designer.cs">
       <DependentUpon>DriveLogTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditUserInfoForm.cs">
+    <Compile Include="Windows\EditUserInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditUserInfoForm.Designer.cs">
+    <Compile Include="Windows\EditUserInfoForm.Designer.cs">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Windows\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Windows\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindowTab.cs">
+    <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindowTab.Designer.cs">
-      <DependentUpon>MainWindowTab.cs</DependentUpon>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverviewTab.cs">
+    <Compile Include="MenuTabs\OverviewTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OverviewTab.Designer.cs">
+    <Compile Include="MenuTabs\OverviewTab.Designer.cs">
       <DependentUpon>OverviewTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProfileTab.cs">
+    <Compile Include="MenuTabs\ProfileTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProfileTab.Designer.cs">
+    <Compile Include="MenuTabs\ProfileTab.Designer.cs">
       <DependentUpon>ProfileTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="ProgressBarColor.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RegisterForm.cs">
+    <Compile Include="Windows\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegisterForm.Designer.cs">
+    <Compile Include="Windows\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsTab.cs">
+    <Compile Include="MenuTabs\SettingsTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SettingsTab.Designer.cs">
+    <Compile Include="MenuTabs\SettingsTab.Designer.cs">
       <DependentUpon>SettingsTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="SignatureEdit.cs">
+    <Compile Include="Windows\SignatureEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SignatureEdit.Designer.cs">
+    <Compile Include="Windows\SignatureEdit.Designer.cs">
       <DependentUpon>SignatureEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="TemplateCreator.cs">
+    <Compile Include="MenuTabs\TemplateCreator.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TemplateCreator.Designer.cs">
+    <Compile Include="MenuTabs\TemplateCreator.Designer.cs">
       <DependentUpon>TemplateCreator.cs</DependentUpon>
     </Compile>
-    <Compile Include="TextboxBorderColor.cs">
+    <Compile Include="CustomControls\TextboxBorderColor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UploadProfilePicForm.cs">
+    <Compile Include="Windows\UploadProfilePicForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UploadProfilePicForm.Designer.cs">
+    <Compile Include="Windows\UploadProfilePicForm.Designer.cs">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserSearchTab.cs">
+    <Compile Include="MenuTabs\UserSearchTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserSearchTab.Designer.cs">
+    <Compile Include="MenuTabs\UserSearchTab.Designer.cs">
       <DependentUpon>UserSearchTab.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddAppointmentWindow.resx">
+    <EmbeddedResource Include="Windows\AddAppointmentWindow.resx">
       <DependentUpon>AddAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CalendarTabG.resx">
+    <EmbeddedResource Include="MenuTabs\CalendarTabG.resx">
       <DependentUpon>CalendarTabG.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomMsgBox.resx">
+    <EmbeddedResource Include="Windows\CustomMsgBox.resx">
       <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DoctorsNote.resx">
-      <DependentUpon>DoctorsNote.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DocumentViewer.resx">
+    <EmbeddedResource Include="MenuTabs\DocumentViewer.resx">
       <DependentUpon>DocumentViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DriveLogTab.resx">
+    <EmbeddedResource Include="MenuTabs\DriveLogTab.resx">
       <DependentUpon>DriveLogTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditUserInfoForm.resx">
+    <EmbeddedResource Include="Windows\EditUserInfoForm.resx">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Windows\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindowTab.resx">
-      <DependentUpon>MainWindowTab.cs</DependentUpon>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverviewTab.resx">
+    <EmbeddedResource Include="MenuTabs\OverviewTab.resx">
       <DependentUpon>OverviewTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProfileTab.resx">
+    <EmbeddedResource Include="MenuTabs\ProfileTab.resx">
       <DependentUpon>ProfileTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -232,22 +219,22 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegisterForm.resx">
+    <EmbeddedResource Include="Windows\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsTab.resx">
+    <EmbeddedResource Include="MenuTabs\SettingsTab.resx">
       <DependentUpon>SettingsTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SignatureEdit.resx">
+    <EmbeddedResource Include="Windows\SignatureEdit.resx">
       <DependentUpon>SignatureEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TemplateCreator.resx">
+    <EmbeddedResource Include="MenuTabs\TemplateCreator.resx">
       <DependentUpon>TemplateCreator.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UploadProfilePicForm.resx">
+    <EmbeddedResource Include="Windows\UploadProfilePicForm.resx">
       <DependentUpon>UploadProfilePicForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserSearchTab.resx">
+    <EmbeddedResource Include="MenuTabs\UserSearchTab.resx">
       <DependentUpon>UserSearchTab.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -351,5 +338,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
