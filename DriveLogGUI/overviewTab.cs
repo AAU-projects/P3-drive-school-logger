@@ -86,7 +86,7 @@ namespace DriveLogGUI
 
             for (var i = 0; i < 42; i++) // 42 is number of days in our calendar, therefor static.
             {
-                CalendarData calendarDay = new CalendarData(new Panel(), new Label(), formatDateTime);
+                CalendarData calendarDay = new CalendarData(new Panel(), new Label(), formatDateTime, new Panel());
                 calendarDay.LabelForDate.MouseEnter += (s, e) =>
                     LabelForDateMouseEnter(calendarDay.LabelForDate, calendarDay.PanelForCalendarDay, calendarDay.Date);
 
@@ -167,7 +167,12 @@ namespace DriveLogGUI
             data.LabelForDate.AutoSize = false;
             data.LabelForDate.Dock = DockStyle.Fill;
             data.LabelForDate.TextAlign = ContentAlignment.MiddleCenter;
+            data.DayNotification.Height = 2;
+            data.DayNotification.Width = 2;
+            data.DayNotification.Location = new Point(data.PanelForCalendarDay.Width / 2 - data.DayNotification.Width / 2, data.PanelForCalendarDay.Height / 2 + 12);
 
+            CheckIfUserHasAppointment(data.DayNotification, currentDateTime);
+            
             if (currentDateTime.Month != selectedMonth.Month)
             {
                 data.LabelForDate.ForeColor = Color.FromArgb(203, 203, 203);
@@ -183,6 +188,22 @@ namespace DriveLogGUI
             data.Date = currentDateTime;
 
             currentDateTime = currentDateTime.AddDays(1);
+        }
+
+        private void CheckIfUserHasAppointment(Panel dayNotification, DateTime currentDateTime)
+        {
+            foreach (Lesson lesson in Session.LessonsUser) //TODO Lookup after session class appointment is done
+            {
+                if (lesson.EndDate.Date == currentDateTime.Date)
+                {
+                    dayNotification.BackColor = Color.FromArgb(127, 132, 144);
+                }
+                else
+                {
+                    dayNotification.BackColor = Color.FromArgb(251, 251, 251);
+                }
+            }
+
         }
 
         private void calendarRightArrow_Click(object sender, EventArgs e)
