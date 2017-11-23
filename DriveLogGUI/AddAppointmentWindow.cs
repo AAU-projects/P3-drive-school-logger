@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
 
 namespace DriveLogGUI
 {
@@ -15,19 +17,23 @@ namespace DriveLogGUI
         private Point _lastClick;
         private Point openWindowPosition;
         private DateTime date;
+        private List<Appointment> _appointments;
 
-        public AddAppointmentWindow(DateTime eDate, Point mousePosition)
+        public AddAppointmentWindow(DateTime eDate, Point mousePosition, List<Appointment> appointments)
         {
             InitializeComponent();
+            _appointments = appointments;
             openWindowPosition = mousePosition;
             date = eDate;
             UpdateTitle();
             SetWindowPosition();
-            FillComboBox(StartTimecomboBox);
-            FillComboBox(EndTimecomboBox);
+            FillTimeComboBox(StartTimecomboBox);
+            FillComboBox(lessonsComboBox);
+            timeDifferenceLabel.Text = "";
+            lessonsComboBox.SelectedItem = 1;
         }
 
-        private void FillComboBox(ComboBox comboBox)
+        private void FillTimeComboBox(ComboBox comboBox)
         {
             DateTime time = new DateTime();
             time = time.AddHours(6);
@@ -36,6 +42,14 @@ namespace DriveLogGUI
             {
                 comboBox.Items.Add(time.ToString("HH:mm"));
                 time = time.AddMinutes(15);
+            }
+        }
+
+        private void FillComboBox(ComboBox comboBox)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                comboBox.Items.Add(i+1);
             }
         }
 
@@ -76,7 +90,57 @@ namespace DriveLogGUI
 
         private void StartTimecomboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            EndTimecomboBox.Text = StartTimecomboBox.Items[StartTimecomboBox.SelectedIndex + 3].ToString();
+            SetComboBoxTimeDifference();
+        }
+
+        private void LessonsComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            SetComboBoxTimeDifference();
+        }
+
+        private void SetComboBoxTimeDifference()
+        {
+            if (StartTimecomboBox.Text != String.Empty & lessonsComboBox.Text != String.Empty)
+            {
+                DateTime startTime = DateTime.Parse(StartTimecomboBox.Text);
+                DateTime endTime = startTime.AddMinutes(45 * (int)lessonsComboBox.SelectedItem);
+
+                TimeSpan timeDifference = endTime - startTime;
+
+                if (timeDifference.Hours <= 0)
+                    timeDifferenceLabel.Text = $"{timeDifference.Minutes} minutes";
+                else
+                    timeDifferenceLabel.Text = $"{timeDifference.Hours} hours {timeDifference.Minutes} minutes";
+            }
+        }
+
+        private void AddAppointmentButton_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(LessonTypecomboBox.Text) && !String.IsNullOrEmpty(StartTimecomboBox.Text) && !String.IsNullOrEmpty(lessonsComboBox.Text))
+            {
+                TimeSpan startTime = TimeSpan.Parse(StartTimecomboBox.Text);
+                DateTime dateToAdd = date.Date + startTime;
+
+                bool appointmentAdded = DatabaseParser.AddAppointment(LessonTypecomboBox.Text, dateToAdd, (int)lessonsComboBox.SelectedItem,
+                    Session.LoggedInUser.Id.ToString());
+
+                if (appointmentAdded)
+                {
+                    CustomMsgBox.Show("Succes", "Appointment succesfully added", CustomMsgBoxIcon.Complete);
+
+                    AppointmentStructure appointmentStructure = 
+                        new AppointmentStructure(-1, Session.LoggedInUser.Id,
+                        dateToAdd, (int) lessonsComboBox.SelectedItem, LessonTypecomboBox.Text, false,
+                        Session.LoggedInUser.Fullname);
+
+                    _appointments.Add(new Appointment(appointmentStructure));
+                    this.Dispose();
+                }
+                else
+                    CustomMsgBox.Show("Failure", "Appointment failed to upload", CustomMsgBoxIcon.Error);
+            }
+            else
+                CustomMsgBox.Show("Failure", "Some fields need to be filled", CustomMsgBoxIcon.Warrning);
         }
     }
 }

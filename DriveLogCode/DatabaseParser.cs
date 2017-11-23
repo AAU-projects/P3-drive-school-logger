@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -139,6 +140,12 @@ namespace DriveLogCode
             }
         }
 
+        public static bool AddAppointment(string type, DateTime startTime, int availableTime, string instructor)
+        {
+            return MySql.AddAppointment(instructor, startTime.ToString("G",
+                CultureInfo.CreateSpecificCulture("zh-CN")), availableTime, type);
+        }
+
         public static List<AppointmentStructure> AppointmentsList()
         {
             List<AppointmentStructure> appointments = new List<AppointmentStructure>();
@@ -168,7 +175,6 @@ namespace DriveLogCode
 
         public static LessonTemplate GetLessonTemplateFromID(int lessonId)
         {
-
             DataTable DatabaseResults = MySql.GetLessonTemplateByID(lessonId);
 
             LessonTemplate lessonTemplate = new LessonTemplate(
