@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,8 @@ namespace DriveLogGUI
     public class Appointment : AppointmentStructure
     {
         public Label LabelAppointment;
-
-        public string Title => GetTitle();
-        public string Context => GetContext();
         public DateTime ToTime => GetToTime();
-        private LessonTemplate lessonTemplate;
+        public LessonTemplate lessonTemplate = new LessonTemplate();
 
         public Appointment(AppointmentStructure appointment, Lesson lesson)
         {
@@ -27,11 +25,66 @@ namespace DriveLogGUI
             this.FullyBooked = appointment.FullyBooked;
             this.InstructorName = appointment.InstructorName;
             this.lessonTemplate = GetLessonTemplate(lesson);
+
+            GenerateLabel();
+            UpdateLabel();
+            SubscribeToEvent();
         }
 
+        public Appointment(AppointmentStructure appointment)
+        {
+            this.Id = appointment.Id;
+            this.InstructorID = appointment.InstructorID;
+            this.StartTime = appointment.StartTime;
+            this.AvailableTime = appointment.AvailableTime;
+            this.LessonType = appointment.LessonType;
+            this.FullyBooked = appointment.FullyBooked;
+            this.InstructorName = appointment.InstructorName;
+
+            GenerateLabel();
+            InstructorData();
+            SubscribeToEvent();
+        }
+
+        private void InstructorData()
+        {
+            LabelAppointment.Text = InstructorName;
+        }
+
+
+        private void GenerateLabel()
+        {
+            LabelAppointment = new Label();
+            LabelAppointment.Text = "no?";
+            LabelAppointment.BackColor = GetColorForLabel(this.LessonType);
+            LabelAppointment.TextAlign = ContentAlignment.MiddleCenter;
+            LabelAppointment.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, LabelAppointment.Font.Unit);
+        }
+
+        private Color GetColorForLabel(string appointmentLessonType)
+        {
+            if (appointmentLessonType.ToLower() == "theoretical") {
+                return ColorScheme.ColorBlue;
+            }
+            if (appointmentLessonType.ToLower() == "practical") {
+                return ColorScheme.ColorGreen;
+            }
+            if (appointmentLessonType.ToLower() == "manoeuvre") {
+                return ColorScheme.ColorYellow;
+            }
+            if (appointmentLessonType.ToLower() == "slippery") {
+                return ColorScheme.ColorYellow;
+            }
+            if (appointmentLessonType.ToLower() == "other") {
+                return ColorScheme.ColorYellow;
+            }
+
+            return ColorScheme.ColorRed;
+
+        }
         public void UpdateLabel()
         {
-            LabelAppointment.Text = Title;
+            LabelAppointment.Text = lessonTemplate.Title;
         }
 
         private LessonTemplate GetLessonTemplate(Lesson lesson)
@@ -39,21 +92,10 @@ namespace DriveLogGUI
             return DatabaseParser.GetLessonTemplateFromID(lesson.TemplateID);
         }
 
-        private string GetContext()
-        {
-            return lessonTemplate.Description;
-        }
-
         private DateTime GetToTime()
         {
             return StartTime.AddMinutes(AvailableTime * 45);
         }
-
-        private string GetTitle()
-        {
-            return lessonTemplate.Title;
-        }
-
 
         public event EventHandler<ApppointmentEventArgs> ClickOnAppointmentTriggered;
 

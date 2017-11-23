@@ -127,6 +127,13 @@ namespace DriveLogGUI
                 if (appointmentAdded)
                 {
                     CustomMsgBox.Show("Succes", "Appointment succesfully added", CustomMsgBoxIcon.Complete);
+
+                    AppointmentStructure appointmentStructure = 
+                        new AppointmentStructure(-1, Session.LoggedInUser.Id,
+                        dateToAdd, (int) lessonsComboBox.SelectedItem, LessonTypecomboBox.Text, false,
+                        Session.LoggedInUser.Fullname);
+
+                    _appointments.Add(new Appointment(appointmentStructure));
                     this.Dispose();
                 }
                 else

@@ -86,7 +86,8 @@ namespace DriveLogCode
                                        $"{userTable}.lastname " +
                                        $"FROM {AppointmentTable}, {userTable} " +
                                        "WHERE " +
-                                       $"{userTable}.user_id = {AppointmentTable}.instructorID ");
+                                       $"{userTable}.user_id = {AppointmentTable}.instructorID " +
+                                       $"ORDER BY {appointmentTable}.startTime, {appointmentTable}.availableTime ");
 
             return SendQuery(cmd);
         }

@@ -18,11 +18,6 @@ namespace DriveLogGUI
 
         private MainWindowTab mainWindow;
 
-        private Color ColorRed = Color.FromArgb(229, 187, 191);
-        private Color ColorBlue = Color.FromArgb(148, 197, 204);
-        private Color ColorGreen = Color.FromArgb(175, 212, 167);
-        private Color ColorYellow = Color.FromArgb(246, 228, 125);
-
         private OverviewTab overviewTab;
 
         Random test = new Random();
@@ -61,11 +56,9 @@ namespace DriveLogGUI
             informationLabel.Text = e.Appointment.LabelAppointment.Text;
             dateInformationLabel.Text = e.Date;
             timeInformationLabel.Text = e.Time;
-            contextInformationTextbox.Text = e.Appointment.Context;
+            contextInformationTextbox.Text = e.Appointment.lessonTemplate.Description;
             contextTitleInformationLabel.Text = e.Appointment.LabelAppointment.Text;
             instructorInformationLabel.Text = e.Appointment.InstructorName;
-            
-
         }
 
         private void SubscribeToAllClickPanels(List<CalendarData> listOfDays)
@@ -286,56 +279,25 @@ namespace DriveLogGUI
 
         private void AddAppointment(AppointmentStructure appointment)
         {
-            Lesson progress = null;
-            if (appointment.LessonType == "Practical")
+            Appointment newAppointment;
+            if (!Session.LoggedInUser.Sysmin)
             {
-                progress = Session.LastPracticalLesson;
+                Lesson progress = null;
+                if (appointment.LessonType == "Practical") {
+                    progress = Session.LastPracticalLesson;
+                }
+                if (appointment.LessonType == "Theoretical") {
+                    progress = Session.LastTheoraticalLesson;
+                }
+
+                newAppointment = new Appointment(appointment, progress);
             }
-            if (appointment.LessonType == "Theoretical") 
+            else
             {
-                progress = Session.LastTheoraticalLesson;
-            } 
-
-            Appointment newAppointment = new Appointment(appointment, progress);
-
-            newAppointment.LabelAppointment = GenerateLabel(appointment);
-            newAppointment.UpdateLabel();
-            newAppointment.SubscribeToEvent();
+                newAppointment = new Appointment(appointment);
+            }
+            
             appointments.Add(newAppointment);
-        }
-
-        private Label GenerateLabel(AppointmentStructure appointment)
-        {
-            Label newLabel = new Label();
-            newLabel.Text = "no?";
-            newLabel.BackColor = GetColorForLabel(appointment.LessonType);
-            newLabel.TextAlign = ContentAlignment.MiddleCenter;
-            newLabel.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, newLabel.Font.Unit);
-
-            return newLabel;
-        }
-
-        private Color GetColorForLabel(string appointmentLessonType)
-        {
-            if (appointmentLessonType.ToLower() == "theoretical")
-            {
-                return ColorBlue;
-            }
-            if (appointmentLessonType.ToLower() == "practical") {
-                return ColorGreen;
-            }
-            if (appointmentLessonType.ToLower() == "manoeuvre") {
-                return ColorYellow;
-            }
-            if (appointmentLessonType.ToLower() == "slippery") {
-                return ColorYellow;
-            }
-            if (appointmentLessonType.ToLower() == "other") {
-                return ColorYellow;
-            }
-
-            return ColorRed;
-
         }
 
         private void AddAllElements()

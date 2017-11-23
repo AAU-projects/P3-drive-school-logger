@@ -11,8 +11,6 @@ namespace DriveLogGUI
     {
         public Appointment Appointment;
         private DateTime EndDate => GetEndDate();
-
-
         public string Time => GetTime();
         public string Date => GetDate();
 

@@ -112,7 +112,10 @@
             this.LessonTypecomboBox.FormattingEnabled = true;
             this.LessonTypecomboBox.Items.AddRange(new object[] {
             "Theoretical",
-            "Practical"});
+            "Practical",
+            "Manoeuvre",
+            "Slippery",
+            "Other"});
             this.LessonTypecomboBox.Location = new System.Drawing.Point(115, 70);
             this.LessonTypecomboBox.Name = "LessonTypecomboBox";
             this.LessonTypecomboBox.Size = new System.Drawing.Size(134, 21);

@@ -175,7 +175,6 @@ namespace DriveLogCode
 
         public static LessonTemplate GetLessonTemplateFromID(int lessonId)
         {
-
             DataTable DatabaseResults = MySql.GetLessonTemplateByID(lessonId);
 
             LessonTemplate lessonTemplate = new LessonTemplate(
