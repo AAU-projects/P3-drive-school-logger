@@ -13,7 +13,12 @@ namespace DriveLogGUI
     {
         public Label LabelAppointment;
         public DateTime ToTime => GetToTime();
+        public DateTime EndDate => GetEndDate();
+        public string Time => GetTime();
+        public string Date => GetDate();
+
         public LessonTemplate lessonTemplate = new LessonTemplate();
+        private Lesson _lesson;
 
         public Appointment(AppointmentStructure appointment, Lesson lesson)
         {
@@ -24,6 +29,7 @@ namespace DriveLogGUI
             this.LessonType = appointment.LessonType;
             this.FullyBooked = appointment.FullyBooked;
             this.InstructorName = appointment.InstructorName;
+            this._lesson = lesson;
             this.lessonTemplate = GetLessonTemplate(lesson);
 
             GenerateLabel();
@@ -92,6 +98,11 @@ namespace DriveLogGUI
             return DatabaseParser.GetLessonTemplateFromID(lesson.TemplateID);
         }
 
+        public void GetNextLessonTemplate()
+        {
+            lessonTemplate = DatabaseParser.GetNextLessonTemplateFromID(_lesson.TemplateID, _lesson.LessonTemplate.Type);
+        }
+
         private DateTime GetToTime()
         {
             return StartTime.AddMinutes(AvailableTime * 45);
@@ -108,6 +119,30 @@ namespace DriveLogGUI
         private void label_Clicked(ApppointmentEventArgs e)
         {
             ClickOnAppointmentTriggered?.Invoke(this, e);
+        }
+        private string GetTime()
+        {
+            return $"Time: {AddZeroToDates(StartTime.Hour)}:{AddZeroToDates(StartTime.Minute)} - {AddZeroToDates(EndDate.Hour)}:{AddZeroToDates(EndDate.Minute)}";
+        }
+
+        private string GetDate()
+        {
+            return $"Date: {EndDate.ToShortDateString().Replace('/', '-')}";
+        }
+        private string AddZeroToDates(int checkString)
+        {
+            string fixedString;
+
+            if (checkString < 10) {
+                fixedString = $"0{checkString}";
+                return fixedString;
+            }
+            return checkString.ToString();
+        }
+
+        private DateTime GetEndDate()
+        {
+            return StartTime.AddMinutes(45 * AvailableTime);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace DriveLogGUI
         private DateTime lastWeek = DateTime.Now;
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
+        private Appointment selectedAppointment;
 
         private MainWindowTab mainWindow;
 
@@ -33,6 +34,7 @@ namespace DriveLogGUI
 
             if (Session.LoggedInUser.Sysmin)
                 bookingInformationButton.Hide();
+
         }
 
         private void GetAppointsments()
@@ -53,12 +55,13 @@ namespace DriveLogGUI
 
         private void UpdateInformation(object sender, ApppointmentEventArgs e)
         {
-            informationLabel.Text = e.Appointment.LabelAppointment.Text;
-            dateInformationLabel.Text = e.Date;
-            timeInformationLabel.Text = e.Time;
-            contextInformationTextbox.Text = e.Appointment.lessonTemplate.Description;
-            contextTitleInformationLabel.Text = e.Appointment.LabelAppointment.Text;
-            instructorInformationLabel.Text = e.Appointment.InstructorName;
+            selectedAppointment = e.Appointment;
+            informationLabel.Text = selectedAppointment.LabelAppointment.Text;
+            dateInformationLabel.Text = selectedAppointment.Date;
+            timeInformationLabel.Text = selectedAppointment.Time;
+            contextInformationTextbox.Text = selectedAppointment.lessonTemplate.Description;
+            contextTitleInformationLabel.Text = selectedAppointment.LabelAppointment.Text;
+            instructorInformationLabel.Text = selectedAppointment.InstructorName;
         }
 
         private void SubscribeToAllClickPanels(List<CalendarData> listOfDays)
@@ -135,6 +138,7 @@ namespace DriveLogGUI
         {
             GenerateWeeklyCalendar();
             DrawLineBelowDates();
+
             if (Session.LoggedInUser.Sysmin)
             {
                 DrawAddAppointmentButtons();
@@ -191,9 +195,6 @@ namespace DriveLogGUI
 
             }
         }
-
-
-
         private void UpdateCalendar(int weeks)
         {
             lastWeek = lastWeek.AddDays(weeks * 7);
@@ -277,17 +278,24 @@ namespace DriveLogGUI
         private void AddAppointment(AppointmentStructure appointment)
         {
             Appointment newAppointment;
+            Lesson progress = progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate());
+
             if (!Session.LoggedInUser.Sysmin)
             {
                 // if no lessons user gets the first lesson :)
-                Lesson progress = new Lesson("get lessons", "get lessons", 1, 1, DateTime.Now, false, new LessonTemplate());
 
                 if (appointment.LessonType == "Practical" && Session.LastPracticalLesson != null) {
                     progress = Session.LastPracticalLesson;
+                } else if (appointment.LessonType == "Practical") {
+                    progress = new Lesson("Your first driving lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate());
                 }
+
                 if (appointment.LessonType == "Theoretical" && Session.LastTheoraticalLesson != null) {
                     progress = Session.LastTheoraticalLesson;
+                } else if (appointment.LessonType == "Theoretical") {
+                    progress = new Lesson("Your first theory lesson :)", "idk", 4, 1, DateTime.Now, false, new LessonTemplate());
                 }
+
 
                 newAppointment = new Appointment(appointment, progress);
             }
@@ -327,21 +335,6 @@ namespace DriveLogGUI
             }
         }
 
-        private Color RandomColor()
-        {
-            int lol = test.Next(0, 3);
-            if (lol == 0) {
-                return Color.FromArgb(255, 229, 187, 191);
-            } else if (lol == 1) {
-                return Color.FromArgb(255, 148, 197, 204);
-            } else if (lol == 2) {
-                return Color.FromArgb(255, 175, 212, 167);
-            } else if (lol == 3) {
-                return Color.FromArgb(255, 246, 228, 125);
-            }
-            return Color.Aquamarine;
-        }
-
         private void buttonLeftWeek_Click(object sender, EventArgs e)
         {
             UpdateCalendar(-1);
@@ -359,15 +352,6 @@ namespace DriveLogGUI
             UpdateCalendar(0);
         }
 
-        private void TestAppointments()
-        {
-            
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void weekNumberTextbox_KeyUp(object sender, KeyEventArgs e)
         {
@@ -378,6 +362,7 @@ namespace DriveLogGUI
             if (weekNumber <= 52)
             {
                 UpdateCalendar(GetDateFromWeek(weekNumber));
+                weekNumberTextbox.Hide();
             }
         }
 
@@ -400,6 +385,17 @@ namespace DriveLogGUI
            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) 
             {
                 e.Handled = true;
+            }
+        }
+
+        private void bookingInformationButton_Click(object sender, EventArgs e)
+        {
+            foreach (var appointment in appointments)
+            {
+                if (appointment.LessonType == selectedAppointment.LessonType)
+                {
+                    appointment.GetNextLessonTemplate();
+                }
             }
         }
     }
