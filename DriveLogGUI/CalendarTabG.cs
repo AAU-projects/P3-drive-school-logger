@@ -282,11 +282,13 @@ namespace DriveLogGUI
             Appointment newAppointment;
             if (!Session.LoggedInUser.Sysmin)
             {
-                Lesson progress = null;
-                if (appointment.LessonType == "Practical") {
+                // if no lessons user gets the first lesson :)
+                Lesson progress = new Lesson("get lessons", "get lessons", 1, 1, DateTime.Now, false, new LessonTemplate());
+
+                if (appointment.LessonType == "Practical" && Session.LastPracticalLesson != null) {
                     progress = Session.LastPracticalLesson;
                 }
-                if (appointment.LessonType == "Theoretical") {
+                if (appointment.LessonType == "Theoretical" && Session.LastTheoraticalLesson != null) {
                     progress = Session.LastTheoraticalLesson;
                 }
 
