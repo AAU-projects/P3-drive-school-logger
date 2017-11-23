@@ -32,6 +32,13 @@ namespace DriveLogGUI
             InitializeComponent();
             welcomeUserLabel.Text = "Welcome " + Session.LoggedInUser.Firstname;
             selectedMonth = DateTime.Now;
+            
+            overviewUpdateTodaysNote.Hide();
+            if (Session.LoggedInUser.Sysmin)
+            {
+                overviewUpdateTodaysNote.Show();
+            }
+            todaysNoteTextbox.Text = DatabaseParser.GetLatestTodaysNote();
 
             DrawCalendar();
             DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
@@ -263,6 +270,19 @@ namespace DriveLogGUI
         private void progressBarPanel_Click(object sender, EventArgs e)
         {
             SubPageCreated?.Invoke(this);
+        }
+
+        private void overviewUpdateTodaysNote_Click(object sender, EventArgs e)
+        {
+            if (todaysNoteTextbox.Enabled)
+            {
+                todaysNoteTextbox.Enabled = false;
+                MySql.AddTodaysNote(Session.LoggedInUser, todaysNoteTextbox.Text);
+            }
+            else
+            {
+                todaysNoteTextbox.Enabled = true;
+            }
         }
     }
 }

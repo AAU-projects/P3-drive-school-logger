@@ -173,6 +173,15 @@ namespace DriveLogCode
             return usersFound;
         }
 
+        public static string GetLatestTodaysNote()
+        {
+            DataTable queryInfo = MySql.GetLatestTodaysNote();
+
+            string todaysNote = (string) queryInfo.Rows[0][3];
+
+            return todaysNote;
+        }
+
         public static LessonTemplate GetLessonTemplateFromID(int lessonId)
         {
             DataTable DatabaseResults = MySql.GetLessonTemplateByID(lessonId);

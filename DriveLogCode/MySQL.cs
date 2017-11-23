@@ -19,6 +19,7 @@ namespace DriveLogCode
         private const string LessonTemplateTable = "lessonTemplates";
         private const string AppointmentTable = "appointments";
         private const string LessonTable = "lessons";
+        private const string TodaysNoteTable = "todaysNoteTable";
 
         public static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string LessonTable = LessonTable, string AppointmentTable = AppointmentTable, string UserTable = UserTable, string LessonTemplateTable = LessonTemplateTable)
         {
@@ -428,6 +429,38 @@ namespace DriveLogCode
             string query = $"SELECT * FROM {table} WHERE username LIKE '%{searchInput}%' OR  firstname LIKE '%{searchInput}%' OR" +
                            $" lastname LIKE '%{searchInput}%' OR phone LIKE '%{searchInput}%' OR email LIKE '%{searchInput}%' OR" +
                            $" cpr LIKE '%{searchInput}%' OR address LIKE '%{searchInput}%' OR zip LIKE '%{searchInput}%' OR city LIKE '%{searchInput}%'";
+            var cmd = new MySqlCommand(query);
+
+            return SendQuery(cmd);
+        }
+
+        public static bool AddTodaysNote(User user, string todayNoteText, string table = TodaysNoteTable)
+        {
+            var cmd = new MySqlCommand($"INSERT INTO {table} (" +
+                                       $"userID, description)" +
+                                       $"VALUES (" +
+                                       $"'{user.Id}', '{todayNoteText}')");
+
+            if (ExistTable(table)) return SendNonQuery(cmd);
+            return CreateTodaysNoteTable(table) && SendNonQuery(cmd);
+        }
+
+        private static bool CreateTodaysNoteTable(string tableName)
+        {
+            var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
+                        "`id`  int(11) NOT NULL AUTO_INCREMENT ," +
+                        "`userID`  int NOT NULL ," +
+                        "`date`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ," +
+                        "`description`  varchar(2000) NOT NULL ," +
+                        "PRIMARY KEY (`id`))" +
+                        "ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
+
+            return SendNonQuery(cmd);
+        }
+
+        public static DataTable GetLatestTodaysNote(string table = TodaysNoteTable)
+        {
+            string query = $"SELECT * FROM {table} ORDER BY `id` DESC LIMIT 1;";
             var cmd = new MySqlCommand(query);
 
             return SendQuery(cmd);
