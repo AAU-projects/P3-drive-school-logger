@@ -35,7 +35,7 @@ namespace DriveLogCode
             foreach (DataRow row in results.Rows)
             {
                 LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[2]), (string)row[6], (string)row[7], (string)row[8], Convert.ToInt32(row[9]), (string)row[10]);
-                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], Convert.ToBoolean(row[5]), newTemplate));
+                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], Convert.ToBoolean(row[5]), newTemplate, (string)row[11]));
             }
 
             return lessonsList;

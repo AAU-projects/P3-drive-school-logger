@@ -33,7 +33,8 @@ namespace DriveLogCode
                 $"{LessonTemplateTable}.description, " +
                 $"{LessonTemplateTable}.type, " +
                 $"{LessonTemplateTable}.time, " +
-                $"{LessonTemplateTable}.reading " +
+                $"{LessonTemplateTable}.reading, " +
+                $"{UserTable}.signature " +
                 $"FROM {AppointmentTable}, {LessonTable}, {UserTable}, {LessonTemplateTable} " + 
                 "WHERE " +
                 $"{LessonTable}.AppointmentID = {AppointmentTable}.id AND " + 
