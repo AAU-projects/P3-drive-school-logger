@@ -78,10 +78,15 @@ namespace DriveLogCode
 
         public string SaveProfilePicture(Image image, string url)
         {
+            return SavePicture(image, url);
+        }
+
+        public string SavePicture(Image image, string url)
+        {
             string tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.png");
-            
+
             if (image == null) return null;
-            image.Save(tempFile,ImageFormat.Png);
+            image.Save(tempFile, ImageFormat.Png);
 
             return SendToServer(tempFile, url);
         }
