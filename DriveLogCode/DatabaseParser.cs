@@ -139,6 +139,11 @@ namespace DriveLogCode
             }
         }
 
+        public static bool AddAppointment(string type, DataTable startTime, int availableTime, string instructor)
+        {
+            return MySql.AddAppointment(instructor, startTime, availableTime, type);
+        }
+
         public static List<AppointmentStructure> AppointmentsList()
         {
             List<AppointmentStructure> appointments = new List<AppointmentStructure>();
