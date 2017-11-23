@@ -18,11 +18,6 @@ namespace DriveLogGUI
 
         private MainWindowTab mainWindow;
 
-        private Color ColorRed = Color.FromArgb(229, 187, 191);
-        private Color ColorBlue = Color.FromArgb(148, 197, 204);
-        private Color ColorGreen = Color.FromArgb(175, 212, 167);
-        private Color ColorYellow = Color.FromArgb(246, 228, 125);
-
         private OverviewTab overviewTab;
 
         Random test = new Random();
@@ -33,14 +28,11 @@ namespace DriveLogGUI
             this.mainWindow = mainWindow;
             this.overviewTab = overviewTab;
             SubscribeToAllClickPanels(overviewTab.listOfDays);
-
+            GetAppointsments();
+            SubscribeToAllClickAppointments(appointments);
 
             if (Session.LoggedInUser.Sysmin)
-            {
-                GetAppointsments();
-            }
-
-            SubscribeToAllClickAppointments(appointments);
+                bookingInformationButton.Hide();
         }
 
         private void GetAppointsments()
@@ -64,11 +56,9 @@ namespace DriveLogGUI
             informationLabel.Text = e.Appointment.LabelAppointment.Text;
             dateInformationLabel.Text = e.Date;
             timeInformationLabel.Text = e.Time;
-            contextInformationTextbox.Text = e.Appointment.Context;
+            contextInformationTextbox.Text = e.Appointment.lessonTemplate.Description;
             contextTitleInformationLabel.Text = e.Appointment.LabelAppointment.Text;
             instructorInformationLabel.Text = e.Appointment.InstructorName;
-            
-
         }
 
         private void SubscribeToAllClickPanels(List<CalendarData> listOfDays)
@@ -146,7 +136,7 @@ namespace DriveLogGUI
         {
             GenerateWeeklyCalendar();
             DrawLineBelowDates();
-            if (true)//remember to add sysadmin here
+            if (Session.LoggedInUser.Sysmin)
             {
                 DrawAddAppointmentButtons();
             }
@@ -173,7 +163,7 @@ namespace DriveLogGUI
 
         private void OpenAppointment(DateClickEventArgs e)
         {
-            AddAppointmentWindow addAppointmentWindow = new AddAppointmentWindow(e.Date, MousePosition);
+            AddAppointmentWindow addAppointmentWindow = new AddAppointmentWindow(e.Date, MousePosition, appointments);
             addAppointmentWindow.ShowDialog();
         }
 
@@ -289,56 +279,27 @@ namespace DriveLogGUI
 
         private void AddAppointment(AppointmentStructure appointment)
         {
-            Lesson progress = null;
-            if (appointment.LessonType == "Practical")
+            Appointment newAppointment;
+            if (!Session.LoggedInUser.Sysmin)
             {
-                progress = Session.LastPracticalLesson;
+                // if no lessons user gets the first lesson :)
+                Lesson progress = new Lesson("get lessons", "get lessons", 1, 1, DateTime.Now, false, new LessonTemplate());
+
+                if (appointment.LessonType == "Practical" && Session.LastPracticalLesson != null) {
+                    progress = Session.LastPracticalLesson;
+                }
+                if (appointment.LessonType == "Theoretical" && Session.LastTheoraticalLesson != null) {
+                    progress = Session.LastTheoraticalLesson;
+                }
+
+                newAppointment = new Appointment(appointment, progress);
             }
-            if (appointment.LessonType == "Theoretical") 
+            else
             {
-                progress = Session.LastTheoraticalLesson;
-            } 
-
-            Appointment newAppointment = new Appointment(appointment, progress);
-
-            newAppointment.LabelAppointment = GenerateLabel(appointment);
-            newAppointment.UpdateLabel();
-            newAppointment.SubscribeToEvent();
+                newAppointment = new Appointment(appointment);
+            }
+            
             appointments.Add(newAppointment);
-        }
-
-        private Label GenerateLabel(AppointmentStructure appointment)
-        {
-            Label newLabel = new Label();
-            newLabel.Text = "no?";
-            newLabel.BackColor = GetColorForLabel(appointment.LessonType);
-            newLabel.TextAlign = ContentAlignment.MiddleCenter;
-            newLabel.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, newLabel.Font.Unit);
-
-            return newLabel;
-        }
-
-        private Color GetColorForLabel(string appointmentLessonType)
-        {
-            if (appointmentLessonType.ToLower() == "theoretical")
-            {
-                return ColorBlue;
-            }
-            if (appointmentLessonType.ToLower() == "practical") {
-                return ColorGreen;
-            }
-            if (appointmentLessonType.ToLower() == "manoeuvre") {
-                return ColorYellow;
-            }
-            if (appointmentLessonType.ToLower() == "slippery") {
-                return ColorYellow;
-            }
-            if (appointmentLessonType.ToLower() == "other") {
-                return ColorYellow;
-            }
-
-            return ColorRed;
-
         }
 
         private void AddAllElements()
