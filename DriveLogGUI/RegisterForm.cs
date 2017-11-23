@@ -359,19 +359,6 @@ namespace DriveLogGUI
                 verifyPasswordBox.Text = "";
         }
 
-        private void panel2_MouseDown(object sender, MouseEventArgs e)
-        {
-            _lastClick = e.Location;
-        }
-
-        private void panel2_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left) {
-                this.Left += e.X - _lastClick.X;
-                this.Top += e.Y - _lastClick.Y;
-            }
-        }
-
         private void button3_MouseClick(object sender, MouseEventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -380,6 +367,20 @@ namespace DriveLogGUI
         private void button4_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void topBarPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            _lastClick = e.Location;
+        }
+
+        private void topBarPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - _lastClick.X;
+                this.Top += e.Y - _lastClick.Y;
+            }
         }
     }
 }

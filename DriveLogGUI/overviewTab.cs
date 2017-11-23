@@ -21,6 +21,12 @@ namespace DriveLogGUI
         private DateTime formatDateTime;
         public List<CalendarData> listOfDays = new List<CalendarData>();
 
+        // Pictures for overview buttons.
+        private Bitmap incompleteImage = DriveLogGUI.Properties.Resources.crossIncomplete;
+        private Bitmap incompleteHoverImage = DriveLogGUI.Properties.Resources.crossHover;
+        private Bitmap completedImage = DriveLogGUI.Properties.Resources.checkCompleted;
+        private Bitmap completedHoverImage = DriveLogGUI.Properties.Resources.checkHover;
+
         public OverviewTab()
         {
             InitializeComponent();
@@ -28,6 +34,8 @@ namespace DriveLogGUI
             selectedMonth = DateTime.Now;
 
             DrawCalendar();
+            DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
+            FirstCheckIfUploaded(firstAidPictureButton);
 
             foreach (Control control in progressBarPanel.Controls)
             {
@@ -69,7 +77,11 @@ namespace DriveLogGUI
             for (var i = 0; i < 42; i++) // 42 is number of days in our calendar, therefor static.
             {
                 CalendarData calendarDay = new CalendarData(new Panel(), new Label(), formatDateTime);
-                calendarDay.LabelForDate.MouseEnter += (s, e) => calendarDay.LabelForDate.Cursor = Cursors.Hand;
+                calendarDay.LabelForDate.MouseEnter += (s, e) =>
+                    LabelForDateMouseEnter(calendarDay.LabelForDate, calendarDay.PanelForCalendarDay, calendarDay.Date);
+
+                calendarDay.LabelForDate.MouseLeave +=
+                    (s, e) => LabelForDateMouseLeave(calendarDay.PanelForCalendarDay, calendarDay.Date);
 
                 listOfDays.Add(calendarDay);
                 
@@ -88,6 +100,19 @@ namespace DriveLogGUI
                 FormatPanelForDays(calendarDay, ref formatDateTime);
                 daysForCalendar.Controls.Add(calendarDay.PanelForCalendarDay);
             }
+        }
+
+        private void LabelForDateMouseEnter(Label label, Panel panel, DateTime panelDate)
+        {
+            label.Cursor = Cursors.Hand;
+            if (panelDate != DateTime.Today)
+                panel.BackColor = Color.FromArgb(229, 243, 255);
+        }
+
+        private void LabelForDateMouseLeave(Panel panel, DateTime panelDate)
+        {
+            if (panelDate != DateTime.Today)
+                panel.BackColor = Color.FromArgb(251, 251, 251);
         }
 
         private void UpdateCalender()
@@ -162,6 +187,46 @@ namespace DriveLogGUI
             selectedMonth = selectedMonth.AddMonths(-1);
             formatDateTime = WhereDoWeStart();
             UpdateCalender();
+        }
+
+        private void doctorsNotePictureButton_Hover(object sender, EventArgs e)
+        {
+            ProgressButtonMouseEnter(doctorsNotePictureButton);
+        }
+
+        private void doctorsNotePictureButton_Leave(object sender, EventArgs e)
+        {
+            DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
+        }
+
+        private void ProgressButtonMouseEnter(PictureBox button)
+        {
+            if (button.Image == incompleteImage)
+                button.Image = incompleteHoverImage;
+            else if (button.Image == completedImage)
+                button.Image = completedHoverImage;
+        }
+
+        private void DoctorsNoteCheckIfUploaded(PictureBox button)
+        {
+            if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
+                button.Image = completedImage;
+        }
+
+        private void FirstCheckIfUploaded(PictureBox button)
+        {
+            if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
+                button.Image = completedImage;
+        }
+
+        private void firstAidPictureButton_Enter(object sender, EventArgs e)
+        {
+            ProgressButtonMouseEnter(firstAidPictureButton);
+        }
+
+        private void firstAidPictureButton_Leave(object sender, EventArgs e)
+        {
+            FirstCheckIfUploaded(firstAidPictureButton);
         }
 
         private void progressBarPanel_Click(object sender, EventArgs e)

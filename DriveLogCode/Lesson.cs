@@ -20,9 +20,11 @@ namespace DriveLogCode
 
         public bool Completed { get; }
 
+        public LessonTemplate LessonTemplate { get; }
+
         public string InstructorFullname => InstructorFirstname + " " + InstructorLastname;
 
-        public Lesson(string instructorFirstname, string instructorLastname, int templateId, int progress, DateTime endDate, bool completed)
+        public Lesson(string instructorFirstname, string instructorLastname, int templateId, int progress, DateTime endDate, bool completed, LessonTemplate lessonTemplate)
         {
             InstructorFirstname = instructorFirstname;
             InstructorLastname = instructorLastname;
@@ -30,6 +32,7 @@ namespace DriveLogCode
             Progress = progress;
             EndDate = endDate;
             Completed = completed;
+            this.LessonTemplate = lessonTemplate;
         }
     }
 }
