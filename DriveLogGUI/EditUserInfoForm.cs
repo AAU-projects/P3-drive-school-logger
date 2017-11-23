@@ -433,18 +433,13 @@ namespace DriveLogGUI
             }
 
             bool updateSuccess;
-            string picturePath;
-            string signaturePath;
+            string picturePath = uploader.SaveProfilePicture(ProfilePicture, Settings.Default["PictureUpload"].ToString());
+            string signaturePath = uploader.SavePicture(_signatureImage, Settings.Default["PictureUpload"].ToString());
 
-            if (uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString()) != null)
-                picturePath = uploader.SaveProfilePicture(ProfilePicture, Properties.Settings.Default["PictureUpload"].ToString());
-            else
+            if (picturePath == null)
                 picturePath = _user.PicturePath;
 
-            if (uploader.SavePicture(_signatureImage, Properties.Settings.Default["PictureUpload"].ToString()) != null)
-                signaturePath = uploader.SavePicture(_signatureImage,
-                    Properties.Settings.Default["PictureUpload"].ToString());
-            else
+            if (signaturePath == null)
                 signaturePath = _user.SignaturePath;
 
             if (editPasswordBox.Text != editPasswordBox.defaultText)
