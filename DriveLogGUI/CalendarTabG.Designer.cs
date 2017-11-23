@@ -40,6 +40,7 @@
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.warningInformationLabel = new System.Windows.Forms.Label();
             this.contextInformationTextbox = new System.Windows.Forms.TextBox();
             this.bookingInformationButton = new System.Windows.Forms.Button();
             this.instructorTitleInformationLabel = new System.Windows.Forms.Label();
@@ -102,7 +103,6 @@
             this.weekNumberTextbox.Text = "42";
             this.weekNumberTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.weekNumberTextbox.Visible = false;
-            this.weekNumberTextbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.weekNumberTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.weekNumberTextbox_KeyPress);
             this.weekNumberTextbox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.weekNumberTextbox_KeyUp);
             // 
@@ -195,6 +195,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel4.Controls.Add(this.warningInformationLabel);
             this.panel4.Controls.Add(this.contextInformationTextbox);
             this.panel4.Controls.Add(this.bookingInformationButton);
             this.panel4.Controls.Add(this.instructorTitleInformationLabel);
@@ -206,6 +207,18 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(171, 401);
             this.panel4.TabIndex = 9;
+            // 
+            // warningInformationLabel
+            // 
+            this.warningInformationLabel.AutoSize = true;
+            this.warningInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold);
+            this.warningInformationLabel.ForeColor = System.Drawing.Color.DarkRed;
+            this.warningInformationLabel.Location = new System.Drawing.Point(50, 335);
+            this.warningInformationLabel.Name = "warningInformationLabel";
+            this.warningInformationLabel.Size = new System.Drawing.Size(71, 19);
+            this.warningInformationLabel.TabIndex = 14;
+            this.warningInformationLabel.Text = "Warning";
+            this.warningInformationLabel.Visible = false;
             // 
             // contextInformationTextbox
             // 
@@ -233,6 +246,7 @@
             this.bookingInformationButton.TabIndex = 12;
             this.bookingInformationButton.Text = "BOOK";
             this.bookingInformationButton.UseVisualStyleBackColor = false;
+            this.bookingInformationButton.Click += new System.EventHandler(this.bookingInformationButton_Click);
             // 
             // instructorTitleInformationLabel
             // 
@@ -345,5 +359,6 @@
         private System.Windows.Forms.Button bookingInformationButton;
         private System.Windows.Forms.TextBox weekNumberTextbox;
         private System.Windows.Forms.TextBox contextInformationTextbox;
+        private System.Windows.Forms.Label warningInformationLabel;
     }
 }

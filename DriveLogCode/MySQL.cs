@@ -92,6 +92,26 @@ namespace DriveLogCode
             return SendQuery(cmd);
         }
 
+
+        public static DataTable GetNextLessonTemplateByID(int lessonTemplateId, string lessonType, string lessonTemplateTable = LessonTemplateTable)
+        {
+            var cmd = new MySqlCommand("SELECT " +
+                                       $"{lessonTemplateTable}.id, " +
+                                       $"{lessonTemplateTable}.title, " +
+                                       $"{lessonTemplateTable}.description, " +
+                                       $"{lessonTemplateTable}.type, " +
+                                       $"{lessonTemplateTable}.time, " +
+                                       $"{lessonTemplateTable}.reading, " +
+                                       $"{lessonTemplateTable}.active " +
+                                       $"FROM {lessonTemplateTable} " +
+                                       "WHERE " +
+                                       $"{lessonTemplateTable}.id > {lessonTemplateId} AND " +
+                                       $"{lessonTemplateTable}.type = {lessonType} " +
+                                       $"ORDER BY {lessonTemplateTable}.id ");
+
+            return SendQuery(cmd);
+        }
+
         public static bool AddLesson(int userId, int appointmentID, int templateID, int part, string table = LessonTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO `{table}` (`userID`, `appointmentID`, `lessonID`, `lessonPart`)" +

@@ -187,5 +187,20 @@ namespace DriveLogCode
 
             return lessonTemplate;
         }
+
+        public static LessonTemplate GetNextLessonTemplateFromID(int lessonTemplateId, string lessonType)
+        {
+            DataTable DatabaseResults = MySql.GetNextLessonTemplateByID(lessonTemplateId, lessonType);
+
+            LessonTemplate lessonTemplate = new LessonTemplate(
+                Convert.ToInt32(DatabaseResults.Rows[0][0]),
+                DatabaseResults.Rows[0][1].ToString(),
+                DatabaseResults.Rows[0][2].ToString(),
+                DatabaseResults.Rows[0][3].ToString(),
+                Convert.ToInt32(DatabaseResults.Rows[0][4]),
+                DatabaseResults.Rows[0][5].ToString());
+
+            return lessonTemplate;
+        }
     }
 }
