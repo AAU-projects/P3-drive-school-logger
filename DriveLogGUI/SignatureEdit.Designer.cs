@@ -87,6 +87,9 @@
             this.signatureBox.Size = new System.Drawing.Size(540, 135);
             this.signatureBox.TabIndex = 45;
             this.signatureBox.TabStop = false;
+            this.signatureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.signatureBox_MouseDown);
+            this.signatureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.signatureBox_MouseMove);
+            this.signatureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.signatureBox_MouseUp);
             // 
             // headerLabel
             // 
@@ -111,6 +114,7 @@
             this.saveButton.TabIndex = 47;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // helpLabel
             // 

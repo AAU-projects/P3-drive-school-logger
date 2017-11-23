@@ -13,10 +13,13 @@ namespace DriveLogGUI
     public partial class SignatureEdit : Form
     {
         private Point _lastClick;
-        private Bitmap signatureImage = new Bitmap(540, 135);
+        private Bitmap _signatureImage = new Bitmap(540, 135);
+        private bool _draw = false;
+        private bool edited = false;
         public SignatureEdit()
         {
             InitializeComponent();
+            signatureBox.Image = _signatureImage;
         }
 
         private void topBarPanel_MouseDown(object sender, MouseEventArgs e)
@@ -36,6 +39,47 @@ namespace DriveLogGUI
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void signatureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            _draw = true;
+            Graphics graphics = Graphics.FromImage(_signatureImage);
+            Pen pen = new Pen(Color.Black, 4);
+            graphics.DrawRectangle(pen, e.X, e.Y, 2f, 2f);
+            graphics.Save();
+            signatureBox.Image = _signatureImage;
+        }
+
+        private void signatureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            _draw = false;
+        }
+
+        private void signatureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_draw)
+            {
+                edited = true;
+                Graphics graphics = Graphics.FromImage(_signatureImage);
+                SolidBrush brush = new SolidBrush(Color.Black);
+                graphics.FillRectangle(brush, e.X, e.Y, 2, 2);
+                graphics.Save();
+                signatureBox.Image = _signatureImage;
+            }
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (edited)
+            {
+                
+            }
+            else
+            {
+                CustomMsgBox.Show("Please write your signature in the box", "Missing Signature",
+                    CustomMsgBoxIcon.Error);
+            }
         }
     }
 }
