@@ -45,6 +45,16 @@ namespace DriveLogGUI
                     childControl.MouseClick += progressBarPanel_Click;
             }
 
+            UpdateProgress();
+        }
+
+        private void UpdateProgress()
+        {
+            theoreticalStatus.Text = Session.LoggedInUser.TheoreticalProgress + "/24";
+            practicalStatus.Text = Session.LoggedInUser.PracticalProgress + "/14";
+
+            theoreticalProgressFill.Size = new Size((theoreticalBar.Width / 24) * Session.LoggedInUser.TheoreticalProgress, theoreticalBar.Height);
+            practicalProgressFill.Size = new Size((practicalBar.Width / 14) * Session.LoggedInUser.PracticalProgress, practicalBar.Height);
         }
 
         public void logoutButton_Click(object sender, EventArgs e)
@@ -232,14 +242,6 @@ namespace DriveLogGUI
         private void progressBarPanel_Click(object sender, EventArgs e)
         {
             SubPageCreated?.Invoke(this);
-            /*
-            this.Hide();
-            DriveLogTab studentFoundDriveLogTab = new DriveLogTab(Session.LoggedInUser, true);
-            studentFoundDriveLogTab.Location = this.Location;
-            studentFoundDriveLogTab.Parent = this;
-            this.Parent.Controls.Add(studentFoundDriveLogTab);
-            studentFoundDriveLogTab.Show();
-            */
         }
     }
 }
