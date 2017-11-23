@@ -10,7 +10,7 @@ namespace DriveLogCode
     public class User
     {
         public User(int id, string firstname, string lastname, string phone, string email, string cpr, 
-            string address, string zip, string city, string username, string password, string picturePath, bool sysmin)
+            string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin)
         {
             Id = id;
             Firstname = firstname;
@@ -24,7 +24,10 @@ namespace DriveLogCode
             Username = username;
             Password = password;
             PicturePath = picturePath;
+            SignaturePath = signaturePath;
             Sysmin = sysmin;
+
+            CalculateProgress();
         }
 
         public User(DataTable userTable, int index = 0)
@@ -41,8 +44,12 @@ namespace DriveLogCode
             Username = (string)userTable.Rows[index][9];
             Password = (string)userTable.Rows[index][10];
             PicturePath = (string)userTable.Rows[index][11];
-            Sysmin = Convert.ToBoolean((string) userTable.Rows[index][12]);
+            SignaturePath = (string)userTable.Rows[index][12];
+            Sysmin = Convert.ToBoolean((string) userTable.Rows[index][13]);
+
+            CalculateProgress();
         }
+
 
         public int Id { get;}
         public string Fullname => $"{Firstname} {Lastname}";
@@ -58,7 +65,30 @@ namespace DriveLogCode
         public string Username { get; }
         public string Password { get; }
         public string PicturePath { get; }
+        public string SignaturePath { get; }
         public bool Sysmin { get; }
+        public int TheoreticalProgress { get; private set; }
+        public int PracticalProgress { get; private set; }
+
+        private void CalculateProgress()
+        {
+            List<Lesson> lessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
+            List<LessonTemplate> lessonTemplates = DatabaseParser.GetTemplatesList();
+            TheoreticalProgress = 0;
+            PracticalProgress = 0;
+
+            foreach (Lesson l in lessonsList)
+            {
+                LessonTemplate template = lessonTemplates.Find(x => l.TemplateID == x.Id);
+
+                if (template == null) continue;
+
+                if (l.Completed && l.Progress == template.Time && template.Type == "Theoretical")
+                    TheoreticalProgress++;
+                else if (l.Completed && l.Progress == template.Time && template.Type == "Practical")
+                    PracticalProgress++;
+            }
+        }
 
         public override string ToString()
         {

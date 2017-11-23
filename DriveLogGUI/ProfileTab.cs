@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode;
 
@@ -42,7 +43,6 @@ namespace DriveLogGUI
         /// </summary>
         private void UpdateInfo()
         {
-
             profileHeaderLabel.Text = "Profile: " + _user.Username;
             nameOutputLabel.Text = _user.Fullname;
             phoneOutputLabel.Text = _user.Phone;
@@ -50,6 +50,11 @@ namespace DriveLogGUI
             emailOutputLabel.Text = _user.Email;
             addressOutputLabel.Text = _user.Address;
             cityOutputLabel.Text = $"{_user.City}, {_user.Zip}";
+            theoreticalStatus.Text = _user.TheoreticalProgress + "/24";
+            practicalStatus.Text = _user.PracticalProgress + "/14";
+
+            theoreticalProgressFill.Size = new Size((theoreticalBar.Width / 24) * _user.TheoreticalProgress, theoreticalBar.Height);
+            practicalProgressFill.Size = new Size((practicalBar.Width / 14) * _user.PracticalProgress, practicalBar.Height);
 
             if (!string.IsNullOrEmpty(_user.PicturePath) || _user.PicturePath != "")
             {
