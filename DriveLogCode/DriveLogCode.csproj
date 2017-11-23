@@ -62,22 +62,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppointmentStructure.cs" />
-    <Compile Include="ColorScheme.cs" />
-    <Compile Include="DatabaseParser.cs" />
-    <Compile Include="Document.cs" />
-    <Compile Include="EmptyDataTableException.cs" />
-    <Compile Include="IUploadHandler.cs" />
-    <Compile Include="JSONReader.cs" />
-    <Compile Include="Lesson.cs" />
-    <Compile Include="LessonTemplate.cs" />
-    <Compile Include="MySQL.cs" />
+    <Compile Include="Objects\AppointmentStructure.cs" />
+    <Compile Include="DesignSchemes\ColorScheme.cs" />
+    <Compile Include="DataAccess\DatabaseParser.cs" />
+    <Compile Include="DesignSchemes\FontScheme.cs" />
+    <Compile Include="Objects\Document.cs" />
+    <Compile Include="Exceptions\EmptyDataTableException.cs" />
+    <Compile Include="DataAccess\IUploadHandler.cs" />
+    <Compile Include="DataAccess\JSONReader.cs" />
+    <Compile Include="Objects\Lesson.cs" />
+    <Compile Include="Objects\LessonTemplate.cs" />
+    <Compile Include="DataAccess\MySQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterVerification.cs" />
-    <Compile Include="Session.cs" />
-    <Compile Include="UploadHandler.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="ZipCodes.cs" />
+    <Compile Include="Objects\Session.cs" />
+    <Compile Include="DataAccess\UploadHandler.cs" />
+    <Compile Include="Objects\User.cs" />
+    <Compile Include="Objects\ZipCodes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

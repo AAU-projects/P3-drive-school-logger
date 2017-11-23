@@ -6,6 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DriveLogCode;
+using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
+using DriveLogCode.Objects;
+using DriveLogGUI.CustomEventArgs;
 
 namespace DriveLogGUI
 {
@@ -68,22 +72,22 @@ namespace DriveLogGUI
         private Color GetColorForLabel(string appointmentLessonType)
         {
             if (appointmentLessonType.ToLower() == "theoretical") {
-                return ColorScheme.ColorBlue;
+                return ColorScheme.CalendarBlue;
             }
             if (appointmentLessonType.ToLower() == "practical") {
-                return ColorScheme.ColorGreen;
+                return ColorScheme.CalendarGreen;
             }
             if (appointmentLessonType.ToLower() == "manoeuvre") {
-                return ColorScheme.ColorYellow;
+                return ColorScheme.CalendarYellow;
             }
             if (appointmentLessonType.ToLower() == "slippery") {
-                return ColorScheme.ColorYellow;
+                return ColorScheme.CalendarYellow;
             }
             if (appointmentLessonType.ToLower() == "other") {
-                return ColorScheme.ColorYellow;
+                return ColorScheme.CalendarYellow;
             }
 
-            return ColorScheme.ColorRed;
+            return ColorScheme.CalendarRed;
 
         }
         public void UpdateLabel()
