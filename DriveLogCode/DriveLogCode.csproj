@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppointmentStructure.cs" />
+    <Compile Include="ColorScheme.cs" />
     <Compile Include="DatabaseParser.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="EmptyDataTableException.cs" />

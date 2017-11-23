@@ -9,9 +9,9 @@ namespace DriveLogCode
     public class LessonTemplate
     {
         public int Id { get; }
-        public string Title { get; }
+        public string Title { get; set; }
 
-        public string Description { get; }
+        public string Description { get; set; }
 
         public string Type { get; }
 
@@ -27,6 +27,16 @@ namespace DriveLogCode
             Type = type;
             Time = time;
             Reading = reading;
+        }
+
+        public LessonTemplate()
+        {
+            Id = 0;
+            Title = null;
+            Description = null;
+            Type = null;
+            Time = 0;
+            Reading = null;
         }
 
         public override string ToString()

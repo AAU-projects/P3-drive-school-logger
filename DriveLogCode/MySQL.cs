@@ -86,7 +86,8 @@ namespace DriveLogCode
                                        $"{userTable}.lastname " +
                                        $"FROM {AppointmentTable}, {userTable} " +
                                        "WHERE " +
-                                       $"{userTable}.user_id = {AppointmentTable}.instructorID ");
+                                       $"{userTable}.user_id = {AppointmentTable}.instructorID " +
+                                       $"ORDER BY {appointmentTable}.startTime, {appointmentTable}.availableTime ");
 
             return SendQuery(cmd);
         }
@@ -117,9 +118,9 @@ namespace DriveLogCode
             return ExistTable(table) ? SendQuery(cmd) : null;
         }
 
-        public static bool AddAppointment(string instructor, DataTable startTime, int availableTime, string type, string table = AppointmentTable)
+        public static bool AddAppointment(string instructor, string startTime, int availableTime, string type, string table = AppointmentTable)
         {
-            var cmd = new MySqlCommand($"INSERT INTO `{table}` (`instructor`, `startTime`, `availableTime`, `lessonType`) " +
+            var cmd = new MySqlCommand($"INSERT INTO `{table}` (`instructorID`, `startTime`, `availableTime`, `lessonType`) " +
                                        $"VALUES ('{instructor}', '{startTime}', '{availableTime}', '{type}')");
 
             if (ExistTable(table)) return SendNonQuery(cmd);
