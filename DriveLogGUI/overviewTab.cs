@@ -196,7 +196,7 @@ namespace DriveLogGUI
             {
                 if (lesson.EndDate.Date == currentDateTime.Date)
                 {
-                    dayNotification.BackColor = Color.FromArgb(127, 132, 144);
+                    dayNotification.BackColor = Color.FromArgb(0, 132, 144);
                 }
                 else
                 {

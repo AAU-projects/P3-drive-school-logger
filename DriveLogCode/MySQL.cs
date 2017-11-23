@@ -106,7 +106,7 @@ namespace DriveLogCode
                                        $"FROM {lessonTemplateTable} " +
                                        "WHERE " +
                                        $"{lessonTemplateTable}.id > {lessonTemplateId} AND " +
-                                       $"{lessonTemplateTable}.type = {lessonType} " +
+                                       $"{lessonTemplateTable}.type = '{lessonType}' " +
                                        $"ORDER BY {lessonTemplateTable}.id ");
 
             return SendQuery(cmd);

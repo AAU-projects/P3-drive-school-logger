@@ -278,22 +278,21 @@ namespace DriveLogGUI
         private void AddAppointment(AppointmentStructure appointment)
         {
             Appointment newAppointment;
-            Lesson progress = progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate());
+            Lesson progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate());
 
             if (!Session.LoggedInUser.Sysmin)
             {
                 // if no lessons user gets the first lesson :)
-
                 if (appointment.LessonType == "Practical" && Session.LastPracticalLesson != null) {
                     progress = Session.LastPracticalLesson;
                 } else if (appointment.LessonType == "Practical") {
-                    progress = new Lesson("Your first driving lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate());
+                    progress = new Lesson("Your first driving lesson :)", "idk", 4, 1, DateTime.Now, false, new LessonTemplate());
                 }
 
                 if (appointment.LessonType == "Theoretical" && Session.LastTheoraticalLesson != null) {
                     progress = Session.LastTheoraticalLesson;
                 } else if (appointment.LessonType == "Theoretical") {
-                    progress = new Lesson("Your first theory lesson :)", "idk", 4, 1, DateTime.Now, false, new LessonTemplate());
+                    progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate());
                 }
 
 
@@ -390,11 +389,19 @@ namespace DriveLogGUI
 
         private void bookingInformationButton_Click(object sender, EventArgs e)
         {
+            if (selectedAppointment.lessonTemplate.Type == "Practical")
+            {
+                
+            }
+
+
+            //TODO let a user select their own lesson if the user already have completed all lessons
+            LessonTemplate lessonTemplate = DatabaseParser.GetNextLessonTemplateFromID(selectedAppointment.lessonTemplate.Id, selectedAppointment.LessonType);
             foreach (var appointment in appointments)
             {
                 if (appointment.LessonType == selectedAppointment.LessonType)
                 {
-                    appointment.GetNextLessonTemplate();
+                    appointment.UpdateTemplate(lessonTemplate);
                 }
             }
         }

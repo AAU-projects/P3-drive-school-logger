@@ -18,7 +18,6 @@ namespace DriveLogGUI
         public string Date => GetDate();
 
         public LessonTemplate lessonTemplate = new LessonTemplate();
-        private Lesson _lesson;
 
         public Appointment(AppointmentStructure appointment, Lesson lesson)
         {
@@ -29,7 +28,6 @@ namespace DriveLogGUI
             this.LessonType = appointment.LessonType;
             this.FullyBooked = appointment.FullyBooked;
             this.InstructorName = appointment.InstructorName;
-            this._lesson = lesson;
             this.lessonTemplate = GetLessonTemplate(lesson);
 
             GenerateLabel();
@@ -93,14 +91,15 @@ namespace DriveLogGUI
             LabelAppointment.Text = lessonTemplate.Title;
         }
 
+        public void UpdateTemplate(LessonTemplate lessonTemplate)
+        {
+            this.lessonTemplate = lessonTemplate;
+            UpdateLabel();
+        }
+
         private LessonTemplate GetLessonTemplate(Lesson lesson)
         {
             return DatabaseParser.GetLessonTemplateFromID(lesson.TemplateID);
-        }
-
-        public void GetNextLessonTemplate()
-        {
-            lessonTemplate = DatabaseParser.GetNextLessonTemplateFromID(_lesson.TemplateID, _lesson.LessonTemplate.Type);
         }
 
         private DateTime GetToTime()
