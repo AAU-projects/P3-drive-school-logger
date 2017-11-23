@@ -182,7 +182,7 @@ namespace DriveLogGUI
 
         private void CheckIfUserHasAppointment(Panel dayNotification, DateTime currentDateTime)
         {
-            foreach (Lesson lesson in Session.LessonsUser)
+            foreach (Lesson lesson in Session.LessonsUser) //TODO Lookup after session class appointment is done
             {
                 if (lesson.EndDate.Date == currentDateTime.Date)
                 {
