@@ -32,6 +32,7 @@
             this.logoutButton = new System.Windows.Forms.Button();
             this.welcomeUserLabel = new System.Windows.Forms.Label();
             this.todaysNotePanel = new System.Windows.Forms.Panel();
+            this.overviewUpdateTodaysNote = new System.Windows.Forms.Button();
             this.todaysNoteUnderline = new System.Windows.Forms.Panel();
             this.todaysNoteLabel = new System.Windows.Forms.Label();
             this.todaysNoteTextbox = new System.Windows.Forms.TextBox();
@@ -85,7 +86,6 @@
             this.maneuverTrackPictureButton = new System.Windows.Forms.PictureBox();
             this.firstAidPictureButton = new System.Windows.Forms.PictureBox();
             this.doctorsNotePictureButton = new System.Windows.Forms.PictureBox();
-            this.overviewUpdateTodaysNote = new System.Windows.Forms.Button();
             this.headerPanel.SuspendLayout();
             this.todaysNotePanel.SuspendLayout();
             this.calendarPanel.SuspendLayout();
@@ -161,6 +161,20 @@
             this.todaysNotePanel.Size = new System.Drawing.Size(454, 180);
             this.todaysNotePanel.TabIndex = 1;
             // 
+            // overviewUpdateTodaysNote
+            // 
+            this.overviewUpdateTodaysNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.overviewUpdateTodaysNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.overviewUpdateTodaysNote.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overviewUpdateTodaysNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.overviewUpdateTodaysNote.Location = new System.Drawing.Point(383, 147);
+            this.overviewUpdateTodaysNote.Name = "overviewUpdateTodaysNote";
+            this.overviewUpdateTodaysNote.Size = new System.Drawing.Size(59, 22);
+            this.overviewUpdateTodaysNote.TabIndex = 13;
+            this.overviewUpdateTodaysNote.Text = "Update";
+            this.overviewUpdateTodaysNote.UseVisualStyleBackColor = false;
+            this.overviewUpdateTodaysNote.Click += new System.EventHandler(this.overviewUpdateTodaysNote_Click);
+            // 
             // todaysNoteUnderline
             // 
             this.todaysNoteUnderline.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
@@ -190,7 +204,6 @@
             this.todaysNoteTextbox.Name = "todaysNoteTextbox";
             this.todaysNoteTextbox.Size = new System.Drawing.Size(420, 136);
             this.todaysNoteTextbox.TabIndex = 0;
-            this.todaysNoteTextbox.Text = "There will be free cake today";
             // 
             // calendarPanel
             // 
@@ -729,20 +742,6 @@
             this.doctorsNotePictureButton.Click += new System.EventHandler(this.doctorsNotePictureButton_Click);
             this.doctorsNotePictureButton.MouseEnter += new System.EventHandler(this.doctorsNotePictureButton_Hover);
             this.doctorsNotePictureButton.MouseLeave += new System.EventHandler(this.doctorsNotePictureButton_Leave);
-            // 
-            // overviewUpdateTodaysNote
-            // 
-            this.overviewUpdateTodaysNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.overviewUpdateTodaysNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.overviewUpdateTodaysNote.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.overviewUpdateTodaysNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.overviewUpdateTodaysNote.Location = new System.Drawing.Point(383, 147);
-            this.overviewUpdateTodaysNote.Name = "overviewUpdateTodaysNote";
-            this.overviewUpdateTodaysNote.Size = new System.Drawing.Size(59, 22);
-            this.overviewUpdateTodaysNote.TabIndex = 13;
-            this.overviewUpdateTodaysNote.Text = "Update";
-            this.overviewUpdateTodaysNote.UseVisualStyleBackColor = false;
-            this.overviewUpdateTodaysNote.Click += new System.EventHandler(this.overviewUpdateTodaysNote_Click);
             // 
             // OverviewTab
             // 

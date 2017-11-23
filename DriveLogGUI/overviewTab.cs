@@ -32,6 +32,13 @@ namespace DriveLogGUI
             InitializeComponent();
             welcomeUserLabel.Text = "Welcome " + Session.LoggedInUser.Firstname;
             selectedMonth = DateTime.Now;
+            
+            overviewUpdateTodaysNote.Hide();
+            if (Session.LoggedInUser.Sysmin)
+            {
+                overviewUpdateTodaysNote.Show();
+            }
+            todaysNoteTextbox.Text = DatabaseParser.GetLatestTodaysNote();
 
             DrawCalendar();
             DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
@@ -270,7 +277,7 @@ namespace DriveLogGUI
             if (todaysNoteTextbox.Enabled)
             {
                 todaysNoteTextbox.Enabled = false;
-
+                MySql.AddTodaysNote(Session.LoggedInUser, todaysNoteTextbox.Text);
             }
             else
             {

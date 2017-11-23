@@ -447,12 +447,22 @@ namespace DriveLogCode
         private static bool CreateTodaysNoteTable(string tableName)
         {
             var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
-                                       $"`id`  int NOT NULL AUTO_INCREMENT ," +
-                                       $"`userID`  int NOT NULL ," +
-                                       $"`description`  varchar(2000) NOT NULL ," +
-                                       $"ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
+                        "`id`  int(11) NOT NULL AUTO_INCREMENT ," +
+                        "`userID`  int NOT NULL ," +
+                        "`date`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ," +
+                        "`description`  varchar(2000) NOT NULL ," +
+                        "PRIMARY KEY (`id`))" +
+                        "ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
 
             return SendNonQuery(cmd);
+        }
+
+        public static DataTable GetLatestTodaysNote(string table = TodaysNoteTable)
+        {
+            string query = $"SELECT * FROM {table} ORDER BY `id` DESC LIMIT 1;";
+            var cmd = new MySqlCommand(query);
+
+            return SendQuery(cmd);
         }
 
         private static bool SendNonQuery(MySqlCommand cmd)
