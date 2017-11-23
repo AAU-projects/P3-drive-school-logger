@@ -23,11 +23,13 @@ namespace DriveLogGUI
             date = eDate;
             UpdateTitle();
             SetWindowPosition();
-            FillComboBox(StartTimecomboBox);
+            FillTimeComboBox(StartTimecomboBox);
             FillComboBox(EndTimecomboBox);
+            timeDifferenceLabel.Text = "";
+            AddAppointmentButton.Enabled = false;
         }
 
-        private void FillComboBox(ComboBox comboBox)
+        private void FillTimeComboBox(ComboBox comboBox)
         {
             DateTime time = new DateTime();
             time = time.AddHours(6);
@@ -36,6 +38,14 @@ namespace DriveLogGUI
             {
                 comboBox.Items.Add(time.ToString("HH:mm"));
                 time = time.AddMinutes(15);
+            }
+        }
+
+        private void FillComboBox(ComboBox comboBox)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                comboBox.Items.Add(i+1);
             }
         }
 
@@ -76,7 +86,28 @@ namespace DriveLogGUI
 
         private void StartTimecomboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            EndTimecomboBox.Text = StartTimecomboBox.Items[StartTimecomboBox.SelectedIndex + 3].ToString();
+            SetComboBoxTimeDifference();
+        }
+
+        private void EndTimecomboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            SetComboBoxTimeDifference();
+        }
+
+        private void SetComboBoxTimeDifference()
+        {
+            if (StartTimecomboBox.Text != String.Empty & EndTimecomboBox.Text != String.Empty)
+            {
+                DateTime startTime = DateTime.Parse(StartTimecomboBox.Text);
+                DateTime endTime = startTime.AddMinutes(45 * (int)EndTimecomboBox.SelectedItem);
+
+                TimeSpan timeDifference = endTime - startTime;
+
+                if (timeDifference.Hours <= 0)
+                    timeDifferenceLabel.Text = $"{timeDifference.Minutes} minutes";
+                else
+                    timeDifferenceLabel.Text = $"{timeDifference.Hours} hours {timeDifference.Minutes} minutes";
+            }
         }
     }
 }

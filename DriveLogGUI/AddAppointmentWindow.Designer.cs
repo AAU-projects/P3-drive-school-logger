@@ -38,6 +38,7 @@
             this.EndTimecomboBox = new System.Windows.Forms.ComboBox();
             this.AddAppointmentButton = new System.Windows.Forms.Button();
             this.CancelButton1 = new System.Windows.Forms.Button();
+            this.timeDifferenceLabel = new System.Windows.Forms.Label();
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,9 +73,9 @@
             this.TitleLabel.Font = new System.Drawing.Font("Calibri Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.Location = new System.Drawing.Point(12, 25);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(354, 33);
+            this.TitleLabel.Size = new System.Drawing.Size(368, 33);
             this.TitleLabel.TabIndex = 3;
-            this.TitleLabel.Text = "Add apointment to 24-12-2012";
+            this.TitleLabel.Text = "Add appointment to 24-12-2012";
             // 
             // LessonTypelabel
             // 
@@ -102,9 +103,9 @@
             this.EndTimelabel.Font = new System.Drawing.Font("Calibri Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EndTimelabel.Location = new System.Drawing.Point(15, 141);
             this.EndTimelabel.Name = "EndTimelabel";
-            this.EndTimelabel.Size = new System.Drawing.Size(68, 18);
+            this.EndTimelabel.Size = new System.Drawing.Size(59, 18);
             this.EndTimelabel.TabIndex = 6;
-            this.EndTimelabel.Text = "End time: ";
+            this.EndTimelabel.Text = "Lessons:";
             // 
             // LessonTypecomboBox
             // 
@@ -133,6 +134,7 @@
             this.EndTimecomboBox.Name = "EndTimecomboBox";
             this.EndTimecomboBox.Size = new System.Drawing.Size(142, 21);
             this.EndTimecomboBox.TabIndex = 10;
+            this.EndTimecomboBox.SelectedValueChanged += new System.EventHandler(this.EndTimecomboBox_SelectedValueChanged);
             // 
             // AddAppointmentButton
             // 
@@ -163,11 +165,22 @@
             this.CancelButton1.UseVisualStyleBackColor = false;
             this.CancelButton1.Click += new System.EventHandler(this.CancelButton1_Click);
             // 
+            // timeDifferenceLabel
+            // 
+            this.timeDifferenceLabel.AutoSize = true;
+            this.timeDifferenceLabel.Font = new System.Drawing.Font("Calibri Light", 10F);
+            this.timeDifferenceLabel.Location = new System.Drawing.Point(255, 126);
+            this.timeDifferenceLabel.Name = "timeDifferenceLabel";
+            this.timeDifferenceLabel.Size = new System.Drawing.Size(94, 17);
+            this.timeDifferenceLabel.TabIndex = 15;
+            this.timeDifferenceLabel.Text = "time difference";
+            // 
             // AddAppointmentWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 221);
+            this.Controls.Add(this.timeDifferenceLabel);
             this.Controls.Add(this.CancelButton1);
             this.Controls.Add(this.AddAppointmentButton);
             this.Controls.Add(this.EndTimecomboBox);
@@ -200,5 +213,6 @@
         private System.Windows.Forms.ComboBox EndTimecomboBox;
         private System.Windows.Forms.Button AddAppointmentButton;
         private System.Windows.Forms.Button CancelButton1;
+        private System.Windows.Forms.Label timeDifferenceLabel;
     }
 }
