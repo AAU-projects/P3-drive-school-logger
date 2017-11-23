@@ -359,13 +359,13 @@ namespace DriveLogCode
         }
 
         public static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr, string address, 
-            string zip, string city, string username, string password, string picture = null, string sysmin = "false", string usertable = UserTable)
+            string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string usertable = UserTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO {usertable} (" +
-                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, sysmin)" +
+                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, signature, sysmin)" +
                                        $"VALUES (" +
                                        $"'{firstname}', '{lastname}', '{phone}', '{mail}', '{cpr}', '{address}', '{zip}', '{city}', '{username}', " +
-                                       $"'{password}', '{picture}', '{sysmin}')");
+                                       $"'{password}', '{picture}', '{signature}', '{sysmin}')");
 
 
             if (ExistTable(usertable)) return SendNonQuery(cmd);
@@ -378,12 +378,12 @@ namespace DriveLogCode
         }
 
         public static bool UpdateUser(string cpr, string firstname, string lastname, string phone, string mail, string address,
-            string zip, string city, string username, string password, string picture = null, string sysmin = "false", string usertable = UserTable)
+            string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string usertable = UserTable)
         {
             var cmd = new MySqlCommand($"UPDATE {usertable} SET " +
                                        $"`firstname` = '{firstname}', `lastname` = '{lastname}', `phone` = '{phone}'," +
                                        $"`email` = '{mail}', `address` = '{address}', `zip` = '{zip}', `city` = '{city}'," +
-                                       $"`username` = '{username}', `password` = '{password}', `picture` = '{picture}', `sysmin` = '{sysmin}'" +
+                                       $"`username` = '{username}', `password` = '{password}', `picture` = '{picture}', `signature` = '{signature}',`sysmin` = '{sysmin}'" +
                                        $"WHERE `cpr` = '{cpr}'");
 
             return SendNonQuery(cmd);
@@ -411,6 +411,7 @@ namespace DriveLogCode
                         "`username`  varchar(255) NOT NULL ," +
                         "`password`  varchar(255) NOT NULL ," +
                         "`picture`  varchar(255) NULL ," +
+                        "`signature`  varchar(255) NOT NULL, " +
                         "`sysmin`  enum('True','False') NOT NULL ," +
                         "PRIMARY KEY (`user_id`))" +
                         "ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;";
