@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace DriveLogGUI
     {
         public Panel PanelForCalendarDay;
         public Panel BottomPanelForCalendar;
+        public Panel DayNotification;
         public Label LabelForDate;
         public Label LabelForWeekday;
         public DateTime Date;
@@ -29,14 +31,15 @@ namespace DriveLogGUI
             Date = date;
         }
 
-        public CalendarData(Panel inputPanel, Label inputLabel, DateTime inputDate)
+        public CalendarData(Panel inputPanel, Label inputLabel, DateTime inputDate, Panel dayNotification)
         {
             PanelForCalendarDay = inputPanel;
             LabelForDate = inputLabel;
             Date = inputDate;
-
+            DayNotification = dayNotification;
+            inputPanel.Controls.Add(DayNotification);
+            
             LabelForDate.Click += (s, e) => panel_Click(new DateClickEventArgs(Date));
-
         }
 
         private void panel_Click(DateClickEventArgs e)

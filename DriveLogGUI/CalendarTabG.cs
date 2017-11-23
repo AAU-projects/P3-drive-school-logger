@@ -67,8 +67,6 @@ namespace DriveLogGUI
             contextInformationTextbox.Text = e.Appointment.Context;
             contextTitleInformationLabel.Text = e.Appointment.LabelAppointment.Text;
             instructorInformationLabel.Text = e.Appointment.InstructorName;
-            
-
         }
 
         private void SubscribeToAllClickPanels(List<CalendarData> listOfDays)
@@ -114,7 +112,6 @@ namespace DriveLogGUI
                 UpdateCalendar(0);
             }
             panelForCalendar.Controls.Add(backPanel);
-
         }
 
         private void GenerateDayLabel(ref Panel newDay)
@@ -166,7 +163,6 @@ namespace DriveLogGUI
                 addAppointmentButton.Click += (s, e) => OpenAppointment(new DateClickEventArgs(data.Date));
 
                 data.BottomPanelForCalendar.Controls.Add(addAppointmentButton);
-
             }
             
         }
@@ -181,10 +177,9 @@ namespace DriveLogGUI
         {
             //drawing a line below dates
             foreach (var data in calendarData) {
-                var test = data.PanelForCalendarDay;
-                using (Graphics g = test.CreateGraphics()) {
+                using (Graphics g = data.PanelForCalendarDay.CreateGraphics()) {
                     var p = new Pen(Color.FromArgb(128, 132, 144), 5);
-                    g.DrawLine(p, test.Location.X + 15, test.Height - 10, test.Width - 15, test.Height - 10);
+                    g.DrawLine(p, data.PanelForCalendarDay.Location.X + 15, data.PanelForCalendarDay.Height - 10, data.PanelForCalendarDay.Width - 15, data.PanelForCalendarDay.Height - 10);
                 }
             }
         }
