@@ -35,15 +35,19 @@
             this.dragAndDropLabel = new System.Windows.Forms.Label();
             this.editPictureBox = new System.Windows.Forms.PictureBox();
             this.UploadButton = new System.Windows.Forms.Button();
+            this.dragPanel = new System.Windows.Forms.Panel();
+            this.dragPicture = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
+            this.dragPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dragPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(223, 9);
+            this.label1.Location = new System.Drawing.Point(223, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(224, 29);
             this.label1.TabIndex = 0;
@@ -107,10 +111,11 @@
             // 
             // editPictureBox
             // 
+            this.editPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.editPictureBox.Location = new System.Drawing.Point(12, 105);
             this.editPictureBox.Name = "editPictureBox";
             this.editPictureBox.Size = new System.Drawing.Size(671, 338);
-            this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.editPictureBox.TabIndex = 6;
             this.editPictureBox.TabStop = false;
             // 
@@ -129,13 +134,39 @@
             this.UploadButton.UseVisualStyleBackColor = false;
             this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
+            // dragPanel
+            // 
+            this.dragPanel.BackColor = System.Drawing.Color.Transparent;
+            this.dragPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dragPanel.Controls.Add(this.dragPicture);
+            this.dragPanel.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.dragPanel.Location = new System.Drawing.Point(247, 155);
+            this.dragPanel.Name = "dragPanel";
+            this.dragPanel.Size = new System.Drawing.Size(200, 200);
+            this.dragPanel.TabIndex = 8;
+            // 
+            // dragPicture
+            // 
+            this.dragPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dragPicture.Cursor = System.Windows.Forms.Cursors.SizeNESW;
+            this.dragPicture.Location = new System.Drawing.Point(177, 175);
+            this.dragPicture.Name = "dragPicture";
+            this.dragPicture.Size = new System.Drawing.Size(20, 22);
+            this.dragPicture.TabIndex = 0;
+            this.dragPicture.TabStop = false;
+            this.dragPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseDown);
+            this.dragPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseMove);
+            this.dragPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseUp);
+            // 
             // UploadProfilePicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(695, 570);
+            this.Controls.Add(this.dragPanel);
             this.Controls.Add(this.UploadButton);
             this.Controls.Add(this.dragAndDropLabel);
             this.Controls.Add(this.dragAndDropPictureBox);
@@ -151,6 +182,8 @@
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.UploadProfilePicForm_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).EndInit();
+            this.dragPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dragPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,5 +198,7 @@
         private System.Windows.Forms.Label dragAndDropLabel;
         private System.Windows.Forms.PictureBox editPictureBox;
         private System.Windows.Forms.Button UploadButton;
+        private System.Windows.Forms.Panel dragPanel;
+        private System.Windows.Forms.PictureBox dragPicture;
     }
 }
