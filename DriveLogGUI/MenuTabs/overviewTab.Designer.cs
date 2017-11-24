@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.welcomeUserLabel = new System.Windows.Forms.Label();
             this.todaysNotePanel = new System.Windows.Forms.Panel();
@@ -115,12 +116,23 @@
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.headerPanel.Controls.Add(this.button2);
             this.headerPanel.Controls.Add(this.logoutButton);
             this.headerPanel.Controls.Add(this.welcomeUserLabel);
             this.headerPanel.Location = new System.Drawing.Point(12, 12);
             this.headerPanel.Name = "headerPanel";
             this.headerPanel.Size = new System.Drawing.Size(873, 56);
             this.headerPanel.TabIndex = 0;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(426, 17);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // logoutButton
             // 
@@ -848,5 +860,6 @@
         private System.Windows.Forms.Label calendarRightArrow;
         private System.Windows.Forms.Label calendarLeftArrow;
         private System.Windows.Forms.Button overviewUpdateTodaysNote;
+        private System.Windows.Forms.Button button2;
     }
 }

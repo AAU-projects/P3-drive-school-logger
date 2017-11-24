@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using DriveLogCode;
 using DriveLogCode.DataAccess;
 using DriveLogCode.Objects;
 
@@ -279,6 +280,12 @@ namespace DriveLogGUI.MenuTabs
             {
                 todaysNoteTextbox.Enabled = true;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var PdfMaker = new PdfMaker();
+            PdfMaker.MakeDriveLog();
         }
     }
 }
