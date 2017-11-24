@@ -19,7 +19,9 @@ namespace DriveLogCode.Objects
         {
             LoggedInUser = new User(userTable);
             LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
-            GetProgress();
+
+            if (!LoggedInUser.Sysmin)
+                GetProgress();
         }
 
         private static void GetProgress()
@@ -30,13 +32,13 @@ namespace DriveLogCode.Objects
                     .Where(x => x.LessonTemplate.Type == "Theoretical")
                     .OrderByDescending(x => x.TemplateID)
                     .ThenByDescending(x => x.Progress)
-                    .First();
+                    .FirstOrDefault();
 
                 LastPracticalLesson = LessonsUser
                     .Where(x => x.LessonTemplate.Type == "Practical")
                     .OrderByDescending(x => x.TemplateID)
                     .ThenByDescending(x => x.Progress)
-                    .First();
+                    .FirstOrDefault();
             }
         }
     }

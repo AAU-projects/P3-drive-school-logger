@@ -36,7 +36,6 @@ namespace DriveLogGUI
             InitializeComponent();
             InitializeMenuTabs();
 
-
             overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
 
             //createing the start point for all pages.
@@ -84,7 +83,14 @@ namespace DriveLogGUI
 
         private void InitializeMenuTabs()
         {
-            overviewTab = new OverviewTab();
+            if (Session.LoggedInUser.Sysmin)
+            {
+                overviewTab = new InstructorOverviewTab();
+            }
+            else
+            {
+                overviewTab = new StudentOverviewTab();
+            }
             profileTab = new ProfileTab(Session.LoggedInUser);
             documentViewer = new DocumentViewer();
             userSearchTab = new UserSearchTab();
@@ -228,7 +234,7 @@ namespace DriveLogGUI
         private void OpenPageEvent(UserControl page)
         {
             if (Session.LoggedInUser.Sysmin) return;
-            if (page is OverviewTab || page is ProfileTab)
+            if (page is StudentOverviewTab || page is ProfileTab)
             {
                 OpenPage(this, driveLogTab);
             }

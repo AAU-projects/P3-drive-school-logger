@@ -71,6 +71,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MenuTabs\InstructorOverviewTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MenuTabs\InstructorOverviewTab.Designer.cs">
+      <DependentUpon>InstructorOverviewTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuTabs\OverviewTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Windows\AddAppointmentWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,11 +134,11 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuTabs\OverviewTab.cs">
+    <Compile Include="MenuTabs\StudentOverviewTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MenuTabs\OverviewTab.Designer.cs">
-      <DependentUpon>OverviewTab.cs</DependentUpon>
+    <Compile Include="MenuTabs\StudentOverviewTab.Designer.cs">
+      <DependentUpon>StudentOverviewTab.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuTabs\ProfileTab.cs">
       <SubType>UserControl</SubType>
@@ -183,6 +192,9 @@
     <Compile Include="MenuTabs\UserSearchTab.Designer.cs">
       <DependentUpon>UserSearchTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MenuTabs\InstructorOverviewTab.resx">
+      <DependentUpon>InstructorOverviewTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\AddAppointmentWindow.resx">
       <DependentUpon>AddAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,8 +219,8 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuTabs\OverviewTab.resx">
-      <DependentUpon>OverviewTab.cs</DependentUpon>
+    <EmbeddedResource Include="MenuTabs\StudentOverviewTab.resx">
+      <DependentUpon>StudentOverviewTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuTabs\ProfileTab.resx">
       <DependentUpon>ProfileTab.cs</DependentUpon>

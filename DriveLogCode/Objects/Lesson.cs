@@ -20,9 +20,12 @@ namespace DriveLogCode.Objects
 
         public LessonTemplate LessonTemplate { get; }
 
+        public int StudentId { get; }
+
         public string InstructorFullname => InstructorFirstname + " " + InstructorLastname;
 
-        public Lesson(string instructorFirstname, string instructorLastname, int templateId, int progress, DateTime endDate, bool completed, LessonTemplate lessonTemplate, string instructorSignaturePath)
+        public Lesson(string instructorFirstname, string instructorLastname, int templateId, int progress, DateTime endDate, bool completed,
+            LessonTemplate lessonTemplate, string instructorSignaturePath, int studentId)
         {
             InstructorFirstname = instructorFirstname;
             InstructorLastname = instructorLastname;
@@ -32,6 +35,7 @@ namespace DriveLogCode.Objects
             Completed = completed;
             this.LessonTemplate = lessonTemplate;
             InstructorSignaturePath = instructorSignaturePath;
+            StudentId = studentId;
         }
     }
 }

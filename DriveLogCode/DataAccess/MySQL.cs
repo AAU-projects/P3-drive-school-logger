@@ -43,6 +43,30 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        public static DataTable GetLessonsToComplete(int instructorId, string LessonTable = LessonTable,
+            string AppointmentTable = AppointmentTable, string LessonTemplateTable = LessonTemplateTable )
+        {
+            var cmd = new MySqlCommand("SELECT " +
+                $"{LessonTable}.LessonID AS TemplateID, " +
+                $"{LessonTable}.LessonPart AS Progress, " +
+                $"{LessonTable}.EndDate, " +
+                $"{LessonTable}.Completed, " +
+                $"{LessonTemplateTable}.title, " +
+                $"{LessonTemplateTable}.description, " +
+                $"{LessonTemplateTable}.type, " +
+                $"{LessonTemplateTable}.time, " +
+                $"{LessonTemplateTable}.reading, " +
+                $"{LessonTable}.UserID " +
+                $"FROM {AppointmentTable}, {LessonTable}, {LessonTemplateTable} " +
+                "WHERE " +
+                $"{LessonTable}.AppointmentID = {AppointmentTable}.id AND " +
+                $"{AppointmentTable}.instructorID = '{instructorId}' AND " +
+                $"{LessonTemplateTable}.id = {LessonTable}.LessonID " +
+                $"ORDER BY {LessonTable}.EndDate");
+
+            return SendQuery(cmd);
+        }
+
         public static DataTable GetLessonByID(int id, string table = LessonTable)
         {
             return GetFromDB("id", id.ToString(), table);
