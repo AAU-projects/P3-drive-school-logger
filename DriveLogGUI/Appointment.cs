@@ -64,7 +64,7 @@ namespace DriveLogGUI
             if (appointmentLessonType == LessonTypes.Slippery) {
                 return ColorScheme.CalendarYellow;
             }
-            if (appointmentLessonType.ToLower() == LessonTypes.Other) {
+            if (appointmentLessonType == LessonTypes.Other) {
                 return ColorScheme.CalendarYellow;
             }
 
