@@ -211,5 +211,12 @@ namespace DriveLogCode.DataAccess
 
             return lessonTemplate;
         }
+
+        public static int GetNumberOfBookedLessonsFromAppointmentID(int appointmentid)
+        {
+            DataTable result = MySql.GetNumberOfBookingsInAppointment(appointmentid);
+
+            return result.Rows.Count;
+        }
     }
 }

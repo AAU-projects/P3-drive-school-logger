@@ -43,6 +43,16 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        public static DataTable GetNumberOfBookingsInAppointment(int appointmentid, string LessonTemplateTable = LessonTemplateTable)
+        {
+            var cmd = new MySqlCommand($"SELECT MIN(lessons.UserID) " +
+                                       $"FROM lessons " +
+                                       $"WHERE lessons.AppointmentID = {appointmentid} " +
+                                       $"GROUP BY UserID");
+
+            return SendQuery(cmd);
+        }
+
         public static DataTable GetLessonByID(int id, string table = LessonTable)
         {
             return GetFromDB("id", id.ToString(), table);

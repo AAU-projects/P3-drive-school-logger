@@ -17,13 +17,17 @@ namespace DriveLogGUI.Windows
         public AddAppointmentWindow(DateTime eDate, Point mousePosition, List<Appointment> appointments)
         {
             InitializeComponent();
+
             _appointments = appointments;
             openWindowPosition = mousePosition;
             date = eDate;
+
             UpdateTitle();
             SetWindowPosition();
+
             FillTimeComboBox(StartTimecomboBox);
             FillComboBox(lessonsComboBox);
+
             timeDifferenceLabel.Text = "";
             lessonsComboBox.SelectedItem = 1;
         }

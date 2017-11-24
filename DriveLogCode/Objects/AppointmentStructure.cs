@@ -23,8 +23,15 @@ namespace DriveLogCode.Objects
             InstructorName = instructorName;
         }
 
-        public AppointmentStructure()
+        public AppointmentStructure(AppointmentStructure appointmentStructure)
         {
+            Id = appointmentStructure.Id;
+            InstructorID = appointmentStructure.InstructorID;
+            StartTime = appointmentStructure.StartTime;
+            AvailableTime = appointmentStructure.AvailableTime;
+            LessonType = appointmentStructure.LessonType;
+            FullyBooked = appointmentStructure.FullyBooked;
+            InstructorName = appointmentStructure.InstructorName;
         }
     }
 }
