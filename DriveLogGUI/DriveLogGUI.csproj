@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MenuTabs\AbstractControlDescriptionProvider.cs" />
     <Compile Include="MenuTabs\InstructorOverviewTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -261,7 +262,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\rubber-duck.png">

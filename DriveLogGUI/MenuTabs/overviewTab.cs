@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Windows.Forms;
 namespace DriveLogGUI.MenuTabs
 {
     internal delegate void SubPageNotification(UserControl origin);
+    [TypeDescriptionProvider(typeof(AbstractControlDescriptionProvider<OverviewTab, UserControl>))]
     public abstract class OverviewTab : UserControl
     {
         public virtual event EventHandler LogOutButtonClick;
