@@ -11,6 +11,10 @@ namespace DriveLogGUI.Windows
 {
     public partial class UploadProfilePicForm : Form
     {
+        private int startX;
+        private int startY;
+
+
         public UploadProfilePicForm(Form registerForm)
         {
             _registerForm = registerForm;
@@ -43,28 +47,31 @@ namespace DriveLogGUI.Windows
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             if (files.Length == 1 && ValidateDroppedFile(files[0]))
-            {
-                dragAndDropLabel.Visible = false;
-                dragAndDropPictureBox.Visible = false;
+                PictureLoaded(Image.FromFile(files[0]));
+        }
 
-                // Resets the picturebox location and resizes the image.
-                ResetPictureBox();
-                Image draggedImage = Image.FromFile(files[0]);
-                draggedImage = CheckImageSize(draggedImage);
+        private void PictureLoaded(Image loadedImage)
+        {
+            dragAndDropLabel.Visible = false;
+            dragAndDropPictureBox.Visible = false;
 
-                // Sets position, width, and height for picturebox.
-                editPictureBox.Width = draggedImage.Width;
-                editPictureBox.Height = draggedImage.Height;
-                editPictureBox.Left = this.Width / 2 - draggedImage.Width / 2;
-                editPictureBox.Image = draggedImage;
-                editPictureBox.SizeMode = PictureBoxSizeMode.StretchImage; 
+            // Resets the picturebox location and resizes the image.
+            ResetPictureBox();
+            Image userImage = loadedImage;
+            userImage = CheckImageSize(userImage);
 
-                SetDragPanelPosition();
-                SetOverlayPanelPosition();
-                dragPicture.Visible = true;
-                dragPanel.Visible = true;
-                overlayPanel.Visible = true;
-            }
+            // Sets position, width, and height for picturebox.
+            editPictureBox.Width = userImage.Width;
+            editPictureBox.Height = userImage.Height;
+            editPictureBox.Left = this.Width / 2 - userImage.Width / 2;
+            editPictureBox.Image = userImage;
+            editPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            SetDragPanelPosition();
+            SetOverlayPanelPosition();
+            dragPicture.Visible = true;
+            dragPanel.Visible = true;
+            overlayPanel.Visible = true;
         }
 
         private Image CheckImageSize(Image image)
@@ -112,6 +119,12 @@ namespace DriveLogGUI.Windows
             return resizedImage;
         }
 
+        private Image CropImage(Image Image)
+        {
+            Bitmap croppedImage = new Bitmap(Image);
+            return croppedImage.Clone(new Rectangle(dragPanel.Location.X, dragPanel.Location.Y, dragPanel.Width, dragPanel.Height), croppedImage.PixelFormat);
+        }
+
         private void ResetPictureBox()
         {
             this.editPictureBox.Location = new Point(12, 105);
@@ -156,13 +169,13 @@ namespace DriveLogGUI.Windows
             {
                 RegisterForm tempregisterForm = _registerForm as RegisterForm;
 
-                tempregisterForm.ProfileImage = editPictureBox.Image;
+                tempregisterForm.ProfileImage = CropImage(editPictureBox.Image);
             }
             else if (_registerForm is EditUserInfoForm)
             {
                 EditUserInfoForm tempregisterForm = _registerForm as EditUserInfoForm;
 
-                tempregisterForm.ProfilePicture = editPictureBox.Image;
+                tempregisterForm.ProfilePicture = CropImage(editPictureBox.Image);
             }
             this.Dispose();
             _registerForm.Show();
@@ -170,7 +183,14 @@ namespace DriveLogGUI.Windows
 
         private void UploadButton_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Title = "Select Image";
+                fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.png) | *.jpg; *.jpeg; *.jpe; *.png";
 
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                    PictureLoaded(new Bitmap(fileDialog.FileName));
+            }
         }
 
         private bool allowResize = false;
@@ -188,68 +208,75 @@ namespace DriveLogGUI.Windows
         {
             if (allowResize)
             {
-                int nx;
+                int newSize;
                 if (dragPanel.Height + dragPanel.Top > editPictureBox.Height)
                 {
                     allowResize = false;
-                    nx = dragPanel.Height - (dragPanel.Height - editPictureBox.Height);
+                    newSize = dragPanel.Height - (dragPanel.Height - editPictureBox.Height);
                 }
                 else if (dragPanel.Width + dragPanel.Left > editPictureBox.Width)
                 {
                     allowResize = false;
-                    nx = dragPanel.Height - (dragPanel.Height - editPictureBox.Width);
+                    newSize = dragPanel.Height - (dragPanel.Height - editPictureBox.Width);
                 }
                 else if (dragPanel.Width < dragPicture.Width)
                 {
                     allowResize = false;
-                    nx = dragPicture.Width + 20;
+                    newSize = dragPicture.Width + 20;
                 }
                 else
-                    nx = dragPicture.Top + e.Y;
+                    newSize = dragPicture.Top + e.Y;
 
-                this.dragPanel.Height = nx;
-                this.dragPanel.Width = nx;
-
-                /*int nx;
-                if (dragPanel.Width + dragPanel.Left <= editPictureBox.Width)
-                {
-                    nx = dragPicture.Top + e.Y;
-                    //this.dragPanel.Height = dragPicture.Top + e.Y;
-                    //this.dragPanel.Width = dragPicture.Top + e.Y;
-                }
-                else if (dragPanel.Height + dragPanel.Top <= editPictureBox.Height)
-                {
-                    allowResize = false;
-                    nx = dragPanel.Height - (dragPanel.Height - editPictureBox.Height);
-                }
-                else
-                {
-                    allowResize = false;
-                    nx = dragPanel.Height - (dragPanel.Height - editPictureBox.Width);
-                    //this.dragPanel.Height = dragPanel.Height - (dragPanel.Height - dragPicture.Width);
-                    //this.dragPanel.Width = dragPanel.Height - (dragPanel.Height - dragPicture.Width);
-                }
-                this.dragPanel.Height = nx;
-                this.dragPanel.Width = nx;*/
+                this.dragPanel.Height = newSize;
+                this.dragPanel.Width = newSize;
             }
         }
 
-        private readonly SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(50, 0, 0, 255));
-        private void dragPanel_Paint(object sender, PaintEventArgs e)
+        private void dragPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            /*Graphics panelGraphics = e.Graphics;
-            GraphicsPath graphicsPath = new GraphicsPath();
-            /*Region graphicRegion = new Region(new Rectangle(editPictureBox.Location.X, editPictureBox.Location.Y, editPictureBox.Width, editPictureBox.Height));
-            graphicsPath.AddRectangle(new Rectangle(dragPanel.Location.X, dragPanel.Location.Y, dragPanel.Width, dragPanel.Height));#1#
+            if (allowResize)
+            {
+                Point newLocation;
 
-            Region graphicRegion = new Region(new Rectangle(0, 0, editPictureBox.Width, editPictureBox.Height));
-            graphicsPath.AddRectangle(new Rectangle(0, 0, dragPanel.Width, dragPanel.Height));
+                // Checks the left side.
+                if (this.dragPanel.Left + e.X - startX <= 0)
+                {
+                    allowResize = false;
+                    newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);
+                } // Checks the right side.
+                else if (this.dragPanel.Left + this.dragPanel.Width + e.X - startX >= editPictureBox.Width)
+                {
+                    allowResize = false;
+                    newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);
+                } // Checks the top.
+                else if (this.dragPanel.Top + e.Y - startY < 0)
+                {
+                    allowResize = false;
+                    newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);
+                } // Checks the bottom.
+                else if (this.dragPanel.Top + this.dragPanel.Height + e.Y - startY >= editPictureBox.Height)
+                {
+                    allowResize = false;
+                    newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);
+                }// Sets the new location if none of the above was true. 
+                else
+                newLocation = new Point(e.X + this.dragPanel.Left - startX, e.Y + this.dragPanel.Top - startY);
 
-            //graphicsPath.AddRectangle(new Rectangle(editPictureBox.Location.X, editPictureBox.Location.Y, editPictureBox.Width, editPictureBox.Height));
-            graphicRegion.Exclude(graphicsPath);
-            panelGraphics.FillRegion(semiTransBrush, graphicRegion);
-            
-            base.OnPaint(e);*/
+                this.dragPanel.Location = newLocation;
+
+            }
+        }
+
+        private void dragPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            allowResize = true;
+            startX = e.X;
+            startY = e.Y;
+        }
+
+        private void dragPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            allowResize = false;
         }
     }
 }

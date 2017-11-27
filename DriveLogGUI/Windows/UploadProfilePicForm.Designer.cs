@@ -31,17 +31,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.acceptButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.dragAndDropPictureBox = new System.Windows.Forms.PictureBox();
             this.dragAndDropLabel = new System.Windows.Forms.Label();
-            this.editPictureBox = new System.Windows.Forms.PictureBox();
             this.UploadButton = new System.Windows.Forms.Button();
             this.dragPanel = new System.Windows.Forms.Panel();
-            this.dragPicture = new System.Windows.Forms.PictureBox();
             this.overlayPanel = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
+            this.dragPicture = new System.Windows.Forms.PictureBox();
+            this.dragAndDropPictureBox = new System.Windows.Forms.PictureBox();
+            this.editPictureBox = new System.Windows.Forms.PictureBox();
             this.dragPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dragPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -86,18 +86,6 @@
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // dragAndDropPictureBox
-            // 
-            this.dragAndDropPictureBox.BackColor = System.Drawing.SystemColors.Control;
-            this.dragAndDropPictureBox.Image = global::DriveLogGUI.Properties.Resources.drag_and_drop_icon;
-            this.dragAndDropPictureBox.InitialImage = null;
-            this.dragAndDropPictureBox.Location = new System.Drawing.Point(247, 132);
-            this.dragAndDropPictureBox.Name = "dragAndDropPictureBox";
-            this.dragAndDropPictureBox.Size = new System.Drawing.Size(200, 200);
-            this.dragAndDropPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.dragAndDropPictureBox.TabIndex = 3;
-            this.dragAndDropPictureBox.TabStop = false;
-            // 
             // dragAndDropLabel
             // 
             this.dragAndDropLabel.AutoSize = true;
@@ -109,16 +97,6 @@
             this.dragAndDropLabel.Text = "Drag and drop a picture here,\r\nor click the button bellow to select a picture fro" +
     "m the PC";
             this.dragAndDropLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // editPictureBox
-            // 
-            this.editPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.editPictureBox.Location = new System.Drawing.Point(12, 105);
-            this.editPictureBox.Name = "editPictureBox";
-            this.editPictureBox.Size = new System.Drawing.Size(671, 338);
-            this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.editPictureBox.TabIndex = 6;
-            this.editPictureBox.TabStop = false;
             // 
             // UploadButton
             // 
@@ -145,20 +123,9 @@
             this.dragPanel.Name = "dragPanel";
             this.dragPanel.Size = new System.Drawing.Size(200, 200);
             this.dragPanel.TabIndex = 8;
-            this.dragPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.dragPanel_Paint);
-            // 
-            // dragPicture
-            // 
-            this.dragPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dragPicture.Cursor = System.Windows.Forms.Cursors.SizeNESW;
-            this.dragPicture.Location = new System.Drawing.Point(179, 177);
-            this.dragPicture.Name = "dragPicture";
-            this.dragPicture.Size = new System.Drawing.Size(20, 22);
-            this.dragPicture.TabIndex = 0;
-            this.dragPicture.TabStop = false;
-            this.dragPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseDown);
-            this.dragPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseMove);
-            this.dragPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseUp);
+            this.dragPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragPanel_MouseDown);
+            this.dragPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragPanel_MouseMove);
+            this.dragPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragPanel_MouseUp);
             // 
             // overlayPanel
             // 
@@ -167,6 +134,43 @@
             this.overlayPanel.Name = "overlayPanel";
             this.overlayPanel.Size = new System.Drawing.Size(200, 100);
             this.overlayPanel.TabIndex = 9;
+            // 
+            // dragPicture
+            // 
+            this.dragPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dragPicture.Cursor = System.Windows.Forms.Cursors.SizeNESW;
+            this.dragPicture.Image = global::DriveLogGUI.Properties.Resources.DragHandle1;
+            this.dragPicture.Location = new System.Drawing.Point(179, 177);
+            this.dragPicture.Name = "dragPicture";
+            this.dragPicture.Size = new System.Drawing.Size(20, 22);
+            this.dragPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.dragPicture.TabIndex = 0;
+            this.dragPicture.TabStop = false;
+            this.dragPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseDown);
+            this.dragPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseMove);
+            this.dragPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseUp);
+            // 
+            // dragAndDropPictureBox
+            // 
+            this.dragAndDropPictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.dragAndDropPictureBox.Image = global::DriveLogGUI.Properties.Resources.drag_and_drop_icon;
+            this.dragAndDropPictureBox.InitialImage = null;
+            this.dragAndDropPictureBox.Location = new System.Drawing.Point(247, 132);
+            this.dragAndDropPictureBox.Name = "dragAndDropPictureBox";
+            this.dragAndDropPictureBox.Size = new System.Drawing.Size(200, 200);
+            this.dragAndDropPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.dragAndDropPictureBox.TabIndex = 3;
+            this.dragAndDropPictureBox.TabStop = false;
+            // 
+            // editPictureBox
+            // 
+            this.editPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.editPictureBox.Location = new System.Drawing.Point(12, 105);
+            this.editPictureBox.Name = "editPictureBox";
+            this.editPictureBox.Size = new System.Drawing.Size(671, 338);
+            this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.editPictureBox.TabIndex = 6;
+            this.editPictureBox.TabStop = false;
             // 
             // UploadProfilePicForm
             // 
@@ -191,10 +195,10 @@
             this.Text = "Choose profile picture";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.UploadProfilePicForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.UploadProfilePicForm_DragEnter);
-            ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).EndInit();
             this.dragPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dragPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
