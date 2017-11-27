@@ -27,7 +27,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalendarTabG));
             this.panelForCalendar = new System.Windows.Forms.Panel();
             this.backPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -41,11 +40,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.warningInformationLabel = new System.Windows.Forms.Label();
-            this.contextInformationTextbox = new System.Windows.Forms.TextBox();
+            this.bookInformationLabel = new System.Windows.Forms.Label();
+            this.warningTitleLabel = new System.Windows.Forms.Label();
             this.bookingInformationButton = new System.Windows.Forms.Button();
             this.instructorTitleInformationLabel = new System.Windows.Forms.Label();
             this.instructorInformationLabel = new System.Windows.Forms.Label();
-            this.contextTitleInformationLabel = new System.Windows.Forms.Label();
             this.timeInformationLabel = new System.Windows.Forms.Label();
             this.dateInformationLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -196,11 +195,11 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.panel4.Controls.Add(this.warningInformationLabel);
-            this.panel4.Controls.Add(this.contextInformationTextbox);
+            this.panel4.Controls.Add(this.bookInformationLabel);
+            this.panel4.Controls.Add(this.warningTitleLabel);
             this.panel4.Controls.Add(this.bookingInformationButton);
             this.panel4.Controls.Add(this.instructorTitleInformationLabel);
             this.panel4.Controls.Add(this.instructorInformationLabel);
-            this.panel4.Controls.Add(this.contextTitleInformationLabel);
             this.panel4.Controls.Add(this.timeInformationLabel);
             this.panel4.Controls.Add(this.dateInformationLabel);
             this.panel4.Location = new System.Drawing.Point(20, 118);
@@ -210,28 +209,34 @@
             // 
             // warningInformationLabel
             // 
-            this.warningInformationLabel.AutoSize = true;
-            this.warningInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold);
-            this.warningInformationLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.warningInformationLabel.Location = new System.Drawing.Point(50, 335);
+            this.warningInformationLabel.Font = new System.Drawing.Font("Calibri Light", 9F);
+            this.warningInformationLabel.Location = new System.Drawing.Point(14, 279);
             this.warningInformationLabel.Name = "warningInformationLabel";
-            this.warningInformationLabel.Size = new System.Drawing.Size(71, 19);
-            this.warningInformationLabel.TabIndex = 14;
-            this.warningInformationLabel.Text = "Warning";
-            this.warningInformationLabel.Visible = false;
+            this.warningInformationLabel.Size = new System.Drawing.Size(141, 75);
+            this.warningInformationLabel.TabIndex = 16;
+            this.warningInformationLabel.Text = "Kim";
             // 
-            // contextInformationTextbox
+            // bookInformationLabel
             // 
-            this.contextInformationTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.contextInformationTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contextInformationTextbox.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.contextInformationTextbox.Location = new System.Drawing.Point(15, 114);
-            this.contextInformationTextbox.Multiline = true;
-            this.contextInformationTextbox.Name = "contextInformationTextbox";
-            this.contextInformationTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.contextInformationTextbox.Size = new System.Drawing.Size(156, 171);
-            this.contextInformationTextbox.TabIndex = 13;
-            this.contextInformationTextbox.Text = resources.GetString("contextInformationTextbox.Text");
+            this.bookInformationLabel.AutoSize = true;
+            this.bookInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bookInformationLabel.Location = new System.Drawing.Point(11, 90);
+            this.bookInformationLabel.Name = "bookInformationLabel";
+            this.bookInformationLabel.Size = new System.Drawing.Size(141, 19);
+            this.bookInformationLabel.TabIndex = 15;
+            this.bookInformationLabel.Text = "Booking status: 4/24";
+            // 
+            // warningTitleLabel
+            // 
+            this.warningTitleLabel.AutoSize = true;
+            this.warningTitleLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold);
+            this.warningTitleLabel.ForeColor = System.Drawing.Color.DarkRed;
+            this.warningTitleLabel.Location = new System.Drawing.Point(49, 260);
+            this.warningTitleLabel.Name = "warningTitleLabel";
+            this.warningTitleLabel.Size = new System.Drawing.Size(71, 19);
+            this.warningTitleLabel.TabIndex = 14;
+            this.warningTitleLabel.Text = "Warning";
+            this.warningTitleLabel.Visible = false;
             // 
             // bookingInformationButton
             // 
@@ -240,11 +245,11 @@
             this.bookingInformationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bookingInformationButton.Font = new System.Drawing.Font("Calibri Light", 9.75F);
             this.bookingInformationButton.ForeColor = System.Drawing.Color.White;
-            this.bookingInformationButton.Location = new System.Drawing.Point(50, 357);
+            this.bookingInformationButton.Location = new System.Drawing.Point(30, 357);
             this.bookingInformationButton.Name = "bookingInformationButton";
-            this.bookingInformationButton.Size = new System.Drawing.Size(71, 23);
+            this.bookingInformationButton.Size = new System.Drawing.Size(108, 23);
             this.bookingInformationButton.TabIndex = 12;
-            this.bookingInformationButton.Text = "BOOK";
+            this.bookingInformationButton.Text = "UNAVAILABLE";
             this.bookingInformationButton.UseVisualStyleBackColor = false;
             this.bookingInformationButton.Click += new System.EventHandler(this.bookingInformationButton_Click);
             // 
@@ -252,7 +257,7 @@
             // 
             this.instructorTitleInformationLabel.AutoSize = true;
             this.instructorTitleInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instructorTitleInformationLabel.Location = new System.Drawing.Point(12, 290);
+            this.instructorTitleInformationLabel.Location = new System.Drawing.Point(11, 122);
             this.instructorTitleInformationLabel.Name = "instructorTitleInformationLabel";
             this.instructorTitleInformationLabel.Size = new System.Drawing.Size(82, 19);
             this.instructorTitleInformationLabel.TabIndex = 11;
@@ -262,21 +267,11 @@
             // 
             this.instructorInformationLabel.AutoSize = true;
             this.instructorInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instructorInformationLabel.Location = new System.Drawing.Point(13, 309);
+            this.instructorInformationLabel.Location = new System.Drawing.Point(12, 141);
             this.instructorInformationLabel.Name = "instructorInformationLabel";
             this.instructorInformationLabel.Size = new System.Drawing.Size(34, 19);
             this.instructorInformationLabel.TabIndex = 10;
             this.instructorInformationLabel.Text = "Kim";
-            // 
-            // contextTitleInformationLabel
-            // 
-            this.contextTitleInformationLabel.AutoSize = true;
-            this.contextTitleInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contextTitleInformationLabel.Location = new System.Drawing.Point(11, 94);
-            this.contextTitleInformationLabel.Name = "contextTitleInformationLabel";
-            this.contextTitleInformationLabel.Size = new System.Drawing.Size(96, 19);
-            this.contextTitleInformationLabel.TabIndex = 9;
-            this.contextTitleInformationLabel.Text = "Information";
             // 
             // timeInformationLabel
             // 
@@ -314,7 +309,7 @@
             this.informationLabel.Name = "informationLabel";
             this.informationLabel.Size = new System.Drawing.Size(171, 80);
             this.informationLabel.TabIndex = 6;
-            this.informationLabel.Text = "Information";
+            this.informationLabel.Text = "Select an object";
             this.informationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CalendarTabG
@@ -351,14 +346,14 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label instructorTitleInformationLabel;
         private System.Windows.Forms.Label instructorInformationLabel;
-        private System.Windows.Forms.Label contextTitleInformationLabel;
         private System.Windows.Forms.Label timeInformationLabel;
         private System.Windows.Forms.Label dateInformationLabel;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label informationLabel;
         private System.Windows.Forms.Button bookingInformationButton;
         private System.Windows.Forms.TextBox weekNumberTextbox;
-        private System.Windows.Forms.TextBox contextInformationTextbox;
+        private System.Windows.Forms.Label warningTitleLabel;
+        private System.Windows.Forms.Label bookInformationLabel;
         private System.Windows.Forms.Label warningInformationLabel;
     }
 }

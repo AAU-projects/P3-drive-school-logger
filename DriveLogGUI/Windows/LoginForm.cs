@@ -52,7 +52,7 @@ namespace DriveLogGUI.Windows
             }
             else
             {
-                Session.LoadUserFromDataTable(MySql.GetUserByName("testuser"));
+                Session.LoadUserFromDataTable(MySql.GetUserByName("luke"));
             }
 
             this.Hide();

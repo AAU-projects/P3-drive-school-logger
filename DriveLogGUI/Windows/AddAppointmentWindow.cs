@@ -17,13 +17,17 @@ namespace DriveLogGUI.Windows
         public AddAppointmentWindow(DateTime eDate, Point mousePosition, List<Appointment> appointments)
         {
             InitializeComponent();
+
             _appointments = appointments;
             openWindowPosition = mousePosition;
             date = eDate;
+
             UpdateTitle();
             SetWindowPosition();
+
             FillTimeComboBox(StartTimecomboBox);
             FillComboBox(lessonsComboBox);
+
             timeDifferenceLabel.Text = "";
             lessonsComboBox.SelectedItem = 1;
         }
@@ -85,7 +89,7 @@ namespace DriveLogGUI.Windows
 
         private void StartTimecomboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            SetComboBoxTimeDifference();
+           SetComboBoxTimeDifference();
         }
 
         private void LessonsComboBox_SelectedValueChanged(object sender, EventArgs e)

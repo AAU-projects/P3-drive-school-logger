@@ -86,6 +86,12 @@
     <Compile Include="MenuTabs\CalendarTabG.Designer.cs">
       <DependentUpon>CalendarTabG.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\BookAppointmentWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\BookAppointmentWindow.Designer.cs">
+      <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\CustomMsgBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuTabs\CalendarTabG.resx">
       <DependentUpon>CalendarTabG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\BookAppointmentWindow.resx">
+      <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\CustomMsgBox.resx">
       <DependentUpon>CustomMsgBox.cs</DependentUpon>
