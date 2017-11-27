@@ -34,8 +34,8 @@ namespace DriveLogCode.DataAccess
 
             foreach (DataRow row in results.Rows)
             {
-                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[2]), (string)row[6], (string)row[7], (string)row[8], Convert.ToInt32(row[9]), (string)row[10]);
-                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], Convert.ToBoolean(row[5]), newTemplate, (string)row[11]));
+                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[2]), (string)row[7], (string)row[8], (string)row[9], Convert.ToInt32(row[10]), (string)row[11]);
+                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], (DateTime)row[5], Convert.ToBoolean(row[6]), newTemplate, (string)row[12]));
             }
 
             return lessonsList;
@@ -46,6 +46,14 @@ namespace DriveLogCode.DataAccess
             DataTable lessonInfo = MySql.GetLessonData(templateName);
 
             return GetDict(lessonInfo);
+        }
+
+        public static bool AddLessonToUserID(int userid, int appointmentID, int lessonID, int lessonPart,
+            DateTime startDate, DateTime endDate, bool completed)
+        {
+            return MySql.AddLesson(userid, appointmentID, lessonID, lessonPart, 
+                startDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), 
+                endDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), completed);
         }
 
         public static User GetInstructorByID(int id)

@@ -39,6 +39,8 @@
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.warningInformationLabel = new System.Windows.Forms.Label();
+            this.bookInformationLabel = new System.Windows.Forms.Label();
             this.warningTitleLabel = new System.Windows.Forms.Label();
             this.bookingInformationButton = new System.Windows.Forms.Button();
             this.instructorTitleInformationLabel = new System.Windows.Forms.Label();
@@ -47,8 +49,6 @@
             this.dateInformationLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.informationLabel = new System.Windows.Forms.Label();
-            this.bookInformationLabel = new System.Windows.Forms.Label();
-            this.warningInformationLabel = new System.Windows.Forms.Label();
             this.panelForCalendar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -207,6 +207,25 @@
             this.panel4.Size = new System.Drawing.Size(171, 401);
             this.panel4.TabIndex = 9;
             // 
+            // warningInformationLabel
+            // 
+            this.warningInformationLabel.Font = new System.Drawing.Font("Calibri Light", 9F);
+            this.warningInformationLabel.Location = new System.Drawing.Point(14, 279);
+            this.warningInformationLabel.Name = "warningInformationLabel";
+            this.warningInformationLabel.Size = new System.Drawing.Size(141, 75);
+            this.warningInformationLabel.TabIndex = 16;
+            this.warningInformationLabel.Text = "Kim";
+            // 
+            // bookInformationLabel
+            // 
+            this.bookInformationLabel.AutoSize = true;
+            this.bookInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bookInformationLabel.Location = new System.Drawing.Point(11, 90);
+            this.bookInformationLabel.Name = "bookInformationLabel";
+            this.bookInformationLabel.Size = new System.Drawing.Size(141, 19);
+            this.bookInformationLabel.TabIndex = 15;
+            this.bookInformationLabel.Text = "Booking status: 4/24";
+            // 
             // warningTitleLabel
             // 
             this.warningTitleLabel.AutoSize = true;
@@ -292,25 +311,6 @@
             this.informationLabel.TabIndex = 6;
             this.informationLabel.Text = "Select an object";
             this.informationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // bookInformationLabel
-            // 
-            this.bookInformationLabel.AutoSize = true;
-            this.bookInformationLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bookInformationLabel.Location = new System.Drawing.Point(11, 90);
-            this.bookInformationLabel.Name = "bookInformationLabel";
-            this.bookInformationLabel.Size = new System.Drawing.Size(141, 19);
-            this.bookInformationLabel.TabIndex = 15;
-            this.bookInformationLabel.Text = "Booking status: 4/24";
-            // 
-            // warningInformationLabel
-            // 
-            this.warningInformationLabel.Font = new System.Drawing.Font("Calibri Light", 9F);
-            this.warningInformationLabel.Location = new System.Drawing.Point(14, 279);
-            this.warningInformationLabel.Name = "warningInformationLabel";
-            this.warningInformationLabel.Size = new System.Drawing.Size(141, 75);
-            this.warningInformationLabel.TabIndex = 16;
-            this.warningInformationLabel.Text = "Kim";
             // 
             // CalendarTabG
             // 

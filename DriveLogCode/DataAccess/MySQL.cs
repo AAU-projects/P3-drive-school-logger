@@ -24,6 +24,7 @@ namespace DriveLogCode.DataAccess
                 $"{UserTable}.lastname AS InstructorLastname, " +
                 $"{LessonTable}.LessonID AS TemplateID, " +
                 $"{LessonTable}.LessonPart AS Progress, " +
+                $"{LessonTable}.StartDate, " +
                 $"{LessonTable}.EndDate, " +
                 $"{LessonTable}.Completed, " +
                 $"{LessonTemplateTable}.title, " +
@@ -120,13 +121,13 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static bool AddLesson(int userId, int appointmentID, int templateID, int part, string table = LessonTable)
+        public static bool AddLesson(int userId, int appointmentID, int templateID, int part, string startDate, string endDate, bool completed, string table = LessonTable)
         {
-            var cmd = new MySqlCommand($"INSERT INTO `{table}` (`userID`, `appointmentID`, `lessonID`, `lessonPart`)" +
-                                       $"VALUES ('{userId}', '{appointmentID}', '{templateID}', '{part}')");
+            var cmd = new MySqlCommand($"INSERT INTO `{table}` (`userID`, `appointmentID`, `lessonID`, `lessonPart`, `StartDate`, `EndDate`, `Completed` )" +
+                                       $"VALUES ('{userId}', '{appointmentID}', '{templateID}', '{part}', '{startDate}', '{endDate}', '{completed}')");
 
             if (ExistTable(table)) return SendNonQuery(cmd);
-            return CreateAppointmentTable(table) && SendNonQuery(cmd);
+            return CreateLessonTable(table) && SendNonQuery(cmd);
         }
 
         public static DataTable GetAppointmentsByInstuctor(int instructorID, string table = AppointmentTable)

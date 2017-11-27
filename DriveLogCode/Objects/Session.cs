@@ -21,12 +21,12 @@ namespace DriveLogCode.Objects
         public static void LoadUserFromDataTable(DataTable userTable)
         {
             LoggedInUser = new User(userTable);
-            LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
             GetProgress();
         }
 
-        private static void GetProgress()
+        public static void GetProgress()
         {
+            LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
             if (LessonsUser.Count != 0)
             {
                 CurrentLesson = LessonsUser

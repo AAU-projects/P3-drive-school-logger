@@ -19,6 +19,7 @@ namespace DriveLogGUI.MenuTabs
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
         private Appointment selectedAppointment;
+        private bool bookingAvailable = false;
 
         private MainWindow mainWindow;
 
@@ -34,6 +35,7 @@ namespace DriveLogGUI.MenuTabs
 
             SubscribeToAllClickPanels(overviewTab.listOfDays);
             GetAppointsments();
+           
             SubscribeToAllClickAppointments(appointments);
 
             if (Session.LoggedInUser.Sysmin)
@@ -88,36 +90,56 @@ namespace DriveLogGUI.MenuTabs
 
         private void CheckIfUserCanBookLesson()
         {
-            if (selectedAppointment.FullyBooked)
+            if (selectedAppointment.FullyBooked) // if the lsson is already fully booked
             {
                 ShowBookingWarrning("This date is already fully booked");
             }
-            else if (Session.CurrentLesson == null)
+            else if (Session.CurrentLesson == null) // if the user have no lessons
             {
                 //gets the first lesson
                 LessonTemplate firstLesson = DatabaseParser.GetLessonTemplateFromID(1);
 
                 if (firstLesson.Type == selectedAppointment.LessonType) {
-                    bookingInformationButton.Text = "BOOK";
+                    BookingAvailable();
                 }
                 else
                 {
                     ShowBookingWarrning("You are not suitable to book practical yet as its required that you have 3 theoretical lessons before your first practical");
                 }
             }
-            else if (Session.CurrentLesson != null)
+            else if (Session.CurrentLesson != null) // if the user have prev booked a lesson
             {
                 LessonTemplate nextLesson = DatabaseParser.GetNextLessonTemplateFromID(Session.CurrentLesson.TemplateID, selectedAppointment.LessonType);
-                if (Session.CurrentLesson.TemplateID == nextLesson.Id - 1)
+                if (Session.CurrentLesson.Progress == Session.CurrentLesson.LessonTemplate.Time) // if the user is done with the current lessontemplate
                 {
-                    bookingInformationButton.Text = "BOOK";
-                } else 
-                {
-                    ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
-                                        $"you would have to book {nextLesson.Id - 1 - Session.CurrentLesson.TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
+                    if (Session.CurrentLesson.TemplateID == nextLesson.Id - 1) {
+                        BookingAvailable();
+                    } else {
+                        ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
+                                            $"you would have to book {nextLesson.Id - 1 - Session.CurrentLesson.TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
+                    }
                 }
+                else // the user continues with the current lessontemplate
+                {
+                    if (Session.CurrentLesson.LessonTemplate.Type == selectedAppointment.LessonType)
+                    {
+                        BookingAvailable();
+                    }
+                    else
+                    {
+                        ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
+                                            $"you would have to book {nextLesson.Id - 1 - Session.CurrentLesson.TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
+                    }
+                }
+                
 
             } 
+        }
+
+        private void BookingAvailable()
+        {
+            bookingInformationButton.Text = "BOOK";
+            bookingAvailable = true;
         }
 
         private string GetReverseType(string type)
@@ -135,6 +157,7 @@ namespace DriveLogGUI.MenuTabs
 
         private void ShowBookingWarrning(string errorMsg)
         {
+            bookingAvailable = false;
             bookingInformationButton.Text = "UNAVAILABLE";
             warningInformationLabel.Text = errorMsg;
 
@@ -442,8 +465,12 @@ namespace DriveLogGUI.MenuTabs
 
         private void bookingInformationButton_Click(object sender, EventArgs e)
         {
-            BookAppointmentWindow bookingWindow = new BookAppointmentWindow(selectedAppointment, MousePosition);
-            bookingWindow.ShowDialog();
+            if (bookingAvailable)
+            {
+                BookAppointmentWindow bookingWindow = new BookAppointmentWindow(selectedAppointment, MousePosition);
+                bookingWindow.ShowDialog();
+            }
+            
         }
     }
 }

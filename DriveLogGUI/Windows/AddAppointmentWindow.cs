@@ -89,7 +89,7 @@ namespace DriveLogGUI.Windows
 
         private void StartTimecomboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            SetComboBoxTimeDifference();
+           SetComboBoxTimeDifference();
         }
 
         private void LessonsComboBox_SelectedValueChanged(object sender, EventArgs e)
