@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
 using DriveLogCode.DesignSchemes;
@@ -390,15 +391,14 @@ namespace DriveLogGUI.MenuTabs
             {
                 int prevLocation = 0;
 
-                foreach (var appointment in appointments)
-                {
-                    if (day.Date.ToShortDateString() == appointment.ToTime.ToShortDateString()) 
-                    {
-                        appointment.LabelAppointment.Show();
-                        appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
-                        prevLocation += appointment.LabelAppointment.Height + 5;
-                        day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
-                    }
+
+                List<Appointment> appointmentsOnDay = appointments.Where(x => x.ToTime.Day == day.Date.Day).ToList();
+                foreach (var appointment in appointmentsOnDay) {
+                    appointment.LabelAppointment.Show();
+                    appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
+                    prevLocation += appointment.LabelAppointment.Height + 5;
+                    day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
+
                 }
             }
         }

@@ -20,7 +20,7 @@ namespace DriveLogCode.Objects
 
         public bool Completed { get; }
 
-        public LessonTemplate LessonTemplate { get; }
+        public LessonTemplate LessonTemplate { get; set;}
 
         public string InstructorFullname => InstructorFirstname + " " + InstructorLastname;
 

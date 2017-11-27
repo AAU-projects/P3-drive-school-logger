@@ -20,8 +20,7 @@ namespace DriveLogGUI.Windows
         private readonly Appointment _appointment;
         private DateTime startDateTime;
         private DateTime endDateTime;
-        private Lesson nextSectedLesson;
-        private LessonTemplate currentLessonTemplate;
+        private Lesson curentLesson;
         private bool addedFirstLesson;
 
 
@@ -31,9 +30,9 @@ namespace DriveLogGUI.Windows
 
             this._openWindowPosition = mousePosition;
             this._appointment = appointment;
+            this.startDateTime = appointment.ToTime;
             CheckForFirstLessons();
-            nextSectedLesson = Session.GetLastLessonFromType(_appointment.LessonType);
-            currentLessonTemplate = DatabaseParser.GetLessonTemplateFromID(nextSectedLesson.TemplateID);
+            curentLesson = Session.GetLastLessonFromType(_appointment.LessonType);
 
             SetWindowPosition();
             UpdateData();
@@ -47,11 +46,13 @@ namespace DriveLogGUI.Windows
             // if a user does not already have a lesson in lessontype a temp lesson is created before first lesson is added to database
             if (Session.LastTheoraticalLesson == null && _appointment.LessonType == LessonTypes.Theoretical) {
                 Session.LastTheoraticalLesson = new Lesson(_appointment.InstructorName, "", 1, 1, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null);
+                Session.LastTheoraticalLesson.LessonTemplate = DatabaseParser.GetLessonTemplateFromID(Session.LastTheoraticalLesson.TemplateID);
                 addedFirstLesson = true;
             }
 
             if (Session.LastPracticalLesson == null && _appointment.LessonType == LessonTypes.Practical) {
                 Session.LastPracticalLesson = new Lesson(_appointment.InstructorName, "", 4, 1, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null);
+                Session.LastPracticalLesson.LessonTemplate = DatabaseParser.GetLessonTemplateFromID(Session.LastPracticalLesson.TemplateID);
                 addedFirstLesson = true;
             }
         }
@@ -60,9 +61,9 @@ namespace DriveLogGUI.Windows
         {
             DateTime time = new DateTime();
             time = time.AddHours(_appointment.StartTime.Hour);
-            int timeSpan = _appointment.ToTime.Hour - _appointment.StartTime.Hour;
+            int timeSpan45= (int) ((_appointment.ToTime.TimeOfDay.TotalMinutes - _appointment.StartTime.TimeOfDay.TotalMinutes) / 45);
 
-            for (int i = 0; i < 4 * (timeSpan - 1) + 2; i++) {
+            for (int i = 0; i < timeSpan45; i++) {
                 comboBox.Items.Add(time.ToString("HH:mm"));
                 time = time.AddMinutes(15);
             }
@@ -70,15 +71,23 @@ namespace DriveLogGUI.Windows
 
         private void FillComboBox(ComboBox comboBox, int lessons)
         {
-            int maxLessonsToBook = currentLessonTemplate.Time - Session.GetLastLessonFromType(_appointment.LessonType).Progress;
+            int maxLessonsToBook = curentLesson.LessonTemplate.Time - Session.GetLastLessonFromType(_appointment.LessonType).Progress;
 
-            if (currentLessonTemplate.Type != DatabaseParser.GetLessonTemplateFromID(currentLessonTemplate.Id + 1).Type)
+            if (maxLessonsToBook == 0) // when users have completed a different lesson type and the next lesson type have to start
             {
-                lessons = maxLessonsToBook < lessons ? maxLessonsToBook : lessons;
+                curentLesson.LessonTemplate = DatabaseParser.GetNextLessonTemplateFromID(curentLesson.LessonTemplate.Id, _appointment.LessonType);
+                curentLesson.Progress = 0;
+                curentLesson.TemplateID = curentLesson.LessonTemplate.Id;
+                maxLessonsToBook = curentLesson.LessonTemplate.Time;
+            }
+
+            if (curentLesson.LessonTemplate.Type != DatabaseParser.GetLessonTemplateFromID(curentLesson.LessonTemplate.Id + 1).Type)
+            {
+                lessons = maxLessonsToBook < lessons ? maxLessonsToBook : lessons; // always make sure that the you can only book the required lessons to complete a lesson type
             }
             else
             {
-                lessons = 4 < lessons ? 4 : lessons;
+                lessons = 4 < lessons ? 4 : lessons; // if type is diferent 
             }
 
             lessonsComboBox.Items.Clear();
@@ -142,7 +151,6 @@ namespace DriveLogGUI.Windows
             TimeSpan span = _appointment.ToTime.TimeOfDay - DateTime.Parse(StartTimecomboBox.Text).TimeOfDay;
             int avaiableTime = (int) span.TotalMinutes / 45;
             FillComboBox(lessonsComboBox, avaiableTime);
-            lessonsComboBox.SelectedIndex = lessonsComboBox.Items.Count;
             //lessonsComboBox.Text = lessonsComboBox.Items[lessonsComboBox.Items.Count].ToString();
         }
 
@@ -182,7 +190,7 @@ namespace DriveLogGUI.Windows
 
         private bool AddLesson()
         {
-            int numberOfLessons = lessonsComboBox.Items.Count;
+            int numberOfLessons = lessonsComboBox.SelectedIndex + 1;
             bool result = true;
 
             if (addedFirstLesson)
@@ -205,20 +213,20 @@ namespace DriveLogGUI.Windows
                     return result;
                 }
 
-                int timeRequeiredForCurrentTemplate = currentLessonTemplate.Time;
+                int timeRequeiredForCurrentTemplate = curentLesson.LessonTemplate.Time;
 
                 if (timeRequeiredForCurrentTemplate > Session.GetLastLessonFromType(_appointment.LessonType).Progress) {
-                    nextSectedLesson.Progress += 1;
+                    curentLesson.Progress += 1;
                 } else {
-                    nextSectedLesson.TemplateID = DatabaseParser.GetNextLessonTemplateFromID(nextSectedLesson.TemplateID, _appointment.LessonType).Id;
-                    nextSectedLesson.Progress = 1;
+                    curentLesson.TemplateID = DatabaseParser.GetNextLessonTemplateFromID(curentLesson.TemplateID, _appointment.LessonType).Id;
+                    curentLesson.Progress = 1;
                 }
 
                 result = DatabaseParser.AddLessonToUserID(
                     Session.LoggedInUser.Id, 
                     _appointment.Id,
-                    nextSectedLesson.TemplateID, 
-                    nextSectedLesson.Progress, 
+                    curentLesson.TemplateID, 
+                    curentLesson.Progress, 
                     startDateTime, 
                     startDateTime = startDateTime.AddMinutes(45), 
                     false);
