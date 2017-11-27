@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using DriveLogCode.DesignSchemes;
 
@@ -11,25 +12,32 @@ namespace DriveLogGUI.Windows
 {
     public partial class UploadProfilePicForm : Form
     {
+        // Used to get the point, from where the user starts moving the dragPanel.
         private int startX;
         private int startY;
 
+        private static Form _registerForm;
+
+        private static readonly List<string> AcceptedImageExtensions = new List<string> { ".jpg", ".png", ".bmp", ".jpeg" };
 
         public UploadProfilePicForm(Form registerForm)
         {
             _registerForm = registerForm;
             InitializeComponent();
+
             editPictureBox.Controls.Add(dragPanel);
             editPictureBox.Controls.Add(overlayPanel);
+
             dragPicture.Visible = false;
             dragPanel.Visible = false;
             overlayPanel.Visible = false;
-            this.AllowDrop = true;
-            overlayPanel.BackColor = Color.FromArgb(75, 0, 0, 0);
-            //this.ResizeRedraw = true;
-        }
 
-        private static Form _registerForm;
+            // Enables the use of drag and drop within this form.
+            this.AllowDrop = true;
+
+            // Sets the color of the crop overlay.
+            overlayPanel.BackColor = Color.FromArgb(75, 0, 0, 0);
+        }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -46,6 +54,7 @@ namespace DriveLogGUI.Windows
         private void UploadProfilePicForm_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            // If multiple files have been dragged, no picture will be loaded. 
             if (files.Length == 1 && ValidateDroppedFile(files[0]))
                 PictureLoaded(Image.FromFile(files[0]));
         }
@@ -67,8 +76,10 @@ namespace DriveLogGUI.Windows
             editPictureBox.Image = userImage;
             editPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            // Set position of remaining panels, based on the position of the picturebox.
             SetDragPanelPosition();
             SetOverlayPanelPosition();
+
             dragPicture.Visible = true;
             dragPanel.Visible = true;
             overlayPanel.Visible = true;
@@ -79,9 +90,9 @@ namespace DriveLogGUI.Windows
             Image imageToCheck = image;
             decimal scale;
 
+            // Finds the scale that will allow us to resize the image, so both sides are within the boundaries, while keeping the aspect ratio.
             if (editPictureBox.Width / image.Width < editPictureBox.Height / image.Height)
                 scale = Convert.ToDecimal(editPictureBox.Width) / Convert.ToDecimal(image.Width);
-
             else
                 scale = Convert.ToDecimal(editPictureBox.Height) / Convert.ToDecimal(image.Height);
 
@@ -115,13 +126,14 @@ namespace DriveLogGUI.Windows
                     graphics.DrawImage(Image, resizedImageRectangle, 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel, wrapMode);
                 }
             }
-
             return resizedImage;
         }
 
         private Image CropImage(Image Image)
         {
             Bitmap croppedImage = new Bitmap(Image);
+
+            // Clones the part of the image that is within the boundaries of the dragPanel.
             return croppedImage.Clone(new Rectangle(dragPanel.Location.X, dragPanel.Location.Y, dragPanel.Width, dragPanel.Height), croppedImage.PixelFormat);
         }
 
@@ -143,9 +155,11 @@ namespace DriveLogGUI.Windows
                 dragPanel.Width = editPictureBox.Width;
                 dragPanel.Height = editPictureBox.Width;
             }
+            // Since left and top is the distance relative to the parent, setting it to 0 "resets" the control and puts it in the top left corner.
             dragPanel.Left = 0;
             dragPanel.Top = 0;
         }
+
         private void SetOverlayPanelPosition()
         {
             overlayPanel.Width = editPictureBox.Width;
@@ -154,7 +168,6 @@ namespace DriveLogGUI.Windows
             overlayPanel.Top = 0;
         }
 
-        private static readonly List<string> AcceptedImageExtensions = new List<string> { ".jpg", ".png", ".bmp",".jpeg" };
         private bool ValidateDroppedFile(string filepath)
         {
             if (AcceptedImageExtensions.Contains(Path.GetExtension(filepath).ToLower())) return true;
@@ -186,7 +199,7 @@ namespace DriveLogGUI.Windows
             using (OpenFileDialog fileDialog = new OpenFileDialog())
             {
                 fileDialog.Title = "Select Image";
-                fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.png) | *.jpg; *.jpeg; *.jpe; *.png";
+                fileDialog.Filter = $"Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
 
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                     PictureLoaded(new Bitmap(fileDialog.FileName));
@@ -209,16 +222,17 @@ namespace DriveLogGUI.Windows
             if (allowResize)
             {
                 int newSize;
+                // Check the height.
                 if (dragPanel.Height + dragPanel.Top > editPictureBox.Height)
                 {
                     allowResize = false;
                     newSize = dragPanel.Height - (dragPanel.Height - editPictureBox.Height);
-                }
+                } // Check the Width,
                 else if (dragPanel.Width + dragPanel.Left > editPictureBox.Width)
                 {
                     allowResize = false;
                     newSize = dragPanel.Height - (dragPanel.Height - editPictureBox.Width);
-                }
+                } // Check if the larger panel becomes smaller than the cornerpanel.
                 else if (dragPanel.Width < dragPicture.Width)
                 {
                     allowResize = false;
@@ -239,7 +253,7 @@ namespace DriveLogGUI.Windows
                 Point newLocation;
 
                 // Checks the left side.
-                if (this.dragPanel.Left + e.X - startX <= 0)
+                if (this.dragPanel.Left + e.X - startX < 0)
                 {
                     allowResize = false;
                     newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);

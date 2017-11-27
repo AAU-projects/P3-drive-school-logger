@@ -109,7 +109,7 @@
             this.UploadButton.Name = "UploadButton";
             this.UploadButton.Size = new System.Drawing.Size(133, 39);
             this.UploadButton.TabIndex = 7;
-            this.UploadButton.Text = "Upload picture";
+            this.UploadButton.Text = "Browse Files";
             this.UploadButton.UseVisualStyleBackColor = false;
             this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
