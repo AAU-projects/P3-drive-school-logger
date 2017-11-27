@@ -114,6 +114,13 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        public static DataTable GetAllAppointmentsByInstructorId(int instructorId, string table = AppointmentTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE instructorID = {instructorId}");
+
+            return SendQuery(cmd);
+        }
+
 
         public static DataTable GetNextLessonTemplateByID(int lessonTemplateId, string lessonType, string lessonTemplateTable = LessonTemplateTable)
         {
@@ -242,6 +249,20 @@ namespace DriveLogCode.DataAccess
             if (CreateTemplateTable(table)) return SendNonQuery(cmd);
 
             return false;
+        }
+
+        public static bool SetLessonToComplete(int studentId, DateTime endDate, bool status, string table = LessonTable)
+        {
+            var cmd = new MySqlCommand($"UPDATE {table} SET Completed = '{status}' WHERE UserID = {studentId} AND EndDate = '{endDate}' LIMIT 1");
+
+            return SendNonQuery(cmd);
+        }
+
+        public static bool DeleteLesson(int studentId, DateTime endDate, string table = LessonTable)
+        {
+            var cmd = new MySqlCommand($"DELETE FROM {table} WHERE UserID = {studentId} AND EndDate = '{endDate}' LIMIT 1");
+
+            return SendNonQuery(cmd);
         }
 
         public static bool UploadLessonTemplate(string id, string title, string description, string type, string time, string reading, string table = LessonTemplateTable)

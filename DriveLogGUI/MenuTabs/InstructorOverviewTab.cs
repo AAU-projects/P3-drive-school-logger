@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
 using DriveLogCode.Objects;
+using DriveLogGUI.Windows;
 
 namespace DriveLogGUI.MenuTabs
 {
@@ -11,6 +12,7 @@ namespace DriveLogGUI.MenuTabs
     {
         private DateTime selectedMonth;
         private DateTime formatDateTime;
+        private List<Lesson> _lessonsToCompleteList = new List<Lesson>();
 
         // Pictures for overview buttons.
         private Bitmap incompleteImage = DriveLogGUI.Properties.Resources.crossIncomplete;
@@ -33,17 +35,37 @@ namespace DriveLogGUI.MenuTabs
 
             DrawCalendar();
             UpdateLessonsToCompleteList();
+            UpdateStatistics();
+        }
+
+        private void UpdateStatistics()
+        {
+            activeUsersLabel.Text = "Active Users: " + DatabaseParser.GetActiveUserCount();
         }
 
         private void UpdateLessonsToCompleteList()
         {
             List<Lesson> lessonsFoundList = DatabaseParser.GetLessonsToCompleteList(Session.LoggedInUser);
+            int scheduledCount = 0;
 
             foreach (Lesson lesson in lessonsFoundList)
             {
+                if (lesson.EndDate > DateTime.Now)
+                {
+                    scheduledCount++;
+                    continue;
+                }
+
+                _lessonsToCompleteList.Add(lesson);
+
                 string[] subItems = {lesson.LessonTemplate.Title, DatabaseParser.GetUserById(lesson.StudentId).Fullname};
                 completeLessonsList.Items.Add(lesson.EndDate.ToString("dd/MM - hh:mm")).SubItems.AddRange(subItems);
             }
+
+            scheduledAppointmentsLabel.Text = "Scheduled Appointments: " + scheduledCount;
+            freeAppointmentsLabel.Text = "Free Appointments: " +
+                                         (DatabaseParser.GetAppointmentsByInstructorIdCount(Session.LoggedInUser.Id) -
+                                         scheduledCount);
         }
 
         public DateTime GetPanelDate(int position)
@@ -208,6 +230,21 @@ namespace DriveLogGUI.MenuTabs
             {
                 todaysNoteTextbox.Enabled = true;
             }
+        }
+
+        private void completeLessonsList_ItemActivate(object sender, EventArgs e)
+        {
+            if (!(sender is ListView item)) return;
+            Lesson selectedLesson = _lessonsToCompleteList[item.SelectedItems[0].Index];
+            List<Lesson> tempLessonList = new List<Lesson>();
+            foreach (Lesson l in _lessonsToCompleteList)
+            {
+                if(l.EndDate == _lessonsToCompleteList[item.SelectedItems[0].Index].EndDate)
+                    tempLessonList.Add(l);
+            }
+            ConfirmLessonForm confirmbox = new ConfirmLessonForm(tempLessonList);
+
+            confirmbox.ShowDialog();
         }
     }
 }

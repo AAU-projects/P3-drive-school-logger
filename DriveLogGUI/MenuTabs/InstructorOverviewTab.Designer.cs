@@ -63,13 +63,18 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.calenderLabel = new System.Windows.Forms.Label();
             this.confirmLessonsPanel = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.confirmLessonsLabel = new System.Windows.Forms.Label();
-            this.miscPanel = new System.Windows.Forms.Panel();
             this.completeLessonsList = new System.Windows.Forms.ListView();
             this.dateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lessonColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.studentColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.confirmLessonsLabel = new System.Windows.Forms.Label();
+            this.miscPanel = new System.Windows.Forms.Panel();
+            this.freeAppointmentsLabel = new System.Windows.Forms.Label();
+            this.scheduledAppointmentsLabel = new System.Windows.Forms.Label();
+            this.activeUsersLabel = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.statisticsLabel = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.todaysNotePanel.SuspendLayout();
             this.calendarPanel.SuspendLayout();
@@ -85,6 +90,7 @@
             this.panel8.SuspendLayout();
             this.monthPanel.SuspendLayout();
             this.confirmLessonsPanel.SuspendLayout();
+            this.miscPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // headerPanel
@@ -467,6 +473,38 @@
             this.confirmLessonsPanel.Size = new System.Drawing.Size(454, 270);
             this.confirmLessonsPanel.TabIndex = 3;
             // 
+            // completeLessonsList
+            // 
+            this.completeLessonsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.completeLessonsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.dateColumn,
+            this.lessonColumn,
+            this.studentColumn});
+            this.completeLessonsList.FullRowSelect = true;
+            this.completeLessonsList.Location = new System.Drawing.Point(22, 28);
+            this.completeLessonsList.MultiSelect = false;
+            this.completeLessonsList.Name = "completeLessonsList";
+            this.completeLessonsList.Size = new System.Drawing.Size(420, 228);
+            this.completeLessonsList.TabIndex = 6;
+            this.completeLessonsList.UseCompatibleStateImageBehavior = false;
+            this.completeLessonsList.View = System.Windows.Forms.View.Details;
+            this.completeLessonsList.ItemActivate += new System.EventHandler(this.completeLessonsList_ItemActivate);
+            // 
+            // dateColumn
+            // 
+            this.dateColumn.Text = "Date: ";
+            this.dateColumn.Width = 127;
+            // 
+            // lessonColumn
+            // 
+            this.lessonColumn.Text = "Lesson:";
+            this.lessonColumn.Width = 140;
+            // 
+            // studentColumn
+            // 
+            this.studentColumn.Text = "Student: ";
+            this.studentColumn.Width = 151;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
@@ -488,39 +526,64 @@
             // miscPanel
             // 
             this.miscPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.miscPanel.Controls.Add(this.freeAppointmentsLabel);
+            this.miscPanel.Controls.Add(this.scheduledAppointmentsLabel);
+            this.miscPanel.Controls.Add(this.activeUsersLabel);
+            this.miscPanel.Controls.Add(this.panel3);
+            this.miscPanel.Controls.Add(this.statisticsLabel);
             this.miscPanel.Location = new System.Drawing.Point(472, 416);
             this.miscPanel.Name = "miscPanel";
             this.miscPanel.Size = new System.Drawing.Size(413, 112);
             this.miscPanel.TabIndex = 4;
             // 
-            // completeLessonsList
+            // freeAppointmentsLabel
             // 
-            this.completeLessonsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.completeLessonsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.dateColumn,
-            this.lessonColumn,
-            this.studentColumn});
-            this.completeLessonsList.Location = new System.Drawing.Point(22, 28);
-            this.completeLessonsList.Name = "completeLessonsList";
-            this.completeLessonsList.Size = new System.Drawing.Size(420, 228);
-            this.completeLessonsList.TabIndex = 6;
-            this.completeLessonsList.UseCompatibleStateImageBehavior = false;
-            this.completeLessonsList.View = System.Windows.Forms.View.Details;
+            this.freeAppointmentsLabel.AutoSize = true;
+            this.freeAppointmentsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.freeAppointmentsLabel.Location = new System.Drawing.Point(17, 72);
+            this.freeAppointmentsLabel.Name = "freeAppointmentsLabel";
+            this.freeAppointmentsLabel.Size = new System.Drawing.Size(98, 13);
+            this.freeAppointmentsLabel.TabIndex = 10;
+            this.freeAppointmentsLabel.Text = "Free Appointments:";
             // 
-            // dateColumn
+            // scheduledAppointmentsLabel
             // 
-            this.dateColumn.Text = "Date: ";
-            this.dateColumn.Width = 127;
+            this.scheduledAppointmentsLabel.AutoSize = true;
+            this.scheduledAppointmentsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.scheduledAppointmentsLabel.Location = new System.Drawing.Point(17, 52);
+            this.scheduledAppointmentsLabel.Name = "scheduledAppointmentsLabel";
+            this.scheduledAppointmentsLabel.Size = new System.Drawing.Size(128, 13);
+            this.scheduledAppointmentsLabel.TabIndex = 9;
+            this.scheduledAppointmentsLabel.Text = "Scheduled Appointments:";
             // 
-            // lessonColumn
+            // activeUsersLabel
             // 
-            this.lessonColumn.Text = "Lesson:";
-            this.lessonColumn.Width = 140;
+            this.activeUsersLabel.AutoSize = true;
+            this.activeUsersLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.activeUsersLabel.Location = new System.Drawing.Point(17, 32);
+            this.activeUsersLabel.Name = "activeUsersLabel";
+            this.activeUsersLabel.Size = new System.Drawing.Size(70, 13);
+            this.activeUsersLabel.TabIndex = 8;
+            this.activeUsersLabel.Text = "Active Users:";
             // 
-            // studentColumn
+            // panel3
             // 
-            this.studentColumn.Text = "Student: ";
-            this.studentColumn.Width = 151;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.panel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.panel3.Location = new System.Drawing.Point(20, 21);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(380, 2);
+            this.panel3.TabIndex = 6;
+            // 
+            // statisticsLabel
+            // 
+            this.statisticsLabel.AutoSize = true;
+            this.statisticsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.statisticsLabel.Location = new System.Drawing.Point(17, 6);
+            this.statisticsLabel.Name = "statisticsLabel";
+            this.statisticsLabel.Size = new System.Drawing.Size(49, 13);
+            this.statisticsLabel.TabIndex = 7;
+            this.statisticsLabel.Text = "Statistics";
             // 
             // InstructorOverviewTab
             // 
@@ -552,6 +615,8 @@
             this.monthPanel.ResumeLayout(false);
             this.monthPanel.PerformLayout();
             this.confirmLessonsPanel.ResumeLayout(false);
+            this.miscPanel.ResumeLayout(false);
+            this.miscPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -600,5 +665,10 @@
         private System.Windows.Forms.ColumnHeader dateColumn;
         private System.Windows.Forms.ColumnHeader lessonColumn;
         private System.Windows.Forms.ColumnHeader studentColumn;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label statisticsLabel;
+        private System.Windows.Forms.Label freeAppointmentsLabel;
+        private System.Windows.Forms.Label scheduledAppointmentsLabel;
+        private System.Windows.Forms.Label activeUsersLabel;
     }
 }

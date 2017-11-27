@@ -55,6 +55,16 @@ namespace DriveLogCode.DataAccess
             return lessonsFoundList;
         }
 
+        public static bool SetLessonToComplete(int studentId, DateTime endDate, bool status)
+        {
+            return MySql.SetLessonToComplete(studentId, endDate, status);
+        }
+
+        public static bool DeleteLesson(int studentId, DateTime endDate)
+        {
+            return MySql.DeleteLesson(studentId, endDate);
+        }
+
         public static User GetUserById(int userId)
         {
             return new User(MySql.GetUserByID(userId));
@@ -190,6 +200,24 @@ namespace DriveLogCode.DataAccess
             }
 
             return usersFound;
+        }
+
+        public static int GetActiveUserCount()
+        {
+            return MySql.GetAllRows("users").Rows.Count;
+        }
+
+        public static int GetAppointmentsByInstructorIdCount(int instructorId)
+        {
+            DataTable results = MySql.GetAllAppointmentsByInstructorId(instructorId);
+            int count = 0;
+
+            foreach (DataRow resultsRow in results.Rows)
+            {
+                count += Convert.ToInt32(resultsRow[3]);
+            }
+
+            return count;
         }
 
         public static string GetLatestTodaysNote()
