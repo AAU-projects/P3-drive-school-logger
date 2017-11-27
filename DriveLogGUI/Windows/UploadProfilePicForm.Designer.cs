@@ -37,6 +37,7 @@
             this.UploadButton = new System.Windows.Forms.Button();
             this.dragPanel = new System.Windows.Forms.Panel();
             this.dragPicture = new System.Windows.Forms.PictureBox();
+            this.overlayPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dragAndDropPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
             this.dragPanel.SuspendLayout();
@@ -137,19 +138,20 @@
             // dragPanel
             // 
             this.dragPanel.BackColor = System.Drawing.Color.Transparent;
-            this.dragPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dragPanel.Controls.Add(this.dragPicture);
             this.dragPanel.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.dragPanel.ForeColor = System.Drawing.Color.Red;
             this.dragPanel.Location = new System.Drawing.Point(247, 155);
             this.dragPanel.Name = "dragPanel";
             this.dragPanel.Size = new System.Drawing.Size(200, 200);
             this.dragPanel.TabIndex = 8;
+            this.dragPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.dragPanel_Paint);
             // 
             // dragPicture
             // 
             this.dragPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dragPicture.Cursor = System.Windows.Forms.Cursors.SizeNESW;
-            this.dragPicture.Location = new System.Drawing.Point(177, 175);
+            this.dragPicture.Location = new System.Drawing.Point(179, 177);
             this.dragPicture.Name = "dragPicture";
             this.dragPicture.Size = new System.Drawing.Size(20, 22);
             this.dragPicture.TabIndex = 0;
@@ -157,6 +159,14 @@
             this.dragPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseDown);
             this.dragPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseMove);
             this.dragPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragPicture_MouseUp);
+            // 
+            // overlayPanel
+            // 
+            this.overlayPanel.BackColor = System.Drawing.Color.Black;
+            this.overlayPanel.Location = new System.Drawing.Point(41, 188);
+            this.overlayPanel.Name = "overlayPanel";
+            this.overlayPanel.Size = new System.Drawing.Size(200, 100);
+            this.overlayPanel.TabIndex = 9;
             // 
             // UploadProfilePicForm
             // 
@@ -166,6 +176,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(695, 570);
+            this.Controls.Add(this.overlayPanel);
             this.Controls.Add(this.dragPanel);
             this.Controls.Add(this.UploadButton);
             this.Controls.Add(this.dragAndDropLabel);
@@ -200,5 +211,6 @@
         private System.Windows.Forms.Button UploadButton;
         private System.Windows.Forms.Panel dragPanel;
         private System.Windows.Forms.PictureBox dragPicture;
+        private System.Windows.Forms.Panel overlayPanel;
     }
 }
