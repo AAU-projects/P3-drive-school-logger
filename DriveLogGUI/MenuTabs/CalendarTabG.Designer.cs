@@ -75,7 +75,6 @@ namespace DriveLogGUI.MenuTabs
             this.panelForCalendar.Name = "panelForCalendar";
             this.panelForCalendar.Size = new System.Drawing.Size(686, 451);
             this.panelForCalendar.TabIndex = 1;
-            this.panelForCalendar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForCalendar_Paint);
             // 
             // backPanel
             // 
@@ -84,6 +83,7 @@ namespace DriveLogGUI.MenuTabs
             this.backPanel.Name = "backPanel";
             this.backPanel.Size = new System.Drawing.Size(687, 401);
             this.backPanel.TabIndex = 0;
+            this.backPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForCalendar_Paint);
             // 
             // panel1
             // 

@@ -103,19 +103,10 @@ namespace DriveLogGUI.MenuTabs
 
         private void CheckIfUserCanBookLesson()
         {
-            if (selectedAppointment.BookedPanelOnLabel.Visible) // if the lesson is already booked by the user
+            if (selectedAppointment.ShowWarning)
             {
-                ShowBookingWarrning("You already have a booking on this appointemnt");
-                ShowUnbookingAvaiable();
-            }
-            else if (selectedAppointment.FullyBooked) // if the lesson is already fully booked
-            {
-                ShowBookingWarrning("This date is already fully booked");
-            }
-            else if (selectedAppointment.ToTime < Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
-            {
-                ShowBookingWarrning("You can not book a lesson in a previous time than your lastly booked lesson");
-            } else if (Session.GetLastLessonFromType(selectedAppointment.LessonType) == null) // if the user have no lessons
+                ShowBookingWarrning(selectedAppointment.WarningText);
+            } else if (Session.GetLastLessonFromType(selectedAppointment.LessonType) == null) // if the user have no lessons // TODO move this to AppointmentDataForUser
             {
                 //gets the first lesson
                 LessonTemplate firstLesson = DatabaseParser.GetLessonTemplateFromID(1);
@@ -438,19 +429,37 @@ namespace DriveLogGUI.MenuTabs
                     prevLocation += appointment.LabelAppointment.Height + 5;
                     day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
 
-                    if (appointment.bookedLessons.Count == 0) // if 0 there is nothing to do for the user with highlights
-                    {
-                    } else if (appointment.bookedLessons.Find(x => x.Completed) != null) 
-                    {
-                        appointment.AppointmentHighlight(ColorScheme.CalendarCompleted);
-                    } else if (appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id).Id != 0)
-                    {
-                        appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
-                    } else if (appointment.FullyBooked) 
-                    {
-                        appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
-                    }
+                    AppointmentDataForUser(appointment);
+                    
                 }
+            }
+        }
+
+        private void AppointmentDataForUser(Appointment appointment)
+        {
+            if (appointment.FullyBooked)  // if the appointment is fullybooked
+            {
+                appointment.AppointmentHighlight(ColorScheme.CalendarRed);
+                appointment.ShowWarning = true;
+                appointment.WarningText = "This appointment is fully booked";
+            } else if (appointment.ToTime < Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
+            {
+                appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
+                appointment.ShowWarning = true;
+                appointment.WarningText = "You can not book a lesson in a previous time than your lastly booked lesson";
+            }
+            if (appointment.bookedLessons.Count == 0) // if 0 there is nothing to do for the user with highlights
+            {
+            } else if (appointment.bookedLessons.Find(x => x.Completed) != null) // if one lesson is completed assigned to that appointment
+            {
+                appointment.AppointmentHighlight(ColorScheme.CalendarCompleted);
+                appointment.ShowWarning = true;
+                appointment.WarningText = "You have already completed your lessons on this appointment";
+            } else if (appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id) != null) // if the user have booked the appointment
+            {
+                appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
+                appointment.ShowWarning = true;
+                appointment.WarningText = "You already have a booking on this appointemnt";
             }
         }
 
@@ -520,6 +529,7 @@ namespace DriveLogGUI.MenuTabs
             {
                 BookAppointmentWindow bookingWindow = new BookAppointmentWindow(selectedAppointment, MousePosition);
                 bookingWindow.ShowDialog();
+                UpdateCalendar(0);
             }
             else if (bookingInformationButton.Text == CancelBookingText)
             {

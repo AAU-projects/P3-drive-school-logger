@@ -21,7 +21,9 @@ namespace DriveLogGUI
         public DateTime ToTime => StartTime.AddMinutes(AvailableTime * 45);
         public string TimeFormat => GetTime();
         public string DateFormat => GetDate();
-        public bool bookedByUser;
+        public bool BookedByUser;
+        public bool ShowWarning;
+        public string WarningText;
 
         public Appointment(AppointmentStructure appointmentStructure) : base(appointmentStructure)
         {
