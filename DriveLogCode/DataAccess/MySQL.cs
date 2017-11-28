@@ -74,7 +74,8 @@ namespace DriveLogCode.DataAccess
                 "WHERE " +
                 $"{LessonTable}.AppointmentID = {AppointmentTable}.id AND " +
                 $"{AppointmentTable}.instructorID = '{instructorId}' AND " +
-                $"{LessonTemplateTable}.id = {LessonTable}.LessonID " +
+                $"{LessonTemplateTable}.id = {LessonTable}.LessonID AND " +
+                $"{LessonTable}.Completed = 'False' " +
                 $"ORDER BY {LessonTable}.EndDate");
 
             return SendQuery(cmd);
@@ -202,12 +203,13 @@ namespace DriveLogCode.DataAccess
         {
             var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
                                        $"`id`  int NOT NULL AUTO_INCREMENT ," +
-                                       $"`userID`  int NOT NULL ," +
-                                       $"`appointmentID`  int NOT NULL ," +
-                                       $"`lessonID`  int NOT NULL ," +
-                                       $"`lessonPart`  int NOT NULL ," +
-                                       $"`endDate`  datetime NULL DEFAULT NULL ," +
-                                       $"`completed`  enum(\'True\',\'False\') NOT NULL DEFAULT \'False\' ," +
+                                       $"`UserID`  int NOT NULL ," +
+                                       $"`AppointmentID`  int NOT NULL ," +
+                                       $"`LessonID`  int NOT NULL ," +
+                                       $"`LessonPart`  int NOT NULL ," +
+                                       $"`StartDate`  datetime NULL DEFAULT NULL ," +
+                                       $"`EndDate`  datetime NULL DEFAULT NULL ," +
+                                       $"`Completed`  enum(\'True\',\'False\') NOT NULL DEFAULT \'False\' ," +
                                        $"PRIMARY KEY (`id`)" +
                                        $")" +
                                        $"ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
@@ -273,16 +275,16 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
-        public static bool SetLessonToComplete(int studentId, DateTime endDate, bool status, string table = LessonTable)
+        public static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status, string table = LessonTable)
         {
-            var cmd = new MySqlCommand($"UPDATE {table} SET Completed = '{status}' WHERE UserID = {studentId} AND EndDate = '{endDate}' LIMIT 1");
+            var cmd = new MySqlCommand($"UPDATE {table} SET Completed = '{status}' WHERE UserID = {studentId} AND AppointmentID = {appointmentId} AND LessonPart = {progress} LIMIT 1");
 
             return SendNonQuery(cmd);
         }
 
-        public static bool DeleteLesson(int studentId, DateTime endDate, string table = LessonTable)
+        public static bool DeleteLesson(int studentId, int appointmentid, int progress, string table = LessonTable)
         {
-            var cmd = new MySqlCommand($"DELETE FROM {table} WHERE UserID = {studentId} AND EndDate = '{endDate}' LIMIT 1");
+            var cmd = new MySqlCommand($"DELETE FROM {table} WHERE UserID = {studentId} AND AppointmentID = {appointmentid} AND LessonPart = {progress} LIMIT 1");
 
             return SendNonQuery(cmd);
         }

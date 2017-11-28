@@ -45,6 +45,8 @@ namespace DriveLogGUI.MenuTabs
 
         private void UpdateLessonsToCompleteList()
         {
+            _lessonsToCompleteList.Clear();
+            completeLessonsList.Items.Clear();
             List<Lesson> lessonsFoundList = DatabaseParser.GetLessonsToCompleteList(Session.LoggedInUser);
             int scheduledCount = 0;
 
@@ -59,7 +61,7 @@ namespace DriveLogGUI.MenuTabs
                 _lessonsToCompleteList.Add(lesson);
 
                 string[] subItems = {lesson.LessonTemplate.Title, DatabaseParser.GetUserById(lesson.StudentId).Fullname};
-                completeLessonsList.Items.Add(lesson.EndDate.ToString("dd/MM - hh:mm")).SubItems.AddRange(subItems);
+                completeLessonsList.Items.Add(lesson.StartDate.ToString("dd/MM - HH:mm") + " to " + lesson.EndDate.ToString("HH:mm")).SubItems.AddRange(subItems);
             }
 
             scheduledAppointmentsLabel.Text = "Scheduled Appointments: " + scheduledCount;
@@ -235,8 +237,8 @@ namespace DriveLogGUI.MenuTabs
         private void completeLessonsList_ItemActivate(object sender, EventArgs e)
         {
             if (!(sender is ListView item)) return;
-            Lesson selectedLesson = _lessonsToCompleteList[item.SelectedItems[0].Index];
             List<Lesson> tempLessonList = new List<Lesson>();
+
             foreach (Lesson l in _lessonsToCompleteList)
             {
                 if(l.EndDate == _lessonsToCompleteList[item.SelectedItems[0].Index].EndDate)
@@ -244,7 +246,10 @@ namespace DriveLogGUI.MenuTabs
             }
             ConfirmLessonForm confirmbox = new ConfirmLessonForm(tempLessonList);
 
-            confirmbox.ShowDialog();
+            DialogResult result = confirmbox.ShowDialog();
+
+            if(result == DialogResult.Yes)
+                UpdateLessonsToCompleteList();
         }
     }
 }
