@@ -248,28 +248,92 @@ namespace DriveLogCode
             SizeF size;
             PdfPageBase page = CreatePage(document);
 
-            for (int i = 0; i < templates.Count; i++)
+            foreach (LessonTemplate template in templates)
             {
-                if (y >= page.Canvas.ClientSize.Height)
+                if (y >= page.Canvas.ClientSize.Height - 250)
                 {
                     page = CreatePage(document);
-                    y = 0;
+                    y = 10;
                 }
-                
-                page.Canvas.DrawString(templates[i].Title, DesignSchemes.FontScheme.PdfTitleFont, DesignSchemes.ColorScheme.PdfBlackText,
+
+                if (templates.IndexOf(template) == 8)
+                {
+                    page.Canvas.DrawString("OBS", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText,0,y);
+
+                    y += DesignSchemes.FontScheme.PdfOBSTitleFont.MeasureString("OBS").Height;
+
+                    string text = "Nu er det på tide at tænke på at bestille teoriprøve!\r\nHvis du kan nå lektionerne til og med Teorilektion 7, inden for de næste ca. 2 uger, kan du bestille teoriprøve via din kørelærer!\r\n";
+                    page.Canvas.DrawString(text,DesignSchemes.FontScheme.PdfOBSTextFont,DesignSchemes.ColorScheme.PdfBlackText,0,y);
+
+                    y += DesignSchemes.FontScheme.PdfOBSTextFont.MeasureString(text).Height;
+
+                    text = "Men kun hvis du HAR afleveret papirerne, ellers er det på høje tid at få dem afleveret!!!";
+                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextUnderlineFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
+
+                    y += DesignSchemes.FontScheme.PdfOBSTextUnderlineFont.MeasureString(text).Height;
+
+                    text = "Husk også at få betalt det gebyr til prøverne, som du har fået via E-Boks";
+                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextUnderlineFatFont, DesignSchemes.ColorScheme.PdfBlackText, page.Canvas.ClientSize.Width/2, y, new PdfStringFormat(PdfTextAlignment.Center));
+                    
+                    y += DesignSchemes.FontScheme.PdfOBSTextUnderlineFatFont.MeasureString(text).Height;
+
+                }
+
+                page.Canvas.DrawString(template.Title, DesignSchemes.FontScheme.PdfTitleFont, DesignSchemes.ColorScheme.PdfBlackText,
                     x: 0, y: y);
 
-                size = DesignSchemes.FontScheme.PdfTitleFont.MeasureString(templates[i].Title);
+                size = DesignSchemes.FontScheme.PdfTitleFont.MeasureString(template.Title);
                 y += size.Height;
 
-                page.Canvas.DrawString(templates[i].Reading, DesignSchemes.FontScheme.PdfHeaderFont, DesignSchemes.ColorScheme.PdfBlackText,
+                page.Canvas.DrawString(template.Reading, DesignSchemes.FontScheme.PdfHeaderFont, DesignSchemes.ColorScheme.PdfBlackText,
                     x: size.Width + 5, y: y - 20);
 
-                page.Canvas.DrawString(templates[i].Description, DesignSchemes.FontScheme.PdfTextFont, DesignSchemes.ColorScheme.PdfBlackText,
-                    x: 0, y: y, format: new PdfStringFormat(PdfTextAlignment.Left));
+                PdfStringFormat format = new PdfStringFormat(PdfTextAlignment.Left);
+                format.LineSpacing = 20f;
 
-                size = DesignSchemes.FontScheme.PdfTextFont.MeasureString(templates[i].Description);
-                y += size.Height;
+                PdfStringLayouter stringLayout = new PdfStringLayouter();
+                PdfStringLayoutResult description = stringLayout.Layout(template.Description, DesignSchemes.FontScheme.PdfTextFont, format, new SizeF(page.GetClientSize().Width, 0));
+
+                foreach (LineInfo line in description.Lines)
+                {
+                    page.Canvas.DrawString(line.Text, DesignSchemes.FontScheme.PdfTextFont, DesignSchemes.ColorScheme.PdfBlackText,0,y,format);
+                    y += description.LineHeight;
+                }
+                y += 10;
+
+                PdfGrid grid = new PdfGrid { Style = { CellPadding = new PdfPaddings(1, 1, 1, 1) } };
+                grid.Columns.Add(2);
+                grid.Columns[0].Width = page.Canvas.ClientSize.Width * 0.20f;
+                grid.Columns[1].Width = page.Canvas.ClientSize.Width * 0.80f;
+
+                List<string> data = new List<string>()
+                {
+                    $" Dato:;Tidsforbug:\t\t\t{template.Time} x 45 min.",
+                    " Elev underskrift:; ",
+                    " Kørelære underskrift:\t\t\t\t+ banens stempel; "
+                };
+
+                foreach (string s in data)
+                {
+                    string[] cols = s.Split(';');
+                    PdfGridRow row = grid.Rows.Add();
+
+                    row.Style.Font = DesignSchemes.FontScheme.PdfTextFont;
+                    
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        row.Cells[i].Value = cols[i];
+
+                        if (data.IndexOf(s) > 0)
+                        {
+                            row.Height += 10;
+                        }
+                    }
+                }
+
+                PdfLayoutResult result = grid.Draw(page, 0, y);
+                y += result.Bounds.Height + 10;
             }
         }
 
