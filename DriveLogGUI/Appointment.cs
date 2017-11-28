@@ -16,12 +16,16 @@ namespace DriveLogGUI
     public class Appointment : AppointmentStructure
     {
         public Label LabelAppointment;
+        public Panel BookedPanelOnLabel;
+        public List<Lesson> bookedLessons;
         public DateTime ToTime => StartTime.AddMinutes(AvailableTime * 45);
         public string TimeFormat => GetTime();
         public string DateFormat => GetDate();
+        public bool bookedByUser;
 
         public Appointment(AppointmentStructure appointmentStructure) : base(appointmentStructure)
         {
+            bookedLessons = DatabaseParser.GetAllLessonsFromAppointmentID(Id);
             GenerateLabel();
 
             if (Session.LoggedInUser.Sysmin)
@@ -48,6 +52,18 @@ namespace DriveLogGUI
             LabelAppointment.BackColor = GetColorForLabel(this.LessonType);
             LabelAppointment.TextAlign = ContentAlignment.MiddleCenter;
             LabelAppointment.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, LabelAppointment.Font.Unit);
+
+            LabelAppointment.ForeColor = ColorScheme.CalendarRed;
+            BookedPanelOnLabel = new Panel();
+            BookedPanelOnLabel.Height = LabelAppointment.Height / 4;
+            BookedPanelOnLabel.Width = LabelAppointment.Width;
+            BookedPanelOnLabel.Location = new Point(0, 0);
+            BookedPanelOnLabel.BackColor = Color.FromArgb(255, Color.Red);
+            BookedPanelOnLabel.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(this));
+            BookedPanelOnLabel.Hide();
+
+            LabelAppointment.ForeColor = Color.Black;
+            LabelAppointment.Controls.Add(BookedPanelOnLabel);
         }
 
         private Color GetColorForLabel(string appointmentLessonType)
@@ -69,6 +85,12 @@ namespace DriveLogGUI
             }
 
             return ColorScheme.CalendarRed;
+
+        }
+
+        public void AppointmentBooked()
+        {
+            BookedPanelOnLabel.Show();
 
         }
         public void UserLabelData()

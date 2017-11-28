@@ -22,6 +22,7 @@ namespace DriveLogCode.DataAccess
             var cmd = new MySqlCommand("SELECT " +
                 $"{UserTable}.firstname AS InstructorFirstname, " +
                 $"{UserTable}.lastname AS InstructorLastname, " +
+                $"{LessonTable}.AppointmentID, " +
                 $"{LessonTable}.LessonID AS TemplateID, " +
                 $"{LessonTable}.LessonPart AS Progress, " +
                 $"{LessonTable}.StartDate, " +
@@ -118,6 +119,15 @@ namespace DriveLogCode.DataAccess
                                        $"{lessonTemplateTable}.type = '{lessonType}' " +
                                        $"ORDER BY {lessonTemplateTable}.id ");
 
+            return SendQuery(cmd);
+        }
+
+        public static DataTable GetAllLessonsFromAppointmentID(int id, string lessonTable = LessonTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * " +
+                                       $"FROM {lessonTable} " +
+                                       $"WHERE " +
+                                       $"{lessonTable}.AppointmentID = {id}");
             return SendQuery(cmd);
         }
 
@@ -418,6 +428,8 @@ namespace DriveLogCode.DataAccess
 
             return SendNonQuery(cmd);
         }
+
+
 
         private static bool ExistTable(string tablename)
         {

@@ -7,6 +7,10 @@ namespace DriveLogCode.Objects
 {
     public class User
     {
+        public User()
+        {
+            
+        }
         public User(int id, string firstname, string lastname, string phone, string email, string cpr, 
             string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin)
         {

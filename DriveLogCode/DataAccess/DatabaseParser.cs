@@ -34,8 +34,8 @@ namespace DriveLogCode.DataAccess
 
             foreach (DataRow row in results.Rows)
             {
-                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[2]), (string)row[7], (string)row[8], (string)row[9], Convert.ToInt32(row[10]), (string)row[11]);
-                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], (DateTime)row[5], Convert.ToBoolean(row[6]), newTemplate, (string)row[12]));
+                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[3]), (string)row[8], (string)row[9], (string)row[10], Convert.ToInt32(row[11]), (string)row[12]);
+                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), Convert.ToInt32(row[4]), (DateTime)row[5], (DateTime)row[6], Convert.ToBoolean(row[7]), newTemplate, (string)row[13]));
             }
 
             return lessonsList;
@@ -225,6 +225,28 @@ namespace DriveLogCode.DataAccess
             DataTable result = MySql.GetNumberOfBookingsInAppointment(appointmentid);
 
             return result.Rows.Count;
+        }
+
+        public static List<Lesson> GetAllLessonsFromAppointmentID(int id)
+        {
+            DataTable result = MySql.GetAllLessonsFromAppointmentID(id);
+
+            List<Lesson> lessonsAppointment = new List<Lesson>();
+
+            foreach (DataRow lesson in result.Rows)
+            {
+                lessonsAppointment.Add(new Lesson(
+                    Convert.ToInt32(lesson[0]), 
+                    Convert.ToInt32(lesson[1]), 
+                    Convert.ToInt32(lesson[2]), 
+                    Convert.ToInt32(lesson[3]), 
+                    Convert.ToInt32(lesson[4]), 
+                    (DateTime)lesson[5], 
+                    (DateTime)lesson[6], 
+                    Convert.ToBoolean(lesson[7])));
+            }
+
+            return lessonsAppointment;
         }
     }
 }

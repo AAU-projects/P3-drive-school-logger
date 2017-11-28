@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DriveLogCode;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogGUI.CustomControls;
 
 namespace DriveLogGUI.Windows
@@ -395,6 +396,11 @@ namespace DriveLogGUI.Windows
                 _isSignatureOk = true;
             signatureEditForm.Dispose();
             signatureBox.Image = _signatureImage;
+        }
+
+        private void topBarPanel_Paint(object sender, PaintEventArgs e)
+        {
+            topBarPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

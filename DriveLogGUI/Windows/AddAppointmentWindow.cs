@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 
 namespace DriveLogGUI.Windows
@@ -140,6 +141,11 @@ namespace DriveLogGUI.Windows
             }
             else
                 CustomMsgBox.Show("Failure", "Some fields need to be filled", CustomMsgBoxIcon.Warrning);
+        }
+
+        private void topPanel_Paint(object sender, PaintEventArgs e)
+        {
+            topPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }
