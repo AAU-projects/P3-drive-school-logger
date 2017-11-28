@@ -20,17 +20,19 @@ namespace DriveLogGUI.MenuTabs
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
         private Appointment selectedAppointment;
-        private bool bookingAvailable = false;
 
         private MainWindow mainWindow;
-
         private OverviewTab overviewTab;
 
-        Random test = new Random();
+        private string CancelBookingText = "CANCEL BOOKING";
+        private string BookingText = "BOOK";
+        private string UnavaiableBookingText = "UNAVAILABLE";
 
         public CalendarTabG(OverviewTab overviewTab, MainWindow mainWindow)
         {
             InitializeComponent();
+            DrawCalendar();
+
             this.mainWindow = mainWindow;
             this.overviewTab = overviewTab;
 
@@ -42,6 +44,16 @@ namespace DriveLogGUI.MenuTabs
             if (Session.LoggedInUser.Sysmin)
                 bookingInformationButton.Hide();
 
+        }
+
+        private void DrawCalendar()
+        {
+            GenerateWeeklyCalendar();
+            DrawLineBelowDates();
+
+            if (Session.LoggedInUser.Sysmin) {
+                DrawAddAppointmentButtons();
+            }
         }
 
         private void GetAppointsments()
@@ -76,7 +88,7 @@ namespace DriveLogGUI.MenuTabs
 
         private string BookInformation()
         {
-            int numberOfBookings = DatabaseParser.GetNumberOfBookedLessonsFromAppointmentID(selectedAppointment.Id);
+            int numberOfBookings = selectedAppointment.bookedLessons.GroupBy(x => x.UserID).Count();
 
             if (selectedAppointment.LessonType == LessonTypes.Theoretical)
             {
@@ -91,7 +103,12 @@ namespace DriveLogGUI.MenuTabs
 
         private void CheckIfUserCanBookLesson()
         {
-            if (selectedAppointment.FullyBooked) // if the lsson is already fully booked
+            if (selectedAppointment.BookedPanelOnLabel.Visible) // if the leson is already booked by the user
+            {
+                ShowBookingWarrning("You already have a booking on this appointemnt");
+                ShowUnbookingAvaiable();
+            }
+            else if (selectedAppointment.FullyBooked) // if the lsson is already fully booked
             {
                 ShowBookingWarrning("This date is already fully booked");
             }
@@ -137,10 +154,15 @@ namespace DriveLogGUI.MenuTabs
             } 
         }
 
+        
+        private void ShowUnbookingAvaiable()
+        {
+            bookingInformationButton.Text = CancelBookingText;
+        }
+
         private void BookingAvailable()
         {
-            bookingInformationButton.Text = "BOOK";
-            bookingAvailable = true;
+            bookingInformationButton.Text = BookingText;
         }
 
         private string GetReverseType(string type)
@@ -158,8 +180,7 @@ namespace DriveLogGUI.MenuTabs
 
         private void ShowBookingWarrning(string errorMsg)
         {
-            bookingAvailable = false;
-            bookingInformationButton.Text = "UNAVAILABLE";
+            bookingInformationButton.Text = UnavaiableBookingText;
             warningInformationLabel.Text = errorMsg;
 
             warningTitleLabel.Show();
@@ -204,10 +225,11 @@ namespace DriveLogGUI.MenuTabs
 
                 //adds each panel to calendarPanel
                 panelForCalendar.Controls.Add(newDay);
-
-                //Updates calendar to current date, update calendar can be called with a int 1 for week forward and -1 for past week
-                UpdateCalendar(0);
             }
+
+            //Updates calendar to current date, update calendar can be called with a int 1 for week forward and -1 for past week
+            UpdateCalendar(0);
+
             panelForCalendar.Controls.Add(backPanel);
         }
 
@@ -322,6 +344,19 @@ namespace DriveLogGUI.MenuTabs
                 day.LabelForDate.Text = dayNow.Day.ToString();
                 day.LabelForWeekday.Text = GetShortWeekday(dayNow.DayOfWeek.ToString()).ToUpper();
                 day.Date = dayNow;
+
+                if (day.Date.Day == DateTime.Now.Day)
+                {
+                    day.LabelForWeekday.BackColor = Color.FromArgb(100, ColorScheme.MainThemeColorLight);
+                    day.LabelForDate.BackColor = Color.FromArgb(100, ColorScheme.MainThemeColorLight);
+                }
+                else
+                {
+                    day.LabelForWeekday.BackColor = Color.White;
+                    day.LabelForDate.BackColor = Color.White;
+
+                }
+
                 dayNow = dayNow.AddDays(1);
             }
 
@@ -393,12 +428,16 @@ namespace DriveLogGUI.MenuTabs
 
 
                 List<Appointment> appointmentsOnDay = appointments.Where(x => x.ToTime.Day == day.Date.Day).ToList();
+
                 foreach (var appointment in appointmentsOnDay) {
                     appointment.LabelAppointment.Show();
                     appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
                     prevLocation += appointment.LabelAppointment.Height + 5;
                     day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
-
+                    if (appointment.bookedLessons.Count != 0 && appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id).Id != 0)
+                    {
+                        appointment.AppointmentBooked();
+                    }
                 }
             }
         }
@@ -465,10 +504,14 @@ namespace DriveLogGUI.MenuTabs
 
         private void bookingInformationButton_Click(object sender, EventArgs e)
         {
-            if (bookingAvailable)
+            if (bookingInformationButton.Text == BookingText)
             {
                 BookAppointmentWindow bookingWindow = new BookAppointmentWindow(selectedAppointment, MousePosition);
                 bookingWindow.ShowDialog();
+            }
+            else if (bookingInformationButton.Text == CancelBookingText)
+            {
+                
             }
             
         }

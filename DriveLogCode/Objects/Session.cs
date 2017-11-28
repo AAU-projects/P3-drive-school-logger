@@ -10,6 +10,7 @@ namespace DriveLogCode.Objects
     public static class Session
     {
         public static User LoggedInUser;
+        public static Dictionary<int, List<Lesson>> LessonsUserDictionary = new Dictionary<int, List<Lesson>>();
         public static List<Lesson> LessonsUser;
         public static string TypeFirstAid = "FirstAid";
         public static string TypeDoctorsNote = "DoctorsNote";
@@ -26,7 +27,22 @@ namespace DriveLogCode.Objects
 
         public static void GetProgress()
         {
+            LessonsUserDictionary.Clear();
             LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
+
+            for (int i = 1; i < 10; i++)
+            {
+                List<Lesson> lessonAppointment = LessonsUser.Where(x => x.AppointmentID == i).ToList();
+
+                if (LessonsUserDictionary.ContainsKey(i))
+                {
+                    
+                    LessonsUserDictionary[i].AddRange(lessonAppointment);
+                }
+                LessonsUserDictionary.Add(i, lessonAppointment);
+            }
+
+
             if (LessonsUser.Count != 0)
             {
                 CurrentLesson = LessonsUser

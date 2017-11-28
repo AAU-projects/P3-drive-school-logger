@@ -15,6 +15,7 @@ namespace DriveLogCode.DesignSchemes
         public static Color MainFontColor = Color.FromArgb(128, 132, 144);
         public static Color MainBackgroundColor = Color.FromArgb(241, 241, 241);
         public static Color MainPanelColor = Color.FromArgb(251, 251, 251);
+        public static Color MainTopPanelColor = Color.FromArgb(100, 108, 112);
         public static Color MainWarningColor = Color.FromArgb(229, 187, 191);
     }
 }

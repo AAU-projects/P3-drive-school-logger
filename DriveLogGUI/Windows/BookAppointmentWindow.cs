@@ -30,7 +30,8 @@ namespace DriveLogGUI.Windows
 
             this._openWindowPosition = mousePosition;
             this._appointment = appointment;
-            this.startDateTime = appointment.ToTime;
+            this.startDateTime = appointment.StartTime;
+            this.endDateTime = appointment.ToTime;
             CheckForFirstLessons();
             curentLesson = Session.GetLastLessonFromType(_appointment.LessonType);
 
@@ -45,13 +46,13 @@ namespace DriveLogGUI.Windows
         {
             // if a user does not already have a lesson in lessontype a temp lesson is created before first lesson is added to database
             if (Session.LastTheoraticalLesson == null && _appointment.LessonType == LessonTypes.Theoretical) {
-                Session.LastTheoraticalLesson = new Lesson(_appointment.InstructorName, "", 1, 1, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null);
+                Session.LastTheoraticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 1, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null);
                 Session.LastTheoraticalLesson.LessonTemplate = DatabaseParser.GetLessonTemplateFromID(Session.LastTheoraticalLesson.TemplateID);
                 addedFirstLesson = true;
             }
 
             if (Session.LastPracticalLesson == null && _appointment.LessonType == LessonTypes.Practical) {
-                Session.LastPracticalLesson = new Lesson(_appointment.InstructorName, "", 4, 1, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null);
+                Session.LastPracticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 4, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null);
                 Session.LastPracticalLesson.LessonTemplate = DatabaseParser.GetLessonTemplateFromID(Session.LastPracticalLesson.TemplateID);
                 addedFirstLesson = true;
             }
@@ -61,9 +62,9 @@ namespace DriveLogGUI.Windows
         {
             DateTime time = new DateTime();
             time = time.AddHours(_appointment.StartTime.Hour);
-            int timeSpan45= (int) ((_appointment.ToTime.TimeOfDay.TotalMinutes - _appointment.StartTime.TimeOfDay.TotalMinutes) / 45);
+            int timeSpan15= (int) ((_appointment.ToTime.TimeOfDay.TotalMinutes - _appointment.StartTime.TimeOfDay.TotalMinutes) / 15);
 
-            for (int i = 0; i < timeSpan45; i++) {
+            for (int i = 0; i < timeSpan15 - 2; i++) {
                 comboBox.Items.Add(time.ToString("HH:mm"));
                 time = time.AddMinutes(15);
             }
@@ -151,7 +152,7 @@ namespace DriveLogGUI.Windows
             TimeSpan span = _appointment.ToTime.TimeOfDay - DateTime.Parse(StartTimecomboBox.Text).TimeOfDay;
             int avaiableTime = (int) span.TotalMinutes / 45;
             FillComboBox(lessonsComboBox, avaiableTime);
-            //lessonsComboBox.Text = lessonsComboBox.Items[lessonsComboBox.Items.Count].ToString();
+            lessonsComboBox.SelectedItem = lessonsComboBox.Items.Count;
         }
 
         private void lessonsComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -174,6 +175,7 @@ namespace DriveLogGUI.Windows
                 if (result)
                 {
                     CustomMsgBox.Show("Successfully booked!", "Sucess", CustomMsgBoxIcon.Complete);
+                    _appointment.AppointmentBooked();
                     this.Dispose();
                     Session.GetProgress();
                 }
@@ -196,7 +198,9 @@ namespace DriveLogGUI.Windows
             if (addedFirstLesson)
             {
                 numberOfLessons -= 1;
+
                 Lesson firstLesson = Session.GetLastLessonFromType(_appointment.LessonType);
+                firstLesson.Progress = 1;
                 result = DatabaseParser.AddLessonToUserID(
                     Session.LoggedInUser.Id, 
                     _appointment.Id,
@@ -205,6 +209,8 @@ namespace DriveLogGUI.Windows
                     startDateTime, 
                     startDateTime = startDateTime.AddMinutes(45), 
                     true);
+
+                curentLesson.Progress = firstLesson.Progress;
 
             }
             for (int i = 0; i < numberOfLessons; i++)
@@ -234,6 +240,11 @@ namespace DriveLogGUI.Windows
             }
             return true;
 
+        }
+
+        private void topPanel_Paint(object sender, PaintEventArgs e)
+        {
+            topPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }
