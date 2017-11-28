@@ -14,6 +14,8 @@ namespace DriveLogCode.DesignSchemes
         public static PdfTrueTypeFont PdfSubTitleFont = new PdfTrueTypeFont(new Font("Calibri", 20f, FontStyle.Bold));
         public static PdfTrueTypeFont PdfHeaderFont = new PdfTrueTypeFont(new Font("Calibri Light", 8f, FontStyle.Bold));
         public static PdfTrueTypeFont PdfBigTextFont = new PdfTrueTypeFont(new Font("Calibri Light", 20f, FontStyle.Regular));
+        public static PdfTrueTypeFont PdfTextFont = new PdfTrueTypeFont(new Font("Calibri Light", 12f, FontStyle.Regular));
+
 
 
 
