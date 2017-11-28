@@ -4,6 +4,11 @@ namespace DriveLogCode.DesignSchemes
 {
     public static class ColorScheme
     {
+        public static Color CalendarCompleted = Color.FromArgb(255, 188, 66);
+        public static Color CalendarBooked = Color.FromArgb(4, 150, 255);
+        public static Color CalendarBookable = Color.FromArgb(46, 164, 88);
+        public static Color CalendarNoSlotsAvailable = Color.FromArgb(216, 17, 89);
+
         public static Color CalendarRed = Color.FromArgb(229, 187, 191);
         public static Color CalendarBlue = Color.FromArgb(148, 197, 204);
         public static Color CalendarGreen = Color.FromArgb(175, 212, 167);

@@ -280,6 +280,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\noAvailableDot.png" />
     <None Include="Resources\exit6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -344,6 +345,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\DragHandle.png" />
+    <None Include="Resources\bookableDot.png" />
+    <None Include="Resources\bookedDot.png" />
+    <None Include="Resources\completedDot.png" />
     <Content Include="Resources\drag_and_drop_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

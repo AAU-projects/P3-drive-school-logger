@@ -52,5 +52,10 @@ namespace DriveLogCode.Objects
             this.EndDate = enddate;
             this.Completed = completed;
         }
+
+        public Lesson()
+        {
+            this.StartDate = DateTime.MinValue;;
+        }
     }
 }

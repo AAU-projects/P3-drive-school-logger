@@ -99,8 +99,10 @@ namespace DriveLogGUI.Windows
 
         private void SetComboBoxTimeDifference()
         {
-            if (StartTimecomboBox.Text != String.Empty & lessonsComboBox.Text != String.Empty) {
-                startDateTime = DateTime.Parse(StartTimecomboBox.Text);
+            if (StartTimecomboBox.Text != String.Empty & lessonsComboBox.Text != String.Empty)
+            {
+                DateTime tempTime = DateTime.Parse(StartTimecomboBox.Text);
+                startDateTime = new DateTime(startDateTime.Year, startDateTime.Month, startDateTime.Day) + tempTime.TimeOfDay;
                 endDateTime = startDateTime.AddMinutes(45 * (int)lessonsComboBox.SelectedItem);
 
                 TimeSpan timeDifference = endDateTime - startDateTime;
@@ -175,7 +177,7 @@ namespace DriveLogGUI.Windows
                 if (result)
                 {
                     CustomMsgBox.Show("Successfully booked!", "Sucess", CustomMsgBoxIcon.Complete);
-                    _appointment.AppointmentBooked();
+                    _appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
                     this.Dispose();
                     Session.GetProgress();
                 }
