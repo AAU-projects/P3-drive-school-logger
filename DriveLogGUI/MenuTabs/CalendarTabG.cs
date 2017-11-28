@@ -24,8 +24,8 @@ namespace DriveLogGUI.MenuTabs
         private MainWindow mainWindow;
         private OverviewTab overviewTab;
 
-        private string CancelBookingText = "CANCEL BOOKING";
         private string BookingText = "BOOK";
+        private string CancelBookingText = "CANCEL BOOKING";
         private string UnavaiableBookingText = "UNAVAILABLE";
 
         public CalendarTabG(OverviewTab overviewTab, MainWindow mainWindow)
@@ -437,22 +437,18 @@ namespace DriveLogGUI.MenuTabs
                     appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
                     prevLocation += appointment.LabelAppointment.Height + 5;
                     day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
+
                     if (appointment.bookedLessons.Count == 0) // if 0 there is nothing to do for the user with highlights
                     {
-                    } else if (appointment.FullyBooked) 
+                    } else if (appointment.bookedLessons.Find(x => x.Completed) != null) 
                     {
-                        appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
+                        appointment.AppointmentHighlight(ColorScheme.CalendarCompleted);
                     } else if (appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id).Id != 0)
                     {
                         appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
-                    }
-                    else if (appointment.bookedLessons.Find(x => x.Completed).Completed)
+                    } else if (appointment.FullyBooked) 
                     {
-                        appointment.AppointmentHighlight(ColorScheme.CalendarCompleted);
-                    }
-                    else
-                    {
-                        appointment.AppointmentHighlight(ColorScheme.CalendarBookable);
+                        appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
                     }
                 }
             }
