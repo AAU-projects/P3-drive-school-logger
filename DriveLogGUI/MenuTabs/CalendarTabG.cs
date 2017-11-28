@@ -103,16 +103,19 @@ namespace DriveLogGUI.MenuTabs
 
         private void CheckIfUserCanBookLesson()
         {
-            if (selectedAppointment.BookedPanelOnLabel.Visible) // if the leson is already booked by the user
+            if (selectedAppointment.BookedPanelOnLabel.Visible) // if the lesson is already booked by the user
             {
                 ShowBookingWarrning("You already have a booking on this appointemnt");
                 ShowUnbookingAvaiable();
             }
-            else if (selectedAppointment.FullyBooked) // if the lsson is already fully booked
+            else if (selectedAppointment.FullyBooked) // if the lesson is already fully booked
             {
                 ShowBookingWarrning("This date is already fully booked");
             }
-            else if (Session.CurrentLesson == null) // if the user have no lessons
+            else if (selectedAppointment.ToTime < Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
+            {
+                ShowBookingWarrning("You can not book a lesson in a previous time than your lastly booked lesson");
+            } else if (Session.GetLastLessonFromType(selectedAppointment.LessonType) == null) // if the user have no lessons
             {
                 //gets the first lesson
                 LessonTemplate firstLesson = DatabaseParser.GetLessonTemplateFromID(1);
@@ -125,28 +128,28 @@ namespace DriveLogGUI.MenuTabs
                     ShowBookingWarrning("You are not suitable to book practical yet as its required that you have 3 theoretical lessons before your first practical");
                 }
             }
-            else if (Session.CurrentLesson != null) // if the user have prev booked a lesson
+            else if (Session.GetLastLessonFromType(selectedAppointment.LessonType) != null) // if the user have prev booked a lesson
             {
-                LessonTemplate nextLesson = DatabaseParser.GetNextLessonTemplateFromID(Session.CurrentLesson.TemplateID, selectedAppointment.LessonType);
-                if (Session.CurrentLesson.Progress == Session.CurrentLesson.LessonTemplate.Time) // if the user is done with the current lessontemplate
+                LessonTemplate nextLesson = DatabaseParser.GetNextLessonTemplateFromID(Session.GetLastLessonFromType(selectedAppointment.LessonType).TemplateID, selectedAppointment.LessonType);
+                if (Session.GetLastLessonFromType(selectedAppointment.LessonType).Progress == Session.GetLastLessonFromType(selectedAppointment.LessonType).LessonTemplate.Time) // if the user is done with the current lessontemplate
                 {
-                    if (Session.CurrentLesson.TemplateID == nextLesson.Id - 1) {
+                    if (Session.GetLastLessonFromType(selectedAppointment.LessonType).TemplateID == nextLesson.Id - 1) {
                         BookingAvailable();
                     } else {
                         ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
-                                            $"you would have to book {nextLesson.Id - 1 - Session.CurrentLesson.TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
+                                            $"you would have to book {nextLesson.Id - 1 - Session.GetLastLessonFromType(selectedAppointment.LessonType).TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
                     }
                 }
                 else // the user continues with the current lessontemplate
                 {
-                    if (Session.CurrentLesson.LessonTemplate.Type == selectedAppointment.LessonType)
+                    if (Session.GetLastLessonFromType(selectedAppointment.LessonType).LessonTemplate.Type == selectedAppointment.LessonType)
                     {
                         BookingAvailable();
                     }
                     else
                     {
                         ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
-                                            $"you would have to book {nextLesson.Id - 1 - Session.CurrentLesson.TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
+                                            $"you would have to book {nextLesson.Id - 1 - Session.GetLastLessonFromType(selectedAppointment.LessonType).TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
                     }
                 }
                 
@@ -434,9 +437,22 @@ namespace DriveLogGUI.MenuTabs
                     appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
                     prevLocation += appointment.LabelAppointment.Height + 5;
                     day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
-                    if (appointment.bookedLessons.Count != 0 && appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id).Id != 0)
+                    if (appointment.bookedLessons.Count == 0) // if 0 there is nothing to do for the user with highlights
                     {
-                        appointment.AppointmentBooked();
+                    } else if (appointment.FullyBooked) 
+                    {
+                        appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
+                    } else if (appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id).Id != 0)
+                    {
+                        appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
+                    }
+                    else if (appointment.bookedLessons.Find(x => x.Completed).Completed)
+                    {
+                        appointment.AppointmentHighlight(ColorScheme.CalendarCompleted);
+                    }
+                    else
+                    {
+                        appointment.AppointmentHighlight(ColorScheme.CalendarBookable);
                     }
                 }
             }

@@ -55,10 +55,9 @@ namespace DriveLogGUI
 
             LabelAppointment.ForeColor = ColorScheme.CalendarRed;
             BookedPanelOnLabel = new Panel();
-            BookedPanelOnLabel.Height = LabelAppointment.Height / 4;
-            BookedPanelOnLabel.Width = LabelAppointment.Width;
+            BookedPanelOnLabel.Height = LabelAppointment.Height;
+            BookedPanelOnLabel.Width = LabelAppointment.Width / 10;
             BookedPanelOnLabel.Location = new Point(0, 0);
-            BookedPanelOnLabel.BackColor = Color.FromArgb(255, Color.Red);
             BookedPanelOnLabel.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(this));
             BookedPanelOnLabel.Hide();
 
@@ -88,11 +87,12 @@ namespace DriveLogGUI
 
         }
 
-        public void AppointmentBooked()
+        public void AppointmentHighlight(Color color)
         {
             BookedPanelOnLabel.Show();
-
+            BookedPanelOnLabel.BackColor = Color.FromArgb(255, color);
         }
+
         public void UserLabelData()
         {
             LabelAppointment.Text = LessonType;
