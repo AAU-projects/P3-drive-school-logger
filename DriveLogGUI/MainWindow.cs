@@ -74,6 +74,7 @@ namespace DriveLogGUI
                 settingsButton.Location = new Point(0, 138);
             }
 
+            overviewTab.DoctorsNotePictureButtonClick += OnIconClick; 
             overviewTab.SubPageCreated += OpenPageEvent;
             profileTab.SubPageCreated += OpenPageEvent;
 
@@ -300,6 +301,16 @@ namespace DriveLogGUI
                 OpenPage(sender, documentViewer);
                 documentViewer.SetType(Session.TypeDoctorsNote);
             }
+        }
+
+        private void OnIconClick(object sender, EventArgs e)
+        {
+            PictureBox pBox = sender as PictureBox;
+           
+            if (pBox.Name == "doctorsNotePictureButton")
+                OpenPage(doctorsNoteButton, documentViewer);
+            else if (pBox.Name == "firstAidPictureButton")
+                OpenPage(firstAidButton, documentViewer);
         }
 
         internal void driveLogButton_Click(object sender, EventArgs e)

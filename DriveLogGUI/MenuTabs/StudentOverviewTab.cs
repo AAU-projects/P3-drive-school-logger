@@ -10,8 +10,8 @@ namespace DriveLogGUI.MenuTabs
     public partial class StudentOverviewTab : OverviewTab
     {
         public event EventHandler LogOutButtonClick;
-        public event EventHandler DoctorsNotePictureButtonClick;
         internal event SubPageNotification SubPageCreated;
+        internal virtual event EventHandler DoctorsNotePictureButtonClick;
         private DateTime selectedMonth;
         private DateTime formatDateTime;
 
