@@ -48,8 +48,8 @@ namespace DriveLogCode.DataAccess
 
             foreach (DataRow row in results.Rows)
             {
-                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[0]), (string)row[4], (string)row[5], (string)row[6], Convert.ToInt32(row[7]), (string)row[8]);
-                lessonsFoundList.Add(new Lesson(instructor.Firstname, instructor.Lastname, Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (DateTime)row[2], Convert.ToBoolean(row[3]), newTemplate, instructor.SignaturePath, Convert.ToInt32(row[9])));
+                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[0]), (string)row[6], (string)row[7], (string)row[8], Convert.ToInt32(row[9]), (string)row[10]);
+                lessonsFoundList.Add(new Lesson(instructor.Firstname, instructor.Lastname, Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), (DateTime)row[3], (DateTime)row[4], Convert.ToBoolean(row[5]), newTemplate, instructor.SignaturePath, Convert.ToInt32(row[11])));
             }
 
             return lessonsFoundList;

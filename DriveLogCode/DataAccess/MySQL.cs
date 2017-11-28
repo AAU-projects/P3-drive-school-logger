@@ -58,8 +58,10 @@ namespace DriveLogCode.DataAccess
             string AppointmentTable = AppointmentTable, string LessonTemplateTable = LessonTemplateTable )
         {
             var cmd = new MySqlCommand("SELECT " +
+                $"{LessonTable}.AppointmentID, " +
                 $"{LessonTable}.LessonID AS TemplateID, " +
                 $"{LessonTable}.LessonPart AS Progress, " +
+                $"{LessonTable}.StartDate, " +
                 $"{LessonTable}.EndDate, " +
                 $"{LessonTable}.Completed, " +
                 $"{LessonTemplateTable}.title, " +
