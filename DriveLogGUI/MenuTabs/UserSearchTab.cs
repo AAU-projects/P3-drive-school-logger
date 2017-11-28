@@ -149,7 +149,7 @@ namespace DriveLogGUI.MenuTabs
         {
             OnTempPanelLeave(sender, e);
             this.Hide();
-            ProfileTab foundUserProfile = new ProfileTab(user, true);
+            StudentProfileTab foundUserProfile = new StudentProfileTab(user, true);
             foundUserProfile.Location = this.Location;
             foundUserProfile.Parent = this;
             this.Parent.Controls.Add(foundUserProfile);

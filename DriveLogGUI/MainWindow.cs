@@ -87,12 +87,14 @@ namespace DriveLogGUI
             if (Session.LoggedInUser.Sysmin)
             {
                 overviewTab = new InstructorOverviewTab();
+                profileTab = new InstructorProfileTab(Session.LoggedInUser);
             }
             else
             {
                 overviewTab = new StudentOverviewTab();
+                profileTab = new StudentProfileTab(Session.LoggedInUser);
             }
-            profileTab = new ProfileTab(Session.LoggedInUser);
+
             documentViewer = new DocumentViewer();
             userSearchTab = new UserSearchTab();
             calendarTab = new CalendarTabG(overviewTab, this);
@@ -235,7 +237,7 @@ namespace DriveLogGUI
         private void OpenPageEvent(UserControl page)
         {
             if (Session.LoggedInUser.Sysmin) return;
-            if (page is StudentOverviewTab || page is ProfileTab)
+            if (page is StudentOverviewTab || page is StudentProfileTab)
             {
                 OpenPage(this, driveLogTab);
             }
