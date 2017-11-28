@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignSchemes\LessonTypes.cs" />
     <Compile Include="Objects\AppointmentStructure.cs" />
     <Compile Include="DesignSchemes\ColorScheme.cs" />
     <Compile Include="DataAccess\DatabaseParser.cs" />

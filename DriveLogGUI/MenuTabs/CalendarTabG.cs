@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 using DriveLogGUI.CustomEventArgs;
 using DriveLogGUI.Windows;
@@ -18,6 +20,7 @@ namespace DriveLogGUI.MenuTabs
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
         private Appointment selectedAppointment;
+        private bool bookingAvailable = false;
 
         private MainWindow mainWindow;
 
@@ -30,8 +33,10 @@ namespace DriveLogGUI.MenuTabs
             InitializeComponent();
             this.mainWindow = mainWindow;
             this.overviewTab = overviewTab;
+
             SubscribeToAllClickPanels(overviewTab.listOfDays);
             GetAppointsments();
+           
             SubscribeToAllClickAppointments(appointments);
 
             if (Session.LoggedInUser.Sysmin)
@@ -59,11 +64,106 @@ namespace DriveLogGUI.MenuTabs
         {
             selectedAppointment = e.Appointment;
             informationLabel.Text = selectedAppointment.LabelAppointment.Text;
-            dateInformationLabel.Text = selectedAppointment.Date;
-            timeInformationLabel.Text = selectedAppointment.Time;
-            contextInformationTextbox.Text = selectedAppointment.lessonTemplate.Description;
-            contextTitleInformationLabel.Text = selectedAppointment.LabelAppointment.Text;
+            dateInformationLabel.Text = selectedAppointment.DateFormat;
+            timeInformationLabel.Text = selectedAppointment.TimeFormat;
             instructorInformationLabel.Text = selectedAppointment.InstructorName;
+            bookInformationLabel.Text = BookInformation();
+            warningInformationLabel.Hide();
+            warningTitleLabel.Hide();
+
+            CheckIfUserCanBookLesson();
+        }
+
+        private string BookInformation()
+        {
+            int numberOfBookings = DatabaseParser.GetNumberOfBookedLessonsFromAppointmentID(selectedAppointment.Id);
+
+            if (selectedAppointment.LessonType == LessonTypes.Theoretical)
+            {
+                return $"Booking status {numberOfBookings}/24";
+            }
+            if (selectedAppointment.LessonType == LessonTypes.Practical)
+            {
+                return $"Booking status {numberOfBookings}/1";
+            }
+            return "error";
+        }
+
+        private void CheckIfUserCanBookLesson()
+        {
+            if (selectedAppointment.FullyBooked) // if the lsson is already fully booked
+            {
+                ShowBookingWarrning("This date is already fully booked");
+            }
+            else if (Session.CurrentLesson == null) // if the user have no lessons
+            {
+                //gets the first lesson
+                LessonTemplate firstLesson = DatabaseParser.GetLessonTemplateFromID(1);
+
+                if (firstLesson.Type == selectedAppointment.LessonType) {
+                    BookingAvailable();
+                }
+                else
+                {
+                    ShowBookingWarrning("You are not suitable to book practical yet as its required that you have 3 theoretical lessons before your first practical");
+                }
+            }
+            else if (Session.CurrentLesson != null) // if the user have prev booked a lesson
+            {
+                LessonTemplate nextLesson = DatabaseParser.GetNextLessonTemplateFromID(Session.CurrentLesson.TemplateID, selectedAppointment.LessonType);
+                if (Session.CurrentLesson.Progress == Session.CurrentLesson.LessonTemplate.Time) // if the user is done with the current lessontemplate
+                {
+                    if (Session.CurrentLesson.TemplateID == nextLesson.Id - 1) {
+                        BookingAvailable();
+                    } else {
+                        ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
+                                            $"you would have to book {nextLesson.Id - 1 - Session.CurrentLesson.TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
+                    }
+                }
+                else // the user continues with the current lessontemplate
+                {
+                    if (Session.CurrentLesson.LessonTemplate.Type == selectedAppointment.LessonType)
+                    {
+                        BookingAvailable();
+                    }
+                    else
+                    {
+                        ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
+                                            $"you would have to book {nextLesson.Id - 1 - Session.CurrentLesson.TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
+                    }
+                }
+                
+
+            } 
+        }
+
+        private void BookingAvailable()
+        {
+            bookingInformationButton.Text = "BOOK";
+            bookingAvailable = true;
+        }
+
+        private string GetReverseType(string type)
+        {
+            if (type == LessonTypes.Theoretical)
+            {
+                return LessonTypes.Practical.ToLower();
+            }
+            if (type == LessonTypes.Practical) 
+            {
+                return LessonTypes.Theoretical.ToLower();
+            }
+            return null;
+        }
+
+        private void ShowBookingWarrning(string errorMsg)
+        {
+            bookingAvailable = false;
+            bookingInformationButton.Text = "UNAVAILABLE";
+            warningInformationLabel.Text = errorMsg;
+
+            warningTitleLabel.Show();
+            warningInformationLabel.Show();
         }
 
         private void SubscribeToAllClickPanels(List<CalendarData> listOfDays)
@@ -279,32 +379,7 @@ namespace DriveLogGUI.MenuTabs
 
         private void AddAppointment(AppointmentStructure appointment)
         {
-            Appointment newAppointment;
-            Lesson progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate(), "path");
-
-            if (!Session.LoggedInUser.Sysmin)
-            {
-                // if no lessons user gets the first lesson :)
-                if (appointment.LessonType == "Practical" && Session.LastPracticalLesson != null) {
-                    progress = Session.LastPracticalLesson;
-                } else if (appointment.LessonType == "Practical") {
-                    progress = new Lesson("Your first driving lesson :)", "idk", 4, 1, DateTime.Now, false, new LessonTemplate(), "path");
-                }
-
-                if (appointment.LessonType == "Theoretical" && Session.LastTheoraticalLesson != null) {
-                    progress = Session.LastTheoraticalLesson;
-                } else if (appointment.LessonType == "Theoretical") {
-                    progress = new Lesson("Your first theory lesson :)", "idk", 1, 1, DateTime.Now, false, new LessonTemplate(), "path");
-                }
-
-
-                newAppointment = new Appointment(appointment, progress);
-            }
-            else
-            {
-                newAppointment = new Appointment(appointment);
-            }
-            
+            Appointment newAppointment = new Appointment(appointment);
             appointments.Add(newAppointment);
         }
 
@@ -316,15 +391,14 @@ namespace DriveLogGUI.MenuTabs
             {
                 int prevLocation = 0;
 
-                foreach (var appointment in appointments)
-                {
-                    if (day.Date.ToShortDateString() == appointment.ToTime.ToShortDateString()) 
-                    {
-                        appointment.LabelAppointment.Show();
-                        appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
-                        prevLocation += appointment.LabelAppointment.Height + 5;
-                        day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
-                    }
+
+                List<Appointment> appointmentsOnDay = appointments.Where(x => x.ToTime.Day == day.Date.Day).ToList();
+                foreach (var appointment in appointmentsOnDay) {
+                    appointment.LabelAppointment.Show();
+                    appointment.LabelAppointment.Location = new Point(0, day.PanelForCalendarDay.Height + prevLocation);
+                    prevLocation += appointment.LabelAppointment.Height + 5;
+                    day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
+
                 }
             }
         }
@@ -391,21 +465,12 @@ namespace DriveLogGUI.MenuTabs
 
         private void bookingInformationButton_Click(object sender, EventArgs e)
         {
-            if (selectedAppointment.lessonTemplate.Type == "Practical")
+            if (bookingAvailable)
             {
-                
+                BookAppointmentWindow bookingWindow = new BookAppointmentWindow(selectedAppointment, MousePosition);
+                bookingWindow.ShowDialog();
             }
-
-
-            //TODO let a user select their own lesson if the user already have completed all lessons
-            LessonTemplate lessonTemplate = DatabaseParser.GetNextLessonTemplateFromID(selectedAppointment.lessonTemplate.Id, selectedAppointment.LessonType);
-            foreach (var appointment in appointments)
-            {
-                if (appointment.LessonType == selectedAppointment.LessonType)
-                {
-                    appointment.UpdateTemplate(lessonTemplate);
-                }
-            }
+            
         }
     }
 }
