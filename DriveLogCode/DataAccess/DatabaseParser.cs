@@ -55,14 +55,14 @@ namespace DriveLogCode.DataAccess
             return lessonsFoundList;
         }
 
-        public static bool SetLessonToComplete(int studentId, DateTime endDate, bool status)
+        public static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status)
         {
-            return MySql.SetLessonToComplete(studentId, endDate, status);
+            return MySql.SetLessonToComplete(studentId, appointmentId, progress, true);
         }
 
-        public static bool DeleteLesson(int studentId, DateTime endDate)
+        public static bool DeleteLesson(int studentId, int appointmentId, int progress)
         {
-            return MySql.DeleteLesson(studentId, endDate);
+            return MySql.DeleteLesson(studentId, appointmentId, progress);
         }
 
         public static User GetUserById(int userId)

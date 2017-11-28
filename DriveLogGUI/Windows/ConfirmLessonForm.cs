@@ -80,10 +80,12 @@ namespace DriveLogGUI.Windows
                 for (int i = 0; i < attendingStudentsList.Items.Count; i++)
                 {
                     if (attendingStudentsList.Items[i].Checked)
-                        DatabaseParser.SetLessonToComplete(_lessonList[i].StudentId, _lessonList[i].EndDate, true);
+                        DatabaseParser.SetLessonToComplete(_lessonList[i].StudentId, _lessonList[i].AppointmentID, _lessonList[i].Progress, true);
                     else
-                        DatabaseParser.DeleteLesson(_lessonList[i].StudentId, _lessonList[i].EndDate);
+                        DatabaseParser.DeleteLesson(_lessonList[i].StudentId, _lessonList[i].AppointmentID, _lessonList[i].Progress);
                 }
+                this.DialogResult = DialogResult.Yes;
+                this.Close();
             }
         }
     }

@@ -76,6 +76,11 @@ namespace DriveLogCode.Objects
                     Console.WriteLine("No practical lessons for user");
                 }
             }
+
+            if (CurrentLesson == null) // if the user have no current lessons he will be able to book any date
+            {
+                CurrentLesson = new Lesson();
+            }
         }
 
         public static Lesson GetLastLessonFromType(string lessonType)
