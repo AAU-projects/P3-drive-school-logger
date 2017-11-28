@@ -275,16 +275,7 @@ namespace DriveLogCode
 
         private PdfPageBase CreatePage(PdfDocument document)
         {
-            PdfUnitConvertor unitCvtr = new PdfUnitConvertor();
-            PdfMargins margin = new PdfMargins();
-
-            margin.Top = unitCvtr.ConvertUnits(2.54f, PdfGraphicsUnit.Centimeter, PdfGraphicsUnit.Point);
-            margin.Bottom = margin.Top;
-
-            margin.Left = unitCvtr.ConvertUnits(3.17f, PdfGraphicsUnit.Centimeter, PdfGraphicsUnit.Point);
-            margin.Right = margin.Left;
-
-            PdfPageBase page = document.Pages.Add(PdfPageSize.A4, margin);
+            PdfPageBase page = document.Pages.Add(PdfPageSize.A4);
             AddHeader(page);
 
             return page;
