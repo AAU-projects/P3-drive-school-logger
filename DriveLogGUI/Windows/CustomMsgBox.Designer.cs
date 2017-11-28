@@ -36,6 +36,8 @@
             this.okButton = new System.Windows.Forms.Button();
             this.textLabel = new System.Windows.Forms.Label();
             this.symbolpictureBox = new System.Windows.Forms.PictureBox();
+            this.messageBox = new System.Windows.Forms.TextBox();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.topBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.symbolpictureBox)).BeginInit();
             this.SuspendLayout();
@@ -136,15 +138,39 @@
             this.symbolpictureBox.TabIndex = 6;
             this.symbolpictureBox.TabStop = false;
             // 
+            // messageBox
+            // 
+            this.messageBox.BackColor = System.Drawing.SystemColors.Control;
+            this.messageBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.messageBox.Location = new System.Drawing.Point(61, 36);
+            this.messageBox.Multiline = true;
+            this.messageBox.Name = "messageBox";
+            this.messageBox.Size = new System.Drawing.Size(179, 59);
+            this.messageBox.TabIndex = 7;
+            this.messageBox.Visible = false;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(145, 101);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 8;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // CustomMsgBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(252, 133);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.textLabel);
             this.Controls.Add(this.symbolpictureBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.topBar);
+            this.Controls.Add(this.messageBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CustomMsgBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -153,6 +179,7 @@
             this.topBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.symbolpictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -166,5 +193,7 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Label textLabel;
         private System.Windows.Forms.PictureBox symbolpictureBox;
+        private System.Windows.Forms.TextBox messageBox;
+        private System.Windows.Forms.Button cancelButton;
     }
 }
