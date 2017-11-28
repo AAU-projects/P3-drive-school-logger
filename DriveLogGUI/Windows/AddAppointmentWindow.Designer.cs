@@ -64,6 +64,7 @@
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(393, 22);
             this.topPanel.TabIndex = 2;
+            this.topPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.topPanel_Paint);
             this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
             this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
             // 
@@ -128,7 +129,7 @@
             this.StartTimecomboBox.Name = "StartTimecomboBox";
             this.StartTimecomboBox.Size = new System.Drawing.Size(134, 21);
             this.StartTimecomboBox.TabIndex = 9;
-            this.StartTimecomboBox.SelectedValueChanged += new System.EventHandler(this.StartTimecomboBox_SelectedValueChanged);
+            this.StartTimecomboBox.SelectedIndexChanged += new System.EventHandler(this.StartTimecomboBox_SelectedValueChanged);
             // 
             // lessonsComboBox
             // 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 
 namespace DriveLogGUI.Windows
@@ -17,13 +18,17 @@ namespace DriveLogGUI.Windows
         public AddAppointmentWindow(DateTime eDate, Point mousePosition, List<Appointment> appointments)
         {
             InitializeComponent();
+
             _appointments = appointments;
             openWindowPosition = mousePosition;
             date = eDate;
+
             UpdateTitle();
             SetWindowPosition();
+
             FillTimeComboBox(StartTimecomboBox);
             FillComboBox(lessonsComboBox);
+
             timeDifferenceLabel.Text = "";
             lessonsComboBox.SelectedItem = 1;
         }
@@ -85,7 +90,7 @@ namespace DriveLogGUI.Windows
 
         private void StartTimecomboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            SetComboBoxTimeDifference();
+           SetComboBoxTimeDifference();
         }
 
         private void LessonsComboBox_SelectedValueChanged(object sender, EventArgs e)
@@ -136,6 +141,11 @@ namespace DriveLogGUI.Windows
             }
             else
                 CustomMsgBox.Show("Failure", "Some fields need to be filled", CustomMsgBoxIcon.Warrning);
+        }
+
+        private void topPanel_Paint(object sender, PaintEventArgs e)
+        {
+            topPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

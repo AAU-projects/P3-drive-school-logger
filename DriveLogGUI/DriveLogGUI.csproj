@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -95,6 +95,12 @@
     </Compile>
     <Compile Include="MenuTabs\CalendarTabG.Designer.cs">
       <DependentUpon>CalendarTabG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BookAppointmentWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\BookAppointmentWindow.Designer.cs">
+      <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\ConfirmLessonForm.cs">
       <SubType>Form</SubType>
@@ -207,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuTabs\CalendarTabG.resx">
       <DependentUpon>CalendarTabG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\BookAppointmentWindow.resx">
+      <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\ConfirmLessonForm.resx">
       <DependentUpon>ConfirmLessonForm.cs</DependentUpon>
@@ -358,6 +367,7 @@
     <Content Include="Resources\addlessongrey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\DragHandle.png" />
     <Content Include="Resources\drag_and_drop_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

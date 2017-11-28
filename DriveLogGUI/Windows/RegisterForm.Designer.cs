@@ -49,17 +49,17 @@ namespace DriveLogGUI.Windows
             this.registerPicture = new System.Windows.Forms.PictureBox();
             this.signatureBox = new System.Windows.Forms.PictureBox();
             this.signatureButton = new System.Windows.Forms.Button();
-            this.verifyPasswordBox = new TextboxBorderColor();
-            this.registerZipBox = new TextboxBorderColor();
-            this.registerCityBox = new TextboxBorderColor();
-            this.registerAdressBox = new TextboxBorderColor();
-            this.registerCprBox = new TextboxBorderColor();
-            this.registerEmailBox = new TextboxBorderColor();
-            this.registerPhoneBox = new TextboxBorderColor();
-            this.registerLastnameBox = new TextboxBorderColor();
-            this.registerFirstnameBox = new TextboxBorderColor();
-            this.registerPasswordBox = new TextboxBorderColor();
-            this.registerUsernameBox = new TextboxBorderColor();
+            this.verifyPasswordBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerZipBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerCityBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerAdressBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerCprBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerEmailBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerPhoneBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerLastnameBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerFirstnameBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerPasswordBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.registerUsernameBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
             this.topBarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.registerPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signatureBox)).BeginInit();
@@ -183,6 +183,7 @@ namespace DriveLogGUI.Windows
             this.topBarPanel.Name = "topBarPanel";
             this.topBarPanel.Size = new System.Drawing.Size(529, 22);
             this.topBarPanel.TabIndex = 43;
+            this.topBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.topBarPanel_Paint);
             this.topBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topBarPanel_MouseDown);
             this.topBarPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topBarPanel_MouseMove);
             // 

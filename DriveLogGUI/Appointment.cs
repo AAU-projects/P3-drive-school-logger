@@ -16,45 +16,30 @@ namespace DriveLogGUI
     public class Appointment : AppointmentStructure
     {
         public Label LabelAppointment;
-        public DateTime ToTime => GetToTime();
-        public DateTime EndDate => GetEndDate();
-        public string Time => GetTime();
-        public string Date => GetDate();
+        public Panel BookedPanelOnLabel;
+        public List<Lesson> bookedLessons;
+        public DateTime ToTime => StartTime.AddMinutes(AvailableTime * 45);
+        public string TimeFormat => GetTime();
+        public string DateFormat => GetDate();
+        public bool bookedByUser;
 
-        public LessonTemplate lessonTemplate = new LessonTemplate();
-
-        public Appointment(AppointmentStructure appointment, Lesson lesson)
+        public Appointment(AppointmentStructure appointmentStructure) : base(appointmentStructure)
         {
-            this.Id = appointment.Id;
-            this.InstructorID = appointment.InstructorID;
-            this.StartTime = appointment.StartTime;
-            this.AvailableTime = appointment.AvailableTime;
-            this.LessonType = appointment.LessonType;
-            this.FullyBooked = appointment.FullyBooked;
-            this.InstructorName = appointment.InstructorName;
-            this.lessonTemplate = GetLessonTemplate(lesson);
-
+            bookedLessons = DatabaseParser.GetAllLessonsFromAppointmentID(Id);
             GenerateLabel();
-            UpdateLabel();
+
+            if (Session.LoggedInUser.Sysmin)
+            {
+                InstructorLabelData();
+            } else 
+            {
+                UserLabelData();
+            }
+
             SubscribeToEvent();
         }
 
-        public Appointment(AppointmentStructure appointment)
-        {
-            this.Id = appointment.Id;
-            this.InstructorID = appointment.InstructorID;
-            this.StartTime = appointment.StartTime;
-            this.AvailableTime = appointment.AvailableTime;
-            this.LessonType = appointment.LessonType;
-            this.FullyBooked = appointment.FullyBooked;
-            this.InstructorName = appointment.InstructorName;
-
-            GenerateLabel();
-            InstructorData();
-            SubscribeToEvent();
-        }
-
-        private void InstructorData()
+        private void InstructorLabelData()
         {
             LabelAppointment.Text = InstructorName;
         }
@@ -67,48 +52,50 @@ namespace DriveLogGUI
             LabelAppointment.BackColor = GetColorForLabel(this.LessonType);
             LabelAppointment.TextAlign = ContentAlignment.MiddleCenter;
             LabelAppointment.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, LabelAppointment.Font.Unit);
+
+            LabelAppointment.ForeColor = ColorScheme.CalendarRed;
+            BookedPanelOnLabel = new Panel();
+            BookedPanelOnLabel.Height = LabelAppointment.Height / 4;
+            BookedPanelOnLabel.Width = LabelAppointment.Width;
+            BookedPanelOnLabel.Location = new Point(0, 0);
+            BookedPanelOnLabel.BackColor = Color.FromArgb(255, Color.Red);
+            BookedPanelOnLabel.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(this));
+            BookedPanelOnLabel.Hide();
+
+            LabelAppointment.ForeColor = Color.Black;
+            LabelAppointment.Controls.Add(BookedPanelOnLabel);
         }
 
         private Color GetColorForLabel(string appointmentLessonType)
         {
-            if (appointmentLessonType.ToLower() == "theoretical") {
+            if (appointmentLessonType == LessonTypes.Theoretical) {
                 return ColorScheme.CalendarBlue;
             }
-            if (appointmentLessonType.ToLower() == "practical") {
+            if (appointmentLessonType == LessonTypes.Practical) {
                 return ColorScheme.CalendarGreen;
             }
-            if (appointmentLessonType.ToLower() == "manoeuvre") {
+            if (appointmentLessonType == LessonTypes.Manoeuvre) {
                 return ColorScheme.CalendarYellow;
             }
-            if (appointmentLessonType.ToLower() == "slippery") {
+            if (appointmentLessonType == LessonTypes.Slippery) {
                 return ColorScheme.CalendarYellow;
             }
-            if (appointmentLessonType.ToLower() == "other") {
+            if (appointmentLessonType == LessonTypes.Other) {
                 return ColorScheme.CalendarYellow;
             }
 
             return ColorScheme.CalendarRed;
 
         }
-        public void UpdateLabel()
-        {
-            LabelAppointment.Text = lessonTemplate.Title;
-        }
 
-        public void UpdateTemplate(LessonTemplate lessonTemplate)
+        public void AppointmentBooked()
         {
-            this.lessonTemplate = lessonTemplate;
-            UpdateLabel();
-        }
+            BookedPanelOnLabel.Show();
 
-        private LessonTemplate GetLessonTemplate(Lesson lesson)
-        {
-            return DatabaseParser.GetLessonTemplateFromID(lesson.TemplateID);
         }
-
-        private DateTime GetToTime()
+        public void UserLabelData()
         {
-            return StartTime.AddMinutes(AvailableTime * 45);
+            LabelAppointment.Text = LessonType;
         }
 
         public event EventHandler<ApppointmentEventArgs> ClickOnAppointmentTriggered;
@@ -125,12 +112,23 @@ namespace DriveLogGUI
         }
         private string GetTime()
         {
-            return $"Time: {AddZeroToDates(StartTime.Hour)}:{AddZeroToDates(StartTime.Minute)} - {AddZeroToDates(EndDate.Hour)}:{AddZeroToDates(EndDate.Minute)}";
+            return $"Time: {FromTimeToTime()}";
+        }
+
+        public string FromTimeToTime()
+        {
+            return
+                $"{AddZeroToDates(StartTime.Hour)}:{AddZeroToDates(StartTime.Minute)} - {AddZeroToDates(ToTime.Hour)}:{AddZeroToDates(ToTime.Minute)}";
         }
 
         private string GetDate()
         {
-            return $"Date: {EndDate.ToShortDateString().Replace('/', '-')}";
+            return $"Date: {DateShortFormat()}";
+        }
+
+        public string DateShortFormat()
+        {
+            return $"{ToTime.ToShortDateString().Replace('/', '-')}";
         }
         private string AddZeroToDates(int checkString)
         {
@@ -141,11 +139,6 @@ namespace DriveLogGUI
                 return fixedString;
             }
             return checkString.ToString();
-        }
-
-        private DateTime GetEndDate()
-        {
-            return StartTime.AddMinutes(45 * AvailableTime);
         }
     }
 }

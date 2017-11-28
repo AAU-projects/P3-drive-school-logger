@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 
 namespace DriveLogGUI.Windows
@@ -52,7 +53,7 @@ namespace DriveLogGUI.Windows
             }
             else
             {
-                Session.LoadUserFromDataTable(MySql.GetUserByName("testuser"));
+                Session.LoadUserFromDataTable(MySql.GetUserByName("luke"));
             }
 
             this.Hide();
@@ -118,6 +119,11 @@ namespace DriveLogGUI.Windows
         private void Unfocus_MouseClick(object sender, EventArgs e)
         {
             this.ActiveControl = loginFormLable;
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            panel2.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

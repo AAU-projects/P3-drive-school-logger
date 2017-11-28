@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DriveLogCode;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 using DriveLogGUI.MenuTabs;
 
@@ -306,7 +307,7 @@ namespace DriveLogGUI
 
         private void topPanel_Paint(object sender, PaintEventArgs e)
         {
-
+            topPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
 
         private void button2_Click(object sender, EventArgs e)

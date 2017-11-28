@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -34,8 +34,8 @@ namespace DriveLogCode.DataAccess
 
             foreach (DataRow row in results.Rows)
             {
-                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[2]), (string)row[6], (string)row[7], (string)row[8], Convert.ToInt32(row[9]), (string)row[10]);
-                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (DateTime)row[4], Convert.ToBoolean(row[5]), newTemplate, (string)row[11], userid));
+                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[3]), (string)row[8], (string)row[9], (string)row[10], Convert.ToInt32(row[11]), (string)row[12]);
+                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), Convert.ToInt32(row[4]), (DateTime)row[5], (DateTime)row[6], Convert.ToBoolean(row[7]), newTemplate, (string)row[13]));
             }
 
             return lessonsList;
@@ -75,6 +75,14 @@ namespace DriveLogCode.DataAccess
             DataTable lessonInfo = MySql.GetLessonData(templateName);
 
             return GetDict(lessonInfo);
+        }
+
+        public static bool AddLessonToUserID(int userid, int appointmentID, int lessonID, int lessonPart,
+            DateTime startDate, DateTime endDate, bool completed)
+        {
+            return MySql.AddLesson(userid, appointmentID, lessonID, lessonPart, 
+                startDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), 
+                endDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), completed);
         }
 
         public static User GetInstructorByID(int id)
@@ -258,5 +266,35 @@ namespace DriveLogCode.DataAccess
 
             return lessonTemplate;
         }
+
+        public static int GetNumberOfBookedLessonsFromAppointmentID(int appointmentid)
+        {
+            DataTable result = MySql.GetNumberOfBookingsInAppointment(appointmentid);
+
+            return result.Rows.Count;
+        }
+
+        public static List<Lesson> GetAllLessonsFromAppointmentID(int id)
+        {
+            DataTable result = MySql.GetAllLessonsFromAppointmentID(id);
+
+            List<Lesson> lessonsAppointment = new List<Lesson>();
+
+            foreach (DataRow lesson in result.Rows)
+            {
+                lessonsAppointment.Add(new Lesson(
+                    Convert.ToInt32(lesson[0]), 
+                    Convert.ToInt32(lesson[1]), 
+                    Convert.ToInt32(lesson[2]), 
+                    Convert.ToInt32(lesson[3]), 
+                    Convert.ToInt32(lesson[4]), 
+                    (DateTime)lesson[5], 
+                    (DateTime)lesson[6], 
+                    Convert.ToBoolean(lesson[7])));
+            }
+
+            return lessonsAppointment;
+        }
     }
 }
+

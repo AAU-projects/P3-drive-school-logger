@@ -43,6 +43,7 @@ namespace DriveLogGUI
             LabelForDate.Click += (s, e) => panel_Click(new DateClickEventArgs(Date));
         }
 
+
         private void panel_Click(DateClickEventArgs e)
         {
             ClickOnDateTriggered?.Invoke(this, e);
