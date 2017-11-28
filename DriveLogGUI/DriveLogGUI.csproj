@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -81,6 +81,15 @@
     <Compile Include="MenuTabs\OverviewTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="MenuTabs\InstructorProfileTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MenuTabs\InstructorProfileTab.Designer.cs">
+      <DependentUpon>InstructorProfileTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuTabs\ProfileTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Windows\AddAppointmentWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,11 +162,11 @@
     <Compile Include="MenuTabs\StudentOverviewTab.Designer.cs">
       <DependentUpon>StudentOverviewTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuTabs\ProfileTab.cs">
+    <Compile Include="MenuTabs\StudentProfileTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MenuTabs\ProfileTab.Designer.cs">
-      <DependentUpon>ProfileTab.cs</DependentUpon>
+    <Compile Include="MenuTabs\StudentProfileTab.Designer.cs">
+      <DependentUpon>StudentProfileTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,6 +217,9 @@
     <EmbeddedResource Include="MenuTabs\InstructorOverviewTab.resx">
       <DependentUpon>InstructorOverviewTab.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuTabs\InstructorProfileTab.resx">
+      <DependentUpon>InstructorProfileTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\AddAppointmentWindow.resx">
       <DependentUpon>AddAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -241,8 +253,8 @@
     <EmbeddedResource Include="MenuTabs\StudentOverviewTab.resx">
       <DependentUpon>StudentOverviewTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuTabs\ProfileTab.resx">
-      <DependentUpon>ProfileTab.cs</DependentUpon>
+    <EmbeddedResource Include="MenuTabs\StudentProfileTab.resx">
+      <DependentUpon>StudentProfileTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
