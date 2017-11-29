@@ -75,14 +75,11 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.previousDrivingLabel = new System.Windows.Forms.Label();
-            this.nextDrivingLabel = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.drivingLessonsLabel = new System.Windows.Forms.Label();
             this.previousTheoreticalLabel = new System.Windows.Forms.Label();
             this.nextTheoreticalLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.theoreticalLessonLabel = new System.Windows.Forms.Label();
+            this.upcommingLessonsLabel = new System.Windows.Forms.Label();
+            this.panelContainingUpcomingLessons = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).BeginInit();
             this.InfoPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
@@ -597,57 +594,15 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.previousDrivingLabel);
-            this.panel1.Controls.Add(this.nextDrivingLabel);
-            this.panel1.Controls.Add(this.panel5);
-            this.panel1.Controls.Add(this.drivingLessonsLabel);
+            this.panel1.Controls.Add(this.panelContainingUpcomingLessons);
             this.panel1.Controls.Add(this.previousTheoreticalLabel);
             this.panel1.Controls.Add(this.nextTheoreticalLabel);
             this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.theoreticalLessonLabel);
+            this.panel1.Controls.Add(this.upcommingLessonsLabel);
             this.panel1.Location = new System.Drawing.Point(472, 74);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(413, 328);
             this.panel1.TabIndex = 6;
-            // 
-            // previousDrivingLabel
-            // 
-            this.previousDrivingLabel.AutoSize = true;
-            this.previousDrivingLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.previousDrivingLabel.Location = new System.Drawing.Point(197, 176);
-            this.previousDrivingLabel.Name = "previousDrivingLabel";
-            this.previousDrivingLabel.Size = new System.Drawing.Size(51, 13);
-            this.previousDrivingLabel.TabIndex = 18;
-            this.previousDrivingLabel.Text = "Previous:";
-            // 
-            // nextDrivingLabel
-            // 
-            this.nextDrivingLabel.AutoSize = true;
-            this.nextDrivingLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.nextDrivingLabel.Location = new System.Drawing.Point(18, 176);
-            this.nextDrivingLabel.Name = "nextDrivingLabel";
-            this.nextDrivingLabel.Size = new System.Drawing.Size(32, 13);
-            this.nextDrivingLabel.TabIndex = 17;
-            this.nextDrivingLabel.Text = "Next:";
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.panel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.panel5.Location = new System.Drawing.Point(21, 168);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(378, 2);
-            this.panel5.TabIndex = 16;
-            // 
-            // drivingLessonsLabel
-            // 
-            this.drivingLessonsLabel.AutoSize = true;
-            this.drivingLessonsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.drivingLessonsLabel.Location = new System.Drawing.Point(18, 152);
-            this.drivingLessonsLabel.Name = "drivingLessonsLabel";
-            this.drivingLessonsLabel.Size = new System.Drawing.Size(82, 13);
-            this.drivingLessonsLabel.TabIndex = 15;
-            this.drivingLessonsLabel.Text = "Driving Lessons";
             // 
             // previousTheoreticalLabel
             // 
@@ -678,17 +633,25 @@
             this.panel4.Size = new System.Drawing.Size(376, 2);
             this.panel4.TabIndex = 12;
             // 
-            // theoreticalLessonLabel
+            // upcommingLessonsLabel
             // 
-            this.theoreticalLessonLabel.AutoSize = true;
-            this.theoreticalLessonLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.theoreticalLessonLabel.Location = new System.Drawing.Point(18, 5);
-            this.theoreticalLessonLabel.Name = "theoreticalLessonLabel";
-            this.theoreticalLessonLabel.Size = new System.Drawing.Size(102, 13);
-            this.theoreticalLessonLabel.TabIndex = 11;
-            this.theoreticalLessonLabel.Text = "Theoretical Lessons";
+            this.upcommingLessonsLabel.AutoSize = true;
+            this.upcommingLessonsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.upcommingLessonsLabel.Location = new System.Drawing.Point(18, 5);
+            this.upcommingLessonsLabel.Name = "upcommingLessonsLabel";
+            this.upcommingLessonsLabel.Size = new System.Drawing.Size(97, 13);
+            this.upcommingLessonsLabel.TabIndex = 11;
+            this.upcommingLessonsLabel.Text = "Upcoming Lessons";
             // 
-            // ProfileTab
+            // panelContainingUpcomingLessons
+            // 
+            this.panelContainingUpcomingLessons.Location = new System.Drawing.Point(21, 47);
+            this.panelContainingUpcomingLessons.Name = "panelContainingUpcomingLessons";
+            this.panelContainingUpcomingLessons.Size = new System.Drawing.Size(376, 270);
+            this.panelContainingUpcomingLessons.TabIndex = 15;
+            this.panelContainingUpcomingLessons.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContainingUpcomingLessons_Paint);
+            // 
+            // StudentProfileTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -697,7 +660,7 @@
             this.Controls.Add(this.progressBarPanel);
             this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.InfoPanel);
-            this.Name = "ProfileTab";
+            this.Name = "StudentProfileTab";
             this.Size = new System.Drawing.Size(897, 544);
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).EndInit();
             this.InfoPanel.ResumeLayout(false);
@@ -762,13 +725,9 @@
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label theoreticalLessonLabel;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label drivingLessonsLabel;
+        private System.Windows.Forms.Label upcommingLessonsLabel;
         private System.Windows.Forms.Label previousTheoreticalLabel;
         private System.Windows.Forms.Label nextTheoreticalLabel;
-        private System.Windows.Forms.Label previousDrivingLabel;
-        private System.Windows.Forms.Label nextDrivingLabel;
         private System.Windows.Forms.Label addressOutputLabel;
         private System.Windows.Forms.Label emailOutputLabel;
         private System.Windows.Forms.Label cprOutputLabel;
@@ -777,5 +736,6 @@
         private System.Windows.Forms.Label cityOutputLabel;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Panel panelContainingUpcomingLessons;
     }
 }
