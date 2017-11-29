@@ -17,7 +17,7 @@ namespace DriveLogGUI
     {
         public Label LabelAppointment;
         public Panel BookedPanelOnLabel;
-        public List<Lesson> bookedLessons => GetUserLessons();
+        public List<Lesson> bookedLessons => Session.LessonsUser.FindAll(x => x.AppointmentID == Id);
         public DateTime ToTime => StartTime.AddMinutes(AvailableTime * 45);
         public string TimeFormat => GetTime();
         public string DateFormat => GetDate();
@@ -39,20 +39,6 @@ namespace DriveLogGUI
 
             SubscribeToEvent();
         }
-
-        private List<Lesson> GetUserLessons()
-        {
-            if (Session.LessonsUserDictionary.ContainsKey(Id))
-            {
-                return Session.LessonsUserDictionary[Id];
-            }
-            else
-            {
-                return new List<Lesson>();
-            }
-        }
-
-
         private void InstructorLabelData()
         {
             LabelAppointment.Text = InstructorName;

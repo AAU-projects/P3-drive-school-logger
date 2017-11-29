@@ -6,7 +6,7 @@ namespace DriveLogCode.Objects
     public class Lesson
     {
         public int Id { get; }
-        public int UserID { get; }
+        public int UserID { get;  }
         public string InstructorFirstname { get; }
 
         public string InstructorLastname { get; }
@@ -24,7 +24,7 @@ namespace DriveLogCode.Objects
 
         public LessonTemplate LessonTemplate { get; set;}
 
-        public int StudentId { get; }
+        public int StudentId => UserID;
 
         public string InstructorFullname => InstructorFirstname + " " + InstructorLastname;
 
@@ -40,7 +40,7 @@ namespace DriveLogCode.Objects
             Completed = completed;
             this.LessonTemplate = lessonTemplate;
             InstructorSignaturePath = instructorSignaturePath;
-            StudentId = studentId;
+            this.UserID = studentId;
         }
 
         public Lesson(int id, int userid, int appointmentid, int lessonid, int lessonpart, DateTime startdate,
@@ -56,7 +56,7 @@ namespace DriveLogCode.Objects
             this.Completed = completed;
         }
 
-        public Lesson(int userid, int appointmentid, int lessonid, int lessonpart, DateTime startdate,
+        public Lesson(int userid, int appointmentid, int lessonid, int lessonpart, LessonTemplate lessonTemplate, DateTime startdate,
             DateTime enddate, bool completed)
         {
             this.Id = -1; // -1 indicates that its not from db
@@ -64,6 +64,7 @@ namespace DriveLogCode.Objects
             this.AppointmentID = appointmentid;
             this.TemplateID = lessonid;
             this.Progress = lessonpart;
+            this.LessonTemplate = lessonTemplate;
             this.StartDate = startdate;
             this.EndDate = enddate;
             this.Completed = completed;
