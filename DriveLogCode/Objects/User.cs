@@ -12,7 +12,7 @@ namespace DriveLogCode.Objects
             
         }
         public User(int id, string firstname, string lastname, string phone, string email, string cpr, 
-            string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin)
+            string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin, string className, bool theotestdone, bool practestdone, bool feepaid)
         {
             Id = id;
             Firstname = firstname;
@@ -28,6 +28,10 @@ namespace DriveLogCode.Objects
             PicturePath = picturePath;
             SignaturePath = signaturePath;
             Sysmin = sysmin;
+            ClassName = className;
+            TheoreticalTestDone = theotestdone;
+            PracticalTestDone = practestdone;
+            FeePaid = feepaid;
 
             CalculateProgress();
         }
@@ -48,6 +52,10 @@ namespace DriveLogCode.Objects
             PicturePath = (string)userTable.Rows[index][11];
             SignaturePath = (string)userTable.Rows[index][12];
             Sysmin = Convert.ToBoolean((string) userTable.Rows[index][13]);
+            ClassName = (string)userTable.Rows[index][14];
+            TheoreticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][15]);
+            PracticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][16]);
+            FeePaid = Convert.ToBoolean((string)userTable.Rows[index][17]);
 
             CalculateProgress();
         }
@@ -69,6 +77,10 @@ namespace DriveLogCode.Objects
         public string PicturePath { get; }
         public string SignaturePath { get; }
         public bool Sysmin { get; }
+        public string ClassName { get; }
+        public bool TheoreticalTestDone { get; }
+        public bool PracticalTestDone { get; }
+        public bool FeePaid { get; }
         public int TheoreticalProgress { get; private set; }
         public int PracticalProgress { get; private set; }
 
