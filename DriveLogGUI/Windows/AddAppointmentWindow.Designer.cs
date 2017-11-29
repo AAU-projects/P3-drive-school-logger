@@ -110,6 +110,7 @@
             // 
             // LessonTypecomboBox
             // 
+            this.LessonTypecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LessonTypecomboBox.FormattingEnabled = true;
             this.LessonTypecomboBox.Items.AddRange(new object[] {
             "Theoretical",
@@ -124,6 +125,7 @@
             // 
             // StartTimecomboBox
             // 
+            this.StartTimecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StartTimecomboBox.FormattingEnabled = true;
             this.StartTimecomboBox.Location = new System.Drawing.Point(115, 111);
             this.StartTimecomboBox.Name = "StartTimecomboBox";
@@ -133,6 +135,7 @@
             // 
             // lessonsComboBox
             // 
+            this.lessonsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lessonsComboBox.FormattingEnabled = true;
             this.lessonsComboBox.Location = new System.Drawing.Point(115, 138);
             this.lessonsComboBox.Name = "lessonsComboBox";

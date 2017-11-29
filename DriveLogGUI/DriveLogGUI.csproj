@@ -71,6 +71,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomMessage.cs" />
+    <Compile Include="CustomMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomMessageForm.Designer.cs">
+      <DependentUpon>CustomMessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddAppointmentWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,12 +98,6 @@
     </Compile>
     <Compile Include="Windows\BookAppointmentWindow.Designer.cs">
       <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\CustomMsgBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\CustomMsgBox.Designer.cs">
-      <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomMsgBoxIcon.cs" />
     <Compile Include="CustomEventArgs\DateClickEventArgs.cs" />
@@ -189,6 +190,9 @@
     <Compile Include="MenuTabs\UserSearchTab.Designer.cs">
       <DependentUpon>UserSearchTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CustomMessageForm.resx">
+      <DependentUpon>CustomMessageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\AddAppointmentWindow.resx">
       <DependentUpon>AddAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,9 +201,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\BookAppointmentWindow.resx">
       <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\CustomMsgBox.resx">
-      <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuTabs\DocumentViewer.resx">
       <DependentUpon>DocumentViewer.cs</DependentUpon>

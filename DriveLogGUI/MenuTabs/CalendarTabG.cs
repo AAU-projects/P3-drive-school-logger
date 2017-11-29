@@ -106,6 +106,10 @@ namespace DriveLogGUI.MenuTabs
             if (selectedAppointment.ShowWarning)
             {
                 ShowBookingWarrning(selectedAppointment.WarningText);
+                if (selectedAppointment.BookedByUser)
+                {
+                    ShowBookingCancel();
+                }
             } else if (Session.GetLastLessonFromType(selectedAppointment.LessonType) == null) // if the user have no lessons // TODO move this to AppointmentDataForUser
             {
                 //gets the first lesson
@@ -149,7 +153,7 @@ namespace DriveLogGUI.MenuTabs
         }
 
         
-        private void ShowUnbookingAvaiable()
+        private void ShowBookingCancel()
         {
             bookingInformationButton.Text = CancelBookingText;
         }
@@ -458,6 +462,7 @@ namespace DriveLogGUI.MenuTabs
             } else if (appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id) != null) // if the user have booked the appointment
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
+                appointment.BookedByUser = true;
                 appointment.ShowWarning = true;
                 appointment.WarningText = "You already have a booking on this appointemnt";
             }
@@ -533,7 +538,11 @@ namespace DriveLogGUI.MenuTabs
             }
             else if (bookingInformationButton.Text == CancelBookingText)
             {
-                
+                DialogResult result = CustomMsgBox.ShowYesNo("Are you sure you want to cancel this lesson", "Cancel lesson", CustomMsgBoxIcon.Warrning);
+                if (result == DialogResult.Yes)
+                {
+                    DatabaseParser.CancelLesson(selectedAppointment.Id, Session.LoggedInUser.Id);
+                }
             }
             
         }

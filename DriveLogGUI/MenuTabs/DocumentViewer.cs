@@ -79,7 +79,7 @@ namespace DriveLogGUI.MenuTabs
                         }
                         else
                         {
-                            CustomMsgBox.Show("Unable to upload document", "Error", CustomMsgBoxIcon.Error);
+                            CustomMsgBox.ShowOk("Unable to upload document", "Error", CustomMsgBoxIcon.Error);
                         }
                     }
                     else if (_documentType == Session.TypeDoctorsNote)
@@ -91,13 +91,13 @@ namespace DriveLogGUI.MenuTabs
                         }
                         else
                         {
-                            CustomMsgBox.Show("Unable to upload document", "Error", CustomMsgBoxIcon.Error);
+                            CustomMsgBox.ShowOk("Unable to upload document", "Error", CustomMsgBoxIcon.Error);
                         }
                     }
                 }
                 else
                 {
-                    CustomMsgBox.Show("File does not exist", "Warrning!", CustomMsgBoxIcon.Warrning);
+                    CustomMsgBox.ShowOk("File does not exist", "Warrning!", CustomMsgBoxIcon.Warrning);
                 }
             }
         }
