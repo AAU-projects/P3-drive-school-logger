@@ -125,7 +125,8 @@ namespace DriveLogGUI
         {
             OpenPage(sender, profileTab);
 
-            ProfileSubmenuControl(true);
+            if (!Session.LoggedInUser.Sysmin)
+                ProfileSubmenuControl(true);
         }
 
         private void ProfileSubmenuControl(bool isProfileClick)
@@ -141,7 +142,7 @@ namespace DriveLogGUI
                 userSearchButton.Location = MoveLocation(userSearchButton.Location, panelForProfile.Height);
                 _isOpen = true;
             }
-            else if (_isOpen)
+            else if (_isOpen && !isProfileClick)
             {
                 //move objects back
                 bookingButton.Location = MoveLocation(bookingButton.Location, -panelForProfile.Height);
