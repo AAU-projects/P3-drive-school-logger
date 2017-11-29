@@ -42,24 +42,24 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Updates the user information with data from session class
         /// </summary>
-        private void UpdateInfo()
+        public void UpdateInfo()
         {
-            profileHeaderLabel.Text = "Profile: " + _user.Username;
-            nameOutputLabel.Text = _user.Fullname;
-            phoneOutputLabel.Text = _user.Phone;
-            cprOutputLabel.Text = _user.Cpr;
-            emailOutputLabel.Text = _user.Email;
-            addressOutputLabel.Text = _user.Address;
-            cityOutputLabel.Text = $"{_user.City}, {_user.Zip}";
-            theoreticalStatus.Text = _user.TheoreticalProgress + "/24";
-            practicalStatus.Text = _user.PracticalProgress + "/14";
+            profileHeaderLabel.Text = "Profile: " + Session.LoggedInUser.Username;
+            nameOutputLabel.Text = Session.LoggedInUser.Fullname;
+            phoneOutputLabel.Text = Session.LoggedInUser.Phone;
+            cprOutputLabel.Text = Session.LoggedInUser.Cpr;
+            emailOutputLabel.Text = Session.LoggedInUser.Email;
+            addressOutputLabel.Text = Session.LoggedInUser.Address;
+            cityOutputLabel.Text = $"{Session.LoggedInUser.City}, {Session.LoggedInUser.Zip}";
+            theoreticalStatus.Text = Session.LoggedInUser.TheoreticalProgress + "/24";
+            practicalStatus.Text = Session.LoggedInUser.PracticalProgress + "/14";
 
-            theoreticalProgressFill.Size = new Size((theoreticalBar.Width / 24) * _user.TheoreticalProgress, theoreticalBar.Height);
-            practicalProgressFill.Size = new Size((practicalBar.Width / 14) * _user.PracticalProgress, practicalBar.Height);
+            theoreticalProgressFill.Size = new Size((theoreticalBar.Width / 24) * Session.LoggedInUser.TheoreticalProgress, theoreticalBar.Height);
+            practicalProgressFill.Size = new Size((practicalBar.Width / 14) * Session.LoggedInUser.PracticalProgress, practicalBar.Height);
 
-            if (!string.IsNullOrEmpty(_user.PicturePath) || _user.PicturePath != "")
+            if (!string.IsNullOrEmpty(Session.LoggedInUser.PicturePath) || Session.LoggedInUser.PicturePath != "")
             {
-                ProfilePicture.Load(_user.PicturePath);
+                ProfilePicture.Load(Session.LoggedInUser.PicturePath);
             }
         }
 

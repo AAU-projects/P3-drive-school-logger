@@ -688,7 +688,7 @@
             this.theoreticalLessonLabel.TabIndex = 11;
             this.theoreticalLessonLabel.Text = "Theoretical Lessons";
             // 
-            // ProfileTab
+            // StudentProfileTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -697,7 +697,7 @@
             this.Controls.Add(this.progressBarPanel);
             this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.InfoPanel);
-            this.Name = "ProfileTab";
+            this.Name = "StudentProfileTab";
             this.Size = new System.Drawing.Size(897, 544);
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).EndInit();
             this.InfoPanel.ResumeLayout(false);
