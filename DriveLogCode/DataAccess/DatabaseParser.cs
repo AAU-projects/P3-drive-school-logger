@@ -65,6 +65,21 @@ namespace DriveLogCode.DataAccess
             return MySql.DeleteLesson(studentId, appointmentId, progress);
         }
 
+        public static bool SetUserTheoreticalTestDone(int userid, bool value)
+        {
+            return MySql.UpdateUserEnum(userid, "theotestdone", value);
+        }
+
+        public static bool SetUserPracticalTestDone(int userid, bool value)
+        {
+            return MySql.UpdateUserEnum(userid, "practestdone", value);
+        }
+
+        public static bool SetUserFeePaid(int userid, bool value)
+        {
+            return MySql.UpdateUserEnum(userid, "feepaid", value);
+        }
+
         public static User GetUserById(int userId)
         {
             return new User(MySql.GetUserByID(userId));
