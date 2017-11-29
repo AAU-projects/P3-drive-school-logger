@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,5 +12,16 @@ namespace DriveLogGUI.MenuTabs
     public abstract class ProfileTab : UserControl
     {
         internal virtual event SubPageNotification SubPageCreated;
+
+        public virtual event EventHandler LogOutButtonClick;
+
+        public virtual void logoutButton_Click(object sender, EventArgs e)
+        {
+            LogOutButtonClick?.Invoke(this, e);
+        }
+
+        internal virtual event EventHandler IconPictureButtonClickEvent;
     }
 }
+
+    

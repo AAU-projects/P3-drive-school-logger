@@ -1,7 +1,8 @@
 ﻿﻿using System;
 using System.Data;
 using DriveLogCode.Objects;
-using MySql.Data.MySqlClient;
+ using Microsoft.Build.Tasks;
+ using MySql.Data.MySqlClient;
 
 namespace DriveLogCode.DataAccess
 {
@@ -447,13 +448,13 @@ namespace DriveLogCode.DataAccess
         }
 
         public static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr, string address, 
-            string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string usertable = UserTable)
+            string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string classname = "", string usertable = UserTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO {usertable} (" +
-                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, signature, sysmin)" +
+                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, signature, sysmin, class, theotestdone, practestdone, feepaid)" +
                                        $"VALUES (" +
                                        $"'{firstname}', '{lastname}', '{phone}', '{mail}', '{cpr}', '{address}', '{zip}', '{city}', '{username}', " +
-                                       $"'{password}', '{picture}', '{signature}', '{sysmin}')");
+                                       $"'{password}', '{picture}', '{signature}', '{sysmin}', '{classname}', 'False', 'False', 'False')");
 
 
             if (ExistTable(usertable)) return SendNonQuery(cmd);
@@ -473,6 +474,15 @@ namespace DriveLogCode.DataAccess
                                        $"`email` = '{mail}', `address` = '{address}', `zip` = '{zip}', `city` = '{city}'," +
                                        $"`username` = '{username}', `password` = '{password}', `picture` = '{picture}', `signature` = '{signature}',`sysmin` = '{sysmin}'" +
                                        $"WHERE `cpr` = '{cpr}'");
+
+            return SendNonQuery(cmd);
+        }
+
+        public static bool UpdateUserEnum(int userid, string column, bool value, string table = UserTable)
+        {
+            var cmd = new MySqlCommand($"UPDATE {table} SET " +
+                                       $"`{column}` = '{value}' " +
+                                       $"WHERE user_id = {userid}");
 
             return SendNonQuery(cmd);
         }
@@ -503,6 +513,10 @@ namespace DriveLogCode.DataAccess
                         "`picture`  varchar(255) NULL ," +
                         "`signature`  varchar(255) NOT NULL, " +
                         "`sysmin`  enum('True','False') NOT NULL ," +
+                        "`class`  varchar(255) NOT NULL ," +
+                        "`theotestdone`  enum('True','False') NOT NULL ," +
+                        "`practestdone`  enum('True','False') NOT NULL ," +
+                        "`feepaid`  enum('True','False') NOT NULL ," +
                         "PRIMARY KEY (`user_id`))" +
                         "ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;";
 

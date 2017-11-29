@@ -10,6 +10,8 @@ namespace DriveLogGUI.MenuTabs
 {
     public partial class DriveLogTab : UserControl
     {
+        public virtual event EventHandler LogOutButtonClick;
+
         private User _user;
         private List<Panel> driveLogPanelList = new List<Panel>();
         private List<LessonTemplate> templateslist = new List<LessonTemplate>();
@@ -184,6 +186,11 @@ namespace DriveLogGUI.MenuTabs
         {
             this.Parent.Controls.Find("profileTab", true).Last().Show();
             this.Dispose();
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            LogOutButtonClick?.Invoke(this, e);
         }
     }
 }

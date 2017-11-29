@@ -147,7 +147,7 @@
             this.overviewUpdateTodaysNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.overviewUpdateTodaysNote.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.overviewUpdateTodaysNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.overviewUpdateTodaysNote.Location = new System.Drawing.Point(383, 147);
+            this.overviewUpdateTodaysNote.Location = new System.Drawing.Point(385, 146);
             this.overviewUpdateTodaysNote.Name = "overviewUpdateTodaysNote";
             this.overviewUpdateTodaysNote.Size = new System.Drawing.Size(59, 22);
             this.overviewUpdateTodaysNote.TabIndex = 13;
@@ -475,6 +475,7 @@
             // 
             // completeLessonsList
             // 
+            this.completeLessonsList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.completeLessonsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.completeLessonsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.dateColumn,

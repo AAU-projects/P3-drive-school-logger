@@ -37,7 +37,11 @@ namespace DriveLogGUI
             InitializeComponent();
             InitializeMenuTabs();
 
-            overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
+            // Add logout events for pages containing a logout button.
+            overviewTab.LogOutButtonClick += LogOut;
+            profileTab.LogOutButtonClick += LogOut;
+            userSearchTab.LogOutButtonClick += LogOut;
+            driveLogTab.LogOutButtonClick += LogOut;
 
             //createing the start point for all pages.
             pageStartPoint = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
@@ -74,12 +78,20 @@ namespace DriveLogGUI
                 settingsButton.Location = new Point(0, 138);
             }
 
+            overviewTab.IconPictureButtonClickEvent += OnIconClick;
+            profileTab.IconPictureButtonClickEvent += OnIconClick;
             overviewTab.SubPageCreated += OpenPageEvent;
             profileTab.SubPageCreated += OpenPageEvent;
 
             // opening starting page after login
             _lastButton = OverviewButton;
             OpenPage(OverviewButton, overviewTab);
+        }
+
+        private void LogOut(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
         }
 
         private void InitializeMenuTabs()
@@ -125,7 +137,8 @@ namespace DriveLogGUI
         {
             OpenPage(sender, profileTab);
 
-            ProfileSubmenuControl(true);
+            if (!Session.LoggedInUser.Sysmin)
+                ProfileSubmenuControl(true);
         }
 
         private void ProfileSubmenuControl(bool isProfileClick)
@@ -141,7 +154,7 @@ namespace DriveLogGUI
                 userSearchButton.Location = MoveLocation(userSearchButton.Location, panelForProfile.Height);
                 _isOpen = true;
             }
-            else if (_isOpen)
+            else if (_isOpen && !isProfileClick)
             {
                 //move objects back
                 bookingButton.Location = MoveLocation(bookingButton.Location, -panelForProfile.Height);
@@ -299,6 +312,24 @@ namespace DriveLogGUI
             {
                 OpenPage(sender, documentViewer);
                 documentViewer.SetType(Session.TypeDoctorsNote);
+            }
+        }
+
+        private void OnIconClick(object sender, EventArgs e)
+        {
+            PictureBox pBox = sender as PictureBox;
+            ProfileSubmenuControl(true);
+
+            if (pBox.Name == "doctorsNotePictureButton")
+            {
+                OpenPage(doctorsNoteButton, documentViewer);
+                documentViewer.LoadDoctorsNote(Session.LoggedInUser);
+            }
+
+            else if (pBox.Name == "firstAidPictureButton")
+            {
+                OpenPage(firstAidButton, documentViewer);
+                documentViewer.LoadFirstAid(Session.LoggedInUser);
             }
         }
 
