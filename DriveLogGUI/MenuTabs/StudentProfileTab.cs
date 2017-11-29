@@ -73,6 +73,14 @@ namespace DriveLogGUI.MenuTabs
             {
                 ProfilePicture.Load(_user.PicturePath);
             }
+
+            // Update icons
+            if (_user.TheoreticalTestDone)
+                theroraticalPictureButton.Image = completedImage;
+            if (_user.PracticalTestDone)
+                praticalTestPictureButton.Image = completedImage;
+            if (_user.FeePaid)
+                feePictureBox.Image = completedImage;
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -179,6 +187,96 @@ namespace DriveLogGUI.MenuTabs
         private void feePictureBox_MouseEnter(object sender, EventArgs e)
         {
             TestAndFeeIcon_Enter(feePictureBox);
+        }
+
+        private void theroraticalPictureButton_MouseLeave(object sender, EventArgs e)
+        {
+            if(!Session.LoggedInUser.Sysmin) return;
+
+            PictureBox pBox = sender as PictureBox;
+            pBox.Image = _user.TheoreticalTestDone ? completedImage : incompleteImage;
+        }
+
+        private void praticalTestPictureButton_MouseLeave(object sender, EventArgs e)
+        {
+            if (!Session.LoggedInUser.Sysmin) return;
+
+            PictureBox pBox = sender as PictureBox;
+            pBox.Image = _user.PracticalTestDone ? completedImage : incompleteImage;
+        }
+
+        private void feePictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            if (!Session.LoggedInUser.Sysmin) return;
+
+            PictureBox pBox = sender as PictureBox;
+            pBox.Image = _user.FeePaid ? completedImage : incompleteImage;
+        }
+
+        private void theroraticalPictureButton_DoubleClick(object sender, EventArgs e)
+        {
+            if (!Session.LoggedInUser.Sysmin) return;
+
+            PictureBox icon = sender as PictureBox;
+
+            DialogResult confirmamtionBox = CustomMsgBox.ShowYesNo($"Are you sure {_user.Fullname} has completed a {theoraticalTestLabel.Text.ToLower()}", "Confirm", CustomMsgBoxIcon.Warrning);
+
+            if (confirmamtionBox == DialogResult.Yes)
+            {
+                DatabaseParser.SetUserTheoreticalTestDone(_user.Id, true);
+                _user = DatabaseParser.GetUserById(_user.Id);
+                icon.Image = completedImage;
+            }
+            else if (confirmamtionBox == DialogResult.No)
+            {
+                DatabaseParser.SetUserTheoreticalTestDone(_user.Id, false);
+                _user = DatabaseParser.GetUserById(_user.Id);
+                icon.Image = incompleteImage;
+            }
+        }
+
+        private void praticalTestPictureButton_DoubleClick(object sender, EventArgs e)
+        {
+            if (!Session.LoggedInUser.Sysmin) return;
+
+            PictureBox icon = sender as PictureBox;
+
+            DialogResult confirmamtionBox = CustomMsgBox.ShowYesNo($"Are you sure {_user.Fullname} has completed a {practicalTestLabel.Text.ToLower()}", "Confirm", CustomMsgBoxIcon.Warrning);
+
+            if (confirmamtionBox == DialogResult.Yes)
+            {
+                DatabaseParser.SetUserTheoreticalTestDone(_user.Id, true);
+                _user = DatabaseParser.GetUserById(_user.Id);
+                icon.Image = completedImage;
+            }
+            else if (confirmamtionBox == DialogResult.No)
+            {
+                DatabaseParser.SetUserPracticalTestDone(_user.Id, false);
+                _user = DatabaseParser.GetUserById(_user.Id);
+                icon.Image = incompleteImage;
+            }
+        }
+
+        private void feePictureBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (!Session.LoggedInUser.Sysmin) return;
+
+            PictureBox icon = sender as PictureBox;
+
+            DialogResult confirmamtionBox = CustomMsgBox.ShowYesNo($"Are you sure {_user.Fullname} has paid goverment {feeLabel.Text.ToLower()}s", "Confirm", CustomMsgBoxIcon.Warrning);
+
+            if (confirmamtionBox == DialogResult.Yes)
+            {
+                DatabaseParser.SetUserFeePaid(_user.Id, true);
+                _user = DatabaseParser.GetUserById(_user.Id);
+                icon.Image = completedImage;
+            }
+            else if (confirmamtionBox == DialogResult.No)
+            {
+                DatabaseParser.SetUserFeePaid(_user.Id, false);
+                _user = DatabaseParser.GetUserById(_user.Id);
+                icon.Image = incompleteImage;
+            }
         }
     }
 }

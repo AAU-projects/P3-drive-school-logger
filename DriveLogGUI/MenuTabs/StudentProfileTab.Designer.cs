@@ -642,7 +642,9 @@
             this.feePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.feePictureBox.TabIndex = 12;
             this.feePictureBox.TabStop = false;
+            this.feePictureBox.DoubleClick += new System.EventHandler(this.feePictureBox_DoubleClick);
             this.feePictureBox.MouseEnter += new System.EventHandler(this.feePictureBox_MouseEnter);
+            this.feePictureBox.MouseLeave += new System.EventHandler(this.feePictureBox_MouseLeave);
             // 
             // doctorsNoteLabel
             // 
@@ -664,7 +666,9 @@
             this.praticalTestPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.praticalTestPictureButton.TabIndex = 5;
             this.praticalTestPictureButton.TabStop = false;
+            this.praticalTestPictureButton.DoubleClick += new System.EventHandler(this.praticalTestPictureButton_DoubleClick);
             this.praticalTestPictureButton.MouseEnter += new System.EventHandler(this.praticalTestPictureButton_MouseEnter);
+            this.praticalTestPictureButton.MouseLeave += new System.EventHandler(this.praticalTestPictureButton_MouseLeave);
             // 
             // theroraticalPictureButton
             // 
@@ -676,7 +680,9 @@
             this.theroraticalPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.theroraticalPictureButton.TabIndex = 4;
             this.theroraticalPictureButton.TabStop = false;
+            this.theroraticalPictureButton.DoubleClick += new System.EventHandler(this.theroraticalPictureButton_DoubleClick);
             this.theroraticalPictureButton.MouseEnter += new System.EventHandler(this.theroraticalPictureButton_MouseEnter);
+            this.theroraticalPictureButton.MouseLeave += new System.EventHandler(this.theroraticalPictureButton_MouseLeave);
             // 
             // slippertTrackPictureButton
             // 
