@@ -442,11 +442,15 @@ namespace DriveLogGUI.Windows
             {
                 updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
                 zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, picturePath, signaturePath, instructorCheckBox.Checked ? "true" : "false");
+                _user.PicturePath = picturePath;
+                _user.SignaturePath = signaturePath;
             }
             else
             {
                 updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
                 zipBox.Text, cityBox.Text, usernameBox.Text, _user.Password, picturePath, signaturePath, instructorCheckBox.Checked ? "true" : "false");
+                _user.PicturePath = picturePath;
+                _user.SignaturePath = signaturePath;
             }
 
             if(updateSuccess)

@@ -13,6 +13,7 @@ namespace DriveLogGUI.MenuTabs
     public abstract class OverviewTab : UserControl
     {
         public virtual event EventHandler LogOutButtonClick;
+        internal virtual event EventHandler IconPictureButtonClickEvent;
         internal virtual event SubPageNotification SubPageCreated;
         public List<CalendarData> listOfDays = new List<CalendarData>();
 

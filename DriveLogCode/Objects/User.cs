@@ -66,8 +66,8 @@ namespace DriveLogCode.Objects
         public string City { get; }
         public string Username { get; }
         public string Password { get; }
-        public string PicturePath { get; }
-        public string SignaturePath { get; }
+        public string PicturePath { get; set; }
+        public string SignaturePath { get; set; }
         public bool Sysmin { get; }
         public int TheoreticalProgress { get; private set; }
         public int PracticalProgress { get; private set; }

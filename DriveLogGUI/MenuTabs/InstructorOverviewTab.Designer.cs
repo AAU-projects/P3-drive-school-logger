@@ -475,6 +475,7 @@
             // 
             // completeLessonsList
             // 
+            this.completeLessonsList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.completeLessonsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.completeLessonsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.dateColumn,
