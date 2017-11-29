@@ -16,6 +16,13 @@ namespace DriveLogGUI.MenuTabs
             userCollectionMenu.SelectedIndex = 0;
         }
 
+        public virtual event EventHandler LogOutButtonClick;
+
+        public virtual void logoutButton_Click(object sender, EventArgs e)
+        {
+            LogOutButtonClick?.Invoke(this, e);
+        }
+
         private List<User> _usersFoundList = new List<User>();
         private List<Panel> _userPanelList = new List<Panel>();
 
