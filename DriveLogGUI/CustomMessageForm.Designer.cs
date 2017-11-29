@@ -176,7 +176,7 @@
             this.symbolpictureBox.TabIndex = 25;
             this.symbolpictureBox.TabStop = false;
             // 
-            // CustomMessageForm2
+            // CustomMessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -189,7 +189,8 @@
             this.Controls.Add(this.topBar);
             this.Controls.Add(this.messageBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CustomMessageForm2";
+            this.Name = "CustomMessageForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CustomMessageForm2";
             this.topBar.ResumeLayout(false);
             this.topBar.PerformLayout();
