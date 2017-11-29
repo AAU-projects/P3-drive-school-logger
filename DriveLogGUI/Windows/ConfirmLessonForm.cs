@@ -73,7 +73,7 @@ namespace DriveLogGUI.Windows
                     text.AppendLine(attendingStudentsList.Items[i].SubItems[1].Text);
             }
 
-            DialogResult result = CustomMsgBox.Show(text.ToString(), "Confirm Attendees", CustomMsgBoxIcon.Complete, 20 * attendingStudentsList.Items.Count);
+            DialogResult result = CustomMsgBox.ShowConfirm(text.ToString(), "Confirm Attendees", CustomMsgBoxIcon.Complete, 20 * attendingStudentsList.Items.Count);
 
             if (result == DialogResult.OK)
             {

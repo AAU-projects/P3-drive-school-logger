@@ -13,7 +13,7 @@ namespace DriveLogGUI.MenuTabs
     {
         private User _user;
         private bool _search;
-        internal override event SubPageNotification SubPageCreated;
+        internal event SubPageNotification SubPageCreated;
         public Color PrevColor;
 
         public StudentProfileTab(User user, bool search = false)
