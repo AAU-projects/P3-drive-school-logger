@@ -37,7 +37,11 @@ namespace DriveLogGUI
             InitializeComponent();
             InitializeMenuTabs();
 
-            overviewTab.LogOutButtonClick += new EventHandler(logoutButton_Click);
+            // Add logout events for pages containing a logout button.
+            overviewTab.LogOutButtonClick += LogOut;
+            profileTab.LogOutButtonClick += LogOut;
+            userSearchTab.LogOutButtonClick += LogOut;
+            driveLogTab.LogOutButtonClick += LogOut;
 
             //createing the start point for all pages.
             pageStartPoint = new Point(leftSidePanel.Size.Width, topPanel.Size.Height);
@@ -82,6 +86,12 @@ namespace DriveLogGUI
             // opening starting page after login
             _lastButton = OverviewButton;
             OpenPage(OverviewButton, overviewTab);
+        }
+
+        private void LogOut(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
         }
 
         private void InitializeMenuTabs()

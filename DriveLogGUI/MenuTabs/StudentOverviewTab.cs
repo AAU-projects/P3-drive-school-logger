@@ -58,12 +58,12 @@ namespace DriveLogGUI.MenuTabs
             practicalProgressFill.Size = new Size((practicalBar.Width / 14) * Session.LoggedInUser.PracticalProgress, practicalBar.Height);
         }
 
-        public void logoutButton_Click(object sender, EventArgs e)
+        /*public void logoutButton_Click(object sender, EventArgs e)
         {
             //bubble the event up to the parent
             if (this.LogOutButtonClick != null)
                 this.LogOutButtonClick(this, e);
-        }
+        }*/
 
         private void doctorsNotePictureButton_Click(object sender, EventArgs e)
         {
