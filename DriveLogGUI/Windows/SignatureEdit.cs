@@ -71,7 +71,7 @@ namespace DriveLogGUI.Windows
             }
             else
             {
-                CustomMsgBox.Show("Please write your signature in the box", "Missing Signature",
+                CustomMsgBox.ShowOk("Please write your signature in the box", "Missing Signature",
                     CustomMsgBoxIcon.Error);
             }
         }

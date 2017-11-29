@@ -256,13 +256,13 @@ namespace DriveLogGUI.Windows
 
                 if (UserCreated)
                 {
-                    CustomMsgBox.Show("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete);
+                    CustomMsgBox.ShowOk("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete);
                     this.Dispose();
                     _loginForm.Show();
                 }
                 else
                 {
-                    CustomMsgBox.Show("Failed to create new user, please try again later!", "Failed",
+                    CustomMsgBox.ShowOk("Failed to create new user, please try again later!", "Failed",
                         CustomMsgBoxIcon.Error);
                 }
             }

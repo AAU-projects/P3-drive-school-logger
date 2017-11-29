@@ -176,24 +176,25 @@ namespace DriveLogGUI.Windows
 
                 if (result)
                 {
-                    CustomMsgBox.Show("Successfully booked!", "Sucess", CustomMsgBoxIcon.Complete);
+                    CustomMsgBox.ShowOk("Successfully booked!", "Sucess", CustomMsgBoxIcon.Complete);
                     _appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
                     this.Dispose();
                     Session.GetProgress();
                 }
                 else
                 {
-                    CustomMsgBox.Show("Error connecting to database", "Failure", CustomMsgBoxIcon.Error);
+                    CustomMsgBox.ShowOk("Error connecting to database", "Failure", CustomMsgBoxIcon.Error);
                 }
             }
             else
             {
-                    CustomMsgBox.Show("Please select a timeperiod you wish to book your appointment", "Warning", CustomMsgBoxIcon.Warrning);
+                    CustomMsgBox.ShowOk("Please select a timeperiod you wish to book your appointment", "Warning", CustomMsgBoxIcon.Warrning);
             }
         }
 
         private bool AddLesson()
         {
+            List<Lesson> newLessonList = new List<Lesson>();
             int numberOfLessons = lessonsComboBox.SelectedIndex + 1;
             bool result = true;
 
@@ -203,14 +204,21 @@ namespace DriveLogGUI.Windows
 
                 Lesson firstLesson = Session.GetLastLessonFromType(_appointment.LessonType);
                 firstLesson.Progress = 1;
-                result = DatabaseParser.AddLessonToUserID(
-                    Session.LoggedInUser.Id, 
-                    _appointment.Id,
-                    firstLesson.TemplateID,
+                Lesson newLesson = new Lesson(
+                    Session.LoggedInUser.Id,
+                    _appointment.Id, 
+                    firstLesson.TemplateID, 
                     firstLesson.Progress, 
                     startDateTime, 
                     startDateTime = startDateTime.AddMinutes(45), 
-                    true);
+                    false);
+
+                result = DatabaseParser.AddLessonToUserID(newLesson);
+
+                if (result) // if lesson is added its manually added to lessons in appointment id
+                {
+                    newLessonList.Add(newLesson);
+                }
 
                 curentLesson.Progress = firstLesson.Progress;
 
@@ -229,17 +237,20 @@ namespace DriveLogGUI.Windows
                     curentLesson.TemplateID = DatabaseParser.GetNextLessonTemplateFromID(curentLesson.TemplateID, _appointment.LessonType).Id;
                     curentLesson.Progress = 1;
                 }
-
-                result = DatabaseParser.AddLessonToUserID(
-                    Session.LoggedInUser.Id, 
+                Lesson newLesson = new Lesson(
+                    Session.LoggedInUser.Id,
                     _appointment.Id,
-                    curentLesson.TemplateID, 
-                    curentLesson.Progress, 
-                    startDateTime, 
-                    startDateTime = startDateTime.AddMinutes(45), 
+                    curentLesson.TemplateID,
+                    curentLesson.Progress,
+                    startDateTime,
+                    startDateTime = startDateTime.AddMinutes(45),
                     false);
 
+                result = DatabaseParser.AddLessonToUserID(newLesson);
+                newLessonList.Add(newLesson);
             }
+
+            Session.AddAppointmentToDictionary(_appointment.Id, newLessonList);
             return true;
 
         }

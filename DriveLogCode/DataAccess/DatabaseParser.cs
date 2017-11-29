@@ -77,12 +77,11 @@ namespace DriveLogCode.DataAccess
             return GetDict(lessonInfo);
         }
 
-        public static bool AddLessonToUserID(int userid, int appointmentID, int lessonID, int lessonPart,
-            DateTime startDate, DateTime endDate, bool completed)
+        public static bool AddLessonToUserID(Lesson lesson)
         {
-            return MySql.AddLesson(userid, appointmentID, lessonID, lessonPart, 
-                startDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), 
-                endDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), completed);
+            return MySql.AddLesson(lesson.UserID, lesson.AppointmentID, lesson.TemplateID, lesson.Progress,
+                lesson.StartDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")),
+                lesson.EndDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), lesson.Completed);
         }
 
         public static User GetInstructorByID(int id)
@@ -294,6 +293,11 @@ namespace DriveLogCode.DataAccess
             }
 
             return lessonsAppointment;
+        }
+
+        public static void CancelLesson(int selectedAppointmentId, int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

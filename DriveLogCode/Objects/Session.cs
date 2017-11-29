@@ -35,13 +35,10 @@ namespace DriveLogCode.Objects
             {
                 List<Lesson> lessonAppointment = LessonsUser.Where(x => x.AppointmentID == i).ToList();
 
-                if (LessonsUserDictionary.ContainsKey(i))
-                {
-                    
-                    LessonsUserDictionary[i].AddRange(lessonAppointment);
-                }
-                LessonsUserDictionary.Add(i, lessonAppointment);
+                AddAppointmentToDictionary(i, lessonAppointment);
+
             }
+
 
 
             if (LessonsUser.Count != 0)
@@ -80,6 +77,18 @@ namespace DriveLogCode.Objects
             if (CurrentLesson == null) // if the user have no current lessons he will be able to book any date
             {
                 CurrentLesson = new Lesson();
+            }
+        }
+
+        public static void AddAppointmentToDictionary(int i, List<Lesson> lessons)
+        {
+            if (LessonsUserDictionary.ContainsKey(i)) {
+
+                LessonsUserDictionary[i].AddRange(lessons);
+            }
+            else
+            {
+                LessonsUserDictionary.Add(i, lessons);
             }
         }
 
