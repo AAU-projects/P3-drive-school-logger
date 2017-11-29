@@ -11,7 +11,7 @@ namespace DriveLogGUI.MenuTabs
     {
         public event EventHandler LogOutButtonClick;
         internal event SubPageNotification SubPageCreated;
-        internal virtual event EventHandler DoctorsNotePictureButtonClick;
+        internal override event EventHandler IconPictureButtonClickEvent;
         private DateTime selectedMonth;
         private DateTime formatDateTime;
 
@@ -67,7 +67,7 @@ namespace DriveLogGUI.MenuTabs
 
         private void doctorsNotePictureButton_Click(object sender, EventArgs e)
         {
-            DoctorsNotePictureButtonClick?.Invoke(this, e);
+            IconPictureButtonClickEvent?.Invoke(doctorsNotePictureButton, e);
         }
 
         public DateTime GetPanelDate(int position)
@@ -287,6 +287,11 @@ namespace DriveLogGUI.MenuTabs
         private void todaysNoteLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void firstAidPictureButton_Click(object sender, EventArgs e)
+        {
+            IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
         }
     }
 }
