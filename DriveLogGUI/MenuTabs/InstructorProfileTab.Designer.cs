@@ -53,6 +53,7 @@
             this.upcommingTestslabel = new System.Windows.Forms.Label();
             this.upcommingTestsUnderline = new System.Windows.Forms.Panel();
             this.linksBackPanel = new System.Windows.Forms.Panel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.upcommingLessonLabel = new System.Windows.Forms.Label();
             this.upcommingLessonsUnderline = new System.Windows.Forms.Panel();
             this.upcommingLessonsBackPanel = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).BeginInit();
             this.InfoPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
@@ -94,7 +94,7 @@
             // 
             // InfoPanel
             // 
-            this.InfoPanel.BackColor = System.Drawing.Color.White;
+            this.InfoPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.InfoPanel.Controls.Add(this.editButton);
             this.InfoPanel.Controls.Add(this.cityOutputLabel);
             this.InfoPanel.Controls.Add(this.emailOutputLabel);
@@ -363,6 +363,16 @@
             this.linksBackPanel.Size = new System.Drawing.Size(413, 124);
             this.linksBackPanel.TabIndex = 5;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(93, 26);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(149, 13);
+            this.linkLabel1.TabIndex = 20;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "https://koreprovebooking.dk/";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -453,23 +463,13 @@
             // 
             // upcommingLessonsBackPanel
             // 
-            this.upcommingLessonsBackPanel.BackColor = System.Drawing.Color.White;
+            this.upcommingLessonsBackPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.upcommingLessonsBackPanel.Controls.Add(this.upcommingLessonsUnderline);
             this.upcommingLessonsBackPanel.Controls.Add(this.upcommingLessonLabel);
             this.upcommingLessonsBackPanel.Location = new System.Drawing.Point(472, 74);
             this.upcommingLessonsBackPanel.Name = "upcommingLessonsBackPanel";
             this.upcommingLessonsBackPanel.Size = new System.Drawing.Size(413, 328);
             this.upcommingLessonsBackPanel.TabIndex = 6;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(93, 26);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(149, 13);
-            this.linkLabel1.TabIndex = 20;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://koreprovebooking.dk/";
             // 
             // InstructorProfileTab
             // 
