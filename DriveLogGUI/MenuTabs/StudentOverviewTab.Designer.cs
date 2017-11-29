@@ -81,7 +81,7 @@
             this.progressLabel = new System.Windows.Forms.Label();
             this.progressUnderline = new System.Windows.Forms.Panel();
             this.miscPanel = new System.Windows.Forms.Panel();
-            this.getbyrBox = new System.Windows.Forms.PictureBox();
+            this.feePictureBox = new System.Windows.Forms.PictureBox();
             this.praticalTestPictureButton = new System.Windows.Forms.PictureBox();
             this.theroraticalPictureButton = new System.Windows.Forms.PictureBox();
             this.slippertTrackPictureButton = new System.Windows.Forms.PictureBox();
@@ -106,7 +106,7 @@
             this.practicalBar.SuspendLayout();
             this.theoreticalBar.SuspendLayout();
             this.miscPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.getbyrBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.feePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.praticalTestPictureButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.theroraticalPictureButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slippertTrackPictureButton)).BeginInit();
@@ -676,7 +676,7 @@
             this.miscPanel.Controls.Add(this.firstAidLabel);
             this.miscPanel.Controls.Add(this.theoraticalTestLabel);
             this.miscPanel.Controls.Add(this.maneuverTrackLabel);
-            this.miscPanel.Controls.Add(this.getbyrBox);
+            this.miscPanel.Controls.Add(this.feePictureBox);
             this.miscPanel.Controls.Add(this.doctorsNoteLabel);
             this.miscPanel.Controls.Add(this.praticalTestPictureButton);
             this.miscPanel.Controls.Add(this.theroraticalPictureButton);
@@ -689,16 +689,16 @@
             this.miscPanel.Size = new System.Drawing.Size(873, 112);
             this.miscPanel.TabIndex = 4;
             // 
-            // getbyrBox
+            // feePictureBox
             // 
-            this.getbyrBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.getbyrBox.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
-            this.getbyrBox.Location = new System.Drawing.Point(779, 31);
-            this.getbyrBox.Name = "getbyrBox";
-            this.getbyrBox.Size = new System.Drawing.Size(40, 40);
-            this.getbyrBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.getbyrBox.TabIndex = 12;
-            this.getbyrBox.TabStop = false;
+            this.feePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.feePictureBox.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
+            this.feePictureBox.Location = new System.Drawing.Point(779, 31);
+            this.feePictureBox.Name = "feePictureBox";
+            this.feePictureBox.Size = new System.Drawing.Size(40, 40);
+            this.feePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.feePictureBox.TabIndex = 12;
+            this.feePictureBox.TabStop = false;
             // 
             // praticalTestPictureButton
             // 
@@ -807,7 +807,7 @@
             this.theoreticalBar.ResumeLayout(false);
             this.miscPanel.ResumeLayout(false);
             this.miscPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.getbyrBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.feePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.praticalTestPictureButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.theroraticalPictureButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slippertTrackPictureButton)).EndInit();
@@ -879,6 +879,6 @@
         private System.Windows.Forms.Label calendarLeftArrow;
         private System.Windows.Forms.Button overviewUpdateTodaysNote;
         private System.Windows.Forms.Label feeLabel;
-        private System.Windows.Forms.PictureBox getbyrBox;
+        private System.Windows.Forms.PictureBox feePictureBox;
     }
 }

@@ -75,7 +75,7 @@
             this.firstAidLabel = new System.Windows.Forms.Label();
             this.theoraticalTestLabel = new System.Windows.Forms.Label();
             this.manueverTrackLabel = new System.Windows.Forms.Label();
-            this.getbyrBox = new System.Windows.Forms.PictureBox();
+            this.feePictureBox = new System.Windows.Forms.PictureBox();
             this.doctorsNoteLabel = new System.Windows.Forms.Label();
             this.praticalTestPictureButton = new System.Windows.Forms.PictureBox();
             this.theroraticalPictureButton = new System.Windows.Forms.PictureBox();
@@ -91,7 +91,7 @@
             this.theoreticalBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.miscPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.getbyrBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.feePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.praticalTestPictureButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.theroraticalPictureButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slippertTrackPictureButton)).BeginInit();
@@ -551,7 +551,7 @@
             this.miscPanel.Controls.Add(this.firstAidLabel);
             this.miscPanel.Controls.Add(this.theoraticalTestLabel);
             this.miscPanel.Controls.Add(this.manueverTrackLabel);
-            this.miscPanel.Controls.Add(this.getbyrBox);
+            this.miscPanel.Controls.Add(this.feePictureBox);
             this.miscPanel.Controls.Add(this.doctorsNoteLabel);
             this.miscPanel.Controls.Add(this.praticalTestPictureButton);
             this.miscPanel.Controls.Add(this.theroraticalPictureButton);
@@ -624,16 +624,19 @@
             this.manueverTrackLabel.TabIndex = 8;
             this.manueverTrackLabel.Text = "Manuever Track";
             // 
-            // getbyrBox
+            // feePictureBox
             // 
-            this.getbyrBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.getbyrBox.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
-            this.getbyrBox.Location = new System.Drawing.Point(779, 31);
-            this.getbyrBox.Name = "getbyrBox";
-            this.getbyrBox.Size = new System.Drawing.Size(40, 40);
-            this.getbyrBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.getbyrBox.TabIndex = 12;
-            this.getbyrBox.TabStop = false;
+            this.feePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.feePictureBox.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
+            this.feePictureBox.Location = new System.Drawing.Point(779, 31);
+            this.feePictureBox.Name = "feePictureBox";
+            this.feePictureBox.Size = new System.Drawing.Size(40, 40);
+            this.feePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.feePictureBox.TabIndex = 12;
+            this.feePictureBox.TabStop = false;
+            this.feePictureBox.DoubleClick += new System.EventHandler(this.feePictureBox_DoubleClick);
+            this.feePictureBox.MouseEnter += new System.EventHandler(this.feePictureBox_MouseEnter);
+            this.feePictureBox.MouseLeave += new System.EventHandler(this.feePictureBox_MouseLeave);
             // 
             // doctorsNoteLabel
             // 
@@ -655,6 +658,9 @@
             this.praticalTestPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.praticalTestPictureButton.TabIndex = 5;
             this.praticalTestPictureButton.TabStop = false;
+            this.praticalTestPictureButton.DoubleClick += new System.EventHandler(this.praticalTestPictureButton_DoubleClick);
+            this.praticalTestPictureButton.MouseEnter += new System.EventHandler(this.praticalTestPictureButton_MouseEnter);
+            this.praticalTestPictureButton.MouseLeave += new System.EventHandler(this.praticalTestPictureButton_MouseLeave);
             // 
             // theroraticalPictureButton
             // 
@@ -666,6 +672,9 @@
             this.theroraticalPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.theroraticalPictureButton.TabIndex = 4;
             this.theroraticalPictureButton.TabStop = false;
+            this.theroraticalPictureButton.DoubleClick += new System.EventHandler(this.theroraticalPictureButton_DoubleClick);
+            this.theroraticalPictureButton.MouseEnter += new System.EventHandler(this.theroraticalPictureButton_MouseEnter);
+            this.theroraticalPictureButton.MouseLeave += new System.EventHandler(this.theroraticalPictureButton_MouseLeave);
             // 
             // slippertTrackPictureButton
             // 
@@ -740,7 +749,7 @@
             this.panel1.PerformLayout();
             this.miscPanel.ResumeLayout(false);
             this.miscPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.getbyrBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.feePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.praticalTestPictureButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.theroraticalPictureButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slippertTrackPictureButton)).EndInit();
@@ -800,7 +809,7 @@
         private System.Windows.Forms.Label firstAidLabel;
         private System.Windows.Forms.Label theoraticalTestLabel;
         private System.Windows.Forms.Label manueverTrackLabel;
-        private System.Windows.Forms.PictureBox getbyrBox;
+        private System.Windows.Forms.PictureBox feePictureBox;
         private System.Windows.Forms.Label doctorsNoteLabel;
         private System.Windows.Forms.PictureBox praticalTestPictureButton;
         private System.Windows.Forms.PictureBox theroraticalPictureButton;
