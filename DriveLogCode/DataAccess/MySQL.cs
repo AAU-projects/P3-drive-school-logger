@@ -478,6 +478,15 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        public static bool UpdateUserEnum(int userid, string column, bool value, string table = UserTable)
+        {
+            var cmd = new MySqlCommand($"UPDATE {table} SET " +
+                                       $"`{column}` = '{value}' " +
+                                       $"WHERE user_id = {userid}");
+
+            return SendNonQuery(cmd);
+        }
+
 
 
         private static bool ExistTable(string tablename)
