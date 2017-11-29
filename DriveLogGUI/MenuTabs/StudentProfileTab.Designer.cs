@@ -75,11 +75,13 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.previousTheoreticalLabel = new System.Windows.Forms.Label();
-            this.nextTheoreticalLabel = new System.Windows.Forms.Label();
+            this.backButtonInUpcomingLesson = new System.Windows.Forms.Button();
+            this.panelContainingUpcomingLessons = new System.Windows.Forms.Panel();
+            this.timelLabel = new System.Windows.Forms.Label();
+            this.dateLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.upcommingLessonsLabel = new System.Windows.Forms.Label();
-            this.panelContainingUpcomingLessons = new System.Windows.Forms.Panel();
+            this.lessonLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).BeginInit();
             this.InfoPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
@@ -594,9 +596,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lessonLabel);
+            this.panel1.Controls.Add(this.backButtonInUpcomingLesson);
             this.panel1.Controls.Add(this.panelContainingUpcomingLessons);
-            this.panel1.Controls.Add(this.previousTheoreticalLabel);
-            this.panel1.Controls.Add(this.nextTheoreticalLabel);
+            this.panel1.Controls.Add(this.timelLabel);
+            this.panel1.Controls.Add(this.dateLabel);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.upcommingLessonsLabel);
             this.panel1.Location = new System.Drawing.Point(472, 74);
@@ -604,25 +608,48 @@
             this.panel1.Size = new System.Drawing.Size(413, 328);
             this.panel1.TabIndex = 6;
             // 
-            // previousTheoreticalLabel
+            // backButtonInUpcomingLesson
             // 
-            this.previousTheoreticalLabel.AutoSize = true;
-            this.previousTheoreticalLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.previousTheoreticalLabel.Location = new System.Drawing.Point(197, 29);
-            this.previousTheoreticalLabel.Name = "previousTheoreticalLabel";
-            this.previousTheoreticalLabel.Size = new System.Drawing.Size(51, 13);
-            this.previousTheoreticalLabel.TabIndex = 14;
-            this.previousTheoreticalLabel.Text = "Previous:";
+            this.backButtonInUpcomingLesson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.backButtonInUpcomingLesson.FlatAppearance.BorderSize = 0;
+            this.backButtonInUpcomingLesson.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.backButtonInUpcomingLesson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButtonInUpcomingLesson.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.backButtonInUpcomingLesson.Location = new System.Drawing.Point(328, 24);
+            this.backButtonInUpcomingLesson.Name = "backButtonInUpcomingLesson";
+            this.backButtonInUpcomingLesson.Size = new System.Drawing.Size(69, 22);
+            this.backButtonInUpcomingLesson.TabIndex = 17;
+            this.backButtonInUpcomingLesson.Text = "Back";
+            this.backButtonInUpcomingLesson.UseVisualStyleBackColor = false;
+            this.backButtonInUpcomingLesson.Click += new System.EventHandler(this.backButtonInUpcomingLesson_Click);
             // 
-            // nextTheoreticalLabel
+            // panelContainingUpcomingLessons
             // 
-            this.nextTheoreticalLabel.AutoSize = true;
-            this.nextTheoreticalLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.nextTheoreticalLabel.Location = new System.Drawing.Point(18, 29);
-            this.nextTheoreticalLabel.Name = "nextTheoreticalLabel";
-            this.nextTheoreticalLabel.Size = new System.Drawing.Size(32, 13);
-            this.nextTheoreticalLabel.TabIndex = 13;
-            this.nextTheoreticalLabel.Text = "Next:";
+            this.panelContainingUpcomingLessons.Location = new System.Drawing.Point(21, 47);
+            this.panelContainingUpcomingLessons.Name = "panelContainingUpcomingLessons";
+            this.panelContainingUpcomingLessons.Size = new System.Drawing.Size(376, 270);
+            this.panelContainingUpcomingLessons.TabIndex = 15;
+            this.panelContainingUpcomingLessons.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContainingUpcomingLessons_Paint);
+            // 
+            // timelLabel
+            // 
+            this.timelLabel.AutoSize = true;
+            this.timelLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.timelLabel.Location = new System.Drawing.Point(162, 29);
+            this.timelLabel.Name = "timelLabel";
+            this.timelLabel.Size = new System.Drawing.Size(30, 13);
+            this.timelLabel.TabIndex = 14;
+            this.timelLabel.Text = "Time";
+            // 
+            // dateLabel
+            // 
+            this.dateLabel.AutoSize = true;
+            this.dateLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.dateLabel.Location = new System.Drawing.Point(47, 29);
+            this.dateLabel.Name = "dateLabel";
+            this.dateLabel.Size = new System.Drawing.Size(30, 13);
+            this.dateLabel.TabIndex = 13;
+            this.dateLabel.Text = "Date";
             // 
             // panel4
             // 
@@ -643,13 +670,15 @@
             this.upcommingLessonsLabel.TabIndex = 11;
             this.upcommingLessonsLabel.Text = "Upcoming Lessons";
             // 
-            // panelContainingUpcomingLessons
+            // lessonLabel
             // 
-            this.panelContainingUpcomingLessons.Location = new System.Drawing.Point(21, 47);
-            this.panelContainingUpcomingLessons.Name = "panelContainingUpcomingLessons";
-            this.panelContainingUpcomingLessons.Size = new System.Drawing.Size(376, 270);
-            this.panelContainingUpcomingLessons.TabIndex = 15;
-            this.panelContainingUpcomingLessons.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContainingUpcomingLessons_Paint);
+            this.lessonLabel.AutoSize = true;
+            this.lessonLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.lessonLabel.Location = new System.Drawing.Point(254, 29);
+            this.lessonLabel.Name = "lessonLabel";
+            this.lessonLabel.Size = new System.Drawing.Size(41, 13);
+            this.lessonLabel.TabIndex = 18;
+            this.lessonLabel.Text = "Lesson";
             // 
             // StudentProfileTab
             // 
@@ -726,8 +755,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label upcommingLessonsLabel;
-        private System.Windows.Forms.Label previousTheoreticalLabel;
-        private System.Windows.Forms.Label nextTheoreticalLabel;
+        private System.Windows.Forms.Label timelLabel;
+        private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Label addressOutputLabel;
         private System.Windows.Forms.Label emailOutputLabel;
         private System.Windows.Forms.Label cprOutputLabel;
@@ -737,5 +766,7 @@
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Panel panelContainingUpcomingLessons;
+        private System.Windows.Forms.Button backButtonInUpcomingLesson;
+        private System.Windows.Forms.Label lessonLabel;
     }
 }

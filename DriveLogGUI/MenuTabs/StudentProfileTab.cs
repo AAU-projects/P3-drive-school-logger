@@ -13,8 +13,10 @@ namespace DriveLogGUI.MenuTabs
     {
         private User _user;
         private bool _search;
-        internal event SubPageNotification SubPageCreated;
+        internal override event SubPageNotification SubPageCreated;
+
         public Color PrevColor;
+        private Panel _showInformation;
 
         public StudentProfileTab(User user, bool search = false)
         {
@@ -105,6 +107,7 @@ namespace DriveLogGUI.MenuTabs
             int heightForEachDay = panelContainingUpcomingLessons.Height / 10;
             int locationForRow = 0;
             List<Lesson> scheduledLessons = new List<Lesson>();
+            backButtonInUpcomingLesson.Hide();
 
             foreach (Lesson lesson in Session.LessonsUser)
             {
@@ -114,7 +117,6 @@ namespace DriveLogGUI.MenuTabs
                 }
             }
 
-            int i = 0;
             foreach (Lesson lesson in scheduledLessons)
             {
                 Label dateLabel = new Label
@@ -159,7 +161,7 @@ namespace DriveLogGUI.MenuTabs
 
                 locationForRow += heightForEachDay;
 
-                upcomingLessonData.PanelForCalendarDay.BackColor = IsOdd(i) ? Color.White : ColorScheme.MainBackgroundColor;
+                upcomingLessonData.PanelForCalendarDay.BackColor = Color.White;
 
                 upcomingLessonData.PanelForCalendarDay.Controls.Add(upcomingLessonData.LabelLessonInformation);
                 upcomingLessonData.PanelForCalendarDay.Controls.Add(upcomingLessonData.LabelLessonTitleAndPart);
@@ -182,21 +184,92 @@ namespace DriveLogGUI.MenuTabs
                 upcomingLessonData.LabelLessonTitleAndPart.MouseLeave += (s, e) => ChangeCursorAndHoverLeave(upcomingLessonData);
 
                 panelContainingUpcomingLessons.Controls.Add(upcomingLessonData.PanelForCalendarDay);
-                i++;
             }
         }
 
         private void ShowInformationAboutLesson(object sender, LessonClickEventArgs lesson)
         {
-            Panel ShowInformation = new Panel
+            _showInformation = new Panel
             {
                 Width = panelContainingUpcomingLessons.Width,
                 Height = panelContainingUpcomingLessons.Height,
                 Location = panelContainingUpcomingLessons.Location,
+                BackColor = Color.White
+            };
+            
+            Label titleForLesson = new Label
+            {
+                AutoSize = false,
+                Height = 40,
+                Font = new Font("Calibri Light", 10F, FontStyle.Regular),
+                ForeColor = ColorScheme.MainFontColor,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Dock = DockStyle.Top,
+                Text = lesson.Lesson.LessonTemplate.Title
             };
 
+            TextBox descriptionForLesson = new TextBox()
+            {
+                AutoSize = false,
+                Width = _showInformation.Width - 40,
+                Height = 100,
+                Multiline = true,
+                ReadOnly = true,
+                ScrollBars = ScrollBars.Vertical,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.None,
+                Font = new Font("Calibri Light", 10F, FontStyle.Regular),
+                ForeColor = ColorScheme.MainFontColor,
+                Dock = DockStyle.Top,
+                Text = lesson.Lesson.LessonTemplate.Description
+            };
+
+            Label dateForLesson = new Label
+            {
+                AutoSize = false,
+                Height = 40,
+                Font = new Font("Calibri Light", 10F, FontStyle.Regular),
+                ForeColor = ColorScheme.MainFontColor,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Dock = DockStyle.Top,
+                Text = $@"Date: {lesson.Lesson.StartDate:f}  - {lesson.Lesson.EndDate:t}"
+            };
+
+            Label readingForLesson = new Label
+            {
+                AutoSize = false,
+                Height = 40,
+                Font = new Font("Calibri Light", 10F, FontStyle.Regular),
+                ForeColor = ColorScheme.MainFontColor,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Dock = DockStyle.Top,
+                Text = $@"Reading: {lesson.Lesson.LessonTemplate.Reading}"
+            };
+
+            Label instructorForLesson = new Label
+            {
+                AutoSize = false,
+                Height = 40,
+                Font = new Font("Calibri Light", 10F, FontStyle.Regular),
+                ForeColor = ColorScheme.MainFontColor,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Dock = DockStyle.Top,
+                Text = $@"Instructor for lesson: {lesson.Lesson.InstructorFullname}"
+            };
+
+            _showInformation.Controls.Add(instructorForLesson);
+            _showInformation.Controls.Add(readingForLesson);
+            _showInformation.Controls.Add(dateForLesson);
+            _showInformation.Controls.Add(descriptionForLesson);
+            _showInformation.Controls.Add(titleForLesson);
+            panel1.Controls.Add(_showInformation);
+
+            dateLabel.Hide();
+            timelLabel.Hide();
+            lessonLabel.Hide();
             panelContainingUpcomingLessons.Hide();
-            ShowInformation.Show();
+
+            backButtonInUpcomingLesson.Show();
         }
 
         private void ChangeCursorAndHoverEnter(CalendarData data)
@@ -222,24 +295,29 @@ namespace DriveLogGUI.MenuTabs
         private void ChangeCursorAndHoverLeave(CalendarData data)
         {
             data.LabelForDate.Cursor = Cursors.Default;
-            data.LabelForDate.BackColor = PrevColor;
+            data.LabelForDate.BackColor = Color.White;
             data.LabelForDate.ForeColor = ColorScheme.MainFontColor;
 
             data.LabelLessonInformation.Cursor = Cursors.Default;
-            data.LabelLessonInformation.BackColor = PrevColor;
+            data.LabelLessonInformation.BackColor = Color.White;
             data.LabelLessonInformation.ForeColor = ColorScheme.MainFontColor;
 
             data.LabelLessonTitleAndPart.Cursor = Cursors.Default;
-            data.LabelLessonTitleAndPart.BackColor = PrevColor;
+            data.LabelLessonTitleAndPart.BackColor = Color.White;
             data.LabelLessonTitleAndPart.ForeColor = ColorScheme.MainFontColor;
 
             data.PanelForCalendarDay.Cursor = Cursors.Hand;
-            data.PanelForCalendarDay.BackColor = PrevColor;
+            data.PanelForCalendarDay.BackColor = Color.White;
         }
 
-        private bool IsOdd(int value)
+        private void backButtonInUpcomingLesson_Click(object sender, EventArgs e)
         {
-            return value % 2 != 0;
+            _showInformation.Hide();
+            panelContainingUpcomingLessons.Show();
+            backButtonInUpcomingLesson.Hide();
+            dateLabel.Show();
+            timelLabel.Show();
+            lessonLabel.Show();
         }
     }
 }
