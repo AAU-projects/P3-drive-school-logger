@@ -446,7 +446,7 @@ namespace DriveLogGUI.MenuTabs
                 appointment.AppointmentHighlight(ColorScheme.CalendarRed);
                 appointment.ShowWarning = true;
                 appointment.WarningText = "This appointment is fully booked";
-            } else if (appointment.ToTime < Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
+            } else if (appointment.StartTime <= Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
                 appointment.ShowWarning = true;
@@ -534,6 +534,7 @@ namespace DriveLogGUI.MenuTabs
             {
                 BookAppointmentWindow bookingWindow = new BookAppointmentWindow(selectedAppointment, MousePosition);
                 bookingWindow.ShowDialog();
+                Session.GetProgress();
                 UpdateCalendar(0);
             }
             else if (bookingInformationButton.Text == CancelBookingText)

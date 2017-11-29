@@ -10,7 +10,6 @@ namespace DriveLogCode.Objects
     public static class Session
     {
         public static User LoggedInUser;
-        public static Dictionary<int, List<Lesson>> LessonsUserDictionary = new Dictionary<int, List<Lesson>>();
         public static List<Lesson> LessonsUser;
         public static string TypeFirstAid = "FirstAid";
         public static string TypeDoctorsNote = "DoctorsNote";
@@ -23,24 +22,17 @@ namespace DriveLogCode.Objects
         {
             LoggedInUser = new User(userTable);
 
+            GetLessonsFromDatabase();
             GetProgress();
+        }
+
+        public static void GetLessonsFromDatabase()
+        {
+            LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
         }
 
         public static void GetProgress()
         {
-            LessonsUserDictionary.Clear();
-            LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
-
-            for (int i = 1; i < 10; i++)
-            {
-                List<Lesson> lessonAppointment = LessonsUser.Where(x => x.AppointmentID == i).ToList();
-
-                AddAppointmentToDictionary(i, lessonAppointment);
-
-            }
-
-
-
             if (LessonsUser.Count != 0)
             {
                 CurrentLesson = LessonsUser
@@ -77,18 +69,6 @@ namespace DriveLogCode.Objects
             if (CurrentLesson == null) // if the user have no current lessons he will be able to book any date
             {
                 CurrentLesson = new Lesson();
-            }
-        }
-
-        public static void AddAppointmentToDictionary(int i, List<Lesson> lessons)
-        {
-            if (LessonsUserDictionary.ContainsKey(i)) {
-
-                LessonsUserDictionary[i].AddRange(lessons);
-            }
-            else
-            {
-                LessonsUserDictionary.Add(i, lessons);
             }
         }
 
