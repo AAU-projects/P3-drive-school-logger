@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode.DesignSchemes;
+using DriveLogCode.DataAccess;
 using DriveLogCode.Objects;
 using DriveLogGUI.CustomEventArgs;
 using DriveLogGUI.Windows;
@@ -17,14 +18,24 @@ namespace DriveLogGUI.MenuTabs
 
         public Color PrevColor;
         private Panel _showInformation;
+        internal override event EventHandler IconPictureButtonClickEvent;
+
+        // Pictures for check icons
+        private Bitmap incompleteImage = DriveLogGUI.Properties.Resources.crossIncomplete;
+        private Bitmap incompleteHoverImage = DriveLogGUI.Properties.Resources.crossHover;
+        private Bitmap completedImage = DriveLogGUI.Properties.Resources.checkCompleted;
+        private Bitmap completedHoverImage = DriveLogGUI.Properties.Resources.checkHover;
 
         public StudentProfileTab(User user, bool search = false)
         {
             InitializeComponent();
             _user = user;
             _search = search;
+
             UpdateLayout();
             UpdateInfo();
+            DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
+            FirstCheckIfUploaded(firstAidPictureButton);
 
             foreach (Control c in progressBarPanel.Controls)
             {
@@ -318,6 +329,61 @@ namespace DriveLogGUI.MenuTabs
             dateLabel.Show();
             timelLabel.Show();
             lessonLabel.Show();
+        }
+
+        private void daysForCalendar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void doctorsNotePictureButton_Click(object sender, EventArgs e)
+        {
+            IconPictureButtonClickEvent?.Invoke(doctorsNotePictureButton, e);
+        }
+
+        private void firstAidPictureButton_Click(object sender, EventArgs e)
+        {
+            IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
+        }
+
+        private void ProgressButtonMouseEnter(PictureBox button)
+        {
+            if (button.Image == incompleteImage)
+                button.Image = incompleteHoverImage;
+            else if (button.Image == completedImage)
+                button.Image = completedHoverImage;
+        }
+
+        private void DoctorsNoteCheckIfUploaded(PictureBox button)
+        {
+            if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
+                button.Image = completedImage;
+        }
+
+        private void FirstCheckIfUploaded(PictureBox button)
+        {
+            if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
+                button.Image = completedImage;
+        }
+
+        private void firstAidPictureButton_MouseLeave(object sender, EventArgs e)
+        {
+            FirstCheckIfUploaded(firstAidPictureButton);
+        }
+
+        private void firstAidPictureButton_MouseEnter(object sender, EventArgs e)
+        {
+            ProgressButtonMouseEnter(firstAidPictureButton);
+        }
+
+        private void doctorsNotePictureButton_MouseLeave(object sender, EventArgs e)
+        {
+            DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
+        }
+
+        private void doctorsNotePictureButton_MouseEnter(object sender, EventArgs e)
+        {
+            ProgressButtonMouseEnter(doctorsNotePictureButton);
         }
     }
 }

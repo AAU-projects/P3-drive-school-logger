@@ -10,8 +10,8 @@ namespace DriveLogGUI.MenuTabs
     public partial class StudentOverviewTab : OverviewTab
     {
         public event EventHandler LogOutButtonClick;
-        public event EventHandler DoctorsNotePictureButtonClick;
         internal event SubPageNotification SubPageCreated;
+        internal override event EventHandler IconPictureButtonClickEvent;
         private DateTime selectedMonth;
         private DateTime formatDateTime;
 
@@ -67,7 +67,7 @@ namespace DriveLogGUI.MenuTabs
 
         private void doctorsNotePictureButton_Click(object sender, EventArgs e)
         {
-            DoctorsNotePictureButtonClick?.Invoke(this, e);
+            IconPictureButtonClickEvent?.Invoke(doctorsNotePictureButton, e);
         }
 
         public DateTime GetPanelDate(int position)
@@ -287,6 +287,11 @@ namespace DriveLogGUI.MenuTabs
         private void todaysNoteLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void firstAidPictureButton_Click(object sender, EventArgs e)
+        {
+            IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
         }
     }
 }

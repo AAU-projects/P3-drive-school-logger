@@ -62,6 +62,13 @@
             this.calendarMonth = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.calenderLabel = new System.Windows.Forms.Label();
+            this.firstAidLabel = new System.Windows.Forms.Label();
+            this.doctorsNoteLabel = new System.Windows.Forms.Label();
+            this.slipperyTrackLabel = new System.Windows.Forms.Label();
+            this.maneuverTrackLabel = new System.Windows.Forms.Label();
+            this.feeLabel = new System.Windows.Forms.Label();
+            this.practicalTestLabel = new System.Windows.Forms.Label();
+            this.theoraticalTestLabel = new System.Windows.Forms.Label();
             this.progressBarPanel = new System.Windows.Forms.Panel();
             this.practicalStatus = new System.Windows.Forms.Label();
             this.theoreticalStatus = new System.Windows.Forms.Label();
@@ -74,12 +81,7 @@
             this.progressLabel = new System.Windows.Forms.Label();
             this.progressUnderline = new System.Windows.Forms.Panel();
             this.miscPanel = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.getbyrBox = new System.Windows.Forms.PictureBox();
             this.praticalTestPictureButton = new System.Windows.Forms.PictureBox();
             this.theroraticalPictureButton = new System.Windows.Forms.PictureBox();
             this.slippertTrackPictureButton = new System.Windows.Forms.PictureBox();
@@ -104,6 +106,7 @@
             this.practicalBar.SuspendLayout();
             this.theoreticalBar.SuspendLayout();
             this.miscPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.getbyrBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.praticalTestPictureButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.theroraticalPictureButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slippertTrackPictureButton)).BeginInit();
@@ -484,6 +487,76 @@
             this.calenderLabel.TabIndex = 5;
             this.calenderLabel.Text = "Calendar";
             // 
+            // firstAidLabel
+            // 
+            this.firstAidLabel.AutoSize = true;
+            this.firstAidLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.firstAidLabel.Location = new System.Drawing.Point(167, 74);
+            this.firstAidLabel.Name = "firstAidLabel";
+            this.firstAidLabel.Size = new System.Drawing.Size(56, 16);
+            this.firstAidLabel.TabIndex = 7;
+            this.firstAidLabel.Text = "First Aid";
+            // 
+            // doctorsNoteLabel
+            // 
+            this.doctorsNoteLabel.AutoSize = true;
+            this.doctorsNoteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doctorsNoteLabel.Location = new System.Drawing.Point(28, 74);
+            this.doctorsNoteLabel.Name = "doctorsNoteLabel";
+            this.doctorsNoteLabel.Size = new System.Drawing.Size(87, 16);
+            this.doctorsNoteLabel.TabIndex = 6;
+            this.doctorsNoteLabel.Text = "Doctors Note";
+            // 
+            // slipperyTrackLabel
+            // 
+            this.slipperyTrackLabel.AutoSize = true;
+            this.slipperyTrackLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.slipperyTrackLabel.Location = new System.Drawing.Point(389, 74);
+            this.slipperyTrackLabel.Name = "slipperyTrackLabel";
+            this.slipperyTrackLabel.Size = new System.Drawing.Size(96, 16);
+            this.slipperyTrackLabel.TabIndex = 9;
+            this.slipperyTrackLabel.Text = "Slippery Track";
+            // 
+            // maneuverTrackLabel
+            // 
+            this.maneuverTrackLabel.AutoSize = true;
+            this.maneuverTrackLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maneuverTrackLabel.Location = new System.Drawing.Point(262, 74);
+            this.maneuverTrackLabel.Name = "maneuverTrackLabel";
+            this.maneuverTrackLabel.Size = new System.Drawing.Size(106, 16);
+            this.maneuverTrackLabel.TabIndex = 8;
+            this.maneuverTrackLabel.Text = "Manuever Track";
+            // 
+            // feeLabel
+            // 
+            this.feeLabel.AutoSize = true;
+            this.feeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.feeLabel.Location = new System.Drawing.Point(783, 74);
+            this.feeLabel.Name = "feeLabel";
+            this.feeLabel.Size = new System.Drawing.Size(32, 16);
+            this.feeLabel.TabIndex = 13;
+            this.feeLabel.Text = "Fee";
+            // 
+            // practicalTestLabel
+            // 
+            this.practicalTestLabel.AutoSize = true;
+            this.practicalTestLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.practicalTestLabel.Location = new System.Drawing.Point(634, 74);
+            this.practicalTestLabel.Name = "practicalTestLabel";
+            this.practicalTestLabel.Size = new System.Drawing.Size(90, 16);
+            this.practicalTestLabel.TabIndex = 11;
+            this.practicalTestLabel.Text = "Practical Test";
+            // 
+            // theoraticalTestLabel
+            // 
+            this.theoraticalTestLabel.AutoSize = true;
+            this.theoraticalTestLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.theoraticalTestLabel.Location = new System.Drawing.Point(504, 74);
+            this.theoraticalTestLabel.Name = "theoraticalTestLabel";
+            this.theoraticalTestLabel.Size = new System.Drawing.Size(106, 16);
+            this.theoraticalTestLabel.TabIndex = 10;
+            this.theoraticalTestLabel.Text = "Theoretical Test";
+            // 
             // progressBarPanel
             // 
             this.progressBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
@@ -504,7 +577,7 @@
             // practicalStatus
             // 
             this.practicalStatus.AutoSize = true;
-            this.practicalStatus.Location = new System.Drawing.Point(412, 89);
+            this.practicalStatus.Location = new System.Drawing.Point(406, 89);
             this.practicalStatus.Name = "practicalStatus";
             this.practicalStatus.Size = new System.Drawing.Size(30, 13);
             this.practicalStatus.TabIndex = 12;
@@ -597,12 +670,14 @@
             // miscPanel
             // 
             this.miscPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.miscPanel.Controls.Add(this.label6);
-            this.miscPanel.Controls.Add(this.label5);
-            this.miscPanel.Controls.Add(this.label4);
-            this.miscPanel.Controls.Add(this.label3);
-            this.miscPanel.Controls.Add(this.label2);
-            this.miscPanel.Controls.Add(this.label1);
+            this.miscPanel.Controls.Add(this.feeLabel);
+            this.miscPanel.Controls.Add(this.slipperyTrackLabel);
+            this.miscPanel.Controls.Add(this.practicalTestLabel);
+            this.miscPanel.Controls.Add(this.firstAidLabel);
+            this.miscPanel.Controls.Add(this.theoraticalTestLabel);
+            this.miscPanel.Controls.Add(this.maneuverTrackLabel);
+            this.miscPanel.Controls.Add(this.getbyrBox);
+            this.miscPanel.Controls.Add(this.doctorsNoteLabel);
             this.miscPanel.Controls.Add(this.praticalTestPictureButton);
             this.miscPanel.Controls.Add(this.theroraticalPictureButton);
             this.miscPanel.Controls.Add(this.slippertTrackPictureButton);
@@ -614,71 +689,22 @@
             this.miscPanel.Size = new System.Drawing.Size(873, 112);
             this.miscPanel.TabIndex = 4;
             // 
-            // label6
+            // getbyrBox
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(653, 74);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 16);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Practical test";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(548, 74);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 16);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Theoratical test";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(456, 74);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 16);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Slippery track";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(354, 74);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 16);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Manuever track";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(283, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 16);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "First aid";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(178, 74);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Doctors note";
+            this.getbyrBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.getbyrBox.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
+            this.getbyrBox.Location = new System.Drawing.Point(779, 31);
+            this.getbyrBox.Name = "getbyrBox";
+            this.getbyrBox.Size = new System.Drawing.Size(40, 40);
+            this.getbyrBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.getbyrBox.TabIndex = 12;
+            this.getbyrBox.TabStop = false;
             // 
             // praticalTestPictureButton
             // 
             this.praticalTestPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.praticalTestPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
-            this.praticalTestPictureButton.Location = new System.Drawing.Point(670, 31);
+            this.praticalTestPictureButton.Location = new System.Drawing.Point(658, 31);
             this.praticalTestPictureButton.Name = "praticalTestPictureButton";
             this.praticalTestPictureButton.Size = new System.Drawing.Size(40, 40);
             this.praticalTestPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -689,7 +715,7 @@
             // 
             this.theroraticalPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.theroraticalPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
-            this.theroraticalPictureButton.Location = new System.Drawing.Point(575, 31);
+            this.theroraticalPictureButton.Location = new System.Drawing.Point(537, 31);
             this.theroraticalPictureButton.Name = "theroraticalPictureButton";
             this.theroraticalPictureButton.Size = new System.Drawing.Size(40, 40);
             this.theroraticalPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -700,7 +726,7 @@
             // 
             this.slippertTrackPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.slippertTrackPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
-            this.slippertTrackPictureButton.Location = new System.Drawing.Point(480, 31);
+            this.slippertTrackPictureButton.Location = new System.Drawing.Point(416, 31);
             this.slippertTrackPictureButton.Name = "slippertTrackPictureButton";
             this.slippertTrackPictureButton.Size = new System.Drawing.Size(40, 40);
             this.slippertTrackPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -711,7 +737,7 @@
             // 
             this.maneuverTrackPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.maneuverTrackPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
-            this.maneuverTrackPictureButton.Location = new System.Drawing.Point(385, 31);
+            this.maneuverTrackPictureButton.Location = new System.Drawing.Point(295, 31);
             this.maneuverTrackPictureButton.Name = "maneuverTrackPictureButton";
             this.maneuverTrackPictureButton.Size = new System.Drawing.Size(40, 40);
             this.maneuverTrackPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -722,12 +748,13 @@
             // 
             this.firstAidPictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.firstAidPictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
-            this.firstAidPictureButton.Location = new System.Drawing.Point(290, 31);
+            this.firstAidPictureButton.Location = new System.Drawing.Point(174, 31);
             this.firstAidPictureButton.Name = "firstAidPictureButton";
             this.firstAidPictureButton.Size = new System.Drawing.Size(40, 40);
             this.firstAidPictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.firstAidPictureButton.TabIndex = 1;
             this.firstAidPictureButton.TabStop = false;
+            this.firstAidPictureButton.Click += new System.EventHandler(this.firstAidPictureButton_Click);
             this.firstAidPictureButton.MouseEnter += new System.EventHandler(this.firstAidPictureButton_Enter);
             this.firstAidPictureButton.MouseLeave += new System.EventHandler(this.firstAidPictureButton_Leave);
             // 
@@ -735,7 +762,7 @@
             // 
             this.doctorsNotePictureButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.doctorsNotePictureButton.Image = global::DriveLogGUI.Properties.Resources.crossIncomplete;
-            this.doctorsNotePictureButton.Location = new System.Drawing.Point(195, 31);
+            this.doctorsNotePictureButton.Location = new System.Drawing.Point(53, 31);
             this.doctorsNotePictureButton.Name = "doctorsNotePictureButton";
             this.doctorsNotePictureButton.Size = new System.Drawing.Size(40, 40);
             this.doctorsNotePictureButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -745,7 +772,7 @@
             this.doctorsNotePictureButton.MouseEnter += new System.EventHandler(this.doctorsNotePictureButton_Hover);
             this.doctorsNotePictureButton.MouseLeave += new System.EventHandler(this.doctorsNotePictureButton_Leave);
             // 
-            // OverviewTab
+            // StudentOverviewTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -755,7 +782,7 @@
             this.Controls.Add(this.calendarPanel);
             this.Controls.Add(this.todaysNotePanel);
             this.Controls.Add(this.headerPanel);
-            this.Name = "OverviewTab";
+            this.Name = "StudentOverviewTab";
             this.Size = new System.Drawing.Size(897, 544);
             this.headerPanel.ResumeLayout(false);
             this.todaysNotePanel.ResumeLayout(false);
@@ -780,6 +807,7 @@
             this.theoreticalBar.ResumeLayout(false);
             this.miscPanel.ResumeLayout(false);
             this.miscPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.getbyrBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.praticalTestPictureButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.theroraticalPictureButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slippertTrackPictureButton)).EndInit();
@@ -814,12 +842,12 @@
         private System.Windows.Forms.Panel practicalProgressFill;
         private System.Windows.Forms.Panel theoreticalBar;
         private System.Windows.Forms.Panel theoreticalProgressFill;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label practicalTestLabel;
+        private System.Windows.Forms.Label theoraticalTestLabel;
+        private System.Windows.Forms.Label slipperyTrackLabel;
+        private System.Windows.Forms.Label maneuverTrackLabel;
+        private System.Windows.Forms.Label firstAidLabel;
+        private System.Windows.Forms.Label doctorsNoteLabel;
         private System.Windows.Forms.PictureBox praticalTestPictureButton;
         private System.Windows.Forms.PictureBox theroraticalPictureButton;
         private System.Windows.Forms.PictureBox slippertTrackPictureButton;
@@ -850,5 +878,7 @@
         private System.Windows.Forms.Label calendarRightArrow;
         private System.Windows.Forms.Label calendarLeftArrow;
         private System.Windows.Forms.Button overviewUpdateTodaysNote;
+        private System.Windows.Forms.Label feeLabel;
+        private System.Windows.Forms.PictureBox getbyrBox;
     }
 }

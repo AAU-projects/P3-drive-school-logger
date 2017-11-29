@@ -12,5 +12,6 @@ namespace DriveLogGUI.MenuTabs
     public abstract class ProfileTab : UserControl
     {
         internal virtual event SubPageNotification SubPageCreated;
+        internal virtual event EventHandler IconPictureButtonClickEvent;
     }
 }
