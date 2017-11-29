@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -22,6 +22,7 @@ namespace DriveLogCode.Objects
         public static void LoadUserFromDataTable(DataTable userTable)
         {
             LoggedInUser = new User(userTable);
+
             GetProgress();
         }
 
@@ -45,7 +46,7 @@ namespace DriveLogCode.Objects
                 CurrentLesson = LessonsUser
                     .OrderByDescending(x => x.TemplateID)
                     .ThenByDescending(x => x.Progress)
-                    .First();
+                    .FirstOrDefault();
 
                 try
                 {
@@ -106,3 +107,4 @@ namespace DriveLogCode.Objects
         }
     }
 }
+

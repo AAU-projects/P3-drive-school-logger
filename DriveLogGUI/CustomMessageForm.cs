@@ -59,5 +59,6 @@ namespace DriveLogGUI
             result = DialogResult.Yes;
             this.Close();
         }
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DriveLogGUI.MenuTabs
 {
-    partial class ProfileTab
+    partial class StudentProfileTab
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileTab));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentProfileTab));
             this.ProfilePicture = new System.Windows.Forms.PictureBox();
             this.infoHeaderLabel = new System.Windows.Forms.Label();
             this.InfoPanel = new System.Windows.Forms.Panel();

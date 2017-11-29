@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -35,10 +35,39 @@ namespace DriveLogCode.DataAccess
             foreach (DataRow row in results.Rows)
             {
                 LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[3]), (string)row[8], (string)row[9], (string)row[10], Convert.ToInt32(row[11]), (string)row[12]);
-                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), Convert.ToInt32(row[4]), (DateTime)row[5], (DateTime)row[6], Convert.ToBoolean(row[7]), newTemplate, (string)row[13]));
+                lessonsList.Add(new Lesson((string)row[0], (string)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), Convert.ToInt32(row[4]), (DateTime)row[5], (DateTime)row[6], Convert.ToBoolean(row[7]), newTemplate, (string)row[13], userid));
             }
 
             return lessonsList;
+        }
+
+        public static List<Lesson> GetLessonsToCompleteList(User instructor)
+        {
+            DataTable results = MySql.GetLessonsToComplete(instructor.Id);
+            List<Lesson> lessonsFoundList = new List<Lesson>();
+
+            foreach (DataRow row in results.Rows)
+            {
+                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[0]), (string)row[6], (string)row[7], (string)row[8], Convert.ToInt32(row[9]), (string)row[10]);
+                lessonsFoundList.Add(new Lesson(instructor.Firstname, instructor.Lastname, Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), (DateTime)row[3], (DateTime)row[4], Convert.ToBoolean(row[5]), newTemplate, instructor.SignaturePath, Convert.ToInt32(row[11])));
+            }
+
+            return lessonsFoundList;
+        }
+
+        public static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status)
+        {
+            return MySql.SetLessonToComplete(studentId, appointmentId, progress, true);
+        }
+
+        public static bool DeleteLesson(int studentId, int appointmentId, int progress)
+        {
+            return MySql.DeleteLesson(studentId, appointmentId, progress);
+        }
+
+        public static User GetUserById(int userId)
+        {
+            return new User(MySql.GetUserByID(userId));
         }
 
         public static Dictionary<string, string> GetTemplate(string templateName)
@@ -180,6 +209,24 @@ namespace DriveLogCode.DataAccess
             return usersFound;
         }
 
+        public static int GetActiveUserCount()
+        {
+            return MySql.GetAllRows("users").Rows.Count;
+        }
+
+        public static int GetAppointmentsByInstructorIdCount(int instructorId)
+        {
+            DataTable results = MySql.GetAllAppointmentsByInstructorId(instructorId);
+            int count = 0;
+
+            foreach (DataRow resultsRow in results.Rows)
+            {
+                count += Convert.ToInt32(resultsRow[3]);
+            }
+
+            return count;
+        }
+
         public static string GetLatestTodaysNote()
         {
             DataTable queryInfo = MySql.GetLatestTodaysNote();
@@ -254,3 +301,4 @@ namespace DriveLogCode.DataAccess
         }
     }
 }
+

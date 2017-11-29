@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Data;
 using DriveLogCode.Objects;
 using MySql.Data.MySqlClient;
@@ -51,6 +51,32 @@ namespace DriveLogCode.DataAccess
                                        $"FROM lessons " +
                                        $"WHERE lessons.AppointmentID = {appointmentid} " +
                                        $"GROUP BY UserID");
+            return SendQuery(cmd);
+        }
+      
+        public static DataTable GetLessonsToComplete(int instructorId, string LessonTable = LessonTable,
+            string AppointmentTable = AppointmentTable, string LessonTemplateTable = LessonTemplateTable )
+        {
+            var cmd = new MySqlCommand("SELECT " +
+                $"{LessonTable}.AppointmentID, " +
+                $"{LessonTable}.LessonID AS TemplateID, " +
+                $"{LessonTable}.LessonPart AS Progress, " +
+                $"{LessonTable}.StartDate, " +
+                $"{LessonTable}.EndDate, " +
+                $"{LessonTable}.Completed, " +
+                $"{LessonTemplateTable}.title, " +
+                $"{LessonTemplateTable}.description, " +
+                $"{LessonTemplateTable}.type, " +
+                $"{LessonTemplateTable}.time, " +
+                $"{LessonTemplateTable}.reading, " +
+                $"{LessonTable}.UserID " +
+                $"FROM {AppointmentTable}, {LessonTable}, {LessonTemplateTable} " +
+                "WHERE " +
+                $"{LessonTable}.AppointmentID = {AppointmentTable}.id AND " +
+                $"{AppointmentTable}.instructorID = '{instructorId}' AND " +
+                $"{LessonTemplateTable}.id = {LessonTable}.LessonID AND " +
+                $"{LessonTable}.Completed = 'False' " +
+                $"ORDER BY {LessonTable}.EndDate");
 
             return SendQuery(cmd);
         }
@@ -98,6 +124,13 @@ namespace DriveLogCode.DataAccess
                                        "WHERE " +
                                        $"{userTable}.user_id = {AppointmentTable}.instructorID " +
                                        $"ORDER BY {appointmentTable}.startTime, {appointmentTable}.availableTime ");
+
+            return SendQuery(cmd);
+        }
+
+        public static DataTable GetAllAppointmentsByInstructorId(int instructorId, string table = AppointmentTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE instructorID = {instructorId}");
 
             return SendQuery(cmd);
         }
@@ -170,12 +203,13 @@ namespace DriveLogCode.DataAccess
         {
             var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
                                        $"`id`  int NOT NULL AUTO_INCREMENT ," +
-                                       $"`userID`  int NOT NULL ," +
-                                       $"`appointmentID`  int NOT NULL ," +
-                                       $"`lessonID`  int NOT NULL ," +
-                                       $"`lessonPart`  int NOT NULL ," +
-                                       $"`endDate`  datetime NULL DEFAULT NULL ," +
-                                       $"`completed`  enum(\'True\',\'False\') NOT NULL DEFAULT \'False\' ," +
+                                       $"`UserID`  int NOT NULL ," +
+                                       $"`AppointmentID`  int NOT NULL ," +
+                                       $"`LessonID`  int NOT NULL ," +
+                                       $"`LessonPart`  int NOT NULL ," +
+                                       $"`StartDate`  datetime NULL DEFAULT NULL ," +
+                                       $"`EndDate`  datetime NULL DEFAULT NULL ," +
+                                       $"`Completed`  enum(\'True\',\'False\') NOT NULL DEFAULT \'False\' ," +
                                        $"PRIMARY KEY (`id`)" +
                                        $")" +
                                        $"ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;");
@@ -239,6 +273,20 @@ namespace DriveLogCode.DataAccess
             if (CreateTemplateTable(table)) return SendNonQuery(cmd);
 
             return false;
+        }
+
+        public static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status, string table = LessonTable)
+        {
+            var cmd = new MySqlCommand($"UPDATE {table} SET Completed = '{status}' WHERE UserID = {studentId} AND AppointmentID = {appointmentId} AND LessonPart = {progress} LIMIT 1");
+
+            return SendNonQuery(cmd);
+        }
+
+        public static bool DeleteLesson(int studentId, int appointmentid, int progress, string table = LessonTable)
+        {
+            var cmd = new MySqlCommand($"DELETE FROM {table} WHERE UserID = {studentId} AND AppointmentID = {appointmentid} AND LessonPart = {progress} LIMIT 1");
+
+            return SendNonQuery(cmd);
         }
 
         public static bool UploadLessonTemplate(string id, string title, string description, string type, string time, string reading, string table = LessonTemplateTable)
@@ -557,3 +605,4 @@ namespace DriveLogCode.DataAccess
         }
     }
 }
+

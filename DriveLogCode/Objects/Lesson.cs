@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Data;
 
 namespace DriveLogCode.Objects
@@ -24,9 +24,11 @@ namespace DriveLogCode.Objects
 
         public LessonTemplate LessonTemplate { get; set;}
 
+        public int StudentId { get; }
+
         public string InstructorFullname => InstructorFirstname + " " + InstructorLastname;
 
-        public Lesson(string instructorFirstname, string instructorLastname, int appointmentID, int templateId, int progress, DateTime startDate, DateTime endDate, bool completed, LessonTemplate lessonTemplate, string instructorSignaturePath)
+        public Lesson(string instructorFirstname, string instructorLastname, int appointmentID, int templateId, int progress, DateTime startDate, DateTime endDate, bool completed, LessonTemplate lessonTemplate, string instructorSignaturePath, int studentId)
         {
             InstructorFirstname = instructorFirstname;
             InstructorLastname = instructorLastname;
@@ -38,6 +40,7 @@ namespace DriveLogCode.Objects
             Completed = completed;
             this.LessonTemplate = lessonTemplate;
             InstructorSignaturePath = instructorSignaturePath;
+            StudentId = studentId;
         }
 
         public Lesson(int id, int userid, int appointmentid, int lessonid, int lessonpart, DateTime startdate,
@@ -72,3 +75,4 @@ namespace DriveLogCode.Objects
         }
     }
 }
+
