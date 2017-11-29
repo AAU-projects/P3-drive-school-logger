@@ -106,11 +106,6 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
-        private void daysForCalendar_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void doctorsNotePictureButton_Click(object sender, EventArgs e)
         {
             IconPictureButtonClickEvent?.Invoke(doctorsNotePictureButton, e);
@@ -123,6 +118,16 @@ namespace DriveLogGUI.MenuTabs
 
         private void ProgressButtonMouseEnter(PictureBox button)
         {
+            if (button.Image == incompleteImage)
+                button.Image = incompleteHoverImage;
+            else if (button.Image == completedImage)
+                button.Image = completedHoverImage;
+        }
+
+        private void TestAndFeeIcon_Enter(PictureBox button)
+        {
+            if (!Session.LoggedInUser.Sysmin) return;
+
             if (button.Image == incompleteImage)
                 button.Image = incompleteHoverImage;
             else if (button.Image == completedImage)
@@ -159,6 +164,21 @@ namespace DriveLogGUI.MenuTabs
         private void doctorsNotePictureButton_MouseEnter(object sender, EventArgs e)
         {
             ProgressButtonMouseEnter(doctorsNotePictureButton);
+        }
+
+        private void theroraticalPictureButton_MouseEnter(object sender, EventArgs e)
+        {
+            TestAndFeeIcon_Enter(theroraticalPictureButton);
+        }
+
+        private void praticalTestPictureButton_MouseEnter(object sender, EventArgs e)
+        {
+            TestAndFeeIcon_Enter(praticalTestPictureButton);
+        }
+
+        private void feePictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            TestAndFeeIcon_Enter(feePictureBox);
         }
     }
 }
