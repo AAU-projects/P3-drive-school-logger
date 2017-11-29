@@ -61,14 +61,13 @@
             this.progressLabel = new System.Windows.Forms.Label();
             this.progressUnderline = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.previousDrivingLabel = new System.Windows.Forms.Label();
-            this.nextDrivingLabel = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.drivingLessonsLabel = new System.Windows.Forms.Label();
-            this.previousTheoreticalLabel = new System.Windows.Forms.Label();
-            this.nextTheoreticalLabel = new System.Windows.Forms.Label();
+            this.backButtonInUpcomingLesson = new System.Windows.Forms.Button();
+            this.panelContainingUpcomingLessons = new System.Windows.Forms.Panel();
+            this.timelLabel = new System.Windows.Forms.Label();
+            this.dateLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.theoreticalLessonLabel = new System.Windows.Forms.Label();
+            this.upcommingLessonsLabel = new System.Windows.Forms.Label();
+            this.lessonLabel = new System.Windows.Forms.Label();
             this.miscPanel = new System.Windows.Forms.Panel();
             this.feeLabel = new System.Windows.Forms.Label();
             this.slipperyTrackLabel = new System.Windows.Forms.Label();
@@ -458,78 +457,62 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lessonLabel);
+            this.panel1.Controls.Add(this.backButtonInUpcomingLesson);
+            this.panel1.Controls.Add(this.panelContainingUpcomingLessons);
+            this.panel1.Controls.Add(this.timelLabel);
+            this.panel1.Controls.Add(this.dateLabel);
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.panel1.Controls.Add(this.previousDrivingLabel);
-            this.panel1.Controls.Add(this.nextDrivingLabel);
-            this.panel1.Controls.Add(this.panel5);
-            this.panel1.Controls.Add(this.drivingLessonsLabel);
-            this.panel1.Controls.Add(this.previousTheoreticalLabel);
-            this.panel1.Controls.Add(this.nextTheoreticalLabel);
             this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.theoreticalLessonLabel);
+            this.panel1.Controls.Add(this.upcommingLessonsLabel);
             this.panel1.Location = new System.Drawing.Point(472, 74);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(413, 336);
             this.panel1.TabIndex = 6;
             // 
-            // previousDrivingLabel
+            // backButtonInUpcomingLesson
             // 
-            this.previousDrivingLabel.AutoSize = true;
-            this.previousDrivingLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.previousDrivingLabel.Location = new System.Drawing.Point(197, 176);
-            this.previousDrivingLabel.Name = "previousDrivingLabel";
-            this.previousDrivingLabel.Size = new System.Drawing.Size(51, 13);
-            this.previousDrivingLabel.TabIndex = 18;
-            this.previousDrivingLabel.Text = "Previous:";
+            this.backButtonInUpcomingLesson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.backButtonInUpcomingLesson.FlatAppearance.BorderSize = 0;
+            this.backButtonInUpcomingLesson.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.backButtonInUpcomingLesson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButtonInUpcomingLesson.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.backButtonInUpcomingLesson.Location = new System.Drawing.Point(328, 24);
+            this.backButtonInUpcomingLesson.Name = "backButtonInUpcomingLesson";
+            this.backButtonInUpcomingLesson.Size = new System.Drawing.Size(69, 22);
+            this.backButtonInUpcomingLesson.TabIndex = 17;
+            this.backButtonInUpcomingLesson.Text = "Back";
+            this.backButtonInUpcomingLesson.UseVisualStyleBackColor = false;
+            this.backButtonInUpcomingLesson.Click += new System.EventHandler(this.backButtonInUpcomingLesson_Click);
             // 
-            // nextDrivingLabel
+            // panelContainingUpcomingLessons
             // 
-            this.nextDrivingLabel.AutoSize = true;
-            this.nextDrivingLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.nextDrivingLabel.Location = new System.Drawing.Point(18, 176);
-            this.nextDrivingLabel.Name = "nextDrivingLabel";
-            this.nextDrivingLabel.Size = new System.Drawing.Size(32, 13);
-            this.nextDrivingLabel.TabIndex = 17;
-            this.nextDrivingLabel.Text = "Next:";
+            this.panelContainingUpcomingLessons.Location = new System.Drawing.Point(21, 47);
+            this.panelContainingUpcomingLessons.Name = "panelContainingUpcomingLessons";
+            this.panelContainingUpcomingLessons.Size = new System.Drawing.Size(376, 270);
+            this.panelContainingUpcomingLessons.TabIndex = 15;
+            this.panelContainingUpcomingLessons.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContainingUpcomingLessons_Paint);
             // 
-            // panel5
+            // timelLabel
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.panel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.panel5.Location = new System.Drawing.Point(21, 168);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(378, 2);
-            this.panel5.TabIndex = 16;
+            this.timelLabel.AutoSize = true;
+            this.timelLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.timelLabel.Location = new System.Drawing.Point(162, 29);
+            this.timelLabel.Name = "timelLabel";
+            this.timelLabel.Size = new System.Drawing.Size(30, 13);
+            this.timelLabel.TabIndex = 14;
+            this.timelLabel.Text = "Time";
             // 
-            // drivingLessonsLabel
+            // dateLabel
             // 
-            this.drivingLessonsLabel.AutoSize = true;
-            this.drivingLessonsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.drivingLessonsLabel.Location = new System.Drawing.Point(18, 152);
-            this.drivingLessonsLabel.Name = "drivingLessonsLabel";
-            this.drivingLessonsLabel.Size = new System.Drawing.Size(82, 13);
-            this.drivingLessonsLabel.TabIndex = 15;
-            this.drivingLessonsLabel.Text = "Driving Lessons";
-            // 
-            // previousTheoreticalLabel
-            // 
-            this.previousTheoreticalLabel.AutoSize = true;
-            this.previousTheoreticalLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.previousTheoreticalLabel.Location = new System.Drawing.Point(197, 29);
-            this.previousTheoreticalLabel.Name = "previousTheoreticalLabel";
-            this.previousTheoreticalLabel.Size = new System.Drawing.Size(51, 13);
-            this.previousTheoreticalLabel.TabIndex = 14;
-            this.previousTheoreticalLabel.Text = "Previous:";
-            // 
-            // nextTheoreticalLabel
-            // 
-            this.nextTheoreticalLabel.AutoSize = true;
-            this.nextTheoreticalLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.nextTheoreticalLabel.Location = new System.Drawing.Point(18, 29);
-            this.nextTheoreticalLabel.Name = "nextTheoreticalLabel";
-            this.nextTheoreticalLabel.Size = new System.Drawing.Size(32, 13);
-            this.nextTheoreticalLabel.TabIndex = 13;
-            this.nextTheoreticalLabel.Text = "Next:";
+            this.dateLabel.AutoSize = true;
+            this.dateLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.dateLabel.Location = new System.Drawing.Point(47, 29);
+            this.dateLabel.Name = "dateLabel";
+            this.dateLabel.Size = new System.Drawing.Size(30, 13);
+            this.dateLabel.TabIndex = 13;
+            this.dateLabel.Text = "Date";
             // 
             // panel4
             // 
@@ -540,16 +523,25 @@
             this.panel4.Size = new System.Drawing.Size(376, 2);
             this.panel4.TabIndex = 12;
             // 
-            // theoreticalLessonLabel
+            // upcommingLessonsLabel
             // 
-            this.theoreticalLessonLabel.AutoSize = true;
-            this.theoreticalLessonLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.theoreticalLessonLabel.Location = new System.Drawing.Point(18, 5);
-            this.theoreticalLessonLabel.Name = "theoreticalLessonLabel";
-            this.theoreticalLessonLabel.Size = new System.Drawing.Size(102, 13);
-            this.theoreticalLessonLabel.TabIndex = 11;
-            this.theoreticalLessonLabel.Text = "Theoretical Lessons";
+            this.upcommingLessonsLabel.AutoSize = true;
+            this.upcommingLessonsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.upcommingLessonsLabel.Location = new System.Drawing.Point(18, 5);
+            this.upcommingLessonsLabel.Name = "upcommingLessonsLabel";
+            this.upcommingLessonsLabel.Size = new System.Drawing.Size(97, 13);
+            this.upcommingLessonsLabel.TabIndex = 11;
+            this.upcommingLessonsLabel.Text = "Upcoming Lessons";
             // 
+            // lessonLabel
+            // 
+            this.lessonLabel.AutoSize = true;
+            this.lessonLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.lessonLabel.Location = new System.Drawing.Point(254, 29);
+            this.lessonLabel.Name = "lessonLabel";
+            this.lessonLabel.Size = new System.Drawing.Size(41, 13);
+            this.lessonLabel.TabIndex = 18;
+            this.lessonLabel.Text = "Lesson";
             // miscPanel
             // 
             this.miscPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
@@ -786,13 +778,9 @@
         private System.Windows.Forms.Panel progressUnderline;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label theoreticalLessonLabel;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label drivingLessonsLabel;
-        private System.Windows.Forms.Label previousTheoreticalLabel;
-        private System.Windows.Forms.Label nextTheoreticalLabel;
-        private System.Windows.Forms.Label previousDrivingLabel;
-        private System.Windows.Forms.Label nextDrivingLabel;
+        private System.Windows.Forms.Label upcommingLessonsLabel;
+        private System.Windows.Forms.Label timelLabel;
+        private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Label addressOutputLabel;
         private System.Windows.Forms.Label emailOutputLabel;
         private System.Windows.Forms.Label cprOutputLabel;
@@ -801,6 +789,9 @@
         private System.Windows.Forms.Label cityOutputLabel;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Panel panelContainingUpcomingLessons;
+        private System.Windows.Forms.Button backButtonInUpcomingLesson;
+        private System.Windows.Forms.Label lessonLabel;
         private System.Windows.Forms.Panel theoreticalProgressFill;
         private System.Windows.Forms.Panel miscPanel;
         private System.Windows.Forms.Label feeLabel;
