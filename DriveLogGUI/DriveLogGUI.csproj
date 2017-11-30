@@ -71,6 +71,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomEventArgs\LessonClickEventArgs.cs" />
+    <Compile Include="CustomMessage.cs" />
+    <Compile Include="CustomMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomMessageForm.Designer.cs">
+      <DependentUpon>CustomMessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuTabs\AbstractControlDescriptionProvider.cs" />
+    <Compile Include="MenuTabs\InstructorOverviewTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MenuTabs\InstructorOverviewTab.Designer.cs">
+      <DependentUpon>InstructorOverviewTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuTabs\OverviewTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MenuTabs\InstructorProfileTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MenuTabs\InstructorProfileTab.Designer.cs">
+      <DependentUpon>InstructorProfileTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuTabs\ProfileTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Windows\AddAppointmentWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,11 +119,11 @@
     <Compile Include="Windows\BookAppointmentWindow.Designer.cs">
       <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\CustomMsgBox.cs">
+    <Compile Include="Windows\ConfirmLessonForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\CustomMsgBox.Designer.cs">
-      <DependentUpon>CustomMsgBox.cs</DependentUpon>
+    <Compile Include="Windows\ConfirmLessonForm.Designer.cs">
+      <DependentUpon>ConfirmLessonForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomMsgBoxIcon.cs" />
     <Compile Include="CustomEventArgs\DateClickEventArgs.cs" />
@@ -131,17 +158,17 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuTabs\OverviewTab.cs">
+    <Compile Include="MenuTabs\StudentOverviewTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MenuTabs\OverviewTab.Designer.cs">
-      <DependentUpon>OverviewTab.cs</DependentUpon>
+    <Compile Include="MenuTabs\StudentOverviewTab.Designer.cs">
+      <DependentUpon>StudentOverviewTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuTabs\ProfileTab.cs">
+    <Compile Include="MenuTabs\StudentProfileTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MenuTabs\ProfileTab.Designer.cs">
-      <DependentUpon>ProfileTab.cs</DependentUpon>
+    <Compile Include="MenuTabs\StudentProfileTab.Designer.cs">
+      <DependentUpon>StudentProfileTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,6 +216,15 @@
     <Compile Include="MenuTabs\UserSearchTab.Designer.cs">
       <DependentUpon>UserSearchTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CustomMessageForm.resx">
+      <DependentUpon>CustomMessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuTabs\InstructorOverviewTab.resx">
+      <DependentUpon>InstructorOverviewTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuTabs\InstructorProfileTab.resx">
+      <DependentUpon>InstructorProfileTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\AddAppointmentWindow.resx">
       <DependentUpon>AddAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,8 +234,8 @@
     <EmbeddedResource Include="Windows\BookAppointmentWindow.resx">
       <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\CustomMsgBox.resx">
-      <DependentUpon>CustomMsgBox.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\ConfirmLessonForm.resx">
+      <DependentUpon>ConfirmLessonForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuTabs\DocumentViewer.resx">
       <DependentUpon>DocumentViewer.cs</DependentUpon>
@@ -216,11 +252,11 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuTabs\OverviewTab.resx">
-      <DependentUpon>OverviewTab.cs</DependentUpon>
+    <EmbeddedResource Include="MenuTabs\StudentOverviewTab.resx">
+      <DependentUpon>StudentOverviewTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuTabs\ProfileTab.resx">
-      <DependentUpon>ProfileTab.cs</DependentUpon>
+    <EmbeddedResource Include="MenuTabs\StudentProfileTab.resx">
+      <DependentUpon>StudentProfileTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -258,7 +294,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\rubber-duck.png">
@@ -280,6 +318,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\noAvailableDot.png" />
     <None Include="Resources\exit6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -343,6 +382,10 @@
     <Content Include="Resources\addlessongrey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\DragHandle.png" />
+    <None Include="Resources\bookableDot.png" />
+    <None Include="Resources\bookedDot.png" />
+    <None Include="Resources\completedDot.png" />
     <Content Include="Resources\drag_and_drop_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

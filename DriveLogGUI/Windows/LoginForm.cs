@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 
 namespace DriveLogGUI.Windows
@@ -38,7 +39,7 @@ namespace DriveLogGUI.Windows
             {
                 DataTable user = MySql.GetUserByName(UsernameBox.Text);
                 if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text) {
-                    CustomMsgBox.Show("Wrong username or password", "Error", CustomMsgBoxIcon.Error);
+                    CustomMsgBox.ShowOk("Wrong username or password", "Error", CustomMsgBoxIcon.Error);
 
                     // resets password with false login information
                     if (PasswordBox.Text != "Password") {
@@ -118,6 +119,11 @@ namespace DriveLogGUI.Windows
         private void Unfocus_MouseClick(object sender, EventArgs e)
         {
             this.ActiveControl = loginFormLable;
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            panel2.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

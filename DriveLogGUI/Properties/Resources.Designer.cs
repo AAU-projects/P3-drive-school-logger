@@ -19,7 +19,7 @@ namespace DriveLogGUI.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -83,6 +83,26 @@ namespace DriveLogGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bookableDot {
+            get {
+                object obj = ResourceManager.GetObject("bookableDot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bookedDot {
+            get {
+                object obj = ResourceManager.GetObject("bookedDot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap checkCompleted {
             get {
                 object obj = ResourceManager.GetObject("checkCompleted", resourceCulture);
@@ -96,6 +116,16 @@ namespace DriveLogGUI.Properties {
         internal static System.Drawing.Bitmap checkHover {
             get {
                 object obj = ResourceManager.GetObject("checkHover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap completedDot {
+            get {
+                object obj = ResourceManager.GetObject("completedDot", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -129,19 +159,40 @@ namespace DriveLogGUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap exit6
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap DragHandle {
+            get {
+                object obj = ResourceManager.GetObject("DragHandle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DragHandle1 {
+            get {
+                object obj = ResourceManager.GetObject("DragHandle1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap exit6 {
+            get {
                 object obj = ResourceManager.GetObject("exit6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap greentick {
             get {
                 object obj = ResourceManager.GetObject("greentick", resourceCulture);
@@ -275,6 +326,16 @@ namespace DriveLogGUI.Properties {
         internal static System.Drawing.Bitmap icons8_close_window {
             get {
                 object obj = ResourceManager.GetObject("icons8-close-window", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap noAvailableDot {
+            get {
+                object obj = ResourceManager.GetObject("noAvailableDot", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

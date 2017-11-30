@@ -424,7 +424,7 @@ namespace DriveLogGUI.Windows
         {
             if (!(usernameOk && passwordOk && verifyPasswordOk && firstnameOk && lastnameOk && phoneOk && emailOk && addressOk && zipOk && cityOk))
             {
-                CustomMsgBox.Show("Please fix the red boxes before saving", "Failed", CustomMsgBoxIcon.Warrning);
+                CustomMsgBox.ShowOk("Please fix the red boxes before saving", "Failed", CustomMsgBoxIcon.Warrning);
                 return;
             }
 
@@ -442,23 +442,27 @@ namespace DriveLogGUI.Windows
             {
                 updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
                 zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, picturePath, signaturePath, instructorCheckBox.Checked ? "true" : "false");
+                _user.PicturePath = picturePath;
+                _user.SignaturePath = signaturePath;
             }
             else
             {
                 updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
                 zipBox.Text, cityBox.Text, usernameBox.Text, _user.Password, picturePath, signaturePath, instructorCheckBox.Checked ? "true" : "false");
+                _user.PicturePath = picturePath;
+                _user.SignaturePath = signaturePath;
             }
 
             if(updateSuccess)
             {
-                CustomMsgBox.Show("You have succesfully updated the profile", "Success", CustomMsgBoxIcon.Complete);
+                CustomMsgBox.ShowOk("You have succesfully updated the profile", "Success", CustomMsgBoxIcon.Complete);
                 DataTable user = MySql.GetUserByName(usernameBox.Text);
                 Session.LoadUserFromDataTable(user);
                 this.Dispose();
             }
             else
             {
-                CustomMsgBox.Show("No connection could be made to the database, please try again later", "No Connection", CustomMsgBoxIcon.Error);
+                CustomMsgBox.ShowOk("No connection could be made to the database, please try again later", "No Connection", CustomMsgBoxIcon.Error);
             }
         }
 

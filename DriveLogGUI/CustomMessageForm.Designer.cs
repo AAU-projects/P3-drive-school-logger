@@ -1,6 +1,6 @@
-﻿namespace DriveLogGUI.Windows
+﻿namespace DriveLogGUI
 {
-    partial class CustomMsgBox
+    partial class CustomMessageForm
     {
         /// <summary>
         /// Required designer variable.
@@ -27,18 +27,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomMsgBox));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomMessageForm));
+            this.NoButton = new System.Windows.Forms.Button();
+            this.YesButton = new System.Windows.Forms.Button();
+            this.textLabel = new System.Windows.Forms.Label();
+            this.okButton = new System.Windows.Forms.Button();
             this.topBar = new System.Windows.Forms.Panel();
             this.captionLabel = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.okButton = new System.Windows.Forms.Button();
-            this.textLabel = new System.Windows.Forms.Label();
+            this.messageBox = new System.Windows.Forms.TextBox();
             this.symbolpictureBox = new System.Windows.Forms.PictureBox();
             this.topBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.symbolpictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // NoButton
+            // 
+            this.NoButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.NoButton.Location = new System.Drawing.Point(142, 101);
+            this.NoButton.Name = "NoButton";
+            this.NoButton.Size = new System.Drawing.Size(75, 23);
+            this.NoButton.TabIndex = 19;
+            this.NoButton.Text = "No";
+            this.NoButton.UseVisualStyleBackColor = true;
+            this.NoButton.Visible = false;
+            this.NoButton.Click += new System.EventHandler(this.NoButton_Click);
+            // 
+            // YesButton
+            // 
+            this.YesButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.YesButton.Location = new System.Drawing.Point(40, 101);
+            this.YesButton.Name = "YesButton";
+            this.YesButton.Size = new System.Drawing.Size(75, 23);
+            this.YesButton.TabIndex = 24;
+            this.YesButton.Text = "Yes";
+            this.YesButton.UseVisualStyleBackColor = true;
+            this.YesButton.Visible = false;
+            this.YesButton.Click += new System.EventHandler(this.YesButton_Click);
+            // 
+            // textLabel
+            // 
+            this.textLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textLabel.Location = new System.Drawing.Point(58, 36);
+            this.textLabel.Name = "textLabel";
+            this.textLabel.Size = new System.Drawing.Size(182, 59);
+            this.textLabel.TabIndex = 23;
+            this.textLabel.Text = "This is how much text you want This is how much text you want This is how much te" +
+    "xt you want";
+            this.textLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // okButton
+            // 
+            this.okButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.okButton.Location = new System.Drawing.Point(89, 101);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.TabIndex = 20;
+            this.okButton.Text = "Ok";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Visible = false;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // topBar
             // 
@@ -50,7 +101,7 @@
             this.topBar.Location = new System.Drawing.Point(0, 0);
             this.topBar.Name = "topBar";
             this.topBar.Size = new System.Drawing.Size(252, 22);
-            this.topBar.TabIndex = 2;
+            this.topBar.TabIndex = 22;
             this.topBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topBar_MouseDown);
             this.topBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topBar_MouseMove);
             // 
@@ -104,27 +155,16 @@
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // okButton
+            // messageBox
             // 
-            this.okButton.Location = new System.Drawing.Point(89, 101);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 0;
-            this.okButton.Text = "Ok";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // textLabel
-            // 
-            this.textLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textLabel.Location = new System.Drawing.Point(58, 36);
-            this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(182, 62);
-            this.textLabel.TabIndex = 4;
-            this.textLabel.Text = "This is how much text you want This is how much text you want This is how much te" +
-    "xt you want";
-            this.textLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.messageBox.BackColor = System.Drawing.SystemColors.Control;
+            this.messageBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.messageBox.Location = new System.Drawing.Point(61, 36);
+            this.messageBox.Multiline = true;
+            this.messageBox.Name = "messageBox";
+            this.messageBox.Size = new System.Drawing.Size(179, 59);
+            this.messageBox.TabIndex = 21;
+            this.messageBox.Visible = false;
             // 
             // symbolpictureBox
             // 
@@ -133,38 +173,45 @@
             this.symbolpictureBox.Name = "symbolpictureBox";
             this.symbolpictureBox.Size = new System.Drawing.Size(40, 40);
             this.symbolpictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.symbolpictureBox.TabIndex = 6;
+            this.symbolpictureBox.TabIndex = 25;
             this.symbolpictureBox.TabStop = false;
             // 
-            // CustomMsgBox
+            // CustomMessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(252, 133);
-            this.Controls.Add(this.textLabel);
             this.Controls.Add(this.symbolpictureBox);
+            this.Controls.Add(this.NoButton);
+            this.Controls.Add(this.YesButton);
+            this.Controls.Add(this.textLabel);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.topBar);
+            this.Controls.Add(this.messageBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CustomMsgBox";
+            this.Name = "CustomMessageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CustomMsgBox";
+            this.Text = "CustomMessageForm2";
             this.topBar.ResumeLayout(false);
             this.topBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.symbolpictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
+        public System.Windows.Forms.Button NoButton;
+        public System.Windows.Forms.Button YesButton;
+        public System.Windows.Forms.Label textLabel;
+        public System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Panel topBar;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label captionLabel;
+        public System.Windows.Forms.Label captionLabel;
         private System.Windows.Forms.Button closeButton;
-        private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.Label textLabel;
-        private System.Windows.Forms.PictureBox symbolpictureBox;
+        public System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.TextBox messageBox;
+        public System.Windows.Forms.PictureBox symbolpictureBox;
     }
 }

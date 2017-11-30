@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -21,12 +21,18 @@ namespace DriveLogCode.Objects
         public static void LoadUserFromDataTable(DataTable userTable)
         {
             LoggedInUser = new User(userTable);
+
+            GetLessonsFromDatabase();
             GetProgress();
+        }
+
+        public static void GetLessonsFromDatabase()
+        {
+            LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
         }
 
         public static void GetProgress()
         {
-            LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
             if (LessonsUser.Count != 0)
             {
                 CurrentLesson = LessonsUser
@@ -59,6 +65,11 @@ namespace DriveLogCode.Objects
                     Console.WriteLine("No practical lessons for user");
                 }
             }
+
+            if (CurrentLesson == null) // if the user have no current lessons he will be able to book any date
+            {
+                CurrentLesson = new Lesson();
+            }
         }
 
         public static Lesson GetLastLessonFromType(string lessonType)
@@ -76,3 +87,4 @@ namespace DriveLogCode.Objects
         }
     }
 }
+

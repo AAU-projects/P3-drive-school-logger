@@ -16,6 +16,13 @@ namespace DriveLogGUI.MenuTabs
             userCollectionMenu.SelectedIndex = 0;
         }
 
+        public virtual event EventHandler LogOutButtonClick;
+
+        public virtual void logoutButton_Click(object sender, EventArgs e)
+        {
+            LogOutButtonClick?.Invoke(this, e);
+        }
+
         private List<User> _usersFoundList = new List<User>();
         private List<Panel> _userPanelList = new List<Panel>();
 
@@ -149,7 +156,7 @@ namespace DriveLogGUI.MenuTabs
         {
             OnTempPanelLeave(sender, e);
             this.Hide();
-            ProfileTab foundUserProfile = new ProfileTab(user, true);
+            StudentProfileTab foundUserProfile = new StudentProfileTab(user, true);
             foundUserProfile.Location = this.Location;
             foundUserProfile.Parent = this;
             this.Parent.Controls.Add(foundUserProfile);

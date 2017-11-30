@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 
 namespace DriveLogGUI.Windows
@@ -125,7 +126,7 @@ namespace DriveLogGUI.Windows
 
                 if (appointmentAdded)
                 {
-                    CustomMsgBox.Show("Succes", "Appointment succesfully added", CustomMsgBoxIcon.Complete);
+                    CustomMsgBox.ShowOk("Succes", "Appointment succesfully added", CustomMsgBoxIcon.Complete);
 
                     AppointmentStructure appointmentStructure = 
                         new AppointmentStructure(-1, Session.LoggedInUser.Id,
@@ -136,10 +137,15 @@ namespace DriveLogGUI.Windows
                     this.Dispose();
                 }
                 else
-                    CustomMsgBox.Show("Failure", "Appointment failed to upload", CustomMsgBoxIcon.Error);
+                    CustomMsgBox.ShowOk("Failure", "Appointment failed to upload", CustomMsgBoxIcon.Error);
             }
             else
-                CustomMsgBox.Show("Failure", "Some fields need to be filled", CustomMsgBoxIcon.Warrning);
+                CustomMsgBox.ShowOk("Failure", "Some fields need to be filled", CustomMsgBoxIcon.Warrning);
+        }
+
+        private void topPanel_Paint(object sender, PaintEventArgs e)
+        {
+            topPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

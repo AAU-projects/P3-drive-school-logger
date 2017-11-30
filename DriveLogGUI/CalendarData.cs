@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode.Objects;
 using DriveLogGUI.CustomEventArgs;
 
 namespace DriveLogGUI
@@ -19,7 +20,12 @@ namespace DriveLogGUI
         public Label LabelForWeekday;
         public DateTime Date;
 
+        public Label LabelLessonInformation;
+        public Label LabelLessonTitleAndPart;
+        public Lesson Lesson;
+
         public event EventHandler<DateClickEventArgs> ClickOnDateTriggered;
+        public event EventHandler<LessonClickEventArgs> ClickOnUpcomingLessonTriggered;
 
 
         public CalendarData(Panel topPanelForCalendar, Panel bottomPanelForCalendar, Label labelForDate,
@@ -43,9 +49,29 @@ namespace DriveLogGUI
             LabelForDate.Click += (s, e) => panel_Click(new DateClickEventArgs(Date));
         }
 
+        public CalendarData(Panel inputPanel, Label date, Label lessonInformation, Label lessonTitleAndPart, Lesson lesson)
+        {
+            PanelForCalendarDay = inputPanel;
+            LabelForDate = date;
+            LabelLessonInformation = lessonInformation;
+            LabelLessonTitleAndPart = lessonTitleAndPart;
+            Lesson = lesson;
+
+            PanelForCalendarDay.Click += (s, e) => panelUpcomingLesson_click(new LessonClickEventArgs(lesson));
+            LabelForDate.Click += (s, e) => panelUpcomingLesson_click(new LessonClickEventArgs(lesson));
+            LabelLessonInformation.Click += (s, e) => panelUpcomingLesson_click(new LessonClickEventArgs(lesson));
+            LabelLessonTitleAndPart.Click += (s, e) => panelUpcomingLesson_click(new LessonClickEventArgs(lesson));
+        }
+
+
         private void panel_Click(DateClickEventArgs e)
         {
             ClickOnDateTriggered?.Invoke(this, e);
+        }
+
+        public void panelUpcomingLesson_click(LessonClickEventArgs e)
+        {
+            ClickOnUpcomingLessonTriggered?.Invoke(this, e);
         }
     }
 

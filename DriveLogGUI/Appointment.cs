@@ -16,9 +16,14 @@ namespace DriveLogGUI
     public class Appointment : AppointmentStructure
     {
         public Label LabelAppointment;
+        public Panel BookedPanelOnLabel;
+        public List<Lesson> bookedLessons => Session.LessonsUser.FindAll(x => x.AppointmentID == Id);
         public DateTime ToTime => StartTime.AddMinutes(AvailableTime * 45);
         public string TimeFormat => GetTime();
         public string DateFormat => GetDate();
+        public bool BookedByUser;
+        public bool ShowWarning;
+        public string WarningText;
 
         public Appointment(AppointmentStructure appointmentStructure) : base(appointmentStructure)
         {
@@ -34,7 +39,6 @@ namespace DriveLogGUI
 
             SubscribeToEvent();
         }
-
         private void InstructorLabelData()
         {
             LabelAppointment.Text = InstructorName;
@@ -48,6 +52,17 @@ namespace DriveLogGUI
             LabelAppointment.BackColor = GetColorForLabel(this.LessonType);
             LabelAppointment.TextAlign = ContentAlignment.MiddleCenter;
             LabelAppointment.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, LabelAppointment.Font.Unit);
+
+            LabelAppointment.ForeColor = ColorScheme.CalendarRed;
+            BookedPanelOnLabel = new Panel();
+            BookedPanelOnLabel.Height = LabelAppointment.Height;
+            BookedPanelOnLabel.Width = LabelAppointment.Width / 10;
+            BookedPanelOnLabel.Location = new Point(0, 0);
+            BookedPanelOnLabel.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(this));
+            BookedPanelOnLabel.Hide();
+
+            LabelAppointment.ForeColor = Color.Black;
+            LabelAppointment.Controls.Add(BookedPanelOnLabel);
         }
 
         private Color GetColorForLabel(string appointmentLessonType)
@@ -71,6 +86,13 @@ namespace DriveLogGUI
             return ColorScheme.CalendarRed;
 
         }
+
+        public void AppointmentHighlight(Color color)
+        {
+            BookedPanelOnLabel.Show();
+            BookedPanelOnLabel.BackColor = Color.FromArgb(255, color);
+        }
+
         public void UserLabelData()
         {
             LabelAppointment.Text = LessonType;

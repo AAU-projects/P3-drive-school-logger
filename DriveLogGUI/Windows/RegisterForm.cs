@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DriveLogCode;
 using DriveLogCode.DataAccess;
+using DriveLogCode.DesignSchemes;
 using DriveLogGUI.CustomControls;
 
 namespace DriveLogGUI.Windows
@@ -255,13 +256,13 @@ namespace DriveLogGUI.Windows
 
                 if (UserCreated)
                 {
-                    CustomMsgBox.Show("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete);
+                    CustomMsgBox.ShowOk("You have succesfully created a user", "Sucess", CustomMsgBoxIcon.Complete);
                     this.Dispose();
                     _loginForm.Show();
                 }
                 else
                 {
-                    CustomMsgBox.Show("Failed to create new user, please try again later!", "Failed",
+                    CustomMsgBox.ShowOk("Failed to create new user, please try again later!", "Failed",
                         CustomMsgBoxIcon.Error);
                 }
             }
@@ -395,6 +396,11 @@ namespace DriveLogGUI.Windows
                 _isSignatureOk = true;
             signatureEditForm.Dispose();
             signatureBox.Image = _signatureImage;
+        }
+
+        private void topBarPanel_Paint(object sender, PaintEventArgs e)
+        {
+            topBarPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

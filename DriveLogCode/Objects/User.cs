@@ -7,8 +7,12 @@ namespace DriveLogCode.Objects
 {
     public class User
     {
+        public User()
+        {
+            
+        }
         public User(int id, string firstname, string lastname, string phone, string email, string cpr, 
-            string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin)
+            string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin, string className, bool theotestdone, bool practestdone, bool feepaid)
         {
             Id = id;
             Firstname = firstname;
@@ -24,6 +28,10 @@ namespace DriveLogCode.Objects
             PicturePath = picturePath;
             SignaturePath = signaturePath;
             Sysmin = sysmin;
+            ClassName = className;
+            TheoreticalTestDone = theotestdone;
+            PracticalTestDone = practestdone;
+            FeePaid = feepaid;
 
             CalculateProgress();
         }
@@ -44,6 +52,10 @@ namespace DriveLogCode.Objects
             PicturePath = (string)userTable.Rows[index][11];
             SignaturePath = (string)userTable.Rows[index][12];
             Sysmin = Convert.ToBoolean((string) userTable.Rows[index][13]);
+            ClassName = (string)userTable.Rows[index][14];
+            TheoreticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][15]);
+            PracticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][16]);
+            FeePaid = Convert.ToBoolean((string)userTable.Rows[index][17]);
 
             CalculateProgress();
         }
@@ -62,22 +74,28 @@ namespace DriveLogCode.Objects
         public string City { get; }
         public string Username { get; }
         public string Password { get; }
-        public string PicturePath { get; }
-        public string SignaturePath { get; }
+        public string PicturePath { get; set; }
+        public string SignaturePath { get; set; }
         public bool Sysmin { get; }
+        public string ClassName { get; }
+        public bool TheoreticalTestDone { get; }
+        public bool PracticalTestDone { get; }
+        public bool FeePaid { get; }
         public int TheoreticalProgress { get; private set; }
         public int PracticalProgress { get; private set; }
+        public List<Lesson> LessonsList = new List<Lesson>();
+        public List<LessonTemplate> LessonTemplates = new List<LessonTemplate>();
 
         private void CalculateProgress()
         {
-            List<Lesson> lessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
-            List<LessonTemplate> lessonTemplates = DatabaseParser.GetTemplatesList();
+            LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
+            LessonTemplates = DatabaseParser.GetTemplatesList();
             TheoreticalProgress = 0;
             PracticalProgress = 0;
 
-            foreach (Lesson l in lessonsList)
+            foreach (Lesson l in LessonsList)
             {
-                LessonTemplate template = lessonTemplates.Find(x => l.TemplateID == x.Id);
+                LessonTemplate template = LessonTemplates.Find(x => l.TemplateID == x.Id);
 
                 if (template == null) continue;
 

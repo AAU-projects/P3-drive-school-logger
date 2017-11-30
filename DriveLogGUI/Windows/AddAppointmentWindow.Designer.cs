@@ -64,6 +64,7 @@
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(393, 22);
             this.topPanel.TabIndex = 2;
+            this.topPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.topPanel_Paint);
             this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
             this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
             // 
@@ -109,6 +110,7 @@
             // 
             // LessonTypecomboBox
             // 
+            this.LessonTypecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LessonTypecomboBox.FormattingEnabled = true;
             this.LessonTypecomboBox.Items.AddRange(new object[] {
             "Theoretical",
@@ -123,6 +125,7 @@
             // 
             // StartTimecomboBox
             // 
+            this.StartTimecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StartTimecomboBox.FormattingEnabled = true;
             this.StartTimecomboBox.Location = new System.Drawing.Point(115, 111);
             this.StartTimecomboBox.Name = "StartTimecomboBox";
@@ -132,6 +135,7 @@
             // 
             // lessonsComboBox
             // 
+            this.lessonsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lessonsComboBox.FormattingEnabled = true;
             this.lessonsComboBox.Location = new System.Drawing.Point(115, 138);
             this.lessonsComboBox.Name = "lessonsComboBox";

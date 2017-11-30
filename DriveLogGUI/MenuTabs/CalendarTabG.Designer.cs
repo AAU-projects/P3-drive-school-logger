@@ -1,4 +1,6 @@
-﻿namespace DriveLogGUI.MenuTabs
+﻿using DriveLogCode.DesignSchemes;
+
+namespace DriveLogGUI.MenuTabs
 {
     partial class CalendarTabG
     {
@@ -39,6 +41,12 @@
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.notAvailableLabel = new System.Windows.Forms.Label();
+            this.notAvailableDot = new System.Windows.Forms.PictureBox();
+            this.completedDotLabel = new System.Windows.Forms.Label();
+            this.completedDot = new System.Windows.Forms.PictureBox();
+            this.bookedDotLabel = new System.Windows.Forms.Label();
+            this.bookedDot = new System.Windows.Forms.PictureBox();
             this.warningInformationLabel = new System.Windows.Forms.Label();
             this.bookInformationLabel = new System.Windows.Forms.Label();
             this.warningTitleLabel = new System.Windows.Forms.Label();
@@ -53,6 +61,9 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notAvailableDot)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.completedDot)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookedDot)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +75,6 @@
             this.panelForCalendar.Name = "panelForCalendar";
             this.panelForCalendar.Size = new System.Drawing.Size(686, 451);
             this.panelForCalendar.TabIndex = 1;
-            this.panelForCalendar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForCalendar_Paint);
             // 
             // backPanel
             // 
@@ -73,6 +83,7 @@
             this.backPanel.Name = "backPanel";
             this.backPanel.Size = new System.Drawing.Size(687, 401);
             this.backPanel.TabIndex = 0;
+            this.backPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForCalendar_Paint);
             // 
             // panel1
             // 
@@ -194,6 +205,12 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel4.Controls.Add(this.notAvailableLabel);
+            this.panel4.Controls.Add(this.notAvailableDot);
+            this.panel4.Controls.Add(this.completedDotLabel);
+            this.panel4.Controls.Add(this.completedDot);
+            this.panel4.Controls.Add(this.bookedDotLabel);
+            this.panel4.Controls.Add(this.bookedDot);
             this.panel4.Controls.Add(this.warningInformationLabel);
             this.panel4.Controls.Add(this.bookInformationLabel);
             this.panel4.Controls.Add(this.warningTitleLabel);
@@ -207,14 +224,75 @@
             this.panel4.Size = new System.Drawing.Size(171, 401);
             this.panel4.TabIndex = 9;
             // 
+            // notAvailableLabel
+            // 
+            this.notAvailableLabel.AutoSize = true;
+            this.notAvailableLabel.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notAvailableLabel.Location = new System.Drawing.Point(46, 314);
+            this.notAvailableLabel.Name = "notAvailableLabel";
+            this.notAvailableLabel.Size = new System.Drawing.Size(76, 15);
+            this.notAvailableLabel.TabIndex = 24;
+            this.notAvailableLabel.Text = "Not Available";
+            // 
+            // notAvailableDot
+            // 
+            this.notAvailableDot.Image = global::DriveLogGUI.Properties.Resources.noAvailableDot;
+            this.notAvailableDot.Location = new System.Drawing.Point(19, 316);
+            this.notAvailableDot.Name = "notAvailableDot";
+            this.notAvailableDot.Size = new System.Drawing.Size(10, 10);
+            this.notAvailableDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.notAvailableDot.TabIndex = 23;
+            this.notAvailableDot.TabStop = false;
+            // 
+            // completedDotLabel
+            // 
+            this.completedDotLabel.AutoSize = true;
+            this.completedDotLabel.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.completedDotLabel.Location = new System.Drawing.Point(46, 287);
+            this.completedDotLabel.Name = "completedDotLabel";
+            this.completedDotLabel.Size = new System.Drawing.Size(64, 15);
+            this.completedDotLabel.TabIndex = 22;
+            this.completedDotLabel.Text = "Completed";
+            // 
+            // completedDot
+            // 
+            this.completedDot.Image = global::DriveLogGUI.Properties.Resources.completedDot;
+            this.completedDot.Location = new System.Drawing.Point(19, 289);
+            this.completedDot.Name = "completedDot";
+            this.completedDot.Size = new System.Drawing.Size(10, 10);
+            this.completedDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.completedDot.TabIndex = 21;
+            this.completedDot.TabStop = false;
+            // 
+            // bookedDotLabel
+            // 
+            this.bookedDotLabel.AutoSize = true;
+            this.bookedDotLabel.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bookedDotLabel.Location = new System.Drawing.Point(46, 262);
+            this.bookedDotLabel.Name = "bookedDotLabel";
+            this.bookedDotLabel.Size = new System.Drawing.Size(47, 15);
+            this.bookedDotLabel.TabIndex = 20;
+            this.bookedDotLabel.Text = "Booked";
+            // 
+            // bookedDot
+            // 
+            this.bookedDot.Image = global::DriveLogGUI.Properties.Resources.bookedDot;
+            this.bookedDot.Location = new System.Drawing.Point(19, 264);
+            this.bookedDot.Name = "bookedDot";
+            this.bookedDot.Size = new System.Drawing.Size(10, 10);
+            this.bookedDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bookedDot.TabIndex = 19;
+            this.bookedDot.TabStop = false;
+            // 
             // warningInformationLabel
             // 
             this.warningInformationLabel.Font = new System.Drawing.Font("Calibri Light", 9F);
-            this.warningInformationLabel.Location = new System.Drawing.Point(14, 279);
+            this.warningInformationLabel.Location = new System.Drawing.Point(13, 184);
             this.warningInformationLabel.Name = "warningInformationLabel";
             this.warningInformationLabel.Size = new System.Drawing.Size(141, 75);
             this.warningInformationLabel.TabIndex = 16;
-            this.warningInformationLabel.Text = "Kim";
+            this.warningInformationLabel.Text = "Warning text";
+            this.warningInformationLabel.Visible = false;
             // 
             // bookInformationLabel
             // 
@@ -230,8 +308,8 @@
             // 
             this.warningTitleLabel.AutoSize = true;
             this.warningTitleLabel.Font = new System.Drawing.Font("Calibri Light", 12F, System.Drawing.FontStyle.Bold);
-            this.warningTitleLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.warningTitleLabel.Location = new System.Drawing.Point(49, 260);
+            this.warningTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
+            this.warningTitleLabel.Location = new System.Drawing.Point(11, 165);
             this.warningTitleLabel.Name = "warningTitleLabel";
             this.warningTitleLabel.Size = new System.Drawing.Size(71, 19);
             this.warningTitleLabel.TabIndex = 14;
@@ -327,6 +405,9 @@
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notAvailableDot)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.completedDot)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookedDot)).EndInit();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -355,5 +436,11 @@
         private System.Windows.Forms.Label warningTitleLabel;
         private System.Windows.Forms.Label bookInformationLabel;
         private System.Windows.Forms.Label warningInformationLabel;
+        private System.Windows.Forms.Label bookedDotLabel;
+        private System.Windows.Forms.PictureBox bookedDot;
+        private System.Windows.Forms.Label completedDotLabel;
+        private System.Windows.Forms.PictureBox completedDot;
+        private System.Windows.Forms.Label notAvailableLabel;
+        private System.Windows.Forms.PictureBox notAvailableDot;
     }
 }
