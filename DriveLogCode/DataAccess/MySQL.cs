@@ -18,6 +18,15 @@ namespace DriveLogCode.DataAccess
         private const string LessonTable = "lessons";
         private const string TodaysNoteTable = "todaysNoteTable";
 
+        public static DataTable GetAllInstrutors(string table = UserTable)
+        {
+            var cmd = new MySqlCommand($"SELECT firstname, lastname, phone, signature FROM {table} WHERE sysmin = 'True'");
+
+            if (ExistTable(table)) return SendQuery(cmd);
+            return CreateTemplateTable(table) ? SendQuery(cmd) : null;
+
+        }
+
         public static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string LessonTable = LessonTable, string AppointmentTable = AppointmentTable, string UserTable = UserTable, string LessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand("SELECT " +

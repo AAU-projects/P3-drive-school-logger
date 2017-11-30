@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DriveLogCode;
+using DriveLogCode.DataAccess;
+using DriveLogCode.Objects;
 
 namespace DriveLogGUI.MenuTabs
 {

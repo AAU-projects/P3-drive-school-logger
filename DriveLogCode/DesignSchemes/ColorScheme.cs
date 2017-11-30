@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
 
+using Spire.Pdf.Graphics;
+
 namespace DriveLogCode.DesignSchemes
 {
     public static class ColorScheme
@@ -22,5 +24,9 @@ namespace DriveLogCode.DesignSchemes
         public static Color MainPanelColor = Color.FromArgb(251, 251, 251);
         public static Color MainTopPanelColor = Color.FromArgb(100, 108, 112);
         public static Color MainWarningColor = Color.FromArgb(229, 187, 191);
+
+        public static PdfSolidBrush PdfBlackText = new PdfSolidBrush(Color.Black);
+        public static PdfSolidBrush PdfLightGrayText = new PdfSolidBrush(Color.LightGray);
+
     }
 }
