@@ -10,6 +10,7 @@ namespace DriveLogCode.Objects
     public static class Session
     {
         public static User LoggedInUser;
+        public static List<LessonTemplate> LessonTemplates;
         public static List<Lesson> LessonsUser;
         public static string TypeFirstAid = "FirstAid";
         public static string TypeDoctorsNote = "DoctorsNote";
@@ -17,28 +18,54 @@ namespace DriveLogCode.Objects
         public static Lesson LastTheoraticalLesson;
         public static Lesson LastPracticalLesson;
         public static Lesson CurrentLesson;
+        public static Lesson NextLesson => GetNextLesson();
 
         public static void LoadUserFromDataTable(DataTable userTable)
         {
             LoggedInUser = new User(userTable);
 
-            GetLessonsFromDatabase();
+            GetDataFromDatabase();
             GetProgress();
+            GetNextLesson();
+
         }
 
-        public static void GetLessonsFromDatabase()
+        public static void GetDataFromDatabase()
         {
             LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
+            LessonTemplates = DatabaseParser.GetTemplatesList();
+        }
+
+        private static Lesson GetNextLesson()
+        {
+            if (CurrentLesson.LessonTemplate != null)
+            {
+                int progress = CurrentLesson.Progress;
+                int templateID = CurrentLesson.TemplateID;
+                LessonTemplate lessonTemplate = CurrentLesson.LessonTemplate;
+
+                if (CurrentLesson.Progress == CurrentLesson.LessonTemplate.Time) {
+                    templateID += 1;
+                    progress = 1;
+                    lessonTemplate = LessonTemplates.Find(x => x.Id == templateID);
+
+                } else {
+                    progress += 1;
+                }
+
+                Lesson newLesson = new Lesson(CurrentLesson.UserID, 0, templateID, progress, lessonTemplate, CurrentLesson.StartDate, CurrentLesson.EndDate, false);
+
+                return newLesson;
+            }
+            return new Lesson(CurrentLesson.UserID, 0, 2, 1, new LessonTemplate(), CurrentLesson.StartDate, CurrentLesson.EndDate, false);
+
         }
 
         public static void GetProgress()
         {
             if (LessonsUser.Count != 0)
             {
-                CurrentLesson = LessonsUser
-                    .OrderByDescending(x => x.TemplateID)
-                    .ThenByDescending(x => x.Progress)
-                    .FirstOrDefault();
+                UpdateCurrentLesson();
 
                 try
                 {
@@ -70,6 +97,14 @@ namespace DriveLogCode.Objects
             {
                 CurrentLesson = new Lesson();
             }
+        }
+
+        public static void UpdateCurrentLesson()
+        {
+            CurrentLesson = LessonsUser
+                .OrderByDescending(x => x.TemplateID)
+                .ThenByDescending(x => x.Progress)
+                .FirstOrDefault();
         }
 
         public static Lesson GetLastLessonFromType(string lessonType)

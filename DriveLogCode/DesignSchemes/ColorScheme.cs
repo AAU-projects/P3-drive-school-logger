@@ -11,6 +11,7 @@ namespace DriveLogCode.DesignSchemes
         public static Color CalendarBookable = Color.FromArgb(46, 164, 88);
         public static Color CalendarNoSlotsAvailable = Color.FromArgb(216, 17, 89);
 
+        public static Color MainCalendarColor = Color.FromArgb(210, 210, 210);
         public static Color CalendarRed = Color.FromArgb(229, 187, 191);
         public static Color CalendarBlue = Color.FromArgb(148, 197, 204);
         public static Color CalendarGreen = Color.FromArgb(175, 212, 167);
@@ -27,6 +28,5 @@ namespace DriveLogCode.DesignSchemes
 
         public static PdfSolidBrush PdfBlackText = new PdfSolidBrush(Color.Black);
         public static PdfSolidBrush PdfLightGrayText = new PdfSolidBrush(Color.LightGray);
-
     }
 }

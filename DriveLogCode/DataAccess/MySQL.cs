@@ -137,6 +137,34 @@ namespace DriveLogCode.DataAccess
 
             return SendQuery(cmd);
         }
+        public static int GetLessonIDFromUserIDProgressIDTemplateID(int templateId, int progressId, int userId, string lessonTable = LessonTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * " +
+                                       $"FROM {lessonTable} " +
+                                       $"WHERE " +
+                                       $"{lessonTable}.UserID = {userId} " +
+                                       $"AND " +
+                                       $"{lessonTable}.LessonID = {templateId} " +
+                                       $"AND " +
+                                       $"{lessonTable}.LessonPart = {progressId}");
+
+            DataTable results = SendQuery(cmd);
+
+            return Convert.ToInt32(results.Rows[0][0]);
+        }
+
+
+        public static DataTable GetAllLessonsAfterLessonID(int lessonId, int userId, string lessonTable = LessonTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * " +
+                                       $"FROM {lessonTable} " +
+                                       $"WHERE " +
+                                       $"{lessonTable}.UserID = {userId} " +
+                                       $"AND " +
+                                       $"lessons.id >= {lessonId} "); 
+
+            return SendQuery(cmd);
+        }
 
         public static DataTable GetAllAppointmentsByInstructorId(int instructorId, string table = AppointmentTable)
         {

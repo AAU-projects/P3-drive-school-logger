@@ -31,11 +31,16 @@
             this.leftSidePanel = new System.Windows.Forms.Panel();
             this.labelForTitle2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.pictureSearchTab = new System.Windows.Forms.PictureBox();
             this.userSearchButton = new System.Windows.Forms.Button();
             this.panelForProfile = new System.Windows.Forms.Panel();
             this.firstAidButton = new System.Windows.Forms.Button();
             this.doctorsNoteButton = new System.Windows.Forms.Button();
             this.driveLogButton = new System.Windows.Forms.Button();
+            this.pictureBookingTab = new System.Windows.Forms.PictureBox();
+            this.pictureSettingsTab = new System.Windows.Forms.PictureBox();
+            this.pictureProfileTab = new System.Windows.Forms.PictureBox();
+            this.pictureHomeTab = new System.Windows.Forms.PictureBox();
             this.settingsButton = new System.Windows.Forms.Button();
             this.bookingButton = new System.Windows.Forms.Button();
             this.ProfileButton = new System.Windows.Forms.Button();
@@ -44,20 +49,15 @@
             this.topPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.pictureSearchTab = new System.Windows.Forms.PictureBox();
-            this.pictureBookingTab = new System.Windows.Forms.PictureBox();
-            this.pictureSettingsTab = new System.Windows.Forms.PictureBox();
-            this.pictureProfileTab = new System.Windows.Forms.PictureBox();
-            this.pictureHomeTab = new System.Windows.Forms.PictureBox();
             this.leftSidePanel.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panelForProfile.SuspendLayout();
-            this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSearchTab)).BeginInit();
+            this.panelForProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBookingTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSettingsTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureProfileTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureHomeTab)).BeginInit();
+            this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // leftSidePanel
@@ -87,12 +87,12 @@
             // panel4
             // 
             this.panel4.Controls.Add(this.pictureSearchTab);
-            this.panel4.Controls.Add(this.userSearchButton);
-            this.panel4.Controls.Add(this.panelForProfile);
             this.panel4.Controls.Add(this.pictureBookingTab);
             this.panel4.Controls.Add(this.pictureSettingsTab);
             this.panel4.Controls.Add(this.pictureProfileTab);
             this.panel4.Controls.Add(this.pictureHomeTab);
+            this.panel4.Controls.Add(this.userSearchButton);
+            this.panel4.Controls.Add(this.panelForProfile);
             this.panel4.Controls.Add(this.settingsButton);
             this.panel4.Controls.Add(this.bookingButton);
             this.panel4.Controls.Add(this.ProfileButton);
@@ -101,6 +101,19 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(132, 315);
             this.panel4.TabIndex = 0;
+            // 
+            // pictureSearchTab
+            // 
+            this.pictureSearchTab.BackColor = System.Drawing.Color.Transparent;
+            this.pictureSearchTab.Enabled = false;
+            this.pictureSearchTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureSearchTab.Image")));
+            this.pictureSearchTab.Location = new System.Drawing.Point(0, 0);
+            this.pictureSearchTab.Name = "pictureSearchTab";
+            this.pictureSearchTab.Size = new System.Drawing.Size(30, 30);
+            this.pictureSearchTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureSearchTab.TabIndex = 7;
+            this.pictureSearchTab.TabStop = false;
+            this.pictureSearchTab.Visible = false;
             // 
             // userSearchButton
             // 
@@ -127,7 +140,7 @@
             this.panelForProfile.Controls.Add(this.firstAidButton);
             this.panelForProfile.Controls.Add(this.doctorsNoteButton);
             this.panelForProfile.Controls.Add(this.driveLogButton);
-            this.panelForProfile.Location = new System.Drawing.Point(0, 188);
+            this.panelForProfile.Location = new System.Drawing.Point(41, 234);
             this.panelForProfile.Name = "panelForProfile";
             this.panelForProfile.Size = new System.Drawing.Size(200, 96);
             this.panelForProfile.TabIndex = 1;
@@ -180,6 +193,50 @@
             this.driveLogButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.driveLogButton.UseVisualStyleBackColor = true;
             this.driveLogButton.Click += new System.EventHandler(this.driveLogButton_Click);
+            // 
+            // pictureBookingTab
+            // 
+            this.pictureBookingTab.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBookingTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureBookingTab.Image")));
+            this.pictureBookingTab.Location = new System.Drawing.Point(0, 0);
+            this.pictureBookingTab.Name = "pictureBookingTab";
+            this.pictureBookingTab.Size = new System.Drawing.Size(30, 30);
+            this.pictureBookingTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBookingTab.TabIndex = 5;
+            this.pictureBookingTab.TabStop = false;
+            // 
+            // pictureSettingsTab
+            // 
+            this.pictureSettingsTab.BackColor = System.Drawing.Color.Transparent;
+            this.pictureSettingsTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureSettingsTab.Image")));
+            this.pictureSettingsTab.Location = new System.Drawing.Point(0, 0);
+            this.pictureSettingsTab.Name = "pictureSettingsTab";
+            this.pictureSettingsTab.Size = new System.Drawing.Size(30, 30);
+            this.pictureSettingsTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureSettingsTab.TabIndex = 6;
+            this.pictureSettingsTab.TabStop = false;
+            // 
+            // pictureProfileTab
+            // 
+            this.pictureProfileTab.BackColor = System.Drawing.Color.Transparent;
+            this.pictureProfileTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureProfileTab.Image")));
+            this.pictureProfileTab.Location = new System.Drawing.Point(0, 0);
+            this.pictureProfileTab.Name = "pictureProfileTab";
+            this.pictureProfileTab.Size = new System.Drawing.Size(30, 30);
+            this.pictureProfileTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureProfileTab.TabIndex = 4;
+            this.pictureProfileTab.TabStop = false;
+            // 
+            // pictureHomeTab
+            // 
+            this.pictureHomeTab.BackColor = System.Drawing.Color.Transparent;
+            this.pictureHomeTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureHomeTab.Image")));
+            this.pictureHomeTab.Location = new System.Drawing.Point(0, 0);
+            this.pictureHomeTab.Name = "pictureHomeTab";
+            this.pictureHomeTab.Size = new System.Drawing.Size(30, 30);
+            this.pictureHomeTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureHomeTab.TabIndex = 0;
+            this.pictureHomeTab.TabStop = false;
             // 
             // settingsButton
             // 
@@ -306,64 +363,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // pictureSearchTab
-            // 
-            this.pictureSearchTab.BackColor = System.Drawing.Color.Transparent;
-            this.pictureSearchTab.Enabled = false;
-            this.pictureSearchTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureSearchTab.Image")));
-            this.pictureSearchTab.Location = new System.Drawing.Point(3, 0);
-            this.pictureSearchTab.Name = "pictureSearchTab";
-            this.pictureSearchTab.Size = new System.Drawing.Size(30, 30);
-            this.pictureSearchTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureSearchTab.TabIndex = 7;
-            this.pictureSearchTab.TabStop = false;
-            this.pictureSearchTab.Visible = false;
-            // 
-            // pictureBookingTab
-            // 
-            this.pictureBookingTab.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBookingTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureBookingTab.Image")));
-            this.pictureBookingTab.Location = new System.Drawing.Point(0, 0);
-            this.pictureBookingTab.Name = "pictureBookingTab";
-            this.pictureBookingTab.Size = new System.Drawing.Size(30, 30);
-            this.pictureBookingTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBookingTab.TabIndex = 5;
-            this.pictureBookingTab.TabStop = false;
-            // 
-            // pictureSettingsTab
-            // 
-            this.pictureSettingsTab.BackColor = System.Drawing.Color.Transparent;
-            this.pictureSettingsTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureSettingsTab.Image")));
-            this.pictureSettingsTab.Location = new System.Drawing.Point(0, 0);
-            this.pictureSettingsTab.Name = "pictureSettingsTab";
-            this.pictureSettingsTab.Size = new System.Drawing.Size(30, 30);
-            this.pictureSettingsTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureSettingsTab.TabIndex = 6;
-            this.pictureSettingsTab.TabStop = false;
-            // 
-            // pictureProfileTab
-            // 
-            this.pictureProfileTab.BackColor = System.Drawing.Color.Transparent;
-            this.pictureProfileTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureProfileTab.Image")));
-            this.pictureProfileTab.Location = new System.Drawing.Point(0, 0);
-            this.pictureProfileTab.Name = "pictureProfileTab";
-            this.pictureProfileTab.Size = new System.Drawing.Size(30, 30);
-            this.pictureProfileTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureProfileTab.TabIndex = 4;
-            this.pictureProfileTab.TabStop = false;
-            // 
-            // pictureHomeTab
-            // 
-            this.pictureHomeTab.BackColor = System.Drawing.Color.Transparent;
-            this.pictureHomeTab.Image = ((System.Drawing.Image)(resources.GetObject("pictureHomeTab.Image")));
-            this.pictureHomeTab.Location = new System.Drawing.Point(0, 0);
-            this.pictureHomeTab.Name = "pictureHomeTab";
-            this.pictureHomeTab.Size = new System.Drawing.Size(30, 30);
-            this.pictureHomeTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureHomeTab.TabIndex = 0;
-            this.pictureHomeTab.TabStop = false;
-            // 
-            // MainWindowTab
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -372,20 +372,20 @@
             this.Controls.Add(this.leftSidePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainWindowTab";
+            this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainWindowTab";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindowTab_FormClosing);
             this.leftSidePanel.ResumeLayout(false);
             this.leftSidePanel.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panelForProfile.ResumeLayout(false);
-            this.topPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureSearchTab)).EndInit();
+            this.panelForProfile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBookingTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSettingsTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureProfileTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureHomeTab)).EndInit();
+            this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
