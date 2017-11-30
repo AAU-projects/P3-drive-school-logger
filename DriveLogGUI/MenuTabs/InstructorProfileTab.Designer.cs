@@ -277,6 +277,7 @@
             this.logoutButton.TabIndex = 1;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = false;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
             // profileHeaderLabel
             // 
@@ -308,7 +309,7 @@
             this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
             this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.backButton.Location = new System.Drawing.Point(808, 6);
+            this.backButton.Location = new System.Drawing.Point(798, 6);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(52, 44);
             this.backButton.TabIndex = 2;
