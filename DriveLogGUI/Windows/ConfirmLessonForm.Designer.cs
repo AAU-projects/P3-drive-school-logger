@@ -38,8 +38,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.attendingStudentLabel = new System.Windows.Forms.Label();
             this.attendingStudentsList = new System.Windows.Forms.ListView();
-            this.studentColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.attendedColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.studentColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.saveButton = new System.Windows.Forms.Button();
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
@@ -145,17 +145,17 @@
             this.attendingStudentsList.UseCompatibleStateImageBehavior = false;
             this.attendingStudentsList.View = System.Windows.Forms.View.Details;
             // 
-            // studentColumn
-            // 
-            this.studentColumn.DisplayIndex = 0;
-            this.studentColumn.Text = "Student:";
-            this.studentColumn.Width = 184;
-            // 
             // attendedColumn
             // 
             this.attendedColumn.DisplayIndex = 1;
             this.attendedColumn.Text = "Attended?";
             this.attendedColumn.Width = 101;
+            // 
+            // studentColumn
+            // 
+            this.studentColumn.DisplayIndex = 0;
+            this.studentColumn.Text = "Student:";
+            this.studentColumn.Width = 184;
             // 
             // saveButton
             // 
@@ -188,6 +188,7 @@
             this.Controls.Add(this.topPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ConfirmLessonForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ConfirmLessonForm";
             this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -310,9 +310,27 @@ namespace DriveLogCode.DataAccess
             return lessonsAppointment;
         }
 
-        public static void CancelLesson(int selectedAppointmentId, int id)
+        public static List<Lesson> CancelLesson(int templateID, int progressID, int userID)
         {
-            throw new NotImplementedException();
+            List<Lesson> lessonsAppointment = new List<Lesson>();
+
+            int lessonID = MySql.GetLessonIDFromUserIDProgressIDTemplateID(templateID, progressID, userID);
+
+            DataTable result = MySql.GetAllLessonsAfterLessonID(lessonID, userID);
+
+            foreach (DataRow lesson in result.Rows) {
+                lessonsAppointment.Add(new Lesson(
+                    Convert.ToInt32(lesson[0]),
+                    Convert.ToInt32(lesson[1]),
+                    Convert.ToInt32(lesson[2]),
+                    Convert.ToInt32(lesson[3]),
+                    Convert.ToInt32(lesson[4]),
+                    (DateTime)lesson[5],
+                    (DateTime)lesson[6],
+                    Convert.ToBoolean(lesson[7])));
+            }
+
+            return lessonsAppointment;
         }
     }
 }

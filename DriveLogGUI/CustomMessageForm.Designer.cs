@@ -39,8 +39,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.messageBox = new System.Windows.Forms.TextBox();
             this.symbolpictureBox = new System.Windows.Forms.PictureBox();
+            this.textboxPanel = new System.Windows.Forms.Panel();
             this.topBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.symbolpictureBox)).BeginInit();
+            this.textboxPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // NoButton
@@ -71,13 +73,12 @@
             // 
             this.textLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textLabel.Location = new System.Drawing.Point(58, 36);
+            this.textLabel.Location = new System.Drawing.Point(0, 0);
             this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(182, 59);
+            this.textLabel.Size = new System.Drawing.Size(179, 59);
             this.textLabel.TabIndex = 23;
             this.textLabel.Text = "This is how much text you want This is how much text you want This is how much te" +
     "xt you want";
-            this.textLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // okButton
             // 
@@ -176,15 +177,23 @@
             this.symbolpictureBox.TabIndex = 25;
             this.symbolpictureBox.TabStop = false;
             // 
+            // textboxPanel
+            // 
+            this.textboxPanel.Controls.Add(this.textLabel);
+            this.textboxPanel.Location = new System.Drawing.Point(58, 36);
+            this.textboxPanel.Name = "textboxPanel";
+            this.textboxPanel.Size = new System.Drawing.Size(179, 59);
+            this.textboxPanel.TabIndex = 26;
+            // 
             // CustomMessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(252, 133);
+            this.Controls.Add(this.textboxPanel);
             this.Controls.Add(this.symbolpictureBox);
             this.Controls.Add(this.NoButton);
             this.Controls.Add(this.YesButton);
-            this.Controls.Add(this.textLabel);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.topBar);
             this.Controls.Add(this.messageBox);
@@ -195,6 +204,7 @@
             this.topBar.ResumeLayout(false);
             this.topBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.symbolpictureBox)).EndInit();
+            this.textboxPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,12 +216,13 @@
         public System.Windows.Forms.Button YesButton;
         public System.Windows.Forms.Label textLabel;
         public System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.Panel topBar;
+        public System.Windows.Forms.Panel topBar;
         public System.Windows.Forms.Label captionLabel;
-        private System.Windows.Forms.Button closeButton;
+        public System.Windows.Forms.Button closeButton;
         public System.Windows.Forms.Button button2;
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.TextBox messageBox;
         public System.Windows.Forms.PictureBox symbolpictureBox;
+        public System.Windows.Forms.Panel textboxPanel;
     }
 }
