@@ -36,14 +36,6 @@ namespace DriveLogGUI.MenuTabs
             UpdateInfo();
             DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
             FirstCheckIfUploaded(firstAidPictureButton);
-
-            foreach (Control c in progressBarPanel.Controls)
-            {
-                c.MouseClick += progressBarPanel_Click;
-
-                foreach (Control childControl in c.Controls)
-                    childControl.MouseClick += progressBarPanel_Click;
-            }
         }
 
         private void UpdateLayout()
@@ -60,24 +52,24 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Updates the user information with data from session class
         /// </summary>
-        public void UpdateInfo()
+        private void UpdateInfo()
         {
-            profileHeaderLabel.Text = "Profile: " + Session.LoggedInUser.Username;
-            nameOutputLabel.Text = Session.LoggedInUser.Fullname;
-            phoneOutputLabel.Text = Session.LoggedInUser.Phone;
-            cprOutputLabel.Text = Session.LoggedInUser.Cpr;
-            emailOutputLabel.Text = Session.LoggedInUser.Email;
-            addressOutputLabel.Text = Session.LoggedInUser.Address;
-            cityOutputLabel.Text = $"{Session.LoggedInUser.City}, {Session.LoggedInUser.Zip}";
-            theoreticalStatus.Text = Session.LoggedInUser.TheoreticalProgress + "/24";
-            practicalStatus.Text = Session.LoggedInUser.PracticalProgress + "/14";
+            profileHeaderLabel.Text = "Profile: " + _user.Username;
+            nameOutputLabel.Text = _user.Fullname;
+            phoneOutputLabel.Text = _user.Phone;
+            cprOutputLabel.Text = _user.Cpr;
+            emailOutputLabel.Text = _user.Email;
+            addressOutputLabel.Text = _user.Address;
+            cityOutputLabel.Text = $"{_user.City}, {_user.Zip}";
+            theoreticalStatus.Text = _user.TheoreticalProgress + "/24";
+            practicalStatus.Text = _user.PracticalProgress + "/14";
 
-            theoreticalProgressFill.Size = new Size((theoreticalBar.Width / 24) * Session.LoggedInUser.TheoreticalProgress, theoreticalBar.Height);
-            practicalProgressFill.Size = new Size((practicalBar.Width / 14) * Session.LoggedInUser.PracticalProgress, practicalBar.Height);
+            theoreticalProgressFill.Size = new Size((theoreticalBar.Width / 24) * _user.TheoreticalProgress, theoreticalBar.Height);
+            practicalProgressFill.Size = new Size((practicalBar.Width / 14) * _user.PracticalProgress, practicalBar.Height);
 
-            if (!string.IsNullOrEmpty(Session.LoggedInUser.PicturePath) || Session.LoggedInUser.PicturePath != "")
+            if (!string.IsNullOrEmpty(_user.PicturePath) || _user.PicturePath != "")
             {
-                ProfilePicture.Load(Session.LoggedInUser.PicturePath);
+                ProfilePicture.Load(_user.PicturePath);
             }
 
             // Update icons
@@ -94,6 +86,7 @@ namespace DriveLogGUI.MenuTabs
             EditUserInfoForm editForm = new EditUserInfoForm(_user);
 
             editForm.ShowDialog(this);
+            _user = DatabaseParser.GetUserById(_user.Id);
             UpdateInfo();
         }
 
@@ -101,23 +94,6 @@ namespace DriveLogGUI.MenuTabs
         {
             this.Parent.Controls.Find("userSearchTab", false)[0].Show();
             this.Dispose();
-        }
-
-        private void progressBarPanel_Click(object sender, EventArgs e)
-        {
-            if (!_search)
-            {
-                SubPageCreated?.Invoke(this);
-            }
-            else
-            {
-                this.Hide();
-                DriveLogTab studentFoundDriveLogTab = new DriveLogTab(_user, true);
-                studentFoundDriveLogTab.Location = this.Location;
-                studentFoundDriveLogTab.Parent = this;
-                this.Parent.Controls.Add(studentFoundDriveLogTab);
-                studentFoundDriveLogTab.Show();
-            }
         }
         
         private void panelContainingUpcomingLessons_Paint(object sender, PaintEventArgs eventArgs)
@@ -338,11 +314,6 @@ namespace DriveLogGUI.MenuTabs
             timelLabel.Show();
             lessonLabel.Show();
         }
-
-        private void daysForCalendar_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
         
         private void doctorsNotePictureButton_Click(object sender, EventArgs e)
         {
@@ -506,6 +477,23 @@ namespace DriveLogGUI.MenuTabs
                 DatabaseParser.SetUserFeePaid(_user.Id, false);
                 _user = DatabaseParser.GetUserById(_user.Id);
                 icon.Image = incompleteImage;
+            }
+        }
+
+        private void driveLogButton_Click(object sender, EventArgs e)
+        {
+            if (!_search)
+            {
+                SubPageCreated?.Invoke(this);
+            }
+            else
+            {
+                this.Hide();
+                DriveLogTab studentFoundDriveLogTab = new DriveLogTab(_user, true);
+                studentFoundDriveLogTab.Location = this.Location;
+                studentFoundDriveLogTab.Parent = this;
+                this.Parent.Controls.Add(studentFoundDriveLogTab);
+                studentFoundDriveLogTab.Show();
             }
         }
     }

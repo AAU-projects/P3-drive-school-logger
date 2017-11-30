@@ -184,7 +184,7 @@ namespace DriveLogGUI.MenuTabs
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            this.Parent.Controls.Find("profileTab", true).Last().Show();
+            this.Parent.Controls.Find("StudentProfileTab", true).Last().Show();
             this.Dispose();
         }
 
