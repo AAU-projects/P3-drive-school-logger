@@ -83,17 +83,19 @@ namespace DriveLogCode.Objects
         public bool FeePaid { get; }
         public int TheoreticalProgress { get; private set; }
         public int PracticalProgress { get; private set; }
+        public List<Lesson> LessonsList = new List<Lesson>();
+        public List<LessonTemplate> LessonTemplates = new List<LessonTemplate>();
 
         private void CalculateProgress()
         {
-            List<Lesson> lessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
-            List<LessonTemplate> lessonTemplates = DatabaseParser.GetTemplatesList();
+            LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
+            LessonTemplates = DatabaseParser.GetTemplatesList();
             TheoreticalProgress = 0;
             PracticalProgress = 0;
 
-            foreach (Lesson l in lessonsList)
+            foreach (Lesson l in LessonsList)
             {
-                LessonTemplate template = lessonTemplates.Find(x => l.TemplateID == x.Id);
+                LessonTemplate template = LessonTemplates.Find(x => l.TemplateID == x.Id);
 
                 if (template == null) continue;
 
