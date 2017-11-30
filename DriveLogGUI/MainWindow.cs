@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DriveLogCode;
 using DriveLogCode.DataAccess;
 using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
@@ -135,10 +128,12 @@ namespace DriveLogGUI
 
         private void ProfileButton_Click(object sender, EventArgs e)
         {
-            OpenPage(sender, profileTab);
 
             if (!Session.LoggedInUser.Sysmin)
                 ProfileSubmenuControl(true);
+
+            OpenPage(sender, profileTab);
+
         }
 
         private void ProfileSubmenuControl(bool isProfileClick)
@@ -147,12 +142,12 @@ namespace DriveLogGUI
             {
                 //placing the panel at the correct location
                 panelForProfile.Location = new Point(ProfileButton.Location.X, ProfileButton.Location.Y + ProfileButton.Height);
-                panelForProfile.Show();
                 //moving objects below
                 bookingButton.Location = MoveLocation(bookingButton.Location, panelForProfile.Height);
                 settingsButton.Location = MoveLocation(settingsButton.Location, panelForProfile.Height);
                 userSearchButton.Location = MoveLocation(userSearchButton.Location, panelForProfile.Height);
                 _isOpen = true;
+                panelForProfile.Show();
             }
             else if (_isOpen && !isProfileClick)
             {
@@ -221,12 +216,6 @@ namespace DriveLogGUI
                 Application.Exit();
         }
 
-        private void logoutButton_Click(object sender, EventArgs e)
-        {
-            Owner.Show();
-            this.Close();
-        }
-
         private void OpenPage(object sender, UserControl page)
         {
             if (_lastPage != page) 
@@ -252,7 +241,8 @@ namespace DriveLogGUI
             if (Session.LoggedInUser.Sysmin) return;
             if (page is StudentOverviewTab || page is StudentProfileTab)
             {
-                OpenPage(this, driveLogTab);
+                ProfileSubmenuControl(true);
+                OpenPage(driveLogButton, driveLogTab);
             }
         }
 
@@ -317,8 +307,10 @@ namespace DriveLogGUI
 
         private void OnIconClick(object sender, EventArgs e)
         {
-            PictureBox pBox = sender as PictureBox;
+
             ProfileSubmenuControl(true);
+
+            PictureBox pBox = sender as PictureBox;
 
             if (pBox.Name == "doctorsNotePictureButton")
             {
@@ -331,6 +323,7 @@ namespace DriveLogGUI
                 OpenPage(firstAidButton, documentViewer);
                 documentViewer.LoadFirstAid(Session.LoggedInUser);
             }
+
         }
 
         internal void driveLogButton_Click(object sender, EventArgs e)

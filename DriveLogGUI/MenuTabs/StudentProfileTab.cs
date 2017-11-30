@@ -15,6 +15,7 @@ namespace DriveLogGUI.MenuTabs
         private User _user;
         private bool _search;
         internal override event SubPageNotification SubPageCreated;
+        internal override event NoParametersEvent BackButtonClicked;
 
         public Color PrevColor;
         private Panel _showInformation;
@@ -36,14 +37,6 @@ namespace DriveLogGUI.MenuTabs
             UpdateInfo();
             DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
             FirstCheckIfUploaded(firstAidPictureButton);
-
-            foreach (Control c in progressBarPanel.Controls)
-            {
-                c.MouseClick += progressBarPanel_Click;
-
-                foreach (Control childControl in c.Controls)
-                    childControl.MouseClick += progressBarPanel_Click;
-            }
         }
 
         private void UpdateLayout()
@@ -60,24 +53,24 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Updates the user information with data from session class
         /// </summary>
-        public void UpdateInfo()
+        private void UpdateInfo()
         {
-            profileHeaderLabel.Text = "Profile: " + Session.LoggedInUser.Username;
-            nameOutputLabel.Text = Session.LoggedInUser.Fullname;
-            phoneOutputLabel.Text = Session.LoggedInUser.Phone;
-            cprOutputLabel.Text = Session.LoggedInUser.Cpr;
-            emailOutputLabel.Text = Session.LoggedInUser.Email;
-            addressOutputLabel.Text = Session.LoggedInUser.Address;
-            cityOutputLabel.Text = $"{Session.LoggedInUser.City}, {Session.LoggedInUser.Zip}";
-            theoreticalStatus.Text = Session.LoggedInUser.TheoreticalProgress + "/24";
-            practicalStatus.Text = Session.LoggedInUser.PracticalProgress + "/14";
+            profileHeaderLabel.Text = "Profile: " + _user.Username;
+            nameOutputLabel.Text = _user.Fullname;
+            phoneOutputLabel.Text = _user.Phone;
+            cprOutputLabel.Text = _user.Cpr;
+            emailOutputLabel.Text = _user.Email;
+            addressOutputLabel.Text = _user.Address;
+            cityOutputLabel.Text = $"{_user.City}, {_user.Zip}";
+            theoreticalStatus.Text = _user.TheoreticalProgress + "/24";
+            practicalStatus.Text = _user.PracticalProgress + "/14";
 
-            theoreticalProgressFill.Size = new Size((theoreticalBar.Width / 24) * Session.LoggedInUser.TheoreticalProgress, theoreticalBar.Height);
-            practicalProgressFill.Size = new Size((practicalBar.Width / 14) * Session.LoggedInUser.PracticalProgress, practicalBar.Height);
+            theoreticalProgressFill.Size = new Size((theoreticalBar.Width / 24) * _user.TheoreticalProgress, theoreticalBar.Height);
+            practicalProgressFill.Size = new Size((practicalBar.Width / 14) * _user.PracticalProgress, practicalBar.Height);
 
-            if (!string.IsNullOrEmpty(Session.LoggedInUser.PicturePath) || Session.LoggedInUser.PicturePath != "")
+            if (!string.IsNullOrEmpty(_user.PicturePath) || _user.PicturePath != "")
             {
-                ProfilePicture.Load(Session.LoggedInUser.PicturePath);
+                ProfilePicture.Load(_user.PicturePath);
             }
 
             // Update icons
@@ -87,6 +80,14 @@ namespace DriveLogGUI.MenuTabs
                 praticalTestPictureButton.Image = completedImage;
             if (_user.FeePaid)
                 feePictureBox.Image = completedImage;
+
+            foreach (Lesson lesson in _user.LessonsList)
+            {
+                if (lesson.LessonTemplate.Id == 1 && lesson.Completed)
+                    maneuverTrackPictureButton.Image = completedImage;
+                if (lesson.LessonTemplate.Id == 18 && lesson.Completed)
+                    slippertTrackPictureButton.Image = completedImage;
+            }
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -94,30 +95,15 @@ namespace DriveLogGUI.MenuTabs
             EditUserInfoForm editForm = new EditUserInfoForm(_user);
 
             editForm.ShowDialog(this);
+            _user = DatabaseParser.GetUserById(_user.Id);
             UpdateInfo();
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Find("userSearchTab", false)[0].Show();
+            BackButtonClicked?.Invoke();
             this.Dispose();
-        }
-
-        private void progressBarPanel_Click(object sender, EventArgs e)
-        {
-            if (!_search)
-            {
-                SubPageCreated?.Invoke(this);
-            }
-            else
-            {
-                this.Hide();
-                DriveLogTab studentFoundDriveLogTab = new DriveLogTab(_user, true);
-                studentFoundDriveLogTab.Location = this.Location;
-                studentFoundDriveLogTab.Parent = this;
-                this.Parent.Controls.Add(studentFoundDriveLogTab);
-                studentFoundDriveLogTab.Show();
-            }
         }
         
         private void panelContainingUpcomingLessons_Paint(object sender, PaintEventArgs eventArgs)
@@ -338,20 +324,39 @@ namespace DriveLogGUI.MenuTabs
             timelLabel.Show();
             lessonLabel.Show();
         }
-
-        private void daysForCalendar_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
         
         private void doctorsNotePictureButton_Click(object sender, EventArgs e)
         {
-            IconPictureButtonClickEvent?.Invoke(doctorsNotePictureButton, e);
+            if (!_search)
+                IconPictureButtonClickEvent?.Invoke(doctorsNotePictureButton, e);
+            else
+            {
+                this.Hide();
+                DocumentViewer documentViewer = new DocumentViewer();
+                documentViewer.Location = this.Location;
+                documentViewer.Parent = this;
+                this.Parent.Controls.Add(documentViewer);
+                documentViewer.Show();
+                documentViewer.LoadDoctorsNote(_user);
+            }
         }
 
         private void firstAidPictureButton_Click(object sender, EventArgs e)
         {
             IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
+
+            if (!_search)
+                IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
+            else
+            {
+                this.Hide();
+                DocumentViewer documentViewer = new DocumentViewer();
+                documentViewer.Location = this.Location;
+                documentViewer.Parent = this;
+                this.Parent.Controls.Add(documentViewer);
+                documentViewer.Show();
+                documentViewer.LoadFirstAid(_user);
+            }
         }
 
         private void ProgressButtonMouseEnter(PictureBox button)
@@ -362,25 +367,23 @@ namespace DriveLogGUI.MenuTabs
                 button.Image = completedHoverImage;
         }
 
-        private void TestAndFeeIcon_Enter(PictureBox button)
+        private void CheckIfComplete(bool completed, PictureBox button)
         {
-            if (!Session.LoggedInUser.Sysmin) return;
-
-            if (button.Image == incompleteImage)
-                button.Image = incompleteHoverImage;
-            else if (button.Image == completedImage)
+            if (completed)
                 button.Image = completedHoverImage;
+            else if (!completed)
+                button.Image = incompleteHoverImage;
         }
 
         private void DoctorsNoteCheckIfUploaded(PictureBox button)
         {
-            if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
+            if (DatabaseParser.ExistDoctorsNote(_user))
                 button.Image = completedImage;
         }
 
         private void FirstCheckIfUploaded(PictureBox button)
         {
-            if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
+            if (DatabaseParser.ExistFirstAid(_user))
                 button.Image = completedImage;
         }
 
@@ -406,17 +409,20 @@ namespace DriveLogGUI.MenuTabs
 
         private void theroraticalPictureButton_MouseEnter(object sender, EventArgs e)
         {
-            TestAndFeeIcon_Enter(theroraticalPictureButton);
+            if (!Session.LoggedInUser.Sysmin) return;
+            CheckIfComplete(_user.TheoreticalTestDone, theroraticalPictureButton);
         }
 
         private void praticalTestPictureButton_MouseEnter(object sender, EventArgs e)
         {
-            TestAndFeeIcon_Enter(praticalTestPictureButton);
+            if (!Session.LoggedInUser.Sysmin) return;
+            CheckIfComplete(_user.PracticalTestDone, praticalTestPictureButton);
         }
 
         private void feePictureBox_MouseEnter(object sender, EventArgs e)
         {
-            TestAndFeeIcon_Enter(feePictureBox);
+            if (!Session.LoggedInUser.Sysmin) return;
+            CheckIfComplete(_user.FeePaid, feePictureBox);
         }
 
         private void theroraticalPictureButton_MouseLeave(object sender, EventArgs e)
@@ -475,7 +481,7 @@ namespace DriveLogGUI.MenuTabs
 
             if (confirmamtionBox == DialogResult.Yes)
             {
-                DatabaseParser.SetUserTheoreticalTestDone(_user.Id, true);
+                DatabaseParser.SetUserPracticalTestDone(_user.Id, true);
                 _user = DatabaseParser.GetUserById(_user.Id);
                 icon.Image = completedImage;
             }
@@ -506,6 +512,23 @@ namespace DriveLogGUI.MenuTabs
                 DatabaseParser.SetUserFeePaid(_user.Id, false);
                 _user = DatabaseParser.GetUserById(_user.Id);
                 icon.Image = incompleteImage;
+            }
+        }
+
+        private void driveLogButton_Click(object sender, EventArgs e)
+        {
+            if (!_search)
+            {
+                SubPageCreated?.Invoke(this);
+            }
+            else
+            {
+                this.Hide();
+                DriveLogTab studentFoundDriveLogTab = new DriveLogTab(_user, true);
+                studentFoundDriveLogTab.Location = this.Location;
+                studentFoundDriveLogTab.Parent = this;
+                this.Parent.Controls.Add(studentFoundDriveLogTab);
+                studentFoundDriveLogTab.Show();
             }
         }
     }

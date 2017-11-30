@@ -70,6 +70,7 @@
             this.practicalTestLabel = new System.Windows.Forms.Label();
             this.theoraticalTestLabel = new System.Windows.Forms.Label();
             this.progressBarPanel = new System.Windows.Forms.Panel();
+            this.driveLogButton = new System.Windows.Forms.Button();
             this.practicalStatus = new System.Windows.Forms.Label();
             this.theoreticalStatus = new System.Windows.Forms.Label();
             this.practicalLabel = new System.Windows.Forms.Label();
@@ -166,13 +167,14 @@
             // 
             // overviewUpdateTodaysNote
             // 
-            this.overviewUpdateTodaysNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.overviewUpdateTodaysNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.overviewUpdateTodaysNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
             this.overviewUpdateTodaysNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.overviewUpdateTodaysNote.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overviewUpdateTodaysNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.overviewUpdateTodaysNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.overviewUpdateTodaysNote.Location = new System.Drawing.Point(383, 147);
+            this.overviewUpdateTodaysNote.Location = new System.Drawing.Point(375, 154);
             this.overviewUpdateTodaysNote.Name = "overviewUpdateTodaysNote";
-            this.overviewUpdateTodaysNote.Size = new System.Drawing.Size(59, 22);
+            this.overviewUpdateTodaysNote.Size = new System.Drawing.Size(69, 23);
             this.overviewUpdateTodaysNote.TabIndex = 13;
             this.overviewUpdateTodaysNote.Text = "Update";
             this.overviewUpdateTodaysNote.UseVisualStyleBackColor = false;
@@ -560,6 +562,7 @@
             // progressBarPanel
             // 
             this.progressBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.progressBarPanel.Controls.Add(this.driveLogButton);
             this.progressBarPanel.Controls.Add(this.practicalStatus);
             this.progressBarPanel.Controls.Add(this.theoreticalStatus);
             this.progressBarPanel.Controls.Add(this.practicalLabel);
@@ -572,7 +575,21 @@
             this.progressBarPanel.Name = "progressBarPanel";
             this.progressBarPanel.Size = new System.Drawing.Size(454, 152);
             this.progressBarPanel.TabIndex = 3;
-            this.progressBarPanel.Click += new System.EventHandler(this.progressBarPanel_Click);
+            // 
+            // driveLogButton
+            // 
+            this.driveLogButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.driveLogButton.FlatAppearance.BorderSize = 0;
+            this.driveLogButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.driveLogButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.driveLogButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.driveLogButton.Location = new System.Drawing.Point(375, 7);
+            this.driveLogButton.Name = "driveLogButton";
+            this.driveLogButton.Size = new System.Drawing.Size(69, 23);
+            this.driveLogButton.TabIndex = 18;
+            this.driveLogButton.Text = "Drivelog";
+            this.driveLogButton.UseVisualStyleBackColor = false;
+            this.driveLogButton.Click += new System.EventHandler(this.driveLogButton_Click);
             // 
             // practicalStatus
             // 
@@ -664,7 +681,7 @@
             this.progressUnderline.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.progressUnderline.Location = new System.Drawing.Point(22, 23);
             this.progressUnderline.Name = "progressUnderline";
-            this.progressUnderline.Size = new System.Drawing.Size(420, 2);
+            this.progressUnderline.Size = new System.Drawing.Size(350, 2);
             this.progressUnderline.TabIndex = 4;
             // 
             // miscPanel
@@ -880,5 +897,6 @@
         private System.Windows.Forms.Button overviewUpdateTodaysNote;
         private System.Windows.Forms.Label feeLabel;
         private System.Windows.Forms.PictureBox feePictureBox;
+        private System.Windows.Forms.Button driveLogButton;
     }
 }

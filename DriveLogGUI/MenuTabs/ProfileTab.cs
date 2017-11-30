@@ -8,9 +8,11 @@ using System.Windows.Forms;
 
 namespace DriveLogGUI.MenuTabs
 {
+    public delegate void NoParametersEvent();
     [TypeDescriptionProvider(typeof(AbstractControlDescriptionProvider<ProfileTab, UserControl>))]
     public abstract class ProfileTab : UserControl
     {
+        internal virtual event NoParametersEvent BackButtonClicked;
         internal virtual event SubPageNotification SubPageCreated;
 
         public virtual event EventHandler LogOutButtonClick;

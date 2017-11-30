@@ -50,6 +50,7 @@
             this.headerPanel = new System.Windows.Forms.Panel();
             this.backButton = new System.Windows.Forms.Button();
             this.progressBarPanel = new System.Windows.Forms.Panel();
+            this.driveLogButton = new System.Windows.Forms.Button();
             this.practicalStatus = new System.Windows.Forms.Label();
             this.theoreticalStatus = new System.Windows.Forms.Label();
             this.practicalLabel = new System.Windows.Forms.Label();
@@ -61,13 +62,13 @@
             this.progressLabel = new System.Windows.Forms.Label();
             this.progressUnderline = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lessonLabel = new System.Windows.Forms.Label();
             this.backButtonInUpcomingLesson = new System.Windows.Forms.Button();
             this.panelContainingUpcomingLessons = new System.Windows.Forms.Panel();
             this.timelLabel = new System.Windows.Forms.Label();
             this.dateLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.upcommingLessonsLabel = new System.Windows.Forms.Label();
-            this.lessonLabel = new System.Windows.Forms.Label();
             this.miscPanel = new System.Windows.Forms.Panel();
             this.feeLabel = new System.Windows.Forms.Label();
             this.slipperyTrackLabel = new System.Windows.Forms.Label();
@@ -349,6 +350,7 @@
             // progressBarPanel
             // 
             this.progressBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.progressBarPanel.Controls.Add(this.driveLogButton);
             this.progressBarPanel.Controls.Add(this.practicalStatus);
             this.progressBarPanel.Controls.Add(this.theoreticalStatus);
             this.progressBarPanel.Controls.Add(this.practicalLabel);
@@ -361,7 +363,21 @@
             this.progressBarPanel.Name = "progressBarPanel";
             this.progressBarPanel.Size = new System.Drawing.Size(454, 160);
             this.progressBarPanel.TabIndex = 4;
-            this.progressBarPanel.Click += new System.EventHandler(this.progressBarPanel_Click);
+            // 
+            // driveLogButton
+            // 
+            this.driveLogButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.driveLogButton.FlatAppearance.BorderSize = 0;
+            this.driveLogButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.driveLogButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.driveLogButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.driveLogButton.Location = new System.Drawing.Point(375, 7);
+            this.driveLogButton.Name = "driveLogButton";
+            this.driveLogButton.Size = new System.Drawing.Size(69, 23);
+            this.driveLogButton.TabIndex = 17;
+            this.driveLogButton.Text = "Drivelog";
+            this.driveLogButton.UseVisualStyleBackColor = false;
+            this.driveLogButton.Click += new System.EventHandler(this.driveLogButton_Click);
             // 
             // practicalStatus
             // 
@@ -453,24 +469,33 @@
             this.progressUnderline.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.progressUnderline.Location = new System.Drawing.Point(22, 23);
             this.progressUnderline.Name = "progressUnderline";
-            this.progressUnderline.Size = new System.Drawing.Size(420, 2);
+            this.progressUnderline.Size = new System.Drawing.Size(350, 2);
             this.progressUnderline.TabIndex = 4;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.panel1.Controls.Add(this.lessonLabel);
             this.panel1.Controls.Add(this.backButtonInUpcomingLesson);
             this.panel1.Controls.Add(this.panelContainingUpcomingLessons);
             this.panel1.Controls.Add(this.timelLabel);
             this.panel1.Controls.Add(this.dateLabel);
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.upcommingLessonsLabel);
             this.panel1.Location = new System.Drawing.Point(472, 74);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(413, 336);
             this.panel1.TabIndex = 6;
+            // 
+            // lessonLabel
+            // 
+            this.lessonLabel.AutoSize = true;
+            this.lessonLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.lessonLabel.Location = new System.Drawing.Point(254, 29);
+            this.lessonLabel.Name = "lessonLabel";
+            this.lessonLabel.Size = new System.Drawing.Size(41, 13);
+            this.lessonLabel.TabIndex = 18;
+            this.lessonLabel.Text = "Lesson";
             // 
             // backButtonInUpcomingLesson
             // 
@@ -534,15 +559,6 @@
             this.upcommingLessonsLabel.TabIndex = 11;
             this.upcommingLessonsLabel.Text = "Upcoming Lessons";
             // 
-            // lessonLabel
-            // 
-            this.lessonLabel.AutoSize = true;
-            this.lessonLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.lessonLabel.Location = new System.Drawing.Point(254, 29);
-            this.lessonLabel.Name = "lessonLabel";
-            this.lessonLabel.Size = new System.Drawing.Size(41, 13);
-            this.lessonLabel.TabIndex = 18;
-            this.lessonLabel.Text = "Lesson";
             // miscPanel
             // 
             this.miscPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
@@ -818,5 +834,6 @@
         private System.Windows.Forms.PictureBox maneuverTrackPictureButton;
         private System.Windows.Forms.PictureBox firstAidPictureButton;
         private System.Windows.Forms.PictureBox doctorsNotePictureButton;
+        private System.Windows.Forms.Button driveLogButton;
     }
 }

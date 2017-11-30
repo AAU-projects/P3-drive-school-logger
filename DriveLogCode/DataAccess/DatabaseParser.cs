@@ -175,7 +175,7 @@ namespace DriveLogCode.DataAccess
             try
             {
                 DataTable fileInfo = MySql.GetDocument(type, user.Id);
-                string tempFilePath = Path.Combine(Path.GetTempPath(), $"{fileInfo.Rows[0][1].ToString().Replace(' ','.')}.pdf");
+                string tempFilePath = Path.Combine(Path.GetTempPath(), $"{fileInfo.Rows[0][1].ToString().Replace(' ','-')}.pdf");
 
                 using (var client = new WebClient())
                 {

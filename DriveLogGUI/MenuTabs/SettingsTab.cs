@@ -17,7 +17,6 @@ namespace DriveLogGUI.MenuTabs
         public SettingsTab()
         {
             InitializeComponent();
-            InitializeCommen();
             if (Session.LoggedInUser.Sysmin)
             {
                 InitializeAdmin();
@@ -26,11 +25,6 @@ namespace DriveLogGUI.MenuTabs
             {
                 templateButton.Hide();
             }
-        }
-
-        private void InitializeCommen()
-        {
-            
         }
 
         private void InitializeAdmin()
@@ -97,6 +91,7 @@ namespace DriveLogGUI.MenuTabs
         private void templateButton_Click(object sender, EventArgs e)
         {
             OpenPage(_lessonCreator);
+
         }
     }
 }
