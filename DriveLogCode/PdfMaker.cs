@@ -2,6 +2,7 @@
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using DriveLogCode.Objects;
 using Spire.Pdf;
 using Spire.Pdf.Graphics;
@@ -31,10 +32,28 @@ namespace DriveLogCode
             AddLessons(doc);
 
             // Save the pdf file
-            doc.SaveToFile("test.pdf");
+            string fileName = SaveFile("test.pdf", doc);
             doc.Close();
 
-            PDFDocumentViewer("test.pdf");
+            PDFDocumentViewer(fileName);
+        }
+
+        private string SaveFile(string filename, PdfDocument document)
+        {
+            int i = 0;
+
+            string[] fileNameAndExt = filename.Split('.');
+
+            while (File.Exists(filename))
+            {
+                i++;
+            }
+
+            if (i != 0) fileNameAndExt[0] += i;
+
+            document.SaveToFile($"{fileNameAndExt[0]}.{fileNameAndExt[1]}");
+
+            return $"{fileNameAndExt[0]}.{fileNameAndExt[1]}";
         }
 
         private void MakeFrontPage(PdfDocument document)
@@ -244,9 +263,21 @@ namespace DriveLogCode
         private void AddLessons(PdfDocument document)
         {
             List<LessonTemplate> templates = DataAccess.DatabaseParser.GetTemplatesList();
-            float y = 0;
+            float y = 10;
             SizeF size;
             PdfPageBase page = CreatePage(document);
+
+            page.Canvas.DrawString("OBS!", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
+
+            y += DesignSchemes.FontScheme.PdfOBSTitleFont.MeasureString("OBS!").Height;
+
+            string text = "For at komme op til teoriprøve skal dine papirer (ansøgningsskema, \r\n lægeerklæring og førstehjælps bevis) være afleveret til kørelæreren. " +
+                          "\r\nLægeerklæringen, SKAL være fra egen læge, og må MAX være 3 måneden gammel!" +
+                          "\r\nFørstehjælps kurset MAX 1 år gammel!\r\n";
+
+            page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
+
+            y += DesignSchemes.FontScheme.PdfOBSTextFont.MeasureString(text).Height;
 
             foreach (LessonTemplate template in templates)
             {
@@ -258,11 +289,11 @@ namespace DriveLogCode
 
                 if (templates.IndexOf(template) == 8)
                 {
-                    page.Canvas.DrawString("OBS", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText,0,y);
+                    page.Canvas.DrawString("OBS!", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText,0,y);
 
                     y += DesignSchemes.FontScheme.PdfOBSTitleFont.MeasureString("OBS").Height;
 
-                    string text = "Nu er det på tide at tænke på at bestille teoriprøve!\r\nHvis du kan nå lektionerne til og med Teorilektion 7, inden for de næste ca. 2 uger, kan du bestille teoriprøve via din kørelærer!\r\n";
+                    text = "Nu er det på tide at tænke på at bestille teoriprøve!\r\nHvis du kan nå lektionerne til og med Teorilektion 7, inden for de næste ca. 2 uger,\r\n kan du bestille teoriprøve via din kørelærer!\r\n";
                     page.Canvas.DrawString(text,DesignSchemes.FontScheme.PdfOBSTextFont,DesignSchemes.ColorScheme.PdfBlackText,0,y);
 
                     y += DesignSchemes.FontScheme.PdfOBSTextFont.MeasureString(text).Height;
@@ -277,6 +308,36 @@ namespace DriveLogCode
                     
                     y += DesignSchemes.FontScheme.PdfOBSTextUnderlineFatFont.MeasureString(text).Height;
 
+                } else if (templates.IndexOf(template) == 11)
+                {
+                    page.Canvas.DrawString("OBS", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
+
+                    y += DesignSchemes.FontScheme.PdfOBSTitleFont.MeasureString("OBS!").Height;
+
+                    text = "Medbring dit ansøgningsskema, og få det underskrevet af kørelæreren i teorilektion 7!";
+                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
+
+                    y += DesignSchemes.FontScheme.PdfOBSTextFont.MeasureString(text).Height;
+                } else if (template.Title == "KØRETEKNISK KURUS")
+                {
+                    page.Canvas.DrawString("OBS! Lektionerne hertil skal gennemføres inden teoriprøven.", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
+
+                    y += DesignSchemes.FontScheme.PdfOBSTitleFont.MeasureString("OBS").Height;
+
+                    text = "Dit ansøgningsskema skal underskrives af teorilæreren i teorilektion 7 + af din \r\nkørelærer i skolevognen, inden du kan komme til teoriprøve!";
+                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextUnderlineFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
+
+                    y += DesignSchemes.FontScheme.PdfOBSTextUnderlineFont.MeasureString(text).Height;
+
+                    text = "Husk pas, lektionsplan og ansøgningsskema til både teori- og køreprøve.";
+                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
+
+                    y += DesignSchemes.FontScheme.PdfOBSTextFont.MeasureString(text).Height;
+
+                    text = "De efterfølgende lektioner behøver ikke nødvendigvis at være i rækkefølge!";
+                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextUnderlineFont, DesignSchemes.ColorScheme.PdfBlackText, page.Canvas.ClientSize.Width / 2, y, new PdfStringFormat(PdfTextAlignment.Center));
+
+                    y += DesignSchemes.FontScheme.PdfOBSTextUnderlineFont.MeasureString(text).Height;
                 }
 
                 page.Canvas.DrawString(template.Title, DesignSchemes.FontScheme.PdfTitleFont, DesignSchemes.ColorScheme.PdfBlackText,
