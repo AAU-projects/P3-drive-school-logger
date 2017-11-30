@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.backButton = new System.Windows.Forms.Button();
             this.driveLogHeaderLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.backPanel = new System.Windows.Forms.Panel();
-            this.backButton = new System.Windows.Forms.Button();
+            this.downloadBtn = new System.Windows.Forms.Button();
             this.headerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.headerPanel.Controls.Add(this.downloadBtn);
             this.headerPanel.Controls.Add(this.backButton);
             this.headerPanel.Controls.Add(this.driveLogHeaderLabel);
             this.headerPanel.Controls.Add(this.logoutButton);
@@ -46,6 +48,23 @@
             this.headerPanel.Name = "headerPanel";
             this.headerPanel.Size = new System.Drawing.Size(873, 56);
             this.headerPanel.TabIndex = 4;
+            // 
+            // backButton
+            // 
+            this.backButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.backButton.Enabled = false;
+            this.backButton.FlatAppearance.BorderSize = 0;
+            this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.backButton.Location = new System.Drawing.Point(808, 6);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(52, 44);
+            this.backButton.TabIndex = 9;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = false;
+            this.backButton.Visible = false;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // driveLogHeaderLabel
             // 
@@ -81,22 +100,22 @@
             this.backPanel.Size = new System.Drawing.Size(873, 458);
             this.backPanel.TabIndex = 8;
             // 
-            // backButton
+            // downloadBtn
             // 
-            this.backButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
-            this.backButton.Enabled = false;
-            this.backButton.FlatAppearance.BorderSize = 0;
-            this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.backButton.Location = new System.Drawing.Point(808, 6);
-            this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(52, 44);
-            this.backButton.TabIndex = 9;
-            this.backButton.Text = "Back";
-            this.backButton.UseVisualStyleBackColor = false;
-            this.backButton.Visible = false;
-            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            this.downloadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(197)))), ((int)(((byte)(204)))));
+            this.downloadBtn.Enabled = true;
+            this.downloadBtn.FlatAppearance.BorderSize = 0;
+            this.downloadBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
+            this.downloadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.downloadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.downloadBtn.Location = new System.Drawing.Point(732, 6);
+            this.downloadBtn.Name = "downloadBtn";
+            this.downloadBtn.Size = new System.Drawing.Size(70, 44);
+            this.downloadBtn.TabIndex = 10;
+            this.downloadBtn.Text = "Download";
+            this.downloadBtn.UseVisualStyleBackColor = false;
+            this.downloadBtn.Visible = true;
+            this.downloadBtn.Click += new System.EventHandler(this.downloadBtn_Click);
             // 
             // DriveLogTab
             // 
@@ -118,5 +137,6 @@
         private System.Windows.Forms.Label driveLogHeaderLabel;
         private System.Windows.Forms.Panel backPanel;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Button downloadBtn;
     }
 }

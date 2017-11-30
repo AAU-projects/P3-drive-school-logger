@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DriveLogCode;
 using DriveLogCode.DataAccess;
 using DriveLogCode.Objects;
 
@@ -184,6 +185,12 @@ namespace DriveLogGUI.MenuTabs
         {
             this.Parent.Controls.Find("profileTab", true).Last().Show();
             this.Dispose();
+        }
+
+        private void downloadBtn_Click(object sender, EventArgs e)
+        {
+            var pdfCreator = new PdfMaker();
+            pdfCreator.MakeDriveLog(_user);
         }
     }
 }

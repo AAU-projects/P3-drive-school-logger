@@ -14,16 +14,16 @@ namespace DriveLogCode
     {
         public PdfMaker()
         {
-            
+
         }
 
-        public void MakeDriveLog()
+        public void MakeDriveLog(User student)
         {
             // Create the empty document
             PdfDocument doc = new PdfDocument();
 
             // Get the front page of the drive log
-            MakeFrontPage(doc);
+            MakeFrontPage(doc, student);
 
             // Get the schools instructors
             CreateInstructorsInfo(doc);
@@ -32,7 +32,7 @@ namespace DriveLogCode
             AddLessons(doc);
 
             // Save the pdf file
-            string fileName = SaveFile("test.pdf", doc);
+            string fileName = SaveFile($"{student.Fullname}-DriveLog.pdf", doc);
             doc.Close();
 
             PDFDocumentViewer(fileName);
@@ -43,10 +43,12 @@ namespace DriveLogCode
             int i = 0;
 
             string[] fileNameAndExt = filename.Split('.');
+            string tempFileName = filename;
 
-            while (File.Exists(filename))
+            while (File.Exists(tempFileName))
             {
                 i++;
+                tempFileName = $"{fileNameAndExt[0]}{i}.{fileNameAndExt[1]}";
             }
 
             if (i != 0) fileNameAndExt[0] += i;
@@ -56,7 +58,7 @@ namespace DriveLogCode
             return $"{fileNameAndExt[0]}.{fileNameAndExt[1]}";
         }
 
-        private void MakeFrontPage(PdfDocument document)
+        private void MakeFrontPage(PdfDocument document, User student)
         {
             float y = 15;
             string text = "LEKTIONSPLAN";
@@ -70,7 +72,7 @@ namespace DriveLogCode
 
             // Add title
 
-            page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfTitleFont, DesignSchemes.ColorScheme.PdfBlackText, 
+            page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfTitleFont, DesignSchemes.ColorScheme.PdfBlackText,
                 x: pageWidth / 2, y: y, format: new PdfStringFormat(PdfTextAlignment.Center));
 
             SizeF size = DesignSchemes.FontScheme.PdfTitleFont.MeasureString(text);
@@ -96,7 +98,7 @@ namespace DriveLogCode
             size = DesignSchemes.FontScheme.PdfBigTextFont.MeasureString(text);
             y += size.Height + 50;
 
-            CreateStudentInfo(Session.LoggedInUser, page, ref y);
+            CreateStudentInfo(student, page, ref y);
         }
 
         private void AddHeader(PdfPageBase page)
@@ -112,7 +114,7 @@ namespace DriveLogCode
             page.Canvas.DrawLine(pen1, 0, textSize.Height + 1, pageWidth, textSize.Height + 1);
         }
 
-        private void DrawLogo(PdfPageBase page,  ref float y)
+        private void DrawLogo(PdfPageBase page, ref float y)
         {
             PdfImage logo = PdfImage.FromFile("Resources/CityLogo.png");
 
@@ -125,7 +127,7 @@ namespace DriveLogCode
             y += height;
         }
 
-        private void CreateStudentInfo(User owner , PdfPageBase page , ref float y)
+        private void CreateStudentInfo(User owner, PdfPageBase page, ref float y)
         {
             string[] data =
             {
@@ -140,7 +142,7 @@ namespace DriveLogCode
 
             // Make two row, full size
             PdfGrid grid = new PdfGrid();
-            grid.Style.CellPadding = new PdfPaddings(1,1,1,1);
+            grid.Style.CellPadding = new PdfPaddings(1, 1, 1, 1);
             grid.Columns.Add(1);
             grid.Columns[0].Width = page.Canvas.ClientSize.Width;
 
@@ -195,7 +197,7 @@ namespace DriveLogCode
 
             DataTable instructorsTable = DataAccess.MySql.GetAllInstrutors();
             float y = 10;
-            
+
             // draw title
             string title = "Kørelærere";
             page.Canvas.DrawString(title, DesignSchemes.FontScheme.PdfTitleFont, DesignSchemes.ColorScheme.PdfBlackText,
@@ -205,7 +207,7 @@ namespace DriveLogCode
             y += size.Height + 10;
 
             // make 3 columns
-            PdfGrid grid = new PdfGrid {Style = {CellPadding = new PdfPaddings(1, 1, 1, 1)}};
+            PdfGrid grid = new PdfGrid { Style = { CellPadding = new PdfPaddings(1, 1, 1, 1) } };
             grid.Columns.Add(3);
             grid.Columns[0].Width = page.Canvas.ClientSize.Width * 0.30f;
             grid.Columns[1].Width = page.Canvas.ClientSize.Width * 0.40f;
@@ -281,20 +283,20 @@ namespace DriveLogCode
 
             foreach (LessonTemplate template in templates)
             {
-                if (y >= page.Canvas.ClientSize.Height - 250)
+                if (y >= page.Canvas.ClientSize.Height - 280)
                 {
                     page = CreatePage(document);
                     y = 10;
                 }
 
-                if (templates.IndexOf(template) == 8)
+                if (templates.IndexOf(template) == 9)
                 {
-                    page.Canvas.DrawString("OBS!", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText,0,y);
+                    page.Canvas.DrawString("OBS!", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
 
                     y += DesignSchemes.FontScheme.PdfOBSTitleFont.MeasureString("OBS").Height;
 
                     text = "Nu er det på tide at tænke på at bestille teoriprøve!\r\nHvis du kan nå lektionerne til og med Teorilektion 7, inden for de næste ca. 2 uger,\r\n kan du bestille teoriprøve via din kørelærer!\r\n";
-                    page.Canvas.DrawString(text,DesignSchemes.FontScheme.PdfOBSTextFont,DesignSchemes.ColorScheme.PdfBlackText,0,y);
+                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
 
                     y += DesignSchemes.FontScheme.PdfOBSTextFont.MeasureString(text).Height;
 
@@ -304,11 +306,12 @@ namespace DriveLogCode
                     y += DesignSchemes.FontScheme.PdfOBSTextUnderlineFont.MeasureString(text).Height;
 
                     text = "Husk også at få betalt det gebyr til prøverne, som du har fået via E-Boks";
-                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextUnderlineFatFont, DesignSchemes.ColorScheme.PdfBlackText, page.Canvas.ClientSize.Width/2, y, new PdfStringFormat(PdfTextAlignment.Center));
-                    
+                    page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextUnderlineFatFont, DesignSchemes.ColorScheme.PdfBlackText, page.Canvas.ClientSize.Width / 2, y, new PdfStringFormat(PdfTextAlignment.Center));
+
                     y += DesignSchemes.FontScheme.PdfOBSTextUnderlineFatFont.MeasureString(text).Height;
 
-                } else if (templates.IndexOf(template) == 11)
+                }
+                else if (templates.IndexOf(template) == 12)
                 {
                     page.Canvas.DrawString("OBS", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
 
@@ -318,7 +321,8 @@ namespace DriveLogCode
                     page.Canvas.DrawString(text, DesignSchemes.FontScheme.PdfOBSTextFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
 
                     y += DesignSchemes.FontScheme.PdfOBSTextFont.MeasureString(text).Height;
-                } else if (template.Title == "KØRETEKNISK KURUS")
+                }
+                else if (template.Title == "KØRETEKNISK KURUS")
                 {
                     page.Canvas.DrawString("OBS! Lektionerne hertil skal gennemføres inden teoriprøven.", DesignSchemes.FontScheme.PdfOBSTitleFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y);
 
@@ -357,7 +361,7 @@ namespace DriveLogCode
 
                 foreach (LineInfo line in description.Lines)
                 {
-                    page.Canvas.DrawString(line.Text, DesignSchemes.FontScheme.PdfTextFont, DesignSchemes.ColorScheme.PdfBlackText,0,y,format);
+                    page.Canvas.DrawString(line.Text, DesignSchemes.FontScheme.PdfTextFont, DesignSchemes.ColorScheme.PdfBlackText, 0, y, format);
                     y += description.LineHeight;
                 }
                 y += 10;
@@ -380,7 +384,7 @@ namespace DriveLogCode
                     PdfGridRow row = grid.Rows.Add();
 
                     row.Style.Font = DesignSchemes.FontScheme.PdfTextFont;
-                    
+
 
                     for (int i = 0; i < 2; i++)
                     {
