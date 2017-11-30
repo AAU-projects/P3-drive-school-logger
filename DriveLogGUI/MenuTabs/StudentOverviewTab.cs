@@ -46,6 +46,22 @@ namespace DriveLogGUI.MenuTabs
                     childControl.MouseClick += progressBarPanel_Click;
             }
 
+            // Update icons
+            if (Session.LoggedInUser.TheoreticalTestDone)
+                theroraticalPictureButton.Image = completedImage;
+            if (Session.LoggedInUser.PracticalTestDone)
+                praticalTestPictureButton.Image = completedImage;
+            if (Session.LoggedInUser.FeePaid)
+                feePictureBox.Image = completedImage;
+
+            foreach (Lesson lesson in Session.LoggedInUser.LessonsList)
+            {
+                if (lesson.LessonTemplate.Id == 1 && lesson.Completed)
+                    maneuverTrackPictureButton.Image = completedImage;
+                if (lesson.LessonTemplate.Id == 18 && lesson.Completed)
+                    slippertTrackPictureButton.Image = completedImage;
+            }
+
             UpdateProgress();
         }
 
