@@ -81,6 +81,14 @@ namespace DriveLogGUI.MenuTabs
                 praticalTestPictureButton.Image = completedImage;
             if (_user.FeePaid)
                 feePictureBox.Image = completedImage;
+
+            foreach (Lesson lesson in _user.LessonsList)
+            {
+                if (lesson.LessonTemplate.Id == 1 && lesson.Completed)
+                    maneuverTrackPictureButton.Image = completedImage;
+                if (lesson.LessonTemplate.Id == 18 && lesson.Completed)
+                    slippertTrackPictureButton.Image = completedImage;
+            }
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -132,16 +140,6 @@ namespace DriveLogGUI.MenuTabs
                 button.Image = completedHoverImage;
         }
 
-        private void TestAndFeeIcon_Enter(PictureBox button)
-        {
-            if (!Session.LoggedInUser.Sysmin) return;
-
-            if (button.Image == incompleteImage)
-                button.Image = incompleteHoverImage;
-            else if (button.Image == completedImage)
-                button.Image = completedHoverImage;
-        }
-
         private void DoctorsNoteCheckIfUploaded(PictureBox button)
         {
             if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
@@ -176,17 +174,20 @@ namespace DriveLogGUI.MenuTabs
 
         private void theroraticalPictureButton_MouseEnter(object sender, EventArgs e)
         {
-            TestAndFeeIcon_Enter(theroraticalPictureButton);
+            if (!Session.LoggedInUser.Sysmin) return;
+            ProgressButtonMouseEnter(theroraticalPictureButton);
         }
 
         private void praticalTestPictureButton_MouseEnter(object sender, EventArgs e)
         {
-            TestAndFeeIcon_Enter(praticalTestPictureButton);
+            if (!Session.LoggedInUser.Sysmin) return;
+            ProgressButtonMouseEnter(praticalTestPictureButton);
         }
 
         private void feePictureBox_MouseEnter(object sender, EventArgs e)
         {
-            TestAndFeeIcon_Enter(feePictureBox);
+            if (!Session.LoggedInUser.Sysmin) return;
+            ProgressButtonMouseEnter(feePictureBox);
         }
 
         private void theroraticalPictureButton_MouseLeave(object sender, EventArgs e)
