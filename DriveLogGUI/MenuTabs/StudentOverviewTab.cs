@@ -10,7 +10,7 @@ namespace DriveLogGUI.MenuTabs
     public partial class StudentOverviewTab : OverviewTab
     {
         public event EventHandler LogOutButtonClick;
-        internal event SubPageNotification SubPageCreated;
+        internal override event SubPageNotification SubPageCreated;
         internal override event EventHandler IconPictureButtonClickEvent;
         private DateTime selectedMonth;
         private DateTime formatDateTime;
@@ -37,14 +37,6 @@ namespace DriveLogGUI.MenuTabs
             DrawCalendar();
             DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
             FirstCheckIfUploaded(firstAidPictureButton);
-
-            foreach (Control control in progressBarPanel.Controls)
-            {
-                control.MouseClick += progressBarPanel_Click;
-
-                foreach (Control childControl in control.Controls)
-                    childControl.MouseClick += progressBarPanel_Click;
-            }
 
             UpdateProgress();
         }
@@ -261,11 +253,6 @@ namespace DriveLogGUI.MenuTabs
             FirstCheckIfUploaded(firstAidPictureButton);
         }
 
-        private void progressBarPanel_Click(object sender, EventArgs e)
-        {
-            SubPageCreated?.Invoke(this);
-        }
-
         private void overviewUpdateTodaysNote_Click(object sender, EventArgs e)
         {
             if (todaysNoteTextbox.Enabled)
@@ -292,6 +279,11 @@ namespace DriveLogGUI.MenuTabs
         private void firstAidPictureButton_Click(object sender, EventArgs e)
         {
             IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
+        }
+
+        private void driveLogButton_Click(object sender, EventArgs e)
+        {
+            SubPageCreated?.Invoke(this);
         }
     }
 }

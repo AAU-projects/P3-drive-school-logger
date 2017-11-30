@@ -245,6 +245,7 @@ namespace DriveLogGUI
             if (Session.LoggedInUser.Sysmin) return;
             if (page is StudentOverviewTab || page is StudentProfileTab)
             {
+                ProfileSubmenuControl(true);
                 OpenPage(driveLogButton, driveLogTab);
             }
         }
