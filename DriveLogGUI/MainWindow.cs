@@ -214,12 +214,6 @@ namespace DriveLogGUI
                 Application.Exit();
         }
 
-        private void logoutButton_Click(object sender, EventArgs e)
-        {
-            Owner.Show();
-            this.Close();
-        }
-
         private void OpenPage(object sender, UserControl page)
         {
             if (_lastPage != page) 
