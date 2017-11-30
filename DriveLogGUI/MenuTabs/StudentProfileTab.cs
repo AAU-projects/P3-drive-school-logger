@@ -15,6 +15,7 @@ namespace DriveLogGUI.MenuTabs
         private User _user;
         private bool _search;
         internal override event SubPageNotification SubPageCreated;
+        internal override event NoParametersEvent BackButtonClicked;
 
         public Color PrevColor;
         private Panel _showInformation;
@@ -101,6 +102,7 @@ namespace DriveLogGUI.MenuTabs
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Find("userSearchTab", false)[0].Show();
+            BackButtonClicked?.Invoke();
             this.Dispose();
         }
         
@@ -325,12 +327,36 @@ namespace DriveLogGUI.MenuTabs
         
         private void doctorsNotePictureButton_Click(object sender, EventArgs e)
         {
-            IconPictureButtonClickEvent?.Invoke(doctorsNotePictureButton, e);
+            if (!_search)
+                IconPictureButtonClickEvent?.Invoke(doctorsNotePictureButton, e);
+            else
+            {
+                this.Hide();
+                DocumentViewer documentViewer = new DocumentViewer();
+                documentViewer.Location = this.Location;
+                documentViewer.Parent = this;
+                this.Parent.Controls.Add(documentViewer);
+                documentViewer.Show();
+                documentViewer.LoadDoctorsNote(_user);
+            }
         }
 
         private void firstAidPictureButton_Click(object sender, EventArgs e)
         {
             IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
+
+            if (!_search)
+                IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
+            else
+            {
+                this.Hide();
+                DocumentViewer documentViewer = new DocumentViewer();
+                documentViewer.Location = this.Location;
+                documentViewer.Parent = this;
+                this.Parent.Controls.Add(documentViewer);
+                documentViewer.Show();
+                documentViewer.LoadFirstAid(_user);
+            }
         }
 
         private void ProgressButtonMouseEnter(PictureBox button)
@@ -341,15 +367,23 @@ namespace DriveLogGUI.MenuTabs
                 button.Image = completedHoverImage;
         }
 
+        private void CheckIfComplete(bool completed, PictureBox button)
+        {
+            if (completed)
+                button.Image = completedHoverImage;
+            else if (!completed)
+                button.Image = incompleteHoverImage;
+        }
+
         private void DoctorsNoteCheckIfUploaded(PictureBox button)
         {
-            if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
+            if (DatabaseParser.ExistDoctorsNote(_user))
                 button.Image = completedImage;
         }
 
         private void FirstCheckIfUploaded(PictureBox button)
         {
-            if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
+            if (DatabaseParser.ExistFirstAid(_user))
                 button.Image = completedImage;
         }
 
@@ -376,19 +410,19 @@ namespace DriveLogGUI.MenuTabs
         private void theroraticalPictureButton_MouseEnter(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
-            ProgressButtonMouseEnter(theroraticalPictureButton);
+            CheckIfComplete(_user.TheoreticalTestDone, theroraticalPictureButton);
         }
 
         private void praticalTestPictureButton_MouseEnter(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
-            ProgressButtonMouseEnter(praticalTestPictureButton);
+            CheckIfComplete(_user.PracticalTestDone, praticalTestPictureButton);
         }
 
         private void feePictureBox_MouseEnter(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
-            ProgressButtonMouseEnter(feePictureBox);
+            CheckIfComplete(_user.FeePaid, feePictureBox);
         }
 
         private void theroraticalPictureButton_MouseLeave(object sender, EventArgs e)
@@ -447,7 +481,7 @@ namespace DriveLogGUI.MenuTabs
 
             if (confirmamtionBox == DialogResult.Yes)
             {
-                DatabaseParser.SetUserTheoreticalTestDone(_user.Id, true);
+                DatabaseParser.SetUserPracticalTestDone(_user.Id, true);
                 _user = DatabaseParser.GetUserById(_user.Id);
                 icon.Image = completedImage;
             }

@@ -14,6 +14,8 @@ namespace DriveLogGUI.MenuTabs
             InitializeComponent();
             errorLabel.Text = string.Empty;
             userCollectionMenu.SelectedIndex = 0;
+
+            
         }
 
         public virtual event EventHandler LogOutButtonClick;
@@ -157,6 +159,7 @@ namespace DriveLogGUI.MenuTabs
             OnTempPanelLeave(sender, e);
             this.Hide();
             StudentProfileTab foundUserProfile = new StudentProfileTab(user, true);
+            foundUserProfile.BackButtonClicked += ExecuteSearch;
             foundUserProfile.Location = this.Location;
             foundUserProfile.Parent = this;
             this.Parent.Controls.Add(foundUserProfile);
