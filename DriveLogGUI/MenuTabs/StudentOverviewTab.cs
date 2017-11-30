@@ -24,7 +24,7 @@ namespace DriveLogGUI.MenuTabs
         public StudentOverviewTab()
         {
             InitializeComponent();
-            welcomeUserLabel.Text = "Welcome " + _user.Firstname;
+            welcomeUserLabel.Text = "Welcome " + Session.LoggedInUser.Firstname;
             selectedMonth = DateTime.Now;
             
             overviewUpdateTodaysNote.Hide();
