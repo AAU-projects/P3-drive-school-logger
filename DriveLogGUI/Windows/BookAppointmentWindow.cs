@@ -55,13 +55,13 @@ namespace DriveLogGUI.Windows
         {
             // if a user does not already have a lesson in lessontype a temp lesson is created before first lesson is added to database
             if (Session.LastTheoraticalLesson == null && _appointment.LessonType == LessonTypes.Theoretical) {
-                Session.LastTheoraticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 1, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null, 1);
+                Session.LastTheoraticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 2, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null, 1);
                 Session.LastTheoraticalLesson.LessonTemplate = DatabaseParser.GetLessonTemplateFromID(Session.LastTheoraticalLesson.TemplateID);
                 addedFirstLesson = true;
             }
 
             if (Session.LastPracticalLesson == null && _appointment.LessonType == LessonTypes.Practical) {
-                Session.LastPracticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 4, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null, 1);
+                Session.LastPracticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 5, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null, 1);
                 Session.LastPracticalLesson.LessonTemplate = DatabaseParser.GetLessonTemplateFromID(Session.LastPracticalLesson.TemplateID);
                 addedFirstLesson = true;
             }
@@ -225,7 +225,8 @@ namespace DriveLogGUI.Windows
 
                 if (result) // if lesson is added its manually added to lessons in appointment id
                 {
-                    newLessonList.Add(newLesson);
+                    Session.LessonsUser.Add(newLesson);
+                    Session.UpdateCurrentLesson();
                 }
 
                 addThisLessonProgress = firstLesson.Progress;
@@ -236,29 +237,25 @@ namespace DriveLogGUI.Windows
                     return false;
                 }
 
-                int timeRequeiredForCurrentTemplate = addThisLessonLessonTemplate.Time;
-
-                if (timeRequeiredForCurrentTemplate > addThisLessonProgress) {
-                    addThisLessonProgress += 1;
-                } else {
-                    addThisLessonTemplateID = DatabaseParser.GetNextLessonTemplateFromID(addThisLessonTemplateID, _appointment.LessonType).Id;
-                    addThisLessonProgress = 1;
-                }
                 Lesson newLesson = new Lesson(
                     Session.LoggedInUser.Id,
                     _appointment.Id,
-                    addThisLessonTemplateID,
-                    addThisLessonProgress,
-                    addThisLessonLessonTemplate,
+                    Session.NextLesson.TemplateID,
+                    Session.NextLesson.Progress,
+                    Session.NextLesson.LessonTemplate,
                     startDateTime,
                     startDateTime = startDateTime.AddMinutes(45),
                     false);
 
+
                 result = DatabaseParser.AddLessonToUserID(newLesson);
-                newLessonList.Add(newLesson);
+
+
+                Session.LessonsUser.Add(newLesson);
+                Session.UpdateCurrentLesson();
+
             }
 
-            Session.LessonsUser.AddRange(newLessonList);
             return true;
 
         }

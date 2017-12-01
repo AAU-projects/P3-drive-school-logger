@@ -7,6 +7,7 @@ using DriveLogCode.Objects;
 using DriveLogGUI.Windows;
 using Spire.Pdf;
 using Spire.PdfViewer.Forms;
+using System.Linq;
 
 namespace DriveLogGUI.MenuTabs
 {
@@ -15,6 +16,11 @@ namespace DriveLogGUI.MenuTabs
         public DocumentViewer()
         {
             InitializeComponent();
+            if (Session.LoggedInUser.Sysmin)
+            {
+                backButton.Visible = true;
+                backButton.Enabled = true;
+            }
         }
 
         private string _documentType = string.Empty;
@@ -48,7 +54,11 @@ namespace DriveLogGUI.MenuTabs
         {
             ClearDocument();
             _documentType = type;
-            _documentName = $"{Session.LoggedInUser.Fullname} - {_documentType}";
+            if(type == Session.TypeDoctorsNote)
+                _documentName = $"{Session.LoggedInUser.Fullname} - Doctor's Note";
+            else if (type == Session.TypeFirstAid)
+                _documentName = $"{Session.LoggedInUser.Fullname} - First Aid";
+
         }
 
         private void ClearDocument()
@@ -115,6 +125,18 @@ namespace DriveLogGUI.MenuTabs
         private void DocumentViewer_VisibleChanged(object sender, EventArgs e)
         {
             ClearDocument();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            this.Parent.Controls.Find("StudentProfileTab", true).Last().Show();
+            DisposePdf();
+            this.Dispose();
+        }
+
+        private void TitleLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

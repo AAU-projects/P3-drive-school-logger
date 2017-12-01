@@ -110,46 +110,11 @@ namespace DriveLogGUI.MenuTabs
                 {
                     ShowBookingCancel();
                 }
-            } else if (Session.GetLastLessonFromType(selectedAppointment.LessonType) == null) // if the user have no lessons // TODO move this to AppointmentDataForUser
-            {
-                //gets the first lesson
-                LessonTemplate firstLesson = DatabaseParser.GetLessonTemplateFromID(1);
-
-                if (firstLesson.Type == selectedAppointment.LessonType) {
-                    BookingAvailable();
-                }
-                else
-                {
-                    ShowBookingWarrning("You are not suitable to book practical yet as its required that you have 3 theoretical lessons before your first practical");
-                }
             }
-            else if (Session.GetLastLessonFromType(selectedAppointment.LessonType) != null) // if the user have prev booked a lesson
+            else
             {
-                LessonTemplate nextLesson = DatabaseParser.GetNextLessonTemplateFromID(Session.GetLastLessonFromType(selectedAppointment.LessonType).TemplateID, selectedAppointment.LessonType);
-                if (Session.GetLastLessonFromType(selectedAppointment.LessonType).Progress == Session.GetLastLessonFromType(selectedAppointment.LessonType).LessonTemplate.Time) // if the user is done with the current lessontemplate
-                {
-                    if (Session.GetLastLessonFromType(selectedAppointment.LessonType).TemplateID == nextLesson.Id - 1) {
-                        BookingAvailable();
-                    } else {
-                        ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
-                                            $"you would have to book {nextLesson.Id - 1 - Session.GetLastLessonFromType(selectedAppointment.LessonType).TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
-                    }
-                }
-                else // the user continues with the current lessontemplate
-                {
-                    if (Session.GetLastLessonFromType(selectedAppointment.LessonType).LessonTemplate.Type == selectedAppointment.LessonType)
-                    {
-                        BookingAvailable();
-                    }
-                    else
-                    {
-                        ShowBookingWarrning($"You are not suitable to book a {selectedAppointment.LessonType.ToLower()} lesson yet, " +
-                                            $"you would have to book {nextLesson.Id - 1 - Session.GetLastLessonFromType(selectedAppointment.LessonType).TemplateID} more {GetReverseType(selectedAppointment.LessonType)} lessons");
-                    }
-                }
-                
-
-            } 
+                BookingAvailable();
+            }
         }
 
         
@@ -289,6 +254,7 @@ namespace DriveLogGUI.MenuTabs
         {
             AddAppointmentWindow addAppointmentWindow = new AddAppointmentWindow(e.Date, MousePosition, appointments);
             addAppointmentWindow.ShowDialog();
+            UpdateCalendar(0);
         }
 
         private void DrawLineBelowDates()
@@ -441,31 +407,68 @@ namespace DriveLogGUI.MenuTabs
 
         private void AppointmentDataForUser(Appointment appointment)
         {
+            bool appointmentInPreviousTime = CheckForPreviousBookedLessons(appointment);
+
             if (appointment.FullyBooked)  // if the appointment is fullybooked
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarRed);
                 appointment.ShowWarning = true;
                 appointment.WarningText = "This appointment is fully booked";
-            } else if (appointment.StartTime <= Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
+            } else if (appointmentInPreviousTime)
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
                 appointment.ShowWarning = true;
                 appointment.WarningText = "You can not book a lesson in a previous time than your lastly booked lesson";
             }
-            if (appointment.bookedLessons.Count == 0) // if 0 there is nothing to do for the user with highlights
+
+            if (Session.LessonsUser.Count == 0) // if 0 there is nothing to do for the user with highlights
             {
+                if (appointment.LessonType != LessonTypes.Theoretical)
+                {
+                    appointment.AppointmentHighlight(Color.BlueViolet);
+                    appointment.ShowWarning = true;
+                    appointment.WarningText = "Please book theoretical lessons before booking a practical lesson";
+                    appointment.LabelAppointmentGreyOut();
+                }
             } else if (appointment.bookedLessons.Find(x => x.Completed) != null) // if one lesson is completed assigned to that appointment
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarCompleted);
                 appointment.ShowWarning = true;
                 appointment.WarningText = "You have already completed your lessons on this appointment";
+                appointment.LabelAppointmentGreyOut();
             } else if (appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id) != null) // if the user have booked the appointment
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
                 appointment.BookedByUser = true;
                 appointment.ShowWarning = true;
-                appointment.WarningText = "You already have a booking on this appointemnt";
+                appointment.WarningText = "You already have a booking on this appointment";
+            } else if (appointmentInPreviousTime)
+            {
+                appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
+                appointment.ShowWarning = true;
+                appointment.WarningText = "You can not book a lesson in a previous time than your lastly booked lesson";
+                appointment.LabelAppointmentGreyOut();
+            } else if (Session.NextLesson.LessonTemplate.Type != appointment.LessonType)
+            {
+                appointment.AppointmentHighlight(Color.BlueViolet);
+                appointment.ShowWarning = true;
+                appointment.WarningText = $"You need to book more {GetReverseType(appointment.LessonType)} lessons before booking a {appointment.LessonType}";
+                appointment.LabelAppointmentGreyOut();
+            } else
+            {
+                appointment.AppointmentHighlightHide();
+                appointment.ShowWarning = false;
+                appointment.WarningText = $"";
             }
+        }
+
+        private bool CheckForPreviousBookedLessons(Appointment appointment)
+        {
+            if (appointment.StartTime <= Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
+            {
+                return true;
+            }
+            return false;
         }
 
         private void UpdateDateMonday()
@@ -539,10 +542,11 @@ namespace DriveLogGUI.MenuTabs
             }
             else if (bookingInformationButton.Text == CancelBookingText)
             {
-                DialogResult result = CustomMsgBox.ShowYesNo("Are you sure you want to cancel this lesson", "Cancel lesson", CustomMsgBoxIcon.Warrning);
+                List<Lesson> cancelTheseLessons = DatabaseParser.CancelLesson(selectedAppointment.bookedLessons.First().TemplateID, selectedAppointment.bookedLessons.First().Progress, Session.LoggedInUser.Id);
+
+                DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons,  CustomMsgBoxIcon.Warrning);
                 if (result == DialogResult.Yes)
                 {
-                    DatabaseParser.CancelLesson(selectedAppointment.Id, Session.LoggedInUser.Id);
                 }
             }
             

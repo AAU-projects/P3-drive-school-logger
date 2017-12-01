@@ -18,6 +18,15 @@ namespace DriveLogCode.DataAccess
         private const string LessonTable = "lessons";
         private const string TodaysNoteTable = "todaysNoteTable";
 
+        public static DataTable GetAllInstrutors(string table = UserTable)
+        {
+            var cmd = new MySqlCommand($"SELECT firstname, lastname, phone, signature FROM {table} WHERE sysmin = 'True'");
+
+            if (ExistTable(table)) return SendQuery(cmd);
+            return CreateTemplateTable(table) ? SendQuery(cmd) : null;
+
+        }
+
         public static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string LessonTable = LessonTable, string AppointmentTable = AppointmentTable, string UserTable = UserTable, string LessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand("SELECT " +
@@ -125,6 +134,34 @@ namespace DriveLogCode.DataAccess
                                        "WHERE " +
                                        $"{userTable}.user_id = {AppointmentTable}.instructorID " +
                                        $"ORDER BY {appointmentTable}.startTime, {appointmentTable}.availableTime ");
+
+            return SendQuery(cmd);
+        }
+        public static int GetLessonIDFromUserIDProgressIDTemplateID(int templateId, int progressId, int userId, string lessonTable = LessonTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * " +
+                                       $"FROM {lessonTable} " +
+                                       $"WHERE " +
+                                       $"{lessonTable}.UserID = {userId} " +
+                                       $"AND " +
+                                       $"{lessonTable}.LessonID = {templateId} " +
+                                       $"AND " +
+                                       $"{lessonTable}.LessonPart = {progressId}");
+
+            DataTable results = SendQuery(cmd);
+
+            return Convert.ToInt32(results.Rows[0][0]);
+        }
+
+
+        public static DataTable GetAllLessonsAfterLessonID(int lessonId, int userId, string lessonTable = LessonTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * " +
+                                       $"FROM {lessonTable} " +
+                                       $"WHERE " +
+                                       $"{lessonTable}.UserID = {userId} " +
+                                       $"AND " +
+                                       $"lessons.id >= {lessonId} "); 
 
             return SendQuery(cmd);
         }
@@ -527,9 +564,14 @@ namespace DriveLogCode.DataAccess
 
         public static DataTable UserSearch(string searchInput, string table = UserTable)
         {
-            string query = $"SELECT * FROM {table} WHERE username LIKE '%{searchInput}%' OR  firstname LIKE '%{searchInput}%' OR" +
-                           $" lastname LIKE '%{searchInput}%' OR phone LIKE '%{searchInput}%' OR email LIKE '%{searchInput}%' OR" +
-                           $" cpr LIKE '%{searchInput}%' OR address LIKE '%{searchInput}%' OR zip LIKE '%{searchInput}%' OR city LIKE '%{searchInput}%'";
+            string query;
+            if (searchInput == "" || searchInput == "%")
+                query = $"SELECT * FROM {table}";
+            else
+            {
+                query =
+                    $"SELECT * FROM {table} WHERE CONCAT(username, firstname, lastname, phone, email, cpr, address, zip, city) LIKE '%{searchInput}%'";
+            }
             var cmd = new MySqlCommand(query);
 
             return SendQuery(cmd);

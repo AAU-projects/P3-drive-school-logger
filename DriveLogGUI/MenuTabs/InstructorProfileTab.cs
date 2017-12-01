@@ -15,6 +15,8 @@ namespace DriveLogGUI.MenuTabs
         private User _user;
         private bool _search;
         internal event SubPageNotification SubPageCreated;
+        internal override event NoParametersEvent BackButtonClicked;
+
         public InstructorProfileTab(User user, bool search = false)
         {
             InitializeComponent();
@@ -75,6 +77,7 @@ namespace DriveLogGUI.MenuTabs
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Find("userSearchTab", false)[0].Show();
+            BackButtonClicked?.Invoke();
             this.Dispose();
         }
 
