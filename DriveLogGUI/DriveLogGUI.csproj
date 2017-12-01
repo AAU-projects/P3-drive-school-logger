@@ -318,6 +318,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\resize1.png" />
+    <None Include="Resources\resize.png" />
     <None Include="Resources\noAvailableDot.png" />
     <None Include="Resources\exit6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -138,8 +138,8 @@
             // dragPicture
             // 
             this.dragPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dragPicture.Cursor = System.Windows.Forms.Cursors.SizeNESW;
-            this.dragPicture.Image = global::DriveLogGUI.Properties.Resources.DragHandle1;
+            this.dragPicture.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.dragPicture.Image = global::DriveLogGUI.Properties.Resources.resize2;
             this.dragPicture.Location = new System.Drawing.Point(179, 177);
             this.dragPicture.Name = "dragPicture";
             this.dragPicture.Size = new System.Drawing.Size(20, 22);
