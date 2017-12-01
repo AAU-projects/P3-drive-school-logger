@@ -302,11 +302,17 @@ namespace DriveLogCode.DataAccess
             return lessonTemplate;
         }
 
-        public static int GetNumberOfBookedLessonsFromAppointmentID(int appointmentid)
+        public static List<User> GetUsersOnAppointmentID(int appointmentid)
         {
-            DataTable result = MySql.GetNumberOfBookingsInAppointment(appointmentid);
+            DataTable queryInfo = MySql.GetUsersFromAppointmentID(appointmentid);
+            List<User> usersOnAppointment = new List<User>();
 
-            return result.Rows.Count;
+            for (int i = 0; i < queryInfo.Rows.Count; i++)
+            {
+                usersOnAppointment.Add(new User(queryInfo, i));
+            }
+
+            return usersOnAppointment;
         }
 
         public static List<Lesson> GetAllLessonsFromAppointmentID(int id)

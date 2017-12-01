@@ -25,13 +25,20 @@ namespace DriveLogCode.Objects
             LoggedInUser = new User(userTable);
 
             GetProgress();
-            GetNextLesson();
 
         }
 
         private static void GetTemplateList()
         {
             LessonTemplates = DatabaseParser.GetTemplatesList();
+        }
+
+        public static void LogOut()
+        {
+            CurrentLesson = null;
+            LastPracticalLesson = null;
+            LastTheoraticalLesson = null;
+
         }
 
         private static Lesson GetNextLesson()

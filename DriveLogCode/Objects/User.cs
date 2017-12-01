@@ -56,8 +56,6 @@ namespace DriveLogCode.Objects
             TheoreticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][15]);
             PracticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][16]);
             FeePaid = Convert.ToBoolean((string)userTable.Rows[index][17]);
-
-            CalculateProgress();
         }
 
 

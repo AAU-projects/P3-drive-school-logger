@@ -59,7 +59,7 @@ namespace DriveLogGUI.Windows
             this.Hide();
             MainWindow main = new MainWindow();
             main.ShowDialog(this);
-
+            Session.LogOut();
             // resets information after logout
             ResetInformation();
         }
