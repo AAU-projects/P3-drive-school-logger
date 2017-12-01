@@ -115,7 +115,7 @@ namespace DriveLogCode.Objects
 
         private void GetInstructorLessons()
         {
-            InstructorAppointments = DatabaseParser.GetAppointmentsByInstructorId(Session.LoggedInUser.Id).OrderBy(a => a.StartTime).ToList();
+            InstructorAppointments = DatabaseParser.GetAppointmentsByInstructorId(Id).OrderBy(a => a.StartTime).ToList();
             InstructorLessons = DatabaseParser.GetAllLessonsFromMultipleAppointmentIds(InstructorAppointments);
         }
 

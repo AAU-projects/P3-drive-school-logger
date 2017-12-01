@@ -347,6 +347,7 @@ namespace DriveLogCode.DataAccess
             foreach (DataRow appointment in result.Rows)
             {
                 AppointmentStructure appointmentToAdd = new AppointmentStructure(
+                    Convert.ToInt32(appointment[0]),
                     Convert.ToInt32(appointment[1]),
                     Convert.ToDateTime(appointment[2]),
                     Convert.ToInt32(appointment[3]),

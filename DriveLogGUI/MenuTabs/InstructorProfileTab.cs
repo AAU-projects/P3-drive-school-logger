@@ -17,6 +17,8 @@ namespace DriveLogGUI.MenuTabs
         internal event SubPageNotification SubPageCreated;
         internal override event NoParametersEvent BackButtonClicked;
 
+        List<AppointmentStructure> instructorAppointments = new List<AppointmentStructure>();
+
         public InstructorProfileTab(User user, bool search = false)
         {
             InitializeComponent();
@@ -135,11 +137,7 @@ namespace DriveLogGUI.MenuTabs
             int locationForRow = 0;
 
             // Get appointments for the instructor, and take 10 if the count is above 10.
-            List<AppointmentStructure> allInstructorAppointments =
-                DatabaseParser.GetAppointmentsByInstructorId(Session.LoggedInUser.Id).OrderBy(a => a.StartTime).ToList();
-
-            List<AppointmentStructure> instructorAppointments = new List<AppointmentStructure>();
-            instructorAppointments = allInstructorAppointments.Count > 10 ? allInstructorAppointments.Take(10).ToList() : allInstructorAppointments;
+            instructorAppointments = Session.LoggedInUser.InstructorAppointments.Count > 10 ? Session.LoggedInUser.InstructorAppointments.Take(10).ToList() : Session.LoggedInUser.InstructorAppointments;
 
 
             foreach (AppointmentStructure appointment in instructorAppointments)
@@ -206,7 +204,12 @@ namespace DriveLogGUI.MenuTabs
                 dateLabel.Text = $@"{appointment.StartTime.Date:dd/MM} {appointment.StartTime.DayOfWeek}";
                 timeLabel.Text = $@"{appointment.StartTime:HH:mm}";
                 typeLabel.Text = $@"{appointment.LessonType}";
-                statusLabel.Text = $@"{appointment.FullyBooked}";
+                
+
+                // Get amount of booked students.
+                List<Lesson> listOfLessonsForCurrentAppointment = Session.LoggedInUser.InstructorLessons
+                    .Where(l => l.AppointmentID == appointment.Id).GroupBy(x => x.StudentId).Select(y => y.First()).ToList();
+                statusLabel.Text = $@"{listOfLessonsForCurrentAppointment.Count} / 24";
 
                 // Panel hover.
                 foreach (Label label in appointmentPanel.Controls)
