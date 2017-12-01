@@ -17,7 +17,7 @@ namespace DriveLogGUI
     {
         public Label LabelAppointment;
         public Panel BookedPanelOnLabel;
-        public List<Lesson> bookedLessons => Session.LessonsUser.FindAll(x => x.AppointmentID == Id);
+        public List<Lesson> bookedLessons => Session.LoggedInUser.LessonsList.FindAll(x => x.AppointmentID == Id);
         public DateTime ToTime => StartTime.AddMinutes(AvailableTime * 45);
         public string TimeFormat => GetTime();
         public string DateFormat => GetDate();

@@ -11,7 +11,7 @@ namespace DriveLogCode.Objects
     {
         public static User LoggedInUser;
         public static List<LessonTemplate> LessonTemplates;
-        public static List<Lesson> LessonsUser;
+        //public static List<Lesson> LessonsUser;
         public static string TypeFirstAid = "FirstAid";
         public static string TypeDoctorsNote = "DoctorsNote";
 
@@ -22,17 +22,22 @@ namespace DriveLogCode.Objects
 
         public static void LoadUserFromDataTable(DataTable userTable)
         {
+            GetTemplateList();
             LoggedInUser = new User(userTable);
 
-            GetDataFromDatabase();
+            //GetDataFromDatabase();
             GetProgress();
             GetNextLesson();
 
         }
 
-        public static void GetDataFromDatabase()
+        /*public static void GetDataFromDatabase()
         {
             LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
+        }*/
+
+        private static void GetTemplateList()
+        {
             LessonTemplates = DatabaseParser.GetTemplatesList();
         }
 
@@ -63,13 +68,13 @@ namespace DriveLogCode.Objects
 
         public static void GetProgress()
         {
-            if (LessonsUser.Count != 0)
+            if (LoggedInUser.LessonsList.Count != 0)
             {
                 UpdateCurrentLesson();
 
                 try
                 {
-                    LastTheoraticalLesson = LessonsUser
+                    LastTheoraticalLesson = LoggedInUser.LessonsList
                         .Where(x => x.LessonTemplate.Type == LessonTypes.Theoretical)
                         .OrderByDescending(x => x.TemplateID)
                         .ThenByDescending(x => x.Progress)
@@ -81,7 +86,7 @@ namespace DriveLogCode.Objects
                 }
                 try
                 {
-                    LastPracticalLesson = LessonsUser
+                    LastPracticalLesson = LoggedInUser.LessonsList
                         .Where(x => x.LessonTemplate.Type == LessonTypes.Practical)
                         .OrderByDescending(x => x.TemplateID)
                         .ThenByDescending(x => x.Progress)
@@ -101,7 +106,7 @@ namespace DriveLogCode.Objects
 
         public static void UpdateCurrentLesson()
         {
-            CurrentLesson = LessonsUser
+            CurrentLesson = LoggedInUser.LessonsList
                 .OrderByDescending(x => x.TemplateID)
                 .ThenByDescending(x => x.Progress)
                 .FirstOrDefault();

@@ -310,6 +310,28 @@ namespace DriveLogCode.DataAccess
             return lessonsAppointment;
         }
 
+        public static List<AppointmentStructure> GetAppointmentsByInstructorId(int id)
+        {
+            DataTable result = MySql.GetAllAppointmentsByInstructorId(id);
+
+            List<AppointmentStructure> instructorAppointments = new List<AppointmentStructure>();
+
+            foreach (DataRow appointment in result.Rows)
+            {
+                AppointmentStructure appointmentToAdd = new AppointmentStructure(
+                    Convert.ToInt32(appointment[1]),
+                    Convert.ToDateTime(appointment[2]),
+                    Convert.ToInt32(appointment[3]),
+                    appointment[4].ToString(),
+                    Convert.ToBoolean(appointment[5])
+                    );
+
+                instructorAppointments.Add(appointmentToAdd);
+            }
+
+            return instructorAppointments;
+        }
+
         public static List<Lesson> CancelLesson(int templateID, int progressID, int userID)
         {
             List<Lesson> lessonsAppointment = new List<Lesson>();

@@ -114,7 +114,7 @@ namespace DriveLogGUI.MenuTabs
             List<Lesson> scheduledLessons = new List<Lesson>();
             backButtonInUpcomingLesson.Hide();
 
-            foreach (Lesson lesson in Session.LessonsUser)
+            foreach (Lesson lesson in Session.LoggedInUser.LessonsList)
             {
                 if (!lesson.Completed && scheduledLessons.Count <= 10)
                 {

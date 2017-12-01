@@ -421,7 +421,7 @@ namespace DriveLogGUI.MenuTabs
                 appointment.WarningText = "You can not book a lesson in a previous time than your lastly booked lesson";
             }
 
-            if (Session.LessonsUser.Count == 0) // if 0 there is nothing to do for the user with highlights
+            if (Session.LoggedInUser.LessonsList.Count == 0) // if 0 there is nothing to do for the user with highlights
             {
                 if (appointment.LessonType != LessonTypes.Theoretical)
                 {
