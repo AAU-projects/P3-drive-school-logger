@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
 using DriveLogCode.Objects;
+using DriveLogGUI.Windows;
 
 namespace DriveLogGUI.MenuTabs
 {
@@ -39,6 +40,12 @@ namespace DriveLogGUI.MenuTabs
         {
             Cursor = Cursors.AppStarting;
             if (searchBox.Text.Contains("'")) return;
+            if (searchBox.Text.Length != 0 && searchBox.Text.Length < 3 && searchBox.Text != "%")
+            {
+                Cursor = Cursors.Arrow;
+                CustomMsgBox.ShowOk("Please input at least 3 characters", "Search Too Short", CustomMsgBoxIcon.Warrning);
+                return;
+            }
             _usersFoundList = DatabaseParser.UserSearchList(searchBox.Text);
 
             _userPanelList.Clear();
