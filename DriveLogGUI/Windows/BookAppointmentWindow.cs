@@ -224,7 +224,7 @@ namespace DriveLogGUI.Windows
 
                 if (result) // if lesson is added its manually added to lessons in appointment id
                 {
-                    Session.LessonsUser.Add(newLesson);
+                    Session.LoggedInUser.LessonsList.Add(newLesson);
                     Session.UpdateCurrentLesson();
                 }
 
@@ -250,7 +250,7 @@ namespace DriveLogGUI.Windows
                 result = DatabaseParser.AddLessonToUserID(newLesson);
 
 
-                Session.LessonsUser.Add(newLesson);
+                Session.LoggedInUser.LessonsList.Add(newLesson);
                 Session.UpdateCurrentLesson();
 
             }

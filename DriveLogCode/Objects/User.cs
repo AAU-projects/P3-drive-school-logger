@@ -84,18 +84,16 @@ namespace DriveLogCode.Objects
         public int TheoreticalProgress { get; private set; }
         public int PracticalProgress { get; private set; }
         public List<Lesson> LessonsList = new List<Lesson>();
-        public List<LessonTemplate> LessonTemplates = new List<LessonTemplate>();
 
         private void CalculateProgress()
         {
-            LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
-            LessonTemplates = DatabaseParser.GetTemplatesList();
+            GetLessonList();
             TheoreticalProgress = 0;
             PracticalProgress = 0;
 
             foreach (Lesson l in LessonsList)
             {
-                LessonTemplate template = LessonTemplates.Find(x => l.TemplateID == x.Id);
+                LessonTemplate template = Session.LessonTemplates.Find(x => l.TemplateID == x.Id);
 
                 if (template == null) continue;
 
@@ -104,6 +102,11 @@ namespace DriveLogCode.Objects
                 else if (l.Completed && l.Progress == template.Time && template.Type == "Practical")
                     PracticalProgress++;
             }
+        }
+
+        public void GetLessonList()
+        {
+            LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
         }
 
         public override string ToString()
