@@ -41,7 +41,7 @@ namespace DriveLogGUI
         }
         private void InstructorLabelData()
         {
-            LabelAppointment.Text = InstructorName;
+            LabelAppointment.Text = $"{InstructorName}\n{LessonType}\n{FromTimeToTime()}";
         }
 
 
@@ -52,6 +52,7 @@ namespace DriveLogGUI
             LabelAppointment.BackColor = GetColorForLabel(this.LessonType);
             LabelAppointment.TextAlign = ContentAlignment.MiddleCenter;
             LabelAppointment.Font = new Font(new FontFamily("Calibri Light"), 9f, FontStyle.Regular, LabelAppointment.Font.Unit);
+            LabelAppointment.ForeColor = ColorScheme.MainFontColor;
             LabelAppointment.Size = new Size(LabelAppointment.Width, LabelAppointment.Height * 2);
 
             LabelAppointment.ForeColor = ColorScheme.CalendarRed;
@@ -60,6 +61,7 @@ namespace DriveLogGUI
             BookedPanelOnLabel.Width = LabelAppointment.Width / 10;
             BookedPanelOnLabel.Location = new Point(0, 0);
             BookedPanelOnLabel.Click += (s, e) => label_Clicked(new ApppointmentEventArgs(this));
+            BookedPanelOnLabel.BackColor = ColorScheme.MainBackgroundColor;
             BookedPanelOnLabel.Hide();
 
             LabelAppointment.ForeColor = Color.Black;
@@ -100,12 +102,18 @@ namespace DriveLogGUI
             BookedPanelOnLabel.BackColor = Color.FromArgb(255, Color.White);
         }
 
-        public void LabelAppointmentGreyOut()
+        public void LabelAppointmentUnavailable()
         {
             BookedPanelOnLabel.BackColor = Color.FromArgb(50, BookedPanelOnLabel.BackColor);
             LabelAppointment.BackColor = Color.FromArgb(100, ColorScheme.MainCalendarColor);
             LabelAppointment.ForeColor = Color.FromArgb(255, ColorScheme.MainFontColor);
+        }
 
+        public void LabelAppointmentAvailable()
+        {
+            BookedPanelOnLabel.BackColor = Color.FromArgb(255, BookedPanelOnLabel.BackColor);
+            LabelAppointment.BackColor = ColorScheme.MainCalendarColor;
+            LabelAppointment.ForeColor = Color.Black;
         }
 
         public void UserLabelData()

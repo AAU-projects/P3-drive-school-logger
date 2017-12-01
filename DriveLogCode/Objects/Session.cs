@@ -24,15 +24,20 @@ namespace DriveLogCode.Objects
         {
             LoggedInUser = new User(userTable);
 
-            GetDataFromDatabase();
+            GetLessonsDataFromDatabase();
+            GetLessonTemplateDataFromDatabase();
             GetProgress();
             GetNextLesson();
 
         }
 
-        public static void GetDataFromDatabase()
+        public static void GetLessonsDataFromDatabase()
         {
             LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
+        }
+
+        public static void GetLessonTemplateDataFromDatabase()
+        {
             LessonTemplates = DatabaseParser.GetTemplatesList();
         }
 
