@@ -11,6 +11,8 @@ namespace DriveLogGUI.MenuTabs
         private User _user;
         private bool _search;
         internal event SubPageNotification SubPageCreated;
+        internal override event NoParametersEvent BackButtonClicked;
+
         public InstructorProfileTab(User user, bool search = false)
         {
             InitializeComponent();
@@ -69,6 +71,7 @@ namespace DriveLogGUI.MenuTabs
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Find("userSearchTab", false)[0].Show();
+            BackButtonClicked?.Invoke();
             this.Dispose();
         }
 
@@ -87,41 +90,6 @@ namespace DriveLogGUI.MenuTabs
                 this.Parent.Controls.Add(studentFoundDriveLogTab);
                 studentFoundDriveLogTab.Show();
             }
-        }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

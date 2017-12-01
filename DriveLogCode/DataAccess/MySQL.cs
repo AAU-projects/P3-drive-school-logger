@@ -587,9 +587,14 @@ namespace DriveLogCode.DataAccess
 
         public static DataTable UserSearch(string searchInput, string table = UserTable)
         {
-            string query = $"SELECT * FROM {table} WHERE username LIKE '%{searchInput}%' OR  firstname LIKE '%{searchInput}%' OR" +
-                           $" lastname LIKE '%{searchInput}%' OR phone LIKE '%{searchInput}%' OR email LIKE '%{searchInput}%' OR" +
-                           $" cpr LIKE '%{searchInput}%' OR address LIKE '%{searchInput}%' OR zip LIKE '%{searchInput}%' OR city LIKE '%{searchInput}%'";
+            string query;
+            if (searchInput == "" || searchInput == "%")
+                query = $"SELECT * FROM {table}";
+            else
+            {
+                query =
+                    $"SELECT * FROM {table} WHERE CONCAT(username, firstname, lastname, phone, email, cpr, address, zip, city) LIKE '%{searchInput}%'";
+            }
             var cmd = new MySqlCommand(query);
 
             return SendQuery(cmd);
