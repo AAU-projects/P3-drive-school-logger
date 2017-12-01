@@ -55,11 +55,14 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static DataTable GetNumberOfBookingsInAppointment(int appointmentid, string LessonTemplateTable = LessonTemplateTable)
+        public static DataTable GetUsersFromAppointmentID(int appointmentid, string lessonTable = LessonTable, string userTable = UserTable)
         {
-            var cmd = new MySqlCommand($"SELECT MIN(lessons.UserID) " +
-                                       $"FROM lessons " +
-                                       $"WHERE lessons.AppointmentID = {appointmentid} " +
+            var cmd = new MySqlCommand($"SELECT {userTable}.* " +
+                                       $"FROM {lessonTable}, {userTable} " +
+                                       $"WHERE " +
+                                       $"{lessonTable}.AppointmentID = {appointmentid} " +
+                                       $"AND " +
+                                       $"{userTable}.user_id = {lessonTable}.UserID " +
                                        $"GROUP BY UserID");
             return SendQuery(cmd);
         }

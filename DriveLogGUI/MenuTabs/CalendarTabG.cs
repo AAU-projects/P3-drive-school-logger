@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Forms;
+ using System.Text;
+ using System.Windows.Forms;
 using DriveLogCode.DataAccess;
 using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
@@ -54,11 +55,15 @@ namespace DriveLogGUI.MenuTabs
             notAvailableDot.Image = Properties.Resources.bookableDot;
             notAvailableLabel.Text = "Bookable";
             NotAvaiableLabel.Text = "Fully booked";
+            instructorTitleInformationLabel.Text = "Students attending";
 
             bookedDot.Hide();
             bookedDotLabel.Hide();
             completedDot.Hide();
             completedDotLabel.Hide();
+            warningInformationTextbox.Size = new Size(141, 118);
+            warningInformationTextbox.Location = new Point(13, 141);
+            warningInformationTextbox.ScrollBars = ScrollBars.Vertical;
 
         }
 
@@ -94,31 +99,35 @@ namespace DriveLogGUI.MenuTabs
             dateInformationLabel.Text = selectedAppointment.DateFormat;
             timeInformationLabel.Text = selectedAppointment.TimeFormat;
             instructorInformationLabel.Text = selectedAppointment.InstructorName;
-            bookInformationLabel.Text = BookInformation();
-            warningInformationLabel.Hide();
+            warningInformationTextbox.Hide();
             warningTitleLabel.Hide();
 
-            CheckIfUserCanBookLesson();
+            List<User> usersOnAppointment = DatabaseParser.GetUsersOnAppointmentID(selectedAppointment.Id);
+
+            CheckIfUserCanBookLesson(usersOnAppointment);
+            bookInformationLabel.Text = BookInformation(usersOnAppointment);
         }
 
-        private string BookInformation()
+        private string BookInformation(List<User> usersOnAppointment)
         {
-            int numberOfBookings = selectedAppointment.bookedLessons.GroupBy(x => x.UserID).Count();
-
             if (selectedAppointment.LessonType == LessonTypes.Theoretical)
             {
-                return $"Booking status {numberOfBookings}/24";
+                return $"Booking status {usersOnAppointment.Count}/24";
             }
             if (selectedAppointment.LessonType == LessonTypes.Practical)
             {
-                return $"Booking status {numberOfBookings}/1";
+                return $"Booking status {usersOnAppointment.Count}/1";
             }
             return "error";
         }
 
-        private void CheckIfUserCanBookLesson()
+        private void CheckIfUserCanBookLesson(List<User> usersOnAppointment)
         {
-            if (selectedAppointment.ShowWarning)
+            if (Session.LoggedInUser.Sysmin)
+            {
+                ShowAttendingStudents(usersOnAppointment);
+            }
+            else if (selectedAppointment.ShowWarning)
             {
                 ShowBookingWarrning(selectedAppointment.WarningText);
                 if (selectedAppointment.BookedByUser)
@@ -132,7 +141,19 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
-        
+        private void ShowAttendingStudents(List<User> usersOnAppointment)
+        {
+            StringBuilder attendingString = new StringBuilder();
+
+            foreach (var user in usersOnAppointment)
+            {
+                attendingString.AppendLine(user.Fullname);
+            }
+
+            ShowBookingWarrning(attendingString.ToString());
+        }
+
+
         private void ShowBookingCancel()
         {
             bookingInformationButton.Text = CancelBookingText;
@@ -159,10 +180,10 @@ namespace DriveLogGUI.MenuTabs
         private void ShowBookingWarrning(string errorMsg)
         {
             bookingInformationButton.Text = UnavaiableBookingText;
-            warningInformationLabel.Text = errorMsg;
+            warningInformationTextbox.Text = errorMsg;
 
             warningTitleLabel.Show();
-            warningInformationLabel.Show();
+            warningInformationTextbox.Show();
         }
 
         private void SubscribeToAllClickPanels(List<CalendarData> listOfDays)
