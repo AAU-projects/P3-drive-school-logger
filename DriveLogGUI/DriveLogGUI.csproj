@@ -318,6 +318,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\purpleDot.png" />
     <None Include="Resources\noAvailableDot.png" />
     <None Include="Resources\exit6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
