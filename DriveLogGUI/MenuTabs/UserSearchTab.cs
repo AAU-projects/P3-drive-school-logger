@@ -158,7 +158,11 @@ namespace DriveLogGUI.MenuTabs
         {
             OnTempPanelLeave(sender, e);
             this.Hide();
-            StudentProfileTab foundUserProfile = new StudentProfileTab(user, true);
+            ProfileTab foundUserProfile;
+            if (user.Sysmin)
+                foundUserProfile = new InstructorProfileTab(user, true);
+            else
+                foundUserProfile = new StudentProfileTab(user, true);
             foundUserProfile.BackButtonClicked += ExecuteSearch;
             foundUserProfile.Location = this.Location;
             foundUserProfile.Parent = this;
