@@ -87,7 +87,7 @@ namespace DriveLogCode.Objects
 
         private void CalculateProgress()
         {
-            LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
+            GetLessonList();
             TheoreticalProgress = 0;
             PracticalProgress = 0;
 
@@ -102,6 +102,11 @@ namespace DriveLogCode.Objects
                 else if (l.Completed && l.Progress == template.Time && template.Type == "Practical")
                     PracticalProgress++;
             }
+        }
+
+        public void GetLessonList()
+        {
+            LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
         }
 
         public override string ToString()

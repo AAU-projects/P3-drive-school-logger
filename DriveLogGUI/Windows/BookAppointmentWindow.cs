@@ -87,7 +87,7 @@ namespace DriveLogGUI.Windows
             {
                 addThisLessonLessonTemplate = DatabaseParser.GetNextLessonTemplateFromID(addThisLesson.LessonTemplate.Id, _appointment.LessonType);
                 addThisLessonTemplateID = addThisLesson.LessonTemplate.Id;
-                maxLessonsToBook = addThisLesson.LessonTemplate.Time;
+                maxLessonsToBook = addThisLessonLessonTemplate.Time;
             }
 
             if (addThisLessonLessonTemplate.Type != DatabaseParser.GetLessonTemplateFromID(addThisLessonLessonTemplate.Id + 1).Type)
@@ -201,7 +201,6 @@ namespace DriveLogGUI.Windows
 
         private bool AddLesson()
         {
-            List<Lesson> newLessonList = new List<Lesson>();
             int numberOfLessons = lessonsComboBox.SelectedIndex + 1;
             bool result = true;
 

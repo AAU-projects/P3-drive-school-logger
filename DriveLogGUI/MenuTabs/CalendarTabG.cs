@@ -42,14 +42,29 @@ namespace DriveLogGUI.MenuTabs
             SubscribeToAllClickAppointments(appointments);
 
             if (Session.LoggedInUser.Sysmin)
-                bookingInformationButton.Hide();
+                GetInstructorData();
+
+            UpdateCalendar(0);
+
+        }
+
+        private void GetInstructorData()
+        {
+            bookingInformationButton.Hide();
+            notAvailableDot.Image = Properties.Resources.bookableDot;
+            notAvailableLabel.Text = "Bookable";
+            NotAvaiableLabel.Text = "Fully booked";
+
+            bookedDot.Hide();
+            bookedDotLabel.Hide();
+            completedDot.Hide();
+            completedDotLabel.Hide();
 
         }
 
         private void DrawCalendar()
         {
             GenerateWeeklyCalendar();
-            DrawLineBelowDates();
 
             if (Session.LoggedInUser.Sysmin) {
                 DrawAddAppointmentButtons();
@@ -223,14 +238,9 @@ namespace DriveLogGUI.MenuTabs
 
         private void panelForCalendar_Paint(object sender, PaintEventArgs e)
         {
-            GenerateWeeklyCalendar();
             DrawLineBelowDates();
-
-            if (Session.LoggedInUser.Sysmin)
-            {
-                DrawAddAppointmentButtons();
-            }
         }
+
 
         private void DrawAddAppointmentButtons()
         {
@@ -399,9 +409,46 @@ namespace DriveLogGUI.MenuTabs
                     prevLocation += appointment.LabelAppointment.Height + 5;
                     day.BottomPanelForCalendar.Controls.Add(appointment.LabelAppointment);
 
-                    AppointmentDataForUser(appointment);
-                    
+                    if (!Session.LoggedInUser.Sysmin)
+                    {
+                        AppointmentDataForUser(appointment);
+                    }
+                    else
+                    {
+                        AppointmentDataForInstructor(appointment);
+                    }
+
                 }
+            }
+        }
+
+        private bool CheckIfAppointmentIsExpired(Appointment appointment)
+        {
+            if (DateTime.Now > appointment.ToTime)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void AppointmentDataForInstructor(Appointment appointment)
+        {
+            bool appointmentInPreviousTime = CheckIfAppointmentIsExpired(appointment);
+
+            if (appointment.FullyBooked)  // if the appointment is fullybooked
+            {
+                appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
+                appointment.ShowWarning = true;
+                appointment.WarningText = "This appointment is fully booked";
+            }
+            else if (appointmentInPreviousTime)
+            {
+                appointment.LabelAppointmentUnavailable();
+            }
+            else
+            {
+                appointment.AppointmentHighlight(ColorScheme.CalendarBookable);
+                appointment.LabelAppointmentAvailable();
             }
         }
 
@@ -428,14 +475,18 @@ namespace DriveLogGUI.MenuTabs
                     appointment.AppointmentHighlight(Color.BlueViolet);
                     appointment.ShowWarning = true;
                     appointment.WarningText = "Please book theoretical lessons before booking a practical lesson";
-                    appointment.LabelAppointmentGreyOut();
+                    appointment.LabelAppointmentUnavailable();
+                }
+                else
+                {
+                    appointment.LabelAppointmentAvailable();
                 }
             } else if (appointment.bookedLessons.Find(x => x.Completed) != null) // if one lesson is completed assigned to that appointment
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarCompleted);
                 appointment.ShowWarning = true;
                 appointment.WarningText = "You have already completed your lessons on this appointment";
-                appointment.LabelAppointmentGreyOut();
+                appointment.LabelAppointmentUnavailable();
             } else if (appointment.bookedLessons.Find(x => x.UserID == Session.LoggedInUser.Id) != null) // if the user have booked the appointment
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarBooked);
@@ -447,21 +498,21 @@ namespace DriveLogGUI.MenuTabs
                 appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
                 appointment.ShowWarning = true;
                 appointment.WarningText = "You can not book a lesson in a previous time than your lastly booked lesson";
-                appointment.LabelAppointmentGreyOut();
+                appointment.LabelAppointmentUnavailable();
             } else if (Session.NextLesson.LessonTemplate.Type != appointment.LessonType)
             {
                 appointment.AppointmentHighlight(Color.BlueViolet);
                 appointment.ShowWarning = true;
                 appointment.WarningText = $"You need to book more {GetReverseType(appointment.LessonType)} lessons before booking a {appointment.LessonType}";
-                appointment.LabelAppointmentGreyOut();
+                appointment.LabelAppointmentUnavailable();
             } else
             {
+                appointment.LabelAppointmentAvailable();
                 appointment.AppointmentHighlightHide();
                 appointment.ShowWarning = false;
                 appointment.WarningText = $"";
             }
         }
-
         private bool CheckForPreviousBookedLessons(Appointment appointment)
         {
             if (appointment.StartTime <= Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
@@ -547,6 +598,10 @@ namespace DriveLogGUI.MenuTabs
                 DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons,  CustomMsgBoxIcon.Warrning);
                 if (result == DialogResult.Yes)
                 {
+                    DatabaseParser.DeleteLessons(cancelTheseLessons);
+                    Session.LoggedInUser.GetLessonList();
+                    Session.GetProgress();
+                    UpdateCalendar(0);
                 }
             }
             

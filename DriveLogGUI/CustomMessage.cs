@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 using DriveLogCode.Objects;
@@ -32,31 +33,34 @@ namespace DriveLogGUI.Windows
 
         public static DialogResult ShowYesNo(string text, string caption, List<Lesson> cancelLessons, Image symbol)
         {
-            int extraHeight = cancelLessons.Count * 20 + 60;
-            int extraWidth = 200;
+            int extraHeight = cancelLessons.Count * 20 + 20;
+            int extraWidth = 150;
             StringBuilder lessons = new StringBuilder();
 
-            lessons.AppendLine($"You will be canceling these {cancelLessons.Count} lessons below, do you want to proceed?");
+            lessons.AppendLine($"You will be canceling these {cancelLessons.Count} lessons below\n");
             foreach (var lesson in cancelLessons)
             {
-                lessons.AppendLine($"{lesson.StartDate.ToString("yy-MM-dd HH:mm")} - {lesson.EndDate.ToString("yy-MM-dd HH:mm")} lesson {lesson.TemplateID} / {lesson.Progress}");
+                lessons.AppendLine($"Date: {lesson.StartDate:dd/MM}    {lesson.StartDate:t} - {lesson.EndDate:t}    {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(lesson.LessonTemplate.Title.ToLower())}");
             }
+
+            lessons.AppendLine($"\nDo you want to proceed?");
 
             CustomMessageForm MsgBox = new CustomMessageForm(text, caption, symbol);
             MsgBox.Size = new Size(MsgBox.Size.Width + extraWidth, MsgBox.Size.Height + extraHeight);
             MsgBox.topBar.Size = new Size(MsgBox.topBar.Width + extraWidth, MsgBox.topBar.Height);
-            MsgBox.closeButton.Location = new Point(MsgBox.closeButton.Location.X + extraWidth, MsgBox.closeButton.Height);
+            MsgBox.closeButton.Location = new Point(MsgBox.closeButton.Location.X+ extraWidth, MsgBox.closeButton.Location.Y);
 
             MsgBox.textboxPanel.Size = new Size(MsgBox.textboxPanel.Size.Width + extraWidth, MsgBox.textboxPanel.Size.Height + extraHeight);
             MsgBox.textLabel.Size = new Size(MsgBox.textLabel.Size.Width+ extraWidth, MsgBox.textLabel.Size.Height + extraHeight);
-            MsgBox.textLabel.Location = new Point(0, 0);
+
 
             MsgBox.textLabel.Text = lessons.ToString();
+            MsgBox.textLabel.Location = new Point(0, 0);
 
-            MsgBox.YesButton.Location = new Point(MsgBox.Size.Width / 2 - MsgBox.YesButton.Width, MsgBox.Size.Height - 30);
+            MsgBox.YesButton.Location = new Point(MsgBox.Size.Width / 2 - (MsgBox.YesButton.Width + 10), MsgBox.Size.Height - 30);
             MsgBox.YesButton.Show();
 
-            MsgBox.NoButton.Location = new Point(MsgBox.Size.Width / 2 + MsgBox.NoButton.Width, MsgBox.Size.Height - 30);
+            MsgBox.NoButton.Location = new Point(MsgBox.Size.Width / 2 + 10, MsgBox.Size.Height - 30);
             MsgBox.NoButton.Show();
             MsgBox.NoButton.TabIndex = 0;
 

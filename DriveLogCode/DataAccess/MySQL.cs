@@ -154,14 +154,29 @@ namespace DriveLogCode.DataAccess
         }
 
 
-        public static DataTable GetAllLessonsAfterLessonID(int lessonId, int userId, string lessonTable = LessonTable)
+        public static DataTable GetAllLessonsAfterLessonID(int lessonId, int userId, string lessonTable = LessonTable, string lessonTemplateTable = LessonTemplateTable)
         {
-            var cmd = new MySqlCommand($"SELECT * " +
-                                       $"FROM {lessonTable} " +
-                                       $"WHERE " +
-                                       $"{lessonTable}.UserID = {userId} " +
-                                       $"AND " +
-                                       $"lessons.id >= {lessonId} "); 
+            var cmd = new MySqlCommand($"SELECT " +
+                                       $"{lessonTable}.id, " +
+                                       $"{lessonTable}.UserID, " +
+                                       $"{lessonTable}.AppointmentID, " +
+                                       $"{lessonTable}.LessonID, " +
+                                       $"{lessonTable}.LessonPart, " +
+                                       $"{lessonTable}.StartDate, " +
+                                       $"{lessonTable}.EndDate, " +
+                                       $"{lessonTable}.Completed, " +
+                                       $"{lessonTemplateTable}.id AS idTemplate, " +
+                                       $"{lessonTemplateTable}.title, " +
+                                       $"{lessonTemplateTable}.description, " +
+                                       $"{lessonTemplateTable}.type, " +
+                                       $"{lessonTemplateTable}.time, " +
+                                       $"{lessonTemplateTable}.reading, " +
+                                       $"{lessonTemplateTable}.active " +
+                                       $"FROM {lessonTable}, " +
+                                       $"{lessonTemplateTable} " +
+                                       $"WHERE {lessonTable}.UserID = {userId} " +
+                                       $"AND {lessonTable}.id >= {lessonId} " +
+                                       $"AND {lessonTable}.LessonID = {lessonTemplateTable}.id"); 
 
             return SendQuery(cmd);
         }
@@ -323,6 +338,14 @@ namespace DriveLogCode.DataAccess
         public static bool DeleteLesson(int studentId, int appointmentid, int progress, string table = LessonTable)
         {
             var cmd = new MySqlCommand($"DELETE FROM {table} WHERE UserID = {studentId} AND AppointmentID = {appointmentid} AND LessonPart = {progress} LIMIT 1");
+
+            return SendNonQuery(cmd);
+        }
+
+        public static bool DeleteLessons(string idsToDelete, string lessonTable = LessonTable)
+        {
+            var cmd = new MySqlCommand($"DELETE from {lessonTable} " +
+                                       $"WHERE id IN ({idsToDelete})");
 
             return SendNonQuery(cmd);
         }

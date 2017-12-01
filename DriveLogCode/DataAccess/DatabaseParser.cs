@@ -4,7 +4,8 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using DriveLogCode.Exceptions;
+ using System.Text;
+ using DriveLogCode.Exceptions;
 using DriveLogCode.Objects;
 
 namespace DriveLogCode.DataAccess
@@ -63,6 +64,26 @@ namespace DriveLogCode.DataAccess
         public static bool DeleteLesson(int studentId, int appointmentId, int progress)
         {
             return MySql.DeleteLesson(studentId, appointmentId, progress);
+        }
+
+        public static bool DeleteLessons(List<Lesson> cancelTheseLessons)
+        {
+            StringBuilder idsToDelete = new StringBuilder();
+
+
+            for (int i = 0; i < cancelTheseLessons.Count; i++)
+            {
+                if (i != cancelTheseLessons.Count - 1)
+                {
+                    idsToDelete.Append($"{cancelTheseLessons[i].Id}, ");
+                }
+                else
+                {
+                    idsToDelete.Append($"{cancelTheseLessons[i].Id}");
+                }
+            }
+
+            return MySql.DeleteLessons(idsToDelete.ToString());
         }
 
         public static bool SetUserTheoreticalTestDone(int userid, bool value)
@@ -340,20 +361,26 @@ namespace DriveLogCode.DataAccess
 
             DataTable result = MySql.GetAllLessonsAfterLessonID(lessonID, userID);
 
-            foreach (DataRow lesson in result.Rows) {
+            foreach (DataRow row in result.Rows) {
+
+                LessonTemplate newTemplate = new LessonTemplate(Convert.ToInt32(row[8]), (string) row[9], (string) row[10], (string) row[11], Convert.ToInt32(row[12]), (string) row[13] );
+
                 lessonsAppointment.Add(new Lesson(
-                    Convert.ToInt32(lesson[0]),
-                    Convert.ToInt32(lesson[1]),
-                    Convert.ToInt32(lesson[2]),
-                    Convert.ToInt32(lesson[3]),
-                    Convert.ToInt32(lesson[4]),
-                    (DateTime)lesson[5],
-                    (DateTime)lesson[6],
-                    Convert.ToBoolean(lesson[7])));
+                    Convert.ToInt32(row[0]),
+                    Convert.ToInt32(row[1]),
+                    Convert.ToInt32(row[2]),
+                    Convert.ToInt32(row[3]),
+                    Convert.ToInt32(row[4]),
+                    newTemplate,
+                    (DateTime)row[5],
+                    (DateTime)row[6],
+                    Convert.ToBoolean(row[7])));
             }
 
             return lessonsAppointment;
         }
+
+
     }
 }
 
