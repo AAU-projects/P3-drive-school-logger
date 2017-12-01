@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
-using System.Net;
+ using System.Linq;
+ using System.Net;
 using DriveLogCode.Exceptions;
 using DriveLogCode.Objects;
 
@@ -308,6 +309,33 @@ namespace DriveLogCode.DataAccess
             }
 
             return lessonsAppointment;
+        }
+
+        public static List<Lesson> GetAllLessonsFromMultipleAppointmentIds(List<AppointmentStructure> appointments)
+        {
+            List<int> appointmentIDs = appointments.Select(a => a.Id).ToList();
+            string appointmentIdString = string.Join(",", appointmentIDs);
+
+            DataTable result = MySql.GetAllLessonsFromMultipleAppointmentIds(appointmentIdString);
+            List<Lesson> InstructorLessons = new List<Lesson>();
+
+            foreach (DataRow lesson in result.Rows)
+            {
+                Lesson lessonToAdd = new Lesson(
+                    Convert.ToInt32(lesson[0]),
+                    Convert.ToInt32(lesson[1]),
+                    Convert.ToInt32(lesson[2]),
+                    Convert.ToInt32(lesson[3]),
+                    Convert.ToInt32(lesson[4]),
+                    Convert.ToDateTime(lesson[5]),
+                    Convert.ToDateTime(lesson[6]),
+                    Convert.ToBoolean(lesson[7])
+                    );
+
+                InstructorLessons.Add(lessonToAdd);
+            }
+
+            return InstructorLessons;
         }
 
         public static List<AppointmentStructure> GetAppointmentsByInstructorId(int id)

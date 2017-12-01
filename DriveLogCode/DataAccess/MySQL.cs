@@ -609,6 +609,14 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        public static DataTable GetAllLessonsFromMultipleAppointmentIds(string appointmentIdString,
+            string table = LessonTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE {table}.AppointmentID IN ({appointmentIdString});");
+
+            return SendQuery(cmd);
+        }
+
         private static bool SendNonQuery(MySqlCommand cmd)
         {
             try
