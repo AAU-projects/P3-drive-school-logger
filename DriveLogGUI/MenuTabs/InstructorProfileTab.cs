@@ -23,14 +23,6 @@ namespace DriveLogGUI.MenuTabs
             UpdateLayout();
             UpdateInfo();
 
-            // TODO: Fix det her næste gang. 
-            Panel appointmentInformationPanel = new Panel
-            {
-                Width = panelContainingUpcomingLessons.Width,
-                Height = panelContainingUpcomingLessons.Height,
-                Location = panelContainingUpcomingLessons.Location,
-                BackColor = Color.Aqua
-            };
             FormatAppointmentInformationPanel();
 
             foreach (Control c in upcommingTestsBackPanel.Controls)
@@ -140,7 +132,32 @@ namespace DriveLogGUI.MenuTabs
 
         private void FormatAppointmentInformationPanel()
         {
-            
+            // Create overlay panel, for when the user clicks on an appointment.
+            appointmentInformationPanel.Width = upcommingLessonsBackPanel.Width;
+            appointmentInformationPanel.Height = upcommingLessonsBackPanel.Height;
+            appointmentInformationPanel.Location = new Point(0, 0);
+
+            upcommingLessonsBackPanel.Controls.Add(appointmentInformationPanel);
+
+            // Create subpanels and labels for the overlay panel.
+
+            // Create back button.
+            Button informationPanelBackButton = new Button
+            {
+                Text = "Back",
+                ForeColor = Color.White,
+                BackColor = ColorScheme.MainThemeColorLighter,
+                Width = 80,
+                Height = 40,
+                Left = appointmentInformationPanel.Width - 92,
+                Top = appointmentInformationPanel.Height - 50,
+                FlatStyle = FlatStyle.Flat
+            };
+            informationPanelBackButton.Click += (s, e) => appointmentInformationPanel.Hide();
+            appointmentInformationPanel.Controls.Add(informationPanelBackButton);
+
+            appointmentInformationPanel.BringToFront();
+            appointmentInformationPanel.Hide();
         }
 
         private void panelContainingUpcomingLessons_Paint(object sender, PaintEventArgs e)
@@ -226,6 +243,7 @@ namespace DriveLogGUI.MenuTabs
                 // Panel hover.
                 foreach (Label label in appointmentPanel.Controls)
                 {
+                    label.MouseClick += (s, eventArgs) => appointmentInformationPanel.Show();
                     label.MouseEnter += (s, eventArgs) => OnAppointmentPanelEnter(appointmentPanel);
                     label.MouseLeave += (s, eventArgs) => OnAppointmentPanelLeave(appointmentPanel);
                 }

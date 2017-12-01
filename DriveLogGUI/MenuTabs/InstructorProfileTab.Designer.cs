@@ -68,6 +68,7 @@
             this.panelContainingUpcomingLessons = new System.Windows.Forms.Panel();
             this.timelLabel = new System.Windows.Forms.Label();
             this.dateLabel = new System.Windows.Forms.Label();
+            this.appointmentInformationPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).BeginInit();
             this.InfoPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
@@ -313,7 +314,7 @@
             this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
             this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.backButton.Location = new System.Drawing.Point(798, 6);
+            this.backButton.Location = new System.Drawing.Point(808, 6);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(52, 44);
             this.backButton.TabIndex = 2;
@@ -469,6 +470,7 @@
             // upcommingLessonsBackPanel
             // 
             this.upcommingLessonsBackPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.upcommingLessonsBackPanel.Controls.Add(this.appointmentInformationPanel);
             this.upcommingLessonsBackPanel.Controls.Add(this.lessonLabel);
             this.upcommingLessonsBackPanel.Controls.Add(this.panelContainingUpcomingLessons);
             this.upcommingLessonsBackPanel.Controls.Add(this.timelLabel);
@@ -517,6 +519,13 @@
             this.dateLabel.Size = new System.Drawing.Size(30, 13);
             this.dateLabel.TabIndex = 19;
             this.dateLabel.Text = "Date";
+            // 
+            // appointmentInformationPanel
+            // 
+            this.appointmentInformationPanel.Location = new System.Drawing.Point(3, 16);
+            this.appointmentInformationPanel.Name = "appointmentInformationPanel";
+            this.appointmentInformationPanel.Size = new System.Drawing.Size(21, 23);
+            this.appointmentInformationPanel.TabIndex = 23;
             // 
             // InstructorProfileTab
             // 
@@ -585,5 +594,6 @@
         private System.Windows.Forms.Panel panelContainingUpcomingLessons;
         private System.Windows.Forms.Label timelLabel;
         private System.Windows.Forms.Label dateLabel;
+        private System.Windows.Forms.Panel appointmentInformationPanel;
     }
 }
