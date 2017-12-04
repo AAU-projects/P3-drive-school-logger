@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using DriveLogCode.DataAccess;
@@ -57,12 +59,12 @@ namespace DriveLogGUI
             this.Controls.Add(documentViewer);
             this.Controls.Add(userSearchTab);
             this.Controls.Add(calendarTab);
+            this.Controls.Add(_lessonCreator);
 
 
             if (Session.LoggedInUser.Sysmin)
             {
                 this.Controls.Add(userSearchTab);
-                this.Controls.Add(_lessonCreator);
                 
                 userSearchButton.Enabled = true;
                 userSearchButton.Visible = true;
@@ -142,18 +144,25 @@ namespace DriveLogGUI
 
         private void SettingsSubMenu(bool visabilty = true)
         {
-            string[] settingsBtnNames = {"templateBtn"};
+            string[] adminSettingsBtnNames = {"templateBtn"};
+            string[] normalSettingsbtnNames = { };
+            IEnumerable<string> settingsbtnNames = normalSettingsbtnNames;
+
+            if (Session.LoggedInUser.Sysmin)
+            {
+                settingsbtnNames = normalSettingsbtnNames.Union(adminSettingsBtnNames);
+            }
 
             if (visabilty)
             {
-                foreach (string btnName in settingsBtnNames)
+                foreach (string btnName in settingsbtnNames)
                 {
                     panel4.Controls.Find(btnName,false)[0].Show();
                 }
             }
             else
             {
-                foreach (string btnName in settingsBtnNames)
+                foreach (string btnName in settingsbtnNames)
                 {
                     panel4.Controls.Find(btnName, false)[0].Hide();
                 }
@@ -184,10 +193,8 @@ namespace DriveLogGUI
             };
 
             templateBtn.Click += TemplateBtn_Click;
-
+            templateBtn.Hide();
             panel4.Controls.Add(templateBtn);
-
-            templateBtn.BringToFront();
         }
 
         private void TemplateBtn_Click(object sender, EventArgs e)
