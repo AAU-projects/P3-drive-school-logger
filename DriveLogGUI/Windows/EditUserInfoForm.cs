@@ -440,14 +440,14 @@ namespace DriveLogGUI.Windows
 
             if (editPasswordBox.Text != editPasswordBox.defaultText)
             {
-                updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
+                updateSuccess = DatabaseParser.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
                 zipBox.Text, cityBox.Text, usernameBox.Text, editPasswordBox.Text, picturePath, signaturePath, instructorCheckBox.Checked ? "true" : "false");
                 _user.PicturePath = picturePath;
                 _user.SignaturePath = signaturePath;
             }
             else
             {
-                updateSuccess = MySql.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
+                updateSuccess = DatabaseParser.UpdateUser(_user.Cpr, firstnameBox.Text, lastnameBox.Text, phoneBox.Text, emailBox.Text, addressBox.Text,
                 zipBox.Text, cityBox.Text, usernameBox.Text, _user.Password, picturePath, signaturePath, instructorCheckBox.Checked ? "true" : "false");
                 _user.PicturePath = picturePath;
                 _user.SignaturePath = signaturePath;
@@ -456,8 +456,7 @@ namespace DriveLogGUI.Windows
             if(updateSuccess)
             {
                 CustomMsgBox.ShowOk("You have succesfully updated the profile", "Success", CustomMsgBoxIcon.Complete);
-                DataTable user = MySql.GetUserByName(usernameBox.Text);
-                Session.LoadUserFromDataTable(user);
+                Session.LoggedInUser = DatabaseParser.GetUserByUsername(usernameBox.Text);
                 this.Dispose();
             }
             else

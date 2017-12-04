@@ -37,8 +37,8 @@ namespace DriveLogGUI.Windows
             // TODO remove else when program is done
             if (UsernameBox.Text != "Username")
             {
-                DataTable user = MySql.GetUserByName(UsernameBox.Text);
-                if (user == null || user.Rows[0][10].ToString() != PasswordBox.Text) {
+                User user = DatabaseParser.GetUserByUsername(UsernameBox.Text);
+                if (user == null || user.Password != PasswordBox.Text) {
                     CustomMsgBox.ShowOk("Wrong username or password", "Error", CustomMsgBoxIcon.Error);
 
                     // resets password with false login information
@@ -48,12 +48,12 @@ namespace DriveLogGUI.Windows
                     return;
                 }
 
-                Session.LoadUserFromDataTable(user);
+                Session.LoadUser(user);
 
             }
             else
             {
-                Session.LoadUserFromDataTable(MySql.GetUserByName("luke"));
+                Session.LoadUser(DatabaseParser.GetUserByUsername("luke"));
             }
 
             this.Hide();

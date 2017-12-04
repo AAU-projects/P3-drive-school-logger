@@ -1,12 +1,16 @@
 ﻿﻿using System;
 using System.Data;
-using DriveLogCode.Objects;
+ using System.Runtime.CompilerServices;
+ using DriveLogCode.Objects;
  using Microsoft.Build.Tasks;
  using MySql.Data.MySqlClient;
 
+[assembly: InternalsVisibleTo("DriveLogTests")]
+
+
 namespace DriveLogCode.DataAccess
 {
-    public static class MySql
+    internal static class MySql
     {
         private const string ConnectionString = "server=ds315e17.duckdns.org;port=50000;uid=DriveLog;pwd=#SWe2017;database=DriveLog";
         private static readonly  MySqlConnection Connection = new MySqlConnection(ConnectionString);
@@ -18,7 +22,7 @@ namespace DriveLogCode.DataAccess
         private const string LessonTable = "lessons";
         private const string TodaysNoteTable = "todaysNoteTable";
 
-        public static DataTable GetAllInstrutors(string table = UserTable)
+        internal static DataTable GetAllInstrutors(string table = UserTable)
         {
             var cmd = new MySqlCommand($"SELECT firstname, lastname, phone, signature FROM {table} WHERE sysmin = 'True'");
 
@@ -27,7 +31,7 @@ namespace DriveLogCode.DataAccess
 
         }
 
-        public static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string LessonTable = LessonTable, string AppointmentTable = AppointmentTable, string UserTable = UserTable, string LessonTemplateTable = LessonTemplateTable)
+        internal static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string LessonTable = LessonTable, string AppointmentTable = AppointmentTable, string UserTable = UserTable, string LessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand("SELECT " +
                 $"{UserTable}.firstname AS InstructorFirstname, " +
@@ -55,7 +59,7 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static DataTable GetUsersFromAppointmentID(int appointmentid, string lessonTable = LessonTable, string userTable = UserTable)
+        internal static DataTable GetUsersFromAppointmentID(int appointmentid, string lessonTable = LessonTable, string userTable = UserTable)
         {
             var cmd = new MySqlCommand($"SELECT {userTable}.* " +
                                        $"FROM {lessonTable}, {userTable} " +
@@ -66,8 +70,8 @@ namespace DriveLogCode.DataAccess
                                        $"GROUP BY UserID");
             return SendQuery(cmd);
         }
-      
-        public static DataTable GetLessonsToComplete(int instructorId, string LessonTable = LessonTable,
+
+        internal static DataTable GetLessonsToComplete(int instructorId, string LessonTable = LessonTable,
             string AppointmentTable = AppointmentTable, string LessonTemplateTable = LessonTemplateTable )
         {
             var cmd = new MySqlCommand("SELECT " +
@@ -94,27 +98,27 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static DataTable GetLessonByID(int id, string table = LessonTable)
+        internal static DataTable GetLessonByID(int id, string table = LessonTable)
         {
             return GetFromDB("id", id.ToString(), table);
         }
 
-        public static DataTable GetInstructorByID(int id, string table = UserTable)
+        internal static DataTable GetInstructorByID(int id, string table = UserTable)
         {
             return GetFromDB("user_id", id.ToString(), table);
         }
 
-        public static DataTable GetLessonTemplateByID(int lessonId, string table = LessonTemplateTable)
+        internal static DataTable GetLessonTemplateByID(int lessonId, string table = LessonTemplateTable)
         {
             return GetFromDB("id", lessonId.ToString(), table);
         }
 
-        public static DataTable GetLessonsByUser(int userID, string table = LessonTable)
+        internal static DataTable GetLessonsByUser(int userID, string table = LessonTable)
         {
             return GetFromDB("userID", userID.ToString(), table);
         }
 
-        public static DataTable GetLessonsByUserAndAppointment(int userID, int appointmentID,
+        internal static DataTable GetLessonsByUserAndAppointment(int userID, int appointmentID,
             string table = AppointmentTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `userID` = '{userID}' AND `appointmentID` = '{appointmentID}'");
@@ -122,7 +126,7 @@ namespace DriveLogCode.DataAccess
             return ExistTable(table) ? SendQuery(cmd) : null;
         }
 
-        public static DataTable GetAllAppointments(string appointmentTable = AppointmentTable, string userTable = UserTable)
+        internal static DataTable GetAllAppointments(string appointmentTable = AppointmentTable, string userTable = UserTable)
         {
             var cmd = new MySqlCommand("SELECT " +
                                        $"{appointmentTable}.id, " +
@@ -140,7 +144,7 @@ namespace DriveLogCode.DataAccess
 
             return SendQuery(cmd);
         }
-        public static int GetLessonIDFromUserIDProgressIDTemplateID(int templateId, int progressId, int userId, string lessonTable = LessonTable)
+        internal static int GetLessonIDFromUserIDProgressIDTemplateID(int templateId, int progressId, int userId, string lessonTable = LessonTable)
         {
             var cmd = new MySqlCommand($"SELECT * " +
                                        $"FROM {lessonTable} " +
@@ -155,9 +159,7 @@ namespace DriveLogCode.DataAccess
 
             return Convert.ToInt32(results.Rows[0][0]);
         }
-
-
-        public static DataTable GetAllLessonsAfterLessonID(int lessonId, int userId, string lessonTable = LessonTable, string lessonTemplateTable = LessonTemplateTable)
+        internal static DataTable GetAllLessonsAfterLessonID(int lessonId, int userId, string lessonTable = LessonTable, string lessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"SELECT " +
                                        $"{lessonTable}.id, " +
@@ -184,7 +186,7 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static DataTable GetAllAppointmentsByInstructorId(int instructorId, string table = AppointmentTable)
+        internal static DataTable GetAllAppointmentsByInstructorId(int instructorId, string table = AppointmentTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE instructorID = {instructorId}");
 
@@ -192,7 +194,7 @@ namespace DriveLogCode.DataAccess
         }
 
 
-        public static DataTable GetNextLessonTemplateByID(int lessonTemplateId, string lessonType, string lessonTemplateTable = LessonTemplateTable)
+        internal static DataTable GetNextLessonTemplateByID(int lessonTemplateId, string lessonType, string lessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand("SELECT " +
                                        $"{lessonTemplateTable}.id, " +
@@ -211,7 +213,7 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static DataTable GetAllLessonsFromAppointmentID(int id, string lessonTable = LessonTable)
+        internal static DataTable GetAllLessonsFromAppointmentID(int id, string lessonTable = LessonTable)
         {
             var cmd = new MySqlCommand($"SELECT * " +
                                        $"FROM {lessonTable} " +
@@ -220,7 +222,7 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static bool AddLesson(int userId, int appointmentID, int templateID, int part, string startDate, string endDate, bool completed, string table = LessonTable)
+        internal static bool AddLesson(int userId, int appointmentID, int templateID, int part, string startDate, string endDate, bool completed, string table = LessonTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO `{table}` (`userID`, `appointmentID`, `lessonID`, `lessonPart`, `StartDate`, `EndDate`, `Completed` )" +
                                        $"VALUES ('{userId}', '{appointmentID}', '{templateID}', '{part}', '{startDate}', '{endDate}', '{completed}')");
@@ -229,24 +231,24 @@ namespace DriveLogCode.DataAccess
             return CreateLessonTable(table) && SendNonQuery(cmd);
         }
 
-        public static DataTable GetAppointmentsByInstuctor(int instructorID, string table = AppointmentTable)
+        internal static DataTable GetAppointmentsByInstuctor(int instructorID, string table = AppointmentTable)
         {
             return GetFromDB("instructorID", instructorID.ToString(), table);
         }
 
-        public static DataTable GetAppointmentByID(int id, string table = AppointmentTable)
+        internal static DataTable GetAppointmentByID(int id, string table = AppointmentTable)
         {
             return GetFromDB("id", id.ToString(), table);
         }
 
-        private static DataTable GetFromDB(string column, string value, string table)
+        internal static DataTable GetFromDB(string column, string value, string table)
         {
             var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `{column}` = '{value}'");
 
             return ExistTable(table) ? SendQuery(cmd) : null;
         }
 
-        public static bool AddAppointment(string instructor, string startTime, int availableTime, string type, string table = AppointmentTable)
+        internal static bool AddAppointment(string instructor, string startTime, int availableTime, string type, string table = AppointmentTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO `{table}` (`instructorID`, `startTime`, `availableTime`, `lessonType`) " +
                                        $"VALUES ('{instructor}', '{startTime}', '{availableTime}', '{type}')");
@@ -255,7 +257,7 @@ namespace DriveLogCode.DataAccess
             return CreateAppointmentTable(table) && SendNonQuery(cmd);
         }
 
-        private static bool CreateLessonTable(string tableName = LessonTable)
+        internal static bool CreateLessonTable(string tableName = LessonTable)
         {
             var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
                                        $"`id`  int NOT NULL AUTO_INCREMENT ," +
@@ -289,7 +291,7 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
-        public static bool DeleteTemplate(int id, string table = LessonTemplateTable)
+        internal static bool DeleteTemplate(int id, string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"UPDATE {table} SET active = 'False' WHERE id = {id}");
 
@@ -297,7 +299,7 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
-        public static DataTable GetCreatedLessonNames(string table = LessonTemplateTable)
+        internal static DataTable GetCreatedLessonNames(string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"SELECT `title` FROM {table} WHERE active = 'True'");
 
@@ -305,14 +307,14 @@ namespace DriveLogCode.DataAccess
             return CreateTemplateTable(table) ? SendQuery(cmd) : null;
         }
 
-        public static DataTable GetAllRows(string table)
+        internal static DataTable GetAllRows(string table)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {table}");
 
             return SendQuery(cmd);
         }
 
-        public static DataTable GetLessonData(string title, string table = LessonTemplateTable)
+        internal static DataTable GetLessonData(string title, string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE title = '{title}' LIMIT 1");
 
@@ -331,21 +333,21 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
-        public static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status, string table = LessonTable)
+        internal static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status, string table = LessonTable)
         {
             var cmd = new MySqlCommand($"UPDATE {table} SET Completed = '{status}' WHERE UserID = {studentId} AND AppointmentID = {appointmentId} AND LessonPart = {progress} LIMIT 1");
 
             return SendNonQuery(cmd);
         }
 
-        public static bool DeleteLesson(int studentId, int appointmentid, int progress, string table = LessonTable)
+        internal static bool DeleteLesson(int studentId, int appointmentid, int progress, string table = LessonTable)
         {
             var cmd = new MySqlCommand($"DELETE FROM {table} WHERE UserID = {studentId} AND AppointmentID = {appointmentid} AND LessonPart = {progress} LIMIT 1");
 
             return SendNonQuery(cmd);
         }
 
-        public static bool DeleteLessons(string idsToDelete, string lessonTable = LessonTable)
+        internal static bool DeleteLessons(string idsToDelete, string lessonTable = LessonTable)
         {
             var cmd = new MySqlCommand($"DELETE from {lessonTable} " +
                                        $"WHERE id IN ({idsToDelete})");
@@ -353,7 +355,7 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
-        public static bool UploadLessonTemplate(string id, string title, string description, string type, string time, string reading, string table = LessonTemplateTable)
+        internal static bool UploadLessonTemplate(string id, string title, string description, string type, string time, string reading, string table = LessonTemplateTable)
         {
            var cmd = new MySqlCommand($"INSERT INTO {table} (title, description, type, time, reading) VALUES ('{title}', '{description}', '{type}', '{time}', '{reading}')");
 
@@ -382,14 +384,14 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
-        public static DataTable GetDocument(string type, int id, string docTable = DocumnentTable)
+        internal static DataTable GetDocument(string type, int id, string docTable = DocumnentTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {docTable} WHERE user = {id} AND type = '{type}' LIMIT 1");
 
             return SendQuery(cmd);
         }
 
-        public static bool Updatedocument(string type, int userId, string newPath, string docTable = DocumnentTable)
+        internal static bool Updatedocument(string type, int userId, string newPath, string docTable = DocumnentTable)
         {
             var cmd = new MySqlCommand($"UPDATE {docTable} SET path = '{newPath}' WHERE type = '{type}' AND `user` = {userId}");
 
@@ -402,7 +404,7 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
-        public static bool UploadDocument(string title, string type, DateTime date, int userId, string path, string table = DocumnentTable)
+        internal static bool UploadDocument(string title, string type, DateTime date, int userId, string path, string table = DocumnentTable)
         {
             if (ExistDocument(userId, type, table)) return Updatedocument(type, userId, path, table);
 
@@ -417,7 +419,7 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
-        public static bool CreateDocumentTabel(string tablename = DocumnentTable)
+        internal static bool CreateDocumentTabel(string tablename = DocumnentTable)
         {
             var query = $"CREATE TABLE `{tablename}` (" +
                         "`id`  int(11) NOT NULL AUTO_INCREMENT ," +
@@ -434,7 +436,7 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
-        public static DataTable GetUserByName(string username, string table = UserTable)
+        internal static DataTable GetUserByName(string username, string table = UserTable)
         {
             if (!ExistUsername(username, table)) return null;
 
@@ -442,7 +444,7 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static DataTable GetUserByID(int id, string table = UserTable)
+        internal static DataTable GetUserByID(int id, string table = UserTable)
         {
             if (!ExistUserId(id, table)) return null;
 
@@ -450,7 +452,7 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static bool ExistDocument(int id, string type, string table = DocumnentTable)
+        internal static bool ExistDocument(int id, string type, string table = DocumnentTable)
         {
             var cmd = new MySqlCommand($"SELECT 1 FROM {table} WHERE type = '{type}' AND user = {id} LIMIT 1");
 
@@ -473,22 +475,22 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
-        public static bool ExistUserId(int id, string table = UserTable)
+        internal static bool ExistUserId(int id, string table = UserTable)
         {
             return Exist("user_id", id.ToString(), table);
         }
 
-        public static bool ExistEmail(string email, string table = UserTable)
+        internal static bool ExistEmail(string email, string table = UserTable)
         {
             return Exist("email", email, table);
         }
 
-        public static bool ExistUsername(string username, string table = UserTable)
+        internal static bool ExistUsername(string username, string table = UserTable)
         {
             return Exist("username", username, table);
         }
 
-        public static bool ExistCPR(string cpr, string table = UserTable)
+        internal static bool ExistCPR(string cpr, string table = UserTable)
         {
             return Exist("cpr", cpr, table);
         }
@@ -510,7 +512,7 @@ namespace DriveLogCode.DataAccess
 
         }
 
-        public static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr, string address, 
+        internal static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr, string address, 
             string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string classname = "", string usertable = UserTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO {usertable} (" +
@@ -529,7 +531,7 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
-        public static bool UpdateUser(string cpr, string firstname, string lastname, string phone, string mail, string address,
+        internal static bool UpdateUser(string cpr, string firstname, string lastname, string phone, string mail, string address,
             string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string usertable = UserTable)
         {
             var cmd = new MySqlCommand($"UPDATE {usertable} SET " +
@@ -541,7 +543,7 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
-        public static bool UpdateUserEnum(int userid, string column, bool value, string table = UserTable)
+        internal static bool UpdateUserEnum(int userid, string column, bool value, string table = UserTable)
         {
             var cmd = new MySqlCommand($"UPDATE {table} SET " +
                                        $"`{column}` = '{value}' " +
@@ -593,7 +595,7 @@ namespace DriveLogCode.DataAccess
             return (SendNonQuery(cmd) && SendNonQuery(cmd2));
         }
 
-        public static DataTable UserSearch(string searchInput, string table = UserTable)
+        internal static DataTable UserSearch(string searchInput, string table = UserTable)
         {
             string query;
             if (searchInput == "" || searchInput == "%")
@@ -608,7 +610,7 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        public static bool AddTodaysNote(User user, string todayNoteText, string table = TodaysNoteTable)
+        internal static bool AddTodaysNote(User user, string todayNoteText, string table = TodaysNoteTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO {table} (" +
                                        $"userID, description)" +
@@ -632,7 +634,7 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
-        public static DataTable GetLatestTodaysNote(string table = TodaysNoteTable)
+        internal static DataTable GetLatestTodaysNote(string table = TodaysNoteTable)
         {
             string query = $"SELECT * FROM {table} ORDER BY `id` DESC LIMIT 1;";
             var cmd = new MySqlCommand(query);
