@@ -1,8 +1,12 @@
 ﻿﻿using System;
 using System.Data;
-using DriveLogCode.Objects;
+ using System.Runtime.CompilerServices;
+ using DriveLogCode.Objects;
  using Microsoft.Build.Tasks;
  using MySql.Data.MySqlClient;
+
+[assembly: InternalsVisibleTo("DriveLogTests")]
+
 
 namespace DriveLogCode.DataAccess
 {
