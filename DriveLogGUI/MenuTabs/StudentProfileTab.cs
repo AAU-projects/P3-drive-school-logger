@@ -482,12 +482,14 @@ namespace DriveLogGUI.MenuTabs
             if (confirmamtionBox == DialogResult.Yes)
             {
                 DatabaseParser.SetUserPracticalTestDone(_user.Id, true);
+                DatabaseParser.SetUserActive(_user.Id, false);
                 _user = DatabaseParser.GetUserById(_user.Id);
                 icon.Image = completedImage;
             }
             else if (confirmamtionBox == DialogResult.No)
             {
                 DatabaseParser.SetUserPracticalTestDone(_user.Id, false);
+                DatabaseParser.SetUserActive(_user.Id, true);
                 _user = DatabaseParser.GetUserById(_user.Id);
                 icon.Image = incompleteImage;
             }

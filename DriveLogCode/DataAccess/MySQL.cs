@@ -514,10 +514,10 @@ namespace DriveLogCode.DataAccess
             string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string classname = "", string usertable = UserTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO {usertable} (" +
-                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, signature, sysmin, class, theotestdone, practestdone, feepaid)" +
+                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, signature, sysmin, class, theotestdone, practestdone, feepaid, active)" +
                                        $"VALUES (" +
                                        $"'{firstname}', '{lastname}', '{phone}', '{mail}', '{cpr}', '{address}', '{zip}', '{city}', '{username}', " +
-                                       $"'{password}', '{picture}', '{signature}', '{sysmin}', '{classname}', 'False', 'False', 'False')");
+                                       $"'{password}', '{picture}', '{signature}', '{sysmin}', '{classname}', 'False', 'False', 'False', 'True')");
 
 
             if (ExistTable(usertable)) return SendNonQuery(cmd);
@@ -580,6 +580,7 @@ namespace DriveLogCode.DataAccess
                         "`theotestdone`  enum('True','False') NOT NULL ," +
                         "`practestdone`  enum('True','False') NOT NULL ," +
                         "`feepaid`  enum('True','False') NOT NULL ," +
+                        "`active`  enum('True','False') NOT NULL " +
                         "PRIMARY KEY (`user_id`))" +
                         "ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;";
 

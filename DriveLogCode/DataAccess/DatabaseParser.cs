@@ -101,6 +101,11 @@ namespace DriveLogCode.DataAccess
             return MySql.UpdateUserEnum(userid, "feepaid", value);
         }
 
+        public static bool SetUserActive(int userid, bool value)
+        {
+            return MySql.UpdateUserEnum(userid, "active", value);
+        }
+
         public static User GetUserById(int userId)
         {
             return new User(MySql.GetUserByID(userId));
