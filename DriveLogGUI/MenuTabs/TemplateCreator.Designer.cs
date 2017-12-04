@@ -31,17 +31,20 @@ namespace DriveLogGUI.MenuTabs
         private void InitializeComponent()
         {
             this.headerPanel = new System.Windows.Forms.Panel();
-            this.menuButton = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.pageTitle = new System.Windows.Forms.Label();
             this.rightPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
             this.radioTheoretical = new System.Windows.Forms.RadioButton();
             this.radioPractical = new System.Windows.Forms.RadioButton();
             this.saveButton = new System.Windows.Forms.Button();
             this.typeLabel = new System.Windows.Forms.Label();
+            this.readingTextbox = new DriveLogGUI.CustomControls.TextboxBorderColor();
             this.timeAmountLabel = new System.Windows.Forms.Label();
             this.timeAmount = new System.Windows.Forms.NumericUpDown();
+            this.descriptionTextbox = new DriveLogGUI.CustomControls.TextboxBorderColor();
+            this.titleTextBox = new DriveLogGUI.CustomControls.TextboxBorderColor();
             this.readingLabel = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
             this.descriptionLabel = new System.Windows.Forms.Label();
@@ -50,10 +53,6 @@ namespace DriveLogGUI.MenuTabs
             this.leftPanelLabel = new System.Windows.Forms.Label();
             this.removebutton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
-            this.readingTextbox = new TextboxBorderColor();
-            this.descriptionTextbox = new TextboxBorderColor();
-            this.titleTextBox = new TextboxBorderColor();
-            this.label1 = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.rightPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeAmount)).BeginInit();
@@ -63,27 +62,12 @@ namespace DriveLogGUI.MenuTabs
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
-            this.headerPanel.Controls.Add(this.menuButton);
             this.headerPanel.Controls.Add(this.logoutButton);
             this.headerPanel.Controls.Add(this.pageTitle);
             this.headerPanel.Location = new System.Drawing.Point(12, 12);
             this.headerPanel.Name = "headerPanel";
             this.headerPanel.Size = new System.Drawing.Size(873, 56);
             this.headerPanel.TabIndex = 1;
-            // 
-            // menuButton
-            // 
-            this.menuButton.BackColor = System.Drawing.Color.Transparent;
-            this.menuButton.BackgroundImage = global::DriveLogGUI.Properties.Resources.ic_menu_black_24dp_1x;
-            this.menuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.menuButton.FlatAppearance.BorderSize = 0;
-            this.menuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.menuButton.Location = new System.Drawing.Point(3, 12);
-            this.menuButton.Name = "menuButton";
-            this.menuButton.Size = new System.Drawing.Size(36, 32);
-            this.menuButton.TabIndex = 4;
-            this.menuButton.UseVisualStyleBackColor = false;
-            this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
             // logoutButton
             // 
@@ -104,7 +88,7 @@ namespace DriveLogGUI.MenuTabs
             this.pageTitle.BackColor = System.Drawing.Color.Transparent;
             this.pageTitle.Font = new System.Drawing.Font("Calibri", 25F);
             this.pageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.pageTitle.Location = new System.Drawing.Point(35, 6);
+            this.pageTitle.Location = new System.Drawing.Point(3, 6);
             this.pageTitle.Name = "pageTitle";
             this.pageTitle.Size = new System.Drawing.Size(767, 44);
             this.pageTitle.TabIndex = 0;
@@ -132,6 +116,17 @@ namespace DriveLogGUI.MenuTabs
             this.rightPanel.Name = "rightPanel";
             this.rightPanel.Size = new System.Drawing.Size(667, 457);
             this.rightPanel.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.label1.Location = new System.Drawing.Point(325, 416);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 19);
+            this.label1.TabIndex = 57;
+            this.label1.Text = "* Required field";
             // 
             // errorLabel
             // 
@@ -193,6 +188,21 @@ namespace DriveLogGUI.MenuTabs
             this.typeLabel.TabIndex = 50;
             this.typeLabel.Text = "Lesson Type*";
             // 
+            // readingTextbox
+            // 
+            this.readingTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.readingTextbox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.readingTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.readingTextbox.DefaultText = "";
+            this.readingTextbox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.readingTextbox.ForeColor = System.Drawing.Color.Black;
+            this.readingTextbox.Location = new System.Drawing.Point(385, 201);
+            this.readingTextbox.MaxLength = 255;
+            this.readingTextbox.Multiline = true;
+            this.readingTextbox.Name = "readingTextbox";
+            this.readingTextbox.Size = new System.Drawing.Size(261, 111);
+            this.readingTextbox.TabIndex = 49;
+            // 
             // timeAmountLabel
             // 
             this.timeAmountLabel.AutoSize = true;
@@ -216,6 +226,35 @@ namespace DriveLogGUI.MenuTabs
             this.timeAmount.Name = "timeAmount";
             this.timeAmount.Size = new System.Drawing.Size(37, 20);
             this.timeAmount.TabIndex = 47;
+            // 
+            // descriptionTextbox
+            // 
+            this.descriptionTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.descriptionTextbox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.descriptionTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.descriptionTextbox.DefaultText = "";
+            this.descriptionTextbox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.descriptionTextbox.ForeColor = System.Drawing.Color.Black;
+            this.descriptionTextbox.Location = new System.Drawing.Point(19, 131);
+            this.descriptionTextbox.MaxLength = 2000;
+            this.descriptionTextbox.Multiline = true;
+            this.descriptionTextbox.Name = "descriptionTextbox";
+            this.descriptionTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.descriptionTextbox.Size = new System.Drawing.Size(300, 304);
+            this.descriptionTextbox.TabIndex = 46;
+            // 
+            // titleTextBox
+            // 
+            this.titleTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.titleTextBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
+            this.titleTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.titleTextBox.DefaultText = "";
+            this.titleTextBox.Font = new System.Drawing.Font("Calibri Light", 14F);
+            this.titleTextBox.ForeColor = System.Drawing.Color.Black;
+            this.titleTextBox.Location = new System.Drawing.Point(19, 46);
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.Size = new System.Drawing.Size(300, 23);
+            this.titleTextBox.TabIndex = 45;
             // 
             // readingLabel
             // 
@@ -310,61 +349,6 @@ namespace DriveLogGUI.MenuTabs
             this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // readingTextbox
-            // 
-            this.readingTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
-            this.readingTextbox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
-            this.readingTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.readingTextbox.DefaultText = "";
-            this.readingTextbox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.readingTextbox.ForeColor = System.Drawing.Color.Black;
-            this.readingTextbox.Location = new System.Drawing.Point(385, 201);
-            this.readingTextbox.MaxLength = 255;
-            this.readingTextbox.Multiline = true;
-            this.readingTextbox.Name = "readingTextbox";
-            this.readingTextbox.Size = new System.Drawing.Size(261, 111);
-            this.readingTextbox.TabIndex = 49;
-            // 
-            // descriptionTextbox
-            // 
-            this.descriptionTextbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
-            this.descriptionTextbox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
-            this.descriptionTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.descriptionTextbox.DefaultText = "";
-            this.descriptionTextbox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.descriptionTextbox.ForeColor = System.Drawing.Color.Black;
-            this.descriptionTextbox.Location = new System.Drawing.Point(19, 131);
-            this.descriptionTextbox.MaxLength = 2000;
-            this.descriptionTextbox.Multiline = true;
-            this.descriptionTextbox.Name = "descriptionTextbox";
-            this.descriptionTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.descriptionTextbox.Size = new System.Drawing.Size(300, 304);
-            this.descriptionTextbox.TabIndex = 46;
-            // 
-            // titleTextBox
-            // 
-            this.titleTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
-            this.titleTextBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(225)))));
-            this.titleTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.titleTextBox.DefaultText = "";
-            this.titleTextBox.Font = new System.Drawing.Font("Calibri Light", 14F);
-            this.titleTextBox.ForeColor = System.Drawing.Color.Black;
-            this.titleTextBox.Location = new System.Drawing.Point(19, 46);
-            this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(300, 23);
-            this.titleTextBox.TabIndex = 45;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.label1.Location = new System.Drawing.Point(325, 416);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 19);
-            this.label1.TabIndex = 57;
-            this.label1.Text = "* Required field";
-            // 
             // TemplateCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,7 +390,6 @@ namespace DriveLogGUI.MenuTabs
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button removebutton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button menuButton;
         private System.Windows.Forms.RadioButton radioTheoretical;
         private System.Windows.Forms.RadioButton radioPractical;
         private System.Windows.Forms.Label errorLabel;
