@@ -46,7 +46,6 @@ namespace DriveLogGUI.MenuTabs
                 GetInstructorData();
 
             UpdateCalendar(0);
-
         }
 
         private void GetInstructorData()
