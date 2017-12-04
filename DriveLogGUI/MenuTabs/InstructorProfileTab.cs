@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
 using DriveLogCode.DesignSchemes;
@@ -17,7 +18,12 @@ namespace DriveLogGUI.MenuTabs
         internal event SubPageNotification SubPageCreated;
         internal override event NoParametersEvent BackButtonClicked;
 
-        List<AppointmentStructure> instructorAppointments = new List<AppointmentStructure>();
+        private List<AppointmentStructure> instructorAppointments = new List<AppointmentStructure>();
+        private Dictionary<AppointmentStructure, List<Lesson>> lessonsForAppointments = new Dictionary<AppointmentStructure, List<Lesson>>();
+
+        private RichTextBox lessonInformation;
+        private RichTextBox studentsForLesson;
+        private RichTextBox lessonData;
 
         public InstructorProfileTab(User user, bool search = false)
         {
@@ -28,6 +34,7 @@ namespace DriveLogGUI.MenuTabs
             UpdateInfo();
 
             FormatAppointmentInformationPanel();
+            CreateAppointmentInfoContent();
 
             foreach (Control c in upcommingTestsBackPanel.Controls)
             {
@@ -123,24 +130,50 @@ namespace DriveLogGUI.MenuTabs
                 Top = appointmentInformationPanel.Height - 50,
                 FlatStyle = FlatStyle.Flat
             };
-            informationPanelBackButton.Click += (s, e) => appointmentInformationPanel.Hide();
+            informationPanelBackButton.Click += (s, e) => OnInfoPanelBackButtonClicked();
             appointmentInformationPanel.Controls.Add(informationPanelBackButton);
 
             appointmentInformationPanel.BringToFront();
             appointmentInformationPanel.Hide();
         }
 
+        private void OnInfoPanelBackButtonClicked()
+        {
+            foreach (Control control in appointmentInformationPanel.Controls)
+            {
+                if (control is RichTextBox)
+                {
+                    RichTextBox test = control as RichTextBox;
+                    test.Clear();
+                }
+            }
+            appointmentInformationPanel.Hide();
+        }
+
         private void panelContainingUpcomingLessons_Paint(object sender, PaintEventArgs e)
         {
+            lessonsForAppointments.Clear();
             int widthForEachDay = panelContainingUpcomingLessons.Width / 4;
             int heightForEachDay = panelContainingUpcomingLessons.Height / 10;
             int locationForRow = 0;
 
             // Get appointments for the instructor, and take 10 if the count is above 10.
-            instructorAppointments = Session.LoggedInUser.InstructorAppointments.Count > 10 ? Session.LoggedInUser.InstructorAppointments.Take(10).ToList() : Session.LoggedInUser.InstructorAppointments;
+            //instructorAppointments = Session.LoggedInUser.InstructorAppointments.Count > 10 ? Session.LoggedInUser.InstructorAppointments.Take(10).ToList() : Session.LoggedInUser.InstructorAppointments;
+            // Takes a maximum of 10 appointments from the current instructor, and saves all lessons from that appointment, but removes duplicates for each student ID.
+            int counter = 0;
+            foreach (AppointmentStructure userAppointment in Session.LoggedInUser.InstructorAppointments)
+            {
+                if (counter < 10)
+                {
+                    List<Lesson> listOfLessonsForCurrentAppointment = Session.LoggedInUser.InstructorLessons
+                        .Where(l => l.AppointmentID == userAppointment.Id).GroupBy(x => x.StudentId).Select(y => y.First()).ToList();
 
+                    lessonsForAppointments.Add(userAppointment, listOfLessonsForCurrentAppointment);
+                    counter++;
+                }
+            }
 
-            foreach (AppointmentStructure appointment in instructorAppointments)
+            foreach (KeyValuePair<AppointmentStructure,List<Lesson>> currentAppointment in lessonsForAppointments)
             {
                 Panel appointmentPanel = new Panel
                 {
@@ -201,24 +234,115 @@ namespace DriveLogGUI.MenuTabs
                 panelContainingUpcomingLessons.Controls.Add(appointmentPanel);
 
                 // Set values of labels.
-                dateLabel.Text = $@"{appointment.StartTime.Date:dd/MM} {appointment.StartTime.DayOfWeek}";
-                timeLabel.Text = $@"{appointment.StartTime:HH:mm}";
-                typeLabel.Text = $@"{appointment.LessonType}";
+                dateLabel.Text = $@"{currentAppointment.Key.StartTime.Date:dd/MM} {currentAppointment.Key.StartTime.DayOfWeek}";
+                timeLabel.Text = $@"{currentAppointment.Key.StartTime:HH:mm}";
+                typeLabel.Text = $@"{currentAppointment.Key.LessonType}";
                 
 
                 // Get amount of booked students.
-                List<Lesson> listOfLessonsForCurrentAppointment = Session.LoggedInUser.InstructorLessons
-                    .Where(l => l.AppointmentID == appointment.Id).GroupBy(x => x.StudentId).Select(y => y.First()).ToList();
-                statusLabel.Text = $@"{listOfLessonsForCurrentAppointment.Count} / 24";
+               /* List<Lesson> listOfLessonsForCurrentAppointment = Session.LoggedInUser.InstructorLessons
+                    .Where(l => l.AppointmentID == appointment.Id).GroupBy(x => x.StudentId).Select(y => y.First()).ToList();*/
+                statusLabel.Text = $@"{currentAppointment.Value.Count} / 24";
 
                 // Panel hover.
                 foreach (Label label in appointmentPanel.Controls)
                 {
-                    label.MouseClick += (s, eventArgs) => appointmentInformationPanel.Show();
+                    label.MouseClick += (s, eventArgs) => OnAppointmentClícked(currentAppointment);
                     label.MouseEnter += (s, eventArgs) => OnAppointmentPanelEnter(appointmentPanel);
                     label.MouseLeave += (s, eventArgs) => OnAppointmentPanelLeave(appointmentPanel);
                 }
             }
+        }
+
+        private void CreateAppointmentInfoContent()
+        {
+            lessonInformation = new RichTextBox
+            {
+                AutoSize = false,
+                Font = new Font("Calibri Light", 10F, FontStyle.Regular),
+                Multiline = true,
+                ReadOnly = true,
+                ForeColor = ColorScheme.MainFontColor,
+                BackColor = ColorScheme.MainBackgroundColor,
+                BorderStyle = BorderStyle.None,
+                Width = appointmentInformationPanel.Width - 20,
+                Height = appointmentInformationPanel.Height / 2 - 20,
+                Left = 10,
+                Top = 10
+            };
+
+            studentsForLesson = new RichTextBox
+            {
+                AutoSize = false,
+                Font = new Font("Calibri Light", 10F, FontStyle.Regular),
+                Multiline = true,
+                ReadOnly = true,
+                ForeColor = ColorScheme.MainFontColor,
+                BackColor = ColorScheme.MainBackgroundColor,
+                BorderStyle = BorderStyle.None,
+                Width = appointmentInformationPanel.Width / 2 - 20,
+                Height = appointmentInformationPanel.Height / 2 - 10,
+                Left = 10,
+                Top = lessonInformation.Bottom + 10
+            };
+
+            lessonData = new RichTextBox
+            {
+                AutoSize = false,
+                Font = new Font("Calibri Light", 10F, FontStyle.Regular),
+                Multiline = true,
+                ReadOnly = true,
+                ForeColor = ColorScheme.MainFontColor,
+                BackColor = ColorScheme.MainBackgroundColor,
+                BorderStyle = BorderStyle.None,
+                Width = appointmentInformationPanel.Width / 2 - 10,
+                Height = appointmentInformationPanel.Height / 2 - 60,
+                Left = studentsForLesson.Width + 20,
+                Top = lessonInformation.Bottom + 10
+            };
+
+            appointmentInformationPanel.Controls.Add(lessonData);
+            appointmentInformationPanel.Controls.Add(studentsForLesson);
+            appointmentInformationPanel.Controls.Add(lessonInformation);
+        }
+
+        private void OnAppointmentClícked(KeyValuePair<AppointmentStructure,List<Lesson>> appointmentLessonPair)
+        {
+            // Sets the fontstyle to bold for the title of the textboxes, and changes it back to normal afterwards.
+            lessonInformation.SelectionFont = new Font(lessonInformation.Font, FontStyle.Bold);
+            lessonInformation.AppendText("Lesson information:" + Environment.NewLine);
+            lessonInformation.SelectionFont = new Font("Calibri Light", 10F, FontStyle.Regular);
+
+            studentsForLesson.SelectionFont = new Font(studentsForLesson.Font, FontStyle.Bold);
+            studentsForLesson.AppendText("Booked students:" + Environment.NewLine);
+            studentsForLesson.SelectionFont = new Font("Calibri Light", 10F, FontStyle.Regular);
+
+            lessonData.AppendText($"Start Time: {appointmentLessonPair.Key.StartTime}" + Environment.NewLine);
+            lessonData.AppendText($"Lessontype: {appointmentLessonPair.Key.LessonType}" + Environment.NewLine);
+            lessonData.AppendText($"Available time: {appointmentLessonPair.Key.AvailableTime}" + Environment.NewLine);
+            lessonData.AppendText($"Booked students: {appointmentLessonPair.Value.Count} / 24" + Environment.NewLine);
+
+            // Checks if any students have booked the appointment.
+            if (appointmentLessonPair.Value.Count == 0)
+            {
+                lessonInformation.AppendText("The lesson template will be updated when a student books this lesson.");
+                studentsForLesson.AppendText("No users have booked this lesson yet.");
+            }
+            else
+            {
+                // Set the template description for the lessonInformation textbox.
+                lessonInformation.AppendText(appointmentLessonPair.Value[0].LessonTemplate.Description);
+
+                // Add student names to studentsForLesson textbox.
+                List<int> studentIds = appointmentLessonPair.Value.Select(i => i.StudentId).ToList();
+                List<User> studentsForAppointment = DatabaseParser.GetAllUsersFromMultipleUserIds(studentIds);
+                
+                foreach (User student in studentsForAppointment)
+                {
+                    studentsForLesson.AppendText($"{student.Firstname} {student.Lastname}" + Environment.NewLine);
+                }
+            }
+            appointmentInformationPanel.Show();
         }
 
         private void OnAppointmentPanelEnter(Panel appointmentPanel)

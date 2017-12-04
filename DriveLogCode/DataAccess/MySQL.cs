@@ -693,6 +693,13 @@ namespace DriveLogCode.DataAccess
             return results;
 
         }
+
+        public static DataTable GetAllUsersFromMultipleUserIds(string userIdsString, string table = UserTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE {table}.user_id IN ({userIdsString});");
+
+            return SendQuery(cmd);
+        }
     }
 }
 

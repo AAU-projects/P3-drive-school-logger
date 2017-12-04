@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
-<<<<<<< HEAD
  using System.Linq;
  using System.Net;
 using DriveLogCode.Exceptions;
-=======
 using System.Net;
  using System.Text;
  using DriveLogCode.Exceptions;
->>>>>>> master
 using DriveLogCode.Objects;
 
 namespace DriveLogCode.DataAccess
@@ -353,12 +350,14 @@ namespace DriveLogCode.DataAccess
 
             foreach (DataRow lesson in result.Rows)
             {
+                LessonTemplate templateToAdd = Session.LessonTemplates.Find(x => Convert.ToInt32(lesson[3]) == x.Id);
                 Lesson lessonToAdd = new Lesson(
                     Convert.ToInt32(lesson[0]),
                     Convert.ToInt32(lesson[1]),
                     Convert.ToInt32(lesson[2]),
                     Convert.ToInt32(lesson[3]),
                     Convert.ToInt32(lesson[4]),
+                    templateToAdd,
                     Convert.ToDateTime(lesson[5]),
                     Convert.ToDateTime(lesson[6]),
                     Convert.ToBoolean(lesson[7])
@@ -368,6 +367,42 @@ namespace DriveLogCode.DataAccess
             }
 
             return InstructorLessons;
+        }
+
+        public static List<User> GetAllUsersFromMultipleUserIds(List<int> userIds)
+        {
+            List<User> locatedUsers = new List<User>();
+            string userIdsString = string.Join(",", userIds);
+
+            DataTable result = MySql.GetAllUsersFromMultipleUserIds(userIdsString);
+
+            foreach (DataRow user in result.Rows)
+            {
+                User foundUser = new User(
+                    Convert.ToInt32(user[0]),
+                    Convert.ToString(user[1]),
+                    Convert.ToString(user[2]),
+                    Convert.ToString(user[3]),
+                    Convert.ToString(user[4]),
+                    Convert.ToString(user[5]),
+                    Convert.ToString(user[6]),
+                    Convert.ToString(user[7]),
+                    Convert.ToString(user[8]),
+                    Convert.ToString(user[9]),
+                    Convert.ToString(user[10]),
+                    Convert.ToString(user[11]),
+                    Convert.ToString(user[12]),
+                    Convert.ToBoolean(user[13]),
+                    string.Empty,
+                    Convert.ToBoolean(user[15]),
+                    Convert.ToBoolean(user[16]),
+                    Convert.ToBoolean(user[17])
+                );
+
+                locatedUsers.Add(foundUser);
+            }
+
+            return locatedUsers;
         }
 
         public static List<AppointmentStructure> GetAppointmentsByInstructorId(int id)

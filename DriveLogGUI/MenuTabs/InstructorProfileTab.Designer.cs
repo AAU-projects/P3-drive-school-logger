@@ -64,11 +64,12 @@
             this.upcommingLessonLabel = new System.Windows.Forms.Label();
             this.upcommingLessonsUnderline = new System.Windows.Forms.Panel();
             this.upcommingLessonsBackPanel = new System.Windows.Forms.Panel();
+            this.appointmentInformationPanel = new System.Windows.Forms.Panel();
             this.lessonLabel = new System.Windows.Forms.Label();
             this.panelContainingUpcomingLessons = new System.Windows.Forms.Panel();
             this.timelLabel = new System.Windows.Forms.Label();
             this.dateLabel = new System.Windows.Forms.Label();
-            this.appointmentInformationPanel = new System.Windows.Forms.Panel();
+            this.bookedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).BeginInit();
             this.InfoPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
@@ -454,9 +455,9 @@
             this.upcommingLessonLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.upcommingLessonLabel.Location = new System.Drawing.Point(18, 5);
             this.upcommingLessonLabel.Name = "upcommingLessonLabel";
-            this.upcommingLessonLabel.Size = new System.Drawing.Size(105, 13);
+            this.upcommingLessonLabel.Size = new System.Drawing.Size(130, 13);
             this.upcommingLessonLabel.TabIndex = 11;
-            this.upcommingLessonLabel.Text = "Upcomming Lessons";
+            this.upcommingLessonLabel.Text = "Upcomming Appointments";
             // 
             // upcommingLessonsUnderline
             // 
@@ -470,6 +471,7 @@
             // upcommingLessonsBackPanel
             // 
             this.upcommingLessonsBackPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.upcommingLessonsBackPanel.Controls.Add(this.bookedLabel);
             this.upcommingLessonsBackPanel.Controls.Add(this.appointmentInformationPanel);
             this.upcommingLessonsBackPanel.Controls.Add(this.lessonLabel);
             this.upcommingLessonsBackPanel.Controls.Add(this.panelContainingUpcomingLessons);
@@ -482,11 +484,18 @@
             this.upcommingLessonsBackPanel.Size = new System.Drawing.Size(413, 328);
             this.upcommingLessonsBackPanel.TabIndex = 6;
             // 
+            // appointmentInformationPanel
+            // 
+            this.appointmentInformationPanel.Location = new System.Drawing.Point(3, 6);
+            this.appointmentInformationPanel.Name = "appointmentInformationPanel";
+            this.appointmentInformationPanel.Size = new System.Drawing.Size(21, 23);
+            this.appointmentInformationPanel.TabIndex = 23;
+            // 
             // lessonLabel
             // 
             this.lessonLabel.AutoSize = true;
             this.lessonLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.lessonLabel.Location = new System.Drawing.Point(251, 27);
+            this.lessonLabel.Location = new System.Drawing.Point(197, 27);
             this.lessonLabel.Name = "lessonLabel";
             this.lessonLabel.Size = new System.Drawing.Size(41, 13);
             this.lessonLabel.TabIndex = 22;
@@ -504,7 +513,7 @@
             // 
             this.timelLabel.AutoSize = true;
             this.timelLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.timelLabel.Location = new System.Drawing.Point(159, 27);
+            this.timelLabel.Location = new System.Drawing.Point(142, 27);
             this.timelLabel.Name = "timelLabel";
             this.timelLabel.Size = new System.Drawing.Size(30, 13);
             this.timelLabel.TabIndex = 20;
@@ -514,18 +523,21 @@
             // 
             this.dateLabel.AutoSize = true;
             this.dateLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
-            this.dateLabel.Location = new System.Drawing.Point(44, 27);
+            this.dateLabel.Location = new System.Drawing.Point(16, 27);
             this.dateLabel.Name = "dateLabel";
             this.dateLabel.Size = new System.Drawing.Size(30, 13);
             this.dateLabel.TabIndex = 19;
             this.dateLabel.Text = "Date";
             // 
-            // appointmentInformationPanel
+            // bookedLabel
             // 
-            this.appointmentInformationPanel.Location = new System.Drawing.Point(3, 16);
-            this.appointmentInformationPanel.Name = "appointmentInformationPanel";
-            this.appointmentInformationPanel.Size = new System.Drawing.Size(21, 23);
-            this.appointmentInformationPanel.TabIndex = 23;
+            this.bookedLabel.AutoSize = true;
+            this.bookedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
+            this.bookedLabel.Location = new System.Drawing.Point(299, 27);
+            this.bookedLabel.Name = "bookedLabel";
+            this.bookedLabel.Size = new System.Drawing.Size(75, 13);
+            this.bookedLabel.TabIndex = 24;
+            this.bookedLabel.Text = "Booked status";
             // 
             // InstructorProfileTab
             // 
@@ -595,5 +607,6 @@
         private System.Windows.Forms.Label timelLabel;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Panel appointmentInformationPanel;
+        private System.Windows.Forms.Label bookedLabel;
     }
 }
