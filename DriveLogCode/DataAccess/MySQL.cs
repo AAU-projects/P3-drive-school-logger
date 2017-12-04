@@ -514,10 +514,10 @@ namespace DriveLogCode.DataAccess
             string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string classname = "", string usertable = UserTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO {usertable} (" +
-                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, signature, sysmin, class, theotestdone, practestdone, feepaid)" +
+                                       $"firstname, lastname, phone, email, cpr, address, zip, city, username, `password`, picture, signature, sysmin, class, theotestdone, practestdone, feepaid, active)" +
                                        $"VALUES (" +
                                        $"'{firstname}', '{lastname}', '{phone}', '{mail}', '{cpr}', '{address}', '{zip}', '{city}', '{username}', " +
-                                       $"'{password}', '{picture}', '{signature}', '{sysmin}', '{classname}', 'False', 'False', 'False')");
+                                       $"'{password}', '{picture}', '{signature}', '{sysmin}', '{classname}', 'False', 'False', 'False', 'True')");
 
 
             if (ExistTable(usertable)) return SendNonQuery(cmd);
@@ -580,12 +580,17 @@ namespace DriveLogCode.DataAccess
                         "`theotestdone`  enum('True','False') NOT NULL ," +
                         "`practestdone`  enum('True','False') NOT NULL ," +
                         "`feepaid`  enum('True','False') NOT NULL ," +
+                        "`active`  enum('True','False') NOT NULL " +
                         "PRIMARY KEY (`user_id`))" +
                         "ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_danish_ci;";
 
-            var cmd = new MySqlCommand(query);
+            var query2 = "ALTER TABLE `users` " +
+                         "ADD FULLTEXT INDEX `FulltextSearch` (`firstname`, `lastname`, `phone`, `email`, `cpr`, `address`, `zip`, `city`, `username`)" ;
 
-            return SendNonQuery(cmd);
+            var cmd = new MySqlCommand(query);
+            var cmd2 = new MySqlCommand(query2);
+
+            return (SendNonQuery(cmd) && SendNonQuery(cmd2));
         }
 
         public static DataTable UserSearch(string searchInput, string table = UserTable)
@@ -596,7 +601,7 @@ namespace DriveLogCode.DataAccess
             else
             {
                 query =
-                    $"SELECT * FROM {table} WHERE CONCAT(username, firstname, lastname, phone, email, cpr, address, zip, city) LIKE '%{searchInput}%'";
+                    $"SELECT * FROM {table} WHERE MATCH(`username`, `firstname`, `lastname`, `phone`, `email`, `cpr`, `address`, `zip`, `city`) AGAINST ('*{searchInput}*' IN BOOLEAN MODE)";
             }
             var cmd = new MySqlCommand(query);
 
