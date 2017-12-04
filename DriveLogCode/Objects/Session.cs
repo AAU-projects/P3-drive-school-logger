@@ -24,6 +24,7 @@ namespace DriveLogCode.Objects
             GetTemplateList();
             LoggedInUser = new User(userTable);
             LoggedInUser.GetLessonList();
+            LoggedInUser.CalculateProgress();
 
             GetProgress();
 

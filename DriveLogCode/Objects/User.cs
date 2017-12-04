@@ -86,7 +86,7 @@ namespace DriveLogCode.Objects
         public int PracticalProgress { get; private set; }
         public List<Lesson> LessonsList = new List<Lesson>();
 
-        private void CalculateProgress()
+        public void CalculateProgress()
         {
             GetLessonList();
             TheoreticalProgress = 0;

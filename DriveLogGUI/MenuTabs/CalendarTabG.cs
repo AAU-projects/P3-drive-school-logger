@@ -46,7 +46,6 @@ namespace DriveLogGUI.MenuTabs
                 GetInstructorData();
 
             UpdateCalendar(0);
-
         }
 
         private void GetInstructorData()
@@ -475,18 +474,27 @@ namespace DriveLogGUI.MenuTabs
 
         private void AppointmentDataForUser(Appointment appointment)
         {
-            bool appointmentInPreviousTime = CheckForPreviousBookedLessons(appointment);
+            bool appointmentBookedInPreviousTime = CheckForPreviousBookedLessons(appointment);
+            bool appointmentInPreviousTime = CheckIfAppointmentIsExpired(appointment);
+
 
             if (appointment.FullyBooked)  // if the appointment is fullybooked
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarRed);
                 appointment.ShowWarning = true;
                 appointment.WarningText = "This appointment is fully booked";
-            } else if (appointmentInPreviousTime)
+            } else if (appointmentBookedInPreviousTime)
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
                 appointment.ShowWarning = true;
                 appointment.WarningText = "You can not book a lesson in a previous time than your lastly booked lesson";
+            }
+            else if (appointmentInPreviousTime)
+            {
+                appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
+                appointment.ShowWarning = true;
+                appointment.WarningText = "You can not book a lesson in the past";
+                appointment.LabelAppointmentUnavailable();
             }
 
             if (Session.LoggedInUser.LessonsList.Count == 0) // if 0 there is nothing to do for the user with highlights
@@ -514,7 +522,12 @@ namespace DriveLogGUI.MenuTabs
                 appointment.BookedByUser = true;
                 appointment.ShowWarning = true;
                 appointment.WarningText = "You already have a booking on this appointment";
-            } else if (appointmentInPreviousTime)
+            } else if (appointmentInPreviousTime) {
+                appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
+                appointment.ShowWarning = true;
+                appointment.WarningText = "You can not book a lesson in the past";
+                appointment.LabelAppointmentUnavailable();
+            } else if (appointmentBookedInPreviousTime)
             {
                 appointment.AppointmentHighlight(ColorScheme.CalendarNoSlotsAvailable);
                 appointment.ShowWarning = true;
@@ -536,7 +549,7 @@ namespace DriveLogGUI.MenuTabs
         }
         private bool CheckForPreviousBookedLessons(Appointment appointment)
         {
-            if (appointment.StartTime <= Session.CurrentLesson.StartDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
+            if (appointment.ToTime <= Session.CurrentLesson.EndDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
             {
                 return true;
             }
