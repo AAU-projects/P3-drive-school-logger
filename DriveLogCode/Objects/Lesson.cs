@@ -86,7 +86,7 @@ namespace DriveLogCode.Objects
 
         public Lesson()
         {
-            this.StartDate = DateTime.MinValue;;
+            this.EndDate = DateTime.MinValue;;
         }
     }
 }

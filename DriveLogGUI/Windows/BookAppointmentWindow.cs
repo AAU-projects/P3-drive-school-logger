@@ -90,6 +90,7 @@ namespace DriveLogGUI.Windows
                 maxLessonsToBook = addThisLessonLessonTemplate.Time;
             }
 
+
             if (addThisLessonLessonTemplate.Type != DatabaseParser.GetLessonTemplateFromID(addThisLessonLessonTemplate.Id + 1).Type)
             {
                 lessons = maxLessonsToBook < lessons ? maxLessonsToBook : lessons; // always make sure that the you can only book the required lessons to complete a lesson type
