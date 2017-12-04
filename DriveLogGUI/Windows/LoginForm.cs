@@ -48,12 +48,12 @@ namespace DriveLogGUI.Windows
                     return;
                 }
 
-                Session.LoggedInUser = user;
+                Session.LoadUser(user);
 
             }
             else
             {
-                Session.LoggedInUser = DatabaseParser.GetUserByUsername("luke");
+                Session.LoadUser(DatabaseParser.GetUserByUsername("luke"));
             }
 
             this.Hide();

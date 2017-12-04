@@ -19,6 +19,16 @@ namespace DriveLogCode.Objects
         public static Lesson CurrentLesson;
         public static Lesson NextLesson => GetNextLesson();
 
+        public static void LoadUser(User user)
+        {
+            GetTemplateList();
+            LoggedInUser = user;
+            LoggedInUser.GetLessonList();
+            LoggedInUser.CalculateProgress();
+
+            GetProgress();
+        }
+
         public static void LoadUserFromDataTable(DataTable userTable)
         {
             GetTemplateList();
