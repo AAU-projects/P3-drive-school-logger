@@ -12,7 +12,7 @@ namespace DriveLogCode.Objects
             
         }
         public User(int id, string firstname, string lastname, string phone, string email, string cpr, 
-            string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin, string className, bool theotestdone, bool practestdone, bool feepaid)
+            string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin, string className, bool theotestdone, bool practestdone, bool feepaid, bool active)
         {
             Id = id;
             Firstname = firstname;
@@ -32,6 +32,7 @@ namespace DriveLogCode.Objects
             TheoreticalTestDone = theotestdone;
             PracticalTestDone = practestdone;
             FeePaid = feepaid;
+            Active = active;
 
             CalculateProgress();
         }
@@ -56,6 +57,7 @@ namespace DriveLogCode.Objects
             TheoreticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][15]);
             PracticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][16]);
             FeePaid = Convert.ToBoolean((string)userTable.Rows[index][17]);
+            Active = Convert.ToBoolean((string)userTable.Rows[index][18]);
         }
 
 
@@ -79,6 +81,7 @@ namespace DriveLogCode.Objects
         public bool TheoreticalTestDone { get; }
         public bool PracticalTestDone { get; }
         public bool FeePaid { get; }
+        public bool Active { get; }
         public int TheoreticalProgress { get; private set; }
         public int PracticalProgress { get; private set; }
         public List<Lesson> LessonsList = new List<Lesson>();
