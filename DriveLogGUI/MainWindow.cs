@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml;
 using DriveLogCode.DataAccess;
 using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
@@ -21,8 +22,9 @@ namespace DriveLogGUI
         private DocumentViewer documentViewer;
         private UserSearchTab userSearchTab;
         private CalendarTabG calendarTab;
-        private SettingsTab settingsTab;
         private DriveLogTab driveLogTab;
+        private TemplateCreator _lessonCreator;
+
 
 
         public MainWindow()
@@ -46,7 +48,7 @@ namespace DriveLogGUI
             documentViewer.Location = pageStartPoint;
             userSearchTab.Location = pageStartPoint;
             calendarTab.Location = pageStartPoint;
-            settingsTab.Location = pageStartPoint;
+            _lessonCreator.Location = pageStartPoint;
 
             // adding them as control panels
             this.Controls.Add(overviewTab);
@@ -55,12 +57,13 @@ namespace DriveLogGUI
             this.Controls.Add(documentViewer);
             this.Controls.Add(userSearchTab);
             this.Controls.Add(calendarTab);
-            this.Controls.Add(settingsTab);
-            
+
+
             if (Session.LoggedInUser.Sysmin)
             {
                 this.Controls.Add(userSearchTab);
-
+                this.Controls.Add(_lessonCreator);
+                
                 userSearchButton.Enabled = true;
                 userSearchButton.Visible = true;
                 pictureSearchTab.Enabled = true;
@@ -79,6 +82,9 @@ namespace DriveLogGUI
             // opening starting page after login
             _lastButton = OverviewButton;
             OpenPage(OverviewButton, overviewTab);
+
+            SettingsAdminSubMenu();
+            SettingsSubMenu(false);
         }
 
         private void LogOut(object sender, EventArgs e)
@@ -93,7 +99,7 @@ namespace DriveLogGUI
             {
                 overviewTab = new InstructorOverviewTab();
                 profileTab = new InstructorProfileTab(Session.LoggedInUser);
-            }
+                }
             else
             {
                 overviewTab = new StudentOverviewTab();
@@ -103,8 +109,9 @@ namespace DriveLogGUI
             documentViewer = new DocumentViewer();
             userSearchTab = new UserSearchTab();
             calendarTab = new CalendarTabG(overviewTab, this);
-            settingsTab = new SettingsTab();
             driveLogTab = new DriveLogTab(Session.LoggedInUser);
+            _lessonCreator = new TemplateCreator();
+
 
             overviewTab.Hide();
             profileTab.Hide();
@@ -112,8 +119,8 @@ namespace DriveLogGUI
             documentViewer.Hide();
             userSearchTab.Hide();
             calendarTab.Hide();
-            settingsTab.Hide();
-
+            _lessonCreator.Hide();
+            
             MoveButtonSpaces(OverviewButton, 8);
             MoveButtonSpaces(ProfileButton, 8);
             MoveButtonSpaces(bookingButton, 8);
@@ -124,6 +131,68 @@ namespace DriveLogGUI
             bookingButton.Controls.Add(pictureBookingTab);
             settingsButton.Controls.Add(pictureSettingsTab);
             userSearchButton.Controls.Add(pictureSearchTab);
+
+        }
+
+        private void SubMenus(bool profileSubMenu = false, bool settingsSubMenu = false)
+        {
+            ProfileSubmenuControl(profileSubMenu);
+            SettingsSubMenu(settingsSubMenu);
+        }
+
+        private void SettingsSubMenu(bool visabilty = true)
+        {
+            string[] settingsBtnNames = {"templateBtn"};
+
+            if (visabilty)
+            {
+                foreach (string btnName in settingsBtnNames)
+                {
+                    panel4.Controls.Find(btnName,false)[0].Show();
+                }
+            }
+            else
+            {
+                foreach (string btnName in settingsBtnNames)
+                {
+                    panel4.Controls.Find(btnName, false)[0].Hide();
+                }
+            }
+        }
+
+        private void SettingsAdminSubMenu()
+        {
+            Button templateBtn = new Button
+            {
+                Name = "templateBtn",
+                Text = "Templates",
+                Size = new Size(108, 32),
+                Location = new Point(
+                    settingsButton.Location.X + 24,
+                    settingsButton.Location.Y + settingsButton.Height
+                    ),
+                BackColor = Color.Transparent,
+                FlatAppearance =
+                {
+                    BorderSize = 0,
+                    MouseOverBackColor = Color.FromArgb(109, 144, 150)
+                },
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point),
+                ForeColor = Color.White,
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            templateBtn.Click += TemplateBtn_Click;
+
+            panel4.Controls.Add(templateBtn);
+
+            templateBtn.BringToFront();
+        }
+
+        private void TemplateBtn_Click(object sender, EventArgs e)
+        {
+            OpenPage(sender, _lessonCreator);
         }
 
         private void ProfileButton_Click(object sender, EventArgs e)
@@ -179,8 +248,8 @@ namespace DriveLogGUI
         {
             //To add a page create a usercontrol and send it as paramater in use OpenPage
             OpenPage(sender, overviewTab);
-
-            ProfileSubmenuControl(false);
+            
+            SubMenus();
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
@@ -241,7 +310,7 @@ namespace DriveLogGUI
             if (Session.LoggedInUser.Sysmin) return;
             if (page is StudentOverviewTab || page is StudentProfileTab)
             {
-                ProfileSubmenuControl(true);
+                SubMenus(true);
                 OpenPage(driveLogButton, driveLogTab);
             }
         }
@@ -276,19 +345,19 @@ namespace DriveLogGUI
         private void bookingButton_Click(object sender, EventArgs e)
         {
             OpenPage(sender, calendarTab);
-            ProfileSubmenuControl(false);
+            SubMenus();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            OpenPage(sender, settingsTab);
-            ProfileSubmenuControl(false);
+            //OpenPage(sender, ??);
+            SubMenus(settingsSubMenu: true);
         }
 
         private void userSearchButton_Click(object sender, EventArgs e)
         {
             OpenPage(sender, userSearchTab);
-            ProfileSubmenuControl(false);
+            SubMenus();
         }
         
         private void doctorsNoteButton_Click_1(object sender, EventArgs e)
@@ -308,7 +377,7 @@ namespace DriveLogGUI
         private void OnIconClick(object sender, EventArgs e)
         {
 
-            ProfileSubmenuControl(true);
+            SubMenus(true);
 
             PictureBox pBox = sender as PictureBox;
 

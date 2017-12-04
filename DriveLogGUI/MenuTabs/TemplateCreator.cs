@@ -8,11 +8,8 @@ namespace DriveLogGUI.MenuTabs
 {
     public partial class TemplateCreator : UserControl
     {
-        public delegate void SlideEvent();
-        public SlideEvent ActivateSlide;
-
         private CheckBox _lastChecked;
-        private Button _actriveButton = null;
+        private Button _activeButton = null;
         private string _currentId = null;
 
         public TemplateCreator()
@@ -60,11 +57,11 @@ namespace DriveLogGUI.MenuTabs
 
         private void Template_Clicked(object sender, EventArgs e)
         {
-            if(_actriveButton != null) _actriveButton.BackColor = Color.FromArgb(251, 251, 251);
+            if(_activeButton != null) _activeButton.BackColor = Color.FromArgb(251, 251, 251);
 
-            _actriveButton = sender as Button;
-            _actriveButton.BackColor = Color.FromArgb(148, 197, 204);
-            LoadTemplateValues(_actriveButton.Text);
+            _activeButton = sender as Button;
+            _activeButton.BackColor = Color.FromArgb(148, 197, 204);
+            LoadTemplateValues(_activeButton.Text);
 
         }
 
@@ -85,13 +82,6 @@ namespace DriveLogGUI.MenuTabs
             {
                 radioTheoretical.Checked = true;
             }
-        }
-
-        private void TypeCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox activeCheckBox = sender as CheckBox;
-            if (activeCheckBox != _lastChecked && _lastChecked != null) _lastChecked.Checked = false;
-            _lastChecked = activeCheckBox.Checked ? activeCheckBox : null;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -130,10 +120,10 @@ namespace DriveLogGUI.MenuTabs
 
         private void removebutton_Click(object sender, EventArgs e)
         {
-            _templates.Remove(_actriveButton);
-            _actriveButton.Dispose();
+            _templates.Remove(_activeButton);
+            _activeButton.Dispose();
             DatabaseParser.DeleteTemplate(Convert.ToInt32(_currentId));
-            _actriveButton = null;
+            _activeButton = null;
 
             foreach (Button template in _templates)
             {
@@ -143,8 +133,8 @@ namespace DriveLogGUI.MenuTabs
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            if (_actriveButton != null) _actriveButton.BackColor = Color.FromArgb(251, 251, 251);
-            _actriveButton = null;
+            if (_activeButton != null) _activeButton.BackColor = Color.FromArgb(251, 251, 251);
+            _activeButton = null;
             _currentId = null;
 
             titleTextBox.Text = "";
@@ -152,11 +142,6 @@ namespace DriveLogGUI.MenuTabs
             readingTextbox.Text = "";
             timeAmount.Value = 0;
             if (_lastChecked != null) _lastChecked.Checked = false;
-        }
-
-        private void menuButton_Click(object sender, EventArgs e)
-        {
-            ActivateSlide?.Invoke();
         }
     }
 }
