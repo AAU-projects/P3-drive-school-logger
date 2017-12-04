@@ -73,16 +73,21 @@ namespace DriveLogGUI.Windows
                     text.AppendLine(attendingStudentsList.Items[i].SubItems[1].Text);
             }
 
-            DialogResult result = CustomMsgBox.ShowConfirm(text.ToString(), "Confirm Attendees", CustomMsgBoxIcon.Complete, 20 * attendingStudentsList.Items.Count + 60);
+            DialogResult result = CustomMsgBox.ShowConfirm(text.ToString(), "Confirm Attendees", CustomMsgBoxIcon.Complete, 20 * attendingStudentsList.Items.Count + 80);
 
             if (result == DialogResult.OK)
             {
                 for (int i = 0; i < attendingStudentsList.Items.Count; i++)
                 {
                     if (attendingStudentsList.Items[i].Checked)
-                        DatabaseParser.SetLessonToComplete(_lessonList[i].StudentId, _lessonList[i].AppointmentID, _lessonList[i].Progress, true);
+                        DatabaseParser.SetLessonToComplete(_lessonList[i].StudentId, _lessonList[i].AppointmentID,
+                            _lessonList[i].Progress, true);
                     else
-                        DatabaseParser.DeleteLesson(_lessonList[i].StudentId, _lessonList[i].AppointmentID, _lessonList[i].Progress);
+                    {
+                        List<Lesson> deleteList = DatabaseParser.CancelLesson(_lessonList[i].TemplateID,
+                            _lessonList[i].Progress, _lessonList[i].StudentId);
+                        DatabaseParser.DeleteLessons(deleteList);
+                    }
                 }
                 this.DialogResult = DialogResult.Yes;
                 this.Close();

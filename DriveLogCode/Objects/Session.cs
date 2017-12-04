@@ -11,7 +11,6 @@ namespace DriveLogCode.Objects
     {
         public static User LoggedInUser;
         public static List<LessonTemplate> LessonTemplates;
-        //public static List<Lesson> LessonsUser;
         public static string TypeFirstAid = "FirstAid";
         public static string TypeDoctorsNote = "DoctorsNote";
 
@@ -25,20 +24,21 @@ namespace DriveLogCode.Objects
             GetTemplateList();
             LoggedInUser = new User(userTable);
 
-            //GetDataFromDatabase();
             GetProgress();
-            GetNextLesson();
 
         }
-
-        /*public static void GetDataFromDatabase()
-        {
-            LessonsUser = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(LoggedInUser.Id);
-        }*/
 
         private static void GetTemplateList()
         {
             LessonTemplates = DatabaseParser.GetTemplatesList();
+        }
+
+        public static void LogOut()
+        {
+            CurrentLesson = null;
+            LastPracticalLesson = null;
+            LastTheoraticalLesson = null;
+
         }
 
         private static Lesson GetNextLesson()

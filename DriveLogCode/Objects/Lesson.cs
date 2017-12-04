@@ -70,6 +70,20 @@ namespace DriveLogCode.Objects
             this.Completed = completed;
         }
 
+        public Lesson(int id, int userid, int appointmentid, int lessonid, int lessonpart, LessonTemplate lessonTemplate, DateTime startdate,
+            DateTime enddate, bool completed)
+        {
+            this.Id = id; 
+            this.UserID = userid;
+            this.AppointmentID = appointmentid;
+            this.TemplateID = lessonid;
+            this.Progress = lessonpart;
+            this.LessonTemplate = lessonTemplate;
+            this.StartDate = startdate;
+            this.EndDate = enddate;
+            this.Completed = completed;
+        }
+
         public Lesson()
         {
             this.StartDate = DateTime.MinValue;;

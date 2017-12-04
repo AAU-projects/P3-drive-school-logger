@@ -318,6 +318,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\purpleDot.png" />
     <None Include="Resources\resize1.png" />
     <None Include="Resources\resize.png" />
     <None Include="Resources\noAvailableDot.png" />

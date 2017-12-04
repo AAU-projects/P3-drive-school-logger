@@ -41,13 +41,15 @@ namespace DriveLogGUI.MenuTabs
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.warningInformationTextbox = new System.Windows.Forms.TextBox();
+            this.NotAvaiableLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.notAvailableLabel = new System.Windows.Forms.Label();
             this.notAvailableDot = new System.Windows.Forms.PictureBox();
             this.completedDotLabel = new System.Windows.Forms.Label();
             this.completedDot = new System.Windows.Forms.PictureBox();
             this.bookedDotLabel = new System.Windows.Forms.Label();
             this.bookedDot = new System.Windows.Forms.PictureBox();
-            this.warningInformationLabel = new System.Windows.Forms.Label();
             this.bookInformationLabel = new System.Windows.Forms.Label();
             this.warningTitleLabel = new System.Windows.Forms.Label();
             this.bookingInformationButton = new System.Windows.Forms.Button();
@@ -61,6 +63,7 @@ namespace DriveLogGUI.MenuTabs
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notAvailableDot)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.completedDot)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookedDot)).BeginInit();
@@ -205,13 +208,15 @@ namespace DriveLogGUI.MenuTabs
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel4.Controls.Add(this.warningInformationTextbox);
+            this.panel4.Controls.Add(this.NotAvaiableLabel);
+            this.panel4.Controls.Add(this.pictureBox1);
             this.panel4.Controls.Add(this.notAvailableLabel);
             this.panel4.Controls.Add(this.notAvailableDot);
             this.panel4.Controls.Add(this.completedDotLabel);
             this.panel4.Controls.Add(this.completedDot);
             this.panel4.Controls.Add(this.bookedDotLabel);
             this.panel4.Controls.Add(this.bookedDot);
-            this.panel4.Controls.Add(this.warningInformationLabel);
             this.panel4.Controls.Add(this.bookInformationLabel);
             this.panel4.Controls.Add(this.warningTitleLabel);
             this.panel4.Controls.Add(this.bookingInformationButton);
@@ -224,19 +229,51 @@ namespace DriveLogGUI.MenuTabs
             this.panel4.Size = new System.Drawing.Size(171, 401);
             this.panel4.TabIndex = 9;
             // 
+            // warningInformationTextbox
+            // 
+            this.warningInformationTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.warningInformationTextbox.Font = new System.Drawing.Font("Calibri Light", 9F);
+            this.warningInformationTextbox.Location = new System.Drawing.Point(13, 184);
+            this.warningInformationTextbox.Multiline = true;
+            this.warningInformationTextbox.Name = "warningInformationTextbox";
+            this.warningInformationTextbox.ReadOnly = true;
+            this.warningInformationTextbox.Size = new System.Drawing.Size(141, 75);
+            this.warningInformationTextbox.TabIndex = 27;
+            this.warningInformationTextbox.Text = "WarningText";
+            // 
+            // NotAvaiableLabel
+            // 
+            this.NotAvaiableLabel.AutoSize = true;
+            this.NotAvaiableLabel.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NotAvaiableLabel.Location = new System.Drawing.Point(46, 339);
+            this.NotAvaiableLabel.Name = "NotAvaiableLabel";
+            this.NotAvaiableLabel.Size = new System.Drawing.Size(76, 15);
+            this.NotAvaiableLabel.TabIndex = 26;
+            this.NotAvaiableLabel.Text = "Not Available";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DriveLogGUI.Properties.Resources.noAvailableDot;
+            this.pictureBox1.Location = new System.Drawing.Point(19, 341);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(10, 10);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            // 
             // notAvailableLabel
             // 
             this.notAvailableLabel.AutoSize = true;
             this.notAvailableLabel.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notAvailableLabel.Location = new System.Drawing.Point(46, 314);
             this.notAvailableLabel.Name = "notAvailableLabel";
-            this.notAvailableLabel.Size = new System.Drawing.Size(76, 15);
+            this.notAvailableLabel.Size = new System.Drawing.Size(102, 15);
             this.notAvailableLabel.TabIndex = 24;
-            this.notAvailableLabel.Text = "Not Available";
+            this.notAvailableLabel.Text = "Type not Available";
             // 
             // notAvailableDot
             // 
-            this.notAvailableDot.Image = global::DriveLogGUI.Properties.Resources.noAvailableDot;
+            this.notAvailableDot.Image = global::DriveLogGUI.Properties.Resources.purpleDot;
             this.notAvailableDot.Location = new System.Drawing.Point(19, 316);
             this.notAvailableDot.Name = "notAvailableDot";
             this.notAvailableDot.Size = new System.Drawing.Size(10, 10);
@@ -284,16 +321,6 @@ namespace DriveLogGUI.MenuTabs
             this.bookedDot.TabIndex = 19;
             this.bookedDot.TabStop = false;
             // 
-            // warningInformationLabel
-            // 
-            this.warningInformationLabel.Font = new System.Drawing.Font("Calibri Light", 9F);
-            this.warningInformationLabel.Location = new System.Drawing.Point(13, 184);
-            this.warningInformationLabel.Name = "warningInformationLabel";
-            this.warningInformationLabel.Size = new System.Drawing.Size(141, 75);
-            this.warningInformationLabel.TabIndex = 16;
-            this.warningInformationLabel.Text = "Warning text";
-            this.warningInformationLabel.Visible = false;
-            // 
             // bookInformationLabel
             // 
             this.bookInformationLabel.AutoSize = true;
@@ -323,7 +350,7 @@ namespace DriveLogGUI.MenuTabs
             this.bookingInformationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bookingInformationButton.Font = new System.Drawing.Font("Calibri Light", 9.75F);
             this.bookingInformationButton.ForeColor = System.Drawing.Color.White;
-            this.bookingInformationButton.Location = new System.Drawing.Point(30, 357);
+            this.bookingInformationButton.Location = new System.Drawing.Point(27, 366);
             this.bookingInformationButton.Name = "bookingInformationButton";
             this.bookingInformationButton.Size = new System.Drawing.Size(108, 23);
             this.bookingInformationButton.TabIndex = 12;
@@ -405,6 +432,7 @@ namespace DriveLogGUI.MenuTabs
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notAvailableDot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.completedDot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookedDot)).EndInit();
@@ -435,12 +463,14 @@ namespace DriveLogGUI.MenuTabs
         private System.Windows.Forms.TextBox weekNumberTextbox;
         private System.Windows.Forms.Label warningTitleLabel;
         private System.Windows.Forms.Label bookInformationLabel;
-        private System.Windows.Forms.Label warningInformationLabel;
         private System.Windows.Forms.Label bookedDotLabel;
         private System.Windows.Forms.PictureBox bookedDot;
         private System.Windows.Forms.Label completedDotLabel;
         private System.Windows.Forms.PictureBox completedDot;
         private System.Windows.Forms.Label notAvailableLabel;
         private System.Windows.Forms.PictureBox notAvailableDot;
+        private System.Windows.Forms.Label NotAvaiableLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox warningInformationTextbox;
     }
 }

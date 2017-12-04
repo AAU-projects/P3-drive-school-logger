@@ -60,11 +60,14 @@ namespace DriveLogCode.Objects
             TheoreticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][15]);
             PracticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][16]);
             FeePaid = Convert.ToBoolean((string)userTable.Rows[index][17]);
+<<<<<<< HEAD
 
             if (Sysmin)
                 GetInstructorLessons();
             else
                 CalculateProgress();
+=======
+>>>>>>> master
         }
 
 
@@ -96,7 +99,7 @@ namespace DriveLogCode.Objects
 
         private void CalculateProgress()
         {
-            LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
+            GetLessonList();
             TheoreticalProgress = 0;
             PracticalProgress = 0;
 
@@ -113,10 +116,16 @@ namespace DriveLogCode.Objects
             }
         }
 
+<<<<<<< HEAD
         private void GetInstructorLessons()
         {
             InstructorAppointments = DatabaseParser.GetAppointmentsByInstructorId(Id).OrderBy(a => a.StartTime).ToList();
             InstructorLessons = DatabaseParser.GetAllLessonsFromMultipleAppointmentIds(InstructorAppointments);
+=======
+        public void GetLessonList()
+        {
+            LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
+>>>>>>> master
         }
 
         public override string ToString()
