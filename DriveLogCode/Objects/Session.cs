@@ -23,6 +23,7 @@ namespace DriveLogCode.Objects
         {
             GetTemplateList();
             LoggedInUser = new User(userTable);
+            LoggedInUser.GetLessonList();
 
             GetProgress();
 
