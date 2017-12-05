@@ -161,11 +161,11 @@ namespace DriveLogGUI.MenuTabs
             //instructorAppointments = Session.LoggedInUser.InstructorAppointments.Count > 10 ? Session.LoggedInUser.InstructorAppointments.Take(10).ToList() : Session.LoggedInUser.InstructorAppointments;
             // Takes a maximum of 10 appointments from the current instructor, and saves all lessons from that appointment, but removes duplicates for each student ID.
             int counter = 0;
-            foreach (AppointmentStructure userAppointment in Session.LoggedInUser.InstructorAppointments)
+            foreach (AppointmentStructure userAppointment in _user.InstructorAppointments)
             {
                 if (counter < 10)
                 {
-                    List<Lesson> listOfLessonsForCurrentAppointment = Session.LoggedInUser.InstructorLessons
+                    List<Lesson> listOfLessonsForCurrentAppointment = _user.InstructorLessons
                         .Where(l => l.AppointmentID == userAppointment.Id).GroupBy(x => x.StudentId).Select(y => y.First()).ToList();
 
                     lessonsForAppointments.Add(userAppointment, listOfLessonsForCurrentAppointment);
@@ -306,7 +306,7 @@ namespace DriveLogGUI.MenuTabs
             appointmentInformationPanel.Controls.Add(lessonInformation);
         }
 
-        private void OnAppointmentClícked(KeyValuePair<AppointmentStructure,List<Lesson>> appointmentLessonPair)
+        private void OnAppointmentClícked(KeyValuePair<AppointmentStructure, List<Lesson>> appointmentLessonPair)
         {
             // Sets the fontstyle to bold for the title of the textboxes, and changes it back to normal afterwards.
             lessonInformation.SelectionFont = new Font(lessonInformation.Font, FontStyle.Bold);
@@ -317,6 +317,9 @@ namespace DriveLogGUI.MenuTabs
             studentsForLesson.AppendText("Booked students:" + Environment.NewLine);
             studentsForLesson.SelectionFont = new Font("Calibri Light", 10F, FontStyle.Regular);
 
+            lessonData.SelectionFont = new Font(studentsForLesson.Font, FontStyle.Bold);
+            lessonData.AppendText("Appointment information:" + Environment.NewLine);
+            lessonData.SelectionFont = new Font("Calibri Light", 10F, FontStyle.Regular);
             lessonData.AppendText($"Start Time: {appointmentLessonPair.Key.StartTime}" + Environment.NewLine);
             lessonData.AppendText($"Lessontype: {appointmentLessonPair.Key.LessonType}" + Environment.NewLine);
             lessonData.AppendText($"Available time: {appointmentLessonPair.Key.AvailableTime}" + Environment.NewLine);

@@ -183,12 +183,6 @@
     <Compile Include="Windows\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuTabs\SettingsTab.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MenuTabs\SettingsTab.Designer.cs">
-      <DependentUpon>SettingsTab.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\SignatureEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -266,9 +260,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MenuTabs\SettingsTab.resx">
-      <DependentUpon>SettingsTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\SignatureEdit.resx">
       <DependentUpon>SignatureEdit.cs</DependentUpon>

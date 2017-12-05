@@ -15,6 +15,36 @@ namespace DriveLogCode.DataAccess
 {
     public static class DatabaseParser
     {
+        public static bool AddTodaysNote(User user, string todayNoteText)
+        {
+            return MySql.AddTodaysNote(user, todayNoteText);
+        }
+
+        public static bool UpdateUser(string cpr, string firstname, string lastname, string phone, string mail,
+            string address,
+            string zip, string city, string username, string password, string picture = null, string signature = "",
+            string sysmin = "false")
+        {
+            return MySql.UpdateUser(cpr, firstname, lastname, phone, mail, address, zip, city, username, password,
+                picture, signature, sysmin);
+        }
+
+        public static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr,
+            string address,
+            string zip, string city, string username, string password, string picture = null, string signature = "",
+            string sysmin = "false", string classname = "")
+        {
+            return MySql.AddUser(firstname, lastname, phone, mail, cpr, address, zip, city, username, password, picture,
+                signature, sysmin, classname);
+        }
+
+        public static User GetUserByUsername(string username)
+        {
+            DataTable user = MySql.GetUserByName(username);
+
+            return user == null ? null : new User(user);
+        }
+
         public static void DeleteTemplate(int id)
         {
             MySql.DeleteTemplate(id);
@@ -102,6 +132,11 @@ namespace DriveLogCode.DataAccess
         public static bool SetUserFeePaid(int userid, bool value)
         {
             return MySql.UpdateUserEnum(userid, "feepaid", value);
+        }
+
+        public static bool SetUserActive(int userid, bool value)
+        {
+            return MySql.UpdateUserEnum(userid, "active", value);
         }
 
         public static User GetUserById(int userId)
@@ -396,7 +431,8 @@ namespace DriveLogCode.DataAccess
                     string.Empty,
                     Convert.ToBoolean(user[15]),
                     Convert.ToBoolean(user[16]),
-                    Convert.ToBoolean(user[17])
+                    Convert.ToBoolean(user[17]),
+                    Convert.ToBoolean(user[18])
                 );
 
                 locatedUsers.Add(foundUser);

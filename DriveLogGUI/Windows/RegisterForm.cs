@@ -248,7 +248,7 @@ namespace DriveLogGUI.Windows
                 _isCityOk && _isZipOk && _isUsernameOk && _isPasswordOk && _isVerifyPasswordOk && _isSignatureOk)
             {
                 
-                bool UserCreated = MySql.AddUser(registerFirstnameBox.Text, registerLastnameBox.Text,
+                bool UserCreated = DatabaseParser.AddUser(registerFirstnameBox.Text, registerLastnameBox.Text,
                     registerPhoneBox.Text, registerEmailBox.Text,
                     registerCprBox.Text, registerAdressBox.Text, registerZipBox.Text, registerCityBox.Text,
                     registerUsernameBox.Text, registerPasswordBox.Text, _uploader.SaveProfilePicture(ProfileImage, Properties.Settings.Default["PictureUpload"].ToString()), 

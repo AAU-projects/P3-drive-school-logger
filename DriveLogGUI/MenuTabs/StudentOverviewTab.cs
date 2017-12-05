@@ -274,7 +274,7 @@ namespace DriveLogGUI.MenuTabs
             if (todaysNoteTextbox.Enabled)
             {
                 todaysNoteTextbox.Enabled = false;
-                MySql.AddTodaysNote(Session.LoggedInUser, todaysNoteTextbox.Text);
+                DatabaseParser.AddTodaysNote(Session.LoggedInUser, todaysNoteTextbox.Text);
             }
             else
             {

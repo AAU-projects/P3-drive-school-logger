@@ -60,8 +60,18 @@ namespace DriveLogGUI.MenuTabs
 
             for (int i = 0; i < _usersFoundList.Count; i++)
             {
-                if (userCollectionMenu.Text == "Students Only" && _usersFoundList[i].Sysmin == true) continue;
-                if (userCollectionMenu.Text == "Instructors Only" && _usersFoundList[i].Sysmin == false) continue;
+                if (activeCheckBox.Checked && !_usersFoundList[i].Active) continue;
+                if (userCollectionMenu.Text == "Students Only" && _usersFoundList[i].Sysmin) continue;
+                if (userCollectionMenu.Text == "Instructors Only" && !_usersFoundList[i].Sysmin) continue;
+
+                if (_usersFoundList[i].Sysmin)
+                {
+                    _usersFoundList[i].GetInstructorLessons();
+                }
+                else
+                {
+                    _usersFoundList[i].CalculateProgress();
+                }
 
                 GenerateUserPanel(_usersFoundList[i], idx);
                 idx++;

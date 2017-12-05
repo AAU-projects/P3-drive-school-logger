@@ -19,10 +19,38 @@ namespace DriveLogCode.Objects
         public static Lesson CurrentLesson;
         public static Lesson NextLesson => GetNextLesson();
 
+        public static void LoadUser(User user)
+        {
+            GetTemplateList();
+            LoggedInUser = user;
+            LoggedInUser.GetLessonList();
+
+            if (LoggedInUser.Sysmin)
+            {
+               LoggedInUser.GetInstructorLessons();
+            }
+            else
+            {
+                LoggedInUser.CalculateProgress();
+            }
+
+            GetProgress();
+        }
+
         public static void LoadUserFromDataTable(DataTable userTable)
         {
             GetTemplateList();
             LoggedInUser = new User(userTable);
+            LoggedInUser.GetLessonList();
+
+            if (LoggedInUser.Sysmin)
+            {
+                LoggedInUser.GetInstructorLessons();
+            }
+            else
+            {
+                LoggedInUser.CalculateProgress();
+            }
 
             GetProgress();
 
