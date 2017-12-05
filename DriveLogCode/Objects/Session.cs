@@ -24,7 +24,15 @@ namespace DriveLogCode.Objects
             GetTemplateList();
             LoggedInUser = user;
             LoggedInUser.GetLessonList();
-            LoggedInUser.CalculateProgress();
+
+            if (LoggedInUser.Sysmin)
+            {
+               LoggedInUser.GetInstructorLessons();
+            }
+            else
+            {
+                LoggedInUser.CalculateProgress();
+            }
 
             GetProgress();
         }
@@ -34,7 +42,15 @@ namespace DriveLogCode.Objects
             GetTemplateList();
             LoggedInUser = new User(userTable);
             LoggedInUser.GetLessonList();
-            LoggedInUser.CalculateProgress();
+
+            if (LoggedInUser.Sysmin)
+            {
+                LoggedInUser.GetInstructorLessons();
+            }
+            else
+            {
+                LoggedInUser.CalculateProgress();
+            }
 
             GetProgress();
 
