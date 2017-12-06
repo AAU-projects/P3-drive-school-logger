@@ -117,7 +117,8 @@ namespace DriveLogGUI.MenuTabs
             {
                 return $"Booking status {usersOnAppointment.Count}/1";
             }
-            return "error";
+            return $"Booking status {usersOnAppointment.Count}/8";
+
         }
 
         private void CheckIfUserCanBookLesson(List<User> usersOnAppointment)
@@ -339,7 +340,7 @@ namespace DriveLogGUI.MenuTabs
                 day.LabelForWeekday.Text = GetShortWeekday(dayNow.DayOfWeek.ToString()).ToUpper();
                 day.Date = dayNow;
 
-                if (day.Date.Day == DateTime.Now.Day)
+                if (day.Date.ToShortDateString() == DateTime.Now.ToShortDateString())
                 {
                     day.LabelForWeekday.BackColor = Color.FromArgb(100, ColorScheme.MainThemeColorLight);
                     day.LabelForDate.BackColor = Color.FromArgb(100, ColorScheme.MainThemeColorLight);
@@ -421,7 +422,7 @@ namespace DriveLogGUI.MenuTabs
                 int prevLocation = 0;
 
 
-                List<Appointment> appointmentsOnDay = appointments.Where(x => x.ToTime.Day == day.Date.Day).ToList();
+                List<Appointment> appointmentsOnDay = appointments.Where(x => x.ToTime.ToShortDateString() == day.Date.ToShortDateString()).ToList();
 
                 foreach (var appointment in appointmentsOnDay) {
                     appointment.LabelAppointment.Show();
