@@ -326,7 +326,7 @@ namespace DriveLogGUI.MenuTabs
             lessonData.AppendText($"Lesson time: {appointmentLessonPair.Key.StartTime:HH:mm} - {appointmentLessonPair.Key.StartTime.AddMinutes(45 * appointmentLessonPair.Key.AvailableTime):HH:mm}" + Environment.NewLine);
             DateTime availableTime = new DateTime();
             availableTime = availableTime.AddMinutes(45 * appointmentLessonPair.Key.AvailableTime);
-            lessonData.AppendText($"Allocated time: {availableTime:HH:mm}" + Environment.NewLine);
+            lessonData.AppendText($"Allocated time: {availableTime:HH}h{availableTime:mm}min" + Environment.NewLine);
             lessonData.AppendText($"Lessontype: {appointmentLessonPair.Key.LessonType}" + Environment.NewLine);
             lessonData.AppendText($"Booked students: {appointmentLessonPair.Value.Count} / 24" + Environment.NewLine);
 
