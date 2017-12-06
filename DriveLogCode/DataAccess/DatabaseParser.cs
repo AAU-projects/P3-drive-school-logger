@@ -12,45 +12,53 @@ namespace DriveLogCode.DataAccess
 {
     public static class DatabaseParser
     {
-        public static bool AddTodaysNote(User user, string todayNoteText)
+
+        private const string UserTable = "users";
+        private const string DocumnentTable = "documents";
+        private const string LessonTemplateTable = "lessonTemplates";
+        private const string AppointmentTable = "appointments";
+        private const string LessonTable = "lessons";
+        private const string TodaysNoteTable = "todaysNoteTable";
+
+        public static bool AddTodaysNote(User user, string todayNoteText, string todaysNoteTable = TodaysNoteTable)
         {
-            return MySql.AddTodaysNote(user, todayNoteText);
+            return MySql.AddTodaysNote(user, todayNoteText, todaysNoteTable);
         }
 
         public static bool UpdateUser(string cpr, string firstname, string lastname, string phone, string mail,
             string address,
             string zip, string city, string username, string password, string picture = null, string signature = "",
-            string sysmin = "false")
+            string sysmin = "false", string usertable = UserTable)
         {
             return MySql.UpdateUser(cpr, firstname, lastname, phone, mail, address, zip, city, username, password,
-                picture, signature, sysmin);
+                picture, signature, sysmin, usertable);
         }
 
         public static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr,
             string address,
             string zip, string city, string username, string password, string picture = null, string signature = "",
-            string sysmin = "false", string classname = "")
+            string sysmin = "false", string classname = "", string usertable = UserTable)
         {
             return MySql.AddUser(firstname, lastname, phone, mail, cpr, address, zip, city, username, password, picture,
-                signature, sysmin, classname);
+                signature, sysmin, classname, usertable);
         }
 
-        public static User GetUserByUsername(string username)
+        public static User GetUserByUsername(string username, string usertable = UserTable)
         {
-            DataTable user = MySql.GetUserByName(username);
+            DataTable user = MySql.GetUserByName(username, usertable);
 
             return user == null ? null : new User(user);
         }
 
-        public static void DeleteTemplate(int id)
+        public static void DeleteTemplate(int id, string lessonTable = LessonTemplateTable)
         {
-            MySql.DeleteTemplate(id);
+            MySql.DeleteTemplate(id, lessonTable);
         }
 
         public static bool UploadTemplate(string id, string title, string description, string type, string time,
-            string reading)
+            string reading, string lessonTable = LessonTemplateTable)
         {
-            return MySql.UploadLessonTemplate(id, title, description, type, time, reading);
+            return MySql.UploadLessonTemplate(id, title, description, type, time, reading, lessonTable);
         }
 
         /// <summary>
@@ -58,9 +66,9 @@ namespace DriveLogCode.DataAccess
         /// </summary>
         /// <param name="userid">userid param</param>
         /// <returns></returns>
-        public static List<Lesson> GetScheduledAndCompletedLessonsByUserIdList(int userid)
+        public static List<Lesson> GetScheduledAndCompletedLessonsByUserIdList(int userid, string lessonTable = LessonTable, string appointmentTable = AppointmentTable, string userTable = UserTable, string lessonTemplateTable = LessonTemplateTable)
         {
-            DataTable results = MySql.GetLessonsAndAttachedAppointmentByUserId(userid);
+            DataTable results = MySql.GetLessonsAndAttachedAppointmentByUserId(userid, lessonTable, appointmentTable, userTable, lessonTemplateTable);
             List<Lesson> lessonsList = new List<Lesson>();
 
             foreach (DataRow row in results.Rows)
@@ -72,9 +80,9 @@ namespace DriveLogCode.DataAccess
             return lessonsList;
         }
 
-        public static List<Lesson> GetLessonsToCompleteList(User instructor)
+        public static List<Lesson> GetLessonsToCompleteList(User instructor, string lessonTable = LessonTable, string appointmentTable = AppointmentTable, string lessonTemplateTable = LessonTemplateTable)
         {
-            DataTable results = MySql.GetLessonsToComplete(instructor.Id);
+            DataTable results = MySql.GetLessonsToComplete(instructor.Id, lessonTable, appointmentTable, lessonTemplateTable);
             List<Lesson> lessonsFoundList = new List<Lesson>();
 
             foreach (DataRow row in results.Rows)
@@ -86,17 +94,17 @@ namespace DriveLogCode.DataAccess
             return lessonsFoundList;
         }
 
-        public static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status)
+        public static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status, string lessonTable = LessonTable)
         {
-            return MySql.SetLessonToComplete(studentId, appointmentId, progress, true);
+            return MySql.SetLessonToComplete(studentId, appointmentId, progress, true, lessonTable);
         }
 
-        public static bool DeleteLesson(int studentId, int appointmentId, int progress)
+        public static bool DeleteLesson(int studentId, int appointmentId, int progress, string lessonTable = LessonTable)
         {
-            return MySql.DeleteLesson(studentId, appointmentId, progress);
+            return MySql.DeleteLesson(studentId, appointmentId, progress, lessonTable);
         }
 
-        public static bool DeleteLessons(List<Lesson> cancelTheseLessons)
+        public static bool DeleteLessons(List<Lesson> cancelTheseLessons, string lessonTable = LessonTable)
         {
             StringBuilder idsToDelete = new StringBuilder();
 
@@ -113,51 +121,51 @@ namespace DriveLogCode.DataAccess
                 }
             }
 
-            return MySql.DeleteLessons(idsToDelete.ToString());
+            return MySql.DeleteLessons(idsToDelete.ToString(), lessonTable);
         }
 
-        public static bool SetUserTheoreticalTestDone(int userid, bool value)
+        public static bool SetUserTheoreticalTestDone(int userid, bool value, string userTable = UserTable)
         {
-            return MySql.UpdateUserEnum(userid, "theotestdone", value);
+            return MySql.UpdateUserEnum(userid, "theotestdone", value, userTable);
         }
 
-        public static bool SetUserPracticalTestDone(int userid, bool value)
+        public static bool SetUserPracticalTestDone(int userid, bool value, string userTable = UserTable)
         {
-            return MySql.UpdateUserEnum(userid, "practestdone", value);
+            return MySql.UpdateUserEnum(userid, "practestdone", value, userTable);
         }
 
-        public static bool SetUserFeePaid(int userid, bool value)
+        public static bool SetUserFeePaid(int userid, bool value, string userTable = UserTable)
         {
-            return MySql.UpdateUserEnum(userid, "feepaid", value);
+            return MySql.UpdateUserEnum(userid, "feepaid", value, userTable);
         }
 
-        public static bool SetUserActive(int userid, bool value)
+        public static bool SetUserActive(int userid, bool value, string userTable = UserTable)
         {
-            return MySql.UpdateUserEnum(userid, "active", value);
+            return MySql.UpdateUserEnum(userid, "active", value, userTable);
         }
 
-        public static User GetUserById(int userId)
+        public static User GetUserById(int userId, string userTable = UserTable)
         {
-            return new User(MySql.GetUserByID(userId));
+            return new User(MySql.GetUserByID(userId, userTable));
         }
 
-        public static Dictionary<string, string> GetTemplate(string templateName)
+        public static Dictionary<string, string> GetTemplate(string templateName, string lessonTemplateTable = LessonTemplateTable)
         {
-            DataTable lessonInfo = MySql.GetLessonData(templateName);
+            DataTable lessonInfo = MySql.GetLessonData(templateName, lessonTemplateTable);
 
             return GetDict(lessonInfo);
         }
 
-        public static bool AddLessonToUserID(Lesson lesson)
+        public static bool AddLessonToUserID(Lesson lesson, string lessonTable = LessonTable)
         {
             return MySql.AddLesson(lesson.UserID, lesson.AppointmentID, lesson.TemplateID, lesson.Progress,
                 lesson.StartDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")),
-                lesson.EndDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), lesson.Completed);
+                lesson.EndDate.ToString("G", CultureInfo.CreateSpecificCulture("zh-CN")), lesson.Completed, lessonTable);
         }
 
-        public static User GetInstructorByID(int id)
+        public static User GetInstructorByID(int id, string userTable = UserTable)
         {
-            DataTable result = MySql.GetInstructorByID(id);
+            DataTable result = MySql.GetInstructorByID(id, userTable);
             return new User(result);
         }
 
@@ -176,9 +184,9 @@ namespace DriveLogCode.DataAccess
             return TempDict;
         }
 
-        public static List<LessonTemplate> GetTemplatesList()
+        public static List<LessonTemplate> GetTemplatesList(string lessonTemplateTable = LessonTemplateTable)
         {
-            DataTable results = MySql.GetAllRows("lessonTemplates");
+            DataTable results = MySql.GetAllRows(lessonTemplateTable);
             List<LessonTemplate> templateslist = new List<LessonTemplate>();
 
             foreach (DataRow row in results.Rows)
@@ -189,10 +197,10 @@ namespace DriveLogCode.DataAccess
             return templateslist;
         }
 
-        public static List<string> GetLessonTemplates()
+        public static List<string> GetLessonTemplates(string lessonTemplateTable = LessonTemplateTable)
         {
             List<string> results = new List<string>();
-            DataTable DatabaseResults = MySql.GetCreatedLessonNames();
+            DataTable DatabaseResults = MySql.GetCreatedLessonNames(lessonTemplateTable);
 
             foreach (DataRow row in DatabaseResults.Rows)
             {
@@ -212,9 +220,9 @@ namespace DriveLogCode.DataAccess
             return ExistDocument(user, Session.TypeFirstAid);
         }
 
-        private static bool ExistDocument(User user, string type)
+        private static bool ExistDocument(User user, string type, string documentTable = DocumnentTable)
         {
-            return MySql.ExistDocument(user.Id, type);
+            return MySql.ExistDocument(user.Id, type, documentTable);
         }
 
         public static string GetDoctorsNote(User user)
@@ -226,11 +234,11 @@ namespace DriveLogCode.DataAccess
             return GetUserDocumentFromDatabase(user, Session.TypeFirstAid);
         }
 
-        private static string GetUserDocumentFromDatabase(User user, string type)
+        private static string GetUserDocumentFromDatabase(User user, string type, string documentTable = DocumnentTable)
         {
             try
             {
-                DataTable fileInfo = MySql.GetDocument(type, user.Id);
+                DataTable fileInfo = MySql.GetDocument(type, user.Id, documentTable);
                 string tempFilePath = Path.Combine(Path.GetTempPath(), $"{fileInfo.Rows[0][1].ToString().Replace(' ','-')}.pdf");
 
                 using (var client = new WebClient())
@@ -247,16 +255,16 @@ namespace DriveLogCode.DataAccess
             }
         }
 
-        public static bool AddAppointment(string type, DateTime startTime, int availableTime, string instructor)
+        public static bool AddAppointment(string type, DateTime startTime, int availableTime, string instructor, string appointmentTable = AppointmentTable)
         {
             return MySql.AddAppointment(instructor, startTime.ToString("G",
-                CultureInfo.CreateSpecificCulture("zh-CN")), availableTime, type);
+                CultureInfo.CreateSpecificCulture("zh-CN")), availableTime, type, appointmentTable);
         }
 
-        public static List<AppointmentStructure> AppointmentsList()
+        public static List<AppointmentStructure> AppointmentsList(string appointmentTable = AppointmentTable, string userTable = UserTable)
         {
             List<AppointmentStructure> appointments = new List<AppointmentStructure>();
-            DataTable queryInfo = MySql.GetAllAppointments();
+            DataTable queryInfo = MySql.GetAllAppointments(appointmentTable, userTable);
 
             foreach (DataRow appointment in queryInfo.Rows)
             {
@@ -267,9 +275,9 @@ namespace DriveLogCode.DataAccess
             return appointments;
         }
 
-        public static List<User> UserSearchList(string searchInput)
+        public static List<User> UserSearchList(string searchInput, string userTable = UserTable)
         {
-            DataTable queryInfo = MySql.UserSearch(searchInput);
+            DataTable queryInfo = MySql.UserSearch(searchInput, userTable);
             List<User> usersFound = new List<User>();
 
             for (int i = 0; i < queryInfo.Rows.Count; i++)
@@ -280,14 +288,14 @@ namespace DriveLogCode.DataAccess
             return usersFound;
         }
 
-        public static int GetActiveUserCount()
+        public static int GetActiveUserCount(string userTable = UserTable)
         {
-            return MySql.GetAllRows("users").Rows.Count;
+            return MySql.GetAllRows(userTable).Rows.Count;
         }
 
-        public static int GetAppointmentsByInstructorIdCount(int instructorId)
+        public static int GetAppointmentsByInstructorIdCount(int instructorId, string appointmentTable = AppointmentTable)
         {
-            DataTable results = MySql.GetAllAppointmentsByInstructorId(instructorId);
+            DataTable results = MySql.GetAllAppointmentsByInstructorId(instructorId, appointmentTable);
             int count = 0;
 
             foreach (DataRow resultsRow in results.Rows)
@@ -298,18 +306,18 @@ namespace DriveLogCode.DataAccess
             return count;
         }
 
-        public static string GetLatestTodaysNote()
+        public static string GetLatestTodaysNote(string todaysNoteTable = TodaysNoteTable)
         {
-            DataTable queryInfo = MySql.GetLatestTodaysNote();
+            DataTable queryInfo = MySql.GetLatestTodaysNote(todaysNoteTable);
 
             string todaysNote = (string) queryInfo.Rows[0][3];
 
             return todaysNote;
         }
 
-        public static LessonTemplate GetLessonTemplateFromID(int lessonId)
+        public static LessonTemplate GetLessonTemplateFromID(int lessonId, string lessonTemplateTable = LessonTemplateTable)
         {
-            DataTable DatabaseResults = MySql.GetLessonTemplateByID(lessonId);
+            DataTable DatabaseResults = MySql.GetLessonTemplateByID(lessonId, lessonTemplateTable);
 
             LessonTemplate lessonTemplate = new LessonTemplate(
                 Convert.ToInt32(DatabaseResults.Rows[0][0]), 
@@ -322,9 +330,9 @@ namespace DriveLogCode.DataAccess
             return lessonTemplate;
         }
 
-        public static LessonTemplate GetNextLessonTemplateFromID(int lessonTemplateId, string lessonType)
+        public static LessonTemplate GetNextLessonTemplateFromID(int lessonTemplateId, string lessonType, string lessonTemplateTable = LessonTemplateTable)
         {
-            DataTable DatabaseResults = MySql.GetNextLessonTemplateByID(lessonTemplateId, lessonType);
+            DataTable DatabaseResults = MySql.GetNextLessonTemplateByID(lessonTemplateId, lessonType, lessonTemplateTable);
 
             LessonTemplate lessonTemplate = new LessonTemplate(
                 Convert.ToInt32(DatabaseResults.Rows[0][0]),
@@ -337,9 +345,9 @@ namespace DriveLogCode.DataAccess
             return lessonTemplate;
         }
 
-        public static List<User> GetUsersOnAppointmentID(int appointmentid)
+        public static List<User> GetUsersOnAppointmentID(int appointmentid, string lessonTable = LessonTable, string userTable = UserTable)
         {
-            DataTable queryInfo = MySql.GetUsersFromAppointmentID(appointmentid);
+            DataTable queryInfo = MySql.GetUsersFromAppointmentID(appointmentid, lessonTable, userTable);
             List<User> usersOnAppointment = new List<User>();
 
             for (int i = 0; i < queryInfo.Rows.Count; i++)
@@ -350,9 +358,9 @@ namespace DriveLogCode.DataAccess
             return usersOnAppointment;
         }
 
-        public static List<Lesson> GetAllLessonsFromAppointmentID(int id)
+        public static List<Lesson> GetAllLessonsFromAppointmentID(int id, string lessonTable = LessonTable)
         {
-            DataTable result = MySql.GetAllLessonsFromAppointmentID(id);
+            DataTable result = MySql.GetAllLessonsFromAppointmentID(id, lessonTable);
 
             List<Lesson> lessonsAppointment = new List<Lesson>();
 
@@ -372,9 +380,9 @@ namespace DriveLogCode.DataAccess
             return lessonsAppointment;
         }
 
-        public static List<AppointmentStructure> GetAppointmentsByInstructorId(int id)
+        public static List<AppointmentStructure> GetAppointmentsByInstructorId(int id, string appointmentTable = AppointmentTable)
         {
-            DataTable result = MySql.GetAllAppointmentsByInstructorId(id);
+            DataTable result = MySql.GetAllAppointmentsByInstructorId(id, appointmentTable);
 
             List<AppointmentStructure> instructorAppointments = new List<AppointmentStructure>();
 
@@ -394,13 +402,13 @@ namespace DriveLogCode.DataAccess
             return instructorAppointments;
         }
 
-        public static List<Lesson> CancelLesson(int templateID, int progressID, int userID)
+        public static List<Lesson> CancelLesson(int templateID, int progressID, int userID, string lessonTable = LessonTable, string lessonTemplateTable = LessonTemplateTable)
         {
             List<Lesson> lessonsAppointment = new List<Lesson>();
 
-            int lessonID = MySql.GetLessonIDFromUserIDProgressIDTemplateID(templateID, progressID, userID);
+            int lessonID = MySql.GetLessonIDFromUserIDProgressIDTemplateID(templateID, progressID, userID, lessonTable);
 
-            DataTable result = MySql.GetAllLessonsAfterLessonID(lessonID, userID);
+            DataTable result = MySql.GetAllLessonsAfterLessonID(lessonID, userID, lessonTable, lessonTemplateTable);
 
             foreach (DataRow row in result.Rows) {
 

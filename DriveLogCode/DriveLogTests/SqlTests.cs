@@ -8,7 +8,7 @@ namespace DriveLogTests
 {
     public class SqlTests
     {
-        private string testtable = "usertest";
+        private string testtable = "user_test";
 
         [TestCase("bob","bob","88888888","bob@bob.bob","much secret","bobvej 14","9025","Bobsby","Bob1","BOb")]
         public void CreateUser_Succesfull(string firstname, string lastname, string phone, string mail, string cpr, string address,
