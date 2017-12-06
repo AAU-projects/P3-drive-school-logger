@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using DriveLogCode.DataAccess;
 
 namespace DriveLogCode.Objects
@@ -33,8 +34,6 @@ namespace DriveLogCode.Objects
             PracticalTestDone = practestdone;
             FeePaid = feepaid;
             Active = active;
-
-            CalculateProgress();
         }
 
         public User(DataTable userTable, int index = 0)
@@ -57,6 +56,7 @@ namespace DriveLogCode.Objects
             TheoreticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][15]);
             PracticalTestDone = Convert.ToBoolean((string)userTable.Rows[index][16]);
             FeePaid = Convert.ToBoolean((string)userTable.Rows[index][17]);
+
             Active = Convert.ToBoolean((string)userTable.Rows[index][18]);
         }
 
@@ -85,6 +85,8 @@ namespace DriveLogCode.Objects
         public int TheoreticalProgress { get; private set; }
         public int PracticalProgress { get; private set; }
         public List<Lesson> LessonsList = new List<Lesson>();
+        public List<Lesson> InstructorLessons = new List<Lesson>();
+        public List<AppointmentStructure> InstructorAppointments = new List<AppointmentStructure>();
 
         public void CalculateProgress()
         {
@@ -103,6 +105,13 @@ namespace DriveLogCode.Objects
                 else if (l.Completed && l.Progress == template.Time && template.Type == "Practical")
                     PracticalProgress++;
             }
+        }
+
+        public void GetInstructorLessons()
+        {
+            InstructorAppointments =
+                DatabaseParser.GetAppointmentsByInstructorId(Id).OrderBy(a => a.StartTime).ToList();
+            InstructorLessons = DatabaseParser.GetAllLessonsFromMultipleAppointmentIds(InstructorAppointments);
         }
 
         public void GetLessonList()

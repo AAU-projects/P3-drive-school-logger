@@ -24,8 +24,9 @@ namespace DriveLogCode.Objects
         }
 
         // Used to create appointments to show on the instructor profile.
-        public AppointmentStructure(int instructorID, DateTime startTime, int availableTime, string lessonType, bool fullyBooked)
+        public AppointmentStructure(int id, int instructorID, DateTime startTime, int availableTime, string lessonType, bool fullyBooked)
         {
+            Id = id;
             InstructorID = instructorID;
             StartTime = startTime;
             AvailableTime = availableTime;

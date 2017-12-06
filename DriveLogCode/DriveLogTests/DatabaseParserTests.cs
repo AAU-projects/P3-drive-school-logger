@@ -12,12 +12,12 @@ namespace DriveLogTests
 {
     class DatabaseParserTests
     {
-        private string appointmentTestTable = "appointments_test";
-        private string documentTestTable = "documents_test";
-        private string lessonTestTable = "lessons_test";
-        private string lessonTemplateTestTable = "lessonTemplates_test";
-        private string todaysNoteTestTable = "todaysNoteTable_test";
-        private string userTestTable = "user_test";
+        private readonly string appointmentTestTable = "appointments_test";
+        private readonly string documentTestTable = "documents_test";
+        private readonly string lessonTestTable = "lessons_test";
+        private readonly string lessonTemplateTestTable = "lessonTemplates_test";
+        private readonly string todaysNoteTestTable = "todaysNoteTable_test";
+        private readonly string userTestTable = "user_test";
 
         private readonly User testUser = new User
             (0, "Name", "Lastname", "12345678", "email@you.com", "1234561234", "adress",
@@ -29,6 +29,10 @@ namespace DriveLogTests
         {
             return MySql.AddTodaysNote(testUser, todayNoteText, todaysNoteTestTable);
         }
+
+
+
+
 
     }
 }

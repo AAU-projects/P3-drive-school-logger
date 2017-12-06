@@ -642,6 +642,14 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        public static DataTable GetAllLessonsFromMultipleAppointmentIds(string appointmentIdString,
+            string table = LessonTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE {table}.AppointmentID IN ({appointmentIdString});");
+
+            return SendQuery(cmd);
+        }
+
         private static bool SendNonQuery(MySqlCommand cmd)
         {
             try
@@ -691,6 +699,13 @@ namespace DriveLogCode.DataAccess
 
             return results;
 
+        }
+
+        public static DataTable GetAllUsersFromMultipleUserIds(string userIdsString, string table = UserTable)
+        {
+            var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE {table}.user_id IN ({userIdsString});");
+
+            return SendQuery(cmd);
         }
     }
 }
