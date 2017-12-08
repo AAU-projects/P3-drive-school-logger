@@ -59,6 +59,7 @@ namespace DriveLogGUI.MenuTabs
             this.dateInformationLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.informationLabel = new System.Windows.Forms.Label();
+            this.panelHideInfo = new System.Windows.Forms.Panel();
             this.panelForCalendar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -208,6 +209,7 @@ namespace DriveLogGUI.MenuTabs
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.panel4.Controls.Add(this.panelHideInfo);
             this.panel4.Controls.Add(this.warningInformationTextbox);
             this.panel4.Controls.Add(this.NotAvaiableLabel);
             this.panel4.Controls.Add(this.pictureBox1);
@@ -417,6 +419,13 @@ namespace DriveLogGUI.MenuTabs
             this.informationLabel.Text = "Select an object";
             this.informationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panelHideInfo
+            // 
+            this.panelHideInfo.Location = new System.Drawing.Point(13, 18);
+            this.panelHideInfo.Name = "panelHideInfo";
+            this.panelHideInfo.Size = new System.Drawing.Size(137, 212);
+            this.panelHideInfo.TabIndex = 0;
+            // 
             // CalendarTabG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,5 +481,6 @@ namespace DriveLogGUI.MenuTabs
         private System.Windows.Forms.Label NotAvaiableLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox warningInformationTextbox;
+        private System.Windows.Forms.Panel panelHideInfo;
     }
 }
