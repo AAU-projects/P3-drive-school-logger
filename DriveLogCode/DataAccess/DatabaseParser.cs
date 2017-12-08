@@ -384,6 +384,7 @@ namespace DriveLogCode.DataAccess
         }
         public static List<Lesson> GetAllLessonsFromMultipleAppointmentIds(List<AppointmentStructure> appointments)
         {
+            if (appointments.Count == 0) return new List<Lesson>();
             List<int> appointmentIDs = appointments.Select(a => a.Id).ToList();
             string appointmentIdString = string.Join(",", appointmentIDs);
 

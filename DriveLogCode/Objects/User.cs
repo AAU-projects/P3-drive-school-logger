@@ -111,11 +111,8 @@ namespace DriveLogCode.Objects
         {
             InstructorAppointments =
                 DatabaseParser.GetAppointmentsByInstructorId(Id).OrderBy(a => a.StartTime).ToList();
-
-            if (InstructorAppointments.Count != 0)
-            {
-                InstructorLessons = DatabaseParser.GetAllLessonsFromMultipleAppointmentIds(InstructorAppointments);
-            }
+            
+            InstructorLessons = DatabaseParser.GetAllLessonsFromMultipleAppointmentIds(InstructorAppointments);
         }
 
         public void GetLessonList()
