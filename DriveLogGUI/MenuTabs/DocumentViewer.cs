@@ -55,7 +55,7 @@ namespace DriveLogGUI.MenuTabs
             ClearDocument();
             _documentType = type;
             if(type == Session.TypeDoctorsNote)
-                _documentName = $"{Session.LoggedInUser.Fullname} - Doctor's Note";
+                _documentName = $"{Session.LoggedInUser.Fullname} - Doctors Note";
             else if (type == Session.TypeFirstAid)
                 _documentName = $"{Session.LoggedInUser.Fullname} - First Aid";
 
