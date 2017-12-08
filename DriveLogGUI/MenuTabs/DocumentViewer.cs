@@ -35,7 +35,9 @@ namespace DriveLogGUI.MenuTabs
         public void LoadDoctorsNote(User user)
         {
             SetType(Session.TypeDoctorsNote);
-            LoadDocument(DatabaseParser.GetDoctorsNote(user));
+            string notePath = DatabaseParser.GetDoctorsNote(user);
+            if (!String.IsNullOrEmpty(notePath))
+                LoadDocument(notePath);
         }
 
         private void LoadDocument(string documentPath)

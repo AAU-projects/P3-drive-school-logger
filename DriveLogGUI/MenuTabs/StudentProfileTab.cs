@@ -35,8 +35,6 @@ namespace DriveLogGUI.MenuTabs
 
             UpdateLayout();
             UpdateInfo();
-            DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
-            FirstCheckIfUploaded(firstAidPictureButton);
         }
 
         private void UpdateLayout()
@@ -51,7 +49,7 @@ namespace DriveLogGUI.MenuTabs
         }
 
         /// <summary>
-        /// Updates the user information with data from session class
+        /// Updates the user information with data from the given user
         /// </summary>
         private void UpdateInfo()
         {
@@ -80,6 +78,9 @@ namespace DriveLogGUI.MenuTabs
                 praticalTestPictureButton.Image = completedImage;
             if (_user.FeePaid)
                 feePictureBox.Image = completedImage;
+
+            DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
+            FirstCheckIfUploaded(firstAidPictureButton);
 
             foreach (Lesson lesson in _user.LessonsList)
             {
