@@ -355,7 +355,10 @@ namespace DriveLogGUI.MenuTabs
                 dayNow = dayNow.AddDays(1);
             }
 
-            AddAllElements();
+            if (Session.LoggedInUser.Active)
+            {
+                AddAllElements();
+            }
         }
 
 

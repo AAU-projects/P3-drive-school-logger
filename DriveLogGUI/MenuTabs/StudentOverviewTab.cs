@@ -24,7 +24,7 @@ namespace DriveLogGUI.MenuTabs
         public StudentOverviewTab()
         {
             InitializeComponent();
-            welcomeUserLabel.Text = "Welcome " + Session.LoggedInUser.Firstname;
+            welcomeUserLabel.Text = $"Welcome {Session.LoggedInUser.Firstname} {GetUserState(Session.LoggedInUser.Active)}";
             selectedMonth = DateTime.Now;
             
             overviewUpdateTodaysNote.Hide();
@@ -55,6 +55,15 @@ namespace DriveLogGUI.MenuTabs
             }
 
             UpdateProgress();
+        }
+
+        private string GetUserState(bool active)
+        {
+            if (active)
+            {
+                return "Active";
+            }
+            return "Inactive";
         }
 
         private void UpdateProgress()
