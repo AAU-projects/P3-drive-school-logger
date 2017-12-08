@@ -59,7 +59,7 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Updates the user information with data from session class
         /// </summary>
-        private void UpdateInfo()
+        public override void UpdateInfo()
         {
             profileHeaderLabel.Text = "Profile: " + _user.Username;
             nameOutputLabel.Text = _user.Fullname;

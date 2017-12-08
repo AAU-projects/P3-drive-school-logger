@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Deployment.Application;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace DriveLogGUI.MenuTabs
         {
             LogOutButtonClick?.Invoke(this, e);
         }
+
+        public abstract void UpdateInfo();
 
         internal virtual event EventHandler IconPictureButtonClickEvent;
     }

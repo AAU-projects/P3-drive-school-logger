@@ -34,13 +34,13 @@ namespace DriveLogGUI.MenuTabs
             todaysNoteTextbox.Text = DatabaseParser.GetLatestTodaysNote();
 
             DrawCalendar();
-            UpdateLessonsToCompleteList();
-            UpdateStatistics();
+            UpdateInfo();
         }
 
-        private void UpdateStatistics()
+        public override void UpdateInfo()
         {
             activeUsersLabel.Text = "Active Users: " + DatabaseParser.GetActiveUserCount();
+            UpdateLessonsToCompleteList();
         }
 
         private void UpdateLessonsToCompleteList()

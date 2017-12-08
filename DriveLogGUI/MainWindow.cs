@@ -207,7 +207,7 @@ namespace DriveLogGUI
 
             if (!Session.LoggedInUser.Sysmin)
                 ProfileSubmenuControl(true);
-
+            profileTab.UpdateInfo();
             OpenPage(sender, profileTab);
 
         }
@@ -254,6 +254,7 @@ namespace DriveLogGUI
         private void OverviewButton_Click(object sender, EventArgs e)
         {
             //To add a page create a usercontrol and send it as paramater in use OpenPage
+            overviewTab.UpdateInfo();
             OpenPage(sender, overviewTab);
             
             SubMenus();

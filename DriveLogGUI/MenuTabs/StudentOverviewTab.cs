@@ -24,7 +24,9 @@ namespace DriveLogGUI.MenuTabs
         public StudentOverviewTab()
         {
             InitializeComponent();
-            welcomeUserLabel.Text = $"Welcome {Session.LoggedInUser.Firstname} {GetUserState(Session.LoggedInUser.Active)}";
+            welcomeUserLabel.Text = $"Welcome {Session.LoggedInUser.Firstname}";
+            if (!Session.LoggedInUser.Active)
+                welcomeUserLabel.Text = welcomeUserLabel.Text + " (Inactive)";
             selectedMonth = DateTime.Now;
             
             overviewUpdateTodaysNote.Hide();
@@ -35,9 +37,11 @@ namespace DriveLogGUI.MenuTabs
             todaysNoteTextbox.Text = DatabaseParser.GetLatestTodaysNote();
 
             DrawCalendar();
-            DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
-            FirstCheckIfUploaded(firstAidPictureButton);
+            UpdateInfo();
+        }
 
+        public override void UpdateInfo()
+        {
             // Update icons
             if (Session.LoggedInUser.TheoreticalTestDone)
                 theroraticalPictureButton.Image = completedImage;
@@ -45,6 +49,9 @@ namespace DriveLogGUI.MenuTabs
                 praticalTestPictureButton.Image = completedImage;
             if (Session.LoggedInUser.FeePaid)
                 feePictureBox.Image = completedImage;
+
+            DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
+            FirstCheckIfUploaded(firstAidPictureButton);
 
             foreach (Lesson lesson in Session.LoggedInUser.LessonsList)
             {
