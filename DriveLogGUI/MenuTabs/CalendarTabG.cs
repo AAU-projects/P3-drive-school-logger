@@ -21,6 +21,7 @@ namespace DriveLogGUI.MenuTabs
         private List<CalendarData> calendarData = new List<CalendarData>();
         private List<Appointment> appointments = new List<Appointment>();
         private Appointment selectedAppointment;
+        private Appointment lastSelectedAppointment;
 
         private MainWindow mainWindow;
         private OverviewTab overviewTab;
@@ -93,7 +94,15 @@ namespace DriveLogGUI.MenuTabs
 
         private void UpdateInformation(object sender, ApppointmentEventArgs e)
         {
+            if (panelHideInfo.Visible)
+            {
+                panelHideInfo.Hide();
+            }
+            lastSelectedAppointment = selectedAppointment;
             selectedAppointment = e.Appointment;
+
+            HighLightSelectedAppointment();
+
             informationLabel.Text = selectedAppointment.LabelAppointment.Text;
             dateInformationLabel.Text = selectedAppointment.DateFormat;
             timeInformationLabel.Text = selectedAppointment.TimeFormat;
@@ -105,6 +114,15 @@ namespace DriveLogGUI.MenuTabs
 
             CheckIfUserCanBookLesson(usersOnAppointment);
             bookInformationLabel.Text = BookInformation(usersOnAppointment);
+        }
+
+        private void HighLightSelectedAppointment()
+        {
+            selectedAppointment.LabelAppointment.BackColor = Color.FromArgb(selectedAppointment.LabelAppointment.BackColor.A, Color.LightBlue);
+            if (lastSelectedAppointment != null)
+            {
+                lastSelectedAppointment.LabelAppointment.BackColor = Color.FromArgb(lastSelectedAppointment.LabelAppointment.BackColor.A, ColorScheme.MainCalendarColor);
+            }
         }
 
         private string BookInformation(List<User> usersOnAppointment)
