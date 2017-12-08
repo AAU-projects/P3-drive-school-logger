@@ -298,7 +298,8 @@ namespace DriveLogGUI.MenuTabs
                 Width = appointmentInformationPanel.Width / 2 - 10,
                 Height = appointmentInformationPanel.Height / 2 - 60,
                 Left = studentsForLesson.Width + 20,
-                Top = lessonInformation.Bottom + 10
+                Top = lessonInformation.Bottom + 10,
+                ScrollBars = RichTextBoxScrollBars.None
             };
 
             appointmentInformationPanel.Controls.Add(lessonData);
@@ -320,9 +321,13 @@ namespace DriveLogGUI.MenuTabs
             lessonData.SelectionFont = new Font(studentsForLesson.Font, FontStyle.Bold);
             lessonData.AppendText("Appointment information:" + Environment.NewLine);
             lessonData.SelectionFont = new Font("Calibri Light", 10F, FontStyle.Regular);
-            lessonData.AppendText($"Start Time: {appointmentLessonPair.Key.StartTime}" + Environment.NewLine);
+
+            lessonData.AppendText($"Lesson date: {appointmentLessonPair.Key.StartTime:MM/dd/yyyy}" + Environment.NewLine);
+            lessonData.AppendText($"Lesson time: {appointmentLessonPair.Key.StartTime:HH:mm} - {appointmentLessonPair.Key.StartTime.AddMinutes(45 * appointmentLessonPair.Key.AvailableTime):HH:mm}" + Environment.NewLine);
+            DateTime availableTime = new DateTime();
+            availableTime = availableTime.AddMinutes(45 * appointmentLessonPair.Key.AvailableTime);
+            lessonData.AppendText($"Allocated time: {availableTime:HH}h{availableTime:mm}min" + Environment.NewLine);
             lessonData.AppendText($"Lessontype: {appointmentLessonPair.Key.LessonType}" + Environment.NewLine);
-            lessonData.AppendText($"Available time: {appointmentLessonPair.Key.AvailableTime}" + Environment.NewLine);
             lessonData.AppendText($"Booked students: {appointmentLessonPair.Value.Count} / 24" + Environment.NewLine);
 
             // Checks if any students have booked the appointment.

@@ -71,7 +71,7 @@ namespace DriveLogGUI.MenuTabs
         private void OpenFileDialog()
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.InitialDirectory = "E:\\Dokumenter";
+            fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             fileDialog.Filter = "Files(*.BMP;*.JPG;*.JPEG;*.PDF)|*.BMP;*.JPG;*.JPEG;*.PDF";
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
