@@ -26,5 +26,7 @@ namespace DriveLogGUI.MenuTabs
         {
             LogOutButtonClick?.Invoke(this, e);
         }
+
+        public abstract void UpdateInfo();
     }
 }
