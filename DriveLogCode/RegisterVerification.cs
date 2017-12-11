@@ -46,36 +46,55 @@ namespace DriveLogCode
             return true;
         }
 
-        public static bool AdressVerification(string adress)
+        public static bool InputOnlyDigitVerification(string input)
         {
-            if (string.IsNullOrEmpty(adress) || !adress.Contains(' '))
+            if (string.IsNullOrEmpty(input))
                 return false;
 
-            string[] adressStrings = adress.Split(' ');
-            string street = adressStrings[0];
-            string streetNo = adressStrings[1];
-
-            if (adressStrings.Length == 1 || adressStrings.Length > 3)
-                return false;
-
-            if (!InputOnlyLettersVerification(street))
-                return false;
-
-            foreach (char number in streetNo)
+            foreach (char c in input)
             {
-                if (!char.IsDigit(number))
+                if (!char.IsDigit(c))
                     return false;
             }
 
-            if (adressStrings.Length == 3)
+            return true;
+        }
+
+        public static bool StreetNameVerification(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return false;
+
+            foreach (var c in input)
             {
-                string floor = adressStrings[2];
-                foreach (char c in floor)
+                if (!char.IsLetter(c))
                 {
-                    if (!char.IsLetterOrDigit(c))
-                        return false;
+                    if (c == '.' || c == '-')
+                        return true;
+
+                    return false;
                 }
             }
+
+            return true;
+        }
+
+        public static bool AdressVerification(string adress)
+        {
+            string[] adressStrings = adress.Split(' ');
+            string street1 = adressStrings[0];
+
+            int inputOnlyDigit = 0;
+            foreach (string s in adressStrings)
+            {
+                if (InputOnlyDigitVerification(s))
+                    inputOnlyDigit++;
+            }
+
+            if (string.IsNullOrEmpty(adress) || !adress.Contains(' ') || adressStrings.Length < 2 || 
+                !StreetNameVerification(street1) || inputOnlyDigit < 1)
+                return false;
+
             return true;
         }
 
