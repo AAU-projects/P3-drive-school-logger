@@ -43,7 +43,7 @@ namespace DriveLogTests
         [TestCase("Vesterbro", ExpectedResult = false)]
         [TestCase("Vester7bro 7", ExpectedResult = false)]
         [TestCase("Vester_bro 7", ExpectedResult = false)]
-        [TestCase("Vesterbro 7 7 th", ExpectedResult = false)]
+        [TestCase("Vesterbro 7 7 th", ExpectedResult = true)]
         [TestCase("Vesterbro7 ", ExpectedResult = false)]
         public bool AdressVerification_CheckInput(string adress)
         {
