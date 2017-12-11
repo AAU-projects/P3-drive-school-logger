@@ -364,7 +364,28 @@ namespace DriveLogGUI
 
         private void userSearchButton_Click(object sender, EventArgs e)
         {
-            OpenPage(sender, userSearchTab);
+            UserControl finalpage = userSearchTab;
+            bool usersearchfound = false;
+            foreach (Control c in this.Controls)
+            {
+                if (c is UserSearchTab)
+                { 
+                    usersearchfound = true;
+                    continue;
+                }
+
+                if (!usersearchfound)
+                    continue;
+
+                if (c is DriveLogTab)
+                    finalpage =  c as DriveLogTab;
+                else if (c is DocumentViewer)
+                    finalpage = c as DocumentViewer;
+                else if (c is ProfileTab)
+                    finalpage = c as ProfileTab;
+            }
+
+            OpenPage(sender, finalpage);
             SubMenus();
         }
         
