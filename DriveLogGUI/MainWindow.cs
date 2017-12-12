@@ -304,6 +304,11 @@ namespace DriveLogGUI
 
                 HighlightCurrentButton((Button)sender, _lastButton);
                 _lastButton = (Button)sender;
+
+            } else if (_lastPage is DocumentViewer && page is DocumentViewer)
+            {
+                HighlightCurrentButton((Button)sender, _lastButton);
+                _lastButton = (Button)sender;
             }
         }
 
