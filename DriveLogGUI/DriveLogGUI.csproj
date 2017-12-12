@@ -146,6 +146,12 @@
     <Compile Include="Windows\EditUserInfoForm.Designer.cs">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\LoadingScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\LoadingScreen.Designer.cs">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EditUserInfoForm.resx">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\LoadingScreen.resx">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -373,6 +382,7 @@
     <None Include="Resources\addlesson.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\aarhus-køreskole-city-ks-logo-v2.jpg" />
     <Content Include="Resources\addlessongrey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

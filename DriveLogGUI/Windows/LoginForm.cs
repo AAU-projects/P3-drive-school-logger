@@ -49,7 +49,6 @@ namespace DriveLogGUI.Windows
                 }
 
                 Session.LoadUser(user);
-
             }
             else
             {

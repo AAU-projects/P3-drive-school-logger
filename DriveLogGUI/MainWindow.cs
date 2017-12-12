@@ -8,6 +8,8 @@ using DriveLogCode.DataAccess;
 using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 using DriveLogGUI.MenuTabs;
+using DriveLogGUI.Windows;
+using System.Threading;
 
 namespace DriveLogGUI
 {
@@ -27,13 +29,16 @@ namespace DriveLogGUI
         private DriveLogTab driveLogTab;
         private TemplateCreator _lessonCreator;
 
-
-
         public MainWindow()
         {
+            Thread loadingThread = new Thread(new ThreadStart(LoadingScreenStart));
+            loadingThread.Start();
+
             InitializeComponent();
             InitializeMenuTabs();
 
+            loadingThread.Abort();
+            
             // Add logout events for pages containing a logout button.
             overviewTab.LogOutButtonClick += LogOut;
             profileTab.LogOutButtonClick += LogOut;
@@ -87,6 +92,11 @@ namespace DriveLogGUI
 
             SettingsAdminSubMenu();
             SettingsSubMenu(false);
+        }
+
+        public void LoadingScreenStart()
+        {
+            Application.Run(new LoadingScreen());
         }
 
         private void LogOut(object sender, EventArgs e)
