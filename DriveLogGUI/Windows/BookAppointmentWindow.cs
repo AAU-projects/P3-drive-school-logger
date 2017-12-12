@@ -49,6 +49,7 @@ namespace DriveLogGUI.Windows
 
             FillTimeComboBox(StartTimecomboBox);
             FillComboBox(lessonsComboBox, 4);
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         private void CheckForFirstLessons()
@@ -257,12 +258,6 @@ namespace DriveLogGUI.Windows
             }
 
             return true;
-
-        }
-
-        private void topPanel_Paint(object sender, PaintEventArgs e)
-        {
-            topPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

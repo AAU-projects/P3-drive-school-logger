@@ -15,8 +15,6 @@ namespace DriveLogGUI.MenuTabs
             InitializeComponent();
             errorLabel.Text = string.Empty;
             userCollectionMenu.SelectedIndex = 0;
-
-            
         }
 
         public virtual event EventHandler LogOutButtonClick;
