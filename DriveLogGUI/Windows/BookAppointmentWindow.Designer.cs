@@ -34,12 +34,13 @@
             this.lessonTypeLabel = new System.Windows.Forms.Label();
             this.timeDifferenceLabel = new System.Windows.Forms.Label();
             this.lessonsComboBox = new System.Windows.Forms.ComboBox();
-            this.EndTimelabel = new System.Windows.Forms.Label();
+            this.lessonsLabel = new System.Windows.Forms.Label();
             this.StartTimelabel = new System.Windows.Forms.Label();
             this.instructorLabel = new System.Windows.Forms.Label();
             this.StartTimecomboBox = new System.Windows.Forms.ComboBox();
             this.CancelButton1 = new System.Windows.Forms.Button();
             this.AddAppointmentButton = new System.Windows.Forms.Button();
+            this.endTimeLabel = new System.Windows.Forms.Label();
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,7 +103,7 @@
             // 
             this.timeDifferenceLabel.AutoSize = true;
             this.timeDifferenceLabel.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.timeDifferenceLabel.Location = new System.Drawing.Point(253, 131);
+            this.timeDifferenceLabel.Location = new System.Drawing.Point(269, 144);
             this.timeDifferenceLabel.Name = "timeDifferenceLabel";
             this.timeDifferenceLabel.Size = new System.Drawing.Size(94, 17);
             this.timeDifferenceLabel.TabIndex = 20;
@@ -118,15 +119,15 @@
             this.lessonsComboBox.TabIndex = 19;
             this.lessonsComboBox.SelectedIndexChanged += new System.EventHandler(this.lessonsComboBox_SelectedIndexChanged);
             // 
-            // EndTimelabel
+            // lessonsLabel
             // 
-            this.EndTimelabel.AutoSize = true;
-            this.EndTimelabel.Font = new System.Drawing.Font("Calibri Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EndTimelabel.Location = new System.Drawing.Point(13, 145);
-            this.EndTimelabel.Name = "EndTimelabel";
-            this.EndTimelabel.Size = new System.Drawing.Size(101, 18);
-            this.EndTimelabel.TabIndex = 17;
-            this.EndTimelabel.Text = "Lessons: (45 m)";
+            this.lessonsLabel.AutoSize = true;
+            this.lessonsLabel.Font = new System.Drawing.Font("Calibri Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lessonsLabel.Location = new System.Drawing.Point(13, 145);
+            this.lessonsLabel.Name = "lessonsLabel";
+            this.lessonsLabel.Size = new System.Drawing.Size(101, 18);
+            this.lessonsLabel.TabIndex = 17;
+            this.lessonsLabel.Text = "Lessons: (45 m)";
             // 
             // StartTimelabel
             // 
@@ -188,18 +189,29 @@
             this.AddAppointmentButton.UseVisualStyleBackColor = false;
             this.AddAppointmentButton.Click += new System.EventHandler(this.AddAppointmentButton_Click);
             // 
+            // endTimeLabel
+            // 
+            this.endTimeLabel.AutoSize = true;
+            this.endTimeLabel.Font = new System.Drawing.Font("Calibri Light", 10F);
+            this.endTimeLabel.Location = new System.Drawing.Point(269, 119);
+            this.endTimeLabel.Name = "endTimeLabel";
+            this.endTimeLabel.Size = new System.Drawing.Size(58, 17);
+            this.endTimeLabel.TabIndex = 24;
+            this.endTimeLabel.Text = "end time";
+            // 
             // BookAppointmentWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 221);
+            this.Controls.Add(this.endTimeLabel);
             this.Controls.Add(this.CancelButton1);
             this.Controls.Add(this.AddAppointmentButton);
             this.Controls.Add(this.instructorLabel);
             this.Controls.Add(this.timeDifferenceLabel);
             this.Controls.Add(this.lessonsComboBox);
             this.Controls.Add(this.StartTimecomboBox);
-            this.Controls.Add(this.EndTimelabel);
+            this.Controls.Add(this.lessonsLabel);
             this.Controls.Add(this.StartTimelabel);
             this.Controls.Add(this.lessonTypeLabel);
             this.Controls.Add(this.TitleTimeLabel);
@@ -224,11 +236,12 @@
         private System.Windows.Forms.Label lessonTypeLabel;
         private System.Windows.Forms.Label timeDifferenceLabel;
         private System.Windows.Forms.ComboBox lessonsComboBox;
-        private System.Windows.Forms.Label EndTimelabel;
+        private System.Windows.Forms.Label lessonsLabel;
         private System.Windows.Forms.Label StartTimelabel;
         private System.Windows.Forms.Label instructorLabel;
         private System.Windows.Forms.ComboBox StartTimecomboBox;
         private System.Windows.Forms.Button CancelButton1;
         private System.Windows.Forms.Button AddAppointmentButton;
+        private System.Windows.Forms.Label endTimeLabel;
     }
 }

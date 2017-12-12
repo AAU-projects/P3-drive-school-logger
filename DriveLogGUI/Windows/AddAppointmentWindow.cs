@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
 using DriveLogCode.DesignSchemes;
@@ -30,6 +31,7 @@ namespace DriveLogGUI.Windows
             FillComboBox(lessonsComboBox);
 
             timeDifferenceLabel.Text = "";
+            endTimeLabel.Text = "";
             lessonsComboBox.SelectedItem = 1;
             this.StartPosition = FormStartPosition.CenterParent;
         }
@@ -112,6 +114,8 @@ namespace DriveLogGUI.Windows
                     timeDifferenceLabel.Text = $"{timeDifference.Minutes} minutes";
                 else
                     timeDifferenceLabel.Text = $"{timeDifference.Hours} hours {timeDifference.Minutes} minutes";
+
+                endTimeLabel.Text = "to " + endTime.ToString("t");
             }
         }
 

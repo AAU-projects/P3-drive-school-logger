@@ -305,6 +305,12 @@ namespace DriveLogGUI
                 HighlightCurrentButton((Button)sender, _lastButton);
                 _lastButton = (Button)sender;
                 Cursor = Cursors.Arrow;
+            } 
+            
+            else if (_lastPage is DocumentViewer && page is DocumentViewer)
+            {
+                HighlightCurrentButton((Button)sender, _lastButton);
+                _lastButton = (Button)sender;
             }
         }
 
