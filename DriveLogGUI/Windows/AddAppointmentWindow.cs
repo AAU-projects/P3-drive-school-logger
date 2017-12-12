@@ -33,6 +33,7 @@ namespace DriveLogGUI.Windows
             timeDifferenceLabel.Text = "";
             endTimeLabel.Text = "";
             lessonsComboBox.SelectedItem = 1;
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         private void FillTimeComboBox(ComboBox comboBox)
@@ -145,11 +146,6 @@ namespace DriveLogGUI.Windows
             }
             else
                 CustomMsgBox.ShowOk("Failure", "Some fields need to be filled", CustomMsgBoxIcon.Warrning);
-        }
-
-        private void topPanel_Paint(object sender, PaintEventArgs e)
-        {
-            topPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

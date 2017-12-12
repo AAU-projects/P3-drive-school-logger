@@ -324,13 +324,13 @@
             // topPanel
             // 
             this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
+            this.topPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(108)))), ((int)(((byte)(112)))));
             this.topPanel.Controls.Add(this.button2);
             this.topPanel.Controls.Add(this.button1);
             this.topPanel.Location = new System.Drawing.Point(132, 0);
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(900, 22);
             this.topPanel.TabIndex = 1;
-            this.topPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.topPanel_Paint);
             this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             // 
