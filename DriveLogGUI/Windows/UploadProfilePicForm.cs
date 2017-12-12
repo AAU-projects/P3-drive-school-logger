@@ -246,38 +246,26 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        private int Clamp(int value, int min, int max)
+        {
+            return (value < min) ? min : (value > max) ? max : value;
+        }
+
         private void dragPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (allowResize)
             {
                 Point newLocation;
+                int minX = 0;
+                int maxX = editPictureBox.Width - dragPanel.Width;
+                int minY = 0;
+                int maxY = editPictureBox.Height - dragPanel.Height;
 
-                // Checks the left side.
-                if (this.dragPanel.Left + e.X - startX < 0)
-                {
-                    allowResize = false;
-                    newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);
-                } // Checks the right side.
-                else if (this.dragPanel.Left + this.dragPanel.Width + e.X - startX >= editPictureBox.Width)
-                {
-                    allowResize = false;
-                    newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);
-                } // Checks the top.
-                else if (this.dragPanel.Top + e.Y - startY < 0)
-                {
-                    allowResize = false;
-                    newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);
-                } // Checks the bottom.
-                else if (this.dragPanel.Top + this.dragPanel.Height + e.Y - startY >= editPictureBox.Height)
-                {
-                    allowResize = false;
-                    newLocation = new Point(this.dragPanel.Location.X, this.dragPanel.Location.Y);
-                }// Sets the new location if none of the above was true. 
-                else
-                newLocation = new Point(e.X + this.dragPanel.Left - startX, e.Y + this.dragPanel.Top - startY);
+                int clampX = Clamp(e.X + this.dragPanel.Left - startX, minX, maxX);
+                int clampY = Clamp(e.Y + this.dragPanel.Top - startY, minY, maxY);
+                newLocation = new Point(clampX,clampY);
 
                 this.dragPanel.Location = newLocation;
-
             }
         }
 

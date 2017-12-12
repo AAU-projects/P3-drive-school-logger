@@ -33,11 +33,12 @@ namespace DriveLogGUI.Windows
 
         public static DialogResult ShowYesNo(string text, string caption, List<Lesson> cancelLessons, Image symbol)
         {
-            int extraHeight = cancelLessons.Count * 20 + 20;
+            int extraHeight = cancelLessons.Count * 20 + 60;
             int extraWidth = 150;
             StringBuilder lessons = new StringBuilder();
 
-            lessons.AppendLine($"You will be canceling these {cancelLessons.Count} lessons below\n");
+            lessons.AppendLine($"Canceling this lesson will result in the \ncancelation of all other lessons after this date,\nas this lesson is a requirement for furture lessons.\n");
+            lessons.AppendLine($"You will be canceling these {cancelLessons.Count} lessons below:\n");
             foreach (var lesson in cancelLessons)
             {
                 lessons.AppendLine($"Date: {lesson.StartDate:dd/MM}    {lesson.StartDate:t} - {lesson.EndDate:t}    {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(lesson.LessonTemplate.Title.ToLower())}");
