@@ -43,6 +43,8 @@ namespace DriveLogGUI.Windows
             addThisLessonProgress = addThisLesson.Progress;
             addThisLessonTemplateID = addThisLesson.TemplateID;
 
+            timeDifferenceLabel.Text = "";
+            endTimeLabel.Text = "";
 
             SetWindowPosition();
             UpdateData();
@@ -120,6 +122,8 @@ namespace DriveLogGUI.Windows
                     timeDifferenceLabel.Text = $"{timeDifference.Minutes} minutes";
                 else
                     timeDifferenceLabel.Text = $"{timeDifference.Hours} hours {timeDifference.Minutes} minutes";
+
+                endTimeLabel.Text = "to " + endDateTime.ToString("t");
             }
         }
 
