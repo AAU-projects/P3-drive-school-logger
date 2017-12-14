@@ -663,6 +663,12 @@ namespace DriveLogGUI.MenuTabs
             }
             
         }
+
+        private void InformationPictureBox_Click(object sender, EventArgs e)
+        {
+            CalendarInformationWindow informationWindow = new CalendarInformationWindow();
+            informationWindow.ShowDialog();
+        }
     }
 }
 
