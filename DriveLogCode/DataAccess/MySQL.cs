@@ -650,6 +650,11 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Send a non query to the database and returns. Used to update data in the database.
+        /// </summary>
+        /// <param name="cmd">The MySQL Command to execute in the database</param>
+        /// <returns>Returns a bool wether the operation was succesfull or not</returns>
         private static bool SendNonQuery(MySqlCommand cmd)
         {
             try
@@ -672,6 +677,11 @@ namespace DriveLogCode.DataAccess
             }
         }
 
+        /// <summary>
+        /// Sends a query to the database.
+        /// </summary>
+        /// <param name="cmd">The MySQL query to execute in the database</param>
+        /// <returns>Returns a DataTable for further use in the DatabaseParser</returns>
         private static DataTable SendQuery(MySqlCommand cmd)
         {
             DataTable results = new DataTable();
