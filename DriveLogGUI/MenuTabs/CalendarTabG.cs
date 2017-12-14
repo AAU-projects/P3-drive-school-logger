@@ -393,6 +393,12 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        private void DeleteAppointment(Appointment appointment)
+        {
+            appointment.LabelAppointment.Hide();
+            appointments.Remove(appointments.Single(x => x.Id == appointment.Id));
+        }
+
         private string GetDatesInWeek(DateTime now)
         {
             return $"{now.Day}  - {now.AddDays(6).Day} {now.ToString("MMMM")} {now.Year}";
@@ -664,7 +670,7 @@ namespace DriveLogGUI.MenuTabs
                     {
                         DatabaseParser.DeleteLessons(cancelTheseLessons);
                         DatabaseParser.DeleteAppointment(selectedAppointment.Id);
-                        appointments.Remove(appointments.Single(x => x.Id == selectedAppointment.Id));
+                        DeleteAppointment(selectedAppointment);
                         Session.LoggedInUser.GetLessonList();
                         Session.GetProgress();
                         UpdateCalendar(0);
