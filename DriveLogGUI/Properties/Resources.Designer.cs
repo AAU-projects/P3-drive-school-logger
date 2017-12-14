@@ -63,6 +63,16 @@ namespace DriveLogGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap aarhus_køreskole_city_ks_logo_v2 {
+            get {
+                object obj = ResourceManager.GetObject("aarhus-køreskole-city-ks-logo-v2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap addlesson {
             get {
                 object obj = ResourceManager.GetObject("addlesson", resourceCulture);
@@ -96,6 +106,16 @@ namespace DriveLogGUI.Properties {
         internal static System.Drawing.Bitmap bookedDot {
             get {
                 object obj = ResourceManager.GetObject("bookedDot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap calendarInformation {
+            get {
+                object obj = ResourceManager.GetObject("calendarInformation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -326,6 +346,16 @@ namespace DriveLogGUI.Properties {
         internal static System.Drawing.Bitmap icons8_close_window {
             get {
                 object obj = ResourceManager.GetObject("icons8-close-window", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_Help_22150 {
+            get {
+                object obj = ResourceManager.GetObject("if_Help_22150", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

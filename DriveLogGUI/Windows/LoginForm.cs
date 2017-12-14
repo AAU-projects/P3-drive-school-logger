@@ -33,7 +33,7 @@ namespace DriveLogGUI.Windows
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-
+            Cursor = Cursors.AppStarting;
             // TODO remove else when program is done
             if (UsernameBox.Text != "Username")
             {
@@ -49,7 +49,6 @@ namespace DriveLogGUI.Windows
                 }
 
                 Session.LoadUser(user);
-
             }
             else
             {
@@ -62,6 +61,7 @@ namespace DriveLogGUI.Windows
             Session.LogOut();
             // resets information after logout
             ResetInformation();
+            Cursor = Cursors.Arrow;
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
@@ -119,11 +119,6 @@ namespace DriveLogGUI.Windows
         private void Unfocus_MouseClick(object sender, EventArgs e)
         {
             this.ActiveControl = loginFormLable;
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            panel2.BackColor = ColorScheme.MainTopPanelColor;
         }
     }
 }

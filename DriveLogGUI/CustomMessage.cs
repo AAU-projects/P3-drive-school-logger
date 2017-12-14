@@ -33,7 +33,7 @@ namespace DriveLogGUI.Windows
 
         public static DialogResult ShowYesNo(string text, string caption, List<Lesson> cancelLessons, Image symbol)
         {
-            int extraHeight = cancelLessons.Count * 20 + 60;
+            int extraHeight = cancelLessons.Count * 20 + 80;
             int extraWidth = 150;
             StringBuilder lessons = new StringBuilder();
 

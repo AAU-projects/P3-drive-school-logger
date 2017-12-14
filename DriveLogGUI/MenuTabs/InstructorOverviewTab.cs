@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DriveLogCode.DataAccess;
 using DriveLogCode.Objects;
@@ -32,14 +33,13 @@ namespace DriveLogGUI.MenuTabs
                 overviewUpdateTodaysNote.Show();
             }
             todaysNoteTextbox.Text = DatabaseParser.GetLatestTodaysNote();
-
+            activeUsersLabel.Text = "Active Users: " + DatabaseParser.GetActiveUserCount();
             DrawCalendar();
             UpdateInfo();
         }
 
         public override void UpdateInfo()
         {
-            activeUsersLabel.Text = "Active Users: " + DatabaseParser.GetActiveUserCount();
             UpdateLessonsToCompleteList();
         }
 
@@ -49,6 +49,7 @@ namespace DriveLogGUI.MenuTabs
             completeLessonsList.Items.Clear();
             List<Lesson> lessonsFoundList = DatabaseParser.GetLessonsToCompleteList(Session.LoggedInUser);
             int scheduledCount = 0;
+            int studentCount = 1;
 
             foreach (Lesson lesson in lessonsFoundList)
             {
@@ -58,10 +59,18 @@ namespace DriveLogGUI.MenuTabs
                     continue;
                 }
 
-                _lessonsToCompleteList.Add(lesson);
+                if (_lessonsToCompleteList.Count != 0 && lesson.StartDate == _lessonsToCompleteList.Last().StartDate)
+                {
+                    studentCount++;
+                }
+                else if (_lessonsToCompleteList.Count != 0)
+                {
+                    string[] subItems = {_lessonsToCompleteList.Last().LessonTemplate.Type, studentCount > 1 ? studentCount.ToString() : DatabaseParser.GetUserById(_lessonsToCompleteList.Last().StudentId).Fullname};
+                    completeLessonsList.Items.Add(_lessonsToCompleteList.Last().StartDate.ToString("dd/MM - HH:mm") + " to " + _lessonsToCompleteList.Last().EndDate.ToString("HH:mm")).SubItems.AddRange(subItems);
+                    studentCount = 1;
+                }
 
-                string[] subItems = {lesson.LessonTemplate.Title, DatabaseParser.GetUserById(lesson.StudentId).Fullname};
-                completeLessonsList.Items.Add(lesson.StartDate.ToString("dd/MM - HH:mm") + " to " + lesson.EndDate.ToString("HH:mm")).SubItems.AddRange(subItems);
+                _lessonsToCompleteList.Add(lesson);
             }
 
             scheduledAppointmentsLabel.Text = "Scheduled Appointments: " + scheduledCount;
@@ -241,7 +250,11 @@ namespace DriveLogGUI.MenuTabs
 
             foreach (Lesson l in _lessonsToCompleteList)
             {
-                if(l.EndDate == _lessonsToCompleteList[item.SelectedItems[0].Index].EndDate)
+                /*if(l.EndDate == _lessonsToCompleteList[item.SelectedItems[0].Index].EndDate)
+                    tempLessonList.Add(l);*/
+                string lessontime = l.StartDate.ToString("dd/MM - HH:mm");
+                string listtime = item.SelectedItems[0].Text.Substring(0, 13);
+                if (lessontime == listtime)
                     tempLessonList.Add(l);
             }
             ConfirmLessonForm confirmbox = new ConfirmLessonForm(tempLessonList);

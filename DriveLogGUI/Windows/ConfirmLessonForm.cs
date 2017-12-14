@@ -25,11 +25,12 @@ namespace DriveLogGUI.Windows
 
         private void UpdateInfo()
         {
-            lessonTitleLabel.Text = "Title: " + _lessonList[0].LessonTemplate.Title;
-            dateLabel.Text = "Date: " + _lessonList[0].EndDate;
+            lessonTitleLabel.Text = "Lesson Type: " + _lessonList[0].LessonTemplate.Type;
+            dateLabel.Text = $"Date: {_lessonList[0].StartDate} to {_lessonList[0].EndDate}";
             foreach (Lesson l in _lessonList)
             {
-                attendingStudentsList.Items.Add("").SubItems.Add(DatabaseParser.GetUserById(l.StudentId).Fullname);
+                string[] subitems = {DatabaseParser.GetUserById(l.StudentId).Fullname, l.LessonTemplate.Title};
+                attendingStudentsList.Items.Add("").SubItems.AddRange(subitems);
                 attendingStudentsList.Items[attendingStudentsList.Items.Count - 1].Checked = true;
             }
 

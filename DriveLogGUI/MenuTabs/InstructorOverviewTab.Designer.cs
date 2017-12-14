@@ -482,6 +482,7 @@
             this.dateColumn,
             this.lessonColumn,
             this.studentColumn});
+            this.completeLessonsList.Cursor = System.Windows.Forms.Cursors.Hand;
             this.completeLessonsList.FullRowSelect = true;
             this.completeLessonsList.Location = new System.Drawing.Point(22, 28);
             this.completeLessonsList.MultiSelect = false;
@@ -499,13 +500,13 @@
             // 
             // lessonColumn
             // 
-            this.lessonColumn.Text = "Lesson:";
+            this.lessonColumn.Text = "Lesson Type:";
             this.lessonColumn.Width = 140;
             // 
             // studentColumn
             // 
-            this.studentColumn.Text = "Student: ";
-            this.studentColumn.Width = 151;
+            this.studentColumn.Text = "Student(s): ";
+            this.studentColumn.Width = 127;
             // 
             // panel2
             // 

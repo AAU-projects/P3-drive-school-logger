@@ -119,6 +119,12 @@
     <Compile Include="Windows\BookAppointmentWindow.Designer.cs">
       <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\CalendarInformationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\CalendarInformationWindow.Designer.cs">
+      <DependentUpon>CalendarInformationWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ConfirmLessonForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,12 @@
     </Compile>
     <Compile Include="Windows\EditUserInfoForm.Designer.cs">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LoadingScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\LoadingScreen.Designer.cs">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\LoginForm.cs">
       <SubType>Form</SubType>
@@ -228,6 +240,9 @@
     <EmbeddedResource Include="Windows\BookAppointmentWindow.resx">
       <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\CalendarInformationWindow.resx">
+      <DependentUpon>CalendarInformationWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\ConfirmLessonForm.resx">
       <DependentUpon>ConfirmLessonForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EditUserInfoForm.resx">
       <DependentUpon>EditUserInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\LoadingScreen.resx">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -309,6 +327,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\if_Help_22150.png" />
     <None Include="Resources\purpleDot.png" />
     <None Include="Resources\resize1.png" />
     <None Include="Resources\resize.png" />
@@ -373,6 +392,7 @@
     <None Include="Resources\addlesson.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\aarhus-køreskole-city-ks-logo-v2.jpg" />
     <Content Include="Resources\addlessongrey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -380,6 +400,7 @@
     <None Include="Resources\bookableDot.png" />
     <None Include="Resources\bookedDot.png" />
     <None Include="Resources\completedDot.png" />
+    <None Include="Resources\calendarInformation.png" />
     <Content Include="Resources\drag_and_drop_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

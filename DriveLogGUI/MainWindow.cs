@@ -8,6 +8,8 @@ using DriveLogCode.DataAccess;
 using DriveLogCode.DesignSchemes;
 using DriveLogCode.Objects;
 using DriveLogGUI.MenuTabs;
+using DriveLogGUI.Windows;
+using System.Threading;
 
 namespace DriveLogGUI
 {
@@ -27,13 +29,16 @@ namespace DriveLogGUI
         private DriveLogTab driveLogTab;
         private TemplateCreator _lessonCreator;
 
-
-
         public MainWindow()
         {
+            Thread loadingThread = new Thread(new ThreadStart(LoadingScreenStart));
+            loadingThread.Start();
+
             InitializeComponent();
             InitializeMenuTabs();
 
+            loadingThread.Abort();
+            
             // Add logout events for pages containing a logout button.
             overviewTab.LogOutButtonClick += LogOut;
             profileTab.LogOutButtonClick += LogOut;
@@ -87,6 +92,11 @@ namespace DriveLogGUI
 
             SettingsAdminSubMenu();
             SettingsSubMenu(false);
+        }
+
+        public void LoadingScreenStart()
+        {
+            Application.Run(new LoadingScreen());
         }
 
         private void LogOut(object sender, EventArgs e)
@@ -204,12 +214,11 @@ namespace DriveLogGUI
 
         private void ProfileButton_Click(object sender, EventArgs e)
         {
-
+            Cursor = Cursors.AppStarting;
             if (!Session.LoggedInUser.Sysmin)
                 ProfileSubmenuControl(true);
             profileTab.UpdateInfo();
             OpenPage(sender, profileTab);
-
         }
 
         private void ProfileSubmenuControl(bool isProfileClick)
@@ -253,6 +262,7 @@ namespace DriveLogGUI
 
         private void OverviewButton_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.AppStarting;
             //To add a page create a usercontrol and send it as paramater in use OpenPage
             overviewTab.UpdateInfo();
             OpenPage(sender, overviewTab);
@@ -302,20 +312,21 @@ namespace DriveLogGUI
                 
                 page.Show();
 
-                HighlightCurrentButton((Button)sender, _lastButton);
-                _lastButton = (Button)sender;
-
-            } else if (_lastPage is DocumentViewer && page is DocumentViewer)
+                HighlightCurrentButton((Button)sender);
+                Cursor = Cursors.Arrow;
+            } 
+            
+            else if (_lastPage is DocumentViewer && page is DocumentViewer)
             {
-                HighlightCurrentButton((Button)sender, _lastButton);
-                _lastButton = (Button)sender;
+                HighlightCurrentButton((Button)sender);
             }
         }
 
-        private void HighlightCurrentButton(Button sender, Button lastButton)
+        public void HighlightCurrentButton(Button sender)
         {
             _lastButton.BackColor = Color.FromArgb(81, 108, 112);
             sender.BackColor = Color.FromArgb(148, 197, 204);
+            _lastButton = sender;
         }
 
         private void OpenPageEvent(UserControl page)
@@ -343,6 +354,7 @@ namespace DriveLogGUI
 
         private void firstAidButton_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.AppStarting;
             if (DatabaseParser.ExistFirstAid(Session.LoggedInUser))
             {
                 OpenPage(sender, documentViewer);
@@ -353,6 +365,7 @@ namespace DriveLogGUI
                 OpenPage(sender, documentViewer);
                 documentViewer.SetType(Session.TypeFirstAid);
             }
+            Cursor = Cursors.Arrow;
         }
 
         private void bookingButton_Click(object sender, EventArgs e)
@@ -396,6 +409,7 @@ namespace DriveLogGUI
         
         private void doctorsNoteButton_Click_1(object sender, EventArgs e)
         {
+            Cursor = Cursors.AppStarting;
             if (DatabaseParser.ExistDoctorsNote(Session.LoggedInUser))
             {
                 OpenPage(sender, documentViewer);
@@ -406,11 +420,11 @@ namespace DriveLogGUI
                 OpenPage(sender, documentViewer);
                 documentViewer.SetType(Session.TypeDoctorsNote);
             }
+            Cursor = Cursors.Arrow;
         }
 
         private void OnIconClick(object sender, EventArgs e)
         {
-
             SubMenus(true);
 
             PictureBox pBox = sender as PictureBox;
@@ -432,11 +446,6 @@ namespace DriveLogGUI
         internal void driveLogButton_Click(object sender, EventArgs e)
         {
             OpenPage(sender, driveLogTab);
-        }
-
-        private void topPanel_Paint(object sender, PaintEventArgs e)
-        {
-            topPanel.BackColor = ColorScheme.MainTopPanelColor;
         }
 
         private void button2_Click(object sender, EventArgs e)

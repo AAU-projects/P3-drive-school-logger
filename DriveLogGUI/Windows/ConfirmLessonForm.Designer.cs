@@ -41,6 +41,7 @@
             this.attendedColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.studentColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.saveButton = new System.Windows.Forms.Button();
+            this.lessonColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             this.closeButton.FlatAppearance.BorderSize = 0;
             this.closeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeButton.Location = new System.Drawing.Point(329, 0);
+            this.closeButton.Location = new System.Drawing.Point(355, 0);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(25, 22);
             this.closeButton.TabIndex = 44;
@@ -65,7 +66,7 @@
             this.topPanel.Controls.Add(this.button1);
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(354, 22);
+            this.topPanel.Size = new System.Drawing.Size(380, 22);
             this.topPanel.TabIndex = 48;
             this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
             this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
@@ -87,7 +88,7 @@
             // 
             this.headerLabel.Font = new System.Drawing.Font("Calibri", 25F);
             this.headerLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(144)))), ((int)(((byte)(150)))));
-            this.headerLabel.Location = new System.Drawing.Point(0, 25);
+            this.headerLabel.Location = new System.Drawing.Point(14, 25);
             this.headerLabel.Name = "headerLabel";
             this.headerLabel.Size = new System.Drawing.Size(354, 48);
             this.headerLabel.TabIndex = 49;
@@ -120,7 +121,7 @@
             this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(132)))), ((int)(((byte)(144)))));
             this.panel2.Location = new System.Drawing.Point(15, 162);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(325, 2);
+            this.panel2.Size = new System.Drawing.Size(350, 2);
             this.panel2.TabIndex = 53;
             // 
             // attendingStudentLabel
@@ -137,25 +138,26 @@
             this.attendingStudentsList.CheckBoxes = true;
             this.attendingStudentsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.attendedColumn,
-            this.studentColumn});
+            this.studentColumn,
+            this.lessonColumn});
             this.attendingStudentsList.Location = new System.Drawing.Point(15, 170);
             this.attendingStudentsList.Name = "attendingStudentsList";
-            this.attendingStudentsList.Size = new System.Drawing.Size(325, 126);
+            this.attendingStudentsList.Size = new System.Drawing.Size(353, 126);
             this.attendingStudentsList.TabIndex = 54;
             this.attendingStudentsList.UseCompatibleStateImageBehavior = false;
             this.attendingStudentsList.View = System.Windows.Forms.View.Details;
             // 
             // attendedColumn
             // 
-            this.attendedColumn.DisplayIndex = 1;
+            this.attendedColumn.DisplayIndex = 2;
             this.attendedColumn.Text = "Attended?";
-            this.attendedColumn.Width = 101;
+            this.attendedColumn.Width = 63;
             // 
             // studentColumn
             // 
             this.studentColumn.DisplayIndex = 0;
             this.studentColumn.Text = "Student:";
-            this.studentColumn.Width = 184;
+            this.studentColumn.Width = 132;
             // 
             // saveButton
             // 
@@ -172,12 +174,18 @@
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // lessonColumn
+            // 
+            this.lessonColumn.DisplayIndex = 1;
+            this.lessonColumn.Text = "Lesson Title";
+            this.lessonColumn.Width = 129;
+            // 
             // ConfirmLessonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(354, 347);
+            this.ClientSize = new System.Drawing.Size(380, 347);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.attendingStudentsList);
             this.Controls.Add(this.panel2);
@@ -210,5 +218,6 @@
         private System.Windows.Forms.ColumnHeader studentColumn;
         private System.Windows.Forms.ColumnHeader attendedColumn;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.ColumnHeader lessonColumn;
     }
 }
