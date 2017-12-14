@@ -312,22 +312,21 @@ namespace DriveLogGUI
                 
                 page.Show();
 
-                HighlightCurrentButton((Button)sender, _lastButton);
-                _lastButton = (Button)sender;
+                HighlightCurrentButton((Button)sender);
                 Cursor = Cursors.Arrow;
             } 
             
             else if (_lastPage is DocumentViewer && page is DocumentViewer)
             {
-                HighlightCurrentButton((Button)sender, _lastButton);
-                _lastButton = (Button)sender;
+                HighlightCurrentButton((Button)sender);
             }
         }
 
-        private void HighlightCurrentButton(Button sender, Button lastButton)
+        public void HighlightCurrentButton(Button sender)
         {
             _lastButton.BackColor = Color.FromArgb(81, 108, 112);
             sender.BackColor = Color.FromArgb(148, 197, 204);
+            _lastButton = sender;
         }
 
         private void OpenPageEvent(UserControl page)

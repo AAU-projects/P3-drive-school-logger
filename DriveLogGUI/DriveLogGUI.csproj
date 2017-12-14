@@ -119,6 +119,12 @@
     <Compile Include="Windows\BookAppointmentWindow.Designer.cs">
       <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\CalendarInformationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\CalendarInformationWindow.Designer.cs">
+      <DependentUpon>CalendarInformationWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ConfirmLessonForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +240,9 @@
     <EmbeddedResource Include="Windows\BookAppointmentWindow.resx">
       <DependentUpon>BookAppointmentWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\CalendarInformationWindow.resx">
+      <DependentUpon>CalendarInformationWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\ConfirmLessonForm.resx">
       <DependentUpon>ConfirmLessonForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -318,6 +327,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\if_Help_22150.png" />
     <None Include="Resources\purpleDot.png" />
     <None Include="Resources\resize1.png" />
     <None Include="Resources\resize.png" />
@@ -390,6 +400,7 @@
     <None Include="Resources\bookableDot.png" />
     <None Include="Resources\bookedDot.png" />
     <None Include="Resources\completedDot.png" />
+    <None Include="Resources\calendarInformation.png" />
     <Content Include="Resources\drag_and_drop_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

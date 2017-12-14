@@ -397,7 +397,7 @@
         private System.Windows.Forms.Label labelForTitle2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button settingsButton;
-        private System.Windows.Forms.Button bookingButton;
+        public System.Windows.Forms.Button bookingButton;
         private System.Windows.Forms.Button ProfileButton;
         private System.Windows.Forms.Button OverviewButton;
         private System.Windows.Forms.Label labelForTitle;

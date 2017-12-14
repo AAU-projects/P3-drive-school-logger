@@ -214,6 +214,7 @@ namespace DriveLogGUI.MenuTabs
 
         public void OverviewTabOnClickOnDate(object sender, DateClickEventArgs dateEvent)
         {
+            this.mainWindow.HighlightCurrentButton(mainWindow.bookingButton);
             this.mainWindow._lastPage = this;
             overviewTab.Hide();
             this.Show();
@@ -661,6 +662,12 @@ namespace DriveLogGUI.MenuTabs
                 }
             }
             
+        }
+
+        private void InformationPictureBox_Click(object sender, EventArgs e)
+        {
+            CalendarInformationWindow informationWindow = new CalendarInformationWindow();
+            informationWindow.ShowDialog();
         }
     }
 }
