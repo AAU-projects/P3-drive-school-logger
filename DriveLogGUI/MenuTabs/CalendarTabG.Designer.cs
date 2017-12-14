@@ -41,6 +41,7 @@ namespace DriveLogGUI.MenuTabs
             this.datesInWeek = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panelHideInfo = new System.Windows.Forms.Panel();
             this.warningInformationTextbox = new System.Windows.Forms.TextBox();
             this.NotAvaiableLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -59,7 +60,6 @@ namespace DriveLogGUI.MenuTabs
             this.dateInformationLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.informationLabel = new System.Windows.Forms.Label();
-            this.panelHideInfo = new System.Windows.Forms.Panel();
             this.panelForCalendar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -230,6 +230,13 @@ namespace DriveLogGUI.MenuTabs
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(171, 401);
             this.panel4.TabIndex = 9;
+            // 
+            // panelHideInfo
+            // 
+            this.panelHideInfo.Location = new System.Drawing.Point(13, 18);
+            this.panelHideInfo.Name = "panelHideInfo";
+            this.panelHideInfo.Size = new System.Drawing.Size(137, 212);
+            this.panelHideInfo.TabIndex = 0;
             // 
             // warningInformationTextbox
             // 
@@ -418,13 +425,6 @@ namespace DriveLogGUI.MenuTabs
             this.informationLabel.TabIndex = 6;
             this.informationLabel.Text = "Select an object";
             this.informationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panelHideInfo
-            // 
-            this.panelHideInfo.Location = new System.Drawing.Point(13, 18);
-            this.panelHideInfo.Name = "panelHideInfo";
-            this.panelHideInfo.Size = new System.Drawing.Size(137, 212);
-            this.panelHideInfo.TabIndex = 0;
             // 
             // CalendarTabG
             // 

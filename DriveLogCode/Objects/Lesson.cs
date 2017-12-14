@@ -6,7 +6,7 @@ namespace DriveLogCode.Objects
     public class Lesson
     {
         public int Id { get; }
-        public int UserID { get;  }
+        public int UserID { get; set; }
         public string InstructorFirstname { get; }
 
         public string InstructorLastname { get; }

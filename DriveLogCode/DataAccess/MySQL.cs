@@ -71,6 +71,18 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        internal static DataTable GetUsersAndLessonsFromAppointmentID(int appointmentid, string lessonTable = LessonTable, string userTable = UserTable)
+        {
+            var cmd = new MySqlCommand($"SELECT {userTable}.user_id, min({lessonTable}.LessonID), min({lessonTable}.LessonPart) " +
+                                       $"FROM {lessonTable}, {userTable} " +
+                                       $"WHERE " +
+                                       $"{lessonTable}.AppointmentID = {appointmentid} " +
+                                       $"AND " +
+                                       $"{userTable}.user_id = {lessonTable}.UserID " +
+                                       $"GROUP BY UserID");
+            return SendQuery(cmd);
+        }
+
         internal static DataTable GetLessonsToComplete(int instructorId, string LessonTable = LessonTable,
             string AppointmentTable = AppointmentTable, string LessonTemplateTable = LessonTemplateTable )
         {
@@ -706,6 +718,13 @@ namespace DriveLogCode.DataAccess
             var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE {table}.user_id IN ({userIdsString});");
 
             return SendQuery(cmd);
+        }
+
+        public static bool DeleteAppointment(int appointmentId, string table)
+        {
+            var cmd = new MySqlCommand($"DELETE FROM {table} WHERE id = {appointmentId}");
+
+            return SendNonQuery(cmd);
         }
     }
 }
