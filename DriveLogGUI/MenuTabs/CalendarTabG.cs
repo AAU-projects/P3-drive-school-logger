@@ -51,7 +51,7 @@ namespace DriveLogGUI.MenuTabs
 
         private void GetInstructorData()
         {
-            bookingInformationButton.Hide();
+            bookingInformationButton.Text = CancelBookingText;
             notAvailableDot.Image = Properties.Resources.bookableDot;
             notAvailableLabel.Text = "Bookable";
             NotAvaiableLabel.Text = "Fully booked";
@@ -197,7 +197,8 @@ namespace DriveLogGUI.MenuTabs
 
         private void ShowBookingWarrning(string errorMsg)
         {
-            bookingInformationButton.Text = UnavaiableBookingText;
+            if (!Session.LoggedInUser.Sysmin)
+                bookingInformationButton.Text = UnavaiableBookingText;
             warningInformationTextbox.Text = errorMsg;
 
             warningTitleLabel.Show();
@@ -390,6 +391,12 @@ namespace DriveLogGUI.MenuTabs
                     element.LabelAppointment.Hide();
                 }
             }
+        }
+
+        private void DeleteAppointment(Appointment appointment)
+        {
+            appointment.LabelAppointment.Hide();
+            appointments.Remove(appointments.Single(x => x.Id == appointment.Id));
         }
 
         private string GetDatesInWeek(DateTime now)
@@ -650,18 +657,39 @@ namespace DriveLogGUI.MenuTabs
             }
             else if (bookingInformationButton.Text == CancelBookingText)
             {
-                List<Lesson> cancelTheseLessons = DatabaseParser.CancelLesson(selectedAppointment.bookedLessons.First().TemplateID, selectedAppointment.bookedLessons.First().Progress, Session.LoggedInUser.Id);
-
-                DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons,  CustomMsgBoxIcon.Warrning);
-                if (result == DialogResult.Yes)
+                if (Session.LoggedInUser.Sysmin)
                 {
-                    DatabaseParser.DeleteLessons(cancelTheseLessons);
-                    Session.LoggedInUser.GetLessonList();
-                    Session.GetProgress();
-                    UpdateCalendar(0);
+                    List<Lesson> cancelTheseLessons = new List<Lesson>();
+                    List<Lesson> usersOnAppointment = DatabaseParser.GetUsersAndLessonsOnAppointmentID(selectedAppointment.Id);
+                    foreach (Lesson lessonToCancel in usersOnAppointment)
+                    {
+                        cancelTheseLessons.AddRange(DatabaseParser.CancelLesson(lessonToCancel.TemplateID, lessonToCancel.Progress, lessonToCancel.UserID));
+                    }
+                    DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
+                    if (result == DialogResult.Yes)
+                    {
+                        DatabaseParser.DeleteLessons(cancelTheseLessons);
+                        DatabaseParser.DeleteAppointment(selectedAppointment.Id);
+                        DeleteAppointment(selectedAppointment);
+                        Session.LoggedInUser.GetLessonList();
+                        Session.GetProgress();
+                        UpdateCalendar(0);
+                    }
+                }
+                else
+                {
+                    List<Lesson> cancelTheseLessons = DatabaseParser.CancelLesson(selectedAppointment.bookedLessons.First().TemplateID, selectedAppointment.bookedLessons.First().Progress, Session.LoggedInUser.Id);
+
+                    DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
+                    if (result == DialogResult.Yes)
+                    {
+                        DatabaseParser.DeleteLessons(cancelTheseLessons);
+                        Session.LoggedInUser.GetLessonList();
+                        Session.GetProgress();
+                        UpdateCalendar(0);
+                    }
                 }
             }
-            
         }
 
         private void InformationPictureBox_Click(object sender, EventArgs e)

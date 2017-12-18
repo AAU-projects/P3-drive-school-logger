@@ -366,6 +366,28 @@ namespace DriveLogCode.DataAccess
             return usersOnAppointment;
         }
 
+        public static List<Lesson> GetUsersAndLessonsOnAppointmentID(int appointmentid, string lessonTable = LessonTable, string userTable = UserTable)
+        {
+            DataTable queryInfo = MySql.GetUsersAndLessonsFromAppointmentID(appointmentid, lessonTable, userTable);
+            List<Lesson> firstLessonForUserOnAppointment = new List<Lesson>(); 
+
+            foreach (DataRow result in queryInfo.Rows)
+            {
+                Lesson lessonToAdd = new Lesson();
+                lessonToAdd.UserID = Convert.ToInt32(result[0]);
+                lessonToAdd.TemplateID = Convert.ToInt32(result[1]);
+                lessonToAdd.Progress = Convert.ToInt32(result[2]);
+                firstLessonForUserOnAppointment.Add(lessonToAdd);
+            }
+
+            return firstLessonForUserOnAppointment;
+        }
+
+        public static bool DeleteAppointment(int appointmentId, string appointmentTable = AppointmentTable)
+        {
+            return MySql.DeleteAppointment(appointmentId, appointmentTable);
+        }
+
         public static List<Lesson> GetAllLessonsFromAppointmentID(int id, string lessonTable = LessonTable)
         {
             DataTable result = MySql.GetAllLessonsFromAppointmentID(id, lessonTable);
