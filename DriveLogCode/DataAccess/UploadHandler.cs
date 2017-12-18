@@ -20,6 +20,14 @@ namespace DriveLogCode.DataAccess
             return UploadFile(title, Session.TypeFirstAid, fileLocation, url);
         }
 
+        /// <summary>
+        /// Uploads a file to the webserver.
+        /// </summary>
+        /// <param name="title">The title for the file, to be used in the Database.</param>
+        /// <param name="type">What type of file is uploaded. Example: 'FirstAid' or 'DoctorsNote'.</param>
+        /// <param name="fileLocation">The local filepath to the document.</param>
+        /// <param name="url">The url of the server, where the file will be uploaded.</param>
+        /// <returns>Returns a bool wether the operation was completed or not.</returns>
         private bool UploadFile(string title, string type, string fileLocation, string url)
         {
             Spire.Pdf.PdfDocument document = new Spire.Pdf.PdfDocument();

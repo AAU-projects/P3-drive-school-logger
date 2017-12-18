@@ -19,6 +19,10 @@ namespace DriveLogCode.Objects
         public static Lesson CurrentLesson;
         public static Lesson NextLesson => GetNextLesson();
 
+        /// <summary>
+        /// Loads an user from an User object.
+        /// </summary>
+        /// <param name="user">The User object to load.</param>
         public static void LoadUser(User user)
         {
             GetTemplateList();
@@ -37,6 +41,10 @@ namespace DriveLogCode.Objects
             GetProgress();
         }
 
+        /// <summary>
+        /// Loads an user from a DataTable
+        /// </summary>
+        /// <param name="userTable">The DataTable to load a user from.</param>
         public static void LoadUserFromDataTable(DataTable userTable)
         {
             GetTemplateList();
