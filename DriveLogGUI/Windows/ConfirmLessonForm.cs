@@ -16,6 +16,11 @@ namespace DriveLogGUI.Windows
     {
         private List<Lesson> _lessonList = new List<Lesson>();
         private Point _lastClick;
+
+        /// <summary>
+        /// Class constructor. Initializes component and information
+        /// </summary>
+        /// <param name="lessons">A list of lessons to complete</param>
         public ConfirmLessonForm(List<Lesson> lessons)
         {
             _lessonList = lessons;
@@ -23,6 +28,9 @@ namespace DriveLogGUI.Windows
             UpdateInfo();
         }
 
+        /// <summary>
+        /// Updates information and adds the info to the listview
+        /// </summary>
         private void UpdateInfo()
         {
             lessonTitleLabel.Text = "Lesson Type: " + _lessonList[0].LessonTemplate.Type;
@@ -36,11 +44,21 @@ namespace DriveLogGUI.Windows
 
         }
 
+        /// <summary>
+        /// Saves the location of the last click
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The MouseEventArgs</param>
         private void topPanel_MouseDown(object sender, MouseEventArgs e)
         {
             _lastClick = e.Location;
         }
 
+        /// <summary>
+        /// Moves the location of the form
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The MouseEventArgs</param>
         private void topPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -50,17 +68,28 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Disposes of the form if close button is clicked
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
+        /// <summary>
+        /// Completes or denies lessons and closes the form
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void saveButton_Click(object sender, EventArgs e)
         {
             StringBuilder text = new StringBuilder();
             text.AppendLine("Are you sure you want to complete the lesson with the following attendees?");
             text.AppendLine();
             text.AppendLine("Attended:");
+            // Lists All the students who attended the lesson
             for (int i = 0; i < attendingStudentsList.Items.Count; i++)
             {
                 if (attendingStudentsList.Items[i].Checked)
@@ -68,18 +97,21 @@ namespace DriveLogGUI.Windows
             }
             text.AppendLine();
             text.AppendLine("Did Not Attend:");
+            // Lists All the students who did not attend the lesson
             for (int i = 0; i < attendingStudentsList.Items.Count; i++)
             {
                 if (!attendingStudentsList.Items[i].Checked)
                     text.AppendLine(attendingStudentsList.Items[i].SubItems[1].Text);
             }
 
+            // Show the dialog and save result
             DialogResult result = CustomMsgBox.ShowConfirm(text.ToString(), "Confirm Attendees", CustomMsgBoxIcon.Complete, 20 * attendingStudentsList.Items.Count + 80);
 
             if (result == DialogResult.OK)
             {
                 for (int i = 0; i < attendingStudentsList.Items.Count; i++)
                 {
+                    // If row is checked then complete lesson else deny lesson
                     if (attendingStudentsList.Items[i].Checked)
                         DatabaseParser.SetLessonToStatus(_lessonList[i].StudentId, _lessonList[i].AppointmentID,
                             _lessonList[i].Progress, true);
