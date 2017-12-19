@@ -21,6 +21,9 @@ namespace DriveLogGUI.MenuTabs
         private Bitmap completedImage = DriveLogGUI.Properties.Resources.checkCompleted;
         private Bitmap completedHoverImage = DriveLogGUI.Properties.Resources.checkHover;
 
+        /// <summary>
+        /// Class constructor. Initializes component, layout and information
+        /// </summary>
         public InstructorOverviewTab()
         {
             InitializeComponent();
@@ -38,27 +41,37 @@ namespace DriveLogGUI.MenuTabs
             UpdateInfo();
         }
 
+        /// <summary>
+        /// Updates all the defined information
+        /// </summary>
         public override void UpdateInfo()
         {
             UpdateLessonsToCompleteList();
         }
 
+        /// <summary>
+        /// Updates the listview containing all the lessons an instructor needs to complete
+        /// </summary>
         private void UpdateLessonsToCompleteList()
         {
             _lessonsToCompleteList.Clear();
             completeLessonsList.Items.Clear();
+
+            // Retrieve all lessons by instructor
             List<Lesson> lessonsFoundList = DatabaseParser.GetLessonsToCompleteList(Session.LoggedInUser);
             int scheduledCount = 0;
             int studentCount = 1;
 
             foreach (Lesson lesson in lessonsFoundList)
             {
+                // Skip lessons of the future and increment scheduledCount
                 if (lesson.EndDate > DateTime.Now)
                 {
                     scheduledCount++;
                     continue;
                 }
 
+                // Count how many students attended the same time slot and add lesson to the listview
                 if (_lessonsToCompleteList.Count != 0 && lesson.StartDate == _lessonsToCompleteList.Last().StartDate)
                 {
                     studentCount++;
@@ -79,11 +92,9 @@ namespace DriveLogGUI.MenuTabs
                                          scheduledCount);
         }
 
-        public DateTime GetPanelDate(int position)
-        {
-            return listOfDays[position].Date;
-        }
-
+        /// <summary>
+        /// Draws the calendar with the correct information
+        /// </summary>
         private void DrawCalendar()
         {
             int widthForEachDay = daysForCalendar.Width / 7;
@@ -96,15 +107,19 @@ namespace DriveLogGUI.MenuTabs
 
             for (var i = 0; i < 42; i++) // 42 is number of days in our calendar, therefor static.
             {
+                // Instantiates a new calendar day
                 CalendarData calendarDay = new CalendarData(new Panel(), new Label(), formatDateTime, new Panel());
                 calendarDay.LabelForDate.MouseEnter += (s, e) =>
                     LabelForDateMouseEnter(calendarDay.LabelForDate, calendarDay.PanelForCalendarDay, calendarDay.Date);
 
+                // Assign mouse leave event
                 calendarDay.LabelForDate.MouseLeave +=
                     (s, e) => LabelForDateMouseLeave(calendarDay.PanelForCalendarDay, calendarDay.Date);
 
+                // Add the day to the list of days
                 listOfDays.Add(calendarDay);
                 
+                // Set the size for the Panel
                 calendarDay.PanelForCalendarDay.Width = widthForEachDay;
                 calendarDay.PanelForCalendarDay.Height = heightForEachDay;
                 
@@ -114,14 +129,22 @@ namespace DriveLogGUI.MenuTabs
                     locationForColumn += heightForEachDay;
                 }
 
+                // Set the location of Panel
                 calendarDay.PanelForCalendarDay.Location = new Point(locationForRow, locationForColumn);
                 locationForRow += widthForEachDay;
 
+                // Format the data
                 FormatPanelForDays(calendarDay, ref formatDateTime);
                 daysForCalendar.Controls.Add(calendarDay.PanelForCalendarDay);
             }
         }
 
+        /// <summary>
+        /// Changes cursor and Panel back color on mouse enter
+        /// </summary>
+        /// <param name="label">The Label</param>
+        /// <param name="panel">The Panel</param>
+        /// <param name="panelDate">The Date</param>
         private void LabelForDateMouseEnter(Label label, Panel panel, DateTime panelDate)
         {
             label.Cursor = Cursors.Hand;
@@ -129,12 +152,20 @@ namespace DriveLogGUI.MenuTabs
                 panel.BackColor = Color.FromArgb(229, 243, 255);
         }
 
+        /// <summary>
+        /// Changes Panel back color on mouse leave
+        /// </summary>
+        /// <param name="panel">The Panel</param>
+        /// <param name="panelDate">The Date</param>
         private void LabelForDateMouseLeave(Panel panel, DateTime panelDate)
         {
             if (panelDate != DateTime.Today)
                 panel.BackColor = Color.FromArgb(251, 251, 251);
         }
 
+        /// <summary>
+        /// Updates the calendar with data from listOfDays
+        /// </summary>
         private void UpdateCalender()
         {
             foreach (CalendarData day in listOfDays)
@@ -145,6 +176,10 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Calculates the start date
+        /// </summary>
+        /// <returns>The start date</returns>
         private DateTime WhereDoWeStart()
         {
             int day;
@@ -166,6 +201,11 @@ namespace DriveLogGUI.MenuTabs
             return date;
         }
 
+        /// <summary>
+        /// Formats the Panels in the calendar
+        /// </summary>
+        /// <param name="data">the data to use in the calendar</param>
+        /// <param name="currentDateTime">Current date and time</param>
         private void FormatPanelForDays(CalendarData data, ref DateTime currentDateTime)
         {
             calendarMonth.Text = selectedMonth.ToString("MMMM").ToUpper();
@@ -200,9 +240,14 @@ namespace DriveLogGUI.MenuTabs
             currentDateTime = currentDateTime.AddDays(1);
         }
 
+        /// <summary>
+        /// Sets the color of the dayNotification Panel if the day and time mathces the lesson
+        /// </summary>
+        /// <param name="dayNotification">The Panel</param>
+        /// <param name="currentDateTime">The current time and date</param>
         private void CheckIfUserHasAppointment(Panel dayNotification, DateTime currentDateTime)
         {
-            foreach (Lesson lesson in Session.LoggedInUser.LessonsList) //TODO Lookup after session class appointment is done
+            foreach (Lesson lesson in Session.LoggedInUser.LessonsList)
             {
                 if (lesson.EndDate.Date == currentDateTime.Date)
                 {
@@ -216,6 +261,11 @@ namespace DriveLogGUI.MenuTabs
 
         }
 
+        /// <summary>
+        /// Event method raised when clicking the Right Arrow
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void calendarRightArrow_Click(object sender, EventArgs e)
         {
             selectedMonth = selectedMonth.AddMonths(1);
@@ -223,6 +273,11 @@ namespace DriveLogGUI.MenuTabs
             UpdateCalender();
         }
 
+        /// <summary>
+        /// Event method raised when clicking the Left Arrow
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void calendarLeftArrow_Click(object sender, EventArgs e)
         {
             selectedMonth = selectedMonth.AddMonths(-1);
@@ -230,6 +285,11 @@ namespace DriveLogGUI.MenuTabs
             UpdateCalender();
         }
 
+        /// <summary>
+        /// Event method raised when clicking the message edit button
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void overviewUpdateTodaysNote_Click(object sender, EventArgs e)
         {
             if (todaysNoteTextbox.Enabled)
@@ -243,24 +303,32 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Event method raised when activating an item in the listview
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void completeLessonsList_ItemActivate(object sender, EventArgs e)
         {
             if (!(sender is ListView item)) return;
             List<Lesson> tempLessonList = new List<Lesson>();
 
+            // Add all lessons which match the StartTime of the selected item to tempLessonList
             foreach (Lesson l in _lessonsToCompleteList)
             {
-                /*if(l.EndDate == _lessonsToCompleteList[item.SelectedItems[0].Index].EndDate)
-                    tempLessonList.Add(l);*/
                 string lessontime = l.StartDate.ToString("dd/MM - HH:mm");
                 string listtime = item.SelectedItems[0].Text.Substring(0, 13);
                 if (lessontime == listtime)
                     tempLessonList.Add(l);
             }
+            
+            // Instantiates a new ConfirmLessonForm
             ConfirmLessonForm confirmbox = new ConfirmLessonForm(tempLessonList);
 
+            // Shows the ConfirmLessonForm and assigns result
             DialogResult result = confirmbox.ShowDialog();
 
+            // Call the update method if result is Yes
             if(result == DialogResult.Yes)
                 UpdateLessonsToCompleteList();
         }

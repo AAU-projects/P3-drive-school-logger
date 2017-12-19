@@ -10,17 +10,31 @@ namespace DriveLogGUI.Windows
         private Point _lastClick;
         private bool _draw = false;
         private bool edited = false;
+
+        /// <summary>
+        /// Class constructor. Initializes component and sets current signature
+        /// </summary>
         public SignatureEdit()
         {
             InitializeComponent();
             signatureBox.Image = SignatureImage;
         }
 
+        /// <summary>
+        /// Saves last click location
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The MouseEventArgs</param>
         private void topBarPanel_MouseDown(object sender, MouseEventArgs e)
         {
             _lastClick = e.Location;
         }
 
+        /// <summary>
+        /// Moves the location of the form
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The MouseEventArgs</param>
         private void topBarPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -30,11 +44,21 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Disposes of the form if the close button is clicked
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
+        /// <summary>
+        /// Paints on the PictureBox as long as mouse is down
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The MouseEventArgs</param>
         private void signatureBox_MouseDown(object sender, MouseEventArgs e)
         {
             _draw = true;
@@ -45,11 +69,21 @@ namespace DriveLogGUI.Windows
             signatureBox.Image = SignatureImage;
         }
 
+        /// <summary>
+        /// Sets drawing to false when mouse up
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The MouseEventArgs</param>
         private void signatureBox_MouseUp(object sender, MouseEventArgs e)
         {
             _draw = false;
         }
 
+        /// <summary>
+        /// Draws a line while the mouse moves
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The MouseEventArgs</param>
         private void signatureBox_MouseMove(object sender, MouseEventArgs e)
         {
             if (_draw)
@@ -63,6 +97,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Checks if changes were made else show warning
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (edited)

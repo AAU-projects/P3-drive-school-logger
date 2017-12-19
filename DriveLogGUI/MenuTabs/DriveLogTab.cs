@@ -21,6 +21,11 @@ namespace DriveLogGUI.MenuTabs
         private Color standartTitleColor = Color.FromArgb(67, 72, 84);
         private bool _search;
 
+        /// <summary>
+        /// Class constructor. Initializes component, layout and information
+        /// </summary>
+        /// <param name="user">The user to retrieve the data from</param>
+        /// <param name="search">Determains if instance was created using a User Search</param>
         public DriveLogTab(User user, bool search = false)
         {
             InitializeComponent();
@@ -30,11 +35,13 @@ namespace DriveLogGUI.MenuTabs
             templateslist = DatabaseParser.GetTemplatesList();
             lessonslist = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(user.Id);
 
+            // Generates a Panel for each template in the templatelist
             for (int i = 0; i < templateslist.Count; i++)
             {
                 GenerateDriveLogPanel(i, templateslist[i]);
             }
 
+            // Adds each Panel to the backPanel Controls list to make them appear
             foreach (Panel panel in driveLogPanelList)
             {
                 backPanel.Controls.Add(panel);
@@ -43,6 +50,9 @@ namespace DriveLogGUI.MenuTabs
             UpdateLayout();
         }
 
+        /// <summary>
+        /// Updates the top right buttons
+        /// </summary>
         private void UpdateLayout()
         {
             if (_search)
@@ -54,6 +64,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Generates a panel containing the information of the lesson
+        /// </summary>
+        /// <param name="idx">The index of the panel</param>
+        /// <param name="template">The LessonTemplate associated with the lesson</param>
         private void GenerateDriveLogPanel(int idx, LessonTemplate template)
         {
             int labelWidth = backPanel.Width - 30;
@@ -61,10 +76,12 @@ namespace DriveLogGUI.MenuTabs
             bool lessonCompleted = false;
             List<Lesson> lessonquery = new List<Lesson>();
 
+            // instantiates a new Panel 
             Panel driveLogPanel = new Panel();
             driveLogPanel.BackColor = Color.White;
             driveLogPanel.BorderStyle = BorderStyle.FixedSingle;
 
+            // Determain the posistion of the panel, index 0 is a special case
             if (idx == 0)
                 driveLogPanel.Location = new Point(6, 13);
             else
@@ -73,15 +90,18 @@ namespace DriveLogGUI.MenuTabs
                     (6, driveLogPanelList[idx - 1].Location.Y + driveLogPanelList[idx - 1].Height + 13);
             }
 
+            // Stores all lessons from the Lessonlist with the same TemplateID as the current Template in the lessonquery list
             foreach (Lesson lesson in lessonslist)
             {
                 if(lesson.TemplateID == template.Id)
                     lessonquery.Add(lesson);
             }
 
+            // Checks if the last lesson in the lessonquery list is the last part of the lessontemplate and if it is completed
             if (lessonquery.Count > 0 && lessonquery.Last().Progress == template.Time && lessonquery.Last().Completed)
                 lessonCompleted = true;
 
+            //The following generates visual objects which are all placed on the current Panel
             Label titleLabel = new Label();
             titleLabel.TextAlign = ContentAlignment.MiddleCenter;
             titleLabel.Location = new Point(5, 5);
@@ -141,6 +161,7 @@ namespace DriveLogGUI.MenuTabs
             studentSignLabel.Text = "\n\n____________________\n      Student Signature";
             driveLogPanel.Controls.Add(studentSignLabel);
 
+            // If the lesson is completed then add appropriate information
             if (lessonCompleted)
             {
                 Label dateCompletedLabel = new Label();
@@ -179,26 +200,41 @@ namespace DriveLogGUI.MenuTabs
                 instructorSignaturePictureBox.BringToFront();
             }
 
+            // The height of the Panel is determined by the contents
             driveLogPanel.Size = new Size(backPanel.Width - 30,  studentSignLabel.Location.Y + studentSignLabel.Height + 5);
             driveLogPanelList.Add(driveLogPanel);
         }
 
+        /// <summary>
+        /// The event method raised when clicking the back button
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Find("StudentProfileTab", true).Last().Show();
             this.Dispose();
         }
 
+        /// <summary>
+        /// The vent method raised when clikcing the download button
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void downloadBtn_Click(object sender, EventArgs e)
         {
             var pdfCreator = new PdfMaker();
             pdfCreator.MakeDriveLog(_user);
         }
 
+        /// <summary>
+        /// Invokes the logout event when clicking the logout button
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs<</param>
         private void logoutButton_Click(object sender, EventArgs e)
         {
             LogOutButtonClick?.Invoke(this, e);
-
         }
     }
 }

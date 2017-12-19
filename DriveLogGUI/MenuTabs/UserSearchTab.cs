@@ -10,6 +10,9 @@ namespace DriveLogGUI.MenuTabs
 {
     public partial class UserSearchTab : UserControl
     {
+        /// <summary>
+        /// Class constructor. Initializes component and sets start index
+        /// </summary>
         public UserSearchTab()
         {
             InitializeComponent();
@@ -19,6 +22,11 @@ namespace DriveLogGUI.MenuTabs
 
         public virtual event EventHandler LogOutButtonClick;
 
+        /// <summary>
+        /// Invokes the log out event
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventARgs</param>
         public virtual void logoutButton_Click(object sender, EventArgs e)
         {
             LogOutButtonClick?.Invoke(this, e);
@@ -27,6 +35,11 @@ namespace DriveLogGUI.MenuTabs
         private List<User> _usersFoundList = new List<User>();
         private List<Panel> _userPanelList = new List<Panel>();
 
+        /// <summary>
+        /// Executes the search once enter is pressed
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventARgs</param>
         private void searchBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
@@ -34,6 +47,9 @@ namespace DriveLogGUI.MenuTabs
             Cursor = Cursors.Arrow;
         }
 
+        /// <summary>
+        /// Executes the serach by sending a query through the database parser
+        /// </summary>
         private void ExecuteSearch()
         {
             Cursor = Cursors.AppStarting;
@@ -44,18 +60,22 @@ namespace DriveLogGUI.MenuTabs
                 CustomMsgBox.ShowOk("Please input at least 3 characters", "Search Too Short", CustomMsgBoxIcon.Warrning);
                 return;
             }
+            // Get all results in a list of users
             _usersFoundList = DatabaseParser.UserSearchList(searchBox.Text);
 
+            // Clear previous search
             _userPanelList.Clear();
             resultsPanel.Controls.Clear();
             int idx = 0;
 
+            // Return if no results
             if (_usersFoundList.Count == 0)
             {
                 errorLabel.Text = "No Users Found";
                 return;
             }
 
+            // Loop the result list and skip results not meeting criterias. Then call GenerateUserPanel
             for (int i = 0; i < _usersFoundList.Count; i++)
             {
                 if (activeCheckBox.Checked && !_usersFoundList[i].Active) continue;
@@ -75,6 +95,7 @@ namespace DriveLogGUI.MenuTabs
                 idx++;
             }
 
+            // Add all Panels in userPanelList to resultPanel controls list to make them appear
             foreach (Panel panel in _userPanelList)
             {
                 resultsPanel.Controls.Add(panel);
@@ -83,16 +104,19 @@ namespace DriveLogGUI.MenuTabs
 
         private void GenerateUserPanel(User user, int index)
         {
+            // Instantiate a new Panel which will be used throughout this method
             Panel tempPanel = new Panel();
             tempPanel.Size = new Size(397, 74);
             tempPanel.BackColor = Color.White;
             tempPanel.BorderStyle = BorderStyle.FixedSingle;
 
+            // Calculate position for the Panel
             if (index % 2 == 0)
                 tempPanel.Location = new Point(22, 13 + (13 + tempPanel.Height) * (index / 2));
             else
                 tempPanel.Location = new Point(454, 13 + (13 + tempPanel.Height) * (index / 2));
 
+            // Add visual objects like Labels and Picture...
             PictureBox profilePictureBox = new PictureBox();
             profilePictureBox.Location = new Point(5, 5);
             profilePictureBox.Size = new Size(64, 64);
@@ -169,6 +193,12 @@ namespace DriveLogGUI.MenuTabs
             _userPanelList.Add(tempPanel);
         }
 
+        /// <summary>
+        /// Goes to the user profile when Panel is clicked
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
+        /// <param name="user">The User on the Panel</param>
         private void OnTempPanelClick(object sender, EventArgs e, User user)
         {
             OnTempPanelLeave(sender, e);
@@ -185,6 +215,11 @@ namespace DriveLogGUI.MenuTabs
             foundUserProfile.Show();
         }
 
+        /// <summary>
+        /// Changes cursor and color on mouse enter
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void OnTempPanelEnter(object sender, EventArgs e)
         {
             Cursor = Cursors.Hand;
@@ -200,6 +235,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Changes cursor and color on mouse leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void OnTempPanelLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Arrow;
@@ -215,17 +255,32 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Executes the search when search button clicked
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void pictureSearchButton_Click(object sender, EventArgs e)
         {
             ExecuteSearch();
             Cursor = Cursors.Arrow;
         }
 
+        /// <summary>
+        /// Changes color of pictureSearchButton on mouse enter
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void pictureSearchButton_MouseEnter(object sender, EventArgs e)
         {
             pictureSearchButton.BackColor = Color.FromArgb(230, 230, 230);
         }
 
+        /// <summary>
+        /// Changes color of pictureSearchButton on mouse leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The EventArgs</param>
         private void pictureSearchButton_MouseLeave(object sender, EventArgs e)
         {
             pictureSearchButton.BackColor = Color.FromArgb(255, 255, 255);
