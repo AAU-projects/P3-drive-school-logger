@@ -50,7 +50,7 @@ namespace DriveLogGUI.MenuTabs
         }
 
         /// <summary>
-        /// Method to load a document from a pdf
+        /// Method to load a document from a documentpath
         /// </summary>
         /// <param name="documentPath">The path to the pdf document</param>
         private void LoadDocument(string documentPath)
