@@ -10,6 +10,13 @@ namespace DriveLogGUI.Windows
 {
     public static class CustomMsgBox
     {
+        /// <summary>
+        /// Show a custom message box with a Ok Button
+        /// </summary>
+        /// <param name="text">Text that is displayed</param>
+        /// <param name="caption">Text that is shown in the title</param>
+        /// <param name="symbol">Symbol shown next to text</param>
+        /// <returns></returns>
         public static DialogResult ShowOk(string text, string caption, Image symbol)
         {
             CustomMessageForm MsgBox = new CustomMessageForm(text, caption, symbol);
@@ -20,6 +27,13 @@ namespace DriveLogGUI.Windows
             return MsgBox.result; 
         }
 
+        /// <summary>
+        /// Show a custom message box with a Yes and No Button
+        /// </summary>
+        /// <param name="text">Text that is displayed</param>
+        /// <param name="caption">Text that is shown in the title</param>
+        /// <param name="symbol">Symbol shown next to text</param>
+        /// <returns></returns>
         public static DialogResult ShowYesNo(string text, string caption, Image symbol)
         {
             CustomMessageForm MsgBox = new CustomMessageForm(text, caption, symbol);
@@ -31,6 +45,14 @@ namespace DriveLogGUI.Windows
             return MsgBox.result;
         }
 
+        /// <summary>
+        /// Show a custom message box with a Yes and No Button with a custom size out from the cancel lessons
+        /// </summary>
+        /// <param name="text">Text that is displayed</param>
+        /// <param name="caption">Text that is shown in the title</param>
+        /// <param name="cancelLessons">All the lessons that have to be displayed</param>
+        /// <param name="symbol">Symbol shown next to text</param>
+        /// <returns></returns>
         public static DialogResult ShowYesNo(string text, string caption, List<Lesson> cancelLessons, Image symbol)
         {
             int extraHeight = cancelLessons.Count * 20 + 80;
@@ -70,6 +92,14 @@ namespace DriveLogGUI.Windows
             return MsgBox.result;
         }
 
+        /// <summary>
+        /// Show a custom message box with a Yes and No Button with a custom size out from the cancel lessons with a text to a instructor
+        /// </summary>
+        /// <param name="text">Text that is displayed</param>
+        /// <param name="caption">Text that is shown in the title</param>
+        /// <param name="cancelLessons">All the lessons that have to be displayed</param>
+        /// <param name="symbol">Symbol shown next to text</param>
+        /// <returns></returns>
         public static DialogResult ShowYesNoInstructor(string text, string caption, List<Lesson> cancelLessons, Image symbol)
         {
             int extraHeight = cancelLessons.Count * 20 + 90;
@@ -108,6 +138,14 @@ namespace DriveLogGUI.Windows
             return MsgBox.result;
         }
 
+        /// <summary>
+        /// Show a custom message box with a Confirm Button with a custom size
+        /// </summary>
+        /// <param name="text">Text that is displayed</param>
+        /// <param name="caption">Text that is shown in the title</param>
+        /// <param name="symbol">Symbol shown next to text</param>
+        /// <param name="extraHeight">The extra height in the custom message box</param>
+        /// <returns></returns>
         public static DialogResult ShowConfirm(string text, string caption, Image symbol, int extraHeight)
         {
             CustomMessageForm MsgBox = new CustomMessageForm(text, caption, symbol);
