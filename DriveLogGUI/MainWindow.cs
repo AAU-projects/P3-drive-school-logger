@@ -108,8 +108,8 @@ namespace DriveLogGUI
         /// <summary>
         /// Method that can be called to logout
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void LogOut(object sender, EventArgs e)
         {
             Owner.Show();
@@ -241,8 +241,8 @@ namespace DriveLogGUI
         /// <summary>
         /// When button is clicked the profile submenu is shown
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void ProfileButton_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
@@ -310,8 +310,8 @@ namespace DriveLogGUI
         /// <summary>
         /// Method for when the overview button is clicked
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void OverviewButton_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
@@ -358,7 +358,7 @@ namespace DriveLogGUI
         /// <summary>
         /// Method for opening a usercontrol page, this makes sure that the last page is closed and the new usercontrol is shown
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The Object sender</param>
         /// <param name="page">The page that should be shown</param>
         private void OpenPage(object sender, UserControl page)
         {
@@ -394,7 +394,7 @@ namespace DriveLogGUI
         /// <summary>
         /// Method that makes sure that the submenus can only be open if the user is a student 
         /// </summary>
-        /// <param name="page"></param>
+        /// <param name="page">The page that should be shown</param>
         private void OpenPageEvent(UserControl page)
         {
             if (Session.LoggedInUser.Sysmin) return;
@@ -424,8 +424,8 @@ namespace DriveLogGUI
         /// <summary>
         /// Method for when the first aid button is clciked, opens the exisitng first aid or empty one
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void firstAidButton_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
@@ -445,8 +445,8 @@ namespace DriveLogGUI
         /// <summary>
         /// Method to open the calendar page
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void bookingButton_Click(object sender, EventArgs e)
         {
             OpenPage(sender, calendarTab);
@@ -456,8 +456,8 @@ namespace DriveLogGUI
         /// <summary>
         /// Method to open the settings page
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void settingsButton_Click(object sender, EventArgs e)
         {
             //OpenPage(sender, ??);
@@ -467,8 +467,8 @@ namespace DriveLogGUI
         /// <summary>
         /// Method to go to the user search if a previous usercontrol is not open
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void userSearchButton_Click(object sender, EventArgs e)
         {
             UserControl finalpage = userSearchTab;
@@ -495,12 +495,12 @@ namespace DriveLogGUI
             OpenPage(sender, finalpage);
             SubMenus();
         }
-        
+
         /// <summary>
         /// Method for doctors note this opens the already existing doctors note or an empty one
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void doctorsNoteButton_Click_1(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
@@ -520,8 +520,8 @@ namespace DriveLogGUI
         /// <summary>
         /// Method for going to pages that match the icon that have been clicked
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void OnIconClick(object sender, EventArgs e)
         {
             SubMenus(true);

@@ -181,8 +181,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Method used to check for the new data when a new start time is selected
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void StartTimecomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             lessonsComboBox.Text = String.Empty;
@@ -207,8 +207,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Method used when a user clicks on add appointment, makes sure that the selected perido is added to the database
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void AddAppointmentButton_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(lessonsComboBox.Text) && !String.IsNullOrWhiteSpace(StartTimecomboBox.Text))
