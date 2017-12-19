@@ -33,6 +33,7 @@ namespace DriveLogGUI.MenuTabs
             this.panelForCalendar = new System.Windows.Forms.Panel();
             this.backPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.InformationPictureBox = new System.Windows.Forms.PictureBox();
             this.weekNumberTextbox = new System.Windows.Forms.TextBox();
             this.weekNumberLabel = new System.Windows.Forms.Label();
             this.weekSelectButton = new System.Windows.Forms.Button();
@@ -45,9 +46,13 @@ namespace DriveLogGUI.MenuTabs
             this.panelHideInfo = new System.Windows.Forms.Panel();
             this.warningInformationTextbox = new System.Windows.Forms.TextBox();
             this.NotAvaiableLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.notAvailableLabel = new System.Windows.Forms.Label();
+            this.notAvailableDot = new System.Windows.Forms.PictureBox();
             this.completedDotLabel = new System.Windows.Forms.Label();
+            this.completedDot = new System.Windows.Forms.PictureBox();
             this.bookedDotLabel = new System.Windows.Forms.Label();
+            this.bookedDot = new System.Windows.Forms.PictureBox();
             this.bookInformationLabel = new System.Windows.Forms.Label();
             this.warningTitleLabel = new System.Windows.Forms.Label();
             this.bookingInformationButton = new System.Windows.Forms.Button();
@@ -58,21 +63,16 @@ namespace DriveLogGUI.MenuTabs
             this.panel3 = new System.Windows.Forms.Panel();
             this.informationLabel = new System.Windows.Forms.Label();
             this.toolTipForCalendar = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.notAvailableDot = new System.Windows.Forms.PictureBox();
-            this.completedDot = new System.Windows.Forms.PictureBox();
-            this.bookedDot = new System.Windows.Forms.PictureBox();
-            this.InformationPictureBox = new System.Windows.Forms.PictureBox();
             this.panelForCalendar.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InformationPictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notAvailableDot)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.completedDot)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookedDot)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.InformationPictureBox)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelForCalendar
@@ -83,6 +83,7 @@ namespace DriveLogGUI.MenuTabs
             this.panelForCalendar.Name = "panelForCalendar";
             this.panelForCalendar.Size = new System.Drawing.Size(686, 451);
             this.panelForCalendar.TabIndex = 1;
+            this.panelForCalendar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForCalendar_Paint);
             // 
             // backPanel
             // 
@@ -108,6 +109,18 @@ namespace DriveLogGUI.MenuTabs
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(687, 93);
             this.panel1.TabIndex = 2;
+            // 
+            // InformationPictureBox
+            // 
+            this.InformationPictureBox.Image = global::DriveLogGUI.Properties.Resources.if_Help_22150;
+            this.InformationPictureBox.Location = new System.Drawing.Point(647, 7);
+            this.InformationPictureBox.Name = "InformationPictureBox";
+            this.InformationPictureBox.Size = new System.Drawing.Size(25, 25);
+            this.InformationPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.InformationPictureBox.TabIndex = 20;
+            this.InformationPictureBox.TabStop = false;
+            this.toolTipForCalendar.SetToolTip(this.InformationPictureBox, "Click here for a more detailed description on calendar");
+            this.InformationPictureBox.Click += new System.EventHandler(this.InformationPictureBox_Click);
             // 
             // weekNumberTextbox
             // 
@@ -264,6 +277,16 @@ namespace DriveLogGUI.MenuTabs
             this.NotAvaiableLabel.TabIndex = 26;
             this.NotAvaiableLabel.Text = "Not Available";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DriveLogGUI.Properties.Resources.noAvailableDot;
+            this.pictureBox1.Location = new System.Drawing.Point(19, 341);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(10, 10);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            // 
             // notAvailableLabel
             // 
             this.notAvailableLabel.AutoSize = true;
@@ -273,6 +296,16 @@ namespace DriveLogGUI.MenuTabs
             this.notAvailableLabel.Size = new System.Drawing.Size(102, 15);
             this.notAvailableLabel.TabIndex = 24;
             this.notAvailableLabel.Text = "Type not Available";
+            // 
+            // notAvailableDot
+            // 
+            this.notAvailableDot.Image = global::DriveLogGUI.Properties.Resources.purpleDot;
+            this.notAvailableDot.Location = new System.Drawing.Point(19, 316);
+            this.notAvailableDot.Name = "notAvailableDot";
+            this.notAvailableDot.Size = new System.Drawing.Size(10, 10);
+            this.notAvailableDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.notAvailableDot.TabIndex = 23;
+            this.notAvailableDot.TabStop = false;
             // 
             // completedDotLabel
             // 
@@ -284,6 +317,16 @@ namespace DriveLogGUI.MenuTabs
             this.completedDotLabel.TabIndex = 22;
             this.completedDotLabel.Text = "Completed";
             // 
+            // completedDot
+            // 
+            this.completedDot.Image = global::DriveLogGUI.Properties.Resources.completedDot;
+            this.completedDot.Location = new System.Drawing.Point(19, 289);
+            this.completedDot.Name = "completedDot";
+            this.completedDot.Size = new System.Drawing.Size(10, 10);
+            this.completedDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.completedDot.TabIndex = 21;
+            this.completedDot.TabStop = false;
+            // 
             // bookedDotLabel
             // 
             this.bookedDotLabel.AutoSize = true;
@@ -293,6 +336,16 @@ namespace DriveLogGUI.MenuTabs
             this.bookedDotLabel.Size = new System.Drawing.Size(47, 15);
             this.bookedDotLabel.TabIndex = 20;
             this.bookedDotLabel.Text = "Booked";
+            // 
+            // bookedDot
+            // 
+            this.bookedDot.Image = global::DriveLogGUI.Properties.Resources.bookedDot;
+            this.bookedDot.Location = new System.Drawing.Point(19, 264);
+            this.bookedDot.Name = "bookedDot";
+            this.bookedDot.Size = new System.Drawing.Size(10, 10);
+            this.bookedDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bookedDot.TabIndex = 19;
+            this.bookedDot.TabStop = false;
             // 
             // bookInformationLabel
             // 
@@ -390,58 +443,6 @@ namespace DriveLogGUI.MenuTabs
             this.informationLabel.Text = "Select an object";
             this.informationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DriveLogGUI.Properties.Resources.noAvailableDot;
-            this.pictureBox1.Location = new System.Drawing.Point(19, 341);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(10, 10);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 25;
-            this.pictureBox1.TabStop = false;
-            // 
-            // notAvailableDot
-            // 
-            this.notAvailableDot.Image = global::DriveLogGUI.Properties.Resources.purpleDot;
-            this.notAvailableDot.Location = new System.Drawing.Point(19, 316);
-            this.notAvailableDot.Name = "notAvailableDot";
-            this.notAvailableDot.Size = new System.Drawing.Size(10, 10);
-            this.notAvailableDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.notAvailableDot.TabIndex = 23;
-            this.notAvailableDot.TabStop = false;
-            // 
-            // completedDot
-            // 
-            this.completedDot.Image = global::DriveLogGUI.Properties.Resources.completedDot;
-            this.completedDot.Location = new System.Drawing.Point(19, 289);
-            this.completedDot.Name = "completedDot";
-            this.completedDot.Size = new System.Drawing.Size(10, 10);
-            this.completedDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.completedDot.TabIndex = 21;
-            this.completedDot.TabStop = false;
-            // 
-            // bookedDot
-            // 
-            this.bookedDot.Image = global::DriveLogGUI.Properties.Resources.bookedDot;
-            this.bookedDot.Location = new System.Drawing.Point(19, 264);
-            this.bookedDot.Name = "bookedDot";
-            this.bookedDot.Size = new System.Drawing.Size(10, 10);
-            this.bookedDot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.bookedDot.TabIndex = 19;
-            this.bookedDot.TabStop = false;
-            // 
-            // InformationPictureBox
-            // 
-            this.InformationPictureBox.Image = global::DriveLogGUI.Properties.Resources.if_Help_22150;
-            this.InformationPictureBox.Location = new System.Drawing.Point(647, 7);
-            this.InformationPictureBox.Name = "InformationPictureBox";
-            this.InformationPictureBox.Size = new System.Drawing.Size(25, 25);
-            this.InformationPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.InformationPictureBox.TabIndex = 20;
-            this.InformationPictureBox.TabStop = false;
-            this.toolTipForCalendar.SetToolTip(this.InformationPictureBox, "Click here for a more detailed description on calendar");
-            this.InformationPictureBox.Click += new System.EventHandler(this.InformationPictureBox_Click);
-            // 
             // CalendarTabG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -454,15 +455,15 @@ namespace DriveLogGUI.MenuTabs
             this.panelForCalendar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InformationPictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notAvailableDot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.completedDot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookedDot)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.InformationPictureBox)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -37,6 +37,10 @@ namespace DriveLogGUI.Windows
             this.Dispose();
         }
 
+        /// <summary>
+        /// Adds stuff onto the picture, this is to make sure that objects can be transparent onto the Control
+        /// </summary>
+        /// <param name="panel">A control that should be added onto the panel</param>
         private void AddStuff(Control panel)
         {
             pictureBoxCalendarInformation.Controls.Add(panel);

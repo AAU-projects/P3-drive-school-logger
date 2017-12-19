@@ -49,6 +49,9 @@ namespace DriveLogGUI.MenuTabs
             UpdateCalendar(0);
         }
 
+        /// <summary>
+        /// A method that should be used to change the programs calendar from a student calendar to instrucotr calendar. 
+        /// </summary>
         private void GetInstructorData()
         {
             bookingInformationButton.Text = CancelBookingText;
@@ -67,6 +70,9 @@ namespace DriveLogGUI.MenuTabs
 
         }
 
+        /// <summary>
+        /// Draws the calendar and adds buttons for a instructor
+        /// </summary>
         private void DrawCalendar()
         {
             GenerateWeeklyCalendar();
@@ -76,6 +82,9 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Get all appointments from the database and adds it to the calendar
+        /// </summary>
         private void GetAppointsments()
         {
             foreach (var appointment in DatabaseParser.AppointmentsList())
@@ -84,6 +93,10 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Subscribes to all appointments that when clicked that it should call UpdateInformation Method
+        /// </summary>
+        /// <param name="appointments">Appointments that should be subscribed</param>
         private void SubscribeToAllClickAppointments(List<Appointment> appointments)
         {
             foreach (var appointment in appointments)
@@ -92,6 +105,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// An event that should be called to update data shown to a user in the calendar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">An appointment event with all the data about the appointment</param>
         private void UpdateInformation(object sender, ApppointmentEventArgs e)
         {
             if (panelHideInfo.Visible)
@@ -116,6 +134,9 @@ namespace DriveLogGUI.MenuTabs
             bookInformationLabel.Text = BookInformation(usersOnAppointment);
         }
 
+        /// <summary>
+        /// Highlights the selected appointment
+        /// </summary>
         private void HighLightSelectedAppointment()
         {
             selectedAppointment.LabelAppointment.BackColor = Color.FromArgb(selectedAppointment.LabelAppointment.BackColor.A, Color.LightBlue);
@@ -125,6 +146,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Shows the correct number of avaiable bookings on the selected appointment
+        /// </summary>
+        /// <param name="usersOnAppointment">Requires a list of all the users that are on the appointment</param>
+        /// <returns>Returns a string that can be displayed</returns>
         private string BookInformation(List<User> usersOnAppointment)
         {
             if (selectedAppointment.LessonType == LessonTypes.Theoretical)
@@ -138,7 +164,10 @@ namespace DriveLogGUI.MenuTabs
             return $"Booking status {usersOnAppointment.Count}/8";
 
         }
-
+        /// <summary>
+        /// Checks if the user should be able to book the appointment and displays specific data for an instructor
+        /// </summary>
+        /// <param name="usersOnAppointment"></param>
         private void CheckIfUserCanBookLesson(List<User> usersOnAppointment)
         {
             if (Session.LoggedInUser.Sysmin)
@@ -159,6 +188,10 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Generates a string that displays all the users that are given in the variable
+        /// </summary>
+        /// <param name="usersOnAppointment">List of users attending</param>
         private void ShowAttendingStudents(List<User> usersOnAppointment)
         {
             StringBuilder attendingString = new StringBuilder();
@@ -171,17 +204,26 @@ namespace DriveLogGUI.MenuTabs
             ShowBookingWarrning(attendingString.ToString());
         }
 
-
+        /// <summary>
+        /// Change the button state to cancel
+        /// </summary>
         private void ShowBookingCancel()
         {
             bookingInformationButton.Text = CancelBookingText;
         }
 
+        /// <summary>
+        /// Change the button state to available
+        /// </summary>
         private void BookingAvailable()
         {
             bookingInformationButton.Text = BookingText;
         }
-
+        /// <summary>
+        /// When given a type of theoretical or practical the opposite type is given returned.
+        /// </summary>
+        /// <param name="type">Given type</param>
+        /// <returns>Returns the oppsoite type</returns>
         private string GetReverseType(string type)
         {
             if (type == LessonTypes.Theoretical)
@@ -195,6 +237,10 @@ namespace DriveLogGUI.MenuTabs
             return null;
         }
 
+        /// <summary>
+        /// Display a messeage to the user in the calendar
+        /// </summary>
+        /// <param name="errorMsg">Given messeage</param>
         private void ShowBookingWarrning(string errorMsg)
         {
             if (!Session.LoggedInUser.Sysmin)
@@ -204,7 +250,10 @@ namespace DriveLogGUI.MenuTabs
             warningTitleLabel.Show();
             warningInformationTextbox.Show();
         }
-
+        /// <summary>
+        /// Subscribes to all the days given and when clicked they go to that date in the calendar
+        /// </summary>
+        /// <param name="listOfDays">A list of the days that should be subscribed to</param>
         private void SubscribeToAllClickPanels(List<CalendarData> listOfDays)
         {
             foreach (var day in listOfDays)
@@ -213,6 +262,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// An event that goes to the date in the calendar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="dateEvent">Requires a DateClickEventArgs with data for the date</param>
         public void OverviewTabOnClickOnDate(object sender, DateClickEventArgs dateEvent)
         {
             this.mainWindow.HighlightCurrentButton(mainWindow.bookingButton);
@@ -222,8 +276,12 @@ namespace DriveLogGUI.MenuTabs
             UpdateCalendar(dateEvent.Date);
         }
 
+        /// <summary>
+        /// Generates the weekly calendar creating the panels needed for the GUI
+        /// </summary>
         private void GenerateWeeklyCalendar()
         {
+
             //sets the first day to monday
             UpdateDateMonday();
             // width of each calendar, so there is space for 7 TODO something with 3 maybe 2
@@ -250,8 +308,13 @@ namespace DriveLogGUI.MenuTabs
             UpdateCalendar(0);
 
             panelForCalendar.Controls.Add(backPanel);
+
         }
 
+        /// <summary>
+        /// Generates the data for each day needed for the GUI
+        /// </summary>
+        /// <param name="newDay">The panel for a day that should hold all the data</param>
         private void GenerateDayLabel(ref Panel newDay)
         {
             Panel dayPanel = new Panel() { Size = new Size(newDay.Width, newDay.Height / 7), Location = new Point(0, 0) };
@@ -277,12 +340,9 @@ namespace DriveLogGUI.MenuTabs
 
         }
 
-        private void panelForCalendar_Paint(object sender, PaintEventArgs e)
-        {
-            DrawLineBelowDates();
-        }
-
-
+        /// <summary>
+        /// Method used to draw buttons below each day that can be used to add an appointment
+        /// </summary>
         private void DrawAddAppointmentButtons()
         {
             //drawing buttons to add appointments
@@ -301,13 +361,19 @@ namespace DriveLogGUI.MenuTabs
             
         }
 
+        /// <summary>
+        /// Method used for to open an add appointment window 
+        /// </summary>
+        /// <param name="e">Data for the date is required</param>
         private void OpenAppointment(DateClickEventArgs e)
         {
             AddAppointmentWindow addAppointmentWindow = new AddAppointmentWindow(e.Date, MousePosition, appointments);
             addAppointmentWindow.ShowDialog();
             UpdateCalendar(0);
         }
-
+        /// <summary>
+        /// Draws a line below each day in a week
+        /// </summary>
         private void DrawLineBelowDates()
         {
             //drawing a line below dates
@@ -319,6 +385,20 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// When the calendar is painted a method for drawing lines is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void panelForCalendar_Paint(object sender, PaintEventArgs e)
+        {
+            DrawLineBelowDates();
+        }
+        /// <summary>
+        /// A method used to transform a weekday into a shorter weekday
+        /// </summary>
+        /// <param name="weekday">Then given weekday</param>
+        /// <returns>A shorter weekday</returns>
         private string GetShortWeekday(string weekday)
         {
             switch (weekday.ToLower())
@@ -334,12 +414,21 @@ namespace DriveLogGUI.MenuTabs
 
             }
         }
+
+        /// <summary>
+        /// Changes the calendar from the current week to a previous or forward week
+        /// </summary>
+        /// <param name="weeks">How many weeks the calendar should update previous or forward</param>
         private void UpdateCalendar(int weeks)
         {
             lastWeek = lastWeek.AddDays(weeks * 7);
             UpdateDates();
         }
 
+        /// <summary>
+        /// Changes the calendar to a specfic date 
+        /// </summary>
+        /// <param name="day">The specifc date</param>
         private void UpdateCalendar(DateTime day)
         {
             lastWeek = day;
@@ -347,7 +436,9 @@ namespace DriveLogGUI.MenuTabs
             UpdateDates();
         }
 
-
+        /// <summary>
+        /// Updates all the dates in the calendar to the correct dates
+        /// </summary>
         private void UpdateDates()
         {
             dayNow = lastWeek;
@@ -382,6 +473,9 @@ namespace DriveLogGUI.MenuTabs
         }
 
 
+        /// <summary>
+        /// Removes all the appointments that have been added to the calendar
+        /// </summary>
         private void RemoveAllElements()
         {
             if (appointments != null)
@@ -393,17 +487,31 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Deletes an appointment from all the appointments
+        /// </summary>
+        /// <param name="appointment"></param>
         private void DeleteAppointment(Appointment appointment)
         {
             appointment.LabelAppointment.Hide();
             appointments.Remove(appointments.Single(x => x.Id == appointment.Id));
         }
 
+        /// <summary>
+        /// Method used to display the current week that is shown
+        /// </summary>
+        /// <param name="now">The given datetime</param>
+        /// <returns>Returns a string with the the current date and a week forward that can be displayed</returns>
         private string GetDatesInWeek(DateTime now)
         {
             return $"{now.Day}  - {now.AddDays(6).Day} {now.ToString("MMMM")} {now.Year}";
         }
 
+        /// <summary>
+        /// Method used to get a weeknumber from datetime
+        /// </summary>
+        /// <param name="dateTime">A datetime you want a weeknumber from</param>
+        /// <returns>Returns the week number the datetime is in</returns>
         private string GetWeekNumber(DateTime dateTime)
         {
             DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(dateTime);
@@ -417,6 +525,11 @@ namespace DriveLogGUI.MenuTabs
             return $"{weekNumber}";
         }
 
+        /// <summary>
+        /// Method used to get a date from a weeknumber
+        /// </summary>
+        /// <param name="weekOfYear">Week number that have to be translated into a date</param>
+        /// <returns>Returns a datetime</returns>
         private DateTime GetDateFromWeek(int weekOfYear)
         {
             int year = lastWeek.Year;
@@ -435,13 +548,19 @@ namespace DriveLogGUI.MenuTabs
             return result.AddDays(-3);
         }
 
-
+        /// <summary>
+        /// Adds an appointment to all appoinments
+        /// </summary>
+        /// <param name="appointment">Appointment that should be added</param>
         private void AddAppointment(AppointmentStructure appointment)
         {
             Appointment newAppointment = new Appointment(appointment);
             appointments.Add(newAppointment);
         }
 
+        /// <summary>
+        /// Displays all appointments on the current dates in the week
+        /// </summary>
         private void AddAllElements()
         {
             RemoveAllElements();
@@ -472,6 +591,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Checks if an appointment should be expired
+        /// </summary>
+        /// <param name="appointment">Given appointment to check</param>
+        /// <returns>Returns true if the appointment is expired</returns>
         private bool CheckIfAppointmentIsExpired(Appointment appointment)
         {
             if (DateTime.Now > appointment.ToTime)
@@ -481,6 +605,10 @@ namespace DriveLogGUI.MenuTabs
             return false;
         }
 
+        /// <summary>
+        /// Analyzes the apppointment data for an instructor
+        /// </summary>
+        /// <param name="appointment">Appointment data</param>
         private void AppointmentDataForInstructor(Appointment appointment)
         {
             bool appointmentInPreviousTime = CheckIfAppointmentIsExpired(appointment);
@@ -502,6 +630,10 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        ///  Analyzes the apppointment appointment data for a student
+        /// </summary>
+        /// <param name="appointment">Appointment data</param>
         private void AppointmentDataForUser(Appointment appointment)
         {
             bool appointmentBookedInPreviousTime = CheckForPreviousBookedLessons(appointment);
@@ -577,6 +709,12 @@ namespace DriveLogGUI.MenuTabs
                 appointment.WarningText = $"";
             }
         }
+
+        /// <summary>
+        /// Method used to check if a appointment have been booked in a preivous time of the appointment given
+        /// </summary>
+        /// <param name="appointment">Given appointment to check</param>
+        /// <returns>Returns true the given appointment is in a previous time of the lastly booked appointment</returns>
         private bool CheckForPreviousBookedLessons(Appointment appointment)
         {
             if (appointment.ToTime <= Session.CurrentLesson.EndDate) // if the user is trying to book a lesson earlier than their lastly booked lesson
@@ -585,24 +723,40 @@ namespace DriveLogGUI.MenuTabs
             }
             return false;
         }
-
+        /// <summary>
+        /// Updates the calendar to show the first day as monday
+        /// </summary>
         private void UpdateDateMonday()
         {
             while (lastWeek.DayOfWeek.ToString().ToLower() != "monday") {
                 lastWeek = lastWeek.AddDays(-1);
             }
         }
-
+        /// <summary>
+        /// Method used to go a week backwrads
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonLeftWeek_Click(object sender, EventArgs e)
         {
             UpdateCalendar(-1);
         }
 
+        /// <summary>
+        /// Method used to go a week forward
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRightWeek_Click(object sender, EventArgs e)
         {
             UpdateCalendar(1);
         }
 
+        /// <summary>
+        /// Method used to go to the current todays date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gotoTodayButton_Click(object sender, EventArgs e)
         {
             lastWeek = DateTime.Now;
@@ -610,7 +764,11 @@ namespace DriveLogGUI.MenuTabs
             UpdateCalendar(0);
         }
 
-
+        /// <summary>
+        /// Method used to go to a specific week 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void weekNumberTextbox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
@@ -624,6 +782,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Toogle for displaying the textbox for the user to go to a specific week
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void weekSelectButton_Click(object sender, EventArgs e)
         {
             if (!weekNumberTextbox.Visible)
@@ -638,6 +801,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Method used to vertificate that the user input is only numbers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void weekNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
         {
            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) 
@@ -646,6 +814,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Method used when the calendar button is clicked opening a window depending on the button text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bookingInformationButton_Click(object sender, EventArgs e)
         {
             if (bookingInformationButton.Text == BookingText)
@@ -665,7 +838,7 @@ namespace DriveLogGUI.MenuTabs
                     {
                         cancelTheseLessons.AddRange(DatabaseParser.CancelLesson(lessonToCancel.TemplateID, lessonToCancel.Progress, lessonToCancel.UserID));
                     }
-                    DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
+                    DialogResult result = CustomMsgBox.ShowYesNoInstructor("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
                     if (result == DialogResult.Yes)
                     {
                         DatabaseParser.DeleteLessons(cancelTheseLessons);
@@ -691,7 +864,11 @@ namespace DriveLogGUI.MenuTabs
                 }
             }
         }
-
+        /// <summary>
+        /// Method used to help a user with the calendar, shows a window that gives a short summary of all functions.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InformationPictureBox_Click(object sender, EventArgs e)
         {
             CalendarInformationWindow informationWindow = new CalendarInformationWindow();
