@@ -27,7 +27,14 @@ namespace DriveLogGUI
         public event EventHandler<DateClickEventArgs> ClickOnDateTriggered;
         public event EventHandler<LessonClickEventArgs> ClickOnUpcomingLessonTriggered;
 
-
+        /// <summary>
+        /// A constructor used to storage some different controls
+        /// </summary>
+        /// <param name="topPanelForCalendar"></param>
+        /// <param name="bottomPanelForCalendar"></param>
+        /// <param name="labelForDate"></param>
+        /// <param name="labelForWeekday"></param>
+        /// <param name="date"></param>
         public CalendarData(Panel topPanelForCalendar, Panel bottomPanelForCalendar, Label labelForDate,
             Label labelForWeekday, DateTime date)
         {
@@ -38,6 +45,14 @@ namespace DriveLogGUI
             Date = date;
         }
 
+        /// <summary>
+        /// A constructor used to storage some different controls
+        /// </summary>
+        /// <param name="topPanelForCalendar"></param>
+        /// <param name="bottomPanelForCalendar"></param>
+        /// <param name="labelForDate"></param>
+        /// <param name="labelForWeekday"></param>
+        /// <param name="date"></param>
         public CalendarData(Panel inputPanel, Label inputLabel, DateTime inputDate, Panel dayNotification)
         {
             PanelForCalendarDay = inputPanel;
@@ -49,6 +64,14 @@ namespace DriveLogGUI
             LabelForDate.Click += (s, e) => panel_Click(new DateClickEventArgs(Date));
         }
 
+        /// <summary>
+        /// A constructor used to storage some different controls
+        /// </summary>
+        /// <param name="topPanelForCalendar"></param>
+        /// <param name="bottomPanelForCalendar"></param>
+        /// <param name="labelForDate"></param>
+        /// <param name="labelForWeekday"></param>
+        /// <param name="date"></param>
         public CalendarData(Panel inputPanel, Label date, Label lessonInformation, Label lessonTitleAndPart, Lesson lesson)
         {
             PanelForCalendarDay = inputPanel;

@@ -64,11 +64,17 @@ namespace DriveLogCode.Objects
 
         }
 
+        /// <summary>
+        /// Gets the templatelist from the database
+        /// </summary>
         private static void GetTemplateList()
         {
             LessonTemplates = DatabaseParser.GetTemplatesList();
         }
 
+        /// <summary>
+        /// Removes the data from the session
+        /// </summary>
         public static void LogOut()
         {
             CurrentLesson = null;
@@ -77,6 +83,10 @@ namespace DriveLogCode.Objects
 
         }
 
+        /// <summary>
+        /// Method used to get the next lesson for the logged in user
+        /// </summary>
+        /// <returns></returns>
         private static Lesson GetNextLesson()
         {
             if (CurrentLesson.LessonTemplate != null)
@@ -102,6 +112,9 @@ namespace DriveLogCode.Objects
 
         }
 
+        /// <summary>
+        /// Method used to get the current lesson, last theoretical and last practical lesson for the logged in user
+        /// </summary>
         public static void GetProgress()
         {
             if (LoggedInUser.LessonsList.Count != 0)
@@ -140,6 +153,9 @@ namespace DriveLogCode.Objects
             }
         }
 
+        /// <summary>
+        /// Updates the current lesson from the lessonlist
+        /// </summary>
         public static void UpdateCurrentLesson()
         {
             CurrentLesson = LoggedInUser.LessonsList
@@ -148,6 +164,11 @@ namespace DriveLogCode.Objects
                 .FirstOrDefault();
         }
 
+        /// <summary>
+        /// Method used to get a the last lesson of a type
+        /// </summary>
+        /// <param name="lessonType">Lesson type</param>
+        /// <returns>Returns a lesson matching the lesson type given</returns>
         public static Lesson GetLastLessonFromType(string lessonType)
         {
             if (lessonType == "Practical")

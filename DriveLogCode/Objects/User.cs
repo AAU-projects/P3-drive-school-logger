@@ -8,10 +8,6 @@ namespace DriveLogCode.Objects
 {
     public class User
     {
-        public User()
-        {
-            
-        }
         public User(int id, string firstname, string lastname, string phone, string email, string cpr, 
             string address, string zip, string city, string username, string password, string picturePath, string signaturePath, bool sysmin, string className, bool theotestdone, bool practestdone, bool feepaid, bool active)
         {
@@ -88,6 +84,10 @@ namespace DriveLogCode.Objects
         public List<Lesson> InstructorLessons = new List<Lesson>();
         public List<AppointmentStructure> InstructorAppointments = new List<AppointmentStructure>();
 
+
+        /// <summary>
+        /// Method used to caculate the progress for a user in theoretical and practical
+        /// </summary>
         public void CalculateProgress()
         {
             GetLessonList();
@@ -107,6 +107,9 @@ namespace DriveLogCode.Objects
             }
         }
 
+        /// <summary>
+        /// Method used to get all the appointments and lessons for a instructor
+        /// </summary>
         public void GetInstructorLessons()
         {
             InstructorAppointments =
@@ -115,11 +118,18 @@ namespace DriveLogCode.Objects
             InstructorLessons = DatabaseParser.GetAllLessonsFromMultipleAppointmentIds(InstructorAppointments);
         }
 
+        /// <summary>
+        /// Method used to get all lessons attached to the user
+        /// </summary>
         public void GetLessonList()
         {
             LessonsList = DatabaseParser.GetScheduledAndCompletedLessonsByUserIdList(Id);
         }
 
+        /// <summary>
+        /// An overridde method to return the full name when ToString is called
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return Fullname;

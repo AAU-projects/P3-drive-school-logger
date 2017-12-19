@@ -30,6 +30,13 @@ namespace DriveLogGUI.MenuTabs
         private string CancelBookingText = "CANCEL BOOKING";
         private string UnavaiableBookingText = "UNAVAILABLE";
 
+
+        /// <summary>
+        /// Constructor initializes componets, then draws the calendar, aswell as subscribing to all the click events from the overview. 
+        /// A list of all appointments are then loaded and a click event to all appointments are then subscribed. Calendar is then updated.
+        /// </summary>
+        /// <param name="overviewTab"></param>
+        /// <param name="mainWindow"></param>
         public CalendarTabG(OverviewTab overviewTab, MainWindow mainWindow)
         {
             InitializeComponent();
@@ -836,7 +843,7 @@ namespace DriveLogGUI.MenuTabs
                     List<Lesson> usersOnAppointment = DatabaseParser.GetUsersAndLessonsOnAppointmentID(selectedAppointment.Id);
                     foreach (Lesson lessonToCancel in usersOnAppointment)
                     {
-                        cancelTheseLessons.AddRange(DatabaseParser.CancelLesson(lessonToCancel.TemplateID, lessonToCancel.Progress, lessonToCancel.UserID));
+                        cancelTheseLessons.AddRange(DatabaseParser.FindLessonsToCancel(lessonToCancel.TemplateID, lessonToCancel.Progress, lessonToCancel.UserID));
                     }
                     DialogResult result = CustomMsgBox.ShowYesNoInstructor("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
                     if (result == DialogResult.Yes)
@@ -851,7 +858,7 @@ namespace DriveLogGUI.MenuTabs
                 }
                 else
                 {
-                    List<Lesson> cancelTheseLessons = DatabaseParser.CancelLesson(selectedAppointment.bookedLessons.First().TemplateID, selectedAppointment.bookedLessons.First().Progress, Session.LoggedInUser.Id);
+                    List<Lesson> cancelTheseLessons = DatabaseParser.FindLessonsToCancel(selectedAppointment.bookedLessons.First().TemplateID, selectedAppointment.bookedLessons.First().Progress, Session.LoggedInUser.Id);
 
                     DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
                     if (result == DialogResult.Yes)
