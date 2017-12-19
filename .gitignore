@@ -286,3 +286,5 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+Dependencies/spire.pdfviewer_2.12.msi
+Dependencies/spire.pdf-fe_3.2.msi
