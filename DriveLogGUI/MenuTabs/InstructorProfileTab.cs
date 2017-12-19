@@ -25,6 +25,11 @@ namespace DriveLogGUI.MenuTabs
         private RichTextBox studentsForLesson;
         private RichTextBox lessonData;
 
+        /// <summary>
+        /// The constructor for the InstructorProfileTab
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="search"></param>
         public InstructorProfileTab(User user, bool search = false)
         {
             InitializeComponent();
@@ -35,16 +40,11 @@ namespace DriveLogGUI.MenuTabs
 
             FormatAppointmentInformationPanel();
             CreateAppointmentInfoContent();
-
-            foreach (Control c in upcommingTestsBackPanel.Controls)
-            {
-                c.MouseClick += progressBarPanel_Click;
-
-                foreach (Control childControl in c.Controls)
-                    childControl.MouseClick += progressBarPanel_Click;
-            }
         }
 
+        /// <summary>
+        /// Updates the layout if the profile was accessed from the search window.
+        /// </summary>
         private void UpdateLayout()
         {
             if(_search)
@@ -75,6 +75,12 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// The click function for the edit button.
+        /// Opens a new EditUserInfoForm.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editButton_Click(object sender, EventArgs e)
         {
             EditUserInfoForm editForm = new EditUserInfoForm(_user);
@@ -83,6 +89,12 @@ namespace DriveLogGUI.MenuTabs
             UpdateInfo();
         }
 
+        /// <summary>
+        /// The click function for the back button.
+        /// Goes back to the search tab.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Find("userSearchTab", false)[0].Show();
@@ -90,23 +102,9 @@ namespace DriveLogGUI.MenuTabs
             this.Dispose();
         }
 
-        private void progressBarPanel_Click(object sender, EventArgs e)
-        {
-            if (!_search)
-            {
-                SubPageCreated?.Invoke(this);
-            }
-            else
-            {
-                this.Hide();
-                DriveLogTab studentFoundDriveLogTab = new DriveLogTab(_user, true);
-                studentFoundDriveLogTab.Location = this.Location;
-                studentFoundDriveLogTab.Parent = this;
-                this.Parent.Controls.Add(studentFoundDriveLogTab);
-                studentFoundDriveLogTab.Show();
-            }
-        }
-
+        /// <summary>
+        /// Formats the AppointmentInformationPanel with the correct location, width and height. 
+        /// </summary>
         private void FormatAppointmentInformationPanel()
         {
             // Create overlay panel, for when the user clicks on an appointment.
@@ -137,19 +135,29 @@ namespace DriveLogGUI.MenuTabs
             appointmentInformationPanel.Hide();
         }
 
+        /// <summary>
+        /// Click function for the InfoPanel back button.
+        /// Clears the text in all the textboxes and hides the panel.
+        /// </summary>
         private void OnInfoPanelBackButtonClicked()
         {
             foreach (Control control in appointmentInformationPanel.Controls)
             {
                 if (control is RichTextBox)
                 {
-                    RichTextBox test = control as RichTextBox;
-                    test.Clear();
+                    RichTextBox textBox = control as RichTextBox;
+                    textBox.Clear();
                 }
             }
             appointmentInformationPanel.Hide();
         }
 
+        /// <summary>
+        /// The paint function for the upcoming lessons panel.
+        /// Draws up to 10 appointments.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panelContainingUpcomingLessons_Paint(object sender, PaintEventArgs e)
         {
             lessonsForAppointments.Clear();
@@ -157,8 +165,6 @@ namespace DriveLogGUI.MenuTabs
             int heightForEachDay = panelContainingUpcomingLessons.Height / 10;
             int locationForRow = 0;
 
-            // Get appointments for the instructor, and take 10 if the count is above 10.
-            //instructorAppointments = Session.LoggedInUser.InstructorAppointments.Count > 10 ? Session.LoggedInUser.InstructorAppointments.Take(10).ToList() : Session.LoggedInUser.InstructorAppointments;
             // Takes a maximum of 10 appointments from the current instructor, and saves all lessons from that appointment, but removes duplicates for each student ID.
             int counter = 0;
             foreach (AppointmentStructure userAppointment in _user.InstructorAppointments)
@@ -254,6 +260,9 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Creates the textboxes for the appointment information panel.
+        /// </summary>
         private void CreateAppointmentInfoContent()
         {
             lessonInformation = new RichTextBox
@@ -307,6 +316,11 @@ namespace DriveLogGUI.MenuTabs
             appointmentInformationPanel.Controls.Add(lessonInformation);
         }
 
+        /// <summary>
+        /// The click function for an appointment, in the appointment overview panel.
+        /// Gets the necessary information about the appointment and draws the panel.
+        /// </summary>
+        /// <param name="appointmentLessonPair"></param>
         private void OnAppointmentClícked(KeyValuePair<AppointmentStructure, List<Lesson>> appointmentLessonPair)
         {
             // Sets the fontstyle to bold for the title of the textboxes, and changes it back to normal afterwards.
@@ -353,6 +367,11 @@ namespace DriveLogGUI.MenuTabs
             appointmentInformationPanel.Show();
         }
 
+        /// <summary>
+        /// The enter function for an appointmentpanel
+        /// Changes the color to indicate a clickable object.
+        /// </summary>
+        /// <param name="appointmentPanel"></param>
         private void OnAppointmentPanelEnter(Panel appointmentPanel)
         {
             appointmentPanel.BackColor = ColorScheme.MainThemeColorLighter;
@@ -360,6 +379,11 @@ namespace DriveLogGUI.MenuTabs
                 label.ForeColor = Color.White;
         }
 
+        /// <summary>
+        /// The leave function for an appointmentpanel
+        /// Changes the color back to the default.
+        /// </summary>
+        /// <param name="appointmentPanel"></param>
         private void OnAppointmentPanelLeave(Panel appointmentPanel)
         {
             appointmentPanel.BackColor = Color.White;
