@@ -10,16 +10,10 @@ namespace DriveLogGUI
 {
     class DriveLogStarter
     {
-        public DriveLogStarter()
-        {
-            
-        }
-
         public void Start()
         {
             LoginForm login = new LoginForm();
             Application.Run(login);
         }
-        
     }
 }

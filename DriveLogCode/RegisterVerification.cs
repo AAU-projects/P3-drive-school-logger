@@ -9,6 +9,11 @@ namespace DriveLogCode
 {
     public static class RegisterVerification
     {
+        /// <summary>
+        /// checks for valid username, 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool UsernameVerifacation(string input)
         {
             if (DataAccess.MySql.ExistUsername(input)) return false;
@@ -32,6 +37,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// checks if the input is only letters
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool InputOnlyLettersVerification(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -46,6 +56,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// checks if the input is only letters
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool InputOnlyDigitVerification(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -60,6 +75,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// checks if valid street name
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool StreetNameVerification(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -79,6 +99,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// checks if address is valid
+        /// </summary>
+        /// <param name="adress"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool AdressVerification(string adress)
         {
             string[] adressStrings = adress.Split(' ');
@@ -98,6 +123,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// checks if emails is valid
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool EmailVerification(string input)
         {
             if (DataAccess.MySql.ExistEmail(input)) return false;
@@ -142,6 +172,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// checks if valid cpr number
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool CPRVerification(string input)
         {
             input = input.Replace("-", "");
@@ -162,6 +197,11 @@ namespace DriveLogCode
                 return false;
         }
 
+        /// <summary>
+        /// checks for valid password
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool PasswordVertification(string password)
         {
             int letterCounter = 0;
@@ -183,6 +223,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// calculates the strenght of the password
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns>returns an int, the higher the stronger password</returns>
         public static int PasswordStrength(string password)
         {
             int hasUppercase = 0;
@@ -208,6 +253,11 @@ namespace DriveLogCode
             return hasUppercase + hasLowercase + hasDigit + hasSpecialChar + password.Length;
         }
 
+        /// <summary>
+        /// checks for valid phonenumber
+        /// </summary>
+        /// <param name="phoneNo"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool PhoneVerifacation(string phoneNo)
         {
 
@@ -222,6 +272,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// checks for valid zipcode
+        /// </summary>
+        /// <param name="zip"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool ZipVerifacation(string zip)
         {
             if (string.IsNullOrEmpty(zip) || zip.Length != 4)
@@ -235,6 +290,11 @@ namespace DriveLogCode
             return true;
         }
 
+        /// <summary>
+        /// checks for valid city
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns>returns true if valid, false if invalid</returns>
         public static bool CityVerification(string city)
         {
             if (string.IsNullOrEmpty(city) || (string.IsNullOrWhiteSpace(city))) return false;
