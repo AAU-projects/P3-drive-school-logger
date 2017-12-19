@@ -333,7 +333,6 @@
             this.upcommingTestsBackPanel.Name = "upcommingTestsBackPanel";
             this.upcommingTestsBackPanel.Size = new System.Drawing.Size(454, 282);
             this.upcommingTestsBackPanel.TabIndex = 4;
-            this.upcommingTestsBackPanel.Click += new System.EventHandler(this.progressBarPanel_Click);
             // 
             // upcommingTestslabel
             // 

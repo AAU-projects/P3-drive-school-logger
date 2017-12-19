@@ -11,6 +11,7 @@ namespace DriveLogGUI.Windows
 {
     public partial class RegisterForm : Form
     {
+        // Used to check the validity of the different fields.
         private bool _isUsernameOk;
         private bool _isPasswordOk;
         private bool _isVerifyPasswordOk;
@@ -25,11 +26,7 @@ namespace DriveLogGUI.Windows
         private bool _isSignatureOk;
         private Image _signatureImage = null;
 
-        private readonly Color _correctColor = Color.FromArgb(109, 144, 150);
-        private readonly Color _wrongColor = Color.FromArgb(229, 187, 191);
-        private readonly Color _neutralColor = Color.FromArgb(200, 212, 225);
-        private readonly Color _whitetextColor = Color.FromArgb(251, 251, 251);
-
+        // A reference to the LoginForm
         private readonly LoginForm _loginForm;
 
         private Point _lastClick;
@@ -37,6 +34,10 @@ namespace DriveLogGUI.Windows
 
         public Image ProfileImage { get; set; } = null;
 
+        /// <summary>
+        /// Initializes the RegisterForm and creates a new instance of UploadHandler
+        /// </summary>
+        /// <param name="login">A reference to the LoginForm</param>
         public RegisterForm(LoginForm login)
         {
             _loginForm = login;
@@ -46,18 +47,33 @@ namespace DriveLogGUI.Windows
             _uploader = new UploadHandler();
         }
 
+        /// <summary>
+        /// Returns to the loginform
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCancelHyperLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _loginForm.Show();
             this.Dispose();
         }
 
+        /// <summary>
+        /// Returns to the loginform
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _loginForm.Show();
             this.Dispose();
         }
 
+        /// <summary>
+        /// Occurs when the user leaves the Username field.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerUsernameBox_Leave(object sender, EventArgs e)
         {
             //Check if username is unique in SQL - Error message: Username taken!
@@ -67,6 +83,11 @@ namespace DriveLogGUI.Windows
             _isUsernameOk = verify;
         }
 
+        /// <summary>
+        /// Occurs when the user leaves the Firstname field.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerFirstnameBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.InputOnlyLettersVerification(registerFirstnameBox.Text);
@@ -75,6 +96,11 @@ namespace DriveLogGUI.Windows
             _isFirstnameOk = verify;
         }
 
+        /// <summary>
+        /// Occurs when the user leaves the Lastname field.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerLastnameBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.InputOnlyLettersVerification(registerLastnameBox.Text);
@@ -83,6 +109,11 @@ namespace DriveLogGUI.Windows
             _isLastnameOk = verify;
         }
 
+        /// <summary>
+        /// Occurs when the user leaves the City field.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCityBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.CityVerification(registerCityBox.Text);
@@ -91,6 +122,11 @@ namespace DriveLogGUI.Windows
             _isCityOk = verify;
         }
 
+        /// <summary>
+        /// Occurs when the user leaves the Adress field.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerAdressBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.AdressVerification(registerAdressBox.Text);
@@ -99,6 +135,11 @@ namespace DriveLogGUI.Windows
             _isAdressOk = verify;
         }
 
+        /// <summary>
+        /// Occurs when the user leaves the Email field.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerEmailBox_Leave(object sender, EventArgs e)
         {
             //Check if email is unique in SQL - Error message: Email taken!
@@ -122,6 +163,12 @@ namespace DriveLogGUI.Windows
             _isCprOk = verify;
         }
 
+        /// <summary>
+        /// Occurs when the text in the Password field is changed.
+        /// Checks strength and validity of the password.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerPasswordBox_TextChanged(object sender, EventArgs e)
         {
             if (registerPasswordBox.Text != registerPasswordBox.defaultText)
@@ -140,7 +187,7 @@ namespace DriveLogGUI.Windows
             if (!usernameNotSameAsPassword)
             {
                 passwordStatusLabel.Text = "Password can not be the same as your username";
-                passwordStatusLabel.ForeColor = _wrongColor;
+                passwordStatusLabel.ForeColor = ColorScheme.MainWarningColor;
             }
             else
             {
@@ -149,14 +196,21 @@ namespace DriveLogGUI.Windows
                 if (strength == 0)
                     passwordStatusLabel.Text = "";
                 else if (strength < 12)
-                    ChangeLabelTextAndColor(passwordStatusLabel, "Weak", _wrongColor);
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Weak", ColorScheme.MainWarningColor);
                 else if (strength < 22)
                     ChangeLabelTextAndColor(passwordStatusLabel, "Medium", Color.FromArgb(229, 200, 3));
                 else
-                    ChangeLabelTextAndColor(passwordStatusLabel, "Strong", _correctColor);
+                    ChangeLabelTextAndColor(passwordStatusLabel, "Strong", ColorScheme.MainThemeColorLight);
             }
         }
 
+        /// <summary>
+        /// When the text changes in the Password field.
+        /// Toggles the passwordchar depending on what text is in the field.
+        /// Passwordchar is set to * if the text is not the default.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
         {
             if (verifyPasswordBox.Text != verifyPasswordBox.defaultText)
@@ -167,6 +221,9 @@ namespace DriveLogGUI.Windows
             VerifyPassword();
         }
 
+        /// <summary>
+        /// Verifies the password
+        /// </summary>
         private void VerifyPassword()
         {
             bool verify = registerPasswordBox.Text == verifyPasswordBox.Text && registerPasswordBox.Text.Length != 0;
@@ -175,6 +232,11 @@ namespace DriveLogGUI.Windows
             _isVerifyPasswordOk = verify;
         }
 
+        /// <summary>
+        /// Occurs when the user leaves the Zipcode field.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerZipBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.ZipVerifacation(registerZipBox.Text);
@@ -188,6 +250,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Occurs when the user leaves the Phone field.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerPhoneBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.PhoneVerifacation(registerPhoneBox.Text);
@@ -218,30 +285,39 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Sets the correct backgroundcolor depending on the text.
+        /// </summary>
+        /// <param name="textBox">The TextBox to check</param>
+        /// <param name="verify">A bool indicating if the TextBox is verified</param>
         private void ChangeBackColorTextBox(TextboxBorderColor textBox, bool verify)
         {
             if (textBox.Text == textBox.defaultText)
             {
-                textBox.BackColor = _neutralColor;
+                textBox.BackColor = ColorScheme.MainNeutralColor;
                 textBox.ForeColor = Color.DarkGray;
             }
 
             if (verify && textBox.Text != textBox.defaultText)
             {
-                textBox.BackColor = _correctColor;
-                textBox.ForeColor = _whitetextColor;
+                textBox.BackColor = ColorScheme.MainThemeColorLight;
+                textBox.ForeColor = ColorScheme.MainPanelColor;
             }
                 
 
             else if (textBox.Text != textBox.defaultText && textBox.Text != textBox.defaultText)
             {
-                textBox.BackColor = _wrongColor;
+                textBox.BackColor = ColorScheme.MainWarningColor;
                 textBox.ForeColor = Color.Black;
             }
                 
         }
 
-
+        /// <summary>
+        /// Registers the given user in the system, if all fields are valid.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCreateNewUserButton_Click(object sender, EventArgs e)
         {
             if (_isFirstnameOk && _isLastnameOk && _isPhoneOk && _isEmailOk && _isCprOk && _isAdressOk &&
@@ -276,11 +352,23 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Changes the text and color of a label.
+        /// </summary>
+        /// <param name="label">The Label to change</param>
+        /// <param name="text">The new text</param>
+        /// <param name="color">The new color</param>
         private void ChangeLabelTextAndColor(Label label, string text, Color color)
         {
             label.Text = text;
             label.ForeColor = color;
         }
+
+        /// <summary>
+        /// Opens the UploadProfilePicForm.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerUploadPhotoButton_Click(object sender, EventArgs e)
         {
             UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
@@ -289,12 +377,20 @@ namespace DriveLogGUI.Windows
             registerPicture.Image = ProfileImage;
         }
 
+        /// <summary>
+        /// Hides akk the status labels of the form.
+        /// </summary>
         private void HideAllStatusLabels()
         {
             passwordStatusLabel.Text = null;
             vertifyPasswordStatusLabel.Text = null;
         }
 
+        /// <summary>
+        /// The click function for the Firstname textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerFirstnameBox_Click(object sender, EventArgs e)
         {
             if (registerFirstnameBox.Text == "Firstname")
@@ -302,81 +398,152 @@ namespace DriveLogGUI.Windows
             
         }
 
+        /// <summary>
+        /// The click function for the Lastname textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerLastnameBox_Click(object sender, EventArgs e)
         {
             if (registerLastnameBox.Text == "Lastname")
                 registerLastnameBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the Phone textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerPhoneBox_Click(object sender, EventArgs e)
         {
             if (registerPhoneBox.Text == "Phone Number")
                 registerPhoneBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the CPR textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCprBox_Click(object sender, EventArgs e)
         {
             if (registerCprBox.Text == "CPR")
                 registerCprBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the Email textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerEmailBox_Click(object sender, EventArgs e)
         {
             if (registerEmailBox.Text == "Email Address")
                 registerEmailBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the Adress textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerAdressBox_Click(object sender, EventArgs e)
         {
             if (registerAdressBox.Text == "Address")
                 registerAdressBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the Zipcode textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerZipBox_Click(object sender, EventArgs e)
         {
             if (registerZipBox.Text == "Zip Code")
                 registerZipBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the City textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCityBox_Click(object sender, EventArgs e)
         {
             if (registerCityBox.Text == "City")
                 registerCityBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the Username textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerUsernameBox_Click(object sender, EventArgs e)
         {
             if (registerUsernameBox.Text == "Username")
                 registerUsernameBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the Password textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerPasswordBox_Click(object sender, EventArgs e)
         {
             if (registerPasswordBox.Text == "Password")
                 registerPasswordBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the Verfy Password textbox.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyPasswordBox_Click(object sender, EventArgs e)
         {
             if (verifyPasswordBox.Text == "Verify Password")
                 verifyPasswordBox.Text = "";
         }
 
+        /// <summary>
+        /// The click function for the statusbar minimize button.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void button3_MouseClick(object sender, MouseEventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
+        /// <summary>
+        /// The click function for the statusbar close button.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void button4_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
+        /// <summary>
+        /// When the user holds down the mouse button, while hovering above the statusbar.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void topBarPanel_MouseDown(object sender, MouseEventArgs e)
         {
             _lastClick = e.Location;
         }
 
+        /// <summary>
+        /// When the user hovers the mouse cursor above the statusbar.
+        /// Allows the users to drag the statusbar around.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void topBarPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -386,6 +553,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// The click function for the signature button.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void signatureButton_Click(object sender, EventArgs e)
         {
             SignatureEdit signatureEditForm = new SignatureEdit();
@@ -398,6 +570,11 @@ namespace DriveLogGUI.Windows
             signatureBox.Image = _signatureImage;
         }
 
+        /// <summary>
+        /// The paint function for the statusbar
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void topBarPanel_Paint(object sender, PaintEventArgs e)
         {
             topBarPanel.BackColor = ColorScheme.MainTopPanelColor;
