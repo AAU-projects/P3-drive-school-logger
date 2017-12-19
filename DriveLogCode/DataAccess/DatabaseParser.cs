@@ -48,7 +48,7 @@ namespace DriveLogCode.DataAccess
 
         public static User GetUserByUsername(string username, string usertable = UserTable)
         {
-            DataTable user = MySql.GetUserByName(username, usertable);
+            DataTable user = MySql.GetUserByUsername(username, usertable);
 
             return user == null ? null : new User(user);
         }
@@ -203,7 +203,7 @@ namespace DriveLogCode.DataAccess
         public static List<string> GetLessonTemplates(string lessonTemplateTable = LessonTemplateTable)
         {
             List<string> results = new List<string>();
-            DataTable DatabaseResults = MySql.GetCreatedLessonNames(lessonTemplateTable);
+            DataTable DatabaseResults = MySql.GetAllActiveLessonTemplates(lessonTemplateTable);
 
             foreach (DataRow row in DatabaseResults.Rows)
             {

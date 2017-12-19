@@ -18,9 +18,6 @@ namespace DriveLogGUI
             Application.SetCompatibleTextRenderingDefault(false);
             DriveLogStarter driveLog = new DriveLogStarter();
             driveLog.Start();
-            
-
-
         }
     }
 }

@@ -7,7 +7,6 @@ using System.Data;
 
 [assembly: InternalsVisibleTo("DriveLogTests")]
 
-
 namespace DriveLogCode.DataAccess
 {
     internal static class MySql
@@ -22,6 +21,11 @@ namespace DriveLogCode.DataAccess
         private const string LessonTable = "lessons";
         private const string TodaysNoteTable = "todaysNoteTable";
 
+        /// <summary>
+        /// Gets all instructors
+        /// </summary>
+        /// <param name="table">The user table which the query is send to</param>
+        /// <returns>Returns all instructors found in a DataTable</returns>
         internal static DataTable GetAllInstrutors(string table = UserTable)
         {
             var cmd = new MySqlCommand($"SELECT firstname, lastname, phone, signature FROM {table} WHERE sysmin = 'True'");
@@ -31,6 +35,15 @@ namespace DriveLogCode.DataAccess
 
         }
 
+        /// <summary>
+        /// Gets lessons and appointments belonging to a specific user
+        /// </summary>
+        /// <param name="userid">The user's id</param>
+        /// <param name="LessonTable">The lesson table</param>
+        /// <param name="AppointmentTable">The appointment table</param>
+        /// <param name="UserTable">The user table</param>
+        /// <param name="LessonTemplateTable">The lesson template table</param>
+        /// <returns>Returns all lessons and appointments found in a DataTable</returns>
         internal static DataTable GetLessonsAndAttachedAppointmentByUserId(int userid, string LessonTable = LessonTable, string AppointmentTable = AppointmentTable, string UserTable = UserTable, string LessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand("SELECT " +
@@ -59,6 +72,13 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets students on an appointment from it's id
+        /// </summary>
+        /// <param name="appointmentid">The appointment id</param>
+        /// <param name="lessonTable">The lesson table</param>
+        /// <param name="userTable">The user table</param>
+        /// <returns>Returns the student found in a DataTable</returns>
         internal static DataTable GetUsersFromAppointmentID(int appointmentid, string lessonTable = LessonTable, string userTable = UserTable)
         {
             var cmd = new MySqlCommand($"SELECT {userTable}.* " +
@@ -71,6 +91,13 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets students and lessons on an appointment
+        /// </summary>
+        /// <param name="appointmentid">The appointment id</param>
+        /// <param name="lessonTable">The lesson table</param>
+        /// <param name="userTable">The user tble</param>
+        /// <returns></returns>
         internal static DataTable GetUsersAndLessonsFromAppointmentID(int appointmentid, string lessonTable = LessonTable, string userTable = UserTable)
         {
             var cmd = new MySqlCommand($"SELECT {userTable}.user_id, min({lessonTable}.LessonID), min({lessonTable}.LessonPart) " +
@@ -83,6 +110,14 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets lessons a speceffic instructor has to mark as completed.
+        /// </summary>
+        /// <param name="instructorId">The instructors id</param>
+        /// <param name="LessonTable">The lesson table</param>
+        /// <param name="AppointmentTable">The appointment table</param>
+        /// <param name="LessonTemplateTable">The lesson template table</param>
+        /// <returns>Returns all lessons found in a DataTable</returns>
         internal static DataTable GetLessonsToComplete(int instructorId, string LessonTable = LessonTable,
             string AppointmentTable = AppointmentTable, string LessonTemplateTable = LessonTemplateTable )
         {
@@ -110,26 +145,57 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets a lesson by it's id
+        /// </summary>
+        /// <param name="id">The lesson id</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the lesson found in a DataTable</returns>
         internal static DataTable GetLessonByID(int id, string table = LessonTable)
         {
             return GetFromDB("id", id.ToString(), table);
         }
 
+        /// <summary>
+        /// Gets an instructor by id
+        /// </summary>
+        /// <param name="id">The instructor id</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the instructor found in a DataTable</returns>
         internal static DataTable GetInstructorByID(int id, string table = UserTable)
         {
             return GetFromDB("user_id", id.ToString(), table);
         }
 
+        /// <summary>
+        /// Gets a lesson template from the database by it's id
+        /// </summary>
+        /// <param name="id">The template's id</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the template found in a DataTable</returns>
         internal static DataTable GetLessonTemplateByID(int lessonId, string table = LessonTemplateTable)
         {
             return GetFromDB("id", lessonId.ToString(), table);
         }
 
+        /// <summary>
+        /// Gets a lesson from the database by it's user's is
+        /// </summary>
+        /// <param name="id">The user's id</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the lesson found in a DataTable</returns>
         internal static DataTable GetLessonsByUser(int userID, string table = LessonTable)
         {
             return GetFromDB("userID", userID.ToString(), table);
         }
 
+        /// <summary>
+        /// Gets all lessons attatced to an appointment by a specific user
+        /// </summary>
+        /// <param name="userID">The user's id</param>
+        /// <param name="appointmentID">The appointment id</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns all lessons found in a DataTable</returns>
         internal static DataTable GetLessonsByUserAndAppointment(int userID, int appointmentID,
             string table = AppointmentTable)
         {
@@ -138,6 +204,12 @@ namespace DriveLogCode.DataAccess
             return ExistTable(table) ? SendQuery(cmd) : null;
         }
 
+        /// <summary>
+        /// Gets all appointments in the database and the fullname of it's instructor 
+        /// </summary>
+        /// <param name="appointmentTable">The appointment table</param>
+        /// <param name="userTable">The user table</param>
+        /// <returns>Returns all appointments found and their instructor's fullname in a DataTable</returns>
         internal static DataTable GetAllAppointments(string appointmentTable = AppointmentTable, string userTable = UserTable)
         {
             var cmd = new MySqlCommand("SELECT " +
@@ -156,6 +228,15 @@ namespace DriveLogCode.DataAccess
 
             return SendQuery(cmd);
         }
+
+        /// <summary>
+        /// Gets a specific user's lesson template's part
+        /// </summary>
+        /// <param name="templateId">The template id</param>
+        /// <param name="progressId">The progress id</param>
+        /// <param name="userId">The user' id</param>
+        /// <param name="lessonTable">The lesson table</param>
+        /// <returns>Returns the number of rows found in the DataTable</returns>
         internal static int GetLessonIDFromUserIDProgressIDTemplateID(int templateId, int progressId, int userId, string lessonTable = LessonTable)
         {
             var cmd = new MySqlCommand($"SELECT * " +
@@ -169,8 +250,17 @@ namespace DriveLogCode.DataAccess
 
             DataTable results = SendQuery(cmd);
 
-            return Convert.ToInt32(results.Rows[0][0]);
+            return Convert.ToInt32(results.Rows[0][0]);    // Should always return 1 since the id's are unique
         }
+
+        /// <summary>
+        /// Gets all booked lessons after a specific booked lessons. 
+        /// </summary>
+        /// <param name="lessonId">The lesson id</param>
+        /// <param name="userId">The user's id</param>
+        /// <param name="lessonTable">The lesson table</param>
+        /// <param name="lessonTemplateTable">The lesson template table</param>
+        /// <returns>Returns all the lessons found in a DataTable</returns>
         internal static DataTable GetAllLessonsAfterLessonID(int lessonId, int userId, string lessonTable = LessonTable, string lessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"SELECT " +
@@ -198,6 +288,12 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets all appointments on one instructor by id
+        /// </summary>
+        /// <param name="instructorId">The instructor's id</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns all appointments found in a DataTable</returns>
         internal static DataTable GetAllAppointmentsByInstructorId(int instructorId, string table = AppointmentTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE instructorID = {instructorId}");
@@ -205,7 +301,13 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-
+        /// <summary>
+        /// Gets the next lesson by the current lessons template id
+        /// </summary>
+        /// <param name="lessonTemplateId">The template id</param>
+        /// <param name="lessonType">The lesson type</param>
+        /// <param name="lessonTemplateTable">The table the query is send to</param>
+        /// <returns>Returns the lesson found in a DataTable</returns>
         internal static DataTable GetNextLessonTemplateByID(int lessonTemplateId, string lessonType, string lessonTemplateTable = LessonTemplateTable)
         {
             var cmd = new MySqlCommand("SELECT " +
@@ -225,6 +327,12 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets all lessons on a appointment
+        /// </summary>
+        /// <param name="id">The appointment id</param>
+        /// <param name="lessonTable">The table the query is send to</param>
+        /// <returns>Returns all lessons found in a DataTable</returns>
         internal static DataTable GetAllLessonsFromAppointmentID(int id, string lessonTable = LessonTable)
         {
             var cmd = new MySqlCommand($"SELECT * " +
@@ -234,6 +342,18 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Adds a lessons the the lesson table in the databse
+        /// </summary>
+        /// <param name="userId">The user id </param>
+        /// <param name="appointmentID">The appointment id </param>
+        /// <param name="templateID">The lesson template's id</param>
+        /// <param name="part">The lesson part</param>
+        /// <param name="startDate">The start time of the appointment</param>
+        /// <param name="endDate">The end time of the appointment</param>
+        /// <param name="completed">The completion satus of the appointment</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the lesson was added or not</returns>
         internal static bool AddLesson(int userId, int appointmentID, int templateID, int part, string startDate, string endDate, bool completed, string table = LessonTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO `{table}` (`userID`, `appointmentID`, `lessonID`, `lessonPart`, `StartDate`, `EndDate`, `Completed` )" +
@@ -243,16 +363,35 @@ namespace DriveLogCode.DataAccess
             return CreateLessonTable(table) && SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets an appointment by the indtructor's id
+        /// </summary>
+        /// <param name="instructorID">The indstructor's id</param>
+        /// <param name="table">The table  the query is send to</param>
+        /// <returns>Returns the appointment found in a DataTable</returns>
         internal static DataTable GetAppointmentsByInstuctor(int instructorID, string table = AppointmentTable)
         {
             return GetFromDB("instructorID", instructorID.ToString(), table);
         }
 
+        /// <summary>
+        /// Get an appointment by it's id
+        /// </summary>
+        /// <param name="id">The id of the appointment</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the appointment found in a DataTable</returns>
         internal static DataTable GetAppointmentByID(int id, string table = AppointmentTable)
         {
             return GetFromDB("id", id.ToString(), table);
         }
 
+        /// <summary>
+        /// Gets a value from a speciffic column in a given table
+        /// </summary>
+        /// <param name="column">The colum to get from</param>
+        /// <param name="value">The value to look after</param>
+        /// <param name="table">The table to look in and the table the query is send to</param>
+        /// <returns>Returns the data found in a DataTable</returns>
         internal static DataTable GetFromDB(string column, string value, string table)
         {
             var cmd = new MySqlCommand($"SELECT * FROM `{table}` WHERE `{column}` = '{value}'");
@@ -260,6 +399,15 @@ namespace DriveLogCode.DataAccess
             return ExistTable(table) ? SendQuery(cmd) : null;
         }
 
+        /// <summary>
+        /// Adds an appointment to the appointment table
+        /// </summary>
+        /// <param name="instructor">The instructor's id</param>
+        /// <param name="startTime">The starttime of the appointment</param>
+        /// <param name="availableTime">The number of lessons on the appointment</param>
+        /// <param name="type">The type of the lessons</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns></returns>
         internal static bool AddAppointment(string instructor, string startTime, int availableTime, string type, string table = AppointmentTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO `{table}` (`instructorID`, `startTime`, `availableTime`, `lessonType`) " +
@@ -269,6 +417,11 @@ namespace DriveLogCode.DataAccess
             return CreateAppointmentTable(table) && SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Creates a table for lessons in the database
+        /// </summary>
+        /// <param name="tableName">The name of the table</param>
+        /// <returns>Returns a bool indicating whether the table was created or not</returns>
         internal static bool CreateLessonTable(string tableName = LessonTable)
         {
             var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
@@ -287,6 +440,11 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Creates a table for appointments in the databse
+        /// </summary>
+        /// <param name="tableName">The name of the table</param>
+        /// <returns>Returns a bool indicating whether the table was created or not</returns>
         private static bool CreateAppointmentTable(string tableName = AppointmentTable)
         {
             var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
@@ -303,6 +461,12 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Deletes a lesson template from the database
+        /// </summary>
+        /// <param name="id">The id of the template</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the template was deleted or not</returns>
         internal static bool DeleteTemplate(int id, string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"UPDATE {table} SET active = 'False' WHERE id = {id}");
@@ -311,7 +475,12 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
-        internal static DataTable GetCreatedLessonNames(string table = LessonTemplateTable)
+        /// <summary>
+        /// Gets all active lesson templates
+        /// </summary>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the templates found in a DataTable</returns>
+        internal static DataTable GetAllActiveLessonTemplates(string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"SELECT `title` FROM {table} WHERE active = 'True'");
 
@@ -319,6 +488,11 @@ namespace DriveLogCode.DataAccess
             return CreateTemplateTable(table) ? SendQuery(cmd) : null;
         }
 
+        /// <summary>
+        /// Gets all rows in a table
+        /// </summary>
+        /// <param name="table">The name of the table</param>
+        /// <returns>Returns all rows in a DataTable</returns>
         internal static DataTable GetAllRows(string table)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {table}");
@@ -326,6 +500,12 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Get a lesson from the databse
+        /// </summary>
+        /// <param name="title">The lessons title</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the lesson data which were found in a DataTable</returns>
         internal static DataTable GetLessonData(string title, string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE title = '{title}' LIMIT 1");
@@ -334,6 +514,17 @@ namespace DriveLogCode.DataAccess
             return CreateTemplateTable(table) ? SendQuery(cmd) : null;
         }
 
+        /// <summary>
+        /// Updates an existing lesson template.
+        /// </summary>
+        /// <param name="id">The id of the template</param>
+        /// <param name="title">The template's title</param>
+        /// <param name="description">The template's describtion</param>
+        /// <param name="type">The type of the teplate</param>
+        /// <param name="time">The amount of lessons the template involves</param>
+        /// <param name="reading">The reading material</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the template was updated or not</returns>
         private static bool UpdateLessonTemplate(string id, string title, string description, string type, string time, string reading, string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"UPDATE {table} SET title = '{title}', description = '{description}', type = '{type}', time = '{time}', reading = '{reading}' WHERE id = {id}");
@@ -345,6 +536,15 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
+        /// <summary>
+        /// Sets the completion status of a lesson.
+        /// </summary>
+        /// <param name="studentId">The student's id</param>
+        /// <param name="appointmentId">The appointment id</param>
+        /// <param name="progress">The students progress</param>
+        /// <param name="status">The status of the </param>
+        /// <param name="table"></param>
+        /// <returns>Returns a bool indicating whether the status was set or not</returns>
         internal static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status, string table = LessonTable)
         {
             var cmd = new MySqlCommand($"UPDATE {table} SET Completed = '{status}' WHERE UserID = {studentId} AND AppointmentID = {appointmentId} AND LessonPart = {progress} LIMIT 1");
@@ -352,6 +552,14 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Deletes a lesson
+        /// </summary>
+        /// <param name="studentId">The students id </param>
+        /// <param name="appointmentid">The appointment id</param>
+        /// <param name="progress">The progress of the student</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the lesson was deleted or not</returns>
         internal static bool DeleteLesson(int studentId, int appointmentid, int progress, string table = LessonTable)
         {
             var cmd = new MySqlCommand($"DELETE FROM {table} WHERE UserID = {studentId} AND AppointmentID = {appointmentid} AND LessonPart = {progress} LIMIT 1");
@@ -359,6 +567,12 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Deletes lessons from the database
+        /// </summary>
+        /// <param name="idsToDelete">The id of the lessons to be deleted seperated by ","</param>
+        /// <param name="lessonTable">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the lessons were deleted or not</returns>
         internal static bool DeleteLessons(string idsToDelete, string lessonTable = LessonTable)
         {
             var cmd = new MySqlCommand($"DELETE from {lessonTable} " +
@@ -367,6 +581,17 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Uploades a lesson template
+        /// </summary>
+        /// <param name="id">The id of the template</param>
+        /// <param name="title">The title of the template</param>
+        /// <param name="description">The description of the template</param>
+        /// <param name="type">The type of the template</param>
+        /// <param name="time">The amout of lessons</param>
+        /// <param name="reading">The reading material</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the template was uploaded or not</returns>
         internal static bool UploadLessonTemplate(string id, string title, string description, string type, string time, string reading, string table = LessonTemplateTable)
         {
            var cmd = new MySqlCommand($"INSERT INTO {table} (title, description, type, time, reading) VALUES ('{title}', '{description}', '{type}', '{time}', '{reading}')");
@@ -381,6 +606,11 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
+        /// <summary>
+        /// Creates a table in the database to hold lesson templates
+        /// </summary>
+        /// <param name="table">The table name</param>
+        /// <returns>Returns a bool indicating whether the table was created or not</returns>
         private static bool CreateTemplateTable(string table = LessonTemplateTable)
         {
             var cmd = new MySqlCommand($"CREATE TABLE `{table}` (" +
@@ -396,6 +626,13 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets a row from the document table
+        /// </summary>
+        /// <param name="type">The document type</param>
+        /// <param name="id">The user id</param>
+        /// <param name="docTable">The table the query is send to</param>
+        /// <returns>Returns the row found in a DataTable</returns>
         internal static DataTable GetDocument(string type, int id, string docTable = DocumnentTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {docTable} WHERE user = {id} AND type = '{type}' LIMIT 1");
@@ -403,7 +640,15 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
-        internal static bool Updatedocument(string type, int userId, string newPath, string docTable = DocumnentTable)
+        /// <summary>
+        /// Updates a document
+        /// </summary>
+        /// <param name="type">The document type</param>
+        /// <param name="userId">The id of the user the document is uploaded to</param>
+        /// <param name="newPath">The path of the new document</param>
+        /// <param name="docTable"></param>
+        /// <returns>Returns a bool indicating whether the document is succesfully updated or not</returns>
+        internal static bool UpdateDocument(string type, int userId, string newPath, string docTable = DocumnentTable)
         {
             var cmd = new MySqlCommand($"UPDATE {docTable} SET path = '{newPath}' WHERE type = '{type}' AND `user` = {userId}");
 
@@ -416,9 +661,19 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
+        /// <summary>
+        /// Uploades a documents 
+        /// </summary>
+        /// <param name="title">The document title</param>
+        /// <param name="type">The document type</param>
+        /// <param name="date">The date of the upload</param>
+        /// <param name="userId">The id of the user the document is upload to</param>
+        /// <param name="path">The document path</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the document is succesfully uploaded or not</returns>
         internal static bool UploadDocument(string title, string type, DateTime date, int userId, string path, string table = DocumnentTable)
         {
-            if (ExistDocument(userId, type, table)) return Updatedocument(type, userId, path, table);
+            if (ExistDocument(userId, type, table)) return UpdateDocument(type, userId, path, table);
 
             var cmd = new MySqlCommand($"INSERT INTO documents (title, type, `user`, path) VALUES ('{title}', '{type}', {userId}, '{path}')");
 
@@ -431,6 +686,11 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
+        /// <summary>
+        /// Creates a table to hold documents
+        /// </summary>
+        /// <param name="tablename">The name of the table</param>
+        /// <returns>Returns a bool indicating whether the table was created or not</returns>
         internal static bool CreateDocumentTabel(string tablename = DocumnentTable)
         {
             var query = $"CREATE TABLE `{tablename}` (" +
@@ -448,7 +708,13 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
-        internal static DataTable GetUserByName(string username, string table = UserTable)
+        /// <summary>
+        /// Gets a user by username
+        /// </summary>
+        /// <param name="username">The username to find</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the user found in a DataTable</returns>
+        internal static DataTable GetUserByUsername(string username, string table = UserTable)
         {
             if (!ExistUsername(username, table)) return null;
 
@@ -456,6 +722,12 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets a user by a user id
+        /// </summary>
+        /// <param name="id">The user id</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the user found in a DataTable</returns>
         internal static DataTable GetUserByID(int id, string table = UserTable)
         {
             if (!ExistUserId(id, table)) return null;
@@ -464,6 +736,13 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Checks if a documents exists
+        /// </summary>
+        /// <param name="id">The user's id</param>
+        /// <param name="type">The document type</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the documents exists or not</returns>
         internal static bool ExistDocument(int id, string type, string table = DocumnentTable)
         {
             var cmd = new MySqlCommand($"SELECT 1 FROM {table} WHERE type = '{type}' AND user = {id} LIMIT 1");
@@ -487,26 +766,57 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
+        /// <summary>
+        /// Checks if a userid exists
+        /// </summary>
+        /// <param name="id">The id to chech for</param>
+        /// <param name="table">The table the query is send for</param>
+        /// <returns></returns>
         internal static bool ExistUserId(int id, string table = UserTable)
         {
             return Exist("user_id", id.ToString(), table);
         }
 
+        /// <summary>
+        /// Checks if an email exists
+        /// </summary>
+        /// <param name="email">The email to check for</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool in indicating whether the email exists or not</returns>
         internal static bool ExistEmail(string email, string table = UserTable)
         {
             return Exist("email", email, table);
         }
 
+        /// <summary>
+        /// Checks if a username exists
+        /// </summary>
+        /// <param name="username">The username to check for</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the username exists or not</returns>
         internal static bool ExistUsername(string username, string table = UserTable)
         {
             return Exist("username", username, table);
         }
 
+        /// <summary>
+        /// Checks if a given cpr exists
+        /// </summary>
+        /// <param name="cpr">The cpr to check for</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns></returns>
         internal static bool ExistCPR(string cpr, string table = UserTable)
         {
             return Exist("cpr", cpr, table);
         }
 
+        /// <summary>
+        /// Checks if a value exists in a speciffic column in the usertable.
+        /// </summary>
+        /// <param name="column">The column to check in </param>
+        /// <param name="value">The value to check for</param>
+        /// <param name="table">´The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the value exists or not</returns>
         private static bool Exist(string column, string value, string table = UserTable)
         {
             var cmd = new MySqlCommand($"SELECT 1 FROM {table} WHERE {column} = '{value}' LIMIT 1");
@@ -524,6 +834,25 @@ namespace DriveLogCode.DataAccess
 
         }
 
+        /// <summary>
+        /// Adds a user to the databse
+        /// </summary>
+        /// <param name="firstname">The user's firstname</param>
+        /// <param name="lastname">The user's lastname</param>
+        /// <param name="phone">The user's phone</param>
+        /// <param name="mail">The user's mail</param>
+        /// <param name="cpr">The user's cpr</param>
+        /// <param name="address">The user's adress</param>
+        /// <param name="zip">The user's zip</param>
+        /// <param name="city">The user's city</param>
+        /// <param name="username">The user's username</param>
+        /// <param name="password">The user's password</param>
+        /// <param name="picture">The user's picturepath</param>
+        /// <param name="signature">The user's signaturepath</param>
+        /// <param name="sysmin">The user's sysmin value</param>
+        /// <param name="classname">The user's class name</param>
+        /// <param name="usertable">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the user was succesfully added or not</returns>
         internal static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr, string address, 
             string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string classname = "", string usertable = UserTable)
         {
@@ -543,6 +872,24 @@ namespace DriveLogCode.DataAccess
             return false;
         }
 
+        /// <summary>
+        /// Updates informtaion on a specific user
+        /// </summary>
+        /// <param name="cpr">The cpr to be updated</param>
+        /// <param name="firstname">The firstname to be updated</param>
+        /// <param name="lastname">The lastname to be updated</param>
+        /// <param name="phone">The phone to be updated</param>
+        /// <param name="mail">The mail to be updated</param>
+        /// <param name="address">The address to be updated</param>
+        /// <param name="zip">The zip to be updated</param>
+        /// <param name="city">The city to be updated</param>
+        /// <param name="username">The username to be updated</param>
+        /// <param name="password">The password to be updated</param>
+        /// <param name="picture">The picturepath to be updated</param>
+        /// <param name="signature">The signaturepath to be updated</param>
+        /// <param name="sysmin">The sysmin value to be updated</param>
+        /// <param name="usertable">The table the query is send to</param>
+        /// <returns>Reeturns a bool indicating whether the user was succesfully updated or not</returns>
         internal static bool UpdateUser(string cpr, string firstname, string lastname, string phone, string mail, string address,
             string zip, string city, string username, string password, string picture = null, string signature = "", string sysmin = "false", string usertable = UserTable)
         {
@@ -555,6 +902,14 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Sets a bool value in a speciffic column in the user table.
+        /// </summary>
+        /// <param name="userid">The id of the user to be updated</param>
+        /// <param name="column">The column to be updated</param>
+        /// <param name="value">The bool value to be set</param>
+        /// <param name="table">The name of the table the query is send to</param>
+        /// <returns>Returns a bools indicating whether table was succrsfully updated or not</returns>
         internal static bool UpdateUserEnum(int userid, string column, bool value, string table = UserTable)
         {
             var cmd = new MySqlCommand($"UPDATE {table} SET " +
@@ -564,8 +919,11 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
-
-
+        /// <summary>
+        /// Checks if the table allready exists in the database.
+        /// </summary>
+        /// <param name="tablename">The name of the table</param>
+        /// <returns>Returns a bool indicating whether the table exists or not</returns>
         private static bool ExistTable(string tablename)
         {
             var cmd = new MySqlCommand($"SELECT 1 FROM {tablename} LIMIT 1;");
@@ -573,6 +931,11 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Creates a user tablee in the databse
+        /// </summary>
+        /// <param name="tablename">The name of the table</param>
+        /// <returns>Returns a bool indicating whether the table was succesfully created or not</returns>
         private static bool CreateUserTable(string tablename)
         {
             var query = $"CREATE TABLE `{tablename}` (" +
@@ -607,6 +970,12 @@ namespace DriveLogCode.DataAccess
             return (SendNonQuery(cmd) && SendNonQuery(cmd2));
         }
 
+        /// <summary>
+        /// Searches in every colum of the user table for a match of the search input.
+        /// </summary>
+        /// <param name="searchInput">The search input string</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the search results found in a DataTable</returns>
         internal static DataTable UserSearch(string searchInput, string table = UserTable)
         {
             string query;
@@ -622,6 +991,14 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Adds a todays note message to the databse.
+        /// </summary>
+        /// <param name="user">The user that adds the message</param>
+        /// <param name="todayNoteText">The message string</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool indicating whether the table was succesfully updated or not.
+        ///  If the table does not exist it is created</returns>
         internal static bool AddTodaysNote(User user, string todayNoteText, string table = TodaysNoteTable)
         {
             var cmd = new MySqlCommand($"INSERT INTO {table} (" +
@@ -633,6 +1010,11 @@ namespace DriveLogCode.DataAccess
             return CreateTodaysNoteTable(table) && SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// This metod creates a new table in the databse to hold todays note messages.
+        /// </summary>
+        /// <param name="tableName">The name of the table</param>
+        /// <returns>Returns a bool indicating whether the table was succesfully created or not</returns>
         private static bool CreateTodaysNoteTable(string tableName)
         {
             var cmd = new MySqlCommand($"CREATE TABLE `{tableName}` (" +
@@ -646,6 +1028,11 @@ namespace DriveLogCode.DataAccess
             return SendNonQuery(cmd);
         }
 
+        /// <summary>
+        /// Gets the latest todays note message from the database 
+        /// </summary>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the message found in a DataTable</returns>
         internal static DataTable GetLatestTodaysNote(string table = TodaysNoteTable)
         {
             string query = $"SELECT * FROM {table} ORDER BY `id` DESC LIMIT 1;";
@@ -654,6 +1041,12 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Returns all lessons found corresponding to the appointmentids given.
+        /// </summary>
+        /// <param name="appointmentIdString">The string holding the appointmentIDs which are seperated by a ",".</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the appointments found in a DataTable</returns>
         public static DataTable GetAllLessonsFromMultipleAppointmentIds(string appointmentIdString,
             string table = LessonTable)
         {
@@ -723,6 +1116,12 @@ namespace DriveLogCode.DataAccess
 
         }
 
+        /// <summary>
+        /// Returns all users found corresponding to the userids given.
+        /// </summary>
+        /// <param name="userIdsString">The string holding the userIDs which are seperated by a ",".</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns the results found in a DataTable by the SendQuery metod</returns>
         public static DataTable GetAllUsersFromMultipleUserIds(string userIdsString, string table = UserTable)
         {
             var cmd = new MySqlCommand($"SELECT * FROM {table} WHERE {table}.user_id IN ({userIdsString});");
@@ -730,6 +1129,12 @@ namespace DriveLogCode.DataAccess
             return SendQuery(cmd);
         }
 
+        /// <summary>
+        /// Delets an appointment in the appointment table in the databse
+        /// </summary>
+        /// <param name="appointmentId">The id of the appointment to be deleted</param>
+        /// <param name="table">The table the query is send to</param>
+        /// <returns>Returns a bool which indicated whether the query were executed or not</returns>
         public static bool DeleteAppointment(int appointmentId, string table)
         {
             var cmd = new MySqlCommand($"DELETE FROM {table} WHERE id = {appointmentId}");
