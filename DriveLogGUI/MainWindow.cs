@@ -301,7 +301,7 @@ namespace DriveLogGUI
         /// </summary>
         /// <param name="location">The current location of the control</param>
         /// <param name="moveLocation">How many pixels it should be moved on the y a-axis</param>
-        /// <returns></returns>
+        /// <returns>Returns a new point that is the moved location</returns>
         private Point MoveLocationY(Point location, int moveLocation)
         {
             return new Point(location.X, location.Y + moveLocation);
