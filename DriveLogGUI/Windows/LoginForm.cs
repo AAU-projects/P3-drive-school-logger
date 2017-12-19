@@ -50,7 +50,6 @@ namespace DriveLogGUI.Windows
         private void loginButton_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
-            // TODO remove else when program is done
             if (UsernameBox.Text != "Username")
             {
                 User user = DatabaseParser.GetUserByUsername(UsernameBox.Text);
@@ -65,19 +64,21 @@ namespace DriveLogGUI.Windows
                 }
 
                 Session.LoadUser(user);
+
+                this.Hide();
+                MainWindow main = new MainWindow();
+                main.ShowDialog(this);
+                Session.LogOut();
+                // resets information after logout
+                ResetInformation();
+                Cursor = Cursors.Arrow;
             }
             else
             {
-                Session.LoadUser(DatabaseParser.GetUserByUsername("luke"));
+                CustomMsgBox.ShowOk("Wrong username or password", "Error", CustomMsgBoxIcon.Error);
             }
 
-            this.Hide();
-            MainWindow main = new MainWindow();
-            main.ShowDialog(this);
-            Session.LogOut();
-            // resets information after logout
-            ResetInformation();
-            Cursor = Cursors.Arrow;
+            
         }
 
         /// <summary>
