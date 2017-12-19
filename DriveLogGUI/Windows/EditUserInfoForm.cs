@@ -49,7 +49,9 @@ namespace DriveLogGUI.Windows
 
         private IUploadHandler uploader;
 
-
+        /// <summary>
+        /// Updates all relevant information in the form. 
+        /// </summary>
         private void UpdateInfo()
         {
             usernameBox.Text = _user.Username;
@@ -79,6 +81,11 @@ namespace DriveLogGUI.Windows
             uploader = new UploadHandler();
         }
 
+        /// <summary>
+        /// Verifys the password on text changed
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
         {
             if (verifyPasswordBox.Text != verifyPasswordBox.defaultText)
@@ -104,6 +111,10 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Changes the enablestatus of the boxes regarding to the input variable
+        /// </summary>
+        /// <param name="enabled">The enablestatus</param>
         private void ChangeEnableStatus(bool enabled)
         {
             usernameBox.Enabled = enabled;
@@ -124,6 +135,11 @@ namespace DriveLogGUI.Windows
             saveChangesButton.Enabled = enabled;
         }
 
+        /// <summary>
+        /// Changes the Fore- and Back- color of labels and textboxes
+        /// </summary>
+        /// <param name="lableColor">The color for the labels to change to</param>
+        /// <param name="textBoxColor">The color for the textboxes to change to</param>
         private void ChangeLabelAndBoxColor(Color lableColor, Color textBoxColor)
         {
             accountDetailsLabel.ForeColor = lableColor;
@@ -142,6 +158,11 @@ namespace DriveLogGUI.Windows
             cityBox.BackColor = textBoxColor;
         }
 
+        /// <summary>
+        /// Changes color in the verify section.
+        /// </summary>
+        /// <param name="lableColor">The color for the labels to change to</param>
+        /// <param name="textBoxColor">The color for the textboxes to change to</param>
         private void ChangeVerifySectionColor(Color lableColor, Color textBoxColor)
         {
             verifyPasswordLabel.ForeColor = lableColor;
@@ -150,17 +171,32 @@ namespace DriveLogGUI.Windows
             verifyPasswordBox.ForeColor = Color.DarkGray;
         }
 
+        /// <summary>
+        /// Sets the text of the textbox when clicked.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyPasswordBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the textbox on leave if it's empty.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyPasswordBox_Leave(object sender, EventArgs e)
         {
             if (verifyPasswordBox.Text == String.Empty)
                 verifyPasswordBox.Text = verifyPasswordBox.defaultText;
         }
 
+        /// <summary>
+        /// Checks if username is ok on leave.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void usernameBox_Leave(object sender, EventArgs e)
         {
             if (usernameBox.Text == _user.Username)
@@ -171,16 +207,31 @@ namespace DriveLogGUI.Windows
             DefaultTextBox_Leave(usernameBox, usernameOk);
         }
 
+        /// <summary>
+        /// Checks if edit password is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void editPasswordBox_Leave(object sender, EventArgs e)
         {
             DefaultTextBox_Leave(editPasswordBox, passwordOk);
         }
 
+        /// <summary>
+        /// Checks if verify edit password is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyEditPasswordBox_Leave(object sender, EventArgs e)
         {
             DefaultTextBox_Leave(verifyEditPasswordBox, verifyPasswordOk);
         }
 
+        /// <summary>
+        /// Checks if edit password is ok text changed
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void editPasswordBox_TextChanged(object sender, EventArgs e)
         {
             passwordOk = RegisterVerification.PasswordVertification(editPasswordBox.Text);
@@ -230,6 +281,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Checks if verify edit password is ok on text changed
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyEditPasswordBox_TextChanged(object sender, EventArgs e)
         {
             if (verifyEditPasswordBox.Text != verifyEditPasswordBox.defaultText)
@@ -249,18 +305,33 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Checks if firstname is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void firstnameBox_Leave(object sender, EventArgs e)
         {
             firstnameOk = RegisterVerification.InputOnlyLettersVerification(firstnameBox.Text);
             DefaultTextBox_Leave(firstnameBox, firstnameOk);
         }
 
+        /// <summary>
+        /// Checks if lastname is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void lastnameBox_Leave(object sender, EventArgs e)
         {
             lastnameOk = RegisterVerification.InputOnlyLettersVerification(lastnameBox.Text);
             DefaultTextBox_Leave(lastnameBox, lastnameOk);
         }
 
+        /// <summary>
+        /// Checks if phone number is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void phoneBox_Leave(object sender, EventArgs e)
         {
             if (phoneBox.Text == _user.Phone)
@@ -271,6 +342,11 @@ namespace DriveLogGUI.Windows
             DefaultTextBox_Leave(phoneBox, phoneOk);
         }
 
+        /// <summary>
+        /// Checks if email is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void emailBox_Leave(object sender, EventArgs e)
         {
             if (emailBox.Text == _user.Email)
@@ -281,18 +357,33 @@ namespace DriveLogGUI.Windows
             DefaultTextBox_Leave(emailBox, emailOk);
         }
 
+        /// <summary>
+        /// Checks if adress is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void addressBox_Leave(object sender, EventArgs e)
         {
             addressOk = RegisterVerification.AdressVerification(addressBox.Text);
             DefaultTextBox_Leave(addressBox, addressOk);
         }
 
+        /// <summary>
+        /// Checks if zip is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void zipBox_Leave(object sender, EventArgs e)
         {
             zipOk = RegisterVerification.ZipVerifacation(zipBox.Text);
             DefaultTextBox_Leave(zipBox, zipOk);
         }
 
+        /// <summary>
+        /// Checks if city is ok on leave
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void cityBox_Leave(object sender, EventArgs e)
         {
             cityOk = RegisterVerification.CityVerification(cityBox.Text);
@@ -300,6 +391,11 @@ namespace DriveLogGUI.Windows
             DefaultTextBox_Leave(cityBox, cityOk);
         }
 
+        /// <summary>
+        /// Set the back color of the textbox depending of the verification
+        /// </summary>
+        /// <param name="textBox">The textbox</param>
+        /// <param name="verificationOk">The verification paramter</param>
         private void DefaultTextBox_Leave(TextboxBorderColor textBox, bool verificationOk)
         {
             if (verificationOk)
@@ -313,12 +409,21 @@ namespace DriveLogGUI.Windows
                 ChangeBackColorTextBox(textBox, false);
         }
 
+        /// <summary>
+        /// Removes the text of the textbox on enter if the textbox has it's deafult text 
+        /// </summary>
+        /// <param name="textBox">The textbox</param>
         private void DefaultTextBox_Enter(TextboxBorderColor textBox)
         {
             if (textBox.Text == textBox.DefaultText)
                 textBox.Text = "";
         }
 
+        /// <summary>
+        /// Changes the color of a textbox depending on it's verify status
+        /// </summary>
+        /// <param name="textBox">the text box</param>
+        /// <param name="verify">The verify status </param>
         private void ChangeBackColorTextBox(TextboxBorderColor textBox, bool verify)
         {
             if (textBox.Text == textBox.defaultText)
@@ -338,72 +443,143 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Sets the text of the username textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void usernameBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the edit password textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void editPasswordBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the username textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyEditPasswordBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the firstname textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void firstnameBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the lastname textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void lastnameBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the phone textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void phoneBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the email textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void emailBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the adress textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void addressBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the text of the zip textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void zipBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Sets the city of the username textbox on mouse click.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void cityBox_MouseClick(object sender, MouseEventArgs e)
         {
             DefaultTextBox_Enter((TextboxBorderColor)sender);
         }
 
+        /// <summary>
+        /// Changes the text and the ForeColor of a label
+        /// </summary>
+        /// <param name="label">The label</param>
+        /// <param name="text">The text to set</param>
+        /// <param name="color">The color to set</param>
         private void ChangeLabelTextAndColor(Label label, string text, Color color)
         {
             label.Text = text;
             label.ForeColor = color;
         }
 
+        /// <summary>
+        /// Disposes the form when the close button is clicked.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
+        /// <summary>
+        /// Sets the location of the _lastClick point when mouse is down on top panel.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void topPanel_MouseDown(object sender, MouseEventArgs e)
         {
             _lastClick = e.Location;
         }
 
+        /// <summary>
+        /// Moves the windows when mouse is down on top panel
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void topPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -413,6 +589,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Edits the user's profile picture path
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void editPictureButton_Click(object sender, EventArgs e)
         {
             UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
@@ -420,6 +601,11 @@ namespace DriveLogGUI.Windows
             pictureBox.Image = ProfilePicture;
         }
 
+        /// <summary>
+        /// Saves all the changes made
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param
         private void saveChangesButton_Click(object sender, EventArgs e)
         {
             if (!(usernameOk && passwordOk && verifyPasswordOk && firstnameOk && lastnameOk && phoneOk && emailOk && addressOk && zipOk && cityOk))
@@ -465,6 +651,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Opens a SignatureEdit form when the button is clicked.
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void signatureButton_Click(object sender, EventArgs e)
         {
             SignatureEdit signatureEditForm = new SignatureEdit();
