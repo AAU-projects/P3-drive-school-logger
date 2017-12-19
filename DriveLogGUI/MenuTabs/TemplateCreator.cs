@@ -12,6 +12,9 @@ namespace DriveLogGUI.MenuTabs
         private Button _activeButton = null;
         private string _currentId = null;
 
+        /// <summary>
+        /// Class constructor, Initializes component and calls GetTemplates
+        /// </summary>
         public TemplateCreator()
         {
             InitializeComponent();
@@ -20,6 +23,9 @@ namespace DriveLogGUI.MenuTabs
 
         private List<Button> _templates = new List<Button>();
 
+        /// <summary>
+        /// Gets all current templates and adds them to leftPanel
+        /// </summary>
         private void GetTemplates()
         {
             List<string> templateNames = DatabaseParser.GetLessonTemplates();
@@ -45,6 +51,9 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Updates the templates list
+        /// </summary>
         private void UpdateTemplateButtons()
         {
             foreach (Button button in _templates)
@@ -55,6 +64,11 @@ namespace DriveLogGUI.MenuTabs
             GetTemplates();
         }
 
+        /// <summary>
+        /// Loads the clicked template
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">the EventArgs</param>
         private void Template_Clicked(object sender, EventArgs e)
         {
             if(_activeButton != null) _activeButton.BackColor = Color.FromArgb(251, 251, 251);
@@ -65,6 +79,10 @@ namespace DriveLogGUI.MenuTabs
 
         }
 
+        /// <summary>
+        /// Loads the template with the given templateName
+        /// </summary>
+        /// <param name="templateName">The name of the template</param>
         private void LoadTemplateValues(string templateName)
         {
             Dictionary<string,string> template = DatabaseParser.GetTemplate(templateName);
@@ -84,6 +102,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Saves the new template if all reuired fields have been filled out
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">the EventArgs</param>
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (IsAllRequiredFilledOut())
@@ -92,7 +115,6 @@ namespace DriveLogGUI.MenuTabs
                     timeAmount.Value.ToString(), readingTextbox.Text);
 
                 UpdateTemplateButtons();
-
             }
             else
             {
@@ -100,6 +122,10 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Checks if all the required fields have been filled out
+        /// </summary>
+        /// <returns>A bool with the result</returns>
         private bool IsAllRequiredFilledOut()
         {
             Color normalColor = Color.FromArgb(127, 132, 144);
@@ -118,6 +144,11 @@ namespace DriveLogGUI.MenuTabs
             return temp;
         }
 
+        /// <summary>
+        /// Removes the selected template
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">the EventArgs</param>
         private void removebutton_Click(object sender, EventArgs e)
         {
             _templates.Remove(_activeButton);
@@ -131,6 +162,11 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Adds a new clean template to be edited by the user
+        /// </summary>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">the EventArgs</param>
         private void addButton_Click(object sender, EventArgs e)
         {
             if (_activeButton != null) _activeButton.BackColor = Color.FromArgb(251, 251, 251);
