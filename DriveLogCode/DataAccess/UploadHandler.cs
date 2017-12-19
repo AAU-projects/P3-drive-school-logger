@@ -79,11 +79,23 @@ namespace DriveLogCode.DataAccess
             return true;
         }
 
+        /// <summary>
+        /// Upload profile picture to the webserver
+        /// </summary>
+        /// <param name="image">the image to uplaod</param>
+        /// <param name="url">the </param>
+        /// <returns>wether it was uploaded or not</returns>
         public string SaveProfilePicture(Image image, string url)
         {
             return SavePicture(image, url);
         }
 
+        /// <summary>
+        /// Upload picture to the webserver
+        /// </summary>
+        /// <param name="image">the image to uplaod</param>
+        /// <param name="url">the </param>
+        /// <returns>wether it was uploaded or not</returns>
         public string SavePicture(Image image, string url)
         {
             string tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.png");
@@ -94,6 +106,12 @@ namespace DriveLogCode.DataAccess
             return SendToServer(tempFile, url);
         }
 
+        /// <summary>
+        /// uploads the file to the web server
+        /// </summary>
+        /// <param name="imageLocation">the local path to the file</param>
+        /// <param name="url">the remote upload path</param>
+        /// <returns>the url to the uploaded file</returns>
         private string SendToServer(string imageLocation, string url)
         {
             System.Net.WebClient Client = new System.Net.WebClient();
