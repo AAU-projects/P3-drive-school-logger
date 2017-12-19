@@ -61,13 +61,13 @@ namespace DriveLogGUI.Windows
         {
             // if a user does not already have a lesson in lessontype a temp lesson is created before first lesson is added to database
             if (Session.LastTheoraticalLesson == null && _appointment.LessonType == LessonTypes.Theoretical) {
-                Session.LastTheoraticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 2, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null, 1);
+                Session.LastTheoraticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 2, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null, Session.LoggedInUser.Id);
                 Session.LastTheoraticalLesson.LessonTemplate = DatabaseParser.GetLessonTemplateFromID(Session.LastTheoraticalLesson.TemplateID);
                 addedFirstLesson = true;
             }
 
             if (Session.LastPracticalLesson == null && _appointment.LessonType == LessonTypes.Practical) {
-                Session.LastPracticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 5, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null, 1);
+                Session.LastPracticalLesson = new Lesson(_appointment.InstructorName, "", _appointment.Id, 5, 0, _appointment.StartTime, _appointment.StartTime.AddMinutes(45), true, null, null, Session.LoggedInUser.Id);
                 Session.LastPracticalLesson.LessonTemplate = DatabaseParser.GetLessonTemplateFromID(Session.LastPracticalLesson.TemplateID);
                 addedFirstLesson = true;
             }
