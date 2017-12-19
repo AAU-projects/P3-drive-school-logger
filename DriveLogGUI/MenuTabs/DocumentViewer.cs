@@ -26,12 +26,21 @@ namespace DriveLogGUI.MenuTabs
         private string _documentType = string.Empty;
         private string _documentName = string.Empty;
 
+
+        /// <summary>
+        /// Method to load the first aid document for the user
+        /// </summary>
+        /// <param name="user">This is the user that the first aid document will be loaded from</param>
         public void LoadFirstAid(User user)
         {
             SetType(Session.TypeFirstAid);
             LoadDocument(DatabaseParser.GetFirstAid(user));
         }
 
+        /// <summary>
+        /// Method to load the doctors note document for the user
+        /// </summary>
+        /// <param name="user">This is the user that the doctors note document will be loaded from</param>
         public void LoadDoctorsNote(User user)
         {
             SetType(Session.TypeDoctorsNote);
@@ -40,6 +49,10 @@ namespace DriveLogGUI.MenuTabs
                 LoadDocument(notePath);
         }
 
+        /// <summary>
+        /// Method to load a document from a pdf
+        /// </summary>
+        /// <param name="documentPath">The path to the pdf document</param>
         private void LoadDocument(string documentPath)
         {
             PdfDocument document = new PdfDocument(documentPath);
@@ -52,6 +65,10 @@ namespace DriveLogGUI.MenuTabs
 
         }
 
+        /// <summary>
+        /// Method to display a title depending on the type
+        /// </summary>
+        /// <param name="type">The document type</param>
         public void SetType(string type)
         {
             ClearDocument();
@@ -63,6 +80,9 @@ namespace DriveLogGUI.MenuTabs
 
         }
 
+        /// <summary>
+        /// Method to clear the documents from the viewer
+        /// </summary>
         private void ClearDocument()
         {
             viewer.CloseDocument();
@@ -70,6 +90,9 @@ namespace DriveLogGUI.MenuTabs
             DateLabel.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Method to Open a file dialog which can take a pdf or image file and upload it to the database.
+        /// </summary>
         private void OpenFileDialog()
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -114,21 +137,39 @@ namespace DriveLogGUI.MenuTabs
             }
         }
 
+        /// <summary>
+        /// Method to open the file dialog
+        /// </summary>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void uploadButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog();
         }
 
+        /// <summary>
+        /// This method disposes the current viewed pdf
+        /// </summary>
         internal void DisposePdf()
         {
             viewer.Dispose();
         }
 
+        /// <summary>
+        /// Method for when the visiblie have been changed that the document clears
+        /// </summary>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void DocumentViewer_VisibleChanged(object sender, EventArgs e)
         {
             ClearDocument();
         }
 
+        /// <summary>
+        /// Method for going back from the documentviewer
+        /// </summary>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Find("StudentProfileTab", true).Last().Show();
