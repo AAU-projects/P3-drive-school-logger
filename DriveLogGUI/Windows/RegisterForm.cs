@@ -50,8 +50,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Returns to the loginform
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCancelHyperLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _loginForm.Show();
@@ -61,8 +61,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Returns to the loginform
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _loginForm.Show();
@@ -72,8 +72,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Occurs when the user leaves the Username field.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerUsernameBox_Leave(object sender, EventArgs e)
         {
             //Check if username is unique in SQL - Error message: Username taken!
@@ -86,8 +86,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Occurs when the user leaves the Firstname field.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerFirstnameBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.InputOnlyLettersVerification(registerFirstnameBox.Text);
@@ -99,8 +99,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Occurs when the user leaves the Lastname field.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerLastnameBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.InputOnlyLettersVerification(registerLastnameBox.Text);
@@ -112,8 +112,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Occurs when the user leaves the City field.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCityBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.CityVerification(registerCityBox.Text);
@@ -125,8 +125,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Occurs when the user leaves the Adress field.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerAdressBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.AdressVerification(registerAdressBox.Text);
@@ -138,8 +138,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Occurs when the user leaves the Email field.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerEmailBox_Leave(object sender, EventArgs e)
         {
             //Check if email is unique in SQL - Error message: Email taken!
@@ -167,8 +167,8 @@ namespace DriveLogGUI.Windows
         /// Occurs when the text in the Password field is changed.
         /// Checks strength and validity of the password.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerPasswordBox_TextChanged(object sender, EventArgs e)
         {
             if (registerPasswordBox.Text != registerPasswordBox.defaultText)
@@ -209,8 +209,8 @@ namespace DriveLogGUI.Windows
         /// Toggles the passwordchar depending on what text is in the field.
         /// Passwordchar is set to * if the text is not the default.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyPasswordBox_TextChanged(object sender, EventArgs e)
         {
             if (verifyPasswordBox.Text != verifyPasswordBox.defaultText)
@@ -235,8 +235,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Occurs when the user leaves the Zipcode field.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerZipBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.ZipVerifacation(registerZipBox.Text);
@@ -253,8 +253,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Occurs when the user leaves the Phone field.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerPhoneBox_Leave(object sender, EventArgs e)
         {
             bool verify = RegisterVerification.PhoneVerifacation(registerPhoneBox.Text);
@@ -288,8 +288,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Sets the correct backgroundcolor depending on the text.
         /// </summary>
-        /// <param name="textBox"></param>
-        /// <param name="verify"></param>
+        /// <param name="textBox">The TextBox to check</param>
+        /// <param name="verify">A bool indicating if the TextBox is verified</param>
         private void ChangeBackColorTextBox(TextboxBorderColor textBox, bool verify)
         {
             if (textBox.Text == textBox.defaultText)
@@ -316,8 +316,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Registers the given user in the system, if all fields are valid.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCreateNewUserButton_Click(object sender, EventArgs e)
         {
             if (_isFirstnameOk && _isLastnameOk && _isPhoneOk && _isEmailOk && _isCprOk && _isAdressOk &&
@@ -355,9 +355,9 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Changes the text and color of a label.
         /// </summary>
-        /// <param name="label"></param>
-        /// <param name="text"></param>
-        /// <param name="color"></param>
+        /// <param name="label">The Label to change</param>
+        /// <param name="text">The new text</param>
+        /// <param name="color">The new color</param>
         private void ChangeLabelTextAndColor(Label label, string text, Color color)
         {
             label.Text = text;
@@ -367,8 +367,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Opens the UploadProfilePicForm.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerUploadPhotoButton_Click(object sender, EventArgs e)
         {
             UploadProfilePicForm uploadPictureForm = new UploadProfilePicForm(this);
@@ -389,8 +389,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Firstname textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerFirstnameBox_Click(object sender, EventArgs e)
         {
             if (registerFirstnameBox.Text == "Firstname")
@@ -401,8 +401,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Lastname textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerLastnameBox_Click(object sender, EventArgs e)
         {
             if (registerLastnameBox.Text == "Lastname")
@@ -412,8 +412,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Phone textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerPhoneBox_Click(object sender, EventArgs e)
         {
             if (registerPhoneBox.Text == "Phone Number")
@@ -423,8 +423,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the CPR textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCprBox_Click(object sender, EventArgs e)
         {
             if (registerCprBox.Text == "CPR")
@@ -434,8 +434,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Email textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerEmailBox_Click(object sender, EventArgs e)
         {
             if (registerEmailBox.Text == "Email Address")
@@ -445,8 +445,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Adress textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerAdressBox_Click(object sender, EventArgs e)
         {
             if (registerAdressBox.Text == "Address")
@@ -456,8 +456,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Zipcode textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerZipBox_Click(object sender, EventArgs e)
         {
             if (registerZipBox.Text == "Zip Code")
@@ -467,8 +467,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the City textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerCityBox_Click(object sender, EventArgs e)
         {
             if (registerCityBox.Text == "City")
@@ -478,8 +478,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Username textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerUsernameBox_Click(object sender, EventArgs e)
         {
             if (registerUsernameBox.Text == "Username")
@@ -489,8 +489,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Password textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void registerPasswordBox_Click(object sender, EventArgs e)
         {
             if (registerPasswordBox.Text == "Password")
@@ -500,8 +500,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the Verfy Password textbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void verifyPasswordBox_Click(object sender, EventArgs e)
         {
             if (verifyPasswordBox.Text == "Verify Password")
@@ -511,8 +511,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the statusbar minimize button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void button3_MouseClick(object sender, MouseEventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -521,8 +521,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the statusbar close button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void button4_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -531,8 +531,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// When the user holds down the mouse button, while hovering above the statusbar.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void topBarPanel_MouseDown(object sender, MouseEventArgs e)
         {
             _lastClick = e.Location;
@@ -542,8 +542,8 @@ namespace DriveLogGUI.Windows
         /// When the user hovers the mouse cursor above the statusbar.
         /// Allows the users to drag the statusbar around.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void topBarPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -556,8 +556,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The click function for the signature button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void signatureButton_Click(object sender, EventArgs e)
         {
             SignatureEdit signatureEditForm = new SignatureEdit();
@@ -573,8 +573,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The paint function for the statusbar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void topBarPanel_Paint(object sender, PaintEventArgs e)
         {
             topBarPanel.BackColor = ColorScheme.MainTopPanelColor;

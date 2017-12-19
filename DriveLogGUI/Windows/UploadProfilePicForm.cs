@@ -261,8 +261,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The Event for when the user clicks the browse button. This will open a file dialog.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void UploadButton_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog fileDialog = new OpenFileDialog())
@@ -278,8 +278,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The Event for when the user stops holding down the mouse, while dragging the dragPicture.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void dragPicture_MouseUp(object sender, MouseEventArgs e)
         {
             allowResize = false;
@@ -288,8 +288,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The Event for when the user starts holding down the mouse, while dragging the dragPicture.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void dragPicture_MouseDown(object sender, MouseEventArgs e)
         {
             allowResize = true;
@@ -300,8 +300,8 @@ namespace DriveLogGUI.Windows
         /// This will move the panel, if allowResize is set to true. 
         /// This is used when trying to resize the crop box.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void dragPicture_MouseMove(object sender, MouseEventArgs e)
         {
             if (allowResize)
@@ -347,8 +347,8 @@ namespace DriveLogGUI.Windows
         /// The Event for when the mouse is hovering above the dragPanel
         /// Used to move the dragpanel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void dragPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (allowResize)
@@ -373,8 +373,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The Event for when the user starts holding down the mouse, while dragging the dragPanel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void dragPanel_MouseDown(object sender, MouseEventArgs e)
         {
             allowResize = true;
@@ -385,8 +385,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// The Event for when the user stops holding down the mouse, while dragging the dragPanel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void dragPanel_MouseUp(object sender, MouseEventArgs e)
         {
             allowResize = false;

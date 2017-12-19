@@ -30,8 +30,8 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// The constructor for the StudentProfileTab.
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="search"></param>
+        /// <param name="user">The User for the profile</param>
+        /// <param name="search">An indicator to show wether the profile was accessed by the user or through the search.</param>
         public StudentProfileTab(User user, bool search = false)
         {
             InitializeComponent();
@@ -103,8 +103,8 @@ namespace DriveLogGUI.MenuTabs
         /// The click function for the edit button.
         /// Opens a new EditUserInfoForm.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void editButton_Click(object sender, EventArgs e)
         {
             EditUserInfoForm editForm = new EditUserInfoForm(_user);
@@ -118,8 +118,8 @@ namespace DriveLogGUI.MenuTabs
         /// The click function for the back button.
         /// Goes back to the search tab.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Find("userSearchTab", false)[0].Show();
@@ -130,8 +130,8 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Fills the upcoming lessons panel with the necessary information.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="eventArgs"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="eventArgs">The event args</param>
         private void panelContainingUpcomingLessons_Paint(object sender, PaintEventArgs eventArgs)
         {
             int widthForEachDay = panelContainingUpcomingLessons.Width;
@@ -221,8 +221,8 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Shows the information about a specific lessons in a new panel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="lesson"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="lesson">The lesson to get information for</param>
         private void ShowInformationAboutLesson(object sender, LessonClickEventArgs lesson)
         {
             _showInformation = new Panel
@@ -360,8 +360,8 @@ namespace DriveLogGUI.MenuTabs
         /// The click function for the information panel back button.
         /// Hides the information panel for a specific lesson, and shows the overview panel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void backButtonInUpcomingLesson_Click(object sender, EventArgs e)
         {
             _showInformation.Hide();
@@ -376,8 +376,8 @@ namespace DriveLogGUI.MenuTabs
         /// The click function for the doctorsnote button.
         /// Will either open the own users document page, or open a new documentviewer if the profile was accessed from the search tab.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void doctorsNotePictureButton_Click(object sender, EventArgs e)
         {
             if (!_search)
@@ -398,8 +398,8 @@ namespace DriveLogGUI.MenuTabs
         /// The click function for the firstaid button.
         /// Will either open the own users document page, or open a new documentviewer if the profile was accessed from the search tab.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void firstAidPictureButton_Click(object sender, EventArgs e)
         {
             IconPictureButtonClickEvent?.Invoke(firstAidPictureButton, e);
@@ -457,7 +457,7 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Sets the image of the firstaid button to completed if the document exists.
         /// </summary>
-        /// <param name="button"></param>
+        /// <param name="button">A button</param>
         private void FirstCheckIfUploaded(PictureBox button)
         {
             if (DatabaseParser.ExistFirstAid(_user))
@@ -468,8 +468,8 @@ namespace DriveLogGUI.MenuTabs
         /// The leave function for the firstaid button.
         /// Resets the image on leave.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void firstAidPictureButton_MouseLeave(object sender, EventArgs e)
         {
             FirstCheckIfUploaded(firstAidPictureButton);
@@ -479,8 +479,8 @@ namespace DriveLogGUI.MenuTabs
         /// The enter function for the firstaid button.
         /// Changes the image to indicate a clickable button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void firstAidPictureButton_MouseEnter(object sender, EventArgs e)
         {
             ProgressButtonMouseEnter(firstAidPictureButton);
@@ -490,8 +490,8 @@ namespace DriveLogGUI.MenuTabs
         /// The leave function for the doctorsnote button.
         /// Resets the image on leave.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void doctorsNotePictureButton_MouseLeave(object sender, EventArgs e)
         {
             DoctorsNoteCheckIfUploaded(doctorsNotePictureButton);
@@ -501,8 +501,8 @@ namespace DriveLogGUI.MenuTabs
         /// The enter function for the doctorsnote button.
         /// Changes the image to indicate a clickable button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void doctorsNotePictureButton_MouseEnter(object sender, EventArgs e)
         {
             ProgressButtonMouseEnter(doctorsNotePictureButton);
@@ -512,8 +512,8 @@ namespace DriveLogGUI.MenuTabs
         /// The enter function for the theoreticaltest button.
         /// Changes the image to indicate a clickable button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void theroraticalPictureButton_MouseEnter(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
@@ -524,8 +524,8 @@ namespace DriveLogGUI.MenuTabs
         /// The enter function for the praticaltest button.
         /// Changes the image to indicate a clickable button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void praticalTestPictureButton_MouseEnter(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
@@ -536,8 +536,8 @@ namespace DriveLogGUI.MenuTabs
         /// The enter function for the fee button.
         /// Changes the image to indicate a clickable button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void feePictureBox_MouseEnter(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
@@ -548,8 +548,8 @@ namespace DriveLogGUI.MenuTabs
         /// The leave function for the theoreticaltest button.
         /// Resets the image on leave.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void theroraticalPictureButton_MouseLeave(object sender, EventArgs e)
         {
             if(!Session.LoggedInUser.Sysmin) return;
@@ -562,8 +562,8 @@ namespace DriveLogGUI.MenuTabs
         /// The leave function for the pratucaltest button.
         /// Resets the image on leave.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void praticalTestPictureButton_MouseLeave(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
@@ -576,8 +576,8 @@ namespace DriveLogGUI.MenuTabs
         /// The leave function for the fee button.
         /// Resets the image on leave.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void feePictureBox_MouseLeave(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
@@ -590,8 +590,8 @@ namespace DriveLogGUI.MenuTabs
         /// The doubleclick function for the theoreticaltest button.
         /// Allows the sysmin to confirm the specific theoreticaltest.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void theroraticalPictureButton_DoubleClick(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
@@ -618,8 +618,8 @@ namespace DriveLogGUI.MenuTabs
         /// The doubleclick function for the praticaltest button.
         /// Allows the sysmin to confirm the specific praticaltest.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void praticalTestPictureButton_DoubleClick(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
@@ -648,8 +648,8 @@ namespace DriveLogGUI.MenuTabs
         /// The doubleclick function for the fee button.
         /// Allows the sysmin to confirm the specific fee.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void feePictureBox_DoubleClick(object sender, EventArgs e)
         {
             if (!Session.LoggedInUser.Sysmin) return;
@@ -676,8 +676,8 @@ namespace DriveLogGUI.MenuTabs
         /// The click function for the driveLog button.
         /// Shows the drivelog for the user.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         private void driveLogButton_Click(object sender, EventArgs e)
         {
             if (!_search)

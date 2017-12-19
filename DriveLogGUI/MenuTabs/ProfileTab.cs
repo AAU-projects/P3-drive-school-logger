@@ -21,8 +21,8 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// The Event for when the logout button is clicked in the form.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object sender</param>
+        /// <param name="e">The event args</param>
         public virtual void logoutButton_Click(object sender, EventArgs e)
         {
             LogOutButtonClick?.Invoke(this, e);
