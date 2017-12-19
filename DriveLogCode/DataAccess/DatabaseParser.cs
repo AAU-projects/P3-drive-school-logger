@@ -6,9 +6,7 @@ using System.IO;
  using System.Linq;
  using System.Net;
 using DriveLogCode.Exceptions;
-using System.Net;
  using System.Text;
- using DriveLogCode.Exceptions;
 using DriveLogCode.Objects;
 
 namespace DriveLogCode.DataAccess
@@ -22,12 +20,37 @@ namespace DriveLogCode.DataAccess
         private const string AppointmentTable = "appointments";
         private const string LessonTable = "lessons";
         private const string TodaysNoteTable = "todaysNoteTable";
-
+        
+        /// <summary>
+        /// Update the note table with a new active note
+        /// </summary>
+        /// <param name="user">The User adding the note</param>
+        /// <param name="todayNoteText">The note to be added</param>
+        /// <param name="todaysNoteTable">Optional* Specify which table to update</param>
+        /// <returns>boolean, wether the db executed the command or not</returns>
         public static bool AddTodaysNote(User user, string todayNoteText, string todaysNoteTable = TodaysNoteTable)
         {
             return MySql.AddTodaysNote(user, todayNoteText, todaysNoteTable);
         }
 
+        /// <summary>
+        /// Updates the user specified by cpr, all values are needed also for changes to a single value. 
+        /// </summary>
+        /// <param name="cpr">The users CPR number.</param>
+        /// <param name="firstname">The users firstname</param>
+        /// <param name="lastname">The users lastname</param>
+        /// <param name="phone">The users phone</param>
+        /// <param name="mail">The users mail</param>
+        /// <param name="address">The users address</param>
+        /// <param name="zip">The users zip code</param>
+        /// <param name="city">The users city</param>
+        /// <param name="username">The users username</param>
+        /// <param name="password">The users password</param>
+        /// <param name="picture">The url to the users picture</param>
+        /// <param name="signature">The url to the users signature</param>
+        /// <param name="sysmin">wether the user is a sysmin or not</param>
+        /// <param name="usertable">Optional* the table to change the user in</param>
+        /// <returns>boolean, wether the db executed the command or not</returns>
         public static bool UpdateUser(string cpr, string firstname, string lastname, string phone, string mail,
             string address,
             string zip, string city, string username, string password, string picture = null, string signature = "",
@@ -37,6 +60,25 @@ namespace DriveLogCode.DataAccess
                 picture, signature, sysmin, usertable);
         }
 
+        /// <summary>
+        /// Create a new user
+        /// </summary>
+        /// <param name="firstname">The users firstname</param>
+        /// <param name="lastname">The users lastname</param>
+        /// <param name="phone">The users phone</param>
+        /// <param name="mail">The users mail</param>
+        /// <param name="cpr">The users CPR number.</param>
+        /// <param name="address">The users address</param>
+        /// <param name="zip">The users zip code</param>
+        /// <param name="city">The users city</param>
+        /// <param name="username">The users username</param>
+        /// <param name="password">The users password</param>
+        /// <param name="picture">The url to the users picture</param>
+        /// <param name="signature">The url to the users signature</param>
+        /// <param name="sysmin">wether the user is a sysmin or not</param>
+        /// <param name="classname">An optional class the user is enrolled in</param>
+        /// <param name="usertable">Optional* the table to change the user in</param>
+        /// <returns>boolean, wether the db executed the command or not</returns>
         public static bool AddUser(string firstname, string lastname, string phone, string mail, string cpr,
             string address,
             string zip, string city, string username, string password, string picture = null, string signature = "",
@@ -46,6 +88,12 @@ namespace DriveLogCode.DataAccess
                 signature, sysmin, classname, usertable);
         }
 
+        /// <summary>
+        /// Find a user from the username
+        /// </summary>
+        /// <param name="username">Username of the user to find</param>
+        /// <param name="usertable">Optional* the table to look for the user in</param>
+        /// <returns>The user found by the database</returns>
         public static User GetUserByUsername(string username, string usertable = UserTable)
         {
             DataTable user = MySql.GetUserByName(username, usertable);
@@ -53,11 +101,27 @@ namespace DriveLogCode.DataAccess
             return user == null ? null : new User(user);
         }
 
+        /// <summary>
+        /// Delete a lesson template
+        /// </summary>
+        /// <param name="id">The id of the template to delete</param>
+        /// <param name="lessonTable">Optional* the table to execute on</param>
         public static void DeleteTemplate(int id, string lessonTable = LessonTemplateTable)
         {
             MySql.DeleteTemplate(id, lessonTable);
         }
 
+        /// <summary>
+        /// update an exsiting lesson template in the database
+        /// </summary>
+        /// <param name="id">the id of the template to change</param>
+        /// <param name="title">the template title</param>
+        /// <param name="description">the template description</param>
+        /// <param name="type">the template type</param>
+        /// <param name="time">the template time requrement</param>
+        /// <param name="reading">the templates needed reading</param>
+        /// <param name="lessonTable">Optional* the table to execute on</param>
+        /// <returns></returns>
         public static bool UploadTemplate(string id, string title, string description, string type, string time,
             string reading, string lessonTable = LessonTemplateTable)
         {
@@ -68,7 +132,7 @@ namespace DriveLogCode.DataAccess
         /// Gets all lessons and associated instructor from database for userid param.
         /// </summary>
         /// <param name="userid">userid param</param>
-        /// <returns></returns>
+        /// <returns>boolean, wether the db executed the command or not</returns>
         public static List<Lesson> GetScheduledAndCompletedLessonsByUserIdList(int userid, string lessonTable = LessonTable, string appointmentTable = AppointmentTable, string userTable = UserTable, string lessonTemplateTable = LessonTemplateTable)
         {
             DataTable results = MySql.GetLessonsAndAttachedAppointmentByUserId(userid, lessonTable, appointmentTable, userTable, lessonTemplateTable);
@@ -83,6 +147,14 @@ namespace DriveLogCode.DataAccess
             return lessonsList;
         }
 
+        /// <summary>
+        /// Finds all lessons assosiated with a given instructor
+        /// </summary>
+        /// <param name="instructor">The instructor to find lessons for</param>
+        /// <param name="lessonTable">Optional* the table in the db where lessons are stored</param>
+        /// <param name="appointmentTable">Optional* the table in the db where appointments are stored</param>
+        /// <param name="lessonTemplateTable">Optional* the table in the db where templates are stores</param>
+        /// <returns>a list containing all lessons associated with the given instructor</returns>
         public static List<Lesson> GetLessonsToCompleteList(User instructor, string lessonTable = LessonTable, string appointmentTable = AppointmentTable, string lessonTemplateTable = LessonTemplateTable)
         {
             DataTable results = MySql.GetLessonsToComplete(instructor.Id, lessonTable, appointmentTable, lessonTemplateTable);
@@ -97,16 +169,39 @@ namespace DriveLogCode.DataAccess
             return lessonsFoundList;
         }
 
-        public static bool SetLessonToComplete(int studentId, int appointmentId, int progress, bool status, string lessonTable = LessonTable)
+        /// <summary>
+        /// Complete a lesson
+        /// </summary>
+        /// <param name="studentId">the id of the studen who completed</param>
+        /// <param name="appointmentId">the appointment that was completed</param>
+        /// <param name="progress">which part of the lesson that was completed</param>
+        /// <param name="status">True/False</param>
+        /// <param name="lessonTable">Optional* the table to execute on</param>
+        /// <returns>bool</returns>
+        public static bool SetLessonToStatus(int studentId, int appointmentId, int progress, bool status, string lessonTable = LessonTable)
         {
-            return MySql.SetLessonToComplete(studentId, appointmentId, progress, true, lessonTable);
+            return MySql.SetLessonToComplete(studentId, appointmentId, progress, status, lessonTable);
         }
 
+        /// <summary>
+        /// Delete a lesson
+        /// </summary>
+        /// <param name="studentId">the id of the student on the lesson</param>
+        /// <param name="appointmentId">the appointment it belong too</param>
+        /// <param name="progress">which part of the lesson to be deleted</param>
+        /// <param name="lessonTable">Optional* the table to execute on</param>
+        /// <returns>bool</returns>
         public static bool DeleteLesson(int studentId, int appointmentId, int progress, string lessonTable = LessonTable)
         {
             return MySql.DeleteLesson(studentId, appointmentId, progress, lessonTable);
         }
 
+        /// <summary>
+        /// Delete multiply lessons
+        /// </summary>
+        /// <param name="cancelTheseLessons">list of lessons to cancel</param>
+        /// <param name="lessonTable">Optional* the table to execute on</param>
+        /// <returns>bool</returns>
         public static bool DeleteLessons(List<Lesson> cancelTheseLessons, string lessonTable = LessonTable)
         {
             StringBuilder idsToDelete = new StringBuilder();
@@ -127,11 +222,25 @@ namespace DriveLogCode.DataAccess
             return MySql.DeleteLessons(idsToDelete.ToString(), lessonTable);
         }
 
+        /// <summary>
+        /// set a users theoratical test to completed
+        /// </summary>
+        /// <param name="userid">the users id</param>
+        /// <param name="value">completed or not</param>
+        /// <param name="userTable">Optional* the table to execute on</param>
+        /// <returns>bool</returns>
         public static bool SetUserTheoreticalTestDone(int userid, bool value, string userTable = UserTable)
         {
             return MySql.UpdateUserEnum(userid, "theotestdone", value, userTable);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userid">the users id</param>
+        /// <param name="value">completed or not</param>
+        /// <param name="userTable">Optional* the table to execute on</param>
+        /// <returns>bool</returns>
         public static bool SetUserPracticalTestDone(int userid, bool value, string userTable = UserTable)
         {
             return MySql.UpdateUserEnum(userid, "practestdone", value, userTable);
@@ -232,6 +341,7 @@ namespace DriveLogCode.DataAccess
         {
             return GetUserDocumentFromDatabase(user, Session.TypeDoctorsNote);
         }
+
         public static string GetFirstAid(User user)
         {
             return GetUserDocumentFromDatabase(user, Session.TypeFirstAid);

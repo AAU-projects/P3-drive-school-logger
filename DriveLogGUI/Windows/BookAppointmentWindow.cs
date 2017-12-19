@@ -226,7 +226,7 @@ namespace DriveLogGUI.Windows
                     startDateTime = startDateTime.AddMinutes(45), 
                     false);
 
-                result = DatabaseParser.AddLessonToUserID(newLesson);
+                result = DatabaseParser.AddLesson(newLesson);
 
                 if (result) // if lesson is added its manually added to lessons in appointment id
                 {
@@ -253,7 +253,7 @@ namespace DriveLogGUI.Windows
                     false);
 
 
-                result = DatabaseParser.AddLessonToUserID(newLesson);
+                result = DatabaseParser.AddLesson(newLesson);
 
 
                 Session.LoggedInUser.LessonsList.Add(newLesson);
