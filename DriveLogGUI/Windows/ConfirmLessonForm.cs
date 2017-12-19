@@ -55,7 +55,7 @@ namespace DriveLogGUI.Windows
         }
 
         /// <summary>
-        /// 
+        /// Moves the location of the form
         /// </summary>
         /// <param name="sender">The object sender</param>
         /// <param name="e">The MouseEventArgs</param>
