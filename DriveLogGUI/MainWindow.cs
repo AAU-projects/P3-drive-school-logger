@@ -29,6 +29,9 @@ namespace DriveLogGUI
         private DriveLogTab driveLogTab;
         private TemplateCreator _lessonCreator;
 
+        /// <summary>
+        /// The constructor makes sure that all the buttons are added to the correct controls aswell as making sure everything is setup correctly
+        /// </summary>
         public MainWindow()
         {
             Thread loadingThread = new Thread(new ThreadStart(LoadingScreenStart));
@@ -94,17 +97,28 @@ namespace DriveLogGUI
             SettingsSubMenu(false);
         }
 
+        /// <summary>
+        /// A loading screen that is showed while everything is intializing
+        /// </summary>
         public void LoadingScreenStart()
         {
             Application.Run(new LoadingScreen());
         }
 
+        /// <summary>
+        /// Method that can be called to logout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogOut(object sender, EventArgs e)
         {
             Owner.Show();
             this.Hide();
         }
 
+        /// <summary>
+        /// The intilizaing of menu tabs creates the correct pages depending on if a user is a instructor or student. 
+        /// </summary>
         private void InitializeMenuTabs()
         {
             if (Session.LoggedInUser.Sysmin)
@@ -146,12 +160,21 @@ namespace DriveLogGUI
 
         }
 
+        /// <summary>
+        /// Method used to show the submenus
+        /// </summary>
+        /// <param name="profileSubMenu">If true the profile submenu is shown</param>
+        /// <param name="settingsSubMenu">If true the settings submenu is shown</param>
         private void SubMenus(bool profileSubMenu = false, bool settingsSubMenu = false)
         {
             ProfileSubmenuControl(profileSubMenu);
             SettingsSubMenu(settingsSubMenu);
         }
 
+        /// <summary>
+        /// Method used to show the settings menu
+        /// </summary>
+        /// <param name="visabilty"></param>
         private void SettingsSubMenu(bool visabilty = true)
         {
             string[] adminSettingsBtnNames = {"templateBtn"};
@@ -179,6 +202,9 @@ namespace DriveLogGUI
             }
         }
 
+        /// <summary>
+        /// Method used to show the settings menu for an instructor
+        /// </summary>
         private void SettingsAdminSubMenu()
         {
             Button templateBtn = new Button
@@ -212,6 +238,11 @@ namespace DriveLogGUI
             OpenPage(sender, _lessonCreator);
         }
 
+        /// <summary>
+        /// When button is clicked the profile submenu is shown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProfileButton_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
@@ -221,6 +252,10 @@ namespace DriveLogGUI
             OpenPage(sender, profileTab);
         }
 
+        /// <summary>
+        /// Method used to close and open the profile sub menu
+        /// </summary>
+        /// <param name="isProfileClick"></param>
         private void ProfileSubmenuControl(bool isProfileClick)
         {
             if (!panelForProfile.Visible && isProfileClick)
@@ -228,23 +263,28 @@ namespace DriveLogGUI
                 //placing the panel at the correct location
                 panelForProfile.Location = new Point(ProfileButton.Location.X, ProfileButton.Location.Y + ProfileButton.Height);
                 //moving objects below
-                bookingButton.Location = MoveLocation(bookingButton.Location, panelForProfile.Height);
-                settingsButton.Location = MoveLocation(settingsButton.Location, panelForProfile.Height);
-                userSearchButton.Location = MoveLocation(userSearchButton.Location, panelForProfile.Height);
+                bookingButton.Location = MoveLocationY(bookingButton.Location, panelForProfile.Height);
+                settingsButton.Location = MoveLocationY(settingsButton.Location, panelForProfile.Height);
+                userSearchButton.Location = MoveLocationY(userSearchButton.Location, panelForProfile.Height);
                 _isOpen = true;
                 panelForProfile.Show();
             }
             else if (_isOpen && !isProfileClick)
             {
                 //move objects back
-                bookingButton.Location = MoveLocation(bookingButton.Location, -panelForProfile.Height);
-                settingsButton.Location = MoveLocation(settingsButton.Location, -panelForProfile.Height);
-                userSearchButton.Location = MoveLocation(userSearchButton.Location, -panelForProfile.Height);
+                bookingButton.Location = MoveLocationY(bookingButton.Location, -panelForProfile.Height);
+                settingsButton.Location = MoveLocationY(settingsButton.Location, -panelForProfile.Height);
+                userSearchButton.Location = MoveLocationY(userSearchButton.Location, -panelForProfile.Height);
                 panelForProfile.Hide();
                 _isOpen = false;
             }
         }
 
+        /// <summary>
+        ///  Method used to move a button around
+        /// </summary>
+        /// <param name="button">The button Control that should be moved</param>
+        /// <param name="spaces">How many spaces it should be moved to the right</param>
         private void MoveButtonSpaces(Button button, int spaces)
         {
             string spacesString = null;
@@ -255,11 +295,23 @@ namespace DriveLogGUI
             }
             button.Text = $@"{spacesString}{button.Text}";
         }
-        private Point MoveLocation(Point location, int moveLocation)
+
+        /// <summary>
+        /// Method used to caculate a new location that should be on the y-axis
+        /// </summary>
+        /// <param name="location">The current location of the control</param>
+        /// <param name="moveLocation">How many pixels it should be moved on the y a-axis</param>
+        /// <returns></returns>
+        private Point MoveLocationY(Point location, int moveLocation)
         {
             return new Point(location.X, location.Y + moveLocation);
         }
 
+        /// <summary>
+        /// Method for when the overview button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OverviewButton_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
@@ -303,6 +355,11 @@ namespace DriveLogGUI
                 Application.Exit();
         }
 
+        /// <summary>
+        /// Method for opening a usercontrol page, this makes sure that the last page is closed and the new usercontrol is shown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="page">The page that should be shown</param>
         private void OpenPage(object sender, UserControl page)
         {
             if (_lastPage != page) 
@@ -322,6 +379,11 @@ namespace DriveLogGUI
             }
         }
 
+
+        /// <summary>
+        /// Method for highlighing a button
+        /// </summary>
+        /// <param name="sender">This button will be highlighted</param>
         public void HighlightCurrentButton(Button sender)
         {
             _lastButton.BackColor = Color.FromArgb(81, 108, 112);
@@ -329,6 +391,10 @@ namespace DriveLogGUI
             _lastButton = sender;
         }
 
+        /// <summary>
+        /// Method that makes sure that the submenus can only be open if the user is a student 
+        /// </summary>
+        /// <param name="page"></param>
         private void OpenPageEvent(UserControl page)
         {
             if (Session.LoggedInUser.Sysmin) return;
@@ -339,6 +405,9 @@ namespace DriveLogGUI
             }
         }
 
+        /// <summary>
+        /// Method to close the last usercontrol page
+        /// </summary>
         private void CloseLastPage()
         {
             if (_lastPage != null)
@@ -352,6 +421,11 @@ namespace DriveLogGUI
             }
         }
 
+        /// <summary>
+        /// Method for when the first aid button is clciked, opens the exisitng first aid or empty one
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void firstAidButton_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
@@ -368,18 +442,33 @@ namespace DriveLogGUI
             Cursor = Cursors.Arrow;
         }
 
+        /// <summary>
+        /// Method to open the calendar page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bookingButton_Click(object sender, EventArgs e)
         {
             OpenPage(sender, calendarTab);
             SubMenus();
         }
 
+        /// <summary>
+        /// Method to open the settings page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void settingsButton_Click(object sender, EventArgs e)
         {
             //OpenPage(sender, ??);
             SubMenus(settingsSubMenu: true);
         }
 
+        /// <summary>
+        /// Method to go to the user search if a previous usercontrol is not open
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void userSearchButton_Click(object sender, EventArgs e)
         {
             UserControl finalpage = userSearchTab;
@@ -407,6 +496,11 @@ namespace DriveLogGUI
             SubMenus();
         }
         
+        /// <summary>
+        /// Method for doctors note this opens the already existing doctors note or an empty one
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void doctorsNoteButton_Click_1(object sender, EventArgs e)
         {
             Cursor = Cursors.AppStarting;
@@ -423,6 +517,11 @@ namespace DriveLogGUI
             Cursor = Cursors.Arrow;
         }
 
+        /// <summary>
+        /// Method for going to pages that match the icon that have been clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnIconClick(object sender, EventArgs e)
         {
             SubMenus(true);
