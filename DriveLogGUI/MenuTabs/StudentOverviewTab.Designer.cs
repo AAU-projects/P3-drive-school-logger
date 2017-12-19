@@ -197,7 +197,6 @@
             this.todaysNoteLabel.Size = new System.Drawing.Size(128, 19);
             this.todaysNoteLabel.TabIndex = 1;
             this.todaysNoteLabel.Text = "Today\'s note";
-            this.todaysNoteLabel.Click += new System.EventHandler(this.todaysNoteLabel_Click);
             // 
             // todaysNoteTextbox
             // 
@@ -210,7 +209,6 @@
             this.todaysNoteTextbox.Name = "todaysNoteTextbox";
             this.todaysNoteTextbox.Size = new System.Drawing.Size(420, 136);
             this.todaysNoteTextbox.TabIndex = 0;
-            this.todaysNoteTextbox.TextChanged += new System.EventHandler(this.todaysNoteTextbox_TextChanged);
             // 
             // calendarPanel
             // 
