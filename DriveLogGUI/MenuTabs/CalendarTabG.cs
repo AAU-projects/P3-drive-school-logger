@@ -30,6 +30,13 @@ namespace DriveLogGUI.MenuTabs
         private string CancelBookingText = "CANCEL BOOKING";
         private string UnavaiableBookingText = "UNAVAILABLE";
 
+
+        /// <summary>
+        /// Constructor initializes componets, then draws the calendar, aswell as subscribing to all the click events from the overview. 
+        /// A list of all appointments are then loaded and a click event to all appointments are then subscribed. Calendar is then updated.
+        /// </summary>
+        /// <param name="overviewTab"></param>
+        /// <param name="mainWindow"></param>
         public CalendarTabG(OverviewTab overviewTab, MainWindow mainWindow)
         {
             InitializeComponent();

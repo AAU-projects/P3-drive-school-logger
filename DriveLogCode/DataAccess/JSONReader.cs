@@ -8,6 +8,12 @@ namespace DriveLogCode.DataAccess
 {
     public static class JSONReader
     {
+
+        /// <summary>
+        /// Method used to get city name with a zip code
+        /// </summary>
+        /// <param name="zip">A valid zip code in Denmark</param>
+        /// <returns>Returns the city name matching the zip code</returns>
         public static string GetCity(int zip)
         {
             try
