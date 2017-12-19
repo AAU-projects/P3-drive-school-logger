@@ -665,7 +665,7 @@ namespace DriveLogGUI.MenuTabs
                     {
                         cancelTheseLessons.AddRange(DatabaseParser.CancelLesson(lessonToCancel.TemplateID, lessonToCancel.Progress, lessonToCancel.UserID));
                     }
-                    DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
+                    DialogResult result = CustomMsgBox.ShowYesNoInstructor("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
                     if (result == DialogResult.Yes)
                     {
                         DatabaseParser.DeleteLessons(cancelTheseLessons);
