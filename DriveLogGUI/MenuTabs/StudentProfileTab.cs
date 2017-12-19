@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -312,7 +312,7 @@ namespace DriveLogGUI.MenuTabs
         /// Changes the colors and cursor of specific UI elements contained in CalendarData.
         /// For when the cursor enters the element.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The CalendarData</param>
         private void ChangeCursorAndHoverEnter(CalendarData data)
         {
             PrevColor = data.PanelForCalendarDay.BackColor;
@@ -337,7 +337,7 @@ namespace DriveLogGUI.MenuTabs
         /// Changes the colors and cursor of specific UI elements contained in CalendarData.
         /// For when the cursor leaves the element.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The CalendarData</param>
         private void ChangeCursorAndHoverLeave(CalendarData data)
         {
             data.LabelForDate.Cursor = Cursors.Default;
@@ -422,7 +422,7 @@ namespace DriveLogGUI.MenuTabs
         /// The enter function for the progress button.
         /// Changes the picture to indicate a clickable button.
         /// </summary>
-        /// <param name="button"></param>
+        /// <param name="button">The button entered</param>
         private void ProgressButtonMouseEnter(PictureBox button)
         {
             if (button.Image == incompleteImage)
@@ -434,8 +434,8 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Sets the image of a PictureBox to the completed or incomplete image.
         /// </summary>
-        /// <param name="completed"></param>
-        /// <param name="button"></param>
+        /// <param name="completed">Bool to check if completed</param>
+        /// <param name="button">The PictureBox to change</param>
         private void CheckIfComplete(bool completed, PictureBox button)
         {
             if (completed)
@@ -447,7 +447,7 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Sets the image of the doctorsnote button to completed if the document exists.
         /// </summary>
-        /// <param name="button"></param>
+        /// <param name="button">The PictureBox to change</param>
         private void DoctorsNoteCheckIfUploaded(PictureBox button)
         {
             if (DatabaseParser.ExistDoctorsNote(_user))
@@ -457,7 +457,7 @@ namespace DriveLogGUI.MenuTabs
         /// <summary>
         /// Sets the image of the firstaid button to completed if the document exists.
         /// </summary>
-        /// <param name="button">A button</param>
+        /// <param name="button">The PictureBox to change</param>
         private void FirstCheckIfUploaded(PictureBox button)
         {
             if (DatabaseParser.ExistFirstAid(_user))

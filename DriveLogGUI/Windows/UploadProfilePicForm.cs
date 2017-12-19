@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -61,7 +61,7 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// An Event for when a file is dragged into the form.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The object sender</param>
         /// <param name="e">Contains the DragEvent data</param>
         private void UploadProfilePicForm_DragEnter(object sender, DragEventArgs e)
         {
@@ -72,7 +72,7 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// An Event for when the file is dropped on the form.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The object sender</param>
         /// <param name="e">Contains the DragEvent data</param>
         private void UploadProfilePicForm_DragDrop(object sender, DragEventArgs e)
         {
