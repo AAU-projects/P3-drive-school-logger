@@ -85,7 +85,7 @@ namespace DriveLogGUI.Windows
                             _lessonList[i].Progress, true);
                     else
                     {
-                        List<Lesson> deleteList = DatabaseParser.CancelLesson(_lessonList[i].TemplateID,
+                        List<Lesson> deleteList = DatabaseParser.FindLessonsToCancel(_lessonList[i].TemplateID,
                             _lessonList[i].Progress, _lessonList[i].StudentId);
                         DatabaseParser.DeleteLessons(deleteList);
                     }
