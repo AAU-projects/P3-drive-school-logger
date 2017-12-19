@@ -174,7 +174,7 @@ namespace DriveLogGUI
         /// <summary>
         /// Method used to show the settings menu
         /// </summary>
-        /// <param name="visabilty"></param>
+        /// <param name="visabilty">The state of the visibility of the settings submenu, true for visiable</param>
         private void SettingsSubMenu(bool visabilty = true)
         {
             string[] adminSettingsBtnNames = {"templateBtn"};
@@ -255,7 +255,7 @@ namespace DriveLogGUI
         /// <summary>
         /// Method used to close and open the profile sub menu
         /// </summary>
-        /// <param name="isProfileClick"></param>
+        /// <param name="isProfileClick">The state of the visibility of the profile submenu, true for visiable</param>
         private void ProfileSubmenuControl(bool isProfileClick)
         {
             if (!panelForProfile.Visible && isProfileClick)

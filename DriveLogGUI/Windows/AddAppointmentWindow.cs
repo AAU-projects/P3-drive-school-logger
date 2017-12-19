@@ -55,7 +55,7 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Method used to fill combobox with periods from 1 to 20
         /// </summary>
-        /// <param name="comboBox"></param>
+        /// <param name="comboBox">The combobox that should be filled with periods</param>
         private void FillComboBoxWithPeriods(ComboBox comboBox)
         {
             for (int i = 0; i < 20; i++)
@@ -137,8 +137,8 @@ namespace DriveLogGUI.Windows
         /// <summary>
         /// Method used to add the selected period as an appointment to the database
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void AddAppointmentButton_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(LessonTypecomboBox.Text) && !String.IsNullOrEmpty(StartTimecomboBox.Text) && !String.IsNullOrEmpty(lessonsComboBox.Text))
