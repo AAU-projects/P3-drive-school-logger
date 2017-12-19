@@ -54,6 +54,9 @@ namespace DriveLogGUI.Windows
             this.StartPosition = FormStartPosition.CenterParent;
         }
 
+        /// <summary>
+        /// Method to check if a user does not have a lesson in the type and makes sure that there always is a lesson
+        /// </summary>
         private void CheckForFirstLessons()
         {
             // if a user does not already have a lesson in lessontype a temp lesson is created before first lesson is added to database
@@ -70,6 +73,10 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Fills the combobox with the times that can be selected in the appointment
+        /// </summary>
+        /// <param name="comboBox">The combobox that should be filled</param>
         private void FillTimeComboBox(ComboBox comboBox)
         {
             DateTime time = new DateTime();
@@ -82,6 +89,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Fills the combobox with the maxium of lessons that should be able to be selected
+        /// </summary>
+        /// <param name="comboBox">The combobox that should be filled</param>
+        /// <param name="lessons">The lessons that can be selected</param>
         private void FillComboBox(ComboBox comboBox, int lessons)
         {
             int maxLessonsToBook = addThisLesson.LessonTemplate.Time - Session.GetLastLessonFromType(_appointment.LessonType).Progress;
@@ -109,6 +121,9 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Method used to display how many hours and minutes the selected period is
+        /// </summary>
         private void SetComboBoxTimeDifference()
         {
             if (StartTimecomboBox.Text != String.Empty & lessonsComboBox.Text != String.Empty)
@@ -128,6 +143,9 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Method used to show the correct data in the book appointment window
+        /// </summary>
         private void UpdateData()
         {
             TitleDateLabel.Text = $"Book appointment at {_appointment.DateShortFormat()}";
@@ -160,6 +178,11 @@ namespace DriveLogGUI.Windows
             this.Location = new Point(_openWindowPosition.X - this.Width, _openWindowPosition.Y - this.Height);
         }
 
+        /// <summary>
+        /// Method used to check for the new data when a new start time is selected
+        /// </summary>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void StartTimecomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             lessonsComboBox.Text = String.Empty;
@@ -181,6 +204,11 @@ namespace DriveLogGUI.Windows
             this.Dispose();
         }
 
+        /// <summary>
+        /// Method used when a user clicks on add appointment, makes sure that the selected perido is added to the database
+        /// </summary>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void AddAppointmentButton_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(lessonsComboBox.Text) && !String.IsNullOrWhiteSpace(StartTimecomboBox.Text))
@@ -205,6 +233,10 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Method used to add the selected lessons to the database for the user
+        /// </summary>
+        /// <returns>Returns true if all the lessons are succesfully added</returns>
         private bool AddLesson()
         {
             int numberOfLessons = lessonsComboBox.SelectedIndex + 1;

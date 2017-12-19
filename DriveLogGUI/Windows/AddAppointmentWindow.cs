@@ -28,7 +28,7 @@ namespace DriveLogGUI.Windows
             SetWindowPosition();
 
             FillTimeComboBox(StartTimecomboBox);
-            FillComboBox(lessonsComboBox);
+            FillComboBoxWithPeriods(lessonsComboBox);
 
             timeDifferenceLabel.Text = "";
             endTimeLabel.Text = "";
@@ -36,6 +36,10 @@ namespace DriveLogGUI.Windows
             this.StartPosition = FormStartPosition.CenterParent;
         }
 
+        /// <summary>
+        /// Method used to fill combo box within a 24 hour period in 15 minutes intervals
+        /// </summary>
+        /// <param name="comboBox">Combobox that should be filled</param>
         private void FillTimeComboBox(ComboBox comboBox)
         {
             DateTime time = new DateTime();
@@ -48,7 +52,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
-        private void FillComboBox(ComboBox comboBox)
+        /// <summary>
+        /// Method used to fill combobox with periods from 1 to 20
+        /// </summary>
+        /// <param name="comboBox">The combobox that should be filled with periods</param>
+        private void FillComboBoxWithPeriods(ComboBox comboBox)
         {
             for (int i = 0; i < 20; i++)
             {
@@ -62,6 +70,9 @@ namespace DriveLogGUI.Windows
             this.Location = new Point(openWindowPosition.X - this.Width, openWindowPosition.Y - this.Height);
         }
 
+        /// <summary>
+        /// Method used to update the title label to the correct date
+        /// </summary>
         private void UpdateTitle()
         {
             TitleLabel.Text = $"Add appointment to {date.ToShortDateString().Replace('/', '-')}";
@@ -91,6 +102,7 @@ namespace DriveLogGUI.Windows
             this.Close();
         }
 
+
         private void StartTimecomboBox_SelectedValueChanged(object sender, EventArgs e)
         {
            SetComboBoxTimeDifference();
@@ -101,6 +113,9 @@ namespace DriveLogGUI.Windows
             SetComboBoxTimeDifference();
         }
 
+        /// <summary>
+        /// Method used to caculate the selected period im hours and minutes and display it to the user
+        /// </summary>
         private void SetComboBoxTimeDifference()
         {
             if (StartTimecomboBox.Text != String.Empty & lessonsComboBox.Text != String.Empty)
@@ -119,6 +134,11 @@ namespace DriveLogGUI.Windows
             }
         }
 
+        /// <summary>
+        /// Method used to add the selected period as an appointment to the database
+        /// </summary>
+        /// <param name="sender">The Object Sender</param>
+        /// <param name="e">The EventArgs</param>
         private void AddAppointmentButton_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(LessonTypecomboBox.Text) && !String.IsNullOrEmpty(StartTimecomboBox.Text) && !String.IsNullOrEmpty(lessonsComboBox.Text))
