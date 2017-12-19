@@ -17,6 +17,10 @@ namespace DriveLogCode
 
         }
 
+        /// <summary>
+        /// Overall method, creates the complete drive log
+        /// </summary>
+        /// <param name="student">the student to make the drive log for</param>
         public void MakeDriveLog(User student)
         {
             // Create the empty document
@@ -38,6 +42,12 @@ namespace DriveLogCode
             PDFDocumentViewer(fileName);
         }
 
+        /// <summary>
+        /// Save the file localy
+        /// </summary>
+        /// <param name="filename">the filename to save as</param>
+        /// <param name="document">the document to save</param>
+        /// <returns></returns>
         private string SaveFile(string filename, PdfDocument document)
         {
             int i = 0;
@@ -58,6 +68,11 @@ namespace DriveLogCode
             return $"{fileNameAndExt[0]}.{fileNameAndExt[1]}";
         }
 
+        /// <summary>
+        /// Creates the frontpage of the drivelog and adds the users information on it
+        /// </summary>
+        /// <param name="document">the document to add it too</param>
+        /// <param name="student"> the student attacted</param>
         private void MakeFrontPage(PdfDocument document, User student)
         {
             float y = 15;
@@ -101,6 +116,10 @@ namespace DriveLogCode
             CreateStudentInfo(student, page, ref y);
         }
 
+        /// <summary>
+        /// creats a header on the page
+        /// </summary>
+        /// <param name="page">the page to add the header on</param>
         private void AddHeader(PdfPageBase page)
         {
             float pageWidth = page.Canvas.ClientSize.Width;
@@ -108,12 +127,19 @@ namespace DriveLogCode
             // Page header
             PdfPen pen1 = new PdfPen(Color.LightGray);
             PdfStringFormat rightAligenment = new PdfStringFormat(PdfTextAlignment.Right);
+
             string headerText = "City Køreskolen Århus";
+
             page.Canvas.DrawString(headerText, DesignSchemes.FontScheme.PdfHeaderFont, DesignSchemes.ColorScheme.PdfLightGrayText, pageWidth, 0, rightAligenment);
             SizeF textSize = DesignSchemes.FontScheme.PdfHeaderFont.MeasureString(headerText, rightAligenment);
             page.Canvas.DrawLine(pen1, 0, textSize.Height + 1, pageWidth, textSize.Height + 1);
         }
 
+        /// <summary>
+        /// add the schools logo to the page
+        /// </summary>
+        /// <param name="page">the page to add on</param>
+        /// <param name="y">the y location on the page to add</param>
         private void DrawLogo(PdfPageBase page, ref float y)
         {
             PdfImage logo = PdfImage.FromFile("Resources/CityLogo.png");
@@ -127,6 +153,12 @@ namespace DriveLogCode
             y += height;
         }
 
+        /// <summary>
+        /// Adds the students personal information to a page
+        /// </summary>
+        /// <param name="owner">the student owning the log</param>
+        /// <param name="page">the page to add it to</param>
+        /// <param name="y">the y location on the page to add</param>
         private void CreateStudentInfo(User owner, PdfPageBase page, ref float y)
         {
             string[] data =
@@ -190,6 +222,10 @@ namespace DriveLogCode
 
         }
 
+        /// <summary>
+        /// Adds all the instructors to a document, creates its own page
+        /// </summary>
+        /// <param name="document">the document to add it to</param>
         private void CreateInstructorsInfo(PdfDocument document)
         {
             PdfPageBase page = document.Pages.Add(PdfPageSize.A4);
@@ -262,6 +298,10 @@ namespace DriveLogCode
 
         }
 
+        /// <summary>
+        /// Add the defalut lessons to the document, based on the lesson templates. creates its pages itself
+        /// </summary>
+        /// <param name="document"></param>
         private void AddLessons(PdfDocument document)
         {
             List<LessonTemplate> templates = DataAccess.DatabaseParser.GetTemplatesList();
@@ -402,6 +442,11 @@ namespace DriveLogCode
             }
         }
 
+        /// <summary>
+        /// create a page and add it to the document
+        /// </summary>
+        /// <param name="document">the document to add the page to </param>
+        /// <returns>the created page</returns>
         private PdfPageBase CreatePage(PdfDocument document)
         {
             PdfPageBase page = document.Pages.Add(PdfPageSize.A4);
@@ -410,6 +455,11 @@ namespace DriveLogCode
             return page;
         }
 
+        /// <summary>
+        /// open the given file in the local systems default pdf viewer.
+        /// on error do nothing
+        /// </summary>
+        /// <param name="fileName">the file to open</param>
         private void PDFDocumentViewer(string fileName)
         {
             try
