@@ -843,7 +843,7 @@ namespace DriveLogGUI.MenuTabs
                     List<Lesson> usersOnAppointment = DatabaseParser.GetUsersAndLessonsOnAppointmentID(selectedAppointment.Id);
                     foreach (Lesson lessonToCancel in usersOnAppointment)
                     {
-                        cancelTheseLessons.AddRange(DatabaseParser.CancelLesson(lessonToCancel.TemplateID, lessonToCancel.Progress, lessonToCancel.UserID));
+                        cancelTheseLessons.AddRange(DatabaseParser.FindLessonsToCancel(lessonToCancel.TemplateID, lessonToCancel.Progress, lessonToCancel.UserID));
                     }
                     DialogResult result = CustomMsgBox.ShowYesNoInstructor("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
                     if (result == DialogResult.Yes)
@@ -858,7 +858,7 @@ namespace DriveLogGUI.MenuTabs
                 }
                 else
                 {
-                    List<Lesson> cancelTheseLessons = DatabaseParser.CancelLesson(selectedAppointment.bookedLessons.First().TemplateID, selectedAppointment.bookedLessons.First().Progress, Session.LoggedInUser.Id);
+                    List<Lesson> cancelTheseLessons = DatabaseParser.FindLessonsToCancel(selectedAppointment.bookedLessons.First().TemplateID, selectedAppointment.bookedLessons.First().Progress, Session.LoggedInUser.Id);
 
                     DialogResult result = CustomMsgBox.ShowYesNo("", "Cancel lesson", cancelTheseLessons, CustomMsgBoxIcon.Warrning);
                     if (result == DialogResult.Yes)

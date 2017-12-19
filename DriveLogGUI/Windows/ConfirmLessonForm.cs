@@ -81,11 +81,11 @@ namespace DriveLogGUI.Windows
                 for (int i = 0; i < attendingStudentsList.Items.Count; i++)
                 {
                     if (attendingStudentsList.Items[i].Checked)
-                        DatabaseParser.SetLessonToComplete(_lessonList[i].StudentId, _lessonList[i].AppointmentID,
+                        DatabaseParser.SetLessonToStatus(_lessonList[i].StudentId, _lessonList[i].AppointmentID,
                             _lessonList[i].Progress, true);
                     else
                     {
-                        List<Lesson> deleteList = DatabaseParser.CancelLesson(_lessonList[i].TemplateID,
+                        List<Lesson> deleteList = DatabaseParser.FindLessonsToCancel(_lessonList[i].TemplateID,
                             _lessonList[i].Progress, _lessonList[i].StudentId);
                         DatabaseParser.DeleteLessons(deleteList);
                     }
