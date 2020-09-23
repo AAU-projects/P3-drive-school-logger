@@ -1,23 +1,33 @@
-# AAU Software 3.Semester Project
-This solution is a part of a semester project on the Software line on Aalborg University
+# Drive School Logger
+This program is developed as part of a 3rd semester Software Engineering project on Aalborg University.
+
+This program implements a windows application for driving schools. It enables students to digitially log their theoretical lessons and their driving lessons.
 
 ## Project Period
 
-3th Semester, Autumn 2017
+3rd Semester, Autumn 2017
 
-## Handed in
+## Screenshots
+Student overview
 
-Tuesday, 19 December 2017
+![image](https://user-images.githubusercontent.com/16747705/93990811-df7cc900-fd8b-11ea-86e6-d49a359498f9.png)
+
+Instructor overview
+
+![image](https://user-images.githubusercontent.com/16747705/93990848-e9063100-fd8b-11ea-8c03-f72135ea3550.png)
+
+CalenderTabG
+
+![image](https://user-images.githubusercontent.com/16747705/93991133-3b475200-fd8c-11ea-8e6f-c170696071f2.png)
+
 
 ## Participants
-
-Alexander Haarbye Jensen	(ajen16@student.aau.dk)
-Jonas Grann Alsen			(jalsen15@student.aau.dk)
-Lasse Lundbo				(llun16@student.aau.dk)
-Lukas Rønsholt				(lransh16@student.aau.dk)
-Magnus Boisen				(mboise16@student.aau.dk)
-Rasmus Egholm Nielsen		(reni16@student.aau.dk)
-
+ - [Alexander Haarbye Jensen](https://github.com/Alechj)
+ - [Jonas Grann Alsen](https://github.com/AlsenDev)
+ - [Lasse Lundbo](https://github.com/llundbo)
+ - [Lukas Rønsholt](https://github.com/LukasRH)
+ - [Magnus Tolderlund Boisen](https://github.com/boisenme)
+ - [Rasmus Egholm Nielsen](https://github.com/ralled96)
 
 ## Program Requirements
 
@@ -33,3 +43,9 @@ dependencies.
 both available in the dependencies folder at root level. both dependencies will
 have to be installed on the primary drive, often the C: drive.
 This can be avoided by manually changing the programs references.  
+
+## Semester Report
+The report written along with this program: [P3_Developing_applications.pdf](https://github.com/AAU-projects/P3-drive-school-logger/files/5266914/P3_Developing_applications.pdf)
+
+## License
+This project uses the following license: [MIT](./LICENSE)
